@@ -1,3 +1,13 @@
+<head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" ></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.5.3/jquery-ui.min.js" ></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#featured > ul").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 5000, true);
+	});
+</script>
+</head>
+
 <?php
 /**********************************************************************//**\file
 	SexInfo Homepage
@@ -159,13 +169,7 @@
 		
 		##### HIGHLIGHTED ARTICLES MODULE #####
 		
-		$page->add('<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" ></script>	
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.5.3/jquery-ui.min.js" ></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
-		$("#featured > ul").tabs({fx:{opacity: "toggle"}}).tabs("rotate", 1000, true);
-		});
-	</script>
+		$page->add('
 
 		<div class="round-featurele">
 		

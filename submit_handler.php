@@ -2,21 +2,9 @@
 
 require('./core/sex-core.php');
 
-/*require_once('recaptchalib.php');
-$privatekey = "6LeuXAYAAAAAAMqiOojoc4niCL2ZtiTouOVkDU2M";
-$resp = recaptcha_check_answer ($privatekey,
-                                $_SERVER["REMOTE_ADDR"],
-                                $_POST["recaptcha_challenge_field"],
-                                $_POST["recaptcha_response_field"]);
 
-if (!$resp->is_valid) {
-  die ("The reCAPTCHA wasn't entered correctly. Go back and try it again." .
-       "(reCAPTCHA said: " . $resp->error . ")");
-}
 
-if ($resp->is_valid) {
 
-*/
 $email = '';
 $verifyEmail = '';
 $age = '';
@@ -25,8 +13,11 @@ $location = '';
 $message = '';
 $reply = '';
 $method = '';
+$code = '';
 
- if (isset($_POST['submit'])) {
+
+
+if (isset($_POST['submit'])) {
 
 	$email = trim($_POST['email']);
 	$verifyEmail = trim($_POST['verifyEmail']);
@@ -36,10 +27,18 @@ $method = '';
 	$message = trim($_POST['message']);
 	$reply = $_POST['reply'];
     $method = $_POST['method'];
+    $code = $_POST['code'];
+    
+    if (strlen($code) != 5) {
+    echo  "$code Fucking tits mayne $captcha";
+    }
+ 
 	
         if ($_POST['reply'] != "1" && $_POST['reply'] != "0") {
             $reply = 0;
         }
+        
+        
         if ($_POST['gender'] != "1" && $_POST['gender'] != "2" && $_POST['gender'] != "3" && $_POST['gender' != "4"]) {
         $gender = 0;
         }

@@ -1,3 +1,4 @@
+
 <!--
 To change this template, choose Tools | Templates
 and open the template in the editor.
@@ -66,21 +67,15 @@ textarea.LV_invalid_field:active {
       <br />
       <textarea name="message" id="message" cols="40" rows="10" tabindex="1"></textarea>
     </p>
-    <!--<p>
-    <input name="accept" type="checkbox" id="accept" value="true" tabindex="1">
-    <label for="accept">
-    	By checking this box you are agreeing to the
-    </label>
-    <a href="./?slug=terms">terms</a>
-    <label for="accept">
-    	that have been put forth.
-    </label>
-    </p>-->
-    <?
-    require_once('./theme/recaptchalib.php');
-    $publickey = "6LeuXAYAAAAAALUvTskgd5cAIspYSRPOun2oADAT";
-    echo recaptcha_get_html($publickey, $error);
-    ?>
+    
+    <!-- CAPTCHA -->
+      
+	    <p>
+	    <label for="code">Enter the validation code:</label><br />
+	    <img src="./core/sex-captcha.php"/><br />
+	    <input type="text" name="code" id="code" /></p>
+	    
+	    
     <p>
 		<br>
       <input name="valid" value="0" type="hidden" />
@@ -92,20 +87,16 @@ textarea.LV_invalid_field:active {
     			var email = new LiveValidation( 'email', {onlyOnSubmit: true } );
     			email.add( Validate.Email, {failureMessage:"Please enter an email address." } );
                 email.add( Validate.Presence, {failureMessage: "Please enter an email address."} );
-                var verifyEmail = new LiveValidation( 'verifyEmail', {onlyOnSubmit: true } );
-                verifyEmail.add( Validate.Confirmation, { match: 'email', failureMessage: "Please ensure your email is correct." } );
-                verifyEmail.add( Validate.Presence, {failureMessage: "Please verify your email address." } );
-    			var accept = new LiveValidation( 'accept', {onlyOnSubmit: true } );
-    			accept.add( Validate.Acceptance, {failureMessage: "Please accept the terms of agreement" } );
     			var message = new LiveValidation( 'message', {onlyOnSubmit: true } );
     			message.add( Validate.Presence, {failureMessage: "Please include a message for us!" } );
+    			var code = new LiveValidation( 'code', {onlyOnSubmit: true } );
+    			code.add( Validate.Presence, {failureMessage: "Please enter the validation code." } );
+    			code.add( Validate.Length, { is: 5, failureMessage: "Validation code incorrect." } );
                 var loc = new LiveValidation( 'location', {onlyOnSubmit: true } );
                 loc.add( Validate.Presence, {failureMessage: "Please include your Country/State."} );
                 var age = new LiveValidation ( 'age', {onlyOnSubmit: true } );
                 age.add( Validate.Numericality, { minimum: 1, failureMessage: "You're not negative years old!" } );
                 age.add ( Validate.Presence, {failureMessage: "Please include your age." } );
-                var reply = new LiveValidation ( 'reply', {onlyOnSubmit: true } );
-                reply.add( Validate.Presence, {failureMessage: "Please state whether you would like a response or not." } );
                 var gender = new LiveValidation( 'gender', {onlyOnSubmit: true } );
                 gender.add( Validate.Presence, {failureMessage: "Please state your gender" } );
                </script>
