@@ -1,0 +1,352 @@
+/*******************************************************************************
+	website name
+*******************************************************************************/
+
+*
+{
+	margin: 0px;
+	padding: 0px;
+}
+
+body
+{
+	margin-top: 6px;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 82.5%;
+	background-color: #517295;
+}
+
+/*******************************************************************************
+	General HTML Tags
+*******************************************************************************/
+
+a
+{
+	color: #44f;
+}
+
+a:hover
+{
+	
+}
+
+a:visited
+{
+	color: #44a;
+}
+
+img
+{
+
+}
+
+p
+{
+
+}
+
+/*******************************************************************************
+	General Layout
+*******************************************************************************/
+
+#banner
+{
+	background-image: url(/sexinfo/theme/expanded-banner.gif);
+	background-position: -20px;
+	height: 100px;
+	color: #006;
+}
+
+#banner a, #banner a:hover, #banner a:visited, #banner a:active
+{
+	color: #006;
+	text-decoration: none;
+}
+
+#wrapper
+{
+	width: 980px;
+	border: 3px solid #708CAE;
+	margin: 0px auto;
+	background-color: #708CAE;
+}
+
+#nav
+{
+	margin: 6px 0px;
+	border: 2px solid #FF9F2B;
+	border-width: 2px 0px;
+	background-color: #FFC000;
+	padding: 1px 10px;
+}
+
+#content
+{
+	background-color: #fff;
+	width: 630px;
+	padding: 10px;
+	float: left;
+	font-family: Verdana;
+	margin: 0px 5px 6px 5px;
+}
+
+.sidebar
+{
+	width: 160px;
+	float: left;
+	
+}
+
+#left
+{
+	clear: both;
+}
+
+#footer
+{
+	clear: both;
+	font-size: .9em;
+	border: 2px solid #FF9F2B;
+	border-width: 2px 0px;
+	background-color: #FFC000;
+	margin-top: 6px;
+	padding: 1px 10px;
+	text-align: center;
+}
+
+/*******************************************************************************
+	Navigation Lists
+*******************************************************************************/
+
+#nav li, .sidebar li
+{
+	list-style: none;
+}
+
+#nav ul
+{
+	padding: 4px;
+	height: 16px;
+}
+
+#nav li
+{
+	float: left;
+	margin-right: 4px;
+}
+
+#nav #search
+{
+	float: right;
+}
+
+#nav li a
+{
+	color: #000;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#nav li a:hover
+{
+	text-decoration: underline;
+}
+
+.sidebar li
+{
+	margin: 0px;
+	width:150px;
+}
+
+.sidebar li a
+{
+	font-size: .8em;
+	display: block;
+	width: 150px;
+	font-weight: bold;
+	color: #fff;
+	background-color: #006;
+	text-decoration: none;
+	padding: .1em 5px;
+	line-height: 1.6em;
+	border-top: 1px solid #aaa;
+	border-bottom: 1px solid #555;
+}
+
+.sidebar li a:hover
+{
+	background-color: #369;
+}
+
+/*******************************************************************************
+	Suckerfish
+	http://www.htmldog.com/articles/suckerfish/dropdowns/
+*******************************************************************************/
+
+#left ul ul
+{
+	position: absolute;
+	left: -999em;
+}
+
+#left li:hover ul, #left li.sfhover ul
+{
+	margin: -1.6em 0 0 160px;
+	left: auto;
+}
+
+/*******************************************************************************
+	Content Formatting
+*******************************************************************************/
+
+#content
+{
+	padding: 10px;
+	min-height: 300px;
+}
+
+#content a
+{
+	text-decoration: none;
+}
+
+#content a:hover
+{
+	text-decoration: underline;
+}
+
+#content ul, #content ol
+{
+	margin-left: 2em;
+	line-height: 1.6em;
+}
+
+#content h1, #content h2, #content h3, #content h4, #content h5, #content h2.title
+{
+	font-family: helvetica, arial, sans-serif;
+	font-weight: normal;
+	margin-bottom: 10px;
+}
+
+#content h1, #content h2.title
+{
+	font-size: 2em;
+	text-align: center;
+}
+
+#content h2
+{
+	font-size: 1.5em;
+}
+
+#content h3
+{
+	font-size: 1.25em;
+	font-weight: bold;
+}
+
+#content h4
+{
+	font-size: 1em;
+	font-weight: bold;
+}
+
+#content p
+{
+	line-height: 1.6em;
+	padding-bottom: 1em;
+}
+
+/*******************************************************************************
+	Content Tables
+*******************************************************************************/
+
+#content table
+{
+	border: 1px solid #ddd;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#content td, #content th
+{
+	border: 1px solid #ddd;
+	border-width: 0px 1px 1px 0px;
+	padding: 3px 5px;
+}
+
+#content th
+{
+	background-color: #eee;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 1.1em;
+	border-bottom: 1px solid #ddd;
+}
+
+/*** Used for "index" lists on the /article/, /question/, etc. ***/
+#content table.index tr a
+{
+	display: block;
+	padding: 3px 5px;
+	margin: -3px -5px;
+	width: 100%;
+}
+
+#content table.index tr:hover, #content table.index tr a:hover
+{
+	background-color: #eef;
+	text-decoration: none;
+}
+
+/*******************************************************************************
+	Metadata
+*******************************************************************************/
+
+#content .metadata
+{
+	margin-top: 1em;
+	text-align: right;
+	font-size: .8em;
+	color: #666;
+}
+
+/*******************************************************************************
+	Homepage
+*******************************************************************************/
+
+#content div.news-item
+{
+	padding: 0 4em;
+}
+
+#content .news-item h2
+{
+	float: left;
+	margin-bottom: 0px;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.news-item .metadata
+{
+	padding-top: .5em;
+}
+
+#content .news-item p
+{
+	border-top: 1px solid #aaa;
+	clear: both;
+	line-height: 1.4em;
+	text-align: justify;
+}
+
+/*******************************************************************************
+	Debug Output
+*******************************************************************************/
+
+#content .debug
+{
+	text-align: right;
+	font-size: .8em;
+	color: #666;
+}
