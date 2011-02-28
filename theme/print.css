@@ -1,0 +1,49 @@
+/*******************************************************************************
+	UCSB SexInfo
+*******************************************************************************/
+
+body
+{
+	font-family: "Times New Roman", "Times Roman", Times, serif;
+	background: #fff;
+	font-size: 12pt;
+	color: #000;
+	margin: 0px;
+}
+
+/*******************************************************************************
+	General HTML Tags
+*******************************************************************************/
+
+a
+{
+	color: #000;
+	text-decoration: none;
+	border-bottom: 1px dashed #000;
+}
+
+p
+{
+	line-height: 1.6em;
+	padding-bottom: 1em;
+}
+
+/*******************************************************************************
+	General Layout
+*******************************************************************************/
+
+#banner
+{
+	font-size: 2em;
+	text-align: center;
+}
+
+#nav, .sidebar, #addthis
+{
+	display: none;
+}
+
+#footer
+{
+	margin-top: 1em;
+}
