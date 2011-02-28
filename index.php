@@ -10,6 +10,12 @@
 
 	$mysqli = new mysqli($config['dbhost'], $config['dbuser'], $config['dbpass'], $config['dbname']);
 	
+	if (mysqli_connect_errno()) {
+    	printf("Connect failed: %s\n", mysqli_connect_error());
+    	exit();
+	}
+	
+	
 	if(isset($_GET['article']))
 	{
 		# hard coded legacy support
