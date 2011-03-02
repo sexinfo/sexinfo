@@ -29,9 +29,9 @@ if (isset($_POST['submit'])) {
     $method = $_POST['method'];
     $code = $_POST['code'];
     
-    if (strlen($code) != 5) {
+    /*if (strlen($code) != 5) {
     echo  "$code Fucking tits mayne $captcha";
-    }
+    }*/
  
 	
         if ($_POST['reply'] != "1" && $_POST['reply'] != "0") {
