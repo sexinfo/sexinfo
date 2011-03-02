@@ -69,6 +69,7 @@ textarea.LV_invalid_field:active {
     </p>
     
     <!-- CAPTCHA -->
+	<!-- Hello -->
       
 	    <p>
 	    <label for="code">Enter the validation code:</label><br />
