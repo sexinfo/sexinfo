@@ -277,7 +277,7 @@
 					
 					<p><label for="abstract">Abstract:</label><br />
 					<textarea id="abstract" name="abstract" rows="4" cols="100">$abstract</textarea></p>
-	
+					
 					<p><label for="body">Body:</label><br />
 					<textarea id="body" name="body" rows="20" cols="100">$body</textarea></p>
 					
@@ -285,6 +285,25 @@
 				</form>
 HERE
 			);
+			
+		/* TINY MCE - Editor
+		
+		$page->add(<<<HERE
+				<script type="text/javascript" src="../core/tinymce/jscripts/tiny_mce.js"></script>
+				<script type="text/javascript">
+					tinyMCE.init({
+							mode : "exact",
+							theme : "advanced",
+							elements: "body",
+							plugins : "fullpage, xhtmlxtras,fullscreen, advlink, bbcode, contextmenu",
+							
+							theme_advanced_buttons1 : 		"bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect,fontsizeselect",
+							theme_advanced_buttons2 : "|bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,code,|,forecolor,",
+							theme_advanced_buttons3 : "hr,|,removeformat",
+					});
+				</script>
+HERE
+		); */
 
 			/*-- Uploaded Images ---------------------------------------------*/
 			$page->add('<div id="content_images"><h3>Uploaded Images</h3>');

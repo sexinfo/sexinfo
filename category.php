@@ -126,6 +126,7 @@
 	else
 	{
 		$page->title('Category');
+		$page->head('<link href="/sexinfo/core/listexpander.css" rel="stylesheet" type="text/css" media="screen" /> <script type="text/javascript" src="/sexinfo/core/listexpander.js"></script>');
 		$page->add('<h1>Category Listing</h1>');
 		$page->add('<p>The Sexperts have written over 2000 pages on SexInfo, and it has to arranged in an orderly fashion!  Check out the categories below for related content.</p>');
 		# Add url query string filter for types?
@@ -140,7 +141,7 @@
 		");
 
 		#TODO empty category check
-
+		$page->add('<ul class="listexpander">');
 		$nav = new nav();
 
 		while($row = $result->fetch_assoc())

@@ -1,4 +1,7 @@
+<head>
+<link rel="stylesheet" href="./theme/css/submit_form.css" type="text/css">
 
+</head>
 <!--
 To change this template, choose Tools | Templates
 and open the template in the editor.
@@ -36,8 +39,9 @@ textarea.LV_invalid_field:active {
 </style>
 	
 <form name="submit" action="submit_handler.php" method="post">
-   <fieldset id="ask">
-	<legend style="font-size:3em;">Ask the Sexperts</legend>
+   <!--<fieldset id="ask">-->
+	<div id="contact">
+	<h1>Ask the Sexperts</h1>
   	<p>
 		<br>
       <label for="email" float:right;>Email</label>
@@ -50,31 +54,39 @@ textarea.LV_invalid_field:active {
       <input type="text" name="location" id="location" value="" size="25" tabindex="1" </>
     </p>
     <p>
-      Gender
-        <select name="gender" id="gender" tabindex="1">
-      &nbsp;&nbsp;&nbsp;&nbsp;<option value="1">Male</option>
-	  &nbsp;&nbsp;&nbsp;&nbsp; <option value="2">Female</option>
-	  &nbsp;&nbsp;&nbsp;&nbsp;<option value="3">Other</option>
-	  &nbsp;&nbsp;&nbsp;&nbsp;<option value="4">Prefer Not To State</option>
+      
+      <label for="message">Gender:</label>
+        <select name="gender" id="gender" tabindex="1" style="width: 260px; margin: 10px 0 20px 0;">
+      		&nbsp;&nbsp;&nbsp;&nbsp;<option value="1">Male</option>
+	  		&nbsp;&nbsp;&nbsp;&nbsp; <option value="2">Female</option>
+	  		&nbsp;&nbsp;&nbsp;&nbsp;<option value="3">Other</option>
+	 		&nbsp;&nbsp;&nbsp;&nbsp;<option value="4">Prefer Not To State</option>
 	  </select>
-    
-       
-      &nbsp;&nbsp;&nbsp;&nbsp;<label for="age">Age</label>
+	</p>
+	
+    <p>   
+      <label for="age">Age</label>
       <input type="text" id="age" name="age" value="" size="4" tabindex="1" </>
     </p>
     <p>
-      <label for="message">Message to the Sexperts:</label>
+      <label for="message">Question:</label>
       <br />
       <textarea name="message" id="message" cols="40" rows="10" tabindex="1"></textarea>
     </p>
     
     <!-- CAPTCHA -->
-	<!-- Hello -->
-      
-	    <p>
+   	<img id="captcha" src="./securimage/securimage_show.php" alt="CAPTCHA Image" class="captcha" /><br />
+   
+  	<label for="code">Enter the CAPTCHA:</label>
+  	<input type="text" name="captcha_code" size="10" maxlength="6" /><br />
+	<!--<a href="#" onclick="document.getElementById('captcha').src = './securimage/securimage_show.php?' + Math.random(); return false">[ Different Image ]</a>-->
+	
+
+  	
+	    <!--<p>
 	    <label for="code">Enter the validation code:</label><br />
 	    <img src="./core/sex-captcha.php"/><br />
-	    <input type="text" name="code" id="code" /></p>
+	    <input type="text" name="code" id="code" /></p>-->
 	    
 	    
     <p>
@@ -82,7 +94,8 @@ textarea.LV_invalid_field:active {
       <input name="valid" value="0" type="hidden" />
       <input type="submit" name="submit" value="Ask the Sexperts" tabindex="1" />
     </p>
-  </fieldset>
+   </div>
+  <!--</fieldset>-->
 </form>
          <script type="text/javascript">
     			var email = new LiveValidation( 'email', {onlyOnSubmit: true } );
@@ -100,4 +113,4 @@ textarea.LV_invalid_field:active {
                 age.add ( Validate.Presence, {failureMessage: "Please include your age." } );
                 var gender = new LiveValidation( 'gender', {onlyOnSubmit: true } );
                 gender.add( Validate.Presence, {failureMessage: "Please state your gender" } );
-               </script>
+   		</script>

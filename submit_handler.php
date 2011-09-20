@@ -1,8 +1,8 @@
 <?php
 
+session_start(); 
+
 require('./core/sex-core.php');
-
-
 
 
 $email = '';
@@ -27,11 +27,26 @@ if (isset($_POST['submit'])) {
 	$message = trim($_POST['message']);
 	$reply = $_POST['reply'];
     $method = $_POST['method'];
-    $code = $_POST['code'];
+    $code = $_POST['captcha_code'];
     
-    /*if (strlen($code) != 5) {
-    echo  "$code Fucking tits mayne $captcha";
-    }*/
+    
+    include_once './securimage/securimage.php';
+
+	$securimage = new Securimage();
+	
+	
+	
+	if ($securimage->check($code) == false) {
+  		// the code was incorrect
+  		// you should handle the error so that the form processor doesn't continue
+  		
+  		echo "The security code entered was incorrect.<br /><br />";
+  		echo "Please go <a href='javascript:history.go(-1)'>back</a> and try again.";
+  		exit;
+	}
+
+	
+
  
 	
         if ($_POST['reply'] != "1" && $_POST['reply'] != "0") {
@@ -66,19 +81,31 @@ if (isset($_POST['submit'])) {
                     mysql_real_escape_string($age, $mysql),
                     $method);
          
-        mysql_query($query) or die(mysql_error());
-      
-	$mailmsg = "This is an automatic reply thanking you for submitting your question to SexInfo. Your question will be thoughtfully considered and discussed, then assigned to one of the Sexperts to be answered.  The response to your question is then carefully proofread and edited before being sent to your e-mail's inbox. This can be a very time consuming process, therefore you will likely receive an answer within two to three weeks.  We apologize if this delay is an inconvenience to you, but it helps to ensure the accuracy of material on our website, and that you will receive the highest quality response possible.\n\n";
-	$mailmsg .= "-The Sexperts\n\n";
-	$mailmsg .= "Please do not reply to this message.";
-
-	mail($email,"Auto-Reply from SexInfo",$mailmsg,"From:auto-reply@SexInfoOnline.com");
-
-		
-        if (mysql_affected_rows($mysql) > 0) {
-
-        header('Location:./?slug=etc');
-        }
+				        mysql_query($query) or die(mysql_error());
+				      
+						$mailmsg = "This is an automatic reply thanking you for submitting your question to SexInfo. Your question will be thoughtfully 
+						considered and 
+						discussed, then assigned to one of the Sexperts to be answered.  The response to your question is then carefully proofread and 
+						edited before 
+						being sent to your e-mail's inbox. This can be a very time consuming process, therefore you will likely receive an answer within 
+						two to three 
+						weeks. We apologize if this delay is an inconvenience to you, but it helps to ensure the accuracy of material on our website, and 
+						that you will 
+						receive the highest quality response possible.\n\n";
+						$mailmsg .= "-The Sexperts\n\n";
+						$mailmsg .= "Please do not reply to this message.";
+				
+						mail($email,"Auto-Reply from SexInfo",$mailmsg,"From:auto-reply@SexInfoOnline.com");
+				
+						
+				        if (mysql_affected_rows($mysql) > 0) {
+				        	header('Location:./?slug=etc');
+        				}
+       
+       		header('Location: http://www.soc.ucsb.edu/sexinfo/submit-success.php');
+        				
  }
  //}
-}	 ?>
+}	 
+
+?>
