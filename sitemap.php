@@ -24,7 +24,7 @@
 	while($row = $result->fetch_assoc())
 	{
 		# Output all data
-		echo '<url><loc>http://www.soc.ucsb.edu/sexinfo/'.$row['type_slug'].'/'.$row['content_slug'].'</loc><lastmod>'.data::format_date($row['content_modified'],7).'</lastmod></url>';		
+		echo '<url><loc>http://www.soc.ucsb.edu/sexinfo/'.$row['type_slug'].'/'.$row['content_slug'].'</loc><lastmod>'.data::format_date($row['content_modified'],7).'</lastmod></url>';
 	}
 
 	echo '</urlset>';
