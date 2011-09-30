@@ -308,8 +308,10 @@ p.copyright {
 
 .container {
 	/* The container is a class simply because of the multiple full-span elements.*/
-	margin:0 auto; padding:0;
-	width:940px; height:auto;
+	margin:0 auto;
+	padding:0;
+	width:940px;
+	height:auto;
 }
 
 /* Various Columns
