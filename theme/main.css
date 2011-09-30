@@ -308,10 +308,8 @@ p.copyright {
 
 .container {
 	/* The container is a class simply because of the multiple full-span elements.*/
-	margin:0 auto;
-	padding:0;
-	width:940px;
-	height:auto;
+	margin:0 auto; padding:0;
+	width:940px; height:auto;
 }
 
 /* Various Columns
@@ -734,7 +732,6 @@ html[xmlns] .clearfix {
 				
 				.footer-cat li a:link, .footer-cat li a:active, .footer-cat li a:visited {
 					font-family:Georgia, "Times New Roman", Times, serif; color:#a7a7a7;
-					font-size:12px;
 				}
 				
 				.footer-cat li a:link span, .footer-cat li a:active span, .footer-cat li a:visited span {
@@ -810,7 +807,7 @@ html[xmlns] .clearfix {
 	height: 26px;
 	background: url(/sexinfo/theme/images/search.gif);
 	border: 0px;
-	float: right;
+	float: left;
 	cursor: pointer;
 }
 
@@ -1071,62 +1068,6 @@ top: 250px;
 
 .announcement a:hover {
 	text-decoration: underline;
-}
-
-
-/* FAQ's page buttons */
-.boxbutton {
-	width:250px;
-	height:60px;
-	float: left;
-	margin-left:40px;
-	/*padding:20px;*/
-	border:2px solid #fff;
-	background-color:#f5fbff;
-	-webkit-border-radius: 10px; 
-	-moz-border-radius: 10px; 
-	border-radius: 10px;
-	-moz-box-shadow: 0 1px 1px #a3b5c1;
-	-webkit-box-shadow:  0 1px 1px #a3b5c1;
-	box-shadow:  0 1px 1px #a3b5c1;	
-}
-
-.boxbutton a, .boxbutton a:link, .boxbutton a:visited {
-	width:250px;
-	height:60px;
-	/*padding: 10px;*/
-	display: block;
-	background:#f5fbff;
-	border:2px solid #fff;
-	background-color:#f5fbff;
-	-webkit-border-radius: 10px; 
-	-moz-border-radius: 10px; 
-	border-radius: 10px;
-	-moz-box-shadow: 0 1px 1px #a3b5c1;
-	-webkit-box-shadow:  0 1px 1px #a3b5c1;
-	box-shadow:  0 1px 1px #a3b5c1;
-}
-
-* html .boxbutton a {
-	width:100%
-}
-
-.boxbutton a:hover {
-	-moz-box-shadow: 0 1px 7px #F23183;
-	-webkit-box-shadow:  0 1px 7px #F23183;
-	box-shadow:  0 1px 7px #F23183;
-}
-
-.question-box {
-	width:700px;
-	border:2px solid #fff;
-	background-color:#f5fbff;
-	-webkit-border-radius: 10px; 
-	-moz-border-radius: 10px; 
-	border-radius: 10px;
-	-moz-box-shadow: 0 1px 1px #a3b5c1;
-	-webkit-box-shadow:  0 1px 1px #a3b5c1;
-	box-shadow:  0 1px 1px #a3b5c1;	
 }
 
 
