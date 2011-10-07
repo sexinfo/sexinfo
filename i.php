@@ -1,6 +1,8 @@
 <?php
-	#if($_SERVER['SERVER_NAME'] != 'www.soc.ucsb.edu')
+	if($_SERVER['SERVER_NAME'] != 'www.soc.ucsb.edu')
 		phpinfo();
-	#else
-	#	exit('For development environment only.');
+	else {
+		header("Location: http://www.soc.ucsb.edu/sexinfo/");
+		exit;
+	}
 ?>
