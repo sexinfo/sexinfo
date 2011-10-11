@@ -11,9 +11,9 @@
 		$page = new page();
 	$page->add(' ');
 	
-	$page->title('Submit A Question');
+	$page->title('Ask the Sexperts - SexInfo Online');
 	
-	/*$page->add('<br /><br /><center><div id="questions"><br /><li>Before submitting a question, please try searching your question or browse the <a href="http://www.soc.ucsb.edu/sexinfo/article/frequently-asked-questions"><b><font size="3"><br />Frequently Asked Questions</font></b></a> to see if it has been already answered. 		
+	$page->add('<br /><br /><center><div id="questions"><br /><li>Before submitting a question, please try searching your question or browse the <a href="http://www.soc.ucsb.edu/sexinfo/article/frequently-asked-questions"><b><font size="3"><br />Frequently Asked Questions</font></b></a> to see if it has been already answered. 		
 
 				<form action="http://www.google.com/cse" method="get">
 					<div>
@@ -41,15 +41,15 @@
 	');
 
 	$page->output();
-	*/
+	
 
-	/*
-	require_once('./core/sex-core.php');
+	
+	/*require_once('./core/sex-core.php');
 
 	$page = new page();
 	
 	$page->title('Ask the Sexperts - SexInfo Online');
-	*/
+	
 	$page->add('<center><br /><h1>Ask the Sexperts</h1><br /><br /> ');
 	$page->add('
 	
@@ -84,7 +84,7 @@
 	<br />
 	
 	&nbsp;
-	');
+	');*/
 	
 	$page->output();
 	
