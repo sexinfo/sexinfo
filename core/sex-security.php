@@ -16,7 +16,7 @@
 		/*
 		 * Workflow:
 		 *
-		 * - Create s ecurity object
+		 * - Create security object
 		 * - Constructor checks for existence of session cookie
 		 * - If cookie exists, initializes session
 		 * - If cookie not set, send to login page
