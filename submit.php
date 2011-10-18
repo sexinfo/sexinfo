@@ -84,9 +84,9 @@
 	<br />
 	
 	&nbsp;
-	');*/
+	');
 	
-	$page->output();
+	$page->output();*/
 	
 	
 ?>
