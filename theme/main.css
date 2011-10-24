@@ -64,8 +64,8 @@ del {
 
 h1 {
 	margin:-10px 0 0 0; padding:0;
-	font:bold 3.53em Verdana, Arial, Helvetica, sans-serif; color:#fefefe;
-    text-shadow: #828282 1px 1px 0px;
+	font:bold 3.53em Verdana, Arial, Helvetica, sans-serif; color:#30393D; /*fefefe*/
+    text-shadow: #A7B0B3 1px 1px 0px; /*828282*/
 	position:relative; display:block;
 }
 
