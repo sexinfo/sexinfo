@@ -13,22 +13,35 @@
 	
 	$page->title('Ask the Sexperts - SexInfo Online');
 	
-	$page->add('<br /><br /><center><div id="questions"><br /><li>Before submitting a question, please try searching your question or browse the <a href="http://www.soc.ucsb.edu/sexinfo/article/frequently-asked-questions"><b><font size="3"><br />Frequently Asked Questions</font></b></a> to see if it has been already answered. 		
-
-				<form action="http://www.google.com/cse" method="get">
-					<div>
-					<font size="3"><b><br />Search: </b></font> 
-					<input type="hidden" name="cx" value="016229344819287620609:57qdqcwlna8" />
-					<input type="hidden" name="ie" value="UTF-8" />
-
-					<input id="search-query" type="text" name="q" maxlength="255" />
-					</div>
-				</form>
-				</li><br /> ');
+	/*$page->add('<br /><br /><center><div id="questions"><br /><li>Before submitting a question, please try searching your question or browse the <a href="http://www.soc.ucsb.edu/sexinfo/article/frequently-asked-questions"><b><font size="3"><br />Frequently Asked Questions</font></b></a> to see if it has been already answered');*/
 
 
-	$page->add('<li>It may take 2-4 weeks to receive a response.</li><br />');
-	$page->add('<li>If you think you or your partner may be <a href="http://www.soc.ucsb.edu/sexinfo/article/can-i-get-pregnant-if"><b><font size="3">pregnant</font></b></a>, please click <a href="http://www.soc.ucsb.edu/sexinfo/article/can-i-get-pregnant-if"><b><font size="3" >here.</font></b></a></li><br /></ul>');	
+	$page->add('
+		<form align="center" action="http://www.google.com/cse" method="get">
+			<div>
+			<font size="3"><b><br />Search: </b></font> 
+			<input type="hidden" name="cx" value="016229344819287620609:57qdqcwlna8" />
+			<input type="hidden" name="ie" value="UTF-8" />
+	
+			<input id="search-query" type="text" name="q" maxlength="255" />
+			</div>
+		</form>
+		</li><br /> '
+	);
+
+
+	$page->add('
+		<h4 style="text-align: center; width: 50%; margin: 0 auto; line-height: 25px;">The Sexperts are currently unable to take questions - sorry! If you think you or your partner may be pregnant, click <a href="http://www.soc.ucsb.edu/sexinfo/article/can-i-get-pregnant-if">here</a>, or you can read our FAQ <a href="http://www.soc.ucsb.edu/sexinfo/article/frequently-asked-questions">here</a>.</h4>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />	
+	');
+	
+	//$page->add('<li>It may take 2-4 weeks to receive a response.</li><br />');
+	/*$page->add('<li>If you think you or your partner may be <a href="http://www.soc.ucsb.edu/sexinfo/article/can-i-get-pregnant-if"><b><font size="3">pregnant</font></b></a>, please click <a href="http://www.soc.ucsb.edu/sexinfo/article/can-i-get-pregnant-if"><b><font size="3" >here.</font></b></a></li><br /></ul>');	
 	$page->add('<a href="http://www.soc.ucsb.edu/sexinfo/category/stds" <img src="images/std-bucket.jpg" style="position:relative; left:-60px; height:80px;" ></a>');
 	$page->add('<a href="http://www.soc.ucsb.edu/sexinfo/category/rape-info" <img src="images/rape-bucket.jpg" style="position:relative; left:0px; right:0px; border:120px; height:80px;" ></a>');
 	$page->add('<a href="http://www.soc.ucsb.edu/sexinfo/article/can-i-get-pregnant-if" <img src="images/pregnant-bucket.jpg" style="position:relative; top:0px; left:60px; right:10px; border:120px; height:80px;" ></a></div></center>');
@@ -36,10 +49,10 @@
 	{
 		$page->add('');
 	}
-	$page->add(file_get_contents('submit_form.php'));
+	//$page->add(file_get_contents('submit_form.php'));
 	$page->add('<br />
 	');
-
+	*/
 	$page->output();
 	
 
