@@ -184,7 +184,7 @@ padding: 20px; overflow:hidden; background:#ffffff; margin:0 0 40px 0;
 
 .region-sidebar-first ul.menu {  margin:0; padding:0; }
 
-.region-sidebar-first ul.menu li { list-style:none; margin:0; padding:0; }
+.region-sidebar-first ul.menu li { list-style:none; margin:0; padding:0; list-style-image:none; }
 
 .region-sidebar-first ul.menu li a { border-bottom:1px solid #e7e7e7; display:block; padding:5px; }
 
@@ -270,12 +270,12 @@ padding: 20px; overflow:hidden; background:#ffffff; margin:25px 0 0 0; font-styl
 * Main-menu 
 */
 /* 1st Level */
-#header-menu ul.menu  { display:block; padding:0; margin:0;  }
+#header-menu ul.menu  { display:block; padding:0; margin:0; position:relative; z-index:100; }
 
 #header-menu ul.menu li { display:inline-block; float:left; vertical-align: middle; padding:0; margin:0; }
 
 #header-menu ul.menu li a { outline:none; text-decoration: none; margin:0 35px 0 0; color:#ffffff; font-size:14px; font-weight:normal; text-align:center; text-transform:uppercase; 
-font-family: Myriad Pro,"Lucida Grande","Lucida Sans Unicode",Segoe UI,Helvetica,Arial,sans-serif; }
+font-family: Myriad Pro,"Lucida Grande","Lucida Sans Unicode",Segoe UI,Helvetica,Arial,sans-serif; display:block; }
 
 #header-menu ul.menu li a:hover, #header-menu ul.menu li a.active { color:#0099CC; }
 
@@ -288,10 +288,9 @@ font-family: Myriad Pro,"Lucida Grande","Lucida Sans Unicode",Segoe UI,Helvetica
 /* 2nd Level */
 #header-menu ul.menu li.expanded ul.menu { width: 230px; z-index:100; padding:0; background: #222222; display: none; position: absolute; }
 
-#header-menu ul.menu li.expanded:hover > ul.menu { display: block; }
+#header-menu ul.menu li.expanded:hover, #header-menu ul.menu li.expanded:hover > ul.menu { display:block; }
 
-#header-menu ul.menu li.expanded ul.menu li a { padding:0 10px; margin:0; display:block; width:210px; text-align:left; line-height:35px; height:35px; background:none; font-size:12px; 
-border-bottom:1px solid #353535; }
+#header-menu ul.menu li.expanded ul.menu li a { padding:10px; margin:0; display:block; width:210px; text-align:left; line-height:130%; background:none; font-size:12px; border-bottom:1px solid #353535; }
 
 #header-menu ul.menu li.expanded ul.menu li.expanded { background:transparent url('images/main-menu-arrow.png') no-repeat center right; }
 
@@ -309,7 +308,7 @@ border-bottom:1px solid #353535; }
 
 #footer .block ul.menu ul.menu { margin: 0 0 0 15px; }
 
-#footer .block ul.menu li { list-style:none; margin:0; padding:0; }
+#footer .block ul.menu li { list-style:none; margin:0; padding:0; list-style-image:none; }
 
 #footer .block ul.menu li a { border-bottom: 1px solid #353535; display: block; padding:5px; }
 
@@ -460,13 +459,11 @@ div.messages.status a, div.messages.error a, div.messages.warning a { color:#fff
 
 #slider-controls { display:block; text-align:center; width:960px; } 
 
-#slider-controls ul { display:block; overflow:hidden; margin:0; padding:0; }
+#slider-controls ul { display:block; overflow:hidden; margin:0; padding:0; text-align:center; }
 
-#slider-controls ul li { margin:0; padding:0; list-style:none; }
+#slider-controls ul li { display:inline; margin:0; padding:0; list-style:none; }
 
-#slider-controls ul li { display:inline-block; }
-
-#slider-controls ul li a { width:17px; height:17px; background:url('images/inactive-slide.png') no-repeat center center; display:block; float:left; padding:0; margin:0; outline:none; }
+#slider-controls ul li a { width:17px; height:17px; background:url('images/inactive-slide.png') no-repeat center center; display:inline-block; padding:0; margin:0; outline:none; }
 
 #slider-controls ul li a:focus { outline:none; }
 
@@ -507,9 +504,9 @@ li { display:list-item; }
 
 .pager-current { font-weight:bold; color:#7c713f; }
 
-ul.inline, ul.links.inline { display:inline; }
+ul.tabs { clear:both; margin:20px; white-space: normal }
 
-ul.tabs { clear:both; margin:20px; }
+ul.tabs li { padding:10px 0; line-height:130%; }
 
 .links { display: block; text-align:right; }
 
@@ -552,7 +549,7 @@ filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#0093c5', end
 
 #block-search-form input.form-submit { margin:0; border:none; -webkit-box-shadow:none; -moz-box-shadow:none; box-shadow:none; background:none; filter:none; }
 
-ul.inline li { padding: 0 2px; }
+ul.inline li { display: inline-block; margin: 0; padding: 10px 5px; zoom: 1; *display: inline; }
 
 input.form-submit { margin:0 10px 0 0; }
 
@@ -581,6 +578,7 @@ ul.social-bookmarks li.delicious a { background:url('images/social-media-delicio
 * Forum
 */
 #forum { padding:20px 0; }
+
 
 
 /*
