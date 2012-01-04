@@ -1,0 +1,17 @@
+name = FlexSlider Views Slideshow
+description = Integrate the FlexSlider library with Views Slideshow
+core = 7.x
+package = Flexslider
+
+dependencies[] = flexslider
+dependencies[] = views_slideshow
+
+files[] = flexslider_views_slideshow.module
+files[] = flexslider_views_slideshow.views_slideshow.inc
+files[] = theme/flexslider_views_slideshow.theme.inc
+; Information added by drupal.org packaging script on 2011-11-15
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "flexslider"
+datestamp = "1321316282"
+

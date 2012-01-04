@@ -25,9 +25,9 @@ settings[slideshow_effect]='scrollHorz'
 settings[slideshow_effect_time]='10'
 
 project = "corporateclean"
-; Information added by drupal.org packaging script on 2011-11-12
-version = "7.x-1.2"
+; Information added by drupal.org packaging script on 2011-07-28
+version = "7.x-1.1"
 core = "7.x"
 project = "corporateclean"
-datestamp = "1321087234"
+datestamp = "1311888415"
 

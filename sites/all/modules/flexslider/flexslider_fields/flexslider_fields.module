@@ -1,0 +1,182 @@
+<?php
+
+/**
+ * @file
+ * Adds fields integration with FlexSlider
+ *
+ * @author jepedo
+ * @author Mathew Winstone <mwinstone@coldfrontlabs.ca>
+ */
+
+/**
+ * Implements hook_field_formatter_info().
+ *
+ * Adds the flexslider format option within the manage display form of
+ * of an image field.
+ */
+function flexslider_fields_field_formatter_info() {
+  return array(
+    'flexslider' => array(
+      'label' => t('flexslider'),
+      'field types' => array('image', 'node_reference', 'media'),
+      'settings' => array(
+        'flexslider_optionset' => 'default',
+        'flexslider_reference_img_src' => NULL,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ *
+ * Provides display settings form within the manage display page of
+ * an image field with formatter flexslider.
+ */
+function flexslider_fields_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  $form = array();
+
+  // Show select box for the option set
+  $optionsets = array();
+  foreach (flexslider_optionsets() as $name => $optionset) {
+    $optionsets[$name] = check_plain($optionset['title']);
+  }
+  $form['flexslider_optionset'] = array(
+    '#title' => t('Option set'),
+    '#type' => 'select',
+    '#options' => $optionsets,
+    '#default_value' => $settings['flexslider_optionset'],
+  );
+
+  // Show select box for image fields if we're formatting a node_reference field
+  if ($field['type'] == 'node_reference') {
+    // Find all image fields
+    $image_fields = array();
+    $fields = field_info_fields();
+    $ref_node_types = array_filter($field['settings']['referenceable_types']);
+    foreach ($ref_node_types as $ref_node_type) {
+      foreach (field_info_instances('node', $ref_node_type) as $field_name => $field_instance) {
+        if ($fields[$field_name]['type'] == 'image') {
+          $image_fields[$field_name] = $field_name;
+        }
+      }
+    }
+    asort($image_fields);
+
+    if (count($image_fields) == 0) {
+      drupal_set_message(t('The referenced node type does not contain any valid image field(s).'), 'error');
+      return FALSE;
+    }
+    elseif (count($image_fields) == 1) {
+      $keys = array_keys($image_fields);
+      $key = $keys[0];
+      $form['flexslider_reference_img_src'] = array(
+        '#type' => 'hidden',
+        '#value' => $image_fields[$key],
+      );
+    }
+    elseif (count($image_fields) > 1) {
+      $form['flexslider_reference_img_src'] = array(
+        '#type' => 'select',
+        '#title' => t('Image source field of the referenced content type'),
+        '#options' => $image_fields,
+        '#default_value' => isset($settings['flexslider_reference_img_src']) ? $settings['flexslider_reference_img_src'] : '', // defaults to classic theme
+      );
+    }
+  }
+
+  return $form;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ *
+ * Displays the summary of the set options of a flexslider formatted image field
+ */
+function flexslider_fields_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  $summary = array();
+
+  // Load option set
+  if (!empty($settings['flexslider_optionset'])) {
+    $o = flexslider_optionset_load($settings['flexslider_optionset']);
+    if ($o !== FALSE) {
+      $optionset = $o;
+    }
+  }
+
+  // Build settings summary
+  $optionset = isset($optionset) ? $optionset['title'] : t('Default settings');
+  $summary[] = t('Option set: %optionset', array('%optionset' => $optionset));
+
+  if (isset($settings['flexslider_reference_img_src'])) {
+    $summary[] = t('Image field of the referenced node: %field', array('%field' => $settings['flexslider_reference_img_src']));
+  }
+
+  return implode('<br />', $summary);
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ *
+ * Prepares a renderable array of images and adds the neccessary JS and CSS
+ */
+function flexslider_fields_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  if ($field['type'] == 'node_reference') {
+    $items = flexslider_fields_get_referenced_images($display['settings']['flexslider_reference_img_src']);
+  }
+  elseif ($field['type'] == 'media') {
+    $image_items = array();
+    foreach ($items as $item) {
+      if ($item['file']->type == 'image') {
+        $file = (array) $item['file'];
+        $file += array('alt' => '', 'title' => '');
+        $image_items[] = $file;
+      }
+    }
+    $items = $image_items;
+  }
+
+  $element = array();
+  if (count($items) > 0) {
+    $element[] = array(
+      '#theme' => 'flexslider_container',
+      '#items' => $items,
+      '#settings' => $display['settings'],
+    );
+  }
+  return $element;
+}
+
+/*
+ * This function returns all images of an image field whose name is passed in argument $field
+ */
+function flexslider_fields_get_referenced_images($field) {
+  if (empty($field)) {
+    drupal_set_message(t('The referenced field does not contain any image field.'), 'error');
+    return FALSE;
+  }
+
+  $fid_col_name = $field . '_fid';
+  $alt_col_name = $field . '_alt';
+  $title_col_name = $field . '_title';
+  $result = db_query('SELECT ' . $fid_col_name . ',' . $alt_col_name . ',' . $title_col_name . ' FROM {field_data_' . $field . '}');
+
+  $images = array();
+  while ($row = $result->fetchAssoc()) {
+    $image = (array) file_load($row[$fid_col_name]);
+    $image['alt'] = $row[$alt_col_name];
+    $image['title'] = $row[$title_col_name];
+    $images[] = $image; 
+  }
+
+  return $images;
+ 
+/*  $output = '<div class="flex-caption">'$image['alt']'</div>';
+  return $output; */
+}

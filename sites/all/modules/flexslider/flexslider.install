@@ -1,0 +1,155 @@
+<?php
+/**
+ * @file
+ * Installation actions for FlexSlider
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function flexslider_schema() {
+  $schema = array();
+
+  $schema['flexslider_optionset'] = array(
+    'description' => 'Store option sets for flexslider instances.',
+    'fields' => array(
+      'name' => array(
+        'description' => 'The machine-readable option set name.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'title' => array(
+        'description' => 'The human-readable title for this option set.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+      'theme' => array(
+        'description' => 'The flexslider theme.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => 'classic',
+      ),
+      'imagestyle_normal' => array(
+        'description' => 'The image style for normal images.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => 'flexslider_full',
+      ),
+      'options' => array(
+        'description' => 'The options array.',
+        'type' => 'blob',
+        'size' => 'big',
+        'serialize' => TRUE,
+      ),
+    ),
+    'primary key' => array('name'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ *
+ * Adds a 'default' option set for fresh installs.
+ */
+function flexslider_install() {
+  $optionset = array(
+    'name' => 'default',
+    'title' => 'Default',
+    'options' => array(
+      'height' => 300,
+      'width' => 450,
+    ),
+  );
+
+  flexslider_optionset_save($optionset, TRUE);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function flexslider_uninstall() {
+  variable_del('flexslider_debug');
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function flexslider_requirements($phase) {
+  $requirements = array();
+  // Ensure translations don't break at install time
+  $t = get_t();
+
+  // Check to see if the flexslider library is available
+  if ($phase == 'runtime' || $phase == 'install') {
+    $requirements['flexslider'] = array(
+      'title' => $t('FlexSlider'),
+      // @todo have the version automatically detected
+      'description' => $t('Version 1.8 installed'),
+      'severity' => REQUIREMENT_OK,
+    );
+    _flexslider_requirements_library_installed($requirements);
+  }
+  return $requirements;
+}
+
+/**
+ * Implements hook_update_N().
+ *
+ * Remove/Update table fields to better suit FlexSlider
+ */
+function flexslider_update_7001(&$sandbox) {
+  $field_new = array(
+    'description' => 'The image style for normal images.',
+    'type' => 'varchar',
+    'length' => 255,
+    'not null' => TRUE,
+    'default' => 'flexslider_full',
+  );
+  // Change the default image style
+  db_change_field('flexslider_optionset', 'imagestyle_normal', $field_new, array());
+  // Drop the unused table column
+  db_drop_field('flexslider_optionset', 'imagestyle_thumb');
+}
+
+/**
+ * Check if the library is available
+ *
+ * @param array $requirements
+ *  Requirements definition
+ */
+function _flexslider_requirements_library_installed(&$requirements) {
+  $t = get_t();
+
+  $path = libraries_get_path('flexslider');
+  $installed = file_exists($path . '/jquery.flexslider-min.js') && file_exists($path . '/jquery.flexslider.js');
+
+  // Check the results of the test
+  if (!$installed) {
+    $requirements['flexslider']['description'] = $t('FlexSlider library not found. Please consult the README.txt for installation instructions.');
+    $requirements['flexslider']['severity'] = REQUIREMENT_ERROR;
+    return;
+  }
+
+  $js = file_exists($path . '/jquery.flexslider-min.js') ? fopen($path . '/jquery.flexslider-min.js', 'r') : fopen($path . '/jquery.flexslider.js', 'r');
+  $header = fread($js, 64);
+  $matches = array();
+  if (preg_match("/ v([0-9]+)\.([0-9]+)/", $header, $matches)) {
+    if (!($matches[1] == 1 and $matches[2] >= 8)) {
+      $requirements['flexslider']['description'] = $t('FlexSlider must be version 1.8 or higher, but lower than version 2.0.  Please consult the README.txt for installation instructions.');
+      $requirements['flexslider']['severity'] = REQUIREMENT_WARNING;
+      return;
+    } else {
+      $requirements['flexslider']['description'] = $t('Version %version installed', array( '%version' => $matches[1] . "." . $matches[2]));
+      return;
+    }
+  } else {
+    $requirements['flexslider']['description'] = $t('FlexSlider version could not be determined.  Please consult the README.txt for installation instructions.');
+    $requirements['flexslider']['severity'] = REQUIREMENT_WARNING;
+  }
+}
