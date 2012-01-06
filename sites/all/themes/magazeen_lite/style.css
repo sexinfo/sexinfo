@@ -38,57 +38,221 @@
 
 
 /* _____Content + Node_____ */
-
-	/*.container { border: 1px solid #f00 !important; }*/
+/*
+	.container { border: 1px solid #f00 !important; }
 	#column-large, #column-small { min-height: 400px; }
-	/*#column-large { background-color: green; }
-	#column-small { background-color: blue; }*/
-/*	
-	.main {border: 1px solid #0FC !important;}
+	#column-large { background-color: green; }
+	#column-small { background-color: blue; }
+	.column-third { background-color: yellow; }
+	.column-third:last-child { background-color: red; }
+	.list-half { background-color: green; }
+	.list-half:last-child { background-color: red; }
+*/
+/*
+	#main-front > .container {border: 1px solid orange !important;}
 	.breadcrumb {border: 1px solid green !important;}
-	.node             { background-color: red !important;      border: none !important; }
-	.node-meta     { background-color: orange !important; border: none !important; }
-	.node-title      { background-color: yellow !important;  }
-	.node-info       { background-color: #0FC !important;  }
-	.node-box       { background-color: green !important;   border: none !important; }
+	.node { background-color: red !important;      border: none !important; }
+	.node-meta { background-color: orange !important; border: none !important; }
+	.node-title { background-color: yellow !important;  }
+	.node-info { background-color: #0FC !important;  }
+	.node-box { background-color: green !important;   border: none !important; }
 	.node-content { background-color: blue !important;     border: none !important;  color: white !important; }
-	.node-footer   { background-color: purple !important;  border: none !important; }
-	.terms           { background-color: yellow !important;}
+	.node-footer { background-color: purple !important;  border: none !important; }
+	.terms { background-color: yellow !important;}
 	.node-readmore { background-color: orange !important; }
 */
 
+	#main-front {
+		padding:20px 0;
+		/*padding-bottom: 0;*/
+		background:url(images/main-content.gif) no-repeat top center;
+		border-top:1px solid #c6dee7;
+		border-bottom:10px solid #d0dce2;
+	}
+	
+	#main-front > .container {
+		width: 985px;
+	}
+
 /* _____In-progress dev styles_____ */
 /*----- LAYOUT -----*/
-#column-large {	
+#column-large {
+	/* The 2/3 width column container on the left of the front page */
 	float: left;
 	margin-right: 10px;
-	width: 600px;
+	/*width: 600px;*/
+	width: 645px;
 }
-#column-small {	
+#column-small {
+	/* The 1/3 width column container on the right of the front page */
 	float: right;		
 	width: 330px;
 }
 .column-container {
+	/* A generic padded container with background/rounded edges for modules  */
 	min-height: 100px; /* Testing only */
-
+	
 	background-color: #f6fbff;
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0px 0px 2px 1px #fff;
 	-moz-box-shadow: inset 0px 0px 2px 1px #fff;
-	box-shadow: inset 0px 0px 2px 1px #fff;	
+	box-shadow: inset 0px 0px 2px 1px #fff;
+	margin-bottom: 20px;
+	overflow: auto;
 	padding: 10px;
 }
-.column-container.dark {
-	background-color: #ebf6fa;
+	.column-container.dark {
+		background-color: #ebf6fa;
+	}
+		.question {
+			/* Generic container for questions in Recent Questions module for individual styling if desired */
+			clear: both;
+			margin-top: 10px;	
+			overflow: auto;
+		}
+.column-third {
+	/* Confusing name - is half the width of #column-large, but a third of the total .container */	
+	float: left;
+	margin-right: 10px;	
+	/*width: 295px;*/
+	width: 317.9px; /* Y U NO ALLOW 318PX?! */
 }
-.question {
-	clear: both;
-	margin-top: 10px;	
-	overflow: auto;
+	.column-third:last-child {
+		/* Zero the margin used for separation on the second box */		
+		margin: 0;
+	}
+
+/* Since the node classes are copied from another page, we need 
+ a few hacks to make it work specifically for the front page */
+.module .node-content { overflow: auto; padding: 10px; }
+
+/* Popular Topics module */
+.list-half {
+	min-height: 50px; /* For testing */
+	
+	float: left;
+	margin-right: 10px;	
+	width: 130px;
 }
+	.list-half:last-child {
+		/* Zero the margin used for separation on the second box */
+		margin: 0;
+	}
+
+	/* FAQ module */
+.faq-image {
+	background-color: pink;		
+	min-height: 100px; /*Testing only*/
+	
+	overflow: hidden;
+	position: relative;
+	width: 270px;
+}
+	.caption-slide {
+		background-color: #262626; /* Light -> Dark: #333 --> #2d2d2d --> #262626 */		
+		color: white;
+		/*height: 50px;*/
+		opacity: 0.7;
+		padding: 5px;
+		position: absolute;
+		bottom: -25px;		
+		left: 0;		
+		width: 260px; /* 5+5 = 10px of padding added */
+	}
+		.caption-slide h3,
+		.caption-slide p {			
+			color: white !important;
+			margin: 0 !important;
+			opacity: 1;
+		}
+
+/* Image carousel module */
+#carousel-window {
+	background-color: black;
+	height: 250px; /* Total height: 1000px; */
+	float: left;
+	margin-right: 10px;
+	overflow: hidden;
+	position: relative;
+	width: 400px;
+}
+	#window-inner {	
+		/* An inner container positioned dynamically with JS - sort of like a film reel */
+		position: absolute;
+		top: 0; left: 0; 
+	}
+		
+.img-placeholder {	
+	color: white;
+	float: left;
+	height: 250px;	
+	overflow: hidden;
+	position: relative;
+	width: 400px; 
+}
+	.carousel-caption {
+		background-color: #262626; /* Light -> Dark: #333 --> #2d2d2d --> #262626 */		
+		color: white;
+		height: 70px;
+		opacity: 0.7;
+		padding: 5px;
+		position: absolute;
+		bottom: 0;		
+		left: 0;		
+		width: 390px; /* 5+5 = 10px of padding added */
+	}
+		.carousel-caption h3,
+		.carousel-caption p {			
+			color: white !important;
+			margin: 0 !important;
+			opacity: 1;
+		}
+		.carousel-caption h3 {
+			font-size: 2em;
+		}
+		.more-button {
+			background-color: red;
+		}
+	
+#carousel-nav {
+	background-color: purple;
+	float: left;
+	/*width: 170px;*/
+	width: 215px;
+	height: 250px;
+}
+	#carousel-nav ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+		#carousel-nav a {			
+			background-color: #FFF;
+			/*border: 1px solid #FFF;*/
+			border-bottom: 2px solid #f6fbff;
+			color: #5E6568 !important;
+			display: block;
+			height: 53px;
+			outline: none;
+			/*margin-bottom: 5px;*/
+			padding: 5px;			
+			text-align: left;
+		}		
+		#carousel-nav a.current {
+			background-color: #ebf6fa;
+			border: 1px solid #EAF1F4;			
+		}
+		.thumb-placeholder {			
+			background-color: yellow;
+			float: left;
+			height: 56px;
+			margin: 4px;
+			width: 86px;
+		}
+
 
 /*----- TYPOGRAPHY -----*/
-.column-container h2 {
+.column-container h2 {	
 	color: #587682;
 	font: bold 2.00em Arial, Helvetica, sans-serif;
 	margin: 10px 0;
@@ -98,15 +262,44 @@
 	font: bold 1.4em Arial, Helvetica, sans-serif;
 }
 .date {
+	/* The timestamps on the questions module have this class for individual styling if desired */
 	color: #A5AEB1;
 	margin-bottom: 0.5em;
 }
 .readmore {
 	float: right;
 }
+.module-title {
+	border-bottom: 4px solid #30393d;
+	color: #30393d;
+	font: bold 1.7em Arial, Helvetica, sans-serif;
+	margin-bottom: 15px;
+	/*margin-right: 5px;*/ /* Add a little space between the bottom border and the edge to make the separation more distinct. */
+	padding-bottom: 5px;
+}
+.list-half a:link,
+.list-half a:visited {
+	clear: both;
+	float: left;
+	font-weight: bold;
+}
+/* Since the node classes are copied from another page, we need 
+ a few hacks to make it work specifically for the front page */
+.module p { margin: 0; }
+.module .node-footer a:link,
+.module .node-footer a:visited { 
+	font-style: italic;
+	font-weight: normal;
+}
+.module .node-footer a:hover,
+.module .node-footer a:active {
+	text-decoration: underline;
+}
 
 
-/*  _____Finished dev styles to be moved into their rules_____ */
+
+
+
 
 
 /* ----------------------------------------------*/
@@ -536,7 +729,7 @@ background:url("images/slideshow/arrow-right.png") no-repeat scroll left top tra
 
 #main {
 	padding:20px 0;
-	padding-bottom: 0;
+	/*padding-bottom: 0;*/
 	background:url(images/main-content.gif) no-repeat top center;
 	border-top:1px solid #c6dee7;
 	border-bottom:10px solid #d0dce2;
@@ -821,3 +1014,56 @@ padding:20px 40px ;
 .comment_delete, .comment_edit, .comment_reply{ margin:0; padding:0; font-family:Verdana, Arial, Helvetica, sans-serif; }
 
 .comment_forbidden { font:bold italic 1.17em Georgia, "Times New Roman", Times, serif; }
+
+/* __________Temporary stuff for jquery-tabs__________ */
+
+/* Layout helpers
+----------------------------------*/
+.ui-helper-hidden { display: none; }
+.ui-helper-hidden-accessible { position: absolute !important; clip: rect(1px 1px 1px 1px); clip: rect(1px,1px,1px,1px); }
+.ui-helper-reset { margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none; }
+.ui-helper-clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.ui-helper-clearfix { display: inline-block; }
+/* required comment for clearfix to work in Opera \*/
+* html .ui-helper-clearfix { height:1%; }
+.ui-helper-clearfix { display:block; }
+/* end clearfix */
+.ui-helper-zfix { width: 100%; height: 100%; top: 0; left: 0; position: absolute; opacity: 0; filter:Alpha(Opacity=0); }
+
+/* Component containers
+----------------------------------*/
+.ui-widget { font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.1em; }
+.ui-widget .ui-widget { font-size: 1em; }
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1em; }
+.ui-widget-content { border: 1px solid #dddddd; background: #eeeeee url(images/ui-bg_highlight-soft_100_eeeeee_1x100.png) 50% top repeat-x; color: #333333; }
+.ui-widget-content a { color: #333333; }
+.ui-widget-header { border: 1px solid #e78f08; background: #f6a828 url(images/ui-bg_gloss-wave_35_f6a828_500x100.png) 50% 50% repeat-x; color: #ffffff; font-weight: bold; }
+.ui-widget-header a { color: #ffffff; }
+
+/* Interaction states
+----------------------------------*/
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #cccccc; background: #f6f6f6 url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #1c94c4; }
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #1c94c4; text-decoration: none; }
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: 1px solid #fbcb09; background: #fdf5ce url(images/ui-bg_glass_100_fdf5ce_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #c77405; }
+.ui-state-hover a, .ui-state-hover a:hover { color: #c77405; text-decoration: none; }
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 1px solid #fbd850; background: #ffffff url(images/ui-bg_glass_65_ffffff_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #eb8f00; }
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #eb8f00; text-decoration: none; }
+.ui-widget :active { outline: none; }
+
+/* Misc visuals
+----------------------------------*/
+/* Corner radius */
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl { -moz-border-radius-topleft: 4px; -webkit-border-top-left-radius: 4px; -khtml-border-top-left-radius: 4px; border-top-left-radius: 4px; }
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr { -moz-border-radius-topright: 4px; -webkit-border-top-right-radius: 4px; -khtml-border-top-right-radius: 4px; border-top-right-radius: 4px; }
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl { -moz-border-radius-bottomleft: 4px; -webkit-border-bottom-left-radius: 4px; -khtml-border-bottom-left-radius: 4px; border-bottom-left-radius: 4px; }
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br { -moz-border-radius-bottomright: 4px; -webkit-border-bottom-right-radius: 4px; -khtml-border-bottom-right-radius: 4px; border-bottom-right-radius: 4px; }
+
+.ui-tabs { position: relative; padding: .2em; zoom: 1; } /* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+.ui-tabs .ui-tabs-nav { margin: 0; padding: .2em .2em 0; }
+.ui-tabs .ui-tabs-nav li { list-style: none; float: left; position: relative; top: 1px; margin: 0 .2em 1px 0; border-bottom: 0 !important; padding: 0; white-space: nowrap; }
+.ui-tabs .ui-tabs-nav li a { float: left; padding: .5em 1em; text-decoration: none; }
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected { margin-bottom: 0; padding-bottom: 1px; }
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { cursor: text; }
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+.ui-tabs .ui-tabs-panel { display: block; border-width: 0; padding: 1em 1.4em; background: none; }
+.ui-tabs .ui-tabs-hide { display: none !important; }
