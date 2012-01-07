@@ -213,8 +213,9 @@
 										<img class="" src="<?php print path_to_theme() . '/images/modules/' . 'sadomasochism.jpg'; ?>" />
 										<div class="caption-slide">
 											<h3>Sexual Fetishism</h3>
-											<p>There are many different types of fetishes. Some people get sexually excited by seeing boots&hellip;</p>
-										</div>
+											<p>There are many types of fetishes. Some people get sexually excited by seeing boots&hellip;
+											<a href="#" class="more-button">Read More</a></p>
+										</div><!-- .caption-slide -->
 									</div><!-- .faq-image -->								
 								</div><!--.node-content-->															
 								
@@ -247,16 +248,23 @@
 							</div>
 							
 							<div class="question">
+								<h4>Is this a real question?</h4>
+								<p class="date">October 30, 2011</p>
+								<p>No. It is not. The webdevs are lazy and need to make this a dynamic module. Go hassle at them, but look how pretty the rest of the site is in the meantime.</p>
+								<p><a href="#" class="readmore">Read More &raquo;</a></p>
+							</div>
+							
+							<div class="question">
 								<h4>Some other question title</h4>
 								<p class="date">October 30, 2011</p>
 								<p>Question: Dear Sexperts, My friends told me that masturbating will make me taller. Is this true? At age eighteen, I started ejaculating at night and it makes...</p>
 								<p><a href="#" class="readmore">Read More &raquo;</a></p>
 							</div>
-							
-							
-						</div>
-					</div>
-				</div>
+														
+						</div><!-- .column-container.dark -->
+						
+					</div><!-- .column-container -->
+				</div><!-- #column-small -->
 				
 				
 			</div>
@@ -316,11 +324,7 @@
 <script type="text/javascript">
 	// Code to run on page load
 	
-	(function ($) {
-	
-		//----- Initialize image rotator tabs ---//
-		//$( "#tabs" ).tabs().tabs( "rotate" , 5000, true) // only if using jQuery UI
-		
+	(function ($) {		
 		
 		//----- Image carousel module ---//
 		function rotate(id) {
