@@ -49,7 +49,7 @@
 	.list-half { background-color: green; }
 	.list-half:last-child { background-color: red; }
 */
-/*	
+/*
 	.breadcrumb {border: 1px solid green !important;}
 	.node { background-color: red !important;      border: none !important; }
 	.node-meta { background-color: orange !important; border: none !important; }
@@ -64,7 +64,58 @@
 
 
 /* _____In-progress dev styles_____ */
+/* Ask the Sexperts page, found at /node/22 */
+/* Incredibly hacked together, but it works. Not sure if there's a better way to do it using templates. */
 
+/*
+ Rules organized by:
+	- Resets + Basic Layouts
+	- Form elements
+	- Typography
+*/
+
+/*----- RESETS + BASIC LAYOUT -----*/
+#node-22 {
+	/* Figure out how to center the node - auto margins aren't working anywhere */
+	width: 600px; /*  Arbitrary. 22+22 = 44px of padding added to left/right. */
+}
+#node-22 .node-box {
+	/* Bunch of container resets */
+	background: none;
+	background-image: none;
+	border: none;	
+}
+#node-22 .node-content {		
+	background-color: red;
+
+	border: none; /* Reset the white border added elsewhere */
+	-webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+	border-radius: 10px;
+	padding: 30px 22px;
+	
+}
+#node-22 .node-footer { 
+	/* Get rid of the footer box ("Category: etc") */
+	display: none; 
+}
+
+
+/*----- FORM ELEMENTS-----*/
+#node-22 input:not([type="submit"]),
+#node-22 textarea {
+	background-color: green;
+	width: 100%; /* A temporary arbitrary design decision */
+}
+#node-22 textarea {
+	/* Remove scrollbar in IE */
+	overflow: auto;
+}
+#node-22 input[type="submit"] {
+	background-color: yellow;
+}
+
+/*----- TYPOGRAPHY-----*/
 
 
 /* ----------------------------------------------*/
@@ -797,7 +848,6 @@ padding:20px 40px ;
 .comment_forbidden { font:bold italic 1.17em Georgia, "Times New Roman", Times, serif; }
 
 
-/* ----------------------------------------------*/
 /* 09 - FRONT PAGE MODULES
 /* ----------------------------------------------*/
 /*

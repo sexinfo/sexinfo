@@ -1,18 +1,3 @@
-<?php
-	
-	/*
-	 * This is a weird hack for getting around the templating engine
-	 * It works for now, but there's definitely a better way to do it.
-	 * Try researching "drupal use different front page template" or similar
-	 * -Andrew
-	*/
-	if ($is_front) {
-		include 'page--front.tpl.php'; 
-		return; 
-	}
-
-?>
-
 <!-- ______________________ HEADER _______________________ -->
 
 <div id="header">
