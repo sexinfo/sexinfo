@@ -82,6 +82,11 @@
 	/* Figure out how to center the node - auto margins aren't working anywhere */
 	width: 600px; /*  Arbitrary. 22+22 = 44px of padding added to left/right. */
 }
+#node-22 .node-info {
+	/* "Hide" the pesky author/publication information.
+	Not using display: none in order to keep the nice gray bottom border.	*/
+	padding-bottom: 3000px;
+}
 #node-22 .node-box {	
 	/* Bunch of container resets */
 	background: none;
@@ -89,9 +94,15 @@
 	border: none;	
 }
 #node-22 .node-content {		
-	background-color: orange;	
+	background-color: #eaeaea;		
+	border: none; /* Reset the white border set elsewhere - could be #d6d6d6*/
 	
-	border: none; /* Reset the white border added elsewhere */
+	-moz-box-shadow: 0px 0px 6px #444;
+	-webkit-box-shadow: 0px 0px 6px #444;
+	box-shadow: 0px 0px 6px #444;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(strength=2, Direction=225, Color='#444')";
+	filter: progid:DXImageTransform.Microsoft.Shadow(strength=2, direction=225, color='#444');  
+	
 	-webkit-border-radius: 10px;
     -moz-border-radius: 10px;
 	border-radius: 10px;
@@ -130,13 +141,30 @@
 	width: 100%;
 }
 #node-22 input[type="submit"] {
-	background-color: yellow;
+	background-color: #3099DF;	
+	background: -moz-linear-gradient(0% 50% 90deg,#188AC2, #3099DF);
+	background: -ms-linear-gradient(#3099DF,#188AC2);
+	background: -webkit-gradient(linear, 0% 0%, 0% 35%, from(#3099DF), to(#188AC2)); 
+	background: -o-linear-gradient(#3099DF,#188AC2);   
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3099DF', endColorstr='#188AC2');
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#3099DF', endColorstr='#188AC2')";
+	background: linear-gradient(#3099DF, #188AC2);		
 	border: none;
-	-webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-	border-radius: 6px;
+	-webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+	border-radius: 7px;	
+	color: white;
+	font-size: 1.1em;
 	padding: 10px 15px;
 }
+	#node-22 input[type="submit"]:hover {
+		background: none;
+		background-color: #008AB8;
+		cursor: pointer;
+	}	
+	#node-22 input[type="submit"]:active {		
+		background-color: #007298;		
+	}
 
 /*----- TYPOGRAPHY-----*/
 #node-22 label {
