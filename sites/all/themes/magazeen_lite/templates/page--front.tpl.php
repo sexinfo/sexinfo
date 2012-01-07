@@ -1,8 +1,3 @@
-<?php	
-	# Placeholder for jquery-tabs.js
-	drupal_add_js('misc/jquery-tabs.js');	
-?>
-
 <!-- ______________________ HEADER _______________________ -->
 
 <div id="header">
@@ -106,44 +101,44 @@
 								<div id="window-inner">
 							
 									<!-- SLIDE 1 -->
-									<div class="img-placeholder" style="background-color: red;">
-										<p>There will eventually be an image here.</p>
+									<div class="carousel-frame">
+										<img src="<?php print path_to_theme() . '/images/modules/' . 'pregnant.jpg'; ?>" alt="Can I get pregnant if..." />										
 										<div class="carousel-caption">
-											<h3>Hello From Slide One!</h3>
-											<p>This is the first slide. There will be four slides with captions like these. It just has to be a sentence or two to describe the image.
-											<span class="more-button">Read More</span></p>
+											<h3>Can I get pregnant if...</h3>
+											<p>There are many situations when the question of pregnancy can occur.. If you are having any doubts on&hellip;
+											<a href="#" class="more-button">Read More</a></p>
 										</div>
-									</div><!-- .img-placeholder -->
+									</div><!-- .carousel-frame -->
 									
 									<!-- SLIDE 2 -->
-									<div class="img-placeholder" style="background-color: orange;">
-										<p>There will eventually be an image here.</p>
+									<div class="carousel-frame">
+										<img src="<?php print path_to_theme() . '/images/modules/' . 'stdtalking.jpg'; ?>" alt="Sexual Behaviors" />
 										<div class="carousel-caption">
-											<h3>Hello From Slide Two!</h3>
-											<p>This is the second slide. There will be four slides with captions like these. It just has to be a sentence or two.
-											<span class="more-button">Read More</span></p>
+											<h3>Sexual Behaviors</h3>
+											<p>Sexual techniques are methods for increasing a partner's sexual arousal. These include activites that&hellip;
+											<a href="#" class="more-button">Read More</a></p>
 										</div>
-									</div><!-- .img-placeholder -->
+									</div><!-- .carousel-frame -->
 									
 									<!-- SLIDE 3 -->
-									<div class="img-placeholder" style="background-color: yellow;">
-										<p>There will eventually be an image here.</p>
+									<div class="carousel-frame">
+										<img src="<?php print path_to_theme() . '/images/modules/' . 'holding-hands.jpg'; ?>" alt="Love and Building Relationships" />
 										<div class="carousel-caption">
-											<h3>Hello From Slide Three!</h3>
-											<p>This is the third slide. There will be four slides with captions like these. It just has to be a sentence or two to describe the image.
-											<span class="more-button">Read More</span></p>
+											<h3>Love &amp; Building Relationships</h3>
+											<p>There are five components that determine with whom you fall in love, and if your love will last. They are&hellip;
+											<a href="#" class="more-button">Read More</a></p>
 										</div>
-									</div><!-- .img-placeholder -->
+									</div><!-- .carousel-frame -->
 									
-										<!-- SLIDE 4 -->
-										<div class="img-placeholder" style="background-color: green;">
-										<p>There will eventually be an image here.</p>
+									<!-- SLIDE 4 -->
+									<div class="carousel-frame">
+										<img src="<?php print path_to_theme() . '/images/modules/' . 'std.jpg'; ?>" alt="Sexually Transmitted Diseases" />
 										<div class="carousel-caption">
-											<h3>Hello From Slide Four!</h3>
-											<p>This is the fourth slide. There will be four slides with captions like these. It just has to be a sentence or two.
-											<span class="more-button">Read More</span></p>
+											<h3>Sexually Transmitted Diseases</h3>
+											<p>Have a concern regarding STD's? Have a look at the STD Symptom Chart to learn more about sexual&hellip;
+											<a href="#" class="more-button">Read More</a></p>
 										</div>
-									</div><!-- .img-placeholder -->
+									</div><!-- .carousel-frame -->
 								
 								</div><!-- #window-inner -->
 							</div><!-- .carousel-window -->
@@ -151,19 +146,19 @@
 							<div id="carousel-nav">
 								<ul>
 									<li>
-										<div class="thumb-placeholder"></div>
+										<img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'pregnant-small.jpg'; ?>" />
 										<a class="current" rel="1" href="#">Can I get pregnant if...</a>
 									</li>
 									<li>
-										<div class="thumb-placeholder"></div>
+										<img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'stdtalking-small.jpg'; ?>" />
 										<a rel="2" href="#">Sexual Behaviors</a>
 									</li>
 									<li>
-										<div class="thumb-placeholder"></div>
+										<img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'holding-hands-small.jpg'; ?>" />
 										<a rel="3" href="#">Love &amp; Building Relationships</a>
 									</li>
 									<li>
-										<div class="thumb-placeholder"></div>
+										<img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'std-small.jpg'; ?>" />
 										<a rel="4" href="#">Sexually Transmitted Diseases</a>
 									</li>
 								</ul>
@@ -213,15 +208,14 @@
 						<div class="module">
 							<div class="node-box">
 							
-								<div class="node-content">								
-									<?php # Markup is temporary. Needs to be replaced with actual images/content ?>
+								<div class="node-content">									
 									<div class="faq-image">
-										<p>There will eventually be an image here.</p>
+										<img class="" src="<?php print path_to_theme() . '/images/modules/' . 'sadomasochism.jpg'; ?>" />
 										<div class="caption-slide">
-											<h3>Hello World!</h3>
-											<p>This is a caption.</p>
+											<h3>Sexual Fetishism</h3>
+											<p>There are many different types of fetishes. Some people get sexually excited by seeing boots&hellip;</p>
 										</div>
-									</div>									
+									</div><!-- .faq-image -->								
 								</div><!--.node-content-->															
 								
 								
@@ -241,12 +235,10 @@
 						<h2>Recent Questions</h2>						
 						
 						<div class="column-container dark">
-							<?php
-							/*
-							These need to be generated dynamically - three most recent questions (or articles, etc)
-							*/
+							<?php				
+								# These need to be generated dynamically - three most recent questions (or articles, etc)							
 							?>
-						
+							
 							<div class="question">
 								<h4>Example question for formatting</h4>
 								<p class="date">October 30, 2011</p>
@@ -357,7 +349,7 @@
 			}, 
 			function () {
 				// Hover off - slide back down
-				$(this).animate({bottom: '-25px'}, 300);
+				$(this).animate({bottom: '-40px'}, 300);
 			}
 		);
 											  
