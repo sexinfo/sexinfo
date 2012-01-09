@@ -40,7 +40,7 @@
 
 /* _____Content + Node_____ */
 /*
-	.container { border: 1px solid #f00 !important; }
+	 .container { border: 1px solid #f00 !important; }
 	#column-large, #column-small { min-height: 400px; }
 	#column-large { background-color: green; }
 	#column-small { background-color: blue; }
@@ -61,13 +61,15 @@
 	.terms { background-color: yellow !important;}
 	.node-readmore { background-color: orange !important; }
 */
-
+	
 
 /* _____In-progress dev styles_____ */
+
+
 /* 
  Ask the Sexperts page, found at /node/22.
  Totally hacked together, but it works.
- You could probably put it in webforms.css but this is easier 
+ You could probably put styles in webforms.css but this is easier 
 */
 
 /*
@@ -94,7 +96,7 @@
 	border: none;	
 }
 #node-22 .node-content {		
-	background-color: #eaeaea;		
+	background-color: #EFEFEF; /* eaeaea */
 	border: none; /* Reset the white border set elsewhere - could be #d6d6d6*/
 	
 	-moz-box-shadow: 0px 0px 6px #444;
@@ -106,7 +108,7 @@
 	-webkit-border-radius: 10px;
     -moz-border-radius: 10px;
 	border-radius: 10px;
-	
+		
 	padding: 30px 40px;
 }
 #node-22 .node-footer,
@@ -176,13 +178,12 @@
 /* ----------------------------------------------*/
 /* 00 - GLOBAL ELEMENTS
 /* ----------------------------------------------*/
-
 body {
 	margin:0; padding:0;
 	width:auto; height:auto;
 	background:#e0edf3;
 	font:0.75em Arial, Helvetica, sans-serif; color:#5e6568;
-	line-height:19px;
+	line-height:19px;	
 }
 
 code {
@@ -600,7 +601,7 @@ background:url("images/slideshow/arrow-right.png") no-repeat scroll left top tra
 
 #main {
 	padding:20px 0;
-	/*padding-bottom: 0;*/
+	/* padding-bottom: 0; */
 	background:url(images/main-content.gif) no-repeat top center;
 	border-top:1px solid #c6dee7;
 	border-bottom:10px solid #d0dce2;
@@ -618,6 +619,7 @@ background:url("images/slideshow/arrow-right.png") no-repeat scroll left top tra
 	#main-front > .container {
 		/* Entire purpose of #main-front is so the front page can have a wider container. */
 		width: 985px;
+		margin-bottom: 55px; /* I hate myself for writing this */
 	}
 
 ul.pager { 
@@ -950,7 +952,7 @@ padding:20px 40px ;
 	/* Confusing name - is half the width of #column-large, but a third of the total .container */	
 	float: left;
 	margin-right: 10px;	
-	width: 317.9px; /* Y U NO ALLOW 318PX?! */
+	width: 316px; /* Y U NO ALLOW 318PX?! */
 }
 	.column-third:last-child {
 		/* Zero the margin used for separation on the second box */		
@@ -980,7 +982,7 @@ padding:20px 40px ;
 	.faq-image img {		
 		margin: 0;
 		padding: 0;
-		width: 291px;
+		width: 290px;
 	}
 	.caption-slide {
 		background-color: #262626; /* Light -> Dark: #333 --> #2d2d2d --> #262626 */		

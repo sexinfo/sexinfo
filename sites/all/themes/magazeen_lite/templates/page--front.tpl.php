@@ -1,3 +1,4 @@
+<div id="heightfix-container">
 <!-- ______________________ HEADER _______________________ -->
 
 <div id="header">
@@ -324,9 +325,12 @@
 <script type="text/javascript">
 	// Code to run on page load
 	
-	(function ($) {		
+	(function ($) {
 		
 		//----- Image carousel module ---//
+		var loopRotate = true; // A boolean determining whether or not to automatically cycle. 
+										// Disabled once user clicks.
+		
 		function rotate(id) {
 			var offset = Math.abs(id-1),
 				distance = 250 * offset; // 250 = hardcoded image height
@@ -336,14 +340,44 @@
 			}, 550);
 		}
 		
-		$('#carousel-nav a').click(function() {			
+		$('#carousel-nav a').click(function() {
+			clearInterval(loop); // Disable auto cycle once user clicks
 			$('#carousel-nav a').removeClass('current'); // Remove from all tabs, not just $(this)
 			$(this).addClass("current");
 			var id = $(this).attr('rel'); // Not a very semantic way of doing it, but oh well
 			rotate(id);			
 			return false; //Prevent browser jump to anchor link
-		});		
+		});
+		
+		/* Automatic carousel cycling */
+		var i = 1,
+			links = $("#carousel-nav a"); // Get all of the nav links for looping through later
 				
+		function cycle() {
+			// Rotate the image frame
+			rotate(i);			
+			
+			// Remove 'current' class from all tabs
+			$('#carousel-nav a').removeClass('current');
+			
+			// Loop through all links in nav list
+			// If the link's rel attribute (used as an identifier) matches current frame, add class 'current'
+			$.each(links, function() {
+				if ( $(this).attr("rel") == i ) {
+					$(this).addClass("current");
+				}			
+			});
+			
+			// Increment the current frame and reset to first if at end 			
+			i++;
+			if (i == 5) { i = 1; }			
+		} // end cycle()
+		
+		if (loopRotate == true) {
+			// Cycle the frame every 5 seconds if the user hasn't clicked a link
+			var loop = setInterval(cycle, 5000);
+		}
+
 		
 		//----- Sliding captions for FAQ module ---//
 		$("#column-large .caption-slide").hover(
@@ -359,3 +393,4 @@
 											  
 	})(jQuery);
 </script>
+</div><!-- heightfix-container -->
