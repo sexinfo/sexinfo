@@ -1040,13 +1040,14 @@ padding:20px 40px ;
 	#carousel-nav ul {
 		list-style: none;
 		margin: 0;
-		padding: 0;
+		padding: 0;				
 	}		
 		.carousel-thumb {			
 			background-color: #FFF;
 			border: 1px solid #EAF1F4;
 			float: left;			
-			margin: 4px;			
+			/*margin: 4px;*/ /* if #carousel-nav a height = 52px  */
+			margin: 3.125px; /* 3.125px optimally */			
 			padding: 2px;
 			
 		}
@@ -1136,19 +1137,18 @@ a:visited.more-button  {
 		background-color: #d1d1d1;
 	}
 
-#carousel-nav a {			
-	background-color: #FFF;
-	/*border: 1px solid #FFF;*/
-	border-bottom: 2px solid #f6fbff;
+#carousel-nav a {	
+	background-color: #FFF;		
+	border: 1px solid #FFF;
+	border-bottom-color: #f6fbff;	
 	color: #5E6568;
 	display: block;
-	height: 53px;
+	height: 51px; /* not including 10px off padding */
 	outline: none;
-	/*margin-bottom: 5px;*/
-	padding: 5px;			
+	padding: 5px;
 	text-align: left;
 }		
 	#carousel-nav a.current {
 		background-color: #ebf6fa;
-		border: 1px solid #EAF1F4;			
+		border: 1px solid #EAF1F4;
 	}
