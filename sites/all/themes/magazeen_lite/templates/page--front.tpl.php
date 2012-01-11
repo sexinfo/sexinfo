@@ -1,4 +1,46 @@
-<div id="heightfix-container">
+<?php
+	/*
+	 * I was going crazy writing code like <?php print "<div class=\"sidebar\">". $content ."</div>"; ?>
+	 * so I wrote a utility function for it called print_content_tag(). Just going to leave it here for now. -Andrew
+	*/
+
+	function open_tag($tag, $attr) {
+		// Utility function for print_content_tag()
+		// returns an opening HTML tag with attributes from parameter
+		$attr_string = null;
+		
+		if (!empty($attr)) {			
+			foreach ($attr as $key => $value) {
+				// If we have attributes, loop through the key/value pairs passed in and append result HTML
+				// to a string that gets added into the opening tag
+				$attr_string .= $key . "=" . '"' . $value . '" ';
+			}
+		}
+		return "<" . $tag . " " . $attr_string . ">"; 
+	}
+	
+	function close_tag($tag) { 
+		// Utility function for print_content_tag(). Returns an closing HTML tag
+		return "</" . $tag . ">";
+	}
+	
+	function print_content_tag($tagName, $content, $attr=array()) {
+		/*
+		 * Description: Facilitates creating HTML tags with dynamic content.
+		 * Parameters: $tagName, $content, $attr=array()
+		 *  - $tagName: string; the HTML tag, ex: "div"
+		 *  - $content: string; the content to wrap in tags
+		 *  - $attr: array; a list of attributes to add to the tag, ex: array( "id" => "sidebar", "class" => "nav" )
+		 *     - default value: null
+		 * Example call: 
+		 *    $content = mysql_query($query); // Anything really
+		 *    print_content_tag("div", $content, array("class" => "user-info"));
+		*/
+		print open_tag($tagName, $attr) . $content . close_tag($tagName);
+	}
+?>
+
+<!-- <div id="heightfix-container"> --><!-- Wrote this to try and fix the error where the footer doesn't stay at the bottom of the window even if the content is shorter than 100%. Doesn't work right now. -->
 <!-- ______________________ HEADER _______________________ -->
 
 <div id="header">
@@ -97,7 +139,7 @@
 				<div id="column-large">
 					<div class="column-container">
 						<div id="image-carousel">
-						
+
 							<div id="carousel-window">
 								<div id="window-inner">
 							
@@ -393,4 +435,4 @@
 											  
 	})(jQuery);
 </script>
-</div><!-- heightfix-container -->
+<!-- </div> --><!-- heightfix-container -->
