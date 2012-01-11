@@ -1,27 +1,37 @@
 <?php
 	/*
 	 * I was going crazy writing code like <?php print "<div class=\"sidebar\">". $content ."</div>"; ?>
-	 * so I wrote a utility function for it called print_content_tag(). Just going to leave it here for now. -Andrew
+	 * so I wrote a utility function for it called content_tag(). Just going to leave it here for now. -Andrew
 	*/
-
-	function open_tag($tag, $attr) {
-		// Utility function for print_content_tag()
-		// returns an opening HTML tag with attributes from parameter
+	
+	function generate_attr_string($attr) {
 		$attr_string = null;
-		
-		if (!empty($attr)) {			
+		if (!empty($attr)) {	
 			foreach ($attr as $key => $value) {
 				// If we have attributes, loop through the key/value pairs passed in and append result HTML
 				// to a string that gets added into the opening tag
 				$attr_string .= $key . "=" . '"' . $value . '" ';
 			}
 		}
+		return $attr_string;
+	}
+
+	function open_tag($tag, $attr) {
+		// Utility function for print_content_tag()
+		// returns an opening HTML tag with attributes from parameter
+		$attr_string = generate_attr_string($attr);
 		return "<" . $tag . " " . $attr_string . ">"; 
 	}
 	
 	function close_tag($tag) { 
-		// Utility function for print_content_tag(). Returns an closing HTML tag
+		// Utility function for content_tag(). Returns an closing HTML tag
 		return "</" . $tag . ">";
+	}
+	
+	function single_tag($tag, $attr=array()) {
+		// Utility function for content_tag(). Returns a HTML tag (like <hr />) with attributes applied
+		$attr_string = generate_attr_string($attr);
+		return "<" . $tag . " " . $attr_string . " />";
 	}
 	
 	function content_tag($tagName, $content, $attr=array()) {
@@ -35,7 +45,7 @@
 		 * Example call: 
 		 *    $content = mysql_query($query); // Anything really
 		 *    print_content_tag("div", $content, array("class" => "user-info"));
-		*/
+		*/	
 		print open_tag($tagName, $attr) . $content . close_tag($tagName);
 	}
 	
@@ -317,13 +327,16 @@
 								";
 								$result = mysql_query($query) or die(mysql_error());
 								
+								// Note the distinction between = and == in the loop here, which is very intentional
+								// See http://www.tizag.com/mysqlTutorial/mysqlfetcharray.php
 								while($row = mysql_fetch_array($result) ) {
-									// Loop through returned Question rows
+									// Loop through returned question rows
 									// Initialize content variables to be passed into print_content_tag()
 									$nid = $row['nid'];
 									$time = format_time($row['created']);
 									$title = $row['title'];
-									$teaser = slice_teaser($row['field_question_value']);									
+									$teaser = slice_teaser($row['field_question_value']);
+									$node_path = "/sexinfo/node/"; // Read More link: ex href="/sexinfo/node/28"
 									/*
 									 - OUTPUTTED CODE STRUCTURE -
 									<div class="question">
@@ -337,7 +350,7 @@
 										content_tag("h4", $title);
 										content_tag("p", $time, array("class" => "date"));																			
 										content_tag("p", $teaser);
-										content_tag("a", "Read More &raquo;", array("href" => "/sexinfo/node/" . $nid, "class" => "readmore"));								
+										content_tag("a", "Read More &raquo;", array("href" => $node_path . $nid, "class" => "readmore"));								
 									print close_tag("div");									
 								}															
 							?>
