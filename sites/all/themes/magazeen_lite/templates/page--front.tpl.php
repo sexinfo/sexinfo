@@ -24,7 +24,7 @@
 		return "</" . $tag . ">";
 	}
 	
-	function print_content_tag($tagName, $content, $attr=array()) {
+	function content_tag($tagName, $content, $attr=array()) {
 		/*
 		 * Description: Facilitates creating HTML tags with dynamic content.
 		 * Parameters: $tagName, $content, $attr=array()
@@ -282,11 +282,7 @@
 						<div class="column-container dark">
 							<?php				
 								// Recent Questions module
-								// Displays the three most recently authored Q/A's and a link to the full node
-														
-								// Title+timestamp stored in table: node
-								// Body stored in table: field_data_field_question
-								// How to join the two for display? JOIN on nid or something?
+								// Displays the three most recently authored Q/A's and a link to the full node														
 																
 								function format_time($time) {
 									// Utility function to render a Unix timestamp in a readable format
@@ -294,15 +290,28 @@
 									// Note that %e (day as 1-31) does not work on Windows, so %#d is apparently a workaround.
 									return strftime("%B %#d, %Y", $time);
 								}
+								function slice_teaser($body) {
+									// Utility function that takes the full body of a question (string)
+									// and cuts it off into a 350-char preview chunk
+									return substr($body,0,350);
+								}
 																
 								// This is an absolutely horrible way to go about things.
 								// Drupal provides DB wrapper functions that I can't figure out for the life of me, and I'm
-								// pretty sure this sort of code should never be in a template file anyways. Bummer.								
+								// pretty sure this sort of DB code should never be in a template file anyways. Bummer.								
 								mysql_connect("localhost", "sexweb00m", "249APWan") or die("Could not connect: " . mysql_error());
 								mysql_select_db("sexweb00");
+								/*
+								 * Question title+timestamp is stored in table:node
+								 * but the question body is stored in table:field_data_field_question,
+								 * so we have to SQL join the two by id so that we have access to fields
+								 * from both tables.
+								 * See http://www.codinghorror.com/blog/2007/10/a-visual-explanation-of-sql-joins.html
+								*/
 								$query = "
-									SELECT * FROM node
-									WHERE type='question'
+									SELECT * FROM node										
+									INNER JOIN field_data_field_question
+									ON node.nid = field_data_field_question.entity_id
 									ORDER BY created DESC
 									LIMIT 3
 								";
@@ -311,48 +320,29 @@
 								while($row = mysql_fetch_array($result) ) {
 									// Loop through returned Question rows
 									// Initialize content variables to be passed into print_content_tag()
+									$nid = $row['nid'];
 									$time = format_time($row['created']);
 									$title = $row['title'];
-									// $teaser =
-									// $nid = $row['nid'];
-									// $readmore = 
-																		
+									$teaser = slice_teaser($row['field_question_value']);									
+									/*
+									 - OUTPUTTED CODE STRUCTURE -
+									<div class="question">
+										<h4>Question Title</h4>							
+										<p class="date">October 30, 2011</p>
+										<p>Body of the question (Not the answer)</p>
+										<a href="/sexinfo/node/$nid" class="readmore">Read More &raquo;</a>
+									</div>									
+									*/									
 									print open_tag("div", array("class" => "question"));
-										print_content_tag("h4", $title);
-										print_content_tag("p", $time, array("class" => "date"));										
-										//print_content_tag("p", $teaser);
-										print_content_tag("p", "This is still static. Can't figure out how to get the question teaser yet.");
-										// render Read More link using its nid here																	
-									print close_tag("div");
+										content_tag("h4", $title);
+										content_tag("p", $time, array("class" => "date"));																			
+										content_tag("p", $teaser);
+										content_tag("a", "Read More &raquo;", array("href" => "/sexinfo/node/" . $nid, "class" => "readmore"));								
+									print close_tag("div");									
 								}															
 							?>
 							
-							<!-- STATIC QUESTIONS FOR STYLING -->
-							<!--  
-							<div class="question">
-								<h4>Example question for formatting</h4>							
-								<p class="date">October 30, 2011</p>
-								<p>Body of the question goes here. This is all static for styling, and needs to be dynamically generated.</p>
-								<p><a href="#" class="readmore">Read More &raquo;</a></p>
-							</div>
-							
-							<div class="question">
-								<h4>Is this a real question?</h4>
-								<p class="date">October 30, 2011</p>
-								<p>No. It is not. The webdevs are lazy and need to make this a dynamic module. Go hassle at them, but look how pretty the rest of the site is in the meantime.</p>
-								<p><a href="#" class="readmore">Read More &raquo;</a></p>
-							</div>
-							
-							<div class="question">
-								<h4>Some other question title</h4>
-								<p class="date">October 30, 2011</p>
-								<p>Question: Dear Sexperts, My friends told me that masturbating will make me taller. Is this true? At age eighteen, I started ejaculating at night and it makes...</p>
-								<p><a href="#" class="readmore">Read More &raquo;</a></p>
-							</div> 
-							-->
-														
-						</div><!-- .column-container.dark -->
-						
+						</div><!-- .column-container.dark -->						
 					</div><!-- .column-container -->
 				</div><!-- #column-small -->
 				
