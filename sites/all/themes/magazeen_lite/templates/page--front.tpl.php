@@ -38,6 +38,7 @@
 		*/
 		print open_tag($tagName, $attr) . $content . close_tag($tagName);
 	}
+	
 ?>
 
 <!-- <div id="heightfix-container"> --><!-- Wrote this to try and fix the error where the footer doesn't stay at the bottom of the window even if the content is shorter than 100%. Doesn't work right now. -->
@@ -280,11 +281,56 @@
 						
 						<div class="column-container dark">
 							<?php				
-								# These need to be generated dynamically - three most recent questions (or articles, etc)							
+								// Recent Questions module
+								// Displays the three most recently authored Q/A's and a link to the full node
+														
+								// Title+timestamp stored in table: node
+								// Body stored in table: field_data_field_question
+								// How to join the two for display? JOIN on nid or something?
+																
+								function format_time($time) {
+									// Utility function to render a Unix timestamp in a readable format
+									// Format: October 17, 2012
+									// Note that %e (day as 1-31) does not work on Windows, so %#d is apparently a workaround.
+									return strftime("%B %#d, %Y", $time);
+								}
+																
+								// This is an absolutely horrible way to go about things.
+								// Drupal provides DB wrapper functions that I can't figure out for the life of me, and I'm
+								// pretty sure this sort of code should never be in a template file anyways. Bummer.								
+								mysql_connect("localhost", "sexweb00m", "249APWan") or die("Could not connect: " . mysql_error());
+								mysql_select_db("sexweb00");
+								$query = "
+									SELECT * FROM node
+									WHERE type='question'
+									ORDER BY created DESC
+									LIMIT 3
+								";
+								$result = mysql_query($query) or die(mysql_error());
+								
+								while($row = mysql_fetch_array($result) ) {
+									// Loop through returned Question rows
+									// Initialize content variables to be passed into print_content_tag()
+									$time = format_time($row['created']);
+									$title = $row['title'];
+									// $teaser =
+									// $nid = $row['nid'];
+									// $readmore = 
+																		
+									print open_tag("div", array("class" => "question"));
+										print_content_tag("h4", $title);
+										print_content_tag("p", $time, array("class" => "date"));										
+										//print_content_tag("p", $teaser);
+										print_content_tag("p", "This is still static. Can't figure out how to get the question teaser yet.");
+										// render Read More link using its nid here																	
+									print close_tag("div");
+								}															
 							?>
 							
+							<!-- STATIC QUESTIONS FOR STYLING -->
+							<!--  
 							<div class="question">
-								<h4>Example question for formatting</h4>
+								<h4>Example question for formatting</h4>							
 								<p class="date">October 30, 2011</p>
 								<p>Body of the question goes here. This is all static for styling, and needs to be dynamically generated.</p>
 								<p><a href="#" class="readmore">Read More &raquo;</a></p>
@@ -302,7 +348,8 @@
 								<p class="date">October 30, 2011</p>
 								<p>Question: Dear Sexperts, My friends told me that masturbating will make me taller. Is this true? At age eighteen, I started ejaculating at night and it makes...</p>
 								<p><a href="#" class="readmore">Read More &raquo;</a></p>
-							</div>
+							</div> 
+							-->
 														
 						</div><!-- .column-container.dark -->
 						
@@ -316,7 +363,7 @@
 				<?php print render($page['sidebar_second']); ?> 
 			</div><!-- #sidebar.right -->
 		
-		<!--</div>--><!-- .main -->
+		<!--</div>--><!-- .main --><!-- Not being used anymore -->
 	</div><!-- .container.clearfix -->
 </div><!-- #main.clearfix -->
  
@@ -370,8 +417,7 @@
 	(function ($) {
 		
 		//----- Image carousel module ---//
-		var loopRotate = true; // A boolean determining whether or not to automatically cycle. 
-										// Disabled once user clicks.
+		var loopRotate = true; // A boolean determining whether or not to automatically cycle. Disabled once user clicks one of the nav links.
 		
 		function rotate(id) {
 			var offset = Math.abs(id-1),
@@ -386,7 +432,7 @@
 			clearInterval(loop); // Disable auto cycle once user clicks
 			$('#carousel-nav a').removeClass('current'); // Remove from all tabs, not just $(this)
 			$(this).addClass("current");
-			var id = $(this).attr('rel'); // Not a very semantic way of doing it, but oh well
+			var id = $(this).attr('rel'); // Not a very semantic way of doing it, but oh well. TODO - CHANGE TO IDS
 			rotate(id);			
 			return false; //Prevent browser jump to anchor link
 		});
@@ -400,7 +446,7 @@
 			rotate(i);			
 			
 			// Remove 'current' class from all tabs
-			$('#carousel-nav a').removeClass('current');
+			links.removeClass('current');
 			
 			// Loop through all links in nav list
 			// If the link's rel attribute (used as an identifier) matches current frame, add class 'current'
