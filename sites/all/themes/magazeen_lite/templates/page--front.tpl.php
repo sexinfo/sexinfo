@@ -17,7 +17,7 @@
 	}
 
 	function open_tag($tag, $attr) {
-		// Utility function for print_content_tag()
+		// Utility function for content_tag()
 		// returns an opening HTML tag with attributes from parameter
 		$attr_string = generate_attr_string($attr);
 		return "<" . $tag . " " . $attr_string . ">"; 
@@ -44,7 +44,7 @@
 		 *     - default value: null
 		 * Example call: 
 		 *    $content = mysql_query($query); // Anything really
-		 *    print_content_tag("div", $content, array("class" => "user-info"));
+		 *    content_tag("div", $content, array("class" => "user-info"));
 		*/	
 		print open_tag($tagName, $attr) . $content . close_tag($tagName);
 	}
@@ -301,9 +301,10 @@
 									return strftime("%B %#d, %Y", $time);
 								}
 								function slice_teaser($body) {
-									// Utility function that takes the full body of a question (string)
+									// Utility function that takes the full body of a question (string),
+									// strips all HTML tags (since it's injected into a paragraph)
 									// and cuts it off into a 350-char preview chunk
-									return substr($body,0,350);
+									return substr(strip_tags($body), 0, 350) . "&hellip;";
 								}
 																
 								// This is an absolutely horrible way to go about things.
@@ -327,11 +328,11 @@
 								";
 								$result = mysql_query($query) or die(mysql_error());
 								
-								// Note the distinction between = and == in the loop here, which is very intentional
+								// Note that = is used in the loop here instead of == which is very intentional
 								// See http://www.tizag.com/mysqlTutorial/mysqlfetcharray.php
 								while($row = mysql_fetch_array($result) ) {
 									// Loop through returned question rows
-									// Initialize content variables to be passed into print_content_tag()
+									// Initialize content variables to be passed into content_tag()
 									$nid = $row['nid'];
 									$time = format_time($row['created']);
 									$title = $row['title'];
