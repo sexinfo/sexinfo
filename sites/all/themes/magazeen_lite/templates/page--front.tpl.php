@@ -82,7 +82,7 @@
 
 <div id="ucbanner">
     <banner>
-        <a href="http://www.ucsb.edu">Univeristy of California Santa Barbara<a/>
+        <a href="http://www.ucsb.edu">University of California Santa Barbara<a/>
     </banner>
     <style type="text/css">
         banner {
