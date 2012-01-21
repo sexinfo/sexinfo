@@ -329,9 +329,15 @@
 																
 								// This is an absolutely horrible way to go about things.
 								// Drupal provides DB wrapper functions that I can't figure out for the life of me, and I'm
-								// pretty sure this sort of DB code should never be in a template file anyways. Bummer.								
-								mysql_connect("localhost", "sexweb00m", "249APWan") or die("Could not connect: " . mysql_error());
+								// pretty sure this sort of DB code should never be in a template file anyways. 
+								// Bummer.				
+								
+								$host = ($_SERVER['SERVER_NAME'] == "localhost") ? "localhost" : "https://secure.lsit.ucsb.edu/";
+																
+								
+								mysql_connect($host, "sexweb00m", "249APWan") or die("Could not connect: " . mysql_error());
 								mysql_select_db("sexweb00");
+								
 								/*
 								 * Question title+timestamp is stored in table:node
 								 * but the question body is stored in table:field_data_field_question,
@@ -339,6 +345,7 @@
 								 * from both tables.
 								 * See http://www.codinghorror.com/blog/2007/10/a-visual-explanation-of-sql-joins.html
 								*/
+								
 								$query = "
 									SELECT * FROM node										
 									INNER JOIN field_data_field_question
@@ -358,6 +365,7 @@
 									$title = $row['title'];
 									$teaser = slice_teaser($row['field_question_value']);
 									$node_path = "/sexinfo/node/"; // Read More link: ex href="/sexinfo/node/28"
+									
 									/*
 									 - OUTPUTTED CODE STRUCTURE -
 									<div class="question">
@@ -366,14 +374,16 @@
 										<p>Body of the question (Not the answer)</p>
 										<a href="/sexinfo/node/$nid" class="readmore">Read More &raquo;</a>
 									</div>									
-									*/									
+									*/
+																
 									print open_tag("div", array("class" => "question"));
 										content_tag("h4", $title);
 										content_tag("p", $time, array("class" => "date"));																			
 										content_tag("p", $teaser);
 										content_tag("a", "Read More &raquo;", array("href" => $node_path . $nid, "class" => "readmore"));								
 									print close_tag("div");									
-								}															
+								}
+							
 							?>
 							
 						</div><!-- .column-container.dark -->						
