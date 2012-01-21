@@ -80,6 +80,26 @@
   </div> <!-- /header-container -->    
 </div> <!-- /header -->
 
+<div id="ucbanner">
+    <banner>
+        <a href="http://www.ucsb.edu">Univeristy of California Santa Barbara<a/>
+    </banner>
+    <style type="text/css">
+        banner {
+            font-family: "Comic Sans MS";
+            color: #FFFFFF;
+            font-size: 110%;
+        }
+        
+        #ucbanner {
+        background: black;
+        height: 20px;
+        text-align: center;
+        }
+
+    </style>
+</div><!-- /ucbanner -->
+
 <!-- ______________________ NAVIGATION _______________________ -->
 
 <?php if (!empty($main_menu)): ?>
