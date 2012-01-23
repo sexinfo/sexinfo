@@ -345,7 +345,8 @@ ol ol ol    { list-style-type: decimal; }
 }
 
 #navigation ul.links li.active a:link, #navigation ul.links li.active a:active, #navigation ul.links li.active a:visited {
-	margin:-3px 0 0 0; padding:15px 15px 14px 15px;
+	/* margin:-3px 0 0 0;*/
+	padding:15px 15px 14px 15px;	
 	background:#171615 url(images/navigation-hover.gif) repeat-x bottom center;
 	color:#f1f8ff; position:relative;
 }
