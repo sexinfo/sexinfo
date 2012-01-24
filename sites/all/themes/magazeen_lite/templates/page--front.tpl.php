@@ -86,9 +86,8 @@
 
 <style type="text/css">
 
-	#navigation {
-		border-top: none !important;
-	}
+	#navigation { border-top: none !important; }
+	
 	#ucbanner {
 		background: black;
 		color: #f23183;
@@ -449,7 +448,7 @@
 <?php if (!empty($secondary_menu)): ?>
   <div id="snavigation">
     <div class="container clearfix">     
-	  <p>UCSB SexInfo Copyright &copy; 2010 University of California, Santa Barbara. All Rights Reserved.</p>
+	  <p>UCSB SexInfo Copyright &copy; 2012 University of California, Santa Barbara. All Rights Reserved.</p>
     </div> <!-- /snavigation-container -->
   </div> <!-- /snavigation -->
 <?php endif;?>
