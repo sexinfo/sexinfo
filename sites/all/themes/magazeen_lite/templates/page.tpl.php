@@ -134,7 +134,7 @@
   <div id="snavigation"><!-- snavigation -->
     <div class="container clearfix">
       <?php #print theme('links', array('links' => $main_menu, 'attributes' => array('id' => 'secondary-links', 'class' => array('slinks', 'main-menu')))); ?>
-	  <p>UCSB SexInfo Copyright &copy; 2010 University of California, Santa Barbara. All Rights Reserved.</p>
+	  <p>UCSB SexInfo Copyright &copy; 2012 University of California, Santa Barbara. All Rights Reserved.</p>
     </div> <!-- /snavigation-container -->
   </div> <!-- /snavigation -->
 <?php endif;?>
