@@ -81,7 +81,7 @@
 </div> <!-- /header -->
 
 <div id="ucbanner">
-     <a href="http://www.ucsb.edu">University of California, Santa Barbara<a/>  
+     <a href="http://www.ucsb.edu">University of California<a/>  
 </div><!-- /ucbanner -->
 
 <style type="text/css">
@@ -95,6 +95,9 @@
 		padding: 5px;
 		text-align: center;
 	}
+		#ucbanner a:hover {
+			color: inherit;
+		}
 </style>
 
 <!-- ______________________ NAVIGATION _______________________ -->
@@ -447,8 +450,12 @@
 
 <?php if (!empty($secondary_menu)): ?>
   <div id="snavigation">
-    <div class="container clearfix">     
+    <div class="container clearfix">	
 	  <p>UCSB SexInfo Copyright &copy; 2012 University of California, Santa Barbara. All Rights Reserved.</p>
+	  
+	  <!-- TO DO: LOGIN LINK -->
+	  
+	  
     </div> <!-- /snavigation-container -->
   </div> <!-- /snavigation -->
 <?php endif;?>
