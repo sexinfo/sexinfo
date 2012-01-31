@@ -1,0 +1,14 @@
+; the module's user friendly name, will be displayed in the modules list
+name = Recent Questions
+
+; the module's description, will be displayed in the second column in the modules list
+description = Retrieves and displays recently published questions to the homepage sidebar
+
+; the module's package, will be the name of the module's group on the modules list page
+package = Sexinfo Custom Modules
+
+; the Drupal core package
+core = 7.x
+
+; the files array indicating which files are part of the module
+files[] = recentquestions.module

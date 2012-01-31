@@ -1,0 +1,84 @@
+<?php
+
+/**
+ * Implements hook_block_info().
+ *
+ * Using this hook we declare to Drupal that our module
+ * provides one block identified as recentquestions
+ */
+function recentquestions_block_info() {
+  $blocks['recentquestions'] = array(
+    'info' => t('SexInfo Recent Questions'),
+  // leave the other properties of the block default
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ *
+ * Returns the renderable view of our block. It pulls
+ * the most recent questions published.
+ */
+function recentquestions_block_view($delta = '') {
+  switch($delta) {
+  	case 'recentquestions' :
+	    $block['subject'] = t('Recent Questions');
+	    $block['content'] = 'Testing out our recent questions nigga!';
+	  }
+  return $block;
+}
+
+/* Implements hook_enable()
+ * Displays a message on successful enable */
+function recentquestions_enable() {
+	drupal_set_message($message = t('The SexInfo Recent Questions Module is now enabled.'), $type='status');
+}
+
+
+/*function recentquestion_type_page_title($type) {
+	switch($type) {
+		case 'question' :
+			return $type->name;
+	}
+}*/
+
+/**
+ * Implements node_load()
+ **/
+function recentquestions_load($nodes, $types) {
+	$result = db_query('SELECT nid, foo FROM {node} WHERE nid IN(:nids)', array(':nids' => array_keys($nodes)));
+	switch($types) {
+		case 'question' :
+			return $type->name;
+	}
+	foreach ($result as $record) {
+		$nodes[$record->nid]->title = $record->title;
+	}
+}
+/*
+function recentquestions_view($node, $viewmode) {
+  if ($view_mode == 'full' && node_is_page($node)) {
+    $breadcrumb = array();
+    $breadcrumb[] = l(t('Home'), NULL);
+    $breadcrumb[] = l(t('Example'), 'example');
+    $breadcrumb[] = l($node->field1, 'example/' . $node->field1);
+    drupal_set_breadcrumb($breadcrumb);
+  }
+
+  $node->content['myfield'] = array(
+    '#markup' => theme('mymodule_myfield', $node->myfield), 
+    '#weight' => 1,
+  );
+
+  return $node;
+}*/
+
+
+
+
+/** DO NOT CLOSE PHP TAG
+ **
+ ** Drupal recommends it for module publishing. :) -Joey
+ **/
