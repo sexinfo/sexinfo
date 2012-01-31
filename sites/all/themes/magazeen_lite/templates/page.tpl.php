@@ -17,7 +17,7 @@
           }
           print '</a></h1>';
         }
-		print '<h2 class="slogan">'/* $site_slogan.*/.'</h2>';
+		//print '<h2 class="slogan">'/* $site_slogan.*/.'</h2>';
       ?>
     </div>
     <div id="searchform-header">
@@ -32,7 +32,6 @@
   <div id="navigation"><!-- navigation -->
     <div class="container clearfix">
       <?php print theme('links', array('links' => $main_menu, 'attributes' => array('id' => 'main-menu', 'class' => array('links', 'main-menu')))); ?>
-      <a title="Subscribe to magazeen RSS" class="rss" href="">Subscribe</a>
     </div> <!-- /navigation-container -->
   </div> <!-- /navigation -->
 <?php endif;?>
