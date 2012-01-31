@@ -371,6 +371,7 @@
 								";
 								$result = mysql_query($query) or die(mysql_error());
 								*/
+								
 								// Note that = is used in the loop here instead of == which is very intentional
 								// See http://www.tizag.com/mysqlTutorial/mysqlfetcharray.php
 								/*while($row = mysql_fetch_array($result) ) {
@@ -380,8 +381,9 @@
 									$time = format_time($row['created']);
 									$title = $row['title'];
 									$teaser = slice_teaser($row['field_question_value']);
-									$node_path = "/sexinfo/node/"; // Read More link: ex href="/sexinfo/node/28"
+									$node_path = "/sexinfo/node/"; // Read More link: ex href="/sexinfo/node/28"								
 									*/
+
 									/*
 									 - OUTPUTTED CODE STRUCTURE -
 									<div class="question">
@@ -389,13 +391,21 @@
 										<p class="date">October 30, 2011</p>
 										<p>Body of the question (Not the answer)</p>
 										<a href="/sexinfo/node/$nid" class="readmore">Read More &raquo;</a>
-									</div>						
+
+									</div>									
+									*/	
+/*									
+									print open_tag("div", array("class" => "question"));
+					
 									*/									
 									/*print open_tag("div", array("class" => "question"));
 										content_tag("h4", $title);
 										content_tag("p", $time, array("class" => "date"));																			
 										content_tag("p", $teaser);
-										content_tag("a", "Read More &raquo;", array("href" => $node_path . $nid, "class" => "readmore"));								
+										content_tag("a", "Read More &raquo;", array("href" => $node_path . $nid, "class" => "readmore"));			
+									print close_tag("div");									
+								}
+							
 									print close_tag("div");*/							
 								//}															
 							?>
