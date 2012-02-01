@@ -25,7 +25,7 @@ function recentquestions_block_view($delta = '') {
   switch($delta) {
   	case 'recentquestions' :
 	    $block['subject'] = t('Recent Questions');
-	    $block['content'] = 'Testing out our recent questions nigga!';
+	    $block['content'] = 'Testing out our recent questions!';
 	  }
   return $block;
 }
