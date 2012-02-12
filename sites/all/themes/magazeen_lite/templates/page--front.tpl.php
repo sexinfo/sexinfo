@@ -53,8 +53,8 @@
 
 <!-- <div id="heightfix-container"> --><!-- Wrote this to try and fix the error where the footer doesn't stay at the bottom of the window even if the content is shorter than 100%. Doesn't work right now. -->
 <!-- ______________________ HEADER _______________________ -->
-
 <div id="header">
+
   <div class="container clearfix">
     <div id="logo">
       <?php
@@ -80,25 +80,12 @@
   </div> <!-- /header-container -->    
 </div> <!-- /header -->
 
-<div id="ucbanner">
+<!--<div class="banner uc-banner"">
      <a href="http://www.ucsb.edu">University of California<a/>  
-</div><!-- /ucbanner -->
-
-<style type="text/css">
-
-	#navigation { border-top: none !important; }
-	
-	#ucbanner {
-		background: black;
-		color: #f23183;
-		height: 20px;
-		padding: 5px;
-		text-align: center;
-	}
-		#ucbanner a:hover {
-			color: inherit;
-		}
-</style>
+</div>--><!-- .banner.uc-banner -->
+<div class="banner new-banner">
+	Welcome to the new SexInfoOnline! We've changed things around a bit. The new site is more stable and easier to navigate, and we hope you like it as much as we do.
+</div>
 
 <!-- ______________________ NAVIGATION _______________________ -->
 
@@ -427,21 +414,25 @@
 <!-- ______________________ FOOTER _______________________ -->
 
 <div id="footer">
-  <div class="container footer-divider clearfix">
+  <!--<div class="container footer-divider clearfix">-->
+  <div class="container clearfix">
   
+	<h4>About SexInfoOnline</h4>
+		<p><?print '<a href="'. check_url($front_page) .'">';?>SexInfo Online</a> is a website devoted to comprehensive sex education based on the best research we have to date. The site is maintained by university students from the University of California, Santa Barbara who have studied advanced topics in human sexuality.</p>
+		<p>Our primary goal is to ensure that people around the world have access to useful and accurate information about all aspects of human sexuality. If you find our site useful, don't forget that your friends, family, and coworkers may find it useful too!</p>
+  
+		<a href="/login" class="login">Writer Login  &raquo;</a>
+  
+	<!--
     <div id="footer-left">
-      <h4>Categories</h4>
-	  <!-- Most of these links are deprecated and should be changed later - purely for positioning -->
-        <a href="#" class="footer-pill">Emergency Info</a>
-		<a href="#" class="footer-pill">UCSB Soc 152A</a>
-		<a href="#" class="footer-pill">Product Reviews</a>
-		<a href="#" class="footer-pill">Sexual Myths</a>
-		<a href="#" class="footer-pill">Extras</a>
+      <h4>What to put here?</h4>	  
+        <a href="/login" class="footer-pill">Login</a>	
 				
-      <?php print render($page['footer_left']); ?>
+      <?php #print render($page['footer_left']); ?>
 	  
     </div>
-	
+	-->
+	<!--
     <div id="footer-right">
       <h4>About SexInfo Online</h4>
 		<p><?print '<a href="'. check_url($front_page) .'">';?>SexInfo Online</a> is a website devoted to comprehensive sex education based on the best research we have to date. The site is maintained by university students from the University of California, Santa Barbara who have studied advanced topics in human sexuality.</p>
@@ -449,26 +440,19 @@
 		
       <?php print render($page['footer-right']); ?>
 	  
-    </div>
+    </div>-->
+	
 	
   </div><!-- /footer-container -->
 </div><!-- /footer -->
 
 
 <!-- ______________________ SECONDARY NAVIGATION _______________________ -->
-
-<?php if (!empty($secondary_menu)): ?>
   <div id="snavigation">
     <div class="container clearfix">	
-	  <p>UCSB SexInfo Copyright &copy; 2012 University of California, Santa Barbara. All Rights Reserved.</p>
-	  
-	  <!-- TO DO: LOGIN LINK -->
-	  
-	  
+	  <p>UCSB SexInfo Copyright &copy; 2012 University of California, Santa Barbara. All Rights Reserved.</p>	  		  	  
     </div> <!-- /snavigation-container -->
   </div> <!-- /snavigation -->
-<?php endif;?>
-
 
 <!-- ______________________ PAGE SCRIPTS _______________________ -->
 
@@ -476,6 +460,8 @@
 	// Code to run on page load
 	
 	(function ($) {
+	
+		//$(".new-banner").slideDown("slow");
 		
 		//----- Image carousel module ---//
 		var loopRotate = true; // A boolean determining whether or not to automatically cycle. Disabled once user clicks one of the nav links.

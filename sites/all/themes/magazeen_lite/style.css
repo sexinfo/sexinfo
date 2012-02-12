@@ -12,6 +12,7 @@
 07 - Footer
 08 - Comments
 09 - Front page modules
+10 - Ask the Sexperts Webform
 
 /* ----------------------------------------------*/
 /* 0x - TEMPORARY DEV STYLES
@@ -30,13 +31,11 @@
 	#searchform-header {}
 */
 
-
 /*  _____Footer _____ */
 /*
 	#footer-left { background-color: green !important; }
-	#footer-right { background-color: blue !important; }
+	#footer-right { background-color: blue !important; }	
 */
-
 
 /* _____Content + Node_____ */
 /*
@@ -65,116 +64,9 @@
 
 /* _____In-progress dev styles_____ */
 
-/* ln. 347: NEGATIVE MARGINS HACK */
-
-/* 
- Ask the Sexperts page, found at /node/22.
- Totally hacked together, but it works.
- You could probably put styles in webforms.css but this is easier 
-*/
-
-/*
- Rules organized by:
-	- Resets + Basic Layouts
-	- Form elements
-	- Typography
-*/
-
-/*----- RESETS + BASIC LAYOUT -----*/
-#node-22 {
-	/* Figure out how to center the node - auto margins aren't working anywhere */
-	width: 600px; /*  Arbitrary. 22+22 = 44px of padding added to left/right. */
-}
-#node-22 .node-info {
-	/* "Hide" the pesky author/publication information.
-	Not using display: none in order to keep the nice gray bottom border.	*/
-	padding-bottom: 3000px;
-}
-#node-22 .node-box {	
-	/* Bunch of container resets */
-	background: none;
-	background-image: none;
-	border: none;	
-}
-#node-22 .node-content {		
-	background-color: #EFEFEF; /* eaeaea */
-	border: none; /* Reset the white border set elsewhere - could be #d6d6d6*/
-	
-	-moz-box-shadow: 0px 0px 6px #444;
-	-webkit-box-shadow: 0px 0px 6px #444;
-	box-shadow: 0px 0px 6px #444;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(strength=2, Direction=225, Color='#444')";
-	filter: progid:DXImageTransform.Microsoft.Shadow(strength=2, direction=225, color='#444');  
-	
-	-webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-	border-radius: 10px;
-		
-	padding: 30px 40px;
-}
-#node-22 .node-footer,
-.grippie { 
-	/* Get rid of the footer box ("Category: etc"), and the weird textarea drag thing */
-	display: none; 
-}
 
 
-/*----- FORM ELEMENTS-----*/
-#node-22 input:not([type="submit"]),
-#node-22 textarea {
-	/* Spoof border to prevent field jump on focus when border added */
-	border: 1px solid white;
-	font-size: 1.2em;	
-	padding: 10px 5px;	
-	width: 510px; /* = 100% of content area with padding. */
-}
-	#node-22 input:not([type="submit"]):focus,
-	#node-22 textarea:focus {		
-		border: 1px solid #F23183;
-		outline: none;		
-	}
-/*#node-22 select {	
-	width: 100%;	
-}*/
-#node-22 textarea {
-	/* Remove scrollbar in IE */
-	overflow: auto;
-	border-bottom: none;
-	font: 1.2em Arial, Helvetica, sans-serif;
-	width: 100%;
-}
-#node-22 input[type="submit"] {
-	background-color: #3099DF;	
-	background: -moz-linear-gradient(0% 50% 90deg,#188AC2, #3099DF);
-	background: -ms-linear-gradient(#3099DF,#188AC2);
-	background: -webkit-gradient(linear, 0% 0%, 0% 35%, from(#3099DF), to(#188AC2)); 
-	background: -o-linear-gradient(#3099DF,#188AC2);   
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3099DF', endColorstr='#188AC2');
-	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#3099DF', endColorstr='#188AC2')";
-	background: linear-gradient(#3099DF, #188AC2);		
-	border: none;
-	-webkit-border-radius: 7px;
-    -moz-border-radius: 7px;
-	border-radius: 7px;	
-	color: white;
-	font-size: 1.1em;
-	padding: 10px 15px;
-}
-	#node-22 input[type="submit"]:hover {
-		background: none;
-		background-color: #008AB8;
-		cursor: pointer;
-	}	
-	#node-22 input[type="submit"]:active {		
-		background-color: #007298;		
-	}
 
-/*----- TYPOGRAPHY-----*/
-#node-22 label {
-	color: #F23183;
-	font-size: 1.2em;
-	margin-bottom: 5px;
-}
 
 /* ----------------------------------------------*/
 /* 00 - GLOBAL ELEMENTS
@@ -275,7 +167,9 @@ h3 {
 	h3.node-title {
 		float: left;
 		margin:0; padding:10px 0;
-		width:450px; height:auto;
+		/*width:450px; */
+		width: 500px;
+		height:auto;
 		border-bottom:4px solid #30393d;
 		font:bold 2.5em Arial, Helvetica, sans-serif;
 	}
@@ -462,13 +356,41 @@ html[xmlns] .clearfix { display: block; }
 /* ----------------------------------------------*/
 
 #header {
-	margin:0; padding:0;
+	margin:0;
+	padding:0;
 	width:auto; 
 	background:#171615 url(images/header.gif) repeat-x top center;
 	border-bottom:1px solid #4a4d4c;
 	clear:both;	
 }
-
+.banner {
+	height: 20px;
+	padding: 6px 0;
+	text-align: center;
+}
+	.banner a:hover { 
+		color: inherit;
+	}
+.new-banner {
+	background-color: #F98BB9;
+		
+	background-image: linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+	background-image: -o-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+	background-image: -moz-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+	background-image: -webkit-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+	background-image: -ms-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+	background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.35, #F875AB),
+		color-stop(0.7, #F98BB9));
+		
+	color: #333433;
+	font-size: 1.1em;
+	font-weight: bold;
+	padding: 11px 0;
+}
+.uc-banner {
+	background-color: black;
+	color: #f23183;	
+}
 #logo {
 	margin:0; 
 	padding: 0; /* 50px 0 15px 0 */
@@ -496,7 +418,9 @@ input#edit-search-block-form--2 {
 	padding:6px 10px 5px 25px;
 	width:165px;
 }
-
+	input#edit-search-block-form--2:focus {
+		color: #30393d;
+	}
 #searchform-header .form-submit{
 	background:transparent url(images/search.gif) no-repeat  right top;
 	border:0 none;
@@ -657,7 +581,13 @@ ul.pager {
 	border-bottom:1px solid #cfdbe1; border-top:0;
 }
 
-.node-content img { margin:0; padding:3px; border:1px solid #E8E8E8; }
+.node-content img { 
+	/*margin: 0;*/
+	display: block; /* Enables auto margins */
+	margin: 0 auto 10px; 
+	padding: 3px;
+	border: 1px solid #E8E8E8;
+}
 
 .breadcrumb {font:1.2em Verdana, Arial, Helvetica, sans-serif;}
 
@@ -703,6 +633,10 @@ ul.pager {
 /* --------------- */		
 .node-footer { margin:0; padding:15px; background:#FCFDFE; border-top:1px solid #ffffff; position:relative; z-index:100; }
 
+.terms {
+	/* Prevent spillover onto Read More link */
+	width: 85%;
+}
 .terms a {
     display: inline;
     list-style-type: none;
@@ -770,7 +704,9 @@ display:block;
 	border-top:1px solid #171615; border-bottom:1px solid #1e1d1d;
 	color:#B2B2B2;
 }
-
+#footer p:last-child {
+	margin-bottom: 10px;
+}
 #footer-message { color:#ffffff; padding:0; font-family:Verdana, Arial, Helvetica, sans-serif; padding:10px 0;}
 
 .footer-divider { background:url("images/footer-divider.gif") repeat-y scroll left top transparent; }
@@ -803,7 +739,26 @@ display:block;
 		background-image: -ms-linear-gradient(bottom, #DCDCDC 20%, #EAEAEA 53%);
 		background-image: -webkit-gradient(linear,left bottom,left top,
 			color-stop(0.05, #DCDCDC),color-stop(0.53, #EAEAEA));
+	}	
+	#footer .login:link,
+	#footer .login:visited {
+		/*background-color: #f23183;
+		border: 1px solid #404040;
+		border-radius: 3px;
+		color: #0C0B0B;
+		display: inline-block;
+		font-size: 1.3em;
+		padding: 5px 20px;*/
+		font-size: 1.1em;
+		float: right;
 	}
+		#footer .login:hover,
+		#footer .login:active {
+			color: inherit;
+			text-decoratioN: underline;
+			/*background-color: #D92C75;
+			color: #000;*/
+		}
 
 #footer-right { float:right; height:auto; margin:0; padding:0 0 0 50px; width:585px; }
 
@@ -1154,3 +1109,110 @@ a:visited.more-button  {
 		background-color: #ebf6fa;
 		border: 1px solid #EAF1F4;
 	}
+	
+
+/* ----------------------------------------------*/
+/* 10 - ASK THE SEXPERTS WEBFORM
+/* ----------------------------------------------*/
+/*
+ Rules organized by:
+	- Resets + Basic Layouts
+	- Form elements
+	- Typography
+*/
+
+/*----- RESETS + BASIC LAYOUT -----*/
+#node-22 {
+	/* Figure out how to center the node - auto margins aren't working anywhere */
+	width: 600px; /*  Arbitrary. 22+22 = 44px of padding added to left/right. */
+}
+#node-22 .node-info {
+	/* "Hide" the pesky author/publication information.
+	Not using display: none in order to keep the nice gray bottom border.	*/
+	padding-bottom: 3000px;
+}
+#node-22 .node-box {	
+	/* Bunch of container resets */
+	background: none;
+	background-image: none;
+	border: none;	
+}
+#node-22 .node-content {		
+	background-color: #EFEFEF; /* eaeaea */
+	border: none; /* Reset the white border set elsewhere - could be #d6d6d6*/
+	
+	-moz-box-shadow: 0px 0px 6px #444;
+	-webkit-box-shadow: 0px 0px 6px #444;
+	box-shadow: 0px 0px 6px #444;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(strength=2, Direction=225, Color='#444')";
+	filter: progid:DXImageTransform.Microsoft.Shadow(strength=2, direction=225, color='#444');  
+	
+	-webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+	border-radius: 10px;
+		
+	padding: 30px 40px;
+}
+#node-22 .node-footer,
+.grippie { 
+	/* Get rid of the footer box ("Category: etc"), and the weird textarea drag thing */
+	display: none; 
+}
+
+
+/*----- FORM ELEMENTS-----*/
+#node-22 input:not([type="submit"]),
+#node-22 textarea {
+	/* Spoof border to prevent field jump on focus when border added */
+	border: 1px solid white;
+	font-size: 1.2em;	
+	padding: 10px 5px;	
+	width: 510px; /* = 100% of content area with padding. */
+}
+	#node-22 input:not([type="submit"]):focus,
+	#node-22 textarea:focus {		
+		border: 1px solid #F23183;
+		outline: none;		
+	}
+/*#node-22 select {	
+	width: 100%;	
+}*/
+#node-22 textarea {
+	/* Remove scrollbar in IE */
+	overflow: auto;
+	border-bottom: none;
+	font: 1.2em Arial, Helvetica, sans-serif;
+	width: 100%;
+}
+#node-22 input[type="submit"] {
+	background-color: #3099DF;	
+	background: -moz-linear-gradient(0% 50% 90deg,#188AC2, #3099DF);
+	background: -ms-linear-gradient(#3099DF,#188AC2);
+	background: -webkit-gradient(linear, 0% 0%, 0% 35%, from(#3099DF), to(#188AC2)); 
+	background: -o-linear-gradient(#3099DF,#188AC2);   
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3099DF', endColorstr='#188AC2');
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#3099DF', endColorstr='#188AC2')";
+	background: linear-gradient(#3099DF, #188AC2);		
+	border: none;
+	-webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+	border-radius: 7px;	
+	color: white;
+	font-size: 1.1em;
+	padding: 10px 15px;
+}
+	#node-22 input[type="submit"]:hover {
+		background: none;
+		background-color: #008AB8;
+		cursor: pointer;
+	}	
+	#node-22 input[type="submit"]:active {		
+		background-color: #007298;		
+	}
+
+/*----- TYPOGRAPHY-----*/
+#node-22 label {
+	color: #F23183;
+	font-size: 1.2em;
+	margin-bottom: 5px;
+}
