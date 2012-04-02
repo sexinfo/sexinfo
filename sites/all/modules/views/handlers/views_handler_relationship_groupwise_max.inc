@@ -50,6 +50,8 @@
  * If your use of this relationship handler is likely to result in large
  * data sets, you might want to consider storing statistics in a separate table,
  * in the same way as node_comment_statistics.
+ *
+ * @ingroup views_relationship_handlers
  */
 class views_handler_relationship_groupwise_max extends views_handler_relationship {
 
@@ -108,7 +110,7 @@ class views_handler_relationship_groupwise_max extends views_handler_relationshi
       '#default_value' => $this->options['subquery_namespace'],
     );
 
-    
+
     // WIP: This stuff doens't work yet: namespacing issues.
     // A list of suitable views to pick one as the subview.
     $views = array('' => '<none>');
@@ -190,10 +192,7 @@ class views_handler_relationship_groupwise_max extends views_handler_relationshi
   function left_query($options) {
     // Either load another view, or create one on the fly.
     if ($options['subquery_view']) {
-      // We don't use views_get_view because we want our own class of view.
-      views_include('view');
-      $temp_view = view::load($options['subquery_view']);
-
+      $temp_view = views_get_view($options['subquery_view']);
       // Remove all fields from default display
       unset($temp_view->display['default']->display_options['fields']);
     }
@@ -380,4 +379,3 @@ class views_handler_relationship_groupwise_max extends views_handler_relationshi
     $this->alias = $this->query->add_relationship($alias, $join, $this->definition['base'], $this->relationship);
   }
 }
-

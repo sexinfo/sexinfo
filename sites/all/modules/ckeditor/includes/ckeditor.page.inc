@@ -2,7 +2,7 @@
 
 /**
  * CKEditor - The text editor for the Internet - http://ckeditor.com
- * Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.
+ * Copyright (c) 2003-2012, CKSource - Frederico Knabben. All rights reserved.
  *
  * == BEGIN LICENSE ==
  *
@@ -67,7 +67,7 @@ function ckeditor_help_delegate($path, $arg) {
                     '<p>' . t('Useful links: !ckeditorlink | !devguidelink | !userguidelink.',
                             array(
                                 '!ckeditorlink' => l(t('CKEditor website'), 'http://ckeditor.com'),
-                                '!devguidelink' => l(t('Developer\'s Guide'), 'http://docs.cksource.com/CKEditor_3.x/Developers_Guide'),
+                                '!devguidelink' => l(t('CKEditor for Drupal Documentation'), 'http://docs.cksource.com/CKEditor_for_Drupal'),
                                 '!userguidelink' => l(t('User\'s Guide'), 'http://docs.cksource.com/CKEditor_3.x/Users_Guide')
                     )) . '</p></div>' .
                     '<p>' . t('Profiles are linked with input format types. A CKEditor profile defines which buttons are available in the editor, how the editor is displayed, and a few other editor functions. The Global Profile stores some general information about CKEditor.') . '</p>';
@@ -82,18 +82,12 @@ function ckeditor_help_delegate($path, $arg) {
             $output .= '<p>' . t('Useful links: !ckeditorlink | !devguidelink | !userguidelink.',
                             array(
                                 '!ckeditorlink' => l(t('CKEditor website'), 'http://ckeditor.com'),
-                                '!devguidelink' => l(t('Developer\'s Guide'), 'http://docs.cksource.com/CKEditor_3.x/Developers_Guide'),
+                                '!devguidelink' => l(t('CKEditor for Drupal Documentation'), 'http://docs.cksource.com/CKEditor_for_Drupal'),
                                 '!userguidelink' => l(t('User\'s Guide'), 'http://docs.cksource.com/CKEditor_3.x/Users_Guide')
                                 )) . '</p>';
             $output .= '<h4>' . t('Configuration') . '</h4>';
             $output .= '<ol>';
-            $output .= '<li>' . t('Go to the !ckeditorlink and download the latest version of CKEditor. Unpack the contents of the <code>ckeditor</code> directory of the downloaded file to <code>%ckeditordir</code> (or to <code>sites/all/libriaries/ckeditor</code>).',
-                            array(
-                                '!ckeditorlink' => l(t('CKEditor website'), 'http://ckeditor.com/download'),
-                                '%ckeditordir' => base_path() . drupal_get_path('module', 'ckeditor') . '/ckeditor/',
-                    )) . '</li>';
-            $output .= '<li>' . t('Enable the module as usual from within Drupal\'s administration pages.') . '</li>';
-            $output .= '<li>' . t('Adjust CKEditor profiles in the <strong>!adminpath</strong> section. Profiles determine which options are available to users based on the input format system.',
+            $output .= '<li>' . t('CKEditor profiles can be configured in the <strong>!adminpath</strong> section. Profiles determine which options are available to users based on the input format system.',
                             array(
                                 '!adminpath' => l(t('Administration panel') . ' > ' . t('Configuration') . ' > ' . t('Content Authoring') . ' > ' . t('CKEditor'), 'admin/config/content/ckeditor'),
                     )) . '</li>';
@@ -101,18 +95,17 @@ function ckeditor_help_delegate($path, $arg) {
                             array(
                                 '!filterlink' => l(t('filters'), 'admin/config/content/formats'),
                     )) .
-                    '<br /><code>' . htmlspecialchars('<a> <p> <span> <div> <h1> <h2> <h3> <h4> <h5> <h6> <img> <map> <area> <hr> <br> <br /> <ul> <ol> <li> <dl> <dt> <dd> <table> <tr> <td> <em> <b> <u> <i> <strong> <font> <del> <ins> <sub> <sup> <quote> <blockquote> <pre> <address> <code> <cite> <embed> <object> <param> <strike> <caption>') . '</code><br />';
-            $output .= t('If you are going to use CKEditor with the <strong>Filtered HTML</strong> input format, please read the "Setting up filters" section in the <code>!readme</code> file.',
+                   '<br /><code>' . htmlspecialchars('<a> <p> <span> <div> <h1> <h2> <h3> <h4> <h5> <h6> <img> <map> <area> <hr> <br> <br /> <ul> <ol> <li> <dl> <dt> <dd> <table> <tbody> <th> <tr> <td> <em> <b> <u> <i> <strong> <del> <ins> <sub> <sup> <quote> <blockquote> <pre> <address> <code> <cite> <embed> <object> <param> <strike> <caption> <iframe>') . '</code><br />';
+            $output .= t('<strong>Note:</strong> be careful when granting users access to create tags like %iframe.',
                             array(
-                                '!readme' => l(t('README.txt'), $base_url . '/' . drupal_get_path('module', 'ckeditor') . '/README.txt', array('absolute' => TRUE))
+                               '%iframe' => '<iframe>',
                     )) . '</li>';
             $output .= '<li>' . t('To have better control over line breaks, you should disable the <strong>%settingname</strong> setting in the chosen Text format (recommended).',
                             array(
                                 '%settingname' => t('Line break converter'),
                     )) . '</li>';
-            $output .= '<li>' . t('Modify the <code>%ckconfig</code> file to adjust CKEditor configuration to your needs (optional). Available configuration settings are available in the !apidocs.',
+            $output .= '<li>' . t('All configuration options described in the !apidocs that cannot be easily changed in the administration area can be set in the <strong>Advanced Options</strong> section in the CKEditor profile.',
                             array(
-                                '%ckconfig' => base_path() . drupal_get_path('module', 'ckeditor') . '/ckeditor/ckeditor.config.js',
                                 '!apidocs' => l(t('API documentation'), 'http://docs.cksource.com/ckeditor_api/symbols/CKEDITOR.config.html')
                     )) . '</li>';
             $output .= '</ol>';
@@ -121,25 +114,11 @@ function ckeditor_help_delegate($path, $arg) {
             $output .= '<p>';
             $output .= t('Take a look at !listlink when installing CKEditor.',
                             array(
-                                '!listlink' => l(t('the list of common problems'), 'http://drupal.ckeditor.com/troubleshooting')
+                                '!listlink' => l(t('the list of common problems'), 'http://docs.cksource.com/CKEditor_for_Drupal/Troubleshooting')
                     ));
             $output .= ' ' . t('If you are looking for more information, have any trouble with the configuration, or found an issue with the CKEditor module, please visit the !officiallink.', array('!officiallink' => l(t('official project page'), 'http://drupal.org/project/ckeditor')));
             $output .= ' ' . t('More information about how to customize CKEditor for your theme can be found !herelink.', array('!herelink' => l(t('here'), 'http://drupal.ckeditor.com/tricks')));
             $output .= '</p>';
-
-            $output .= '<h3>' . t('Uploading images and files') . '</h3>';
-            $output .= '<p>' . t('There are three ways for uploading files:') . '</p>';
-            $output .= '<ol>';
-            $output .= '<li>' . t('By using !ckfinder (commercial), an advanced Ajax file manager.',
-                            array(
-                                '!ckfinder' => l(t('CKFinder'), 'http://ckfinder.com'),
-                    )) . '</li>';
-            $output .= '<li>' . t('By using a dedicated module like !imcelink.',
-                            array(
-                                '!imcelink' => l(t('IMCE'), 'http://drupal.org/project/imce')
-                    )) . '</li>';
-            $output .= '<li>' . t('By using the core upload module.') . '</li>';
-            $output .= '</ol>';
 
             break;
     }
@@ -150,33 +129,45 @@ function ckeditor_help_delegate($path, $arg) {
  * AJAX callback - XSS filter
  */
 function ckeditor_filter_xss() {
+    header('Content-Type: text/html; charset=utf-8');
     $GLOBALS['devel_shutdown'] = FALSE;
 
-    if (!isset($_POST['text']) || !is_string($_POST['text']) || !is_array($_POST['filters']) || !isset($_POST['input_format']) || !is_string($_POST['input_format'])) {
+    if (!isset($_POST['text']) || !is_string($_POST['text']) || !isset($_POST['input_format']) || !is_string($_POST['input_format']) || !isset($_POST['token']) || !drupal_valid_token($_POST['token'], 'ckeditorAjaxCall', TRUE)) {
+      exit;
+    }
+
+    $format = filter_format_load($_POST['input_format']);
+    if ($format == FALSE || !is_object($format) || !filter_access($format)) {
         exit;
     }
 
-    if (!isset($_POST['textformat_filters']) || $_POST['textformat_filters'] == 'true') {
-        $text = check_markup($_POST['text'], $_POST['input_format']);
+    module_load_include('inc', 'ckeditor', 'includes/ckeditor.lib');
+    $profile = ckeditor_get_profile($_POST['input_format']);
+
+    if ($profile == FALSE) {
+        $settings = array();
+        $settings['filters'] = ckeditor_security_filters();
     }
     else {
-        $text = $_POST['text'];
+        $settings = $profile->settings;
     }
-    
+
+    $text = $_POST['text'];
     $filters = filter_get_filters();
     $format_filters = filter_list_format($_POST['input_format']);
+    foreach ((array) $settings['filters'] as $name => $status) {
+        //If filter not exists, cannot be called or isn't enabled in selected text format then skip this filter
+        if (!isset($filters[$name]) || !isset($filters[$name]['process callback']) || !array_key_exists($name, $format_filters) || $format_filters[$name]->status == 0) {
+          continue;
+        }
 
-    foreach ($_POST['filters'] as $name) {
-        if ($name == "default") {
+        //Call default CKEditor built-in filter
+        if ($name == "filter_html" && $status == 1) {
             preg_match_all("|</?([a-z][a-z0-9]*)(?:\b[^>]*)>|i", $text, $matches);
             if ($matches[1]) {
                 $tags = array_unique($matches[1]);
                 $text = filter_xss($text, $tags);
             }
-            continue;
-        }
-
-        if (!isset($filters[$name]) || !isset($filters[$name]['process callback']) || (array_key_exists($name, $format_filters)) && $format_filters[$name]->status) {
             continue;
         }
 

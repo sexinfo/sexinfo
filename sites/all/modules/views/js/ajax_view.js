@@ -35,8 +35,19 @@ Drupal.views.ajaxView = function(settings) {
     ajax_path = ajax_path[0];
   }
 
+  // Check if there are any GET parameters to send to views.
+  var queryString = window.location.search || '';
+  if (queryString !== '') {
+    // Remove the question mark and Drupal path component if any.
+    var queryString = queryString.slice(1).replace(/q=[^&]+&?|&?render=[^&]+/, '');
+    if (queryString !== '') {
+      // If there is a '?' in ajax_path, clean url are on and & should be used to add parameters.
+      queryString = ((/\?/.test(ajax_path)) ? '&' : '?') + queryString;
+    }
+  }
+
   this.element_settings = {
-    url: ajax_path,
+    url: ajax_path + queryString,
     submit: settings,
     setClick: true,
     event: 'click',
@@ -102,6 +113,25 @@ Drupal.views.ajaxView.prototype.attachPagerLinkAjax = function(id, link) {
 
   this.element_settings.submit = viewData;
   this.pagerAjax = new Drupal.ajax(false, $link, this.element_settings);
+};
+
+Drupal.ajax.prototype.commands.viewsScrollTop = function (ajax, response, status) {
+  // Scroll to the top of the view. This will allow users
+  // to browse newly loaded content after e.g. clicking a pager
+  // link.
+  var offset = $(response.selector).offset();
+  // We can't guarantee that the scrollable object should be
+  // the body, as the view could be embedded in something
+  // more complex such as a modal popup. Recurse up the DOM
+  // and scroll the first element that has a non-zero top.
+  var scrollTarget = response.selector;
+  while ($(scrollTarget).scrollTop() == 0 && $(scrollTarget).parent()) {
+    scrollTarget = $(scrollTarget).parent();
+  }
+  // Only scroll upward
+  if (offset.top - 10 < $(scrollTarget).scrollTop()) {
+    $(scrollTarget).animate({scrollTop: (offset.top - 10)}, 500);
+  }
 };
 
 })(jQuery);

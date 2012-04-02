@@ -2,6 +2,8 @@
 
 /**
  * Argument handler to accept a language.
+ *
+ * @ingroup views_argument_handlers
  */
 class views_handler_argument_locale_language extends views_handler_argument {
   function construct() {
@@ -29,4 +31,3 @@ class views_handler_argument_locale_language extends views_handler_argument {
     return isset($languages[$langcode]) ? $languages[$langcode] : t('Unknown language');
   }
 }
-

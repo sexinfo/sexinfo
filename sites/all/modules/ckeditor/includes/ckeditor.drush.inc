@@ -1,7 +1,7 @@
 <?php
 /**
  * CKEditor - The text editor for the Internet - http://ckeditor.com
- * Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.
+ * Copyright (c) 2003-2012, CKSource - Frederico Knabben. All rights reserved.
  *
  * == BEGIN LICENSE ==
  *

@@ -92,7 +92,6 @@ function ctools_entity_form_field_content_type_render($subtype, $conf, $panel_ar
   else {
     $block->content = t('Entity info.');
   }
-  return $block;
 
   return $block;
 }

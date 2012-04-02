@@ -277,7 +277,7 @@ function hook_views_plugins_alter(&$plugins) {
  */
 function hook_views_api() {
   return array(
-    'api' => 2,
+    'api' => 3,
     'path' => drupal_get_path('module', 'example') . '/includes/views',
     'template path' => drupal_get_path('module', 'example') . 'themes',
   );
@@ -539,8 +539,21 @@ function hook_views_default_views() {
 }
 
 /**
+ * Alter default views defined by other modules.
+ *
  * This hook is called right before all default views are cached to the
  * database. It takes a keyed array of views by reference.
+ *
+ * Example usage to add a field to a view:
+ * @code
+ *   $handler =& $view->display['DISPLAY_ID']->handler;
+ *   // Add the user name field to the view.
+ *   $handler->display->display_options['fields']['name']['id'] = 'name';
+ *   $handler->display->display_options['fields']['name']['table'] = 'users';
+ *   $handler->display->display_options['fields']['name']['field'] = 'name';
+ *   $handler->display->display_options['fields']['name']['label'] = 'Author';
+ *   $handler->display->display_options['fields']['name']['link_to_user'] = 1;
+ * @endcode
  */
 function hook_views_default_views_alter(&$views) {
   if (isset($views['taxonomy_term'])) {
@@ -728,6 +741,20 @@ function hook_views_preview_info_alter(&$rows, $view) {
 function hook_views_ui_display_top_links_alter(&$links, $view, $display_id) {
   // example code here
 }
+
+/**
+ * This hook allows to alter the commands which are used on a views ajax
+ * request.
+ *
+ * @param $commands
+ *   An array of ajax commands
+ * @param $view view
+ *   The view which is requested.
+ */
+function hook_views_ajax_data_alter(&$commands, $view) {
+}
+
+
 
 /**
  * @}

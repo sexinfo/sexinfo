@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2012, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.html or http://ckeditor.com/license
 */
 
@@ -28,7 +28,7 @@ CKEDITOR.editorConfig = function(config) {
 
     /*
     * Append here extra CSS rules that should be applied into the editing area.
-    * Example: 
+    * Example:
     * config.extraCss = 'body {color:#FF0000;}';
     */
     config.extraCss = '';
@@ -87,10 +87,10 @@ Drupal.settings.cke_toolbar_DrupalFull = [
     ['Source'],
     ['Cut','Copy','Paste','PasteText','PasteFromWord','-','SpellChecker', 'Scayt'],
     ['Undo','Redo','Find','Replace','-','SelectAll','RemoveFormat'],
-    ['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar'],
+    ['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','Iframe'],
     '/',
     ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
-    ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+    ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote','CreateDiv'],
     ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiRtl','BidiLtr'],
     ['Link','Unlink','Anchor','Linkit','LinkToNode', 'LinkToMenu'],
     '/',

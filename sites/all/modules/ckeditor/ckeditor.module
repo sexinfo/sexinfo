@@ -2,7 +2,7 @@
 
 /**
  * CKEditor - The text editor for the Internet - http://ckeditor.com
- * Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.
+ * Copyright (c) 2003-2012, CKSource - Frederico Knabben. All rights reserved.
  *
  * == BEGIN LICENSE ==
  *
@@ -65,10 +65,11 @@ function ckeditor_menu() {
         'type' => MENU_CALLBACK,
     );
 
-    $items['ckeditor/disable/wysiwyg'] = array(
+    $items['ckeditor/disable/wysiwyg/%'] = array(
         'title' => 'Disable the WYSIWYG module',
         'description' => 'Disable WYSIWYG module.',
         'page callback' => 'ckeditor_disable_wysiwyg',
+        'page arguments' => array(3),
         'file' => 'includes/ckeditor.admin.inc',
         'access arguments' => array('administer ckeditor'),
         'access callback' => TRUE,
@@ -164,7 +165,7 @@ function ckeditor_permission() {
             'description' => t('Allow users to customize CKEditor appearance.')
         );
 
-    if (file_exists(drupal_get_path('module', 'ckeditor') . "/ckfinder")) {
+    if (file_exists(ckfinder_path())) {
         $arr['allow CKFinder file uploads'] = array(
             'title' => t('CKFinder access'),
             'description' => t('Allow users to use CKFinder.')
@@ -180,8 +181,11 @@ function ckeditor_permission() {
  * lower the amount of code in ckeditor.module.
  */
 function ckeditor_help($path, $arg) {
-    module_load_include('inc', 'ckeditor', 'includes/ckeditor.page');
-    return module_invoke('ckeditor', 'help_delegate', $path, $arg);
+  if (preg_match('#admin/[\w/]+/ckeditor#', $path)) {
+    ckeditor_check_license();
+  }
+  module_load_include('inc', 'ckeditor', 'includes/ckeditor.page');
+  return module_invoke('ckeditor', 'help_delegate', $path, $arg);
 }
 
 /**
@@ -237,7 +241,7 @@ function ckeditor_pre_render_text_format($element) {
             $element['summary'] = ckeditor_load_by_field($element['summary'], $element['format']['format'], FALSE);
         }
         else {
-            $element['value'] = ckeditor_load_by_field($element['value'], $element['#format']);
+            $element['value'] = ckeditor_load_by_field($element['value'], $element['format']['format']);
         }
     }
     else {
@@ -430,6 +434,40 @@ function ckeditor_plugins_path($local = FALSE, $refresh = FALSE) {
 }
 
 /**
+ * Read the CKFinder path from the Global profile.
+ *
+ * @return
+ *   Path to CKFinder folder.
+ */
+function ckfinder_path($refresh = FALSE) {
+    static $ckf_path;
+
+    if ($refresh || (!$ckf_path)) {
+        $mod_path = drupal_get_path('module', 'ckeditor');
+        $lib_path = 'sites/all/libraries';
+        $global_profile = ckeditor_profile_load('CKEditor Global Profile', $refresh);
+
+        //default: path to ckeditor subdirectory in the ckeditor module directory (starting from the document root)
+        //e.g. for http://example.com/drupal it will be /drupal/sites/all/modules/ckeditor/ckeditor
+        $ckf_path = $mod_path . '/ckfinder';
+
+        if ($global_profile) {
+            $gs = $global_profile->settings;
+
+            if (isset($gs['ckfinder_path'])) {
+                $tmp_path = $gs['ckfinder_path'];
+                $tmp_path = strtr($tmp_path, array("%b" => base_path(), "%m" => $mod_path, "%l" => $lib_path));
+                $tmp_path = str_replace('\\', '/', $tmp_path);
+                $tmp_path = str_replace('//', '/', $tmp_path);
+                $ckf_path = $tmp_path;
+            }
+        }
+    }
+
+    return $ckf_path;
+}
+
+/**
  * Implementation of hook_features_api().
  *
  * Allow exporting of CKEditor profiles by the Features module.
@@ -451,35 +489,52 @@ function ckeditor_features_api() {
  * CKEditor does not implement any kind of potection on private files.
  */
 function ckeditor_file_download($uri) {
-
   if ($path = file_create_url($uri)) {
-    $result = db_query("SELECT f.* FROM {file_managed} f WHERE uri = :uri", array(':uri' => $path));
-    foreach ($result as $record)
-    {
+    $result = db_query("SELECT f.* FROM {file_managed} f WHERE uri = :uri", array(':uri' => $uri));
+    foreach ($result as $record) {
       return NULL;
     }
     //No info in DB? Probably a file uploaded with FCKeditor / CKFinder
     $global_profile = ckeditor_profile_load("CKEditor Global Profile");
     //Assume that files inside of ckeditor directory belong to the CKEditor. If private directory is set, let the decision about protection to the user.
     $private_dir_db = $private_dir = isset($global_profile->settings['private_dir']) ? trim($global_profile->settings['private_dir'], '\/') : '';
-    $private_dir_db = str_replace(array('\\%u', '\\%n'),array('', '') , $private_dir_db);
+    $private_dir_db = str_replace(array('\\%u', '\\%n'), array('', ''), $private_dir_db);
     $private_dir = preg_quote($private_dir, '#');
     $private_dir = strtr($private_dir, array('%u' => '(\d+)', '%n' => '([\x80-\xF7 \w@.-]+)')); // regex for %n taken from user_validate_name() in user.module
     $private_dir = trim($private_dir, '\/');
 
-    $regex = '#^'. preg_quote(file_default_scheme() . '://' , '#') . $private_dir .'#';
+    $regex = '#^' . preg_quote('private://', '#') . $private_dir . '#';
 
-    if (!strstr($uri, 'private://') && !strstr($uri,'public://'))
-    {
-      $path =   file_default_scheme() . '://' .$uri   ;
-    }else{
-      $path =    $uri  ;
+    if (!strstr($uri, 'private://') && !strstr($uri, 'public://')) {
+      $path = 'private://' . $uri;
     }
-    if (!$private_dir && variable_get('file_default_scheme', '') == 'private' &&  strcmp(isset($global_profile->settings['ckeditor_allow_download_private_files']) ? $global_profile->settings['ckeditor_allow_download_private_files']: '', 't') != 0 ) return -1;
-    if (preg_match($regex, $path))
-    {
+    else {
+      $path = $uri;
+    }
+    //check if CKEditor's "Enable access to files located in the private folder" option is disabled or enabled
+    $allow_download_private_files = FALSE;
+    if (isset($global_profile->settings['ckeditor_allow_download_private_files']) &&  $global_profile->settings['ckeditor_allow_download_private_files'] === 't') {
+      $allow_download_private_files = TRUE;
+    }
+    //denied access to file if private upload is set and CKEditor's "Enable access to files located in the private folder" option is disabled
+    if ($allow_download_private_files  == FALSE ) return NULL;
+    //check if file can be served by comparing regex and path to file
+    if (preg_match($regex, $path)) {
       $info = image_get_info($uri);
       return array('Content-Type' => $info['mime_type']);
     }
+  }
+}
+
+/*
+ * check if package is licensed
+*/
+
+function ckeditor_check_license() {
+  module_load_include('inc', 'ckeditor', 'includes/ckeditor.functions');
+  $profile = ckeditor_profile_load('CKEditor Global Profile');
+  $authenticated = ckeditor_check_package_license($profile->settings['license_key'], $profile->settings['license_name']);
+  if ($authenticated['authenticate'] == FALSE && strstr($_GET['q'], 'ckeditor')) {
+    drupal_set_message(t('You are using an unlicensed version of the CKEditor module for Drupal. Visit <a href="http://ckeditor.com/ckeditor-for-drupal">http://ckeditor.com/ckeditor-for-drupal</a> to purchase a licensed version that also includes a license for a full-featured file browser, CKFinder, and a dedicated support channel'), 'warning');
   }
 }

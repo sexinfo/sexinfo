@@ -2,7 +2,7 @@
 
 /**
  * CKEditor - The text editor for the Internet - http://ckeditor.com
- * Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.
+ * Copyright (c) 2003-2012, CKSource - Frederico Knabben. All rights reserved.
  *
  * == BEGIN LICENSE ==
  *
@@ -47,12 +47,12 @@ function ckeditor_admin_main() {
     if (!_ckeditor_requirements_isinstalled()) {
         drupal_set_message(t('Checking for <code>%filename</code> or <code>%file</code>.', array('%filename' => $ckconfig_file, '%file' => 'sites/all/libraries/ckeditor/ckeditor.js')));
         drupal_set_message(t('The CKEditor component is not installed correctly. Please go to the !ckeditorlink in order to download the latest version. After that you must extract the files to the <code>%ckeditorpath</code> or <code>%librarypath</code> directory and make sure that the <code>%ckeditorfile</code> or <code>%ckeditorlibrary</code> file exists. Refer to the <code>!readme</code> file for more information.', array('!ckeditorlink' => l(t('CKEditor homepage'), 'http://ckeditor.com/download'), '!readme' => l(t('README.txt'), $base_url . '/' . drupal_get_path('module', 'ckeditor') . '/README.txt', array('absolute' => TRUE)), '%ckeditorpath' => 'sites/all/modules/ckeditor/ckeditor', '%ckeditorsubdir' => $editor_path . '/editor', '%ckeditorfile' => 'sites/all/modules/ckeditor/ckeditor/ckeditor.js', '%ckeditorlibrary' => 'sites/all/libraries/ckeditor/ckeditor.js', '%librarypath' => 'sites/all/libraries/ckeditor')), 'error');
-        drupal_set_message(t('If you have CKEditor already installed, edit the <strong>!editg</strong> and update the CKEditor path.', array('!editg' => l(t('CKEditor Global Profile'), 'admin/config/content/ckeditor/editg'))), 'warning');
+        drupal_set_message(t('If you have CKEditor already installed, edit the <strong>@editg</strong> and update the CKEditor path.', array('@editg' => l(t('CKEditor Global Profile'), 'admin/config/content/ckeditor/editg'))), 'warning');
         return '';
     }
 
     if (module_exists('wysiwyg')) {
-        drupal_set_message(t('The WYSIWYG module was detected. Using both modules at the same time may cause problems. It is recommended to turn the WYSIWYG module off (@wysiwygdisablelink).', array('@wysiwygdisablelink' => l(t('click here to disable'), 'ckeditor/disable/wysiwyg'))), 'warning');
+        drupal_set_message(t('The WYSIWYG module was detected. Using both modules at the same time may cause problems. It is recommended to turn the WYSIWYG module off (<a href="@wysiwygdisablelink">click here to disable</a>).', array('@wysiwygdisablelink' => url('ckeditor/disable/wysiwyg/' . drupal_get_token('ckeditorDisableWysiwyg')))), 'warning');
     }
 
     //find profile other than Global
@@ -145,6 +145,31 @@ function ckeditor_admin_global_profile_form($form, $form_state, $mode = 'add') {
         $formats[$format->format] = $format->name;
     }
 
+    $form['ckeditor_license_settings'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('License Information'),
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+    );
+
+    $form['ckeditor_license_settings']['license_name'] = array(
+     '#type' => 'textfield',
+     '#title' => t('License name'),
+     '#default_value' => isset($profile->settings['license_name']) ? $profile->settings['license_name'] : '',
+     '#size' => 50,
+     '#maxlength' => 128,
+     '#description' => t('CKEditor for Drupal license name. If left empty, CKFinder will run in the demonstration mode.'),
+    );
+
+    $form['ckeditor_license_settings']['license_key'] = array(
+     '#type' => 'textfield',
+     '#title' => t('License key'),
+     '#default_value' => isset($profile->settings['license_key']) ? $profile->settings['license_key'] : '',
+     '#size' => 50,
+     '#maxlength' => 128,
+     '#description' => t('CKEditor for Drupal license name. If left empty, CKFinder will run in the demonstration mode.'),
+    );
+
     $form['ckeditor_advanced_settings'] = array(
         '#type' => 'fieldset',
         '#title' => t('Advanced settings'),
@@ -209,15 +234,33 @@ function ckeditor_admin_global_profile_form($form, $form_state, $mode = 'add') {
         '#description' => t('The path to the local directory (on the server) that points to the path defined above. Enter either an absolute server path or a path relative to the <code>index.php</code> file. If left empty, the CKEditor module will try to find the right path.<br />Current path: <code>!path</code>', array('!path' => ckeditor_plugins_path(TRUE))),
     );
 
+    $form['ckeditor_advanced_settings']['ckfinder_path'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Path to CKFinder'),
+        '#default_value' => !empty($profile->settings['ckfinder_path']) ? $profile->settings['ckfinder_path'] : '%m/ckfinder',
+        '#size' => 40,
+        '#maxlength' => 128,
+        '#description' => t('The path to CKFinder (AJAX based file manager downloaded from <a href="!ckfindercom">ckfinder.com</a>) relative to the document root.') .
+        '<br />' .
+        t('Available placeholders:!m &ndash; path where the CKEditor module is stored (<code>!files</code>).!l &ndash; path to the libraries directory (<code>sites/all/libraries</code>)<br />Current path: <code>!path</code>',
+                array(
+                    '!m' => '<br /><code>%m</code>',
+                    '!l' => '<br /><code>%l</code>',
+                    '!path' => ckfinder_path(FALSE),
+                    '!files' => $module_drupal_path,
+                    '!ckeditorcom' => 'http://ckfinder.com/download'
+                )
+        )
+    );
+
     //@todo DOWNLOAD API
-    if (variable_get('file_default_scheme', '') == 'private')
-    {
+    if (variable_get('file_default_scheme', '') == 'private') {
       $form['ckeditor_advanced_settings']['ckeditor_allow_download_private_files'] = array(
       '#type' => 'checkbox',
       '#title' => t('Enable access to files located in the private folder'),
       '#default_value' => !empty($profile->settings['ckeditor_allow_download_private_files']),
       '#return_value' => 't',
-      '#description' =>  t('<strong>Use this option with care.</strong> If checked, CKEditor will allow anyone knowing the URL to view a file, if it located inside of the private path (<code>'.variable_get('file_private_path' , '').'</code>) and if there is no information about the file in the Drupal database.'),
+      '#description' => t('<strong>Use this option with care.</strong> If checked, CKEditor will allow anyone knowing the URL to view a file located inside of the private path (<code>' . variable_get('file_private_path' , '') . '</code>), but only if there is no information about the file in the Drupal database. If the path below is specified, anyone will have access only to that location.'),
       '#required' => FALSE
     );
       $current_private_dir = !empty($profile->settings['private_dir']) ? $profile->settings['private_dir'] : '';
@@ -227,7 +270,7 @@ function ckeditor_admin_global_profile_form($form, $form_state, $mode = 'add') {
           '#default_value' => !empty($profile->settings['private_dir']) ? $profile->settings['private_dir'] : '',
           '#size' => 40,
           '#maxlength' => 255,
-          '#description' => t('The path relative to the location of the private directory where CKEditor should store uploaded files.') . '<br />' . t('Available wildcard characters:') . '<br/><code>%u</code> &ndash; ' . t('User ID') . '<br /><code>%n</code> &ndash; ' . t('Username') . '<br />' . t('System path to the private folder is: <code>!system_path</code>.', array('!system_path' => realpath(variable_get('file_private_path', conf_path() . '/files')) . DIRECTORY_SEPARATOR)) . '<br />' . t('<strong>Warning:</strong> CKEditor does not implement any kind of access protection for files available in this location. All files stored in the directory defined above might be accessible to unauthenticated users if there is no information about the file in the Drupal\'s database.'),
+           '#description' => t('The path relative to the location of the private directory where CKEditor should store uploaded files.') . '<br />' . t('Available wildcard characters:') . '<br/><code>%u</code> &ndash; ' . t('User ID') . '<br /><code>%n</code> &ndash; ' . t('Username') . '<br />' . t('System path to the private folder is: <code>!system_path</code>.', array('!system_path' => realpath(variable_get('file_private_path', conf_path() . '/files')) . DIRECTORY_SEPARATOR)) ,
       );
     }
 
@@ -240,6 +283,17 @@ function ckeditor_admin_global_profile_form($form, $form_state, $mode = 'add') {
             '#description' => t('With the !plink extension it is possible to use internal: links. By default the !link extension is linking to nodes using paths.', array('!plink' => l(t('Path Filter'), 'http://drupal.org/project/pathfilter'), '!link' => l(t('Link To Content'), 'http://drupal.org/project/linktocontent'))),
         );
     }
+
+    $form['ckeditor_advanced_settings']['toolbar_wizard'] = array(
+        '#type' => 'radios',
+        '#title' => t('Use toolbar Drag&Drop feature'),
+        '#default_value' => !empty($profile->settings['toolbar_wizard']) ? $profile->settings['toolbar_wizard'] : 't',
+        '#options' => array(
+            't' => t('Enabled'),
+            'f' => t('Disabled')
+        ),
+        '#description' => t('When enabled, the toolbar can be built by using the drag-and-drop feature. Otherwise you will need to enter the toolbar configuration manually to the text box.'),
+    );
 
     $form['submit'] = array(
         '#type' => 'submit',
@@ -307,6 +361,16 @@ function ckeditor_admin_global_profile_form_submit($form, &$form_state) {
     }
     //no slash at the end
     $edit['ckeditor_plugins_path'] = trim(rtrim($edit['ckeditor_plugins_path'], "/"));
+
+    //strip slash from the end
+    if (empty($edit['ckfinder_path'])) {
+        $edit['ckfinder_path'] = '';
+    }
+    $edit['ckfinder_path'] = trim(rtrim($edit['ckfinder_path'], "/"));
+    if ($edit['ckfinder_path'] && 0 !== strpos($edit['ckfinder_path'], "/") && 0 !== strpos($edit['ckfinder_path'], "%")) {
+        //ensure that slash is at the beginning
+        $edit['ckfinder_path'] = "/" . $edit['ckfinder_path'];
+    }
 
     $settings = ckeditor_admin_values_to_settings($edit);
     db_insert('ckeditor_settings')
@@ -377,6 +441,10 @@ function ckeditor_admin_profile_form($form, $form_state, $profile = NULL) {
             break;
     }
 
+    $global_profile = ckeditor_profile_load('CKEditor Global Profile');
+    $toolbar_wizard = !empty($global_profile->settings['toolbar_wizard']) ? $global_profile->settings['toolbar_wizard'] : 't';
+    drupal_add_js(array('ckeditor_toolbar_wizard' => $toolbar_wizard), 'setting');
+
     $form['basic']['name'] = array(
         '#type' => 'textfield',
         '#title' => t('Profile name'),
@@ -405,11 +473,12 @@ function ckeditor_admin_profile_form($form, $form_state, $profile = NULL) {
     }
 
     $form['basic']['input_formats'] = array(
+        '#id' => 'input-formats',
         '#type' => 'checkboxes',
-        '#title' => t('Input formats'),
+        '#title' => t('Text formats'),
         '#default_value' => !empty($profile->input_formats) ? array_keys((array) $profile->input_formats) : array(),
         '#options' => $formats,
-        '#description' => t('Choose the input formats where you want to load CKEditor.')
+        '#description' => t('Choose the text formats where you want to load CKEditor.')
     );
 
     $form['security'] = array(
@@ -421,6 +490,7 @@ function ckeditor_admin_profile_form($form, $form_state, $profile = NULL) {
     );
 
     $form['security']['filters'] = array(
+        '#id' => 'security-filters',
         '#type' => 'fieldset',
         '#title' => t('Security filters'),
         '#description' => t('Please choose all filters that protect your content (probably not all filters listed below are security filters).'),
@@ -429,38 +499,33 @@ function ckeditor_admin_profile_form($form, $form_state, $profile = NULL) {
 
     $all_filters = filter_get_filters();
 
-    if (!isset($profile->settings['ss'])) {
-        $profile->settings['filters']['filter/0'] = 1;
+    //get text formats filters
+    $input_format_filters = array();
+    foreach ($formats AS $key => $value) {
+        $input_format_filters[$key] = array();
+        $filters = filter_list_format($key);
+        foreach ($filters as $filter_name => $filter_settings) {
+            if ($filter_settings->status == 1) {
+                $input_format_filters[$key][$filter_name] = TRUE;
+            }
+        }
+    }
+    drupal_add_js(array('text_format_filters' => $input_format_filters), 'setting');
+
+    _ckeditor_admin_profile_form_add_filter($form, 'filter_html', "Limit allowed HTML tags", "Removes the attributes that the built-in \"Limit allowed HTML tags\"
+-filter does not allow inside HTML elements/tags", !empty($profile->settings['filters']['filter_html']));
+
+    //load security filters from whitelisted modules
+    $security_modules = array('htmLawed', 'htmltidy', 'htmlpurifier', 'wysiwyg_filter');
+    foreach ($security_modules as $val) {
+        _ckeditor_admin_profile_form_add_module_filters($form, $profile, $val);
     }
 
-    if (array_key_exists('filter_htmlcorrector', $all_filters)) {
-        $form['security']['filters']['filter_htmlcorrector'] = array(
-            '#type' => 'checkbox',
-            '#title' => t("@data", array('@data' => $all_filters['filter_htmlcorrector']['title'])),
-            '#default_value' => !empty($profile->settings['filters']['filter_htmlcorrector']),
-            '#description' => t("@data", array('@data' => $all_filters['filter_htmlcorrector']['description'])),
-        );
+    //load security filters added by API
+    $external_module_filters = module_invoke_all('ckeditor_security_filter');
+    foreach ($external_module_filters as $module_filter_name => $module_filter_conf) {
+        _ckeditor_admin_profile_form_add_filter($form, $module_filter_name, $module_filter_conf['title'], $module_filter_conf['description'], !empty($profile->settings['filters'][$module_filter_name]));
     }
-
-    if (array_key_exists('filter_html', $all_filters)) {
-        $form['security']['filters']['filter_html'] = array(
-            '#type' => 'checkbox',
-            '#title' => t("@data", array('@data' => $all_filters['filter_html']['title'])),
-            '#default_value' => !empty($profile->settings['filters']['filter_html']),
-            '#description' => t("@data", array('@data' => $all_filters['filter_html']['description'])),
-        );
-    }
-
-    $form['security']['textformat_filters'] = array(
-        '#type' => 'radios',
-        '#title' => t('Use Drupal text format filters'),
-        '#default_value' => !empty($profile->settings['textformat_filters']) ? $profile->settings['textformat_filters'] : 't',
-        '#options' => array(
-            't' => t('Enabled'),
-            'f' => t('Disabled')
-        ),
-        '#description' => t('If this option is selected (enabled), the content displayed in the editor when you are editing the page will be filtered through the filters associated with a given "text format". When this option is disabled, the editor will show the full unfiltered page content.'),
-    );
 
     $form['security']['ss'] = array(
         '#type' => 'radios',
@@ -558,15 +623,18 @@ function ckeditor_admin_profile_form($form, $form_state, $profile = NULL) {
     drupal_add_js($editor_path . '/ckeditor.js', array('type' => 'file', 'preprocess' => FALSE));
     drupal_add_js($module_drupal_path . '/ckeditor.config.js', 'file');
     drupal_add_js($module_drupal_path . '/includes/ckeditor.admin.js', 'file');
-    if (module_exists('jquery_ui')){
-        jquery_ui_add(array('jquery.ui.widget.js', 'jquery.ui.sortable.js'));
+
+    if ($toolbar_wizard == 't') {
+        if (module_exists('jquery_ui')) {
+            jquery_ui_add(array('jquery.ui.widget.min.js', 'jquery.ui.sortable.min.js'));
+        }
+        else {
+            drupal_add_js($module_drupal_path . '/includes/jqueryUI/jquery-ui.min.js', 'file');
+            drupal_add_js($module_drupal_path . '/includes/jqueryUI/jquery.ui.widget.min.js', 'file');
+            drupal_add_js($module_drupal_path . '/includes/jqueryUI/jquery.ui.sortable.min.js', 'file');
+        }
+        drupal_add_js($module_drupal_path . '/includes/jqueryUI/sort.js', 'file');
     }
-    else {
-        drupal_add_js($module_drupal_path . '/includes/jqueryUI/jquery-ui.js', 'file');
-        drupal_add_js($module_drupal_path . '/includes/jqueryUI/jquery.ui.widget.js', 'file');
-        drupal_add_js($module_drupal_path . '/includes/jqueryUI/jquery.ui.sortable.js', 'file');
-    }
-    drupal_add_js($module_drupal_path . '/includes/jqueryUI/sort.js', 'file');
 
     $form['appearance']['uicolor'] = array(
         '#type' => 'select',
@@ -600,17 +668,19 @@ function ckeditor_admin_profile_form($form, $form_state, $profile = NULL) {
         '#rows' => 15
     );
 
-    $form['appearance']['toolbar_wizzard_used'] = array(
-        '#markup' => '<div>' . t('Used buttons') . '</div><div class="sortableList" id="groupLayout"></div><br/>',
-        '#description' => t('Currently used buttons'),
-    );
+    if ($toolbar_wizard == 't') {
+        $form['appearance']['toolbar_wizzard_used'] = array(
+            '#markup' => '<div>' . t('Used buttons') . '</div><div class="sortableList" id="groupLayout"></div><br/>',
+            '#description' => t('Currently used buttons'),
+        );
 
-    drupal_add_js(array('cke_toolbar_buttons_all' => ckeditor_toolbar_buttons_all()), 'setting');
+        drupal_add_js(array('cke_toolbar_buttons_all' => ckeditor_toolbar_buttons_all()), 'setting');
 
-    $form['appearance']['toolbar_wizzard_all'] = array(
-        '#markup' => '<div>' . t('All buttons') . '</div><div id="allButtons" class="sortableList"></div><br/>',
-        '#description' => t('All available buttons'),
-    );
+        $form['appearance']['toolbar_wizzard_all'] = array(
+            '#markup' => '<div>' . t('All buttons') . '</div><div id="allButtons" class="sortableList"></div><br/>',
+            '#description' => t('All available buttons'),
+        );
+    }
 
     $plugin_list = ckeditor_load_plugins();
     $plugins = array();
@@ -910,11 +980,13 @@ function ckeditor_admin_profile_form($form, $form_state, $profile = NULL) {
         '#description' => t('Select the file browser that you would like to use to upload Flash movies.'),
     );
 
-    if (variable_get('file_default_scheme', '') != 'private')
-    {
+    if (variable_get('file_default_scheme', '') != 'private') {
+      $current_user_files_path = empty($profile->settings['UserFilesPath']) ? "%b%f/" : $profile->settings['UserFilesPath'];
+      $current_user_files_path = strtr($current_user_files_path, array("%f" => variable_get('file_public_path', conf_path() . '/files'), "%u" => "UID", "%b" => base_path(), "%n" => "UNAME"));
 
-      $current_user_files_path = empty($profile->settings['UserFilesPath']) ? "" : strtr($profile->settings['UserFilesPath'], array("%f" => variable_get('file_public_path', conf_path() . '/files'), "%u" => "UID", "%b" => base_path(), "%n" => "UNAME"));
-      $current_user_files_absolute_path = empty($profile->settings['UserFilesAbsolutePath']) ? "" : strtr($profile->settings['UserFilesAbsolutePath'], array("%f" => variable_get('file_public_path', conf_path() . '/files'), "%u" => "UID", "%b" => base_path(), "%d" => ckeditor_get_document_root_full_path(), "%n" => "UNAME"));
+      $current_user_files_absolute_path = empty($profile->settings['UserFilesAbsolutePath']) ? "%d%b%f/" : $profile->settings['UserFilesAbsolutePath'];
+      $current_user_files_absolute_path = strtr($current_user_files_absolute_path, array("%f" => variable_get('file_public_path', conf_path() . '/files'), "%u" => "UID", "%b" => base_path(), "%d" => ckeditor_get_document_root_full_path(), "%n" => "UNAME"));
+
 
       $form['ckeditor_upload_settings']['UserFilesPath'] = array(
           '#type' => 'textfield',
@@ -962,10 +1034,9 @@ function ckeditor_admin_profile_form($form, $form_state, $profile = NULL) {
           )
       );
     }
-    if (variable_get('file_default_scheme', '') == 'private')
-    {
+    if (variable_get('file_default_scheme', '') == 'private') {
       $form['ckeditor_upload_settings']['private_path_descrption'] = array(
-        '#markup' => '<div>'.t('Setting a relative path to uploaded files was disabled because private downloads are enabled and thus this path is calculated automatically. To change the location of uploaded files in the private file system, edit the <strong><a href="!url">CKEditor Global Profile</a></strong>.', array('!url' => url('admin/config/content/ckeditor/editg'))).'</div>',
+        '#markup' => '<div>' . t('Setting a relative path to uploaded files was disabled because private downloads are enabled and thus this path is calculated automatically. To change the location of uploaded files in the private file system, edit the <strong><a href="!url">CKEditor Global Profile</a></strong>.', array('!url' => url('admin/config/content/ckeditor/editg'))) . '</div>',
       );
     }
 
@@ -1290,7 +1361,6 @@ function ckeditor_profile_delete($name) {
  * List of CKEditor librares to load
  */
 function _ckeditor_load_methods() {
-    module_load_include('module', 'ckeditor');
     $result = array('ckeditor.js' => 'ckeditor.js');
     if (file_exists(ckeditor_path(TRUE) . '/ckeditor_basic.js')) {
         $result['ckeditor_basic.js'] = 'ckeditor_basic.js';
@@ -1304,7 +1374,10 @@ function _ckeditor_load_methods() {
 /*
  * Disable WYSIWYG module
  */
-function ckeditor_disable_wysiwyg() {
+function ckeditor_disable_wysiwyg($token) {
+    if (!drupal_valid_token($token, 'ckeditorDisableWysiwyg')) {
+        exit();
+    }
     module_disable(array('wysiwyg'));
     drupal_set_message(t('The WYSIWYG module is disabled.'));
 
@@ -1383,10 +1456,10 @@ function ckeditor_toolbar_buttons_all() {
         'BGColor' => array('name' => 'BGColor', 'icon' => $path . '/images/buttons/backgroundColor.png', 'title' => 'Background Color', 'row' => 3),
         'Maximize' => array('name' => 'Maximize', 'icon' => $path . '/images/buttons/maximize.png', 'title' => 'Maximize', 'row' => 3),
         'ShowBlocks' => array('name' => 'ShowBlocks', 'icon' => $path . '/images/buttons/showBlocks.png', 'title' => 'Show Blocks', 'row' => 3),
-        'Iframe' => array('name' => 'Iframe', 'icon' => $path . '/images/buttons/iframe.png', 'title' => 'Read more', 'row' => 3),
+        'Iframe' => array('name' => 'Iframe', 'icon' => $path . '/images/buttons/iframe.png', 'title' => 'IFrame', 'row' => 3),
         'About' => array('name' => 'About', 'icon' => $path . '/images/buttons/about.png', 'title' => 'About', 'row' => 3),
-        '__spacer' => array('name' => false, 'icon' => $path . '/images/buttons/spacer.png', 'title' => 'Spacer', 'row' => 4),
-        '__group' => array('name' => false, 'icon' => $path . '/images/buttons/group.png', 'title' => 'Group', 'row' => 4)
+        '__spacer' => array('name' => FALSE, 'icon' => $path . '/images/buttons/spacer.png', 'title' => 'Spacer', 'row' => 4),
+        '__group' => array('name' => FALSE, 'icon' => $path . '/images/buttons/group.png', 'title' => 'Group', 'row' => 4)
     );
 
     $plugins = ckeditor_load_plugins(TRUE);
@@ -1398,4 +1471,29 @@ function ckeditor_toolbar_buttons_all() {
     }
 
     return $buttons;
+}
+
+/**
+ * Add security filters from a selected Drupal module to the configuration panel available in the CKEditor profile administration section
+ */
+function _ckeditor_admin_profile_form_add_module_filters(&$form, $profile, $module_name) {
+    if (module_exists($module_name)) {
+        $module_filters = module_invoke($module_name, 'filter_info');
+        foreach ($module_filters as $module_filter_name => $module_filter_conf) {
+            _ckeditor_admin_profile_form_add_filter($form, $module_filter_name, $module_filter_conf['title'], $module_filter_conf['description'], !empty($profile->settings['filters'][$module_filter_name]));
+        }
+    }
+}
+
+/**
+ *  Add security filter to the configuration panel available in the CKEditor profile administration section
+ */
+function _ckeditor_admin_profile_form_add_filter(&$form, $name, $title, $desc, $default) {
+    $warning = '<div class="filter-warning"><strong> Warning:</strong><code> ' . $title . ' </code> is disabled for the following text formats: <span data="text_formats"></span>. In order to use it you have to enable it in the text format configuration.</div>';
+    $form['security']['filters'][$name] = array(
+        '#type' => 'checkbox',
+        '#title' => t("@data", array('@data' => $title)),
+        '#default_value' => $default,
+        '#description' => t("!data !warning", array('!data' => $desc, '!warning' => $warning))
+    );
 }

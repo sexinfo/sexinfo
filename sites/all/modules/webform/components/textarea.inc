@@ -98,24 +98,31 @@ function _webform_edit_textarea($component) {
  * Implements _webform_render_component().
  */
 function _webform_render_textarea($component, $value = NULL, $filter = TRUE) {
+  $node = isset($component['nid']) ? node_load($component['nid']) : NULL;
+
   $element = array(
     '#type' => 'textarea',
     '#title' => $filter ? _webform_filter_xss($component['name']) : $component['name'],
     '#title_display' => $component['extra']['title_display'] ? $component['extra']['title_display'] : 'before',
-    '#default_value' => $filter ? _webform_filter_values($component['value']) : $component['value'],
+    '#default_value' => $filter ? _webform_filter_values($component['value'], $node) : $component['value'],
     '#required' => $component['mandatory'],
     '#weight' => $component['weight'],
-    '#description' => $filter ? _webform_filter_descriptions($component['extra']['description']) : $component['extra']['description'],
+    '#description' => $filter ? _webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
     '#rows' => !empty($component['extra']['rows']) ? $component['extra']['rows'] : 5,
     '#cols' => !empty($component['extra']['cols']) ? $component['extra']['cols'] : 60,
     '#attributes' => $component['extra']['attributes'],
     '#resizable' => (bool) $component['extra']['resizable'], // MUST be FALSE to disable.
     '#theme_wrappers' => array('webform_element'),
-    '#webform_component' => $component,
+    '#translatable' => array('title', 'description'),
   );
 
   if ($component['extra']['disabled']) {
-    $element['#attributes']['readonly'] = 'readonly';
+    if ($filter) {
+      $element['#attributes']['readonly'] = 'readonly';
+    }
+    else {
+      $element['#disabled'] = TRUE;
+    }
   }
 
   if (isset($value)) {
@@ -136,7 +143,7 @@ function _webform_display_textarea($component, $value, $format = 'html') {
     '#theme_wrappers' => $format == 'html' ? array('webform_element') : array('webform_element_text'),
     '#format' => $format,
     '#value' => isset($value[0]) ? $value[0] : '',
-    '#webform_component' => $component,
+    '#translatable' => array('title'),
   );
 }
 

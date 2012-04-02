@@ -42,6 +42,9 @@ class views_plugin_display extends views_plugin {
     $this->view = &$view;
     $this->display = &$display;
 
+    // Track changes that the user should know about.
+    $changed = FALSE;
+
     // Make some modifications:
     if (!isset($options) && isset($display->display_options)) {
       $options = $display->display_options;
@@ -50,7 +53,29 @@ class views_plugin_display extends views_plugin {
     if ($this->is_default_display() && isset($options['defaults'])) {
       unset($options['defaults']);
     }
-    $this->unpack_options($this->options, $options);
+
+    // Cache for unpack_options, but not if we are in the ui.
+    static $unpack_options = array();
+    if (empty($view->editing)) {
+      $cid = 'unpack_options:' . md5(serialize(array($this->options, $options)));
+      if (empty($unpack_options[$cid])) {
+        $cache = views_cache_get($cid, TRUE);
+        if (!empty($cache->data)) {
+          $this->options = $cache->data;
+        }
+        else {
+          $this->unpack_options($this->options, $options);
+          views_cache_set($cid, $this->options, TRUE);
+        }
+        $unpack_options[$cid] = $this->options;
+      }
+      else {
+        $this->options = $unpack_options[$cid];
+      }
+    }
+    else {
+      $this->unpack_options($this->options, $options);
+    }
 
     // Translate changed settings:
     $items_per_page = $this->get_option('items_per_page');
@@ -101,6 +126,7 @@ class views_plugin_display extends views_plugin {
       $this->set_option('offset', NULL);
       $this->set_option('use_pager', NULL);
       $this->set_option('pager', $pager);
+      $changed = TRUE;
     }
 
 
@@ -130,6 +156,7 @@ class views_plugin_display extends views_plugin {
             }
             $this->set_option($area, array('text' => $options));
             $converted = TRUE;
+            $changed = TRUE;
           }
         }
         // Ensure that options are at least an empty array
@@ -147,6 +174,7 @@ class views_plugin_display extends views_plugin {
       $this->set_option('query', $query_settings);
       // Clear the values
       $this->set_option('distinct', NULL);
+      $changed = TRUE;
     }
 
     // Convert field language settings.
@@ -154,12 +182,40 @@ class views_plugin_display extends views_plugin {
     if (isset($query_options['options']['field_language'])) {
       $this->set_option('field_language', $query_options['options']['field_language']);
       unset($query_options['options']['field_language']);
+      $changed = TRUE;
     }
     if (isset($query_options['options']['field_language_add_to_query'])) {
       $this->set_option('field_language_add_to_query', $query_options['options']['field_language_add_to_query']);
       unset($query_options['options']['field_language_add_to_query']);
+      $changed = TRUE;
     }
     $this->set_option('query', $query_options);
+
+    // Convert filter groups.
+    $filter_groups = $this->get_option('filter_groups');
+    // Only convert if it wasn't converted yet, which is the case if there is a 0 group.
+    if (isset($filter_groups['groups'][0])) {
+      // Update filter groups.
+      $filter_groups ['groups'] = views_array_key_plus($filter_groups['groups']);
+      $this->set_option('filter_groups', $filter_groups);
+      // Update the filter group on each filter.
+      $filters = $this->get_option('filters');
+      foreach ($filters as &$filter) {
+        if (isset($filter['group'])) {
+          $filter['group']++;
+        }
+        else {
+          $filter['group'] = 1;
+        }
+      }
+      $this->set_option('filters', $filters);
+      $changed = TRUE;
+    }
+
+    // Mark the view as changed so the user has a chance to save it.
+    if ($changed) {
+      $this->view->changed = TRUE;
+    }
   }
 
   function construct() {
@@ -171,7 +227,7 @@ class views_plugin_display extends views_plugin {
       foreach ($extenders as $extender) {
         $data = views_fetch_plugin_data('display_extender', $extender);
         if (isset($data['handler']) && class_exists($data['handler'])) {
-          $this->extender[$extender] = new $data['handler']($view, $this);
+          $this->extender[$extender] = new $data['handler']($this->view, $this);
         }
         else {
           vpr('Invalid display extender @extender', array('@handler' => $extender));
@@ -607,7 +663,7 @@ class views_plugin_display extends views_plugin {
       'filter_groups' => array(
         'contains' => array(
           'operator' => array('default' => 'AND'),
-          'groups' => array('default' => array(0 => 'AND')),
+          'groups' => array('default' => array(1 => 'AND')),
         ),
       ),
       'filters' => array(
@@ -746,7 +802,14 @@ class views_plugin_display extends views_plugin {
   }
 
   /**
-   * Get the display or row plugin, if it exists.
+   * Get the instance of a plugin, for example style or row.
+   *
+   * @param string $type
+   *   The type of the plugin.
+   * @param string $name
+   *   The name of the plugin defined in hook_views_plugins.
+   *
+   * @return views_plugin|FALSE
    */
   function get_plugin($type = 'style', $name = NULL) {
     static $cache = array();
@@ -974,7 +1037,7 @@ class views_plugin_display extends views_plugin {
       // Use strip tags as there should never be HTML in the path.
       // However, we need to preserve special characters like " that
       // were removed by check_plain().
-      $tokens['!' . $count] = isset($this->view->args[$count - 1]) ? strip_tags(html_entity_decode($this->view->args[$count - 1])) : '';
+      $tokens['!' . $count] = isset($this->view->args[$count - 1]) ? strip_tags(decode_entities($this->view->args[$count - 1])) : '';
     }
 
     return $tokens;
@@ -1039,7 +1102,7 @@ class views_plugin_display extends views_plugin {
       );
     }
 
-    $display_comment = drupal_substr($this->get_option('display_comment'), 0, 10);
+    $display_comment = check_plain(drupal_substr($this->get_option('display_comment'), 0, 10));
     $options['display_comment'] = array(
       'category' => 'other',
       'title' => t('Comment'),
@@ -1294,6 +1357,7 @@ class views_plugin_display extends views_plugin {
    * Provide the default form for setting options.
    */
   function options_form(&$form, &$form_state) {
+    parent::options_form($form, $form_state);
     if ($this->defaultable_sections($form_state['section'])) {
       views_ui_standard_display_dropdown($form, $form_state, $form_state['section']);
     }
@@ -1659,6 +1723,7 @@ class views_plugin_display extends views_plugin {
 
         // Default text.
         // We have some options, so make a list.
+        $output = '';
         if (!empty($options)) {
           $output = t('<p>The following tokens are available for this link.</p>');
           foreach (array_keys($options) as $type) {
@@ -2214,12 +2279,12 @@ class views_plugin_display extends views_plugin {
         }
         break;
 
+      case 'link_display':
+        $this->set_option('link_url', $form_state['values']['link_url']);
       case 'title':
       case 'css_class':
-      case 'link_display':
       case 'display_comment':
         $this->set_option($section, $form_state['values'][$section]);
-        $this->set_option('link_url', $form_state['values']['link_url']);
         break;
       case 'field_language':
         $this->set_option('field_language', $form_state['values']['field_language']);
@@ -2276,7 +2341,7 @@ class views_plugin_display extends views_plugin {
         // if row, $style will be empty.
         $plugin = $this->get_plugin(empty($style) ? 'row' : 'style');
         if ($plugin) {
-          $plugin->options_submit($form[$section], $form_state);
+          $plugin->options_submit($form['options'][$section], $form_state);
         }
         $this->set_option($section, $form_state['values'][$section]);
         break;

@@ -118,6 +118,7 @@ function _webform_edit_select($component) {
       '#key_type' => 'mixed',
       '#key_type_toggle' => t('Customize keys (Advanced)'),
       '#key_type_toggled' => $component['extra']['custom_keys'],
+      '#default_value_pattern' => '^%.+\[.+\]$',
       '#disabled' => !empty($component['extra']['options_source']),
       '#weight' => 1,
     );
@@ -262,19 +263,21 @@ function _webform_edit_validate_options($element, &$form_state) {
  * Implements _webform_render_component().
  */
 function _webform_render_select($component, $value = NULL, $filter = TRUE) {
+  $node = isset($component['nid']) ? node_load($component['nid']) : NULL;
+
   $element = array(
     '#title' => $filter ? _webform_filter_xss($component['name']) : $component['name'],
     '#title_display' => $component['extra']['title_display'] ? $component['extra']['title_display'] : 'before',
     '#required' => $component['mandatory'],
     '#weight' => $component['weight'],
-    '#description' => $filter ? _webform_filter_descriptions($component['extra']['description']) : $component['extra']['description'],
+    '#description' => $filter ? _webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
     '#theme_wrappers' => array('webform_element'),
     '#pre_render' => array(), // Needed to disable double-wrapping of radios and checkboxes.
-    '#webform_component' => $component,
+    '#translatable' => array('title', 'description', 'options'),
   );
 
   // Convert the user-entered options list into an array.
-  $default_value = $filter ? _webform_filter_values($component['value'], NULL, NULL, NULL, FALSE) : $component['value'];
+  $default_value = $filter ? _webform_filter_values($component['value'], $node, NULL, NULL, FALSE) : $component['value'];
   $options = _webform_select_options($component, !$component['extra']['aslist'], $filter);
 
   if ($component['extra']['optrand']) {
@@ -333,9 +336,13 @@ function _webform_render_select($component, $value = NULL, $filter = TRUE) {
     // Set display as a select_or_other element:
     $element['#type'] = 'select_or_other';
     $element['#other'] = !empty($component['extra']['other_text']) ? check_plain($component['extra']['other_text']) : t('Other...');
+    $element['#other_title'] = $element['#title'] . ' ' . $element['#other'];
+    $element['#other_title_display'] = 'invisible';
     $element['#other_unknown_defaults'] = 'other';
     $element['#other_delimiter'] = ', ';
-    $element['#process'] = array('select_or_other_element_process', 'webform_expand_select_or_other');
+    // Merge in Webform's #process function for Select or other.
+    $element['#process'] = array_merge(element_info_property('select_or_other', '#process'), array('webform_expand_select_or_other'));
+
     if ($component['extra']['multiple']) {
       $element['#multiple'] = TRUE;
       $element['#select_type'] = 'checkboxes';
@@ -361,14 +368,18 @@ function _webform_render_select($component, $value = NULL, $filter = TRUE) {
       // Set display as a checkbox set.
       $element['#type'] = 'checkboxes';
       $element['#theme_wrappers'] = array_merge(array('checkboxes'), $element['#theme_wrappers']);
-      // Drupal 6 hack to properly render on multipage forms.
-      $element['#process'] = array('webform_expand_checkboxes', 'webform_expand_select_ids');
+      $element['#process'] = array_merge(element_info_property('checkboxes', '#process'), array('webform_expand_select_ids'));
+
+      // Entirely replace the normal expand checkboxes with our custom version.
+      // This helps render checkboxes in multipage forms.
+      $process_key = array_search('form_process_checkboxes', $element['#process']);
+      $element['#process'][$process_key] = 'webform_expand_checkboxes';
     }
     else {
       // Set display as a radio set.
       $element['#type'] = 'radios';
       $element['#theme_wrappers'] = array_merge(array('radios'), $element['#theme_wrappers']);
-      $element['#process'] = array('form_process_radios', 'webform_expand_select_ids');
+      $element['#process'] = array_merge(element_info_property('radios', '#process'), array('webform_expand_select_ids'));
     }
   }
 
@@ -393,6 +404,11 @@ function webform_expand_select_or_other($element) {
     unset($element['#default_value'][$key]);
     $element['#default_value'] = array_values($element['#default_value']);
     $element['other']['#default_value'] = implode(', ', $element['#default_value']);
+  }
+
+  // Sanitize the options in Select or other check boxes and radio buttons.
+  if ($element['#select_type'] == 'checkboxes' || $element['#select_type'] == 'radios') {
+    $element['select']['#process'] = array_merge(element_info_property($element['#select_type'], '#process'), array('webform_expand_select_ids'));
   }
 
   return $element;
@@ -454,8 +470,9 @@ function _webform_display_select($component, $value, $format = 'html') {
     '#theme' => 'webform_display_select',
     '#theme_wrappers' => $format == 'html' ? array('webform_element') : array('webform_element_text'),
     '#format' => $format,
+    '#options' => _webform_select_options($component, !$component['extra']['aslist']),
     '#value' => (array) $value,
-    '#webform_component' => $component,
+    '#translatable' => array('title', 'options'),
   );
 }
 
@@ -504,8 +521,19 @@ function theme_webform_display_select($variables) {
   $element = $variables['element'];
   $component = $element['#webform_component'];
 
-  // Convert submitted 'safe' values to un-edited, original form.
-  $options = _webform_select_options($component, TRUE);
+  // Flatten the list of options so we can get values easily. These options
+  // may be translated by hook_webform_display_component_alter().
+  $options = array();
+  foreach ($element['#options'] as $key => $value) {
+    if (is_array($value)) {
+      foreach ($value as $subkey => $subvalue) {
+        $options[$subkey] = $subvalue;
+      }
+    }
+    else {
+      $options[$key] = $value;
+    }
+  }
 
   $items = array();
   if ($component['extra']['multiple']) {
