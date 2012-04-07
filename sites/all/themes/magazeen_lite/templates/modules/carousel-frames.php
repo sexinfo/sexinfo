@@ -59,7 +59,7 @@
 
 <!-- SLIDE 5 -->
 <div class="carousel-frame">
-  <img class="carousel-thumb" src="http://placehold.it/400x250">                  
+  <img src="<?php print path_to_theme() . '/images/modules/' . 'circumcision.jpg'; ?>" alt="Sexual Behaviors" />                
   <div class="carousel-caption">
     <h3>Circumcision</h3>
     <p>Brief subtext goes here&hellip;
@@ -69,7 +69,7 @@
 
 <!-- SLIDE 6 -->
 <div class="carousel-frame">
-  <img class="carousel-thumb" src="http://placehold.it/400x250"> 
+  <img src="<?php print path_to_theme() . '/images/modules/' . 'contraception.jpg'; ?>" alt="Sexual Behaviors" />
   <div class="carousel-caption">
     <h3>Contraception</h3>
     <p>Brief subtext goes here&hellip;
@@ -79,7 +79,7 @@
 
 <!-- SLIDE 7 -->
 <div class="carousel-frame">
-  <img class="carousel-thumb" src="http://placehold.it/400x250"> 
+  <img src="<?php print path_to_theme() . '/images/modules/' . 'female-orgasm.jpg'; ?>" alt="Sexual Behaviors" />
   <div class="carousel-caption">
     <h3>Female Orgasm</h3>
     <p>Brief subtext goes here&hellip;
@@ -89,7 +89,7 @@
 
 <!-- SLIDE 8 -->
 <div class="carousel-frame">
-  <img class="carousel-thumb" src="http://placehold.it/400x250"> 
+  <img src="http://placehold.it/400x250" alt="Sexual Behaviors" />
   <div class="carousel-caption">
     <h3>Sexual Orientation</h3>
     <p>Brief subtext goes here&hellip;

@@ -25,19 +25,19 @@
 
   <div class="carousel-nav-right">
   <li>
-    <img class="carousel-thumb" src="http://placehold.it/80x50">
+    <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'circumcision-small.jpg'; ?>" />
     <a rel="5" href="#">Circumcision</a>
   </li>
   <li>
-    <img class="carousel-thumb" src="http://placehold.it/80x50">
+    <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'contraception-small.jpg'; ?>" />
     <a rel="6" href="#">Contraception</a>
   </li>
   <li>
-    <img class="carousel-thumb" src="http://placehold.it/80x50">
+    <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'female-orgasm-small.jpg'; ?>" />
     <a rel="7" href="#">Female Orgasm</a>
   </li>
   <li>
-    <img class="carousel-thumb" src="http://placehold.it/80x50">
+    <img class="carousel-thumb" src="http://placehold.it/80x50" />
     <a rel="8" href="#">Sexual Orientation</a>
   </li>
   </div><!-- .carousel-nav-left -->
