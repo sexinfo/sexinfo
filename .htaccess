@@ -11,7 +11,7 @@
 Options -Indexes
 
 # Follow symbolic links in this directory.
-Options +FollowSymLinks
+# Options +FollowSymLinks
 
 # Make Drupal handle any 404 errors.
 ErrorDocument 404 /index.php
@@ -25,6 +25,9 @@ DirectoryIndex index.php index.html index.htm
 
 # PHP 5, Apache 1 and 2.
 <IfModule mod_php5.c>
+
+  php_flag display_errors                   on
+
   php_flag magic_quotes_gpc                 off
   php_flag magic_quotes_sybase              off
   php_flag register_globals                 off
