@@ -322,6 +322,7 @@ function webform_schema() {
     ),
     'indexes' => array(
       'nid_uid_sid' => array('nid', 'uid', 'sid'),
+      'nid_sid' => array('nid', 'sid'),
     ),
   );
 
@@ -420,19 +421,21 @@ function webform_install() {
     ->fields(array('weight' => -1))
     ->execute();
 
-  // Create the default webform type.
-  $webform_type = array(
-    'type' => 'webform',
-    'name' => st('Webform'),
-    'base' => 'node_content',
-    'description' => st('Create a new form or questionnaire accessible to users. Submission results and statistics are recorded and accessible to privileged users.'),
-    'custom' => TRUE,
-    'modified' => TRUE,
-    'locked' => FALSE,
-  );
-  $webform_type = node_type_set_defaults($webform_type);
-  node_type_save($webform_type);
-  node_add_body_field($webform_type);
+  // Optionally create the default webform type.
+  if (variable_get('webform_install_create_content_type', TRUE)) {
+    $webform_type = array(
+      'type' => 'webform',
+      'name' => st('Webform'),
+      'base' => 'node_content',
+      'description' => st('Create a new form or questionnaire accessible to users. Submission results and statistics are recorded and accessible to privileged users.'),
+      'custom' => TRUE,
+      'modified' => TRUE,
+      'locked' => FALSE,
+    );
+    $webform_type = node_type_set_defaults($webform_type);
+    node_type_save($webform_type);
+    node_add_body_field($webform_type);
+  }
 }
 
 /**
@@ -476,10 +479,42 @@ function webform_update_last_removed() {
 }
 
 /**
- * Ensure that the confirmation format column is correctly using size = 'tiny'.
+ * Allow the confirmation format column to have a NULL value.
  */
 function webform_update_7301() {
-  db_change_field('webform', 'confirmation_format', 'confirmation_format', array('type' => 'int', 'size' => 'tiny', 'not null' => TRUE, 'default' => 0));
+  // These changes are modeled after user_update_7010().
+  db_change_field('webform', 'confirmation_format', 'confirmation_format', array(
+    'description' => 'The {filter_format}.format of the confirmation message.',
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'not null' => FALSE,
+  ));
+  db_update('webform')
+    ->fields(array('confirmation_format' => NULL))
+    ->condition('confirmation', '')
+    ->condition('confirmation_format', 0)
+    ->execute();
+  $existing_formats = db_query("SELECT format FROM {filter_format}")->fetchCol();
+  $default_format = variable_get('filter_default_format', 1);
+
+  // Since Webform may be updated separately from Drupal core, not all format
+  // names may be numbers when running this update.
+  $numeric_formats = array();
+  foreach ($existing_formats as $format_name) {
+    if (is_numeric($format_name)) {
+      $numeric_formats[] = (int) $format_name;
+    }
+  }
+
+  $query = db_update('webform')
+    ->fields(array('confirmation_format' => $default_format))
+    ->isNotNull('confirmation_format');
+
+  if (!empty($numeric_formats)) {
+    $query->condition('confirmation_format', $numeric_formats, 'NOT IN');
+  }
+
+  $query->execute();
 }
 
 /**
@@ -536,39 +571,8 @@ function webform_update_7306() {
  * Update the confirmation_format column for default text format changes.
  */
 function webform_update_7307() {
-  // These changes are modeled after user_update_7010().
-  db_change_field('webform', 'confirmation_format', 'confirmation_format', array(
-    'description' => 'The {filter_format}.format of the confirmation message.',
-    'type' => 'int',
-    'unsigned' => TRUE,
-    'not null' => FALSE,
-  ));
-  db_update('webform')
-    ->fields(array('confirmation_format' => NULL))
-    ->condition('confirmation', '')
-    ->condition('confirmation_format', 0)
-    ->execute();
-  $existing_formats = db_query("SELECT format FROM {filter_format}")->fetchCol();
-  $default_format = variable_get('filter_default_format', 1);
-
-  // Since Webform may be updated separately from Drupal core, not all format
-  // names may be numbers when running this update.
-  $numeric_formats = array();
-  foreach ($existing_formats as $format_name) {
-    if (is_numeric($format_name)) {
-      $numeric_formats[] = (int) $format_name;
-    }
-  }
-
-  $query = db_update('webform')
-    ->fields(array('confirmation_format' => $default_format))
-    ->isNotNull('confirmation_format');
-
-  if (!empty($numeric_formats)) {
-    $query->condition('confirmation_format', $numeric_formats, 'NOT IN');
-  }
-
-  $query->execute();
+  // Update removed and moved to webform_update_7301().
+  // See http://drupal.org/node/976102.
 }
 
 /**
@@ -612,7 +616,7 @@ function webform_update_7310() {
 }
 
 /**
- * Add an index for sid_nid_uid to webform_submissions.
+ * Add an index for nid_uid_sid to webform_submissions.
  */
 function webform_update_7311() {
   if (!db_index_exists('webform_submissions', 'nid_uid_sid')) {
@@ -716,4 +720,114 @@ function webform_update_7316() {
   if (!db_field_exists('webform', 'total_submit_interval')) {
     db_add_field('webform', 'total_submit_interval', array('type' => 'int', 'not null' => TRUE, 'default' => -1));
   }
+}
+
+/**
+ * Add an index for 'nid_sid' to webform_submissions.
+ */
+function webform_update_7317() {
+  // Even though we already have an index 'nid_uid_sid', adding the index for
+  // 'nid_sid' saves us a tablesort on the node/x/webform-results page.
+  if (!db_index_exists('webform_submissions', 'nid_sid')) {
+    db_add_index('webform_submissions', 'nid_sid', array('nid', 'sid'));
+  }
+}
+
+/**
+ * Upgrade file components to support the new AJAX-upload element.
+ */
+function webform_update_7318() {
+  $result = db_select('webform_component', 'wc', array('fetch' => PDO::FETCH_ASSOC))
+    ->fields('wc')
+    ->condition('type', 'file')
+    ->execute();
+  foreach ($result as $component) {
+    $component['extra'] = unserialize($component['extra']);
+    if (!isset($component['extra']['directory'])) {
+      $component['extra']['directory'] = $component['extra']['savelocation'];
+      $component['extra']['scheme'] = file_default_scheme();
+      $component['extra']['filtering']['size'] = $component['extra']['filtering']['size'] . ' KB';
+      unset($component['extra']['savelocation']);
+      $component['extra'] = serialize($component['extra']);
+      drupal_write_record('webform_component', $component, array('nid', 'cid'));
+    }
+  }
+
+  return t('File components updated to support AJAX uploading.');
+}
+
+/**
+ * Add file usage entries for all files uploaded through Webform.
+ */
+function webform_update_7319(&$sandbox) {
+  if (!isset($sandbox['progress'])) {
+    // Initialize batch update information.
+    $sandbox['progress'] = 0;
+    $sandbox['last_fid_processed'] = -1;
+    $sandbox['max'] = db_select('file_managed')
+      ->condition('uri', '%' . db_like('://webform/') . '%', 'LIKE')
+      ->countQuery()
+      ->execute()
+      ->fetchField();
+  }
+
+  // Process all files attached to a given revision during the same batch.
+  $limit = variable_get('webform_update_batch_size', 100);
+  $files = db_select('file_managed', 'f')
+    ->fields('f')
+    ->condition('uri', '%' . db_like('://webform/') . '%', 'LIKE')
+    ->condition('fid', $sandbox['last_fid_processed'], '>')
+    ->orderBy('fid', 'ASC')
+    ->range(0, $limit)
+    ->execute()
+    ->fetchAllAssoc('fid', PDO::FETCH_ASSOC);
+
+  // Determine each submission with which a file is associated.
+  if (!empty($files)) {
+    foreach ($files as $fid => $file) {
+      $file = (object) $file;
+      $sids = db_query('SELECT wsd.sid FROM {webform_component} wc INNER JOIN {webform_submitted_data} wsd ON wc.nid = wsd.nid AND wc.type = :file WHERE data = :fid', array(':file' => 'file', ':fid' => $file->fid))->fetchAllAssoc('sid', PDO::FETCH_ASSOC);
+      foreach ($sids as $sid => $row) {
+        // We use a db_merge() instead of file_usage_add() to prevent problems
+        // in the event this update was run twice. No file provided by Webform
+        // should ever be in use more than once at this point.
+        db_merge('file_usage')
+          ->key(array(
+            'fid' => $file->fid,
+            'type' => 'submission',
+            'module' => 'webform',
+            'id' => $sid,
+          ))
+          ->fields(array(
+            'count' => 1,
+          ))
+          ->execute();
+      }
+
+      // Update our progress information for the batch update.
+      $sandbox['progress']++;
+      $sandbox['last_fid_processed'] = $file->fid;
+    }
+  }
+
+  // If less than limit was processed, the update process is finished.
+  if (count($files) < $limit || $sandbox['progress'] == $sandbox['max']) {
+    $finished = TRUE;
+  }
+
+  // If there's no max value then there's nothing to update and we're finished.
+  if (empty($sandbox['max']) || isset($finished)) {
+    return t('Webform file entries created in the file_usage table.');
+  }
+  else {
+    // Indicate our current progress to the batch update system.
+    $sandbox['#finished'] = $sandbox['progress'] / $sandbox['max'];
+  }
+}
+
+/**
+ * Mark files uploaded through Webform that report active usage permanent.
+ */
+function webform_update_7320() {
+  db_query("UPDATE {file_managed} SET status = 1 WHERE fid IN (SELECT fid FROM {file_usage} WHERE module = :module_name)", array(':module_name' => 'webform'));
 }

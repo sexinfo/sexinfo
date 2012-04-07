@@ -1,5 +1,4 @@
-// JavaScript Document
-jQuery(document).ready(function($) {
+jQuery(document).ready(function($) {	
 
 //Set Default State of each portfolio piece
 $(".paging").show();
@@ -89,4 +88,4 @@ $(".force-previous a").click(function() {
     return false; //Prevent browser jump to link anchor
 });	
 
-})(jQuery);
+});

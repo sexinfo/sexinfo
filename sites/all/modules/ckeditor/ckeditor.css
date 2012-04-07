@@ -48,10 +48,10 @@ table.cke_editor fieldset {
 }
 
 /*toolbar Drag & Drop*/
-#edit-toolbar {
+form#ckeditor-admin-profile-form textarea#edit-toolbar {
     display: none;
 }
-#edit-toolbar + .grippie {
+form#ckeditor-admin-profile-form #edit-toolbar + .grippie {
     display: none;
 }
 div.sortableList {
@@ -109,8 +109,13 @@ li.sortableItem {
     margin: 3px 1px 1px 0px;
     border: 1px solid #CCC;
     background-color: #F0F0EE;
-    disc-type: none;
     z-index: 99;
+}
+
+#security-filters .filter-warning {
+    display: none;
+    clear: both;
+    color: red;
 }
 
 /* Fix for fieldset for-edit-apperance in Firefox*/

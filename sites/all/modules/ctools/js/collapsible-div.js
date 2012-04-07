@@ -219,6 +219,8 @@
           var state = toggle.hasClass('ctools-toggle-collapsed') ? -1 : 1;
           Drupal.CTools.Collapsible.setState($container.attr('id'), state);
         }
+
+        return false;
       }
 
       // Let both the toggle and the handle be clickable.

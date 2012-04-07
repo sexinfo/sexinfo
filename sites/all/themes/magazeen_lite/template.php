@@ -12,20 +12,9 @@ function magazeenlite_breadcrumb($variables) {
   }
 }
 
-
-/**
- * Returns the rendered local tasks. The default implementation renders
- * them as tabs. Overridden to split the secondary tasks.
- *
- * @ingroup themeable
- */
-
-
-
 function magazeenlite_preprocess_comment(&$variables) {
     $variables['submitted'] = t('!datetime — !username', array('!username' => $variables['author'], '!datetime' => $variables['created']));
 }
-
 
 function magazeenlite_preprocess_node(&$variables) {
     $variables['submitted'] = t('!datetime — !username', array('!username' => $variables['name'], '!datetime' => $variables['date']));

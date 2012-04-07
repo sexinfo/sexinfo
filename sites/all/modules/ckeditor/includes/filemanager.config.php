@@ -2,7 +2,7 @@
 
 /**
  * CKEditor - The text editor for the Internet - http://ckeditor.com
- * Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.
+ * Copyright (c) 2003-2012, CKSource - Frederico Knabben. All rights reserved.
  *
  * == BEGIN LICENSE ==
  *
@@ -76,15 +76,17 @@ function CheckAuthentication() {
                 $_SESSION['ckeditor']['UserFilesPath'] = $_SESSION['ckeditor'][$_GET['id']]['UserFilesPath'];
                 $_SESSION['ckeditor']['UserFilesAbsolutePath'] = $_SESSION['ckeditor'][$_GET['id']]['UserFilesAbsolutePath'];
             }
-            chdir($current_cwd); 
+            chdir($current_cwd);
         }
     }
-    
+
     return $authenticated;
 }
 
 CheckAuthentication();
 
+$config['LicenseName'] = trim($_SESSION['ckeditor']['license_name']);
+$config['LicenseKey'] = trim(substr($_SESSION['ckeditor']['license_key'],15));
 if (isset($_SESSION['ckeditor']['UserFilesPath'], $_SESSION['ckeditor']['UserFilesAbsolutePath'])) {
     $baseUrl = $_SESSION['ckeditor']['UserFilesPath'];
     $baseDir = $_SESSION['ckeditor']['UserFilesAbsolutePath'];
@@ -94,4 +96,5 @@ if (isset($_SESSION['ckeditor']['UserFilesPath'], $_SESSION['ckeditor']['UserFil
     $baseUrl = strtr(base_path(), array(
                 '/modules/ckeditor/ckfinder/core/connector/php' => '',
             )) . variable_get('file_private_path', conf_path() . '/files') . '/';
+    $baseDir = resolveUrl($baseUrl);
 }

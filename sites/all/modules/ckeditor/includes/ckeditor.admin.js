@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2012, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.html or http://ckeditor.com/license
 */
 (function ($) {
@@ -15,7 +15,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
             configBox.style = 'display:none';
         }
     });
-    
+
     $(document).ready(function() {
         if (typeof(CKEDITOR) == "undefined")
             return;
@@ -122,7 +122,33 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
                 }
             }
         });
-        
+
+        $("#input-formats :checkbox").change(function() {
+            $('#security-filters .filter-warning').hide();
+            $('#security-filters .filter-warning span[data="text_formats"]').html('');
+            $('#input-formats :checked').each(function() {
+                var format_name = $(this).val();
+                var format_label = $('label[for="' + $(this).attr('id') + '"]').html();
+                $('#security-filters :checkbox').each(function() {
+                    var filter_name = ($(this).attr('name').match(/^filters\[(.*)\]$/))[1];
+                    if (typeof Drupal.settings.text_format_filters[format_name][filter_name] == 'undefined') {
+                        var dataSel = $(this).siblings('div.description').find('span[data="text_formats"]');
+                        var html = dataSel.html();
+                        if (html.length == 0) {
+                            dataSel.html(format_label)
+                        }
+                        else {
+                            html += ', ';
+                            html += format_label;
+                            dataSel.html(html);
+                        }
+                        dataSel.parent().show();
+                    }
+                });
+            });
+        });
+        $("#input-formats :checkbox:eq(0)").trigger('change');
+
         $(".cke_load_toolbar").click(function() {
             var buttons = eval('Drupal.settings.'+$(this).attr("id"));
             var text = "[\n";
@@ -152,8 +178,14 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
             text = text + "]";
             text = text.replace(/\['\/'\]/g,"'/'");
             $("#edit-toolbar").attr('value',text);
-            Drupal.ckeditorToolbarReload();
+            if (Drupal.settings.ckeditor_toolbar_wizard == 't'){
+                Drupal.ckeditorToolbarReload();
+            }
             return false;
         });
+
+        if (Drupal.settings.ckeditor_toolbar_wizard == 'f'){
+            $("form#ckeditor-admin-profile-form textarea#edit-toolbar, form#ckeditor-admin-profile-form #edit-toolbar + .grippie").show();
+        }
     });
 })(jQuery);

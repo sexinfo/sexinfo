@@ -52,22 +52,20 @@ function _webform_edit_fieldset($component) {
  * Implements _webform_render_component().
  */
 function _webform_render_fieldset($component, $value = NULL, $filter = TRUE) {
+  $node = isset($component['nid']) ? node_load($component['nid']) : NULL;
+
   $element = array(
     '#type' => 'fieldset',
     '#title' => $filter ? _webform_filter_xss($component['name']) : $component['name'],
+    '#title_display' => $component['extra']['title_display'] ? $component['extra']['title_display'] : NULL,
     '#weight' => $component['weight'],
-    '#description' => $filter ? _webform_filter_descriptions($component['extra']['description']) : $component['extra']['description'],
+    '#description' => $filter ? _webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
     '#collapsible' => $component['extra']['collapsible'],
     '#collapsed' => $component['extra']['collapsed'],
     '#attributes' => array('class' => array('webform-component-fieldset'), 'id' => 'webform-component-' . $component['form_key']),
-    '#pre_render' => array('webform_fieldset_prerender'),
-    '#webform_component' => $component,
+    '#pre_render' => array('webform_fieldset_prerender', 'webform_element_title_display'),
+    '#translatable' => array('title', 'description'),
   );
-
-  // Hide the fieldset title if #title_display is 'none'.
-  if (!empty($component['extra']['title_display']) && $component['extra']['title_display'] == 'none') {
-    $element['#title'] = NULL;
-  }
 
   return $element;
 }
@@ -89,13 +87,13 @@ function _webform_display_fieldset($component, $value, $format = 'html') {
       '#title' => $component['name'],
       '#weight' => $component['weight'],
       '#theme_wrappers' => array('webform_element_text'),
+      '#translatable' => array('title'),
     );
   }
   else {
     $element = _webform_render_fieldset($component, $value);
   }
 
-  $element['#webform_component'] = $component;
   $element['#format'] = $format;
 
   return $element;

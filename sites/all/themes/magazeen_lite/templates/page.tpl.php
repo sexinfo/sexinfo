@@ -102,26 +102,34 @@
 <!-- ______________________ FOOTER _______________________ -->
 
 <div id="footer">
-  <div class="container footer-divider clearfix">
+  <!--<div class="container footer-divider clearfix">-->
+  <div class="container clearfix">
   
+	<h4>About SexInfoOnline</h4>
+		<p><?print '<a href="'. check_url($front_page) .'">';?>SexInfo Online</a> is a website devoted to comprehensive sex education based on the best research we have to date. The site is maintained by university students from the University of California, Santa Barbara who have studied advanced topics in human sexuality.</p>
+		<p>Our primary goal is to ensure that people around the world have access to useful and accurate information about all aspects of human sexuality. If you find our site useful, don't forget that your friends, family, and coworkers may find it useful too!</p>
+  
+		<a href="/login" class="login">Writer Login  &raquo;</a>
+  
+	<!--
     <div id="footer-left">
-      <h4>Categories</h4>
-	  <!-- Most of these links are deprecated and should be changed later - purely for positioning -->
-        <a href="#" class="footer-pill">Emergency Info</a>
-		<a href="#" class="footer-pill">UCSB Soc 152A</a>
-		<a href="#" class="footer-pill">Product Reviews</a>
-		<a href="#" class="footer-pill">Sexual Myths</a>
-		<a href="#" class="footer-pill">Extras</a>
+      <h4>What to put here?</h4>	  
+        <a href="/login" class="footer-pill">Login</a>	
 				
-      <?php print render($page['footer_left']); ?>
+      <?php #print render($page['footer_left']); ?>
+	  
     </div>
-	
+	-->
+	<!--
     <div id="footer-right">
       <h4>About SexInfo Online</h4>
 		<p><?print '<a href="'. check_url($front_page) .'">';?>SexInfo Online</a> is a website devoted to comprehensive sex education based on the best research we have to date. The site is maintained by university students from the University of California, Santa Barbara who have studied advanced topics in human sexuality.</p>
 		<p>Our primary goal is to ensure that people around the world have access to useful and accurate information about all aspects of human sexuality. If you find our site useful, don't forget that your friends, family, and coworkers may find it useful too!</p>
+		
       <?php print render($page['footer-right']); ?>
-    </div>
+	  
+    </div>-->
+	
 	
   </div><!-- /footer-container -->
 </div><!-- /footer -->
@@ -129,14 +137,11 @@
 
 <!-- ______________________ SECONDARY NAVIGATION _______________________ -->
 
-<?php if (!empty($secondary_menu)): ?>
-  <div id="snavigation"><!-- snavigation -->
-    <div class="container clearfix">
-      <?php #print theme('links', array('links' => $main_menu, 'attributes' => array('id' => 'secondary-links', 'class' => array('slinks', 'main-menu')))); ?>
-	  <p>UCSB SexInfo Copyright &copy; 2012 University of California, Santa Barbara. All Rights Reserved.</p>
+  <div id="snavigation">
+    <div class="container clearfix">	
+	  <p>UCSB SexInfo Copyright &copy; 2012 University of California, Santa Barbara. All Rights Reserved.</p>	  		  	  
     </div> <!-- /snavigation-container -->
   </div> <!-- /snavigation -->
-<?php endif;?>
 
 <!-- ______________________ LINK-BACK _______________________ -->
 <?php

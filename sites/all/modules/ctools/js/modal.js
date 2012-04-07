@@ -200,7 +200,7 @@
         });
         */
 
-      $('a.ctools-use-modal:not(.ctools-use-modal-processed)', context)
+      $('area.ctools-use-modal:not(.ctools-use-modal-processed), a.ctools-use-modal:not(.ctools-use-modal-processed)', context)
         .addClass('ctools-use-modal-processed')
         .click(Drupal.CTools.Modal.clickAjaxLink)
         .each(function () {
@@ -260,6 +260,15 @@
           });
 
         });
+
+      // Bind a click handler to allow elements with the 'ctools-close-modal'
+      // class to close the modal.
+      $('.ctools-close-modal', context).once('ctools-close-modal-processed', function () {
+        $(this).click(function() {
+          Drupal.CTools.Modal.dismiss();
+          return false;
+        });
+      });
     }
   };
 
@@ -417,6 +426,16 @@
     modalContentClose = function(){close(); return false;};
     $('.close').bind('click', modalContentClose);
 
+    // Bind a keypress on escape for closing the modalContent
+    modalEventEscapeCloseHandler = function(event) {
+      if (event.keyCode == 27) {
+        close();
+        return false;
+      }
+    };
+
+    $(document).bind('keypress', modalEventEscapeCloseHandler);
+
     // Close the open modal content and backdrop
     function close() {
       // Unbind the events
@@ -424,6 +443,7 @@
       $('body').unbind( 'focus', modalEventHandler);
       $('body').unbind( 'keypress', modalEventHandler );
       $('.close').unbind('click', modalContentClose);
+      $('body').unbind('keypress', modalEventEscapeCloseHandler);
       $(document).trigger('CToolsDetachBehaviors', $('#modalContent'));
 
       // Set our animation parameters and use them

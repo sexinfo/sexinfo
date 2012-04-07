@@ -2,45 +2,25 @@ name = Magazeen lite
 description = Magazeen lite is  based on the famous Wordpress Magazeen theme. It's a port of WP theme with the addition of a slideshow. Created by <a href="http://www.drupalizing.com">drupalizing.com</a> based on <a href="http://www.smashingmagazine.com/2009/02/23/magazeen-free-magazine-look-wordpress-theme/">Smashing Magazine wordpress theme release</a>.
 version = VERSION
 core = "7.x"
-engine = phptemplate
 project = "magazeenlite"
 
 stylesheets[all][] = style.css
 
-regions[header] = Header
-regions[help] = Help
+regions[search_area] = Search area
+regions[highlighted] = Highlighted
 regions[content] = Content
 regions[sidebar_second] = Right sidebar
 regions[footer] = Footer
-regions[search_area] = Search area
-regions[footer-right] = Right footer
 regions[footer-left] = Left footer
-
-
-features[] = logo
-features[] = favicon
-features[] = main_menu
-features[] = secondary_menu
-features[] = sidebar_second
-
-features[] = name
-features[] = slogan
-features[] = mission
-features[] = node_user_picture
-features[] = comment_user_picture
-features[] = search
-
-settings[breadcrumb_display]= 1
+regions[footer-right] = Right footer
+regions[help] = Help
+regions[page_top] = Page top
+regions[page_bottom] = Page bottom
 
 scripts[] = js/magazeenlite.js
-
-
-
-
-; Information added by drupal.org packaging script on 2010-12-19
-; Information added by drupal.org packaging script on 2011-11-12
-version = "7.x-1.0-rc1"
+; Information added by drupal.org packaging script on 2011-11-22
+version = "7.x-1.1"
 core = "7.x"
 project = "magazeen_lite"
-datestamp = "1321088156"
+datestamp = "1321978843"
 

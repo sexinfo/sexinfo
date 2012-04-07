@@ -84,21 +84,23 @@ function _webform_edit_time($component) {
  * Implements _webform_render_component().
  */
 function _webform_render_time($component, $value = NULL, $filter = TRUE) {
+  $node = isset($component['nid']) ? node_load($component['nid']) : NULL;
+
   $element = array(
     '#type' => 'webform_time',
     '#title' => $filter ? _webform_filter_xss($component['name']) : $component['name'],
     '#title_display' => $component['extra']['title_display'] ? $component['extra']['title_display'] : 'before',
     '#required' => $component['mandatory'],
     '#weight' => $component['weight'],
-    '#description' => $filter ? _webform_filter_descriptions($component['extra']['description']) : $component['extra']['description'],
+    '#description' => $filter ? _webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
     '#element_validate' => array('webform_validate_time'),
     '#hourformat' => $component['extra']['hourformat'],
-    '#default_value' => $filter ? _webform_filter_values($component['value'], NULL, NULL, NULL, FALSE) : $component['value'],
+    '#default_value' => $filter ? _webform_filter_values($component['value'], $node, NULL, NULL, FALSE) : $component['value'],
     '#timezone' => $component['extra']['timezone'],
     '#process' => array('webform_expand_time'),
     '#theme' => 'webform_time',
     '#theme_wrappers' => array('webform_element'),
-    '#webform_component' => $component,
+    '#translatable' => array('title', 'description'),
   );
 
   // Set the value from Webform if available.
@@ -245,7 +247,7 @@ function _webform_display_time($component, $value, $format = 'html') {
     '#format' => $format,
     '#hourformat' => $component['extra']['hourformat'],
     '#value' => $value,
-    '#webform_component' => $component,
+    '#translatable' => array('title'),
   );
 }
 

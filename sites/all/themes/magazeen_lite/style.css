@@ -31,15 +31,9 @@
 	#searchform-header {}
 */
 
-/*  _____Footer _____ */
-/*
-	#footer-left { background-color: green !important; }
-	#footer-right { background-color: blue !important; }	
-*/
-
 /* _____Content + Node_____ */
 /*
-	 .container { border: 1px solid #f00 !important; }
+	.container { border: 1px solid #f00 !important; }
 	#column-large, #column-small { min-height: 400px; }
 	#column-large { background-color: green; }
 	#column-small { background-color: blue; }
@@ -63,9 +57,32 @@
 	
 
 /* _____In-progress dev styles_____ */
+.box-module-container {
+  margin-bottom: 20px;
+  overflow: auto;
+}
 
+.social-buttons {
+  float: right;
+  margin: 15px 5px 10px;
+  overflow: auto;
+}
+  .social-buttons a {
+    /* Scott Kellum image replacement method */
+    width: 32px;
+    height: 32px;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 
-
+    float: left;
+    margin-right: 20px;
+  }
+    .social-buttons a:last-child {margin: 0;}
+    /* http://dribbble.com/shots/112573-Mighty-Social-Icons */
+    .social-buttons .soc-fb  { background: url(images/social/fb_32.png); }
+    .social-buttons .soc-yt  { background: url(images/social/yt_32.png); }
+    .social-buttons .soc-rss { background: url(images/social/rss_32.png);}
 
 
 /* ----------------------------------------------*/
@@ -320,7 +337,11 @@ a.rss:link, a.rss:active, a.rss:visited, a.rss:hover {
 /* Footer
 /* -------------- */
 	
-#footer{ font:0.92em Arial, Helvetica, sans-serif; color:#b2b2b2; line-height:17px; }
+#footer{
+  font: 1em Arial, Helvetica, sans-serif; /*0.92em*/
+  color:#b2b2b2;
+  line-height:17px;
+}
 
 p.copyright { margin:10px 0 0 0; font:0.92em Arial, Helvetica, sans-serif; color:#404040; }
 
@@ -442,9 +463,23 @@ img#logo-image {
 /* Navigation
 /* -------------- */
 #navigation {
-	margin:0; padding:0;
+	margin:0; 
+  padding:0;
 	background:#FFF url(images/navigation.gif) repeat-x bottom center;
-	border-top:2px solid #393b3b; border-bottom:1px solid #FFF; 
+
+  /*background-color: #F98BB9;
+  background-image: linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+  background-image: -o-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+  background-image: -moz-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+  background-image: -webkit-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+  background-image: -ms-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+  background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.35, #F875AB),
+    color-stop(0.7, #F98BB9));
+  color: #333433;*/
+  
+  font-size: 1.1em;
+	border-top:2px solid #393b3b;
+  border-bottom:1px solid #FFF; 
 }
 
 #navigation ul.links {
@@ -457,6 +492,14 @@ img#logo-image {
 	margin:0 3px; padding:0;
 	float:left; overflow:visible;
 }
+  #navigation ul li a:hover,
+  #navigation ul li a:active {
+    padding: 15px 15px 14px 15px;
+    /*background: #171615 url(images/navigation-hover.gif) repeat-x bottom center;*/
+    background-color: rgba(0,0,0,0.5);
+    color: #F1F8FF;
+    t/*ext-decoration: none;*/
+  }
 
 /* 04 - SLIDESHOW
 /* ----------------------------------------------*/
@@ -906,19 +949,20 @@ padding:20px 40px ;
 			overflow: auto;
 		}
 .column-third {
-	/* Confusing name - is half the width of #column-large, but a third of the total .container */	
 	float: left;
 	margin-right: 10px;	
-	width: 316px; /* Y U NO ALLOW 318PX?! */
+	width: 321px;
 }
 	.column-third:last-child {
-		/* Zero the margin used for separation on the second box */		
-		margin: 0;
+		margin: 0; /* Zero the margin used for separation on the other boxes */  
 	}
 
 /* Since the node classes are copied from another page, we need 
  a few hacks to make it work specifically for the front page */
-.module .node-content { overflow: auto; padding: 10px; }
+.module .node-content {
+  overflow: auto;
+  padding: 10px;
+}
 
 /* Popular Topics module */
 .list-half {	
@@ -927,8 +971,7 @@ padding:20px 40px ;
 	width: 130px;
 }
 	.list-half:last-child {
-		/* Zero the margin used for separation on the second box */
-		margin: 0;
+		margin: 0; /* Zero the margin used for separation */
 	}
 
 	/* FAQ module */
@@ -954,8 +997,7 @@ padding:20px 40px ;
 		
 /* Image carousel module */
 #carousel-window {
-	background-color: black;
-	height: 250px; /* Total height: 1000px - window is 250px tall */
+	height: 250px; /* Actual height: 1000px - viewport is 250px tall */
 	float: left;
 	margin-right: 10px;
 	overflow: hidden;
@@ -963,7 +1005,7 @@ padding:20px 40px ;
 	width: 400px;
 }
 	#window-inner {	
-		/* An inner container positioned dynamically with JS - sort of like a film reel */
+		/* An inner container that's scrolled by JS - sort of like a film reel */
 		position: absolute;
 		top: 0; left: 0; 
 	}
@@ -977,7 +1019,7 @@ padding:20px 40px ;
 	width: 400px; 
 }
 	.carousel-caption {
-		background-color: #262626; /* Light -> Dark: #333 --> #2d2d2d --> #262626 */		
+		background-color: #262626;
 		color: white;
 		height: 70px;
 		opacity: 0.8;
@@ -989,11 +1031,20 @@ padding:20px 40px ;
 	}
 	
 #carousel-nav {
-	background-color: purple;
-	float: left;	
-	width: 215px; /* 170px with standard 940px container layout */
-	height: 250px;
+	float: left;
+  width: 555px;
 }
+  .carousel-nav-left,
+  .carousel-nav-right {
+    width: 277px;
+  }
+
+  .carousel-nav-left {
+    float: left;
+  }
+  .carousel-nav-right {
+    float: right;
+  }
 	#carousel-nav ul {
 		list-style: none;
 		margin: 0;
@@ -1003,10 +1054,8 @@ padding:20px 40px ;
 			background-color: #FFF;
 			border: 1px solid #EAF1F4;
 			float: left;			
-			/*margin: 4px;*/ /* if #carousel-nav a height = 52px  */
-			margin: 3.125px; /* 3.125px optimally */			
+			margin: 3.125px;
 			padding: 2px;
-			
 		}
 		
 

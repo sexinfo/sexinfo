@@ -120,6 +120,7 @@ function webform_menu() {
     'file' => 'includes/webform.components.inc',
     'weight' => 1,
     'type' => MENU_LOCAL_TASK,
+    'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
   );
   $items['node/%webform_menu/webform/components'] = array(
     'title' => 'Form components',
@@ -217,6 +218,7 @@ function webform_menu() {
     'file' => 'includes/webform.report.inc',
     'weight' => 2,
     'type' => MENU_LOCAL_TASK,
+    'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
   );
   $items['node/%webform_menu/webform-results/submissions'] = array(
     'title' => 'Submissions',
@@ -707,6 +709,20 @@ function webform_element_info() {
   // files because of the unnecessary loading that it would require.
   $elements['webform_time'] = array('#input' => 'TRUE');
   $elements['webform_grid'] = array('#input' => 'TRUE');
+
+  $elements['webform_email'] = array(
+    '#input' => TRUE,
+    '#theme' => 'webform_email',
+    '#size' => 60,
+  );
+  $elements['webform_number'] = array(
+    '#input' => TRUE,
+    '#theme' => 'webform_number',
+    '#min' => NULL,
+    '#max' => NULL,
+    '#step' => NULL,
+  );
+
   return $elements;
 }
 
@@ -714,7 +730,7 @@ function webform_element_info() {
  * Implements hook_webform_component_info().
  */
 function webform_webform_component_info() {
-  return array(
+  $component_info = array(
     'date' => array(
       'label' => t('Date'),
       'description' => t('Presents month, day, and year fields.'),
@@ -737,6 +753,7 @@ function webform_webform_component_info() {
       'description' => t('Fieldsets allow you to organize multiple fields into groups.'),
       'features' => array(
         'csv' => FALSE,
+        'default_value' => FALSE,
         'required' => FALSE,
         'conditional' => FALSE,
         'group' => TRUE,
@@ -744,20 +761,12 @@ function webform_webform_component_info() {
       ),
       'file' => 'components/fieldset.inc',
     ),
-    'file' => array(
-      'label' => t('File'),
-      'description' => t('Allow users to upload files of configurable types.'),
-      'features' => array(
-        'conditional' => FALSE,
-        'attachment' => TRUE,
-      ),
-      'file' => 'components/file.inc',
-    ),
     'grid' => array(
       'label' => t('Grid'),
       'description' => t('Allows creation of grid questions, denoted by radio buttons.'),
       'features' => array(
         'conditional' => FALSE,
+        'default_value' => FALSE,
         'title_inline' => FALSE,
       ),
       'file' => 'components/grid.inc',
@@ -768,9 +777,11 @@ function webform_webform_component_info() {
       'file' => 'components/hidden.inc',
       'features' => array(
         'required' => FALSE,
+        'description' => FALSE,
         'email_address' => TRUE,
         'email_name' => TRUE,
         'title_display' => FALSE,
+        'private' => FALSE,
       ),
     ),
     'markup' => array(
@@ -778,18 +789,31 @@ function webform_webform_component_info() {
       'description' => t('Displays text as HTML in the form; does not render a field.'),
       'features' => array(
         'csv' => FALSE,
+        'default_value' => FALSE,
+        'description' => FALSE,
         'email' => FALSE,
         'required' => FALSE,
         'conditional' => FALSE,
         'title_display' => FALSE,
+        'private' => FALSE,
       ),
       'file' => 'components/markup.inc',
+    ),
+    'number' => array(
+      'label' => t('Number'),
+      'description' => t('A numeric input field (either as textfield or select list).'),
+      'features' => array(
+      ),
+      'file' => 'components/number.inc',
     ),
     'pagebreak' => array(
       'label' => t('Page break'),
       'description' => t('Organize forms into multiple pages.'),
       'features' => array(
         'csv' => FALSE,
+        'default_value' => FALSE,
+        'description' => FALSE,
+        'private' => FALSE,
         'required' => FALSE,
         'title_display' => FALSE,
       ),
@@ -800,6 +824,7 @@ function webform_webform_component_info() {
       'description' => t('Allows creation of checkboxes, radio buttons, or select menus.'),
       'file' => 'components/select.inc',
       'features' => array(
+        'default_value' => FALSE,
         'email_address' => TRUE,
         'email_name' => TRUE,
       ),
@@ -831,6 +856,21 @@ function webform_webform_component_info() {
       'file' => 'components/time.inc',
     ),
   );
+
+  if (module_exists('file')) {
+    $component_info['file'] = array(
+      'label' => t('File'),
+      'description' => t('Allow users to upload files of configurable types.'),
+      'features' => array(
+        'conditional' => FALSE,
+        'default_value' => FALSE,
+        'attachment' => TRUE,
+      ),
+      'file' => 'components/file.inc',
+    );
+  }
+
+  return $component_info;
 }
 
 /**
@@ -876,7 +916,7 @@ function webform_webform_submission_actions($node, $submission) {
     );
   }
 
-  if (webform_results_access($node)) {
+  if (webform_results_access($node) && count($node->webform['emails'])) {
     $actions['resend'] = array(
       'title' => t('Resend e-mails'),
       'href' => 'node/' . $node->nid . '/submission/' . $submission->sid . '/resend',
@@ -888,46 +928,102 @@ function webform_webform_submission_actions($node, $submission) {
 }
 
 /**
+ * Implements hook_webform_submission_update().
+ *
+ * We implement our own hook here to facilitate the File component, which needs
+ * to clean up manage file usage records and delete files from submissions that
+ * have been edited if necessary.
+ */
+function webform_webform_submission_presave($node, &$submission) {
+  // Check if there are any file components in this submission and if any of
+  // them currently contain files.
+  $has_file_components = FALSE;
+  $new_fids = array();
+  $old_fids = array();
+
+  foreach ($node->webform['components'] as $cid => $component) {
+    if ($component['type'] == 'file') {
+      $has_file_components = TRUE;
+      if (!empty($submission->data[$cid]['value'])) {
+        $new_fids = array_merge($new_fids, $submission->data[$cid]['value']);
+      }
+    }
+  }
+
+  if ($has_file_components) {
+    // If we're updating a submission, build a list of previous files.
+    if (isset($submission->sid)) {
+      $old_submission = webform_get_submission($node->nid, $submission->sid, TRUE);
+
+      foreach ($node->webform['components'] as $cid => $component) {
+        if ($component['type'] == 'file') {
+          if (!empty($old_submission->data[$cid]['value'])) {
+            $old_fids = array_merge($old_fids, $old_submission->data[$cid]['value']);
+          }
+        }
+      }
+    }
+
+    // Save the list of added or removed files so we can add usage in
+    // hook_webform_submission_insert() or _update().
+    $submission->file_usage = array(
+      // Diff the old against new to determine what files were deleted.
+      'deleted_fids' => array_diff($old_fids, $new_fids),
+      // Diff the new files against old to determine new uploads.
+      'added_fids' => array_diff($new_fids, $old_fids)
+    );
+  }
+}
+
+/**
+ * Implements hook_webform_submission_insert().
+ */
+function webform_webform_submission_insert($node, $submission) {
+  if (isset($submission->file_usage)) {
+    webform_component_include('file');
+    webform_file_usage_adjust($submission);
+  }
+}
+
+/**
+ * Implements hook_webform_submission_update().
+ */
+function webform_webform_submission_update($node, $submission) {
+  if (isset($submission->file_usage)) {
+    webform_component_include('file');
+    webform_file_usage_adjust($submission);
+  }
+}
+
+/**
  * Implements hook_file_download().
  *
  * Only allow users with view webform submissions to download files.
  */
 function webform_file_download($uri) {
-  global $user;
+  module_load_include('inc', 'webform', 'includes/webform.submissions');
 
-  // Determine whether this file was a webform upload. If it was, retrieve file
-  // information, plus the user id of the uploader.
-  $file = db_query("SELECT ws.uid, f.* FROM {file_managed} f INNER JOIN {webform_submitted_data} wsd ON f.fid = wsd.data INNER JOIN {webform_submissions} ws ON ws.sid = wsd.sid INNER JOIN {webform_component} wc ON wc.cid = wsd.cid  WHERE f.uri = :uri AND wc.type = :file", array('uri' => $uri, ':file' => 'file'))->fetchObject();
-  if ($file) {
-    // Allow file access for admins, or for users who are viewing their own
-    // submissions.
-    if (user_access('access all webform results') || ($user->uid == $file->uid && user_access('access own webform results'))) {
-      // TODO: This is a copy/paste from file_file_download. Switch to using
-      // file_get_content_headers() instead if http://drupal.org/node/943112
-      // gets committed.
-      $name = mime_header_encode($file->filename);
-      $type = mime_header_encode($file->filemime);
-      // Serve images, text, and flash content for display rather than download.
-      $inline_types = variable_get('file_inline_types', array('^text/', '^image/', 'flash$'));
-      $disposition = 'attachment';
-      foreach ($inline_types as $inline_type) {
-        // Exclamation marks are used as delimiters to avoid escaping slashes.
-        if (preg_match('!' . $inline_type . '!', $file->filemime)) {
-          $disposition = 'inline';
-        }
-      }
-      return array(
-        'Content-Type' => $type . '; name="' . $name . '"',
-        'Content-Length' => $file->filesize,
-        'Content-Disposition' => $disposition . '; filename="' . $name . '"',
-        'Cache-Control' => 'private',
-      );
-    }
-    // This is a webform-controlled file, but the user doesn't have access.
-    return -1;
+  // Determine whether this file was a webform upload.
+  $row = db_query("SELECT fu.id as sid, f.fid FROM {file_managed} f LEFT JOIN {file_usage} fu ON f.fid = fu.fid AND fu.module = :webform AND fu.type = :submission WHERE f.uri = :uri", array('uri' => $uri, ':webform' => 'webform', ':submission' => 'submission'))->fetchObject();
+  if ($row) {
+    $file = file_load($row->fid);
   }
-  // This is not a webform-controlled file.
-  return NULL;
+  if (!empty($row->sid)) {
+    $submissions = webform_get_submissions(array('sid' => $row->sid));
+    $submission = reset($submissions);
+  }
+
+  // Grant access based on access to the submission.
+  if (!empty($submission)) {
+    $node = node_load($submission->nid);
+    if (webform_submission_access($node, $submission)) {
+      return file_get_content_headers($file);
+    }
+  }
+  // Grant access to files uploaded by a user before the submission is saved.
+  elseif (!empty($file) && !empty($_SESSION['webform_files'][$file->fid])) {
+    return file_get_content_headers($file);
+  }
 }
 
 /**
@@ -1159,16 +1255,6 @@ function webform_node_prepare($node) {
   }
 }
 
-/**
- * Implements hook_node_prepare_translation().
- */
-function webform_node_prepare_translation(&$node) {
-  // Copy all Webform settings over to translated versions of this node.
-  if (isset($node->translation_source)) {
-    $source_node = node_load($node->translation_source->nid);
-    $node->webform = $source_node->webform;
-  }
-}
 
 /**
  * Implements hook_node_load().
@@ -1633,10 +1719,17 @@ function webform_block_view($delta = '') {
     $content = node_view($node, $teaser);
   }
 
+  // Add contextual links for the webform node if they aren't already there.
+  if (!isset($content['#contextual_links']['node'])) {
+    $content['#contextual_links']['node'] = array('node', array($node->nid));
+  }
+
   // Create the block.
+  // Note that we render the content immediately here rather than passing back
+  // a renderable so that if the block is empty it is hidden.
   $block = array(
     'subject' => $subject,
-    'content' => $content,
+    'content' => drupal_render($content),
   );
   return $block;
 }
@@ -1693,24 +1786,6 @@ function webform_block_save($delta = '', $edit = array()) {
 }
 
 /**
- * Implements hook_contextual_links_view_alter().
- */
-function webform_contextual_links_view_alter(&$element, &$items) {
-  // Add Webform and Results links to webform-enabled nodes. This code affects
-  // both node teasers and nodes exposed as blocks through Webform.
-  if (isset($element['#element']['#node']) && in_array($element['#element']['#node']->type, webform_variable_get('webform_node_types'))) {
-    $element['#links']['webform'] = array(
-      'title' => t('Webform'),
-      'href' => 'node/' . $element['#element']['#node']->nid . '/webform',
-    );
-    $element['#links']['webform-results'] = array(
-      'title' => t('Results'),
-      'href' => 'node/' . $element['#element']['#node']->nid . '/webform-results',
-    );
-  }
-}
-
-/**
  * Client form generation function. If this is displaying an existing
  * submission, pass in the $submission variable with the contents of the
  * submission to be displayed.
@@ -1731,7 +1806,7 @@ function webform_contextual_links_view_alter(&$element, &$items) {
  *   building the form. Values need to be unfiltered to be editable by
  *   Form Builder.
  */
-function webform_client_form($form, $form_state, $node, $submission, $is_draft = FALSE, $filter = TRUE) {
+function webform_client_form($form, &$form_state, $node, $submission, $is_draft = FALSE, $filter = TRUE) {
   global $user;
 
   // Attach necessary JavaScript and CSS.
@@ -1739,8 +1814,12 @@ function webform_client_form($form, $form_state, $node, $submission, $is_draft =
     'css' => array(drupal_get_path('module', 'webform') . '/css/webform.css'),
     'js' => array(drupal_get_path('module', 'webform') . '/js/webform.js'),
   );
-  module_load_include('inc', 'webform', 'includes/webform.components');
-  module_load_include('inc', 'webform', 'includes/webform.submissions');
+  form_load_include($form_state, 'inc', 'webform', 'includes/webform.components');
+  form_load_include($form_state, 'inc', 'webform', 'includes/webform.submissions');
+
+  $form['#process'] = array(
+    'webform_client_form_includes',
+  );
 
   // If in a multi-step form, a submission ID may be specified in form state.
   // Load this submission. This allows anonymous users to use auto-save.
@@ -1858,6 +1937,7 @@ function webform_client_form($form, $form_state, $node, $submission, $is_draft =
         '#value' => t('Save Draft'),
         '#weight' => -2,
         '#validate' => array(),
+        '#attributes' => array('formnovalidate' => 'formnovalidate'),
       );
     }
 
@@ -1872,6 +1952,7 @@ function webform_client_form($form, $form_state, $node, $submission, $is_draft =
           '#value' => $prev_page,
           '#weight' => 5,
           '#validate' => array(),
+          '#attributes' => array('formnovalidate' => 'formnovalidate'),
         );
       }
       if ($page_num == $page_count) {
@@ -1899,6 +1980,19 @@ function webform_client_form($form, $form_state, $node, $submission, $is_draft =
     }
   }
 
+  return $form;
+}
+
+/**
+ * Process function for webform_client_form().
+ *
+ * Include all the enabled components for this form to ensure availability.
+ */
+function webform_client_form_includes($form, $form_state) {
+  $components = webform_components();
+  foreach ($components as $component_type => $component) {
+    webform_component_include($component_type);
+  }
   return $form;
 }
 
@@ -2004,6 +2098,12 @@ function _webform_client_form_add_component($node, $component, $component_value,
     // This component is display only.
     $data = empty($submission->data[$cid]['value']) ? NULL : $submission->data[$cid]['value'];
     if ($display_element = webform_component_invoke($component['type'], 'display', $component, $data, $format)) {
+      // Ensure the component is added as a property.
+      $display_element['#webform_component'] = $component;
+
+      // Allow modules to modify a "display only" webform component.
+      drupal_alter('webform_component_display', $display_element, $component);
+
       // The form_builder() function usually adds #parents and #id for us, but
       // because these are not marked for #input, we need to add them manually.
       if (!isset($display_element['#parents'])) {
@@ -2014,6 +2114,8 @@ function _webform_client_form_add_component($node, $component, $component_value,
       if (!isset($display_element['#id'])) {
         $display_element['#id'] = drupal_clean_css_identifier('edit-' . implode('-', $display_element['#parents']));
       }
+
+      // Add the element into the proper parent in the display.
       $parent_fieldset[$component['form_key']] = $display_element;
     }
   }
@@ -2021,6 +2123,13 @@ function _webform_client_form_add_component($node, $component, $component_value,
     // Add this user-defined field to the form (with all the values that are always available).
     $data = isset($submission->data[$cid]['value']) ? $submission->data[$cid]['value'] : NULL;
     if ($element = webform_component_invoke($component['type'], 'render', $component, $data, $filter)) {
+      // Ensure the component is added as a property.
+      $element['#webform_component'] = $component;
+
+      // Allow modules to modify a webform component that is going to be render in a form.
+      drupal_alter('webform_component_render', $element, $component);
+
+      // Add the element into the proper parent in the form.
       $parent_fieldset[$component['form_key']] = $element;
 
       // Override the value if one already exists in the form state.
@@ -2277,7 +2386,7 @@ function webform_client_form_pages($form, &$form_state) {
   }
   else {
     // Remove the form state storage now that we're done with the pages.
-    unset($form_state['rebuild']);
+    $form_state['rebuild'] = FALSE;
     unset($form_state['storage']);
   }
 }
@@ -2313,7 +2422,7 @@ function webform_client_form_submit($form, &$form_state) {
   }
   else {
     // To maintain time and user information, load the existing submission.
-    $submission = webform_get_submission($node->nid, $sid);
+    $submission = webform_get_submission($node->webform['nid'], $sid);
     $submission->is_draft = $is_draft;
 
     // Merge with new submission data. The + operator maintains numeric keys.
@@ -2321,6 +2430,13 @@ function webform_client_form_submit($form, &$form_state) {
     // a submission previously saved as a draft.
     $new_data = webform_submission_data($node, $form_state['values']['submitted']);
     $submission->data = $new_data + $submission->data;
+  }
+
+  // If there is no data to be saved (such as on a multipage form with no fields
+  // on the first page), process no further. Submissions with no data cannot
+  // be loaded from the database as efficiently, so we don't save them at all.
+  if (empty($submission->data)) {
+    return;
   }
 
   // Save the submission to the database.
@@ -2333,8 +2449,9 @@ function webform_client_form_submit($form, &$form_state) {
     // The cookie expires in the length of the interval plus a day to compensate for different timezones.
     if (variable_get('webform_use_cookies', 0)) {
       $cookie_name = 'webform-' . $node->nid;
-      $time = time();
-      setcookie($cookie_name . '[' . $time . ']', $time, $time + $node->webform['submit_interval'] + 86400);
+      $time = REQUEST_TIME;
+      $params = session_get_cookie_params();
+      setcookie($cookie_name . '[' . $time . ']', $time, $time + $node->webform['submit_interval'] + 86400, $params['path'], $params['domain'], $params['secure'], $params['httponly']);
     }
 
     // Save session information about this submission for anonymous users,
@@ -2351,7 +2468,7 @@ function webform_client_form_submit($form, &$form_state) {
 
   // Check if this form is sending an email.
   if (!$is_draft && !$form_state['values']['details']['finished']) {
-    $submission = webform_get_submission($node->nid, $sid, TRUE);
+    $submission = webform_get_submission($node->webform['nid'], $sid, TRUE);
     webform_submission_send_mail($node, $submission);
   }
 
@@ -2503,6 +2620,19 @@ function template_preprocess_webform_mail_message(&$vars) {
 }
 
 /**
+ * A Form API #pre_render function. Sets display based on #title_display.
+ *
+ * This function is used regularly in D6 for all elements, but specifically for
+ * fieldsets in D7, which don't support #title_display natively.
+ */
+function webform_element_title_display($element) {
+  if (isset($element['#title_display']) && strcmp($element['#title_display'], 'none') === 0) {
+    $element['#title'] = NULL;
+  }
+  return $element;
+}
+
+/**
  * Replacement for theme_form_element().
  */
 function theme_webform_element($variables) {
@@ -2520,18 +2650,20 @@ function theme_webform_element($variables) {
   else {
     $type = (isset($element['#type']) && !in_array($element['#type'], array('markup', 'textfield'))) ? $element['#type'] : $element['#webform_component']['type'];
   }
-  $parents = str_replace('_', '-', implode('--', array_slice($element['#parents'], 1)));
+
+  // Convert the parents array into a string, excluding the "submitted" wrapper.
+  $nested_level = $element['#parents'][0] == 'submitted' ? 1 : 0;
+  $parents = str_replace('_', '-', implode('--', array_slice($element['#parents'], $nested_level)));
 
   $wrapper_classes = array(
    'form-item',
    'webform-component',
    'webform-component-' . $type,
   );
-  if (isset($element['#title_display']) && $element['#title_display'] == 'inline') {
+  if (isset($element['#title_display']) && strcmp($element['#title_display'], 'inline') === 0) {
     $wrapper_classes[] = 'webform-container-inline';
   }
   $output = '<div class="' . implode(' ', $wrapper_classes) . '" id="webform-component-' . $parents . '">' . "\n";
-  $required = !empty($element['#required']) ? '<span class="form-required" title="' . t('This field is required.') . '">*</span>' : '';
 
   // If #title is not set, we don't display any label or required marker.
   if (!isset($element['#title'])) {
@@ -2758,7 +2890,7 @@ function _webform_filter_values($string, $node = NULL, $submission = NULL, $emai
 
   // Submission replacements.
   if (isset($submission) && !isset($replacements['email'][$format])) {
-    module_load_include('inc', 'webform', 'includes/webform.components.inc');
+    module_load_include('inc', 'webform', 'includes/webform.components');
 
     // Set the submission ID.
     $replacements['unsafe']['%sid'] = $submission->sid;
@@ -2774,6 +2906,10 @@ function _webform_filter_values($string, $node = NULL, $submission = NULL, $emai
       $parents = webform_component_parent_keys($node, $component);
       $form_key = implode('][', $parents);
       $display_element = webform_component_invoke($component['type'], 'display', $component, $value['value'], $format);
+
+      // Ensure the component is added as a property.
+      $display_element['#webform_component'] = $component;
+
       if (empty($display_element['#parents'])) {
         $display_element['#parents'] = array_merge(array('submitted'), $parents);
       }
@@ -3528,7 +3664,8 @@ function webform_strtodate($format, $string, $timezone_name = NULL) {
   if (variable_get('configurable_timezones', 1) && $timezone_name == 'user') {
     $timezone_name = isset($GLOBALS['user']->timezone) ? $GLOBALS['user']->timezone : 'UTC';
   }
-  elseif (empty($timezone_name) || $timezone_name == 'user') {
+  // If the timezone is still empty or not set, use the site timezone.
+  if (empty($timezone_name) || $timezone_name == 'user') {
     $timezone_name = variable_get('date_default_timezone', 'UTC');
   }
 
@@ -3561,11 +3698,15 @@ function webform_strtotime($date) {
 }
 
 /**
- * Wrapper function for tt() if i18nstrings enabled.
+ * Wrapper function for i18n_string() if i18nstrings enabled.
  */
 function webform_tt($name, $string, $langcode = NULL, $update = FALSE) {
-  if (function_exists('tt')) {
-    return tt($name, $string, $langcode, $update);
+  if (function_exists('i18n_string')) {
+    $options = array(
+      'langcode' => $langcode,
+      'update' => $update,
+    );
+    return i18n_string($name, $string, $options);
   }
   else {
     return $string;

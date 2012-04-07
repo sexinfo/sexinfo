@@ -159,6 +159,11 @@ function webform_views_data_alter(&$data) {
       'label' => t('Webform Submission'),
     ),
   );
+  $data['node']['table']['join']['webform_submissions'] = array(
+    'field' => 'nid',
+    'left_field' => 'nid',
+    'left_table' => 'webform_submissions',
+  );
   // Submission count (node).
   $data['node']['webform_submission_count_node'] = array(
     'field' => array(

@@ -88,6 +88,7 @@ class views_handler_relationship extends views_handler {
       '#title' => t('Identifier'),
       '#default_value' => isset($this->options['label']) ? $this->options['label'] : '',
       '#description' => t('Edit the administrative label displayed when referencing this relationship from filters, etc.'),
+      '#required' => TRUE,
     );
 
     $form['required'] = array(
@@ -115,6 +116,10 @@ class views_handler_relationship extends views_handler {
     $def['left_field'] = $this->real_field;
     if (!empty($this->options['required'])) {
       $def['type'] = 'INNER';
+    }
+
+    if (!empty($this->definition['extra'])) {
+      $def['extra'] = $this->definition['extra'];
     }
 
     if (!empty($def['join_handler']) && class_exists($def['join_handler'])) {
@@ -151,6 +156,8 @@ class views_handler_relationship extends views_handler {
 
 /**
  * A special handler to take the place of missing or broken handlers.
+ *
+ * @ingroup views_relationship_handlers
  */
 class views_handler_relationship_broken extends views_handler_relationship {
   function ui_name($short = FALSE) {

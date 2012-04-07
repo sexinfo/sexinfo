@@ -3,6 +3,8 @@
 /**
  * Argument handler to accept a user id to check for nodes that
  * user posted or commented on.
+ *
+ * @ingroup views_argument_handlers
  */
 class views_handler_argument_comment_user_uid extends views_handler_argument {
   function title() {
@@ -36,12 +38,10 @@ class views_handler_argument_comment_user_uid extends views_handler_argument {
   function query($group_by = FALSE) {
     $this->ensure_my_table();
 
-    $nid_alias = $this->query->add_field('node', 'nid');
-
     $subselect = db_select('comment', 'c');
     $subselect->addField('c', 'cid');
     $subselect->condition('c.uid', $this->argument);
-    $subselect->where("c.nid = $nid_alias");
+    $subselect->where("c.nid = $this->table_alias.nid");
 
     $condition = db_or()
       ->condition("$this->table_alias.uid", $this->argument, '=')

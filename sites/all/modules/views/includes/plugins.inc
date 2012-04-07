@@ -40,6 +40,7 @@ function views_views_plugins() {
         'contextual links locations' => array('page'),
         'use ajax' => TRUE,
         'use pager' => TRUE,
+        'use more' => TRUE,
         'accept attachments' => TRUE,
         'admin' => t('Page'),
         'help topic' => 'display-page',
@@ -80,6 +81,17 @@ function views_views_plugins() {
         'accept attachments' => FALSE,
         'admin' => t('Feed'),
         'help topic' => 'display-feed',
+      ),
+      'embed' => array(
+        'title' => t('Embed'),
+        'help' => t('Provide a display which can be embedded using the views api.'),
+        'handler' => 'views_plugin_display_embed',
+        'uses hook menu' => FALSE,
+        'use ajax' => TRUE,
+        'use pager' => TRUE,
+        'accept attachments' => FALSE,
+        'admin' => t('Embed'),
+        'no ui' => !variable_get('views_ui_display_embed', FALSE),
       ),
     ),
     'display_extender' => array(
@@ -451,9 +463,9 @@ class views_plugin extends views_object {
   var $view = NULL;
 
   /**
-   * The current used display plugin.
+   * The current used views display.
    *
-   * @var views_plugin_display
+   * @var views_display
    */
   var $display = NULL;
 

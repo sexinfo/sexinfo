@@ -55,8 +55,8 @@ function ckeditor_install() {
 
     //insert settings for default role
     $arr = array();
-    $arr['filebrowser'] = 'none';
-    $arr['quickupload'] = 'f';
+    $arr['filebrowser'] = 'ckfinder';
+    $arr['quickupload'] = 't';
 
     //security
     $arr['ss'] = "2";
@@ -103,7 +103,7 @@ function ckeditor_install() {
 
     //upload
     //get permissions here like in _update_role_permissions
-    $arr['filebrowser'] = "none";
+    $arr['filebrowser'] = "ckfinder";
     $arr['user_choose'] = "f";
     $arr['ckeditor_load_method'] = "ckeditor.js";
     $arr['ckeditor_load_time_out'] = 0;
@@ -117,10 +117,10 @@ function ckeditor_install() {
     ['Source'],
     ['Cut','Copy','Paste','PasteText','PasteFromWord','-','SpellChecker', 'Scayt'],
     ['Undo','Redo','Find','Replace','-','SelectAll','RemoveFormat'],
-    ['Image','Media','Flash','Table','HorizontalRule','Smiley','SpecialChar'],
+    ['Image','Media','Flash','Table','HorizontalRule','Smiley','SpecialChar','Iframe'],
     '/',
     ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
-    ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+    ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote','CreateDiv'],
     ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl'],
     ['Link','Unlink','Anchor', 'Linkit'],
     ['DrupalBreak'],
@@ -140,6 +140,9 @@ function ckeditor_install() {
     if ($editor_path) {
         $arr['ckeditor_path'] = $editor_path;
     }
+
+    $arr['license_name'] = '';
+    $arr['license_key'] = '';
 
     db_insert('ckeditor_settings')->fields(array("name" => "CKEditor Global Profile", "settings" => serialize($arr)))->execute();
 
@@ -241,7 +244,8 @@ function ckeditor_requirements($phase) {
         }
         if (!empty($installed_version)) {
             $requirements['ckeditor']['value'] = $installed_version;
-        }else{
+        }
+        else{
           $requirements['ckeditor']['value'] = t('Not found');
         }
     }
@@ -288,18 +292,17 @@ function _ckeditor_requirements_getinstalledversion() {
 function _ckeditor_requirements_ckfinder_config_check($profile_name) {
     global $base_url;
     module_load_include('module', 'ckeditor');
-    $module_drupal_path = drupal_get_path('module', 'ckeditor');
-    $config_path = $module_drupal_path . '/ckfinder/config.php';
-
+    $ckfinder_full_path = ckfinder_path();
+    $config_path = $ckfinder_full_path . '/config.php';
     if (!file_exists($config_path)) {
         return t('!ckfinder is not installed correctly: <code>!config</code> not found. Make sure that you uploaded all files and did not accidentally remove the configuration file.', array(
-            '!config' => $module_drupal_path . '/ckfinder/config.php',
+            '!config' => $config_path,
             '!ckfinder' => '<a href="http://ckfinder.com">CKFinder</a>'
         ));
     }
 
     if (!is_readable($config_path)) {
-        return t('CKEditor needs read permission to the <code>!config</code> file.', array('!config' => 'ckfinder/config.php'));
+        return t('CKEditor needs read permission to the <code>!config</code> file.', array('!config' => $config_path));
     }
 
     $config_contents = file($config_path);
@@ -330,12 +333,12 @@ function _ckeditor_requirements_ckfinder_config_check($profile_name) {
     }
 
     if (!$require_once_found) {
-        return t('You are using a feature that requires manual integration in the <code>config.php</code> file. Please read the "Installing CKFinder" section in the <code>!readme</code> file carefully and add a <code>require_once ...</code> statement to the <code>%ckfconfig</code> file.', array('%ckfconfig' => drupal_get_path('module', 'ckeditor') . '/ckfinder/config.php', '!readme' => l(t('README.txt'), $base_url . '/' . drupal_get_path('module', 'ckeditor') . '/README.txt', array('absolute' => TRUE))));
+        return t('You are using a feature that requires manual integration in the <code>config.php</code> file. Please read the "Installing CKFinder" section in the <code>!readme</code> file carefully and add a <code>require_once ...</code> statement to the <code>%ckfconfig</code> file.', array('%ckfconfig' => $config_path, '!readme' => l(t('README.txt'), $base_url . '/' . drupal_get_path('module', 'ckeditor') . '/README.txt', array('absolute' => TRUE))));
     }
 
     if ($userfiles_absolute_path_line && $force_single_extension_line && (
             $require_once_line < $userfiles_absolute_path_line || $require_once_line > $force_single_extension_line)) {
-        return t('You are using a feature that requires manual integration in the <code>config.php</code> file. You have added a <code>require_once ...</code> statement to the <code>%ckfconfig</code> file, but in the wrong line.', array('%ckfconfig' => drupal_get_path('module', 'ckeditor') . '/ckfinder/config.php'));
+        return t('You are using a feature that requires manual integration in the <code>config.php</code> file. You have added a <code>require_once ...</code> statement to the <code>%ckfconfig</code> file, but in the wrong line.', array('%ckfconfig' => $config_path));
     }
 
     return FALSE;
@@ -391,6 +394,7 @@ function _ckeditor_requirements_cookiedomainset() {
  * Updates broken settings for the 'Full' profile. (Resets toolbar to default)
  */
 function ckeditor_update_7000() {
+    _ckeditor_d6_to_d7_migration();
     $result = db_query("SELECT settings FROM {ckeditor_settings} WHERE name = :name", array(':name' => 'Full'))->fetchField();
     $settings = unserialize($result);
     $settings['toolbar'] = "
@@ -484,6 +488,9 @@ function ckeditor_update_7002() {
  */
 function ckeditor_update_7003() {
     module_load_include('inc', 'ckeditor', 'includes/ckeditor.lib');
+    module_load_include('module', 'ckeditor');
+
+    _ckeditor_d6_to_d7_migration();
 
     $render = array();
     $render["%base_path%"] = base_path();
@@ -511,4 +518,44 @@ function ckeditor_update_7003() {
                     ->execute();
     }
 
+}
+
+/**
+* Minor update for those who have run update.php with problems.
+* @see http://drupal.org/node/1347682 for a better explanation.
+*/
+function ckeditor_update_7004() {
+  return _ckeditor_d6_to_d7_migration();
+}
+
+/**
+* Adapts D6 table structure to D7 schema.
+*/
+function _ckeditor_d6_to_d7_migration() {
+  if (db_table_exists('ckeditor_role')) {
+    db_drop_table('ckeditor_role');
+  }
+  if (!db_table_exists('ckeditor_input_format')) {
+    $ckeditor_input_format = array(
+      'description' => 'Stores CKEditor input format assignments',
+      'fields' => array(
+        'name' => array(
+          'type' => 'varchar',
+          'not null' => TRUE,
+          'default' => '',
+          'length' => 128,
+          'description' => 'Name of the CKEditor role',
+        ),
+        'format' => array(
+          'type' => 'varchar',
+          'not null' => TRUE,
+          'default' => '',
+          'length' => 128,
+          'description' => 'Drupal filter format ID',
+        )
+      ),
+      'primary key' => array('name', 'format'),
+    );
+    db_create_table('ckeditor_input_format', $ckeditor_input_format);
+  }
 }

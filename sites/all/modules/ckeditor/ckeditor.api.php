@@ -1,7 +1,7 @@
 <?php
 /**
  * CKEditor - The text editor for the Internet - http://ckeditor.com
- * Copyright (c) 2003-2011, CKSource - Frederico Knabben. All rights reserved.
+ * Copyright (c) 2003-2012, CKSource - Frederico Knabben. All rights reserved.
  *
  * == BEGIN LICENSE ==
  *
@@ -51,6 +51,20 @@ function hook_ckeditor_plugin() {
                     'label' => 'Button Label',
                 )
             )
+        )
+    );
+}
+
+/**
+ * Hook to register the CKEditor security filter - it would appear in the security filters list on the profile setting page.
+ */
+function hook_ckeditor_security_filter() {
+    return array(
+        'security_filter_name' => array(
+            // Title of the security filter - it would be displayed in the security filters section of profile settings.
+            'title' => t('Security filter title'),
+            // Description of the security filter - it would be displayed in the security filters section of profile settings.
+            'description' => t('Security filter description'),
         )
     );
 }
