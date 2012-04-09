@@ -15,8 +15,8 @@
   <img src="<?php print path_to_theme() . '/images/modules/' . 'pregnant.jpg'; ?>" alt="Can I get pregnant if..." />                    
   <div class="carousel-caption">
     <h3>Can I get pregnant if...</h3>
-    <p>There are many situations when the question of pregnancy can occur.. If you are having any doubts on&hellip;
-    <a href="#" class="more-button">Read More</a></p>
+    <p>Becoming a mother is a very important and amazing transition in life. Bringing a new life into the world brings&hellip;
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/getting-pregnant-can-i-get-pregnant-if-her" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
@@ -26,12 +26,12 @@
   <div class="carousel-caption">
     <h3>Sexual Behaviors</h3>
     <p>Sexual techniques are methods for increasing a partner's sexual arousal. These include activites that&hellip;
-    <a href="#" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/sexual-behaviors" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
 <!-- SLIDE 3 -->
-<div class="carousel-frame">
+<div class="carousel-frame">  
   <img src="<?php print path_to_theme() . '/images/modules/' . 'holding-hands.jpg'; ?>" alt="Love and Building Relationships" />
   <div class="carousel-caption">
     <h3>Love &amp; Building Relationships</h3>
@@ -62,8 +62,8 @@
   <img src="<?php print path_to_theme() . '/images/modules/' . 'circumcision.jpg'; ?>" alt="Sexual Behaviors" />                
   <div class="carousel-caption">
     <h3>Circumcision</h3>
-    <p>Brief subtext goes here&hellip;
-    <a href="#" class="more-button">Read More</a></p>
+    <p>Male circumcision is a medical procedure in which the foreskin of the penis is surgically removed, exposing the&hellip;
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/body-male-anatomy-male-circumcision" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
@@ -72,8 +72,8 @@
   <img src="<?php print path_to_theme() . '/images/modules/' . 'contraception.jpg'; ?>" alt="Sexual Behaviors" />
   <div class="carousel-caption">
     <h3>Contraception</h3>
-    <p>Brief subtext goes here&hellip;
-    <a href="#" class="more-button">Read More</a></p>
+    <p>Contraception is the intentional prevention of pregnancy. There are many contraceptive methods, also known as&hellip;
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/basics-contraception" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
@@ -89,7 +89,7 @@
 
 <!-- SLIDE 8 -->
 <div class="carousel-frame">
-  <img src="http://placehold.it/400x250" alt="Sexual Behaviors" />
+  <img src="<?php print path_to_theme() . '/images/modules/' . 'sexual-orientation.jpg'; ?>" alt="Sexual Orientation" />
   <div class="carousel-caption">
     <h3>Sexual Orientation</h3>
     <p>Brief subtext goes here&hellip;

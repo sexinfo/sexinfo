@@ -134,7 +134,7 @@
 									</div>
 								</div><!--.node-content-->
 								<div class="node-footer">																								
-									<a href="#">All Topics &raquo;</a>									
+									<a href="<?php print $base_path . "category" ?>">All Topics &raquo;</a>									
 								</div><!--.node-footer-->
 							</div><!--.node-box-->
 						</div><!-- .module -->
@@ -153,13 +153,13 @@
 										<img class="" src="<?php print path_to_theme() . '/images/modules/' . 'sadomasochism.jpg'; ?>" />
 										<div class="caption-slide">
 											<h3>Sexual Fetishism</h3>
-											<p>There are many types of fetishes. Some people get sexually excited by seeing boots&hellip;
-											<a href="#" class="more-button">Read More</a></p>
+											<p>Fetishism is a non-coercive paraphilia in which a person becomes sexually aroused by inanimate objects such as &hellip;
+											<a href="http://www.soc.ucsb.edu/sexinfo/article/sexual-activitykinky-sexual-behaviorslow-risk-behaviorsfetishism" class="more-button">Read More</a></p>
 										</div><!-- .caption-slide -->
 									</div><!-- .faq-image -->								
 								</div><!--.node-content-->
 								<div class="node-footer">																								
-									<a href="#">All Questions &raquo;</a>									
+									<a href="<?php print $base_path . "question" ?>">All Questions &raquo;</a>									
 								</div><!--.node-footer-->
 							</div><!--.node-box-->
 						</div><!-- .module -->							
