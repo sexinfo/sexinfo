@@ -36,7 +36,7 @@
   <div class="carousel-caption">
     <h3>Love &amp; Relationships</h3>
     <p>There are five components that determine with whom you fall in love, and if your love will last. They are&hellip;
-    <a href="#" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/love-and-relationships-love-love-and-attachment" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
