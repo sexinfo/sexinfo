@@ -14,9 +14,9 @@
       <a rel="2" href="#">Sexual Behaviors</a>
     </li>
     <li>
-      <!-- <img class="carousel-thumb" src="<?php #print path_to_theme() . '/images/modules/' . 'holding-hands-small.jpg'; ?>" /> -->
+      <!-- <img class="carousel-thumb" src="<?php #print path_to_theme() . '/images/modules/' . 'love-relationships-small.jpg'; ?>" /> -->
       <img class="carousel-thumb" src="http://placehold.it/80x50">
-      <a rel="3" href="#">Love &amp; Building Relationships</a>
+      <a rel="3" href="#">Love &amp; Relationships</a>
     </li>
     <li>
       <!-- <img class="carousel-thumb" src="<?php #print path_to_theme() . '/images/modules/' . 'std-small.jpg'; ?>" /> -->

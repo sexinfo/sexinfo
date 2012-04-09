@@ -32,9 +32,9 @@
 
 <!-- SLIDE 3 -->
 <div class="carousel-frame">  
-  <img src="<?php print path_to_theme() . '/images/modules/' . 'holding-hands.jpg'; ?>" alt="Love and Building Relationships" />
+  <img src="<?php print path_to_theme() . '/images/modules/' . 'love-relationships.jpg'; ?>" alt="Love and Relationships" />
   <div class="carousel-caption">
-    <h3>Love &amp; Building Relationships</h3>
+    <h3>Love &amp; Relationships</h3>
     <p>There are five components that determine with whom you fall in love, and if your love will last. They are&hellip;
     <a href="#" class="more-button">Read More</a></p>
   </div>
