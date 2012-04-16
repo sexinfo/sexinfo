@@ -1169,10 +1169,41 @@ a:visited.more-button  {
 	- Typography
 */
 
+#node-22 .form-button-container {
+  overflow: auto;
+  margin-bottom: 15px;
+  outline: 1px solid green;
+}
+
+#node-22 .form-button:link,
+#node-22 .form-button:visited {
+  -webkit-border-radius: 7px;
+     -moz-border-radius: 7px;
+          border-radius: 7px;
+  background-color: #F23183;
+  color: white;
+  display: block;
+  float: left;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-right: 10px;  
+  padding: 10px;
+  text-align: center;
+  width: 146px;
+}
+  #node-22 .form-button:hover,
+  #node-22 .form-button:active {
+    background-color: #C9286D;
+  }
+  #node-22 .form-button:last-child {
+    margin-right: 0;    
+  }
+
+
 /*----- RESETS + BASIC LAYOUT -----*/
 #node-22 {
 	/* Figure out how to center the node - auto margins aren't working anywhere */
-	width: 600px; /*  Arbitrary. 22+22 = 44px of padding added to left/right. */
+	width: 600px; /*  Arbitrary. 22+22 = 44px of padding added to left/right. */  
 }
 #node-22 .node-info {
 	/* "Hide" the pesky author/publication information.
@@ -1215,7 +1246,7 @@ a:visited.more-button  {
 	border: 1px solid white;
 	font-size: 1.2em;	
 	padding: 10px 5px;	
-	width: 510px; /* = 100% of content area with padding. */
+	width: 510px; /* = 100% of content area with padding. */  
 }
 	#node-22 input:not([type="submit"]):focus,
 	#node-22 textarea:focus {		
