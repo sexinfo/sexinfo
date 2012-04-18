@@ -81,9 +81,9 @@
 <div class="carousel-frame">
   <img src="<?php print path_to_theme() . '/images/modules/' . 'female-orgasm.jpg'; ?>" alt="Sexual Behaviors" />
   <div class="carousel-caption">
-    <h3>Female Orgasm</h3>
-    <p>Brief subtext goes here&hellip;
-    <a href="#" class="more-button">Read More</a></p>
+    <h3>Female Orgasmic Disorder</h3>
+    <p>Known as "anorgasmia" in medical terms, female orgasmic problems are defined as "a sexual difficulty involving&hellip;
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/female-orgasmic-disorder" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 

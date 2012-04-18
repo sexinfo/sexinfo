@@ -34,9 +34,8 @@
     <a rel="6" href="#">Contraception</a>
   </li>
   <li>
-    <!-- <img class="carousel-thumb" src="<?php #print path_to_theme() . '/images/modules/' . 'female-orgasm-small.jpg'; ?>" /> -->
-    <img class="carousel-thumb" src="http://placehold.it/80x50">
-    <a rel="7" href="#">Female Orgasm</a>
+    <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'female-orgasm-small.jpg'; ?>" />    
+    <a rel="7" href="#">Female Orgasmic Disorder</a>
   </li>
   <li>
     <!-- <img class="carousel-thumb" src="<?php #print path_to_theme() . '/images/modules/' . 'sexual-orientation-small.jpg'; ?>" /> -->
