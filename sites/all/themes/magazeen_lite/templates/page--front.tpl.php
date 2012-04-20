@@ -150,11 +150,11 @@
 							<div class="node-box">
 								<div class="node-content">									
 									<div class="faq-image">
-										<img class="" src="<?php print path_to_theme() . '/images/modules/' . 'sadomasochism.jpg'; ?>" />
+										<img class="" src="<?php print path_to_theme() . '/images/modules/' . 'masturbation.jpg'; ?>" />
 										<div class="caption-slide">
-											<h3>Sexual Fetishism</h3>
-											<p>Fetishism is a non-coercive paraphilia in which a person becomes sexually aroused by inanimate objects such as &hellip;
-											<a href="http://www.soc.ucsb.edu/sexinfo/article/sexual-activitykinky-sexual-behaviorslow-risk-behaviorsfetishism" class="more-button">Read More</a></p>
+											<h3>Is Masturbation Dangerous?</h3>
+											<p>Masturbation, or self-stimulation of the genitals for pleasure, is not a dangerous or bad activity for men or women. In facts &hellip;
+											<a href="http://www.soc.ucsb.edu/sexinfo/article/faq-masturbation-dangerous" class="more-button">Read More</a></p>
 										</div><!-- .caption-slide -->
 									</div><!-- .faq-image -->								
 								</div><!--.node-content-->
