@@ -44,9 +44,9 @@
 <div class="carousel-frame">
   <img src="<?php print path_to_theme() . '/images/modules/' . 'std.jpg'; ?>" alt="Sexually Transmitted Diseases" />
   <div class="carousel-caption">
-    <h3>Sexually Transmitted Diseases</h3>
-    <p>Have a concern regarding STD's? Have a look at the STD Symptom Chart to learn more about sexual&hellip;
-    <a href="#" class="more-button">Read More</a></p>
+    <h3>Sexually Transmitted Infections</h3>
+    <p>Sexually transmitted infections (STI's) are passed from one person to another through various types of sexual contact.&hellip;
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/sexually-transmitted-infections-stis" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
@@ -91,8 +91,8 @@
 <div class="carousel-frame">
   <img src="<?php print path_to_theme() . '/images/modules/' . 'sexual-orientation.jpg'; ?>" alt="Sexual Orientation" />
   <div class="carousel-caption">
-    <h3>Sexual Orientation</h3>
-    <p>Brief subtext goes here&hellip;
-    <a href="#" class="more-button">Read More</a></p>
+    <h3>Basics of Sexuality</h3>
+    <p>Sexuality involves much more than just having sex or engaging in sexual activities. A person’s sexuality affects&hellip;
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/basics-sexuality-basics-introduction-sexuality" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
