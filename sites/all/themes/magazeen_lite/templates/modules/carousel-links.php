@@ -18,9 +18,8 @@
       <a rel="3" href="#">Love &amp; Relationships</a>
     </li>
     <li>
-      <!-- <img class="carousel-thumb" src="<?php #print path_to_theme() . '/images/modules/' . 'std-small.jpg'; ?>" /> -->
-      <img class="carousel-thumb" src="http://placehold.it/80x50">
-      <a rel="4" href="#">Sexually Transmitted Diseases</a>
+      <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'std-small.jpg'; ?>" />
+      <a rel="4" href="#">Sexually Transmitted Infections</a>
     </li>
   </div><!-- .carousel-nav-left -->
 
@@ -38,9 +37,8 @@
     <a rel="7" href="#">Female Orgasmic Disorder</a>
   </li>
   <li>
-    <!-- <img class="carousel-thumb" src="<?php #print path_to_theme() . '/images/modules/' . 'sexual-orientation-small.jpg'; ?>" /> -->
-    <img class="carousel-thumb" src="http://placehold.it/80x50">
-    <a rel="8" href="#">Sexual Orientation</a>
+    <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'sexual-orientation-small.jpg'; ?>" />
+    <a rel="8" href="#">Basics of Sexuality</a>
   </li>
   </div><!-- .carousel-nav-left -->
 </ul>

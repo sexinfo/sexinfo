@@ -170,14 +170,14 @@
           ========================-->
           <div class="column-third">          
             <!-- BOX TITLE -->           
-            <h4 class="module-title">Module Title</h4>
-            <div class="module">
+            <h4 class="module-title">Ask the Sexperts</h4>
+            <div class="module ask-module">
               <div class="node-box">
                 <div class="node-content">                  
-                  Content              
+                  <p>Can't find an answer to your question? Want to send in feedback about the new site? We'd love to hear from you! Click <a href="<?php print $base_path . "ask" ?>">here</a> to send a question to the Sexperts.</p>
                 </div><!--.node-content-->
                 <div class="node-footer">                                               
-                  <a href="#">View the list &raquo;</a>               
+                  <a href="#">Ask a Question &raquo;</a>               
                 </div><!--.node-footer-->
               </div><!--.node-box-->
             </div><!-- .module -->              
@@ -205,7 +205,7 @@
   <div class="container clearfix">
   
 	 <h4>About SexInfoOnline</h4>
-		<p><?print '<a href="'. check_url($front_page) .'">';?>SexInfo Online</a> is a website devoted to comprehensive sex education based on the best research we have to date. The site is maintained by university students from the University of California, Santa Barbara who have studied advanced topics in human sexuality.</p>
+		<p><?print '<a href="'. check_url($front_page) .'">';?>SexInfoOnline</a> is a website devoted to comprehensive sex education based on the best research we have to date. The site is maintained by university students from the University of California, Santa Barbara who have studied advanced topics in human sexuality.</p>
 		<p>Our primary goal is to ensure that people around the world have access to useful and accurate information about all aspects of human sexuality. If you find our site useful, don't forget that your friends, family, and coworkers may find it useful too!</p>
 
 		<a href="<?php print $base_path . "login" ?>" class="login">Writer Login &raquo;</a>
