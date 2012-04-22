@@ -38,7 +38,7 @@
   </li>
   <li>
     <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'sexual-orientation-small.jpg'; ?>" />
-    <a rel="8" href="#">Basics of Sexuality</a>
+    <a rel="8" href="#">Homophobia</a>
   </li>
   </div><!-- .carousel-nav-left -->
 </ul>
