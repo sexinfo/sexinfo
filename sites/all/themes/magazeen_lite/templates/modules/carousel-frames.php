@@ -91,7 +91,7 @@
 <div class="carousel-frame">
   <img src="<?php print path_to_theme() . '/images/modules/' . 'sexual-orientation.jpg'; ?>" alt="Sexual Orientation" />
   <div class="carousel-caption">
-    <h3>Basics of Sexuality</h3>
+    <h3>Homophobia</h3>
     <p>Homophobia is defined as "irrational fear of, aversion to, or discrimination against homosexuality&hellip;
     <a href="http://www.soc.ucsb.edu/sexinfo/article/queer-sexuality-homophobia" class="more-button">Read More</a></p>
   </div>
