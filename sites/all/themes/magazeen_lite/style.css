@@ -493,7 +493,7 @@ img#logo-image {
 }
   #navigation ul li a:hover,
   #navigation ul li a:active {
-    padding: 15px 15px 14px 15px;
+    /*padding: 15px 15px 14px 15px;*/
     /*background: #171615 url(images/navigation-hover.gif) repeat-x bottom center;*/
     background-color: rgba(0,0,0,0.5);
     color: #F1F8FF;
