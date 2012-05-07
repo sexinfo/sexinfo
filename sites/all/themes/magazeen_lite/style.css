@@ -1206,6 +1206,9 @@ a:visited.more-button  {
 }
   #node-22 .form-button:hover,
   #node-22 .form-button:active {
+    -webkit-transition: all 0.2s ease-out;
+       -moz-transition: all 0.2s ease-out;
+         -o-transition: all 0.2s ease-out;
     background-color: #C9286D;
   }
   #node-22 .form-button:last-child {
