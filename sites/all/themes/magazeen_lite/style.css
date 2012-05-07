@@ -972,6 +972,9 @@ padding:20px 40px ;
 	.list-half:last-child {
 		margin: 0; /* Zero the margin used for separation */
 	}
+  .list-half a:hover {
+    text-decoration: underline;
+  }
 
 	/* FAQ module */
 .faq-image {	
