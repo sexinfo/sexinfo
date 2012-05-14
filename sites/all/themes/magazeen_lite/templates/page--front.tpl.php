@@ -57,7 +57,7 @@
 
 <!-- ______________________ SLIDESHOW _______________________ -->
 
-<?php include "modules/slideshow.php" ?>
+<?php #include "modules/slideshow.php" ?>
 
 <!-- ______________________ MAIN _______________________ -->
 
