@@ -1326,12 +1326,20 @@ a:visited.more-button  {
 
 .taxonomy-parent {
   background-color: #eee;
-  border: 1px solid #D0D0D0;
+  border: 1px solid #d0d0d0;
   font-size: 1.1em;
   padding: 0;
 }
+  .taxonomy-parent ul {
+    background-color: white;
+    padding: 0;
+  }
+    .taxonomy-parent ul li {
+      padding-left: 26px;
+    }
 .taxonomy-nested {
-  border-bottom: 1px solid #DADADA; /*e3e3e3*/
+  border-bottom: 1px solid #DADADA;
+  margin: 0; 2
 }
 .taxonomy-item {
   background-color: white;
