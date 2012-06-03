@@ -155,7 +155,7 @@
 										<div class="caption-slide">
 											<h3>Is Masturbation Dangerous?</h3>
 											<p>Masturbation, or self-stimulation of the genitals for pleasure, is not a dangerous or bad activity for men or women. In facts &hellip;
-											<a href="http://www.soc.ucsb.edu/sexinfo/article/faq-masturbation-dangerous" class="more-button">Read More</a></p>
+											<a href="http://www.soc.ucsb.edu/sexinfo/question/faq-masturbation-dangerous" class="more-button">Read More</a></p>
 										</div><!-- .caption-slide -->
 									</div><!-- .faq-image -->								
 								</div><!--.node-content-->

@@ -16,7 +16,7 @@
   <div class="carousel-caption">
     <h3>Can I get pregnant if...</h3>
     <p>Becoming a mother is a very important and amazing transition in life. Bringing a new life into the world brings&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/article/getting-pregnant-can-i-get-pregnant-if-her" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/pregnancy-getting-pregnant-can-i-get-pregnant-if-her" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
@@ -63,7 +63,7 @@
   <div class="carousel-caption">
     <h3>Circumcision</h3>
     <p>Male circumcision is a medical procedure in which the foreskin of the penis is surgically removed, exposing the&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/article/body-male-anatomy-male-circumcision" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/health-medical-procedures-elective-male-circumcision" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
@@ -73,7 +73,7 @@
   <div class="carousel-caption">
     <h3>Contraception</h3>
     <p>Contraception is the intentional prevention of pregnancy. There are many contraceptive methods, also known as&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/article/basics-contraception" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/category/contraception" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
@@ -83,7 +83,7 @@
   <div class="carousel-caption">
     <h3>Female Orgasmic Disorder</h3>
     <p>Known as "anorgasmia" in medical terms, female orgasmic problems are defined as "a sexual difficulty involving&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/article/female-orgasmic-disorder" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/sexual-difficulties-female-difficulty-female-orgasmic-disorder" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
@@ -93,6 +93,6 @@
   <div class="carousel-caption">
     <h3>Homophobia</h3>
     <p>Homophobia is defined as "irrational fear of, aversion to, or discrimination against homosexuality&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/article/queer-sexuality-homophobia" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/sexual-orientation-queer-sexuality-homophobia" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
