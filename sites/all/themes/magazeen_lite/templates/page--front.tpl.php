@@ -175,10 +175,10 @@
             <div class="module ask-module">
               <div class="node-box">
                 <div class="node-content">                  
-                  <p>Can't find an answer to your question? Want to send in feedback about the new site? We'd love to hear from you! Click <a href="<?php print $base_path . "ask" ?>">here</a> to send a question to the Sexperts.</p>
+                  <p>Can't find an answer to your question? Want to send in feedback about the new site? We'd love to hear from you! Click <a href="<?php print $base_path . "ask-sexperts" ?>">here</a> to send a question to the Sexperts.</p>
                 </div><!--.node-content-->
                 <div class="node-footer">                                               
-                  <a href="<?php print $base_path . "ask" ?>">Ask a Question &raquo;</a>               
+                  <a href="<?php print $base_path . "ask-sexperts" ?>">Ask a Question &raquo;</a>               
                 </div><!--.node-footer-->
               </div><!--.node-box-->
             </div><!-- .module -->              
