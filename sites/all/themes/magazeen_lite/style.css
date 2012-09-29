@@ -13,6 +13,7 @@
 08 - Comments
 09 - Front page modules
 10 - Ask the Sexperts Webform
+11 - Topics Listing
 
 /* ----------------------------------------------*/
 /* 0x - TEMPORARY DEV STYLES
@@ -1243,20 +1244,12 @@ a:visited.more-button  {
 	border: none;
 }
 #node-22 .node-content {
-	background-color: #EFEFEF; /* eaeaea */
-	border: none; /* Reset the white border set elsewhere - could be #d6d6d6*/
-
-	-moz-box-shadow: 0px 0px 6px #444;
-	-webkit-box-shadow: 0px 0px 6px #444;
-	box-shadow: 0px 0px 6px #444;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(strength=2, Direction=225, Color='#444')";
-	filter: progid:DXImageTransform.Microsoft.Shadow(strength=2, direction=225, color='#444');
-
-	-webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-	border-radius: 10px;
-
-	padding: 30px 40px;
+	background-color: #EFEFEF;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+  padding: 25px 30px;
 }
 #node-22 .node-footer,
 .grippie {
@@ -1269,40 +1262,33 @@ a:visited.more-button  {
 #node-22 input:not([type="submit"]),
 #node-22 textarea {
 	/* Spoof border to prevent field jump on focus when border added */
-	border: 1px solid white;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+	border: 1px solid #ccc;
 	font-size: 1.2em;
 	padding: 10px 5px;
-	width: 510px; /* = 100% of content area with padding. */
+  width: 100%;
 }
 	#node-22 input:not([type="submit"]):focus,
 	#node-22 textarea:focus {
 		border: 1px solid #F23183;
 		outline: none;
 	}
-/*#node-22 select {
-	width: 100%;
-}*/
 #node-22 textarea {
 	/* Remove scrollbar in IE */
-	overflow: auto;
-	border-bottom: none;
 	font: 1.2em Arial, Helvetica, sans-serif;
+  overflow: auto;
 	width: 100%;
 }
 #node-22 input[type="submit"] {
 	background-color: #3099DF;
-	background: -moz-linear-gradient(0% 50% 90deg,#188AC2, #3099DF);
-	background: -ms-linear-gradient(#3099DF,#188AC2);
-	background: -webkit-gradient(linear, 0% 0%, 0% 35%, from(#3099DF), to(#188AC2));
-	background: -o-linear-gradient(#3099DF,#188AC2);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3099DF', endColorstr='#188AC2');
-	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#3099DF', endColorstr='#188AC2')";
-	background: linear-gradient(#3099DF, #188AC2);
 	border: none;
-	-webkit-border-radius: 7px;
-    -moz-border-radius: 7px;
-	border-radius: 7px;
+	-webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+	        border-radius: 3px;
 	color: white;
+  float: right;
 	font-size: 1.1em;
 	padding: 10px 15px;
 }
