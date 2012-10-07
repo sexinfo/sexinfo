@@ -1,0 +1,50 @@
+@mixin clearfix {
+  // http://nicolasgallagher.com/micro-clearfix-hack/
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: "";
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin border-radius($rad: 3px) {
+  -webkit-border-radius: $rad;
+     -moz-border-radius: $rad;
+          border-radius: $rad;
+}
+
+//-- UTILITY/VENDOR PREFIXES
+//------------------------------------
+
+@mixin border-box {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+@mixin ease-out($time: 0.5s) {
+  -webkit-transition: all $time ease-out;
+     -moz-transition: all $time ease-out;
+       -o-transition: all $time ease-out;
+}
+
+@mixin box-shadow($horizOffset: 0px, $vertOffset: 0px, $blurDist: 0px, $spreadDist: 0px, $color: #000) {
+  -webkit-box-shadow: $horizOffset $vertOffset $blurDist $spreadDist $color;
+     -moz-box-shadow: $horizOffset $vertOffset $blurDist $spreadDist $color;
+          box-shadow: $horizOffset $vertOffset $blurDist $spreadDist $color;
+}
+
+@mixin inset-box-shadow($horizOffset: 0px, $vertOffset: 0px, $blurDist: 0px, $spreadDist: 0px, $color: #000) {
+  -webkit-box-shadow: inset $horizOffset $vertOffset $blurDist $spreadDist $color;
+     -moz-box-shadow: inset $horizOffset $vertOffset $blurDist $spreadDist $color;
+          box-shadow: inset $horizOffset $vertOffset $blurDist $spreadDist $color;
+}
+
+@mixin bold($font_size: 1em) {
+  font-size: $font_size;
+  font-weight: bold;
+}

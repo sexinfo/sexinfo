@@ -1,0 +1,142 @@
+/* 03 - HEADER
+/* ----------------------------------------------*/
+
+#header {
+  margin:0;
+  padding:0;
+  width:auto;
+  background:#171615 url(images/header.gif) repeat-x top center;
+  border-bottom:1px solid #4a4d4c;
+  clear:both;
+}
+.banner {
+  padding: 10px 0;
+  text-align: center;
+}
+  .banner a,
+  .banner a:hover {
+    color: inherit;
+  }
+  .banner a {
+    text-decoration: underline;
+  }
+  .banner a:hover {
+    color: black;
+  }
+.new-banner {
+  background-color: #F98BB9;
+
+  background-image: linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+  background-image: -o-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+  background-image: -moz-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+  background-image: -webkit-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+  background-image: -ms-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+  background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.35, #F875AB),
+    color-stop(0.7, #F98BB9));
+
+  color: #333433;
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 11px 0;
+}
+.uc-banner {
+  background-color: black;
+  color: #f23183;
+}
+#logo {
+  margin:0;
+  padding: 0; /* 50px 0 15px 0 */
+  width:580px;
+  height:auto;
+  background:url(images/header-shade.gif) no-repeat top right;
+  float:left;
+}
+
+#searchform-header {
+  margin: 38px 20px 0 0; /*78px 20px 0 0*/
+  width:284px;
+  height:auto;
+  float:right;
+  background:no-repeat scroll right top transparent;}
+
+input#edit-search-block-form--2 {
+  background:#FDFEFE url(images/searchform-back.gif) no-repeat  left top;
+  border:0 none;
+  color:#AEA592;
+  float:left;
+  font-size:0.92em;
+  height:auto;
+  margin:0;
+  padding:6px 10px 5px 25px;
+  width:165px;
+}
+  input#edit-search-block-form--2:focus {
+    color: #30393d;
+  }
+#searchform-header .form-submit{
+  background:transparent url(images/search.gif) no-repeat  right top;
+  border:0 none;
+  color:#ffffff;
+  cursor:pointer;
+  font-family:Helvetica,Arial,sans-serif;
+  font-size:122%;
+  font-weight:bold;
+  margin:0 0 0 12px;
+  width:72px;
+}
+
+#searchform-header .form-item {display:inline;}
+
+img#logo-image {
+  padding:0 10px 0 0;
+}
+
+.social-buttons {
+  float: right;
+  margin: 15px 5px 10px;
+  overflow: auto;
+}
+  .social-buttons a {
+    /* Scott Kellum image replacement method */
+    width: 32px;
+    height: 32px;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+
+    float: left;
+    margin-right: 20px;
+  }
+    .social-buttons a:last-child {margin: 0;}
+    /* http://dribbble.com/shots/112573-Mighty-Social-Icons */
+    .social-buttons .soc-fb  { background: url('./images/social/fb_32.png'); }
+    .social-buttons .soc-yt  { background: url('./images/social/yt_32.png'); }
+    .social-buttons .soc-rss { background: url('./images/social/rss_32.png');}
+
+
+/* Navigation
+/* -------------- */
+#navigation {
+  margin:0;
+  padding:0;
+  background:#FFF url(images/navigation.gif) repeat-x bottom center;
+  font-size: 1.1em;
+  border-top:2px solid #393b3b;
+  border-bottom:1px solid #FFF;
+}
+
+#navigation ul.links {
+  margin:0 auto; padding:0;
+  width:880px; height:auto;
+  list-style:none; float:left;
+}
+
+#navigation ul li {
+  margin:0 3px; padding:0;
+  float:left; overflow:visible;
+}
+  #navigation ul li a:hover,
+  #navigation ul li a:active {
+    background-color: rgba(0,0,0,0.5);
+    color: #F1F8FF;
+  }

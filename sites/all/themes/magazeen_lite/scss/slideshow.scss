@@ -1,0 +1,63 @@
+/* 04 - SLIDESHOW
+/* ----------------------------------------------*/
+
+#slideshow { margin:0; padding:0; background:#f4f6f8 url(images/dock.gif) repeat-x bottom center; border-bottom:1px solid #fbf9fa; }
+
+.slideshow  { background:transparent url("images/slide-shadow.png") no-repeat scroll center bottom; padding:10px 0 50px 0; }
+
+/*--Main Container--*/
+.main_view { float: left; position: relative; }
+
+/*--Window/Masking Styles--*/
+.window {
+  height:330px; width: 840px;
+  overflow: hidden; /*--Hides anything outside of the set width/height--*/
+  position: relative;
+  border:6px solid #ffffff;
+}
+.image_reel { position: absolute; top: 0; left:0; float:left; }
+
+.image_reel img {float: left; }
+/*--Paging Styles--*/
+.paging {
+  position: absolute;
+  bottom: 40px; right: -7px;
+  width: 178px; height:47px;
+  z-index: 100; /*--Assures the paging stays on the top layer--*/
+  text-align: center;
+  line-height: 40px;
+  display: none; /*--Hidden by default, will be later shown with jQuery--*/
+}
+.paging a {
+  padding: 6px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: normal;
+  background: #171615;
+  border: 1px solid #171615;
+}
+.paging a.active { font-weight: bold; background: #EA2F7E; border: 1px solid #171615; }
+
+.paging a:hover {font-weight: bold;}
+
+.force-previous a {
+background:url("images/slideshow/arrow-left.png") no-repeat scroll right top transparent;
+  display:block;
+  float:left;
+  height:339px;
+  margin:0; padding:0;
+  outline:0 none;
+  text-indent:-9999px;
+  width:44px;
+}
+
+.force-next a {
+background:url("images/slideshow/arrow-right.png") no-repeat scroll left top transparent;
+  display:block;
+  float:right;
+  height:339px;
+  margin:0; padding:0;
+  outline:0 none;
+  text-indent:-9999px;
+  width:44px;
+}

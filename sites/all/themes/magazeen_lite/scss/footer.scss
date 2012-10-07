@@ -1,0 +1,49 @@
+/* 07 - FOOTER
+/* ----------------------------------------------*/
+
+#footer {
+  margin:0;
+  padding: 10px 0 15px; /* 30px 0 */
+  width:auto; height:auto;
+  background:#171615 url(images/footer-stroke.gif) repeat-x top center;
+  border-top:1px solid #171615; border-bottom:1px solid #1e1d1d;
+  color:#B2B2B2;
+}
+#footer p:last-child {
+  margin-bottom: 10px;
+}
+#footer-message { color:#ffffff; padding:0; font-family:Verdana, Arial, Helvetica, sans-serif; padding:10px 0;}
+
+.footer-divider { background:url("images/footer-divider.gif") repeat-y scroll left top transparent; }
+
+#footer-left { float:left; height:auto; margin:0; padding:0; width:305px; }
+
+#footer .login:link,
+#footer .login:visited {
+  font-size: 1.1em;
+  float: right;
+}
+  #footer .login:hover,
+  #footer .login:active {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+#footer-right { float:right; height:auto; margin:0; padding:0 0 0 50px; width:585px; }
+
+#snavigation { clear:both; padding:10px 0; border-top:1px solid #1E1D1D; border-bottom:1px solid #1E1D1D; background-color:#171615;}
+
+#snavigation li a.active { color:#f23183; }
+
+#snavigation p { margin-bottom:0; }
+
+ul.slinks {
+    margin: 0;
+    padding: 0;
+}
+
+ul.slinks li {
+    display: inline;
+    list-style-type: none;
+    padding: 0 0.5em;
+}

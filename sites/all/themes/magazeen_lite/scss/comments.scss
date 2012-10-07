@@ -1,0 +1,53 @@
+/* 08 - COMMENTS
+/* ----------------------------------------------*/
+
+#comments h2.title{ margin-left: 20px; margin-bottom: 0px; }
+
+h2.comments-header { background-color: #EA2F7E; color: #fff; display: inline; font-size: 150%; margin: -8px 8px 0px -8px; padding: 8px 15px; position: relative; z-index: 10; }
+
+#comments { background-color: #F3F8FA; position: relative; z-index: 1; overflow: visible; padding-top: 28px; margin-top: -20px; }
+
+.comments { border-color: #DCE7ED #CFDBE1; border-style: solid; border-width: 1px 1px 2px 1px; margin-top: -22px; }
+
+#comments form { padding: 20px; }
+
+div.comment,
+div.comment-folded { border-color: #fff #fff #CFDBE1 #fff; border-style: solid; border-width: 1px; margin: 0; }
+
+div.comment-folded { padding: 12px 8px; }
+
+div.indented { border-left: 10px solid; border-color: #cfdbe1; margin: 0 1px; }
+
+.comment h3.title a,
+.comment h3.title a:visited,
+.comment h3.title a:hover,
+.comment h3.title a:active { color:#3C4D54; font:0.6em Arial,Helvetica,sans-serif; font-weight:bold; }
+
+div.comment .submitted { color: #81888D; font-family: Georgia,"Times New Roman",Times,serif; }
+
+.comment { color:#74868D; font:1em/19px Arial,Helvetica,sans-serif; }
+
+.comment .content { padding:10px 0 0 0; }
+
+.comment div.comment-by-author { background-color: #fff; }
+
+.comment div.comment-by-author h3.title,
+.comment div.comment-by-author h3.title a { color: #e82f7d; }
+
+.signature { border-top: 1px solid #d6ddb9; }
+
+.comment div.even, .comment div.odd {
+background:url("images/white.gif") repeat-x scroll center bottom transparent;
+border-bottom:1px solid #D9E1E6;
+margin:0;
+padding:20px 40px ;
+}
+
+.comment div.odd { background-color: #F3F8FA; }
+
+.comment div.even,
+.preview div.comment.odd { background-color: #fff; }
+
+.comment_delete, .comment_edit, .comment_reply{ margin:0; padding:0; font-family:Verdana, Arial, Helvetica, sans-serif; }
+
+.comment_forbidden { font:bold italic 1.17em Georgia, "Times New Roman", Times, serif; }
