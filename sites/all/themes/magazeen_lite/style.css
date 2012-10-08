@@ -50,29 +50,29 @@ body {
   width: auto; }
 
 code {
+  color: #0f8eb3;
+  font: 1.17em Georgia, "Times New Roman", Times, serif;
+  height: auto;
   margin: 0;
   padding: 0;
-  width: 80%;
-  height: auto;
-  font: 1.17em Georgia, "Times New Roman", Times, serif;
-  color: #0f8eb3; }
+  width: 80%; }
 
 pre {
-  margin: 0 auto;
-  padding: 5px 20px;
   background: #f4f1ec url(images/code.gif) repeat;
   border: 1px solid #bbced7;
-  font: 0.92em Georgia, "Times New Roman", Times, serif;
   color: #3e3e3e;
-  line-height: 200%; }
+  font: 0.92em Georgia, "Times New Roman", Times, serif;
+  line-height: 200%;
+  margin: 0 auto;
+  padding: 5px 20px; }
 
 blockquote {
+  background: #f8fbfc url(images/blockquote.gif) no-repeat top left;
+  border: 1px solid #edeff0;
+  height: auto;
   margin: 0 auto;
   padding: 5px 20px;
-  width: 80%;
-  height: auto;
-  background: #f8fbfc url(images/blockquote.gif) no-repeat top left;
-  border: 1px solid #edeff0; }
+  width: 80%; }
 
 img {
   margin: 0;
@@ -102,10 +102,10 @@ div.status {
   border-color: #be7; }
 
 .container {
-  width: 940px;
-  margin: 0 auto;
   height: auto;
-  padding: 0; }
+  margin: 0 auto;
+  padding: 0;
+  width: 940px; }
 
 /* Columns
 /* -------------- */
@@ -113,26 +113,25 @@ div.status {
   width: 75%; }
 
 .right {
+  float: right;
   width: 340px; }
 
-.main, .left {
+.main,
+.left {
   float: left; }
-
-.right {
-  float: right; }
 
 /* Clearfix
 /* -------------- */
-.clearfix:after {
-  content: " ";
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  height: 0; }
-
 .clearfix {
   display: inline-block; }
+
+.clearfix:after {
+  content: " ";
+  clear: both;
+  display: block;
+  height: 0;
+  line-height: 0;
+  visibility: hidden; }
 
 html[xmlns] .clearfix {
   display: block; }
@@ -423,16 +422,11 @@ p.copyright {
 .banner {
   padding: 10px 0;
   text-align: center; }
-
-.banner a,
-.banner a:hover {
-  color: inherit; }
-
-.banner a {
-  text-decoration: underline; }
-
-.banner a:hover {
-  color: black; }
+  .banner a {
+    color: inherit;
+    text-decoration: underline; }
+    .banner a:hover {
+      color: black; }
 
 .new-banner {
   background-color: #F98BB9;
@@ -447,26 +441,21 @@ p.copyright {
   font-weight: bold;
   padding: 11px 0; }
 
-.uc-banner {
-  background-color: black;
-  color: #f23183; }
-
 #logo {
+  background: url(images/header-shade.gif) no-repeat top right;
+  float: left;
+  height: auto;
   margin: 0;
   padding: 0;
   /* 50px 0 15px 0 */
-  width: 580px;
-  height: auto;
-  background: url(images/header-shade.gif) no-repeat top right;
-  float: left; }
+  width: 580px; }
 
 #searchform-header {
-  margin: 38px 20px 0 0;
-  /*78px 20px 0 0*/
-  width: 284px;
-  height: auto;
+  background: no-repeat scroll right top transparent;
   float: right;
-  background: no-repeat scroll right top transparent; }
+  height: auto;
+  margin: 38px 20px 0 0;
+  width: 284px; }
 
 input#edit-search-block-form--2 {
   background: #fdfefe url(images/searchform-back.gif) no-repeat left top;
@@ -478,9 +467,8 @@ input#edit-search-block-form--2 {
   margin: 0;
   padding: 6px 10px 5px 25px;
   width: 165px; }
-
-input#edit-search-block-form--2:focus {
-  color: #30393d; }
+  input#edit-search-block-form--2:focus {
+    color: #30393d; }
 
 #searchform-header .form-submit {
   background: transparent url(images/search.gif) no-repeat right top;
@@ -505,14 +493,13 @@ img#logo-image {
   overflow: auto; }
 
 .social-buttons a {
-  /* Scott Kellum image replacement method */
-  width: 32px;
+  float: left;
   height: 32px;
+  margin-right: 20px;
+  overflow: hidden;
   text-indent: 100%;
   white-space: nowrap;
-  overflow: hidden;
-  float: left;
-  margin-right: 20px; }
+  width: 32px; }
 
 .social-buttons a:last-child {
   margin: 0; }
@@ -530,54 +517,49 @@ img#logo-image {
 /* Navigation
 /* -------------- */
 #navigation {
-  margin: 0;
-  padding: 0;
   background: white url(images/navigation.gif) repeat-x bottom center;
-  font-size: 1.1em;
   border-top: 2px solid #393b3b;
-  border-bottom: 1px solid #FFF; }
+  border-bottom: 1px solid #FFF;
+  font-size: 1.1em;
+  margin: 0;
+  padding: 0; }
 
 #navigation ul.links {
-  margin: 0 auto;
-  padding: 0;
-  width: 880px;
+  float: left;
   height: auto;
   list-style: none;
-  float: left; }
+  margin: 0 auto;
+  padding: 0;
+  width: 880px; }
 
 #navigation ul li {
-  margin: 0 3px;
-  padding: 0;
   float: left;
-  overflow: visible; }
-
-#navigation ul li a:hover,
-#navigation ul li a:active {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #F1F8FF; }
+  margin: 0 3px;
+  overflow: visible;
+  padding: 0; }
+  #navigation ul li a:hover, #navigation ul li a:active {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #F1F8FF; }
 
 /* 05 - MAIN
 /* ----------------------------------------------*/
 #main {
-  padding: 20px 0;
-  /* padding-bottom: 0; */
   background: url(images/main-content.gif) no-repeat top center;
   border-top: 1px solid #c6dee7;
-  border-bottom: 10px solid #d0dce2; }
+  border-bottom: 10px solid #d0dce2;
+  padding: 20px 0; }
 
 /* Special ID just for the front page. Hackety hack! */
 #main-front {
-  padding: 20px 0;
-  /*padding-bottom: 0;*/
   background: url(images/main-content.gif) no-repeat top center;
   border-top: 1px solid #c6dee7;
-  border-bottom: 10px solid #d0dce2; }
+  border-bottom: 10px solid #d0dce2;
+  padding: 20px 0; }
 
 #main-front > .container {
   /* Entire purpose of #main-front is so the front page can have a wider container. */
   width: 985px;
-  margin-bottom: 55px;
-  /* I hate myself for writing this */ }
+  margin-bottom: 55px; }
 
 ul.pager {
   background-color: #DCE8EE;
@@ -602,17 +584,15 @@ ul.pager {
   margin: 0 0 25px 0; }
 
 .node-box {
-  margin: 0;
-  padding: 0;
   background: #fdfefe url(images/node-box-top.gif) repeat-x top center;
   border: 1px solid #dce7ed;
   border-bottom: 1px solid #cfdbe1;
-  border-top: 0; }
+  border-top: 0;
+  margin: 0;
+  padding: 0; }
 
 .node-content img {
-  /*margin: 0;*/
   display: block;
-  /* Enables auto margins */
   margin: 0 auto 10px;
   padding: 3px;
   border: 1px solid #E8E8E8; }
@@ -627,36 +607,37 @@ ul.pager {
   position: relative; }
 
 .node-info {
+  border-bottom: 4px solid #889398;
   margin: 0;
   padding: 10px 5px;
   height: auto;
-  width: 35%;
-  /* 190px */
-  border-bottom: 4px solid #889398;
   bottom: 0;
   right: 0;
-  position: absolute; }
+  position: absolute;
+  width: 35%; }
 
-.node-content, .page-content, .comment-content {
-  margin: 0;
-  padding: 22px 22px 11px;
+.node-content,
+.page-content,
+.comment-content {
   border: 1px solid #FFF;
   border-bottom: 1px solid #e8ebec;
+  margin: 0;
+  padding: 22px 22px 11px;
   position: relative; }
 
 .page-content {
   padding: 15px 22px 0; }
 
 .comment-count {
+  background: #f23183;
+  display: block;
+  height: auto;
   margin: 0;
   padding: 0;
-  width: auto;
-  height: auto;
-  background: #f23183;
   position: absolute;
-  display: block;
   top: -10px;
-  left: -10px; }
+  left: -10px;
+  width: auto; }
 
 .page-content .comment-count {
   margin-top: -15px; }
@@ -664,96 +645,76 @@ ul.pager {
 /* Node Footer
 /* --------------- */
 .node-footer {
+  background: #FCFDFE;
+  border-top: 1px solid #fff;
   margin: 0;
   padding: 15px;
-  background: #FCFDFE;
-  border-top: 1px solid #ffffff;
   position: relative;
   z-index: 100; }
 
 .terms {
   /* Prevent spillover onto Read More link */
   width: 85%; }
-
-.terms a {
-  display: inline;
-  list-style-type: none;
-  padding: 0 0.5em; }
+  .terms a {
+    display: inline;
+    list-style-type: none;
+    padding: 0 0.5em; }
 
 /* Content Navigation
 /* --------------- */
 .navigation {
-  margin: 0;
-  padding: 8px 10px;
   background: #dce8ee url(images/box-highlight.gif) repeat-x bottom center;
   border: 1px solid #ebf2f5;
-  border-bottom: 1px solid #d4e0e6; }
+  border-bottom: 1px solid #d4e0e6;
+  margin: 0;
+  padding: 8px 10px; }
 
 /* Inputs
 /* --------------- */
 .input {
-  margin: 0;
-  padding: 5px;
   background: #fdfefe url(images/node-box-top.gif) repeat-x top center;
   border: 1px solid #dce7ed;
+  color: #76716c;
   font: 0.92em Arial, Helvetica, sans-serif;
-  color: #76716c; }
+  margin: 0;
+  padding: 5px; }
 
 /* 07 - FOOTER
 /* ----------------------------------------------*/
 #footer {
-  margin: 0;
-  padding: 10px 0 15px;
-  /* 30px 0 */
-  width: auto;
-  height: auto;
   background: #171615 url(images/footer-stroke.gif) repeat-x top center;
   border-top: 1px solid #171615;
   border-bottom: 1px solid #1e1d1d;
-  color: #B2B2B2; }
+  color: #B2B2B2;
+  height: auto;
+  margin: 0;
+  padding: 10px 0 15px;
+  width: auto; }
 
 #footer p:last-child {
   margin-bottom: 10px; }
 
 #footer-message {
-  color: #ffffff;
-  padding: 0;
+  color: #fff;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   padding: 10px 0; }
 
 .footer-divider {
   background: url("images/footer-divider.gif") repeat-y scroll left top transparent; }
 
-#footer-left {
-  float: left;
-  height: auto;
-  margin: 0;
-  padding: 0;
-  width: 305px; }
-
-#footer .login:link,
-#footer .login:visited {
+#footer .login {
   font-size: 1.1em;
   float: right; }
-
-#footer .login:hover,
-#footer .login:active {
-  color: inherit;
-  text-decoration: underline; }
-
-#footer-right {
-  float: right;
-  height: auto;
-  margin: 0;
-  padding: 0 0 0 50px;
-  width: 585px; }
+  #footer .login:hover, #footer .login:active {
+    color: inherit;
+    text-decoration: underline; }
 
 #snavigation {
-  clear: both;
-  padding: 10px 0;
+  background-color: #171615;
   border-top: 1px solid #1E1D1D;
   border-bottom: 1px solid #1E1D1D;
-  background-color: #171615; }
+  clear: both;
+  padding: 10px 0; }
 
 #snavigation li a.active {
   color: #f23183; }
@@ -764,20 +725,19 @@ ul.pager {
 ul.slinks {
   margin: 0;
   padding: 0; }
-
-ul.slinks li {
-  display: inline;
-  list-style-type: none;
-  padding: 0 0.5em; }
+  ul.slinks li {
+    display: inline;
+    list-style-type: none;
+    padding: 0 0.5em; }
 
 /* 06 - SIDEBAR
 /* ----------------------------------------------*/
 #sidebar {
+  height: auto;
+  list-style: none;
   margin: 0 0 0 15px;
   padding: 0;
-  width: 305px;
-  height: auto;
-  list-style: none; }
+  width: 305px; }
 
 #sidebar .block h2 {
   background: url("images/sidebar-top.gif") no-repeat scroll center top #f5fbfe;
@@ -790,11 +750,11 @@ ul.slinks li {
 
 #sidebar .block .content {
   background: url("images/sidebar-bottom.gif") no-repeat scroll center bottom #f5fbfe;
+  display: block;
   height: auto;
   margin: 0 0 0 0;
   padding: 20px 20px 80px 20px;
-  width: 265px;
-  display: block; }
+  width: 265px; }
 
 #sidebar .block {
   margin: 0 0 20px 0; }
@@ -1060,70 +1020,30 @@ a:active.more-button {
 /* ----------------------------------------------*/
 /* 10 - ASK THE SEXPERTS WEBFORM
 /* ----------------------------------------------*/
-#node-22 .form-button-container {
-  overflow: auto;
-  margin-bottom: 15px; }
-
-#node-22 .form-button:link,
-#node-22 .form-button:visited {
-  -webkit-border-radius: 7px;
-  -moz-border-radius: 7px;
-  border-radius: 7px;
-  background-color: #F23183;
-  color: white;
-  display: block;
-  float: left;
-  font-size: 1.1em;
-  font-weight: bold;
-  margin-right: 10px;
-  padding: 10px;
-  text-align: center;
-  width: 146px; }
-
-#node-22 .form-button:hover,
-#node-22 .form-button:active {
-  -webkit-transition: all 0.2s ease-out;
-  -moz-transition: all 0.2s ease-out;
-  -o-transition: all 0.2s ease-out;
-  background-color: #C9286D; }
-
-#node-22 .form-button:last-child {
-  margin-right: 0; }
-
 /*----- RESETS + BASIC LAYOUT -----*/
 #node-22 {
-  /* Figure out how to center the node - auto margins aren't working anywhere */
-  width: 600px;
-  /*  Arbitrary. 22+22 = 44px of padding added to left/right. */ }
-
-#node-22 .node-info {
-  /* "Hide" the pesky author/publication information.
-  Not using display: none in order to keep the nice gray bottom border. */
-  padding-bottom: 3000px; }
+  width: 600px; }
 
 #node-22 .node-box {
-  /* Bunch of container resets */
   background: none;
   background-image: none;
   border: none; }
 
 #node-22 .node-content {
-  background-color: #EFEFEF;
-  border: 1px solid #ccc;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+  background-color: #EFEFEF;
+  border: 1px solid #ccc;
   padding: 25px 30px; }
 
 #node-22 .node-footer,
 .grippie {
-  /* Get rid of the footer box ("Category: etc"), and the weird textarea drag thing */
   display: none; }
 
 /*----- FORM ELEMENTS-----*/
 #node-22 input:not([type="submit"]),
 #node-22 textarea {
-  /* Spoof border to prevent field jump on focus when border added */
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -1131,38 +1051,33 @@ a:active.more-button {
   font-size: 1.2em;
   padding: 10px 5px;
   width: 100%; }
-
-#node-22 input:not([type="submit"]):focus,
-#node-22 textarea:focus {
-  border: 1px solid #F23183;
-  outline: none; }
+  #node-22 input:not([type="submit"]):focus,
+  #node-22 textarea:focus {
+    border: 1px solid #F23183;
+    outline: none; }
 
 #node-22 textarea {
-  /* Remove scrollbar in IE */
   font: 1.2em Arial, Helvetica, sans-serif;
   overflow: auto;
   width: 100%; }
 
 #node-22 input[type="submit"] {
-  background-color: #3099DF;
-  border: none;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+  background-color: #3099DF;
+  border: none;
   color: white;
   float: right;
   font-size: 1.1em;
   padding: 10px 15px; }
+  #node-22 input[type="submit"]:hover {
+    background: none;
+    background-color: #008AB8;
+    cursor: pointer; }
+  #node-22 input[type="submit"]:active {
+    background-color: #007298; }
 
-#node-22 input[type="submit"]:hover {
-  background: none;
-  background-color: #008AB8;
-  cursor: pointer; }
-
-#node-22 input[type="submit"]:active {
-  background-color: #007298; }
-
-/*----- TYPOGRAPHY-----*/
 #node-22 label {
   color: #F23183;
   font-size: 1.2em;
@@ -1180,13 +1095,11 @@ a:active.more-button {
   border: 1px solid #d0d0d0;
   font-size: 1.1em;
   padding: 0; }
-
-.taxonomy-parent ul {
-  background-color: white;
-  padding: 0; }
-
-.taxonomy-parent ul li {
-  padding-left: 26px; }
+  .taxonomy-parent ul {
+    background-color: white;
+    padding: 0; }
+    .taxonomy-parent ul li {
+      padding-left: 26px; }
 
 .taxonomy-nested {
   border-bottom: 1px solid #DADADA;
@@ -1197,18 +1110,15 @@ a:active.more-button {
   border-bottom: 1px solid #DADADA;
   list-style: none;
   padding: 5px 7px; }
-
-.taxonomy-item:last-child {
-  border: none; }
-
-.taxonomy-item a:hover {
-  color: #000; }
+  .taxonomy-item:last-child {
+    border: none; }
+  .taxonomy-item a:hover {
+    color: #000; }
 
 .item-odd {
   background-color: #eee; }
 
 .taxonomy-nested .taxonomy-item:before {
-  /* Nested sub-categories */
   content: "- ";
   display: inline-block;
   margin-right: 5px; }

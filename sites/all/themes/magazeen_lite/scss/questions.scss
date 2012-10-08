@@ -2,64 +2,28 @@
 /* 10 - ASK THE SEXPERTS WEBFORM
 /* ----------------------------------------------*/
 
-#node-22 .form-button-container {
-  overflow: auto;
-  margin-bottom: 15px;
-}
-
-#node-22 .form-button:link,
-#node-22 .form-button:visited {
-  @include border-radius(7px);
-  background-color: #F23183;
-  color: white;
-  display: block;
-  float: left;
-  font-size: 1.1em;
-  font-weight: bold;
-  margin-right: 10px;
-  padding: 10px;
-  text-align: center;
-  width: 146px;
-}
-  #node-22 .form-button:hover,
-  #node-22 .form-button:active {
-    -webkit-transition: all 0.2s ease-out;
-       -moz-transition: all 0.2s ease-out;
-         -o-transition: all 0.2s ease-out;
-    background-color: #C9286D;
-  }
-  #node-22 .form-button:last-child {
-    margin-right: 0;
-  }
-
-
 /*----- RESETS + BASIC LAYOUT -----*/
 #node-22 {
-  /* Figure out how to center the node - auto margins aren't working anywhere */
-  width: 600px; /*  Arbitrary. 22+22 = 44px of padding added to left/right. */
+  width: 600px;
 }
-#node-22 .node-info {
-  /* "Hide" the pesky author/publication information.
-  Not using display: none in order to keep the nice gray bottom border. */
-  padding-bottom: 3000px;
-}
+
 #node-22 .node-box {
-  /* Bunch of container resets */
+  // Container resets
   background: none;
   background-image: none;
   border: none;
 }
+
 #node-22 .node-content {
+  @include border-radius;
   background-color: #EFEFEF;
   border: 1px solid #ccc;
-  -webkit-border-radius: 3px;
-     -moz-border-radius: 3px;
-          border-radius: 3px;
   padding: 25px 30px;
 }
+
 #node-22 .node-footer,
 .grippie {
-  /* Get rid of the footer box ("Category: etc"), and the weird textarea drag thing */
+  // Get rid of the footer box ("Category: etc"), and the weird textarea drag thing
   display: none;
 }
 
@@ -67,47 +31,44 @@
 /*----- FORM ELEMENTS-----*/
 #node-22 input:not([type="submit"]),
 #node-22 textarea {
-  /* Spoof border to prevent field jump on focus when border added */
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  @include border-box;
   border: 1px solid #ccc;
   font-size: 1.2em;
   padding: 10px 5px;
   width: 100%;
-}
-  #node-22 input:not([type="submit"]):focus,
-  #node-22 textarea:focus {
+
+  &:focus {
     border: 1px solid #F23183;
     outline: none;
   }
+}
+
 #node-22 textarea {
-  /* Remove scrollbar in IE */
   font: 1.2em Arial, Helvetica, sans-serif;
-  overflow: auto;
+  overflow: auto; // Remove scrollbar in IE
   width: 100%;
 }
+
 #node-22 input[type="submit"] {
+  @include border-radius;
   background-color: #3099DF;
   border: none;
-  -webkit-border-radius: 3px;
-     -moz-border-radius: 3px;
-          border-radius: 3px;
   color: white;
   float: right;
   font-size: 1.1em;
   padding: 10px 15px;
-}
-  #node-22 input[type="submit"]:hover {
+
+  &:hover {
     background: none;
     background-color: #008AB8;
     cursor: pointer;
   }
-  #node-22 input[type="submit"]:active {
+
+  &:active {
     background-color: #007298;
   }
+}
 
-/*----- TYPOGRAPHY-----*/
 #node-22 label {
   color: #F23183;
   font-size: 1.2em;

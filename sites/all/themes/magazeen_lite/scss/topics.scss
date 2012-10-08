@@ -12,30 +12,36 @@
   border: 1px solid #d0d0d0;
   font-size: 1.1em;
   padding: 0;
-}
-  .taxonomy-parent ul {
+
+  ul {
     background-color: white;
     padding: 0;
-  }
-    .taxonomy-parent ul li {
+
+    li {
       padding-left: 26px;
     }
+  }
+}
+
 .taxonomy-nested {
   border-bottom: 1px solid #DADADA;
   margin: 0;
 }
+
 .taxonomy-item {
   background-color: white;
   border-bottom: 1px solid #DADADA;
   list-style: none;
   padding: 5px 7px;
+
+  &:last-child { border: none; }
+  a:hover { color: #000; }
 }
-  .taxonomy-item:last-child { border: none; }
-  .taxonomy-item a:hover { color: #000; }
-  .item-odd { background-color: #eee; }
+
+.item-odd { background-color: #eee; }
 
 .taxonomy-nested .taxonomy-item:before {
-  /* Nested sub-categories */
+  // Nested sub-categories
   content: "- ";
   display: inline-block;
   margin-right: 5px;

@@ -1,44 +1,35 @@
-
-/* ----------------------------------------------*/
-/* 0x - TEMPORARY DEV STYLES
- * I use these styles to make the structural divs and
- * such more apparent.  They're an excellent tool
- * for learning how Drupal lays out pages.
-  * -Andrew
-*/
-/* ----------------------------------------------*/
+/* ----------------------------------------------/
+  TEMPORARY DEV STYLES
+    Used to reveal core Drupal CSS structure
+/ ----------------------------------------------*/
 
 /*  _____Header _____ */
-/*
-  #header { background-image: none !important; background-color: blue !important;  }
-  #logo     { background-image: none !important; background-color: green !important;}
-  #logo-image {border: 1px solid #0fc !important;}
-  #searchform-header {}
-*/
+
+// #header { background-image: none !important; background-color: blue !important;  }
+// #logo     { background-image: none !important; background-color: green !important;}
+// #logo-image {border: 1px solid #0fc !important;}
+// #searchform-header {}
+
 
 
 /* _____Content + Node_____ */
-/*
-  .container { border: 1px solid #f00 !important; }
-  #column-large, #column-small { min-height: 400px; }
-  #column-large { background-color: green; }
-  #column-small { background-color: blue; }
-  .column-third { background-color: yellow; }
-  .column-third:last-child { background-color: red; }
-  .list-half { background-color: green; }
-  .list-half:last-child { background-color: red; }
 
-  .breadcrumb {border: 1px solid green !important;}
-  .node { background-color: red !important;      border: none !important; }
-  .node-meta { background-color: orange !important; border: none !important; }
-  .node-title { background-color: yellow !important;  }
-  .node-info { background-color: #0FC !important;  }
-  .node-box { background-color: green !important;   border: none !important; }
-  .node-content { background-color: blue !important;     border: none !important;  color: white !important; }
-  .node-footer { background-color: purple !important;  border: none !important; }
-  .terms { background-color: yellow !important;}
-  .node-readmore { background-color: orange !important; }
-*/
+// .container { border: 1px solid #f00 !important; }
+// #column-large, #column-small { min-height: 400px; }
+// #column-large { background-color: green; }
+// #column-small { background-color: blue; }
+// .column-third { background-color: yellow; }
+// .column-third:last-child { background-color: red; }
+// .list-half { background-color: green; }
+// .list-half:last-child { background-color: red; }
 
-
-/* _____In-progress dev styles_____ */
+// .breadcrumb {border: 1px solid green !important;}
+// .node { background-color: red !important;      border: none !important; }
+// .node-meta { background-color: orange !important; border: none !important; }
+// .node-title { background-color: yellow !important;  }
+// .node-info { background-color: #0FC !important;  }
+// .node-box { background-color: green !important;   border: none !important; }
+// .node-content { background-color: blue !important;     border: none !important;  color: white !important; }
+// .node-footer { background-color: purple !important;  border: none !important; }
+// .terms { background-color: yellow !important;}
+// .node-readmore { background-color: orange !important; }
