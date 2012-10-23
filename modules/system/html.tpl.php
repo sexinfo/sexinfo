@@ -52,7 +52,7 @@
   <script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-7057063-1']);
-    _gaq.push(['_trackPageview']);
+    _gaq.push(['_trackPageview','/404error/?url=' + document.location.pathname + document.location.search + '&ref=' + document.referrer]);
 
     (function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
