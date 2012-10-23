@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Fill in with your LSIT credentials
+
+USERNAME=sshaikh
+PASSWORD=fa%QG#4T
+
+
+# Don't change anything below this point
+URL=webshare.lsit.ucsb.edu/soci/sexinfo/
+
+echo "Pushing to GitHub..."
+git push
+
+echo "Deploying to ${URL}..."
+git ftp push -u ${USERNAME} -p ${PASSWORD} sftp://${URL}
