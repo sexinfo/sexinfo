@@ -5,7 +5,7 @@
   margin: 0;
   padding: 0;
   width: auto;
-  background: #171615 url(images/header.gif) repeat-x top center;
+  background: lighten(#171615, 2); //url(images/header.gif) repeat-x top center;
   border-bottom:1px solid #4a4d4c;
   clear: both;
 }
@@ -42,11 +42,11 @@
 }
 
 #logo {
-  background: url(images/header-shade.gif) no-repeat top right;
+  // background: url(images/header-shade.gif) no-repeat top right;
   float: left;
   height: auto;
   margin: 0;
-  padding: 0; /* 50px 0 15px 0 */
+  padding: 0;
   width: 580px;
 }
 

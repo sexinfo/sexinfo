@@ -383,7 +383,7 @@ p.copyright {
   margin: 0;
   padding: 0;
   width: auto;
-  background: #171615 url(images/header.gif) repeat-x top center;
+  background: #1c1b1a;
   border-bottom: 1px solid #4a4d4c;
   clear: both; }
 
@@ -410,7 +410,6 @@ p.copyright {
   padding: 11px 0; }
 
 #logo {
-  background: url(images/header-shade.gif) no-repeat top right;
   float: left;
   height: auto;
   margin: 0;
