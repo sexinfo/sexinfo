@@ -26,7 +26,7 @@
   <div class="carousel-caption">
     <h3>Sexual Behaviors</h3>
     <p>Sexual techniques are methods for increasing a partner's sexual arousal. These include activites that&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/article/sexual-behaviors" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/sexual-activity-spice-your-sex-life-aphrodisiacs" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
@@ -46,7 +46,7 @@
   <div class="carousel-caption">
     <h3>Sexually Transmitted Infections</h3>
     <p>Sexually transmitted infections (STI's) are passed from one person to another through various types of sexual contact.&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/article/sexually-transmitted-infections-stis" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/category/sexually-transmitted-infections" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
@@ -73,7 +73,7 @@
   <div class="carousel-caption">
     <h3>Contraception</h3>
     <p>Contraception is the intentional prevention of pregnancy. There are many contraceptive methods, also known as&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/category/contraception" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/contraception-barrier-methods-male-condom" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
@@ -93,6 +93,6 @@
   <div class="carousel-caption">
     <h3>Homophobia</h3>
     <p>Homophobia is defined as "irrational fear of, aversion to, or discrimination against homosexuality&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/article/sexual-orientation-queer-sexuality-homophobia" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/sexual-orientation-sexual-identities-homophobia" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
