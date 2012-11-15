@@ -2389,13 +2389,13 @@ function file_directory_temp() {
     }
 
     // Operating system specific dirs.
-    if (substr(PHP_OS, 0, 3) == 'WIN') {
-      $directories[] = 'c:\\windows\\temp';
-      $directories[] = 'c:\\winnt\\temp';
-    }
-    else {
-      $directories[] = '/tmp';
-    }
+    // if (substr(PHP_OS, 0, 3) == 'WIN') {
+    //   $directories[] = 'c:\\windows\\temp';
+    //   $directories[] = 'c:\\winnt\\temp';
+    // }
+    // else {
+    //   $directories[] = '/tmp';
+    // }
     // PHP may be able to find an alternative tmp directory.
     // This function exists in PHP 5 >= 5.2.1, but Drupal
     // requires PHP 5 >= 5.2.0, so we check for it.
