@@ -33,6 +33,6 @@
 </div> <!-- /header -->
 
 <div class="banner new-banner">
-  The Sexperts are back and answering questions again!
+  The Sexperts are taking questions!
   <a href="<?php print $base_path . "ask-sexperts" ?>">We'd love to hear from you &raquo;</a>
 </div>
