@@ -414,7 +414,6 @@ p.copyright {
   height: auto;
   margin: 0;
   padding: 0;
-  /* 50px 0 15px 0 */
   width: 580px; }
 
 #searchform-header {
@@ -456,8 +455,7 @@ img#logo-image {
 
 .social-buttons {
   float: right;
-  margin: 15px 5px 10px;
-  overflow: auto; }
+  margin: -25px 0 0 10px; }
 
 .social-buttons a {
   float: left;

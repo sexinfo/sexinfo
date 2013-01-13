@@ -26,7 +26,10 @@
     <div class="social-buttons">
       <a class="soc-yt" href="http://www.youtube.com/user/UCSBSexInfoOnline">YouTube</a>
       <a class="soc-fb" href="https://www.facebook.com/SexInfoOnline">Facebook</a>
-      <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.sexinfoonline.com&amp;send=false&amp;layout=button_count&amp;width=50&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font=lucida+grande&amp;height=21&amp;appId=228872410538762" scrolling="no" frameborder="0" style="border:none; border-height:10px; padding-top:5px; overflow:hidden; width:75px; height:21px;" allowtransparency="true"></iframe>
+
+      <div style="display: inline-block; margin-top: 3px">
+        <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FSexInfoOnline&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=false&amp;font&amp;colorscheme=dark&amp;action=like&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:35px;" allowTransparency="true"></iframe>
+      </div>
     </div><!-- .social-buttons -->
 
   </div> <!-- /header-container -->
