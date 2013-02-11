@@ -1,0 +1,13 @@
+<?php
+/**
+ * @file views.install
+ * Contains install and update functions for Views.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function google_analytics_views_install() {
+  db_query("UPDATE {system} SET weight = 11 WHERE name = 'google_analytics_views'");
+}
+

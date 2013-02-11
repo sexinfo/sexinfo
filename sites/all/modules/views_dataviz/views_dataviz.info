@@ -1,0 +1,16 @@
+name = Views Dataviz
+description = Provides a a views plugin for generating charts, graphs and other dataviz widgets.
+package = Views
+core = 7.x
+files[] = views_dataviz.module
+files[] = views_dataviz.views.inc
+files[] = views_dataviz_plugin_style_dataviz.inc
+files[] = views_dataviz_plugin_display_extender_dataviz_bigtext.inc
+dependencies[] = views
+
+; Information added by drupal.org packaging script on 2013-02-05
+version = "7.x-1.0-alpha3+4-dev"
+core = "7.x"
+project = "views_dataviz"
+datestamp = "1360030355"
+

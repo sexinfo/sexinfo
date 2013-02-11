@@ -1,0 +1,145 @@
+<?php
+/**
+ * @file
+ * Front-end interfaces that use the Google Analytics API module.
+ */
+
+/**
+ * Implementation of hook_menu().
+ */
+function google_analytics_reports_menu() {
+  $items['admin/reports/google-analytics'] = array(
+    'title' => 'Google Analytics Summary',
+    'description' => "View a traffic report for your site.",
+    'page callback' => 'google_analytics_reports_summary_page',
+    'access arguments' => array('access google analytics reports'),
+    'file' => 'google_analytics_reports.pages.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/reports/google-analytics/detail'] = array(
+    'title' => 'Content Detail',
+    'page callback' => 'google_analytics_reports_detail_page',
+    'access arguments' => array('access google analytics reports'),
+    'file' => 'google_analytics_reports.pages.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['google-analytics-reports/ajax/path-mini'] = array(
+    'title' => 'Page traffic',
+    'page callback' => 'google_analytics_reports_path_mini_ajax',
+    'access arguments' => array('access google analytics reports'),
+    'file' => 'google_analytics_reports.blocks.inc',
+    'type' => MENU_CALLBACK,
+  );
+  $items['google-analytics-reports/ajax/dashboard'] = array(
+    'title' => 'Page traffic',
+    'page callback' => 'google_analytics_reports_dashboard_ajax',
+    'access arguments' => array('access google analytics reports'),
+    'file' => 'google_analytics_reports.blocks.inc',
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_init().
+ */
+function google_analytics_reports_init() {
+  drupal_add_js(array('googleAnalyticsReportsAjaxUrl' => url('google-analytics-reports/ajax')), 'setting');
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function google_analytics_reports_block_info() {
+  $blocks['path_mini']['info'] = t('Google Analytics page traffic');
+  $blocks['dashboard']['info'] = t('Google Analytics site visits');
+  $blocks['dashboard']['properties']['administrative'] = TRUE;
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function google_analytics_reports_block_view($delta = '') {
+  if (!user_access('access google analytics reports')) {
+    return FALSE;
+  }
+  switch ($delta) {
+    case 'path_mini':
+      $block['subject'] = t('Page traffic');
+      $block['content'] = '<div class="google-analytics-reports-path-mini"></div>';
+      return $block;
+    case 'dashboard':
+      $block['subject'] = t('Google Analytics Summary');
+      $block['content'] = '<div class="google-analytics-reports-dashboard"></div>';
+      return $block;
+  }
+}
+
+/**
+ * Implementation of hook_permission().
+ */
+function google_analytics_reports_permission() {
+  return array(
+    'access google analytics reports' => array(
+      'title' => t('access google analytics reports'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function google_analytics_reports_theme() {
+  return array(
+    'google_analytics_reports_summary' => array(
+      'variables' => array('summary' => NULL),
+      'template' => 'google_analytics_reports_summary',
+      'file' => 'google_analytics_reports.theme.inc',
+    ),
+    'google_analytics_reports_detail' => array(
+      'variables' => array('report' => NULL),
+      'template' => 'google_analytics_reports_detail',
+      'file' => 'google_analytics_reports.theme.inc',
+    ),
+    'google_analytics_reports_dashboard' => array(
+      'variables' => array('report' => NULL),
+      'template' => 'google_analytics_reports_dashboard',
+      'file' => 'google_analytics_reports.theme.inc',
+    ),
+    'google_analytics_reports_path_mini' => array(
+      'variables' => array('report' => NULL),
+      'file' => 'google_analytics_reports.theme.inc',
+    ),
+  );
+}
+
+/*
+ * Construct a filter string that grabs pagePaths corresponding to the specified path.
+ */
+function _google_analytics_reports_path_filter($path) {
+  // Google Analytics regex filters have a limit of 32 characters. Therefore we
+  // can't simply create one filter per pagePath. Instead we are going too do a
+  // "contains substring" match on the path, and then take as many of the ending
+  // characters paired with ([?#].*)?$.
+
+  // Use 100 character maximum to allow some room for escaping regex metacharacters.
+  if (strlen($path) <= 121) {
+    $filter = 'ga:pagePath=~^' . preg_quote($path) . '(#.*)?$';
+  }
+  else {
+    $filter = 'ga:pagePath=@' . $path . ';ga:pagePath=~' . preg_quote(substr($path, -100)) . '(#.*)?$';
+  }
+  return $filter;
+}
+
+/**
+ * Helper function to generate an error message.
+ */
+function _google_analytics_reports_error_message() {
+  $message = t('There was a problem retrieving the statistics.');
+  if (user_access('access site reports') && user_access('access administration pages') && module_exists('dblog')) {
+    $message .= ' ' . t('Please review the <a href="!url">watchdog</a> for details.', array('!url' => url('admin/reports/dblog')));
+  }
+  return $message;
+}

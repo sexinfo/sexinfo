@@ -1,0 +1,1253 @@
+<?php
+
+function google_analytics_views_views_api() {
+  return array(
+    'api' => '3',
+    'path' => drupal_get_path('module', 'google_analytics_views'),
+  );
+}
+
+function google_analytics_views_get_fields() {
+  return array(
+  'visitorType' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Visitor',
+    'name' => 'ga:visitorType',
+    'description' => 'A boolean indicating if a visitor is new or returning. Possible values: <code>New Visitor</code>, <code>Returning Visitor</code>.',
+  ),
+  'visitCount' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Visitor',
+    'name' => 'ga:visitCount',
+    'description' => 'The visit index for a visitor to your website. Each visit from a unique visitor will get its own incremental index starting from 1 for the first visit. Subsequent visits do not change previous visit indicies. For example, if a certain visitor has 4 visits to your website, <code>ga:visitCount</code> for that visitor will have 4 distinct values of &#39;1&#39; through &#39;4&#39;.',
+  ),
+  'daysSinceLastVisit' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Visitor',
+    'name' => 'ga:daysSinceLastVisit',
+    'description' => 'The number of days elapsed since visitors last visited your website. Used to calculate visitor loyalty.',
+  ),
+  'userDefinedValue' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Visitor',
+    'name' => 'ga:userDefinedValue',
+    'description' => 'The value provided when you define custom visitor segments for your website. For more information, see <a href=\'http://code.google.com/apis/analytics/docs/tracking/gaTrackingVisitors.html#customVisitors\'>Creating Custom Visitor Segments</a>.',
+  ),
+  'visitLength' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Session',
+    'name' => 'ga:visitLength',
+    'description' => 'The length of a visit to your website measured in seconds and reported in second increments. The value returned is a string.',
+  ),
+  'referralPath' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Traffic Sources',
+    'name' => 'ga:referralPath',
+    'description' => 'The path of the referring URL (e.g. <code>document.referrer</code>). If someone places a link to your website on their website, this element contains the path of the page that contains the referring link.',
+  ),
+  'campaign' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Traffic Sources',
+    'name' => 'ga:campaign',
+    'description' => 'When using manual campaign tracking, the value of the <code>utm_campaign</code> campaign tracking parameter. When using AdWords autotagging, the name(s) of the online ad campaign that you use for your website. Otherwise the value <code>(not set)</code> is used.',
+  ),
+  'source' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Traffic Sources',
+    'name' => 'ga:source',
+    'description' => 'The source of referrals to your website. When using manual campaign tracking, the value of the <code>utm_source</code> campaign tracking parameter. When using AdWords autotagging, the value is <code>google</code>. Otherwise the domain of the source referring the visitor to your website. (e.g. <code>document.referrer</code>). The value may also contain a port address. If the visitor came to the site without a referrer, the value is <code>(direct)</code>',
+  ),
+  'medium' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Traffic Sources',
+    'name' => 'ga:medium',
+    'description' => 'The type of referrals to your website. When using manual campaign tracking, the value of the <code>utm_medium</code> campaign tracking parameter. When using AdWords autotagging, the value is <code>ppc</code>. If the user comes from a search engine detected by Google Analytics, the value is <code>organic</code>. If the referrer is not a search engine, the value is <code>referral</code>. If the visitor came directly to the site, and <code>document.referrer</code> is empty, the value is <code>(none)</code>.',
+  ),
+  'keyword' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Traffic Sources',
+    'name' => 'ga:keyword',
+    'description' => 'When using manual campaign tracking, the value of the <code>utm_term</code> campaign tracking parameter. When using AdWords autotagging or if a visitor used organic search to reach your website, the keywords used by visitors to reach your website. Otherwise the value is <code>(not set)</code>.',
+  ),
+  'adContent' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Traffic Sources',
+    'name' => 'ga:adContent',
+    'description' => 'When using manual campaign tracking, the value of the <code>utm_content</code> campaign tracking parameter. When using AdWords autotagging, the first line of the text for your online Ad campaign. If you are using mad libs for your AdWords content, this field displays the keywords you provided for the mad libs keyword match. Otherwise the value is <code>(not set)</code>',
+  ),
+  'adGroup' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'AdWords',
+    'name' => 'ga:adGroup',
+    'description' => 'The name of your AdWords ad group.',
+  ),
+  'adSlot' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'AdWords',
+    'name' => 'ga:adSlot',
+    'description' => 'The location of the advertisement on the hosting page (Top, RHS, or not set).',
+  ),
+  'adSlotPosition' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'AdWords',
+    'name' => 'ga:adSlotPosition',
+    'description' => 'The ad slot positions in which your AdWords ads appeared (1-8).',
+  ),
+  'adDistributionNetwork' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'AdWords',
+    'name' => 'ga:adDistributionNetwork',
+    'description' => 'The networks used to deliver your ads (Content, Search, Search partners, etc.).',
+  ),
+  'adMatchType' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'AdWords',
+    'name' => 'ga:adMatchType',
+    'description' => 'The match types applied to your keywords (Phrase, Exact, Broad, etc.). Ads on the content network are identified as &quot;Content network&quot;.',
+  ),
+  'adMatchedQuery' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'AdWords',
+    'name' => 'ga:adMatchedQuery',
+    'description' => 'The search queries that triggered impressions of your AdWords ads.',
+  ),
+  'adPlacementDomain' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'AdWords',
+    'name' => 'ga:adPlacementDomain',
+    'description' => 'The domains where your ads on the content network were placed.',
+  ),
+  'adPlacementUrl' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'AdWords',
+    'name' => 'ga:adPlacementUrl',
+    'description' => 'The URLs where your ads on the content network were placed.',
+  ),
+  'adFormat' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'AdWords',
+    'name' => 'ga:adFormat',
+    'description' => 'Your AdWords ad formats (Text, Image, Flash, Video, etc.).',
+  ),
+  'adTargetingType' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'AdWords',
+    'name' => 'ga:adTargetingType',
+    'description' => 'How your AdWords ads were targeted (keyword, placement, and vertical targeting, etc.).',
+  ),
+  'adTargetingOption' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'AdWords',
+    'name' => 'ga:adTargetingOption',
+    'description' => 'How you manage your ads on the content network. Values are <code>Automatic placements</code> or <code>Managed placements</code>.',
+  ),
+  'adDisplayUrl' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'AdWords',
+    'name' => 'ga:adDisplayUrl',
+    'description' => 'The URLs your AdWords ads displayed.',
+  ),
+  'adDestinationUrl' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'AdWords',
+    'name' => 'ga:adDestinationUrl',
+    'description' => 'The URLs to which your AdWords ads referred traffic.',
+  ),
+  'adwordsCustomerId' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'AdWords',
+    'name' => 'ga:adwordsCustomerId',
+    'description' => 'A string. Corresponds to AdWords API <a href=\'http://code.google.com/apis/adwords/docs/developer/AccountInfo.html\'>AccountInfo.customerId</a>.',
+  ),
+  'adwordsCampaignId' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'AdWords',
+    'name' => 'ga:adwordsCampaignId',
+    'description' => 'A string. Corresponds to AdWords API <a href=\'http://code.google.com/apis/adwords/v2009/docs/reference/CampaignService.Campaign.html\'>Campaign.id</a>.',
+  ),
+  'adwordsAdGroupId' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'AdWords',
+    'name' => 'ga:adwordsAdGroupId',
+    'description' => 'A string. Corresponds to AdWords API <a href=\'http://code.google.com/apis/adwords/v2009/docs/reference/AdGroupService.AdGroup.html\'>AdGroup.id</a>.',
+  ),
+  'adwordsCreativeId' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'AdWords',
+    'name' => 'ga:adwordsCreativeId',
+    'description' => 'A string. Corresponds to AdWords API <a href=\'http://code.google.com/apis/adwords/v2009/docs/reference/AdGroupAdService.Ad.html\'>Ad.id</a>.',
+  ),
+  'adwordsCriteriaId' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'AdWords',
+    'name' => 'ga:adwordsCriteriaId',
+    'description' => 'A string. Corresponds to AdWords API <a href=\'http://code.google.com/apis/adwords/v2009/docs/reference/AdGroupCriterionService.Criterion.html\'>Criterion.id</a>.',
+  ),
+  'browser' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'System',
+    'name' => 'ga:browser',
+    'description' => 'The names of browsers used by visitors to your website. For example, <code>Internet Explorer</code> or <code>Firefox</code>.',
+  ),
+  'browserVersion' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'System',
+    'name' => 'ga:browserVersion',
+    'description' => 'The browser versions used by visitors to your website. For example, <code>2.0.0.14</code>',
+  ),
+  'operatingSystem' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'System',
+    'name' => 'ga:operatingSystem',
+    'description' => 'The operating system used by your visitors. For example, <code>Windows</code>, <code>Linux</code> , <code>Macintosh</code>, <code>iPhone</code>, <code>iPod</code>.',
+  ),
+  'operatingSystemVersion' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'System',
+    'name' => 'ga:operatingSystemVersion',
+    'description' => 'The version of the operating system used by your visitors, such as <code>XP</code> for Windows or <code>PPC</code> for Macintosh.',
+  ),
+  'flashVersion' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'System',
+    'name' => 'ga:flashVersion',
+    'description' => 'The versions of Flash supported by visitors&#39; browsers, including minor versions.',
+  ),
+  'javaEnabled' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'System',
+    'name' => 'ga:javaEnabled',
+    'description' => 'Indicates Java support for visitors&#39; browsers. The possible values are <code>Yes</code> or <code>No</code> where the first letter must be capitalized.',
+  ),
+  'isMobile' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'System',
+    'name' => 'ga:isMobile',
+    'description' => 'Indicates mobile visitors. The possible values are <code>Yes</code> or <code>No</code> where the first letter must be capitalized.',
+  ),
+  'language' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'System',
+    'name' => 'ga:language',
+    'description' => 'The language provided by the HTTP Request for the browser. Values are given as an <a href=\'http://en.wikipedia.org/wiki/ISO_639\'>ISO-639 code</a> (e.g. <code>en-gb</code> for British English).',
+  ),
+  'screenColors' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'System',
+    'name' => 'ga:screenColors',
+    'description' => 'The color depth of visitors&#39; monitors, as retrieved from the DOM of the visitor&#39;s browser. For example <code>4-bit</code>, <code>8-bit</code>, <code>24-bit</code>, or <code>undefined-bit</code>.',
+  ),
+  'screenResolution' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'System',
+    'name' => 'ga:screenResolution',
+    'description' => 'The screen resolution of visitors&#39; monitors, as retrieved from the DOM of the visitor&#39;s browser. For example: <code>1024x738</code>.',
+  ),
+  'continent' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Geo / Network',
+    'name' => 'ga:continent',
+    'description' => 'The continents of website visitors, derived from IP addresses.',
+  ),
+  'subContinent' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Geo / Network',
+    'name' => 'ga:subContinent',
+    'description' => 'The sub-continent of website visitors, derived from IP addresses. For example, <code>Polynesia</code> or <code>Northern Europe</code>.',
+  ),
+  'country' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Geo / Network',
+    'name' => 'ga:country',
+    'description' => 'The countries of website visitors, derived from IP addresses.',
+  ),
+  'region' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Geo / Network',
+    'name' => 'ga:region',
+    'description' => 'The region of website visitors, derived from IP addresses. In the U.S., a region is a state, such as <code>New York</code>.',
+  ),
+  'city' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Geo / Network',
+    'name' => 'ga:city',
+    'description' => 'The cities of website visitors, derived from IP addresses.',
+  ),
+  'latitude' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Geo / Network',
+    'name' => 'ga:latitude',
+    'description' => 'The approximate latitude of the visitor&#39;s city. Derived from IP address. Locations north of the equator are represented by positive values and locations south of the equator by negative values.',
+  ),
+  'longitude' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Geo / Network',
+    'name' => 'ga:longitude',
+    'description' => 'The approximate longitude of the visitor&#39;s city. Derived from IP address. Locations east of the meridian are represented by positive values and locations west of the meridian by negative values.',
+  ),
+  'networkDomain' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Geo / Network',
+    'name' => 'ga:networkDomain',
+    'description' => 'The domain name of the ISPs used by visitors to your website. This is derived from the domain name registered to the IP address.',
+  ),
+  'networkLocation' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Geo / Network',
+    'name' => 'ga:networkLocation',
+    'description' => 'The name of service providers used to reach your website. For example, if most visitors to your website come via the major service providers for cable internet, you will see the names of those cable service providers in this element.',
+  ),
+  'hostname' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Page Tracking',
+    'name' => 'ga:hostname',
+    'description' => 'The hostname from which the tracking request was made.',
+  ),
+  'pagePath' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Page Tracking',
+    'name' => 'ga:pagePath',
+    'description' => 'A page on your website specified by path and/or query parameters. Use in conjunction with <code>ga:hostname</code> to get the full URL of the page.',
+  ),
+  'pageTitle' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Page Tracking',
+    'name' => 'ga:pageTitle',
+    'description' => 'The title of a page. Keep in mind that multiple pages might have the same page title.',
+  ),
+  'landingPagePath' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Page Tracking',
+    'name' => 'ga:landingPagePath',
+    'description' => 'The first page in a user&#39;s session, or landing page.',
+  ),
+  'secondPagePath' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Page Tracking',
+    'name' => 'ga:secondPagePath',
+    'description' => 'The second page in a user&#39;s session.',
+  ),
+  'exitPagePath' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Page Tracking',
+    'name' => 'ga:exitPagePath',
+    'description' => 'The last page in a user&#39;s session, or <code>exit</code> page.',
+  ),
+  'previousPagePath' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Page Tracking',
+    'name' => 'ga:previousPagePath',
+    'description' => 'A page on your website that was visited <code>before</code> another page on your website. Typically used with the <code>ga:nextPagePath</code> dimension.',
+  ),
+  'nextPagePath' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Page Tracking',
+    'name' => 'ga:nextPagePath',
+    'description' => 'A page on your website that was visited <code>after</code> another page on your website. Typically used with the <code>ga:previousPagePath</code> dimension.',
+  ),
+  'pageDepth' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Page Tracking',
+    'name' => 'ga:pageDepth',
+    'description' => 'The number of pages visited by visitors during a session (visit). The value is a histogram that counts pageviews across a range of possible values. In this calculation, all visits will have at least one pageview, and some percentage of visits will have more.',
+  ),
+  'searchUsed' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Internal Search',
+    'name' => 'ga:searchUsed',
+    'description' => 'A boolean to distinguish whether internal site search was used in a session. Values are <code>Visits With Site Search</code> and <code>Visits Without Site Search</code>.',
+  ),
+  'searchKeyword' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Internal Search',
+    'name' => 'ga:searchKeyword',
+    'description' => 'Search terms used by website visitors on your internal site search.',
+  ),
+  'searchKeywordRefinement' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Internal Search',
+    'name' => 'ga:searchKeywordRefinement',
+    'description' => 'Subsequent keyword search terms or strings entered by users after a given initial string search.',
+  ),
+  'searchCategory' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Internal Search',
+    'name' => 'ga:searchCategory',
+    'description' => 'The categories used for the internal search if you have this enabled for your profile. For example, you might have product categories such as <code>electronics</code>, <code>furniture</code>, or <code>clothing</code>.',
+  ),
+  'searchStartPage' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Internal Search',
+    'name' => 'ga:searchStartPage',
+    'description' => 'A page where the user initiated an internal site search.',
+  ),
+  'searchDestinationPage' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Internal Search',
+    'name' => 'ga:searchDestinationPage',
+    'description' => 'A page that the user visited after performing an internal website search.',
+  ),
+  'eventCategory' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Event Tracking',
+    'name' => 'ga:eventCategory',
+    'description' => 'The category of the event.',
+  ),
+  'eventAction' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Event Tracking',
+    'name' => 'ga:eventAction',
+    'description' => 'The action of the event.',
+  ),
+  'eventLabel' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Event Tracking',
+    'name' => 'ga:eventLabel',
+    'description' => 'The label of the event.',
+  ),
+  'transactionId' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Ecommerce',
+    'name' => 'ga:transactionId',
+    'description' => 'The transaction ID for the shopping cart purchase as supplied by your ecommerce tracking method.',
+  ),
+  'affiliation' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Ecommerce',
+    'name' => 'ga:affiliation',
+    'description' => 'Typically used to designate a supplying company or brick and mortar location; product affiliation.',
+  ),
+  'visitsToTransaction' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Ecommerce',
+    'name' => 'ga:visitsToTransaction',
+    'description' => 'The number of visits between users&#39; purchases and the related campaigns that lead to the purchases.',
+  ),
+  'daysToTransaction' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Ecommerce',
+    'name' => 'ga:daysToTransaction',
+    'description' => 'The number of days between users&#39; purchases and the related campaigns that lead to the purchases.',
+  ),
+  'productSku' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Ecommerce',
+    'name' => 'ga:productSku',
+    'description' => 'The product sku for purchased items as you have defined them in your ecommerce tracking application.',
+  ),
+  'productName' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Ecommerce',
+    'name' => 'ga:productName',
+    'description' => 'The product name for purchased items as supplied by your ecommerce tracking application.',
+  ),
+  'productCategory' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Ecommerce',
+    'name' => 'ga:productCategory',
+    'description' => 'Any product variations (size, color) for purchased items as supplied by your ecommerce application.',
+  ),
+  'customVarName(n)' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Custom Variables',
+    'name' => 'ga:customVarName(n)',
+    'description' => 'The name for the requested custom variable.',
+  ),
+  'customVarValue(n)' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Custom Variables',
+    'name' => 'ga:customVarValue(n)',
+    'description' => 'The value for the requested custom variable.',
+  ),
+  'date' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Time',
+    'name' => 'ga:date',
+    'description' => 'The date of the visit. An integer in the form YYYYMMDD.',
+  ),
+  'year' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Time',
+    'name' => 'ga:year',
+    'description' => 'The year of the visit. A four-digit year from 2005 to the current year.',
+  ),
+  'month' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Time',
+    'name' => 'ga:month',
+    'description' => 'The month of the visit. A two digit integer from 01 to 12.',
+  ),
+  'week' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Time',
+    'name' => 'ga:week',
+    'description' => 'The week of the visit. A two-digit number from 01 to 53. Each week starts on Sunday.',
+  ),
+  'day' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Time',
+    'name' => 'ga:day',
+    'description' => 'The day of the month. A two-digit number from 01 to 31.',
+  ),
+  'hour' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Time',
+    'name' => 'ga:hour',
+    'description' => 'A two-digit hour of the day ranging from 00-23 in the timezone configured for the account. This value is also corrected for daylight savings time, adhering to all local rules for daylight savings time. If your timezone follows daylight savings time, there will be an apparent bump in the number of visits during the change-over hour (e.g. between 1:00 and 2:00) for the day per year when that hour repeats. A corresponding hour with zero visits will occur at the opposite changeover. (Google Analytics does not track visitor time more precisely than hours.)',
+  ),
+  'nthMonth' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Time',
+    'name' => 'ga:nthMonth',
+    'description' => 'Index for each month in the specified date range. Index for the first month in the date range is 0, 1 for the second month, and so on. The index corresponds to <code>ga:month</code> entries.',
+  ),
+  'nthWeek' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Time',
+    'name' => 'ga:nthWeek',
+    'description' => 'Index for each week in the specified date range. Index for the first week in the date range is 0, 1 for the second week, and so on. The index corresponds to <code>ga:week</code> entries.',
+  ),
+  'nthDay' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Time',
+    'name' => 'ga:nthDay',
+    'description' => 'Index for each day in the specified date range. Index for the first day (i.e., start-date) in the date range is 0, 1 for the second day, and so on.',
+  ),
+  'dayOfWeek' => 
+  array(
+    'type' => 'dimension',
+    'group' => 'Time',
+    'name' => 'ga:dayOfWeek',
+    'description' => 'The day of the week. A one-digit number from 0 (Sunday) to 6 (Monday).',
+  ),
+  'visitors' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Visitor',
+    'name' => 'ga:visitors',
+    'description' => 'Total number of visitors to your website for the requested time period.',
+  ),
+  'newVisits' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Visitor',
+    'name' => 'ga:newVisits',
+    'description' => 'The number of visitors whose visit to your website was marked as a first-time visit.',
+  ),
+  'percentNewVisits' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Visitor',
+    'name' => 'ga:percentNewVisits',
+    'description' => '<code>(ga:newVisits / ga:visits) * 100</code><br/>The percentage of visits by people who had never visited your site before.',
+  ),
+  'visits' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Session',
+    'name' => 'ga:visits',
+    'description' => 'Counts the total number of sessions.',
+  ),
+  'bounces' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Session',
+    'name' => 'ga:bounces',
+    'description' => 'The total number of single page (or single engagement hit) sessions to your website.',
+  ),
+  'entranceBounceRate' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Session',
+    'name' => 'ga:entranceBounceRate',
+    'description' => '<code>(ga:bounces / ga:entrances) * 100</code><br/>The percentage of single-page visits (i.e. visits in which the person left your site from the entrance page).',
+  ),
+  'visitBounceRate' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Session',
+    'name' => 'ga:visitBounceRate',
+    'description' => '<code>(ga:bounces / ga:visits) * 100</code><br/>The percentage of single-page visits (i.e., visits in which the person left your site from the first page).',
+  ),
+  'timeOnSite' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Session',
+    'name' => 'ga:timeOnSite',
+    'description' => 'The total duration of visitor sessions represented in total seconds.',
+  ),
+  'avgTimeOnSite' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Session',
+    'name' => 'ga:avgTimeOnSite',
+    'description' => '<code>ga:timeOnSite / ga:visits</code><br/>The average duration visitor sessions represented in total seconds.',
+  ),
+  'organicSearches' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Traffic Sources',
+    'name' => 'ga:organicSearches',
+    'description' => 'The number of organic searches that happened within a session. This metric is search engine agnostic.',
+  ),
+  'impressions' => 
+  array(
+    'type' => 'metric',
+    'group' => 'AdWords',
+    'name' => 'ga:impressions',
+    'description' => 'Total number of campaign impressions.',
+  ),
+  'adClicks' => 
+  array(
+    'type' => 'metric',
+    'group' => 'AdWords',
+    'name' => 'ga:adClicks',
+    'description' => 'The total number of times users have clicked on an ad to reach your website.',
+  ),
+  'adCost' => 
+  array(
+    'type' => 'metric',
+    'group' => 'AdWords',
+    'name' => 'ga:adCost',
+    'description' => 'Derived cost for the advertising campaign. The currency for this value is based on the currency that you set in your AdWords account.',
+  ),
+  'CPM' => 
+  array(
+    'type' => 'metric',
+    'group' => 'AdWords',
+    'name' => 'ga:CPM',
+    'description' => 'Cost per thousand impressions.',
+  ),
+  'CPC' => 
+  array(
+    'type' => 'metric',
+    'group' => 'AdWords',
+    'name' => 'ga:CPC',
+    'description' => 'Cost to advertiser per click.',
+  ),
+  'CTR' => 
+  array(
+    'type' => 'metric',
+    'group' => 'AdWords',
+    'name' => 'ga:CTR',
+    'description' => 'Click-through-rate for your ad. This is equal to the number of clicks divided by the number of impressions for your ad (e.g. how many times users clicked on one of your ads where that ad appeared).',
+  ),
+  'costPerTransaction' => 
+  array(
+    'type' => 'metric',
+    'group' => 'AdWords',
+    'name' => 'ga:costPerTransaction',
+    'description' => '<code>ga:adCost / ga:transactions</code><br/>The cost per transaction for your site.',
+  ),
+  'costPerGoalConversion' => 
+  array(
+    'type' => 'metric',
+    'group' => 'AdWords',
+    'name' => 'ga:costPerGoalConversion',
+    'description' => '<code>ga:adCost / ga:goalCompletionsAll</code><br/>The cost per goal conversion for your site.',
+  ),
+  'costPerConversion' => 
+  array(
+    'type' => 'metric',
+    'group' => 'AdWords',
+    'name' => 'ga:costPerConversion',
+    'description' => '<code>ga:adCost / (ga:transactions + ga:goalCompletionsAll)</code><br/>The cost per conversion (including ecommerce and goal conversions) for your site.',
+  ),
+  'RPC' => 
+  array(
+    'type' => 'metric',
+    'group' => 'AdWords',
+    'name' => 'ga:RPC',
+    'description' => '<code>(ga:transactionRevenue + ga:goalValueAll) / ga:adClicks</code><br/>RPC or revenue-per-click is the average revenue (from ecommerce sales and/or goal value) you received for each click on one of your search ads.',
+  ),
+  'ROI' => 
+  array(
+    'type' => 'metric',
+    'group' => 'AdWords',
+    'name' => 'ga:ROI',
+    'description' => '<code>(ga:transactionRevenue + ga:goalValueAll - ga:adCost) / ga:adCost</code><br/>Returns on Investment is overall transaction profit divided by derived advertising cost.',
+  ),
+  'margin' => 
+  array(
+    'type' => 'metric',
+    'group' => 'AdWords',
+    'name' => 'ga:margin',
+    'description' => '<code>(ga:transactionRevenue + ga:goalValueAll - ga:adCost) / (ga:transactionRevenue + ga:goalValueAll)</code><br/>The overall transaction profit margin.',
+  ),
+  'goal(n)Starts' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Goal Conversions',
+    'name' => 'ga:goal(n)Starts',
+    'description' => 'The total number of starts for the requested goal number.',
+  ),
+  'goalStartsAll' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Goal Conversions',
+    'name' => 'ga:goalStartsAll',
+    'description' => 'The total number of starts for all goals defined for your profile.',
+  ),
+  'goal(n)Completions' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Goal Conversions',
+    'name' => 'ga:goal(n)Completions',
+    'description' => 'The total number of completions for the requested goal number.',
+  ),
+  'goalCompletionsAll' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Goal Conversions',
+    'name' => 'ga:goalCompletionsAll',
+    'description' => 'The total number of completions for all goals defined for your profile.',
+  ),
+  'goal(n)Value' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Goal Conversions',
+    'name' => 'ga:goal(n)Value',
+    'description' => 'The total numeric value for the requested goal number.',
+  ),
+  'goalValueAll' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Goal Conversions',
+    'name' => 'ga:goalValueAll',
+    'description' => 'The total numeric value for all goals defined for your profile.',
+  ),
+  'goalValuePerVisit' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Goal Conversions',
+    'name' => 'ga:goalValuePerVisit',
+    'description' => '<code>ga:goalValueAll / ga:visits</code><br/>The average goal value of a visit to your site.',
+  ),
+  'goal(n)ConversionRate' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Goal Conversions',
+    'name' => 'ga:goal(n)ConversionRate',
+    'description' => '<code>(ga:goal(n)Completions / ga:visits) * 100</code><br/>The percentage of visits which resulted in a conversion to the requested goal number.',
+  ),
+  'goalConversionRateAll' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Goal Conversions',
+    'name' => 'ga:goalConversionRateAll',
+    'description' => '<code>(ga:goalCompletionsAll / ga:visits) * 100</code><br/>The percentage of visits which resulted in a conversion to at least one of your goals.',
+  ),
+  'goal(n)Abandons' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Goal Conversions',
+    'name' => 'ga:goal(n)Abandons',
+    'description' => '<code>ga:goal(n)Starts - ga:goal(n)Completions</code><br/>The number of times visitors started conversion activity on the requested goal number without actually completing it.',
+  ),
+  'goalAbandonsAll' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Goal Conversions',
+    'name' => 'ga:goalAbandonsAll',
+    'description' => '<code>ga:goalStartsAll - ga:goalCompletionsAll</code><br/>The overall number of times visitors started goals without actually completing them.',
+  ),
+  'goal(n)AbandonRate' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Goal Conversions',
+    'name' => 'ga:goal(n)AbandonRate',
+    'description' => '<code>((ga:goal(n)Starts - ga:goal(n)Completions) / ga:goal(n)Starts) * 100</code><br/>The rate at which the requested goal number was abandoned.',
+  ),
+  'goalAbandonRateAll' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Goal Conversions',
+    'name' => 'ga:goalAbandonRateAll',
+    'description' => '<code>(ga:goalStartsAll - ga:goalCompletionsAll) / ga:goalStartsAll) * 100</code><br/>The rate at which goals were abandoned.',
+  ),
+  'entrances' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Page Tracking',
+    'name' => 'ga:entrances',
+    'description' => 'The number of entrances to your website measured as the first pageview in a session. Typically used with <code>ga:landingPagePath</code>',
+  ),
+  'entranceRate' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Page Tracking',
+    'name' => 'ga:entranceRate',
+    'description' => '<code>(ga:entrances / ga:pageviews) * 100</code><br/>The percentage of pageviews in which this page was the entrance.',
+  ),
+  'pageviews' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Page Tracking',
+    'name' => 'ga:pageviews',
+    'description' => 'The total number of pageviews for your website.',
+  ),
+  'pageviewsPerVisit' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Page Tracking',
+    'name' => 'ga:pageviewsPerVisit',
+    'description' => '<code>ga:pageviews / ga:visits</code><br/>The average number of pages viewed during a visit to your site. Repeated views of a single page are counted.',
+  ),
+  'uniquePageviews' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Page Tracking',
+    'name' => 'ga:uniquePageviews',
+    'description' => 'The number of different (unique) pages within a session. This takes into both the <code>pagePath</code> and <code>pageTitle</code> to determine uniqueness.',
+  ),
+  'timeOnPage' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Page Tracking',
+    'name' => 'ga:timeOnPage',
+    'description' => 'How long a visitor spent on a particular page in seconds. Calculated by subtracting the initial view time for a particular page from the initial view time for a subsequent page. Thus, this metric does not apply to exit pages for your website.',
+  ),
+  'avgTimeOnPage' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Page Tracking',
+    'name' => 'ga:avgTimeOnPage',
+    'description' => '<code>ga:timeOnPage / (ga:pageviews - ga:exits)</code><br/>The average amount of time visitors spent viewing this page or a set of pages.',
+  ),
+  'exits' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Page Tracking',
+    'name' => 'ga:exits',
+    'description' => 'The number of exits from your website.',
+  ),
+  'exitRate' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Page Tracking',
+    'name' => 'ga:exitRate',
+    'description' => '<code>(ga:exits / ga:pageviews) * 100</code><br/>The percentage of site exits that occurred out of the total page views.',
+  ),
+  'searchResultViews' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Internal Search',
+    'name' => 'ga:searchResultViews',
+    'description' => 'The number of times a search result page was viewed after performing a search.',
+  ),
+  'searchUniques' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Internal Search',
+    'name' => 'ga:searchUniques',
+    'description' => 'The total number of unique keywords from internal site search within a session. For example if &quot;shoes&quot; was searched for 3 times in a session, it will be only counted once.',
+  ),
+  'avgSearchResultViews' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Internal Search',
+    'name' => 'ga:avgSearchResultViews',
+    'description' => '<code>ga:searchResultViews / ga:searchUniques</code><br/>The average number of times people viewed a search results page after performing a search.',
+  ),
+  'searchVisits' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Internal Search',
+    'name' => 'ga:searchVisits',
+    'description' => 'The total number of sessions that included an internal site search',
+  ),
+  'percentVisitsWithSearch' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Internal Search',
+    'name' => 'ga:percentVisitsWithSearch',
+    'description' => '<code>(ga:searchVisits / ga:visits) * 100</code><br/>The percentage of visits with search.',
+  ),
+  'searchDepth' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Internal Search',
+    'name' => 'ga:searchDepth',
+    'description' => 'The average number of subsequent page views made on your site after a use of your internal search feature.',
+  ),
+  'avgSearchDepth' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Internal Search',
+    'name' => 'ga:avgSearchDepth',
+    'description' => '<code>ga:searchDepth / ga:searchUniques</code><br/>The average number of pages people viewed after performing a search on your site.',
+  ),
+  'searchRefinements' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Internal Search',
+    'name' => 'ga:searchRefinements',
+    'description' => 'The total number of times a refinement (transition) occurs between internal site search keywords within a session. For example if the sequence of keywords is: &quot;shoes&quot;, &quot;shoes&quot;, &quot;pants&quot;, &quot;pants&quot;, this metric will be one because the transition between &quot;shoes&quot; and &quot;pants&quot; is different.',
+  ),
+  'searchDuration' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Internal Search',
+    'name' => 'ga:searchDuration',
+    'description' => 'The visit duration to your site where a use of your internal search feature occurred.',
+  ),
+  'avgSearchDuration' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Internal Search',
+    'name' => 'ga:avgSearchDuration',
+    'description' => '<code>ga:searchDuration / ga:searchUniques</code><br/>The average amount of time people spent on your site after searching.',
+  ),
+  'searchExits' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Internal Search',
+    'name' => 'ga:searchExits',
+    'description' => 'The number of exits on your site that occurred following a search result from your internal search feature.',
+  ),
+  'searchExitRate' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Internal Search',
+    'name' => 'ga:searchExitRate',
+    'description' => '<code>(ga:searchExits / ga:searchUniques) * 100</code><br/>The percentage of searches that resulted in an immediate exit from your site.',
+  ),
+  'searchGoal(n)ConversionRate' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Internal Search',
+    'name' => 'ga:searchGoal(n)ConversionRate',
+    'description' => '<code>(ga:goal(n)Completions / ga:searchUniques) * 100</code><br/>The percentage of search visits (i.e., visits that included at least one search) which resulted in a conversion to the requested goal number.',
+  ),
+  'searchGoalConversionRateAll' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Internal Search',
+    'name' => 'ga:searchGoalConversionRateAll',
+    'description' => '<code>(ga:goalCompletionsAll / ga:searchUniques) * 100</code><br/>The percentage of search visits (i.e., visits that included at least one search) which resulted in a conversion to at least one of your goals.',
+  ),
+  'goalValueAllPerSearch' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Internal Search',
+    'name' => 'ga:goalValueAllPerSearch',
+    'description' => '<code>ga:goalValueAll / ga:searchUniques</code><br/>The average goal value of a search on your site.',
+  ),
+  'pageLoadTime' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Site Speed',
+    'name' => 'ga:pageLoadTime',
+    'description' => 'Total Page Load Time is the amount of time (in milliseconds) it takes for pages from the sample set to load, from initiation of the pageview (e.g. click on a page link) to load completion in the browser.',
+  ),
+  'pageLoadSample' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Site Speed',
+    'name' => 'ga:pageLoadSample',
+    'description' => 'The sample set (or count) of pageviews used to calculate the average page load time.',
+  ),
+  'avgPageLoadTime' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Site Speed',
+    'name' => 'ga:avgPageLoadTime',
+    'description' => '<code>(ga:pageLoadTime / ga:pageLoadSample) * 0.001</code><br/>The average amount of time (in seconds) it takes for pages from the sample set to load, from initiation of the pageview (e.g. click on a page link) to load completion in the browser.',
+  ),
+  'domainLookupTime' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Site Speed',
+    'name' => 'ga:domainLookupTime',
+    'description' => 'The total amount of time (in milliseconds) spent in DNS lookup for this page among all samples.',
+  ),
+  'avgDomainLookupTime' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Site Speed',
+    'name' => 'ga:avgDomainLookupTime',
+    'description' => '<code>(ga:domainLookupTime / ga:speedMetricsSample) * 0.001</code><br/>The average amount of time (in seconds) spent in DNS lookup for this page.',
+  ),
+  'pageDownloadTime' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Site Speed',
+    'name' => 'ga:pageDownloadTime',
+    'description' => 'The total amount of time (in milliseconds) to download this page among all samples.',
+  ),
+  'avgPageDownloadTime' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Site Speed',
+    'name' => 'ga:avgPageDownloadTime',
+    'description' => '<code>(pageDownloadTime / ga:speedMetricsSample) * 0.001</code><br/>The average amount of time (in seconds) to download this page.',
+  ),
+  'redirectionTime' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Site Speed',
+    'name' => 'ga:redirectionTime',
+    'description' => 'The total amount of time (in milliseconds) spent in redirects before fetching this page among all samples. If there are no redirects, the value for this metric is expected to be 0.',
+  ),
+  'avgRedirectionTime' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Site Speed',
+    'name' => 'ga:avgRedirectionTime',
+    'description' => '<code>(ga:redirectionTime / ga:speedMetricsSample) * 0.001</code><br/>The average amount of time (in seconds) spent in redirects before fetching this page. If there are no redirects, the value for this metric is expected to be 0.',
+  ),
+  'serverConnectionTime' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Site Speed',
+    'name' => 'ga:serverConnectionTime',
+    'description' => 'The total amount of time (in milliseconds) spent in establishing TCP connection for this page among all samples.',
+  ),
+  'avgServerConnectionTime' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Site Speed',
+    'name' => 'ga:avgServerConnectionTime',
+    'description' => '<code>(ga:serverConnectionTime / ga:speedMetricsSample) * 0.001</code><br/>The average amount of time (in seconds) spent in establishing TCP connection for this page.',
+  ),
+  'serverResponseTime' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Site Speed',
+    'name' => 'ga:serverResponseTime',
+    'description' => 'The total amount of time (in milliseconds) your server takes to respond to a user request among all samples, including the network time from user&#39;s location to your server.',
+  ),
+  'avgServerResponseTime' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Site Speed',
+    'name' => 'ga:avgServerResponseTime',
+    'description' => '<code>(ga:serverResponseTime / ga:speedMetricsSample) * 0.001</code><br/>The average amount of time (in seconds) your server takes to respond to a user request, including the network time from user&#39;s location to your server.',
+  ),
+  'speedMetricsSample' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Site Speed',
+    'name' => 'ga:speedMetricsSample',
+    'description' => 'The sample set (or count) of pageviews used to calculate the averages for site speed metrics. This metric is used in all site speed average calculations including <code>ga:avgDomainLookupTime</code>, <code>ga:avgPageDownloadTime</code>, <code>ga:avgRedirectionTime</code>, <code>ga:avgServerConnectionTime</code>, and <code>ga:avgServerResponseTime</code>.',
+  ),
+  'totalEvents' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Event Tracking',
+    'name' => 'ga:totalEvents',
+    'description' => 'The total number of events for the profile, across all categories.',
+  ),
+  'uniqueEvents' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Event Tracking',
+    'name' => 'ga:uniqueEvents',
+    'description' => 'The total number of unique events for the profile, across all categories.',
+  ),
+  'eventValue' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Event Tracking',
+    'name' => 'ga:eventValue',
+    'description' => 'The total value of events for the profile.',
+  ),
+  'avgEventValue' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Event Tracking',
+    'name' => 'ga:avgEventValue',
+    'description' => '<code>ga:eventValue / ga:totalEvents</code><br/>The average value of an event.',
+  ),
+  'visitsWithEvent' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Event Tracking',
+    'name' => 'ga:visitsWithEvent',
+    'description' => 'The total number of visits with events.',
+  ),
+  'eventsPerVisitWithEvent' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Event Tracking',
+    'name' => 'ga:eventsPerVisitWithEvent',
+    'description' => '<code>ga:totalEvents / ga:visitsWithEvent</code><br/>The average number of events per visit with event.',
+  ),
+  'transactions' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Ecommerce',
+    'name' => 'ga:transactions',
+    'description' => 'The total number of transactions.',
+  ),
+  'transactionsPerVisit' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Ecommerce',
+    'name' => 'ga:transactionsPerVisit',
+    'description' => '<code>ga:transactions / ga:visits</code><br/>The average number of transactions for a visit to your site.',
+  ),
+  'transactionRevenue' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Ecommerce',
+    'name' => 'ga:transactionRevenue',
+    'description' => 'The total sale revenue provided in the transaction excluding shipping and tax. See the tracking API reference for <a href=\'http://code.google.com/apis/analytics/docs/gaJS/gaJSApiEcommerce.html#_gat.GA_Tracker_._addTrans\'><code>_addTrans()</code></a> for additional information.',
+  ),
+  'revenuePerTransaction' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Ecommerce',
+    'name' => 'ga:revenuePerTransaction',
+    'description' => '<code>ga:transactionRevenue / ga:transactions</code><br/>The average revenue for an e-commerce transaction.',
+  ),
+  'transactionRevenuePerVisit' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Ecommerce',
+    'name' => 'ga:transactionRevenuePerVisit',
+    'description' => '<code>ga:transactionRevenue / ga:visits</code><br/>Average transaction revenue for a visit to your site.',
+  ),
+  'transactionShipping' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Ecommerce',
+    'name' => 'ga:transactionShipping',
+    'description' => 'The total cost of shipping.',
+  ),
+  'transactionTax' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Ecommerce',
+    'name' => 'ga:transactionTax',
+    'description' => 'The total amount of tax.',
+  ),
+  'totalValue' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Ecommerce',
+    'name' => 'ga:totalValue',
+    'description' => '<code>ga:transactionRevenue + ga:goalValueAll</code><br/>Total value for your site (including total revenue and total goal value).',
+  ),
+  'itemQuantity' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Ecommerce',
+    'name' => 'ga:itemQuantity',
+    'description' => 'The total number of items purchased. For example, if users purchase 2 frisbees and 5 tennis balls, 7 items have been purchased.',
+  ),
+  'uniquePurchases' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Ecommerce',
+    'name' => 'ga:uniquePurchases',
+    'description' => 'The number of product sets purchased. For example, if users purchase 2 frisbees and 5 tennis balls from your site, 2 unique products have been purchased.',
+  ),
+  'revenuePerItem' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Ecommerce',
+    'name' => 'ga:revenuePerItem',
+    'description' => '<code>ga:itemRevenue / ga:itemQuantity</code><br/>The average revenue per item.',
+  ),
+  'itemRevenue' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Ecommerce',
+    'name' => 'ga:itemRevenue',
+    'description' => 'The total revenue from purchased product items on your website. See the tracking API reference for <a href=\'http://code.google.com/apis/analytics/docs/gaJS/gaJSApiEcommerce.html#_gat.GA_Tracker_._addItem\'><code>_addItem()</code></a> for additional information.',
+  ),
+  'itemsPerPurchase' => 
+  array(
+    'type' => 'metric',
+    'group' => 'Ecommerce',
+    'name' => 'ga:itemsPerPurchase',
+    'description' => '<code>ga:itemQuantity / ga:uniquePurchases</code><br/>The average quantity of this item (or group of items) sold per purchase.',
+  ),
+);
+
+}
