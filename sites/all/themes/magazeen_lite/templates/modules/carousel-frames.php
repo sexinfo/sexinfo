@@ -1,10 +1,10 @@
-<?php 
+<?php
 
   // SLIDES/CAPTIONS FOR FRONT PAGE CAROUSEL MODULE
 
  ?>
 
- <?php 
+ <?php
 /*-------------------------
   LEFT COLUMN
 -------------------------*/
@@ -12,7 +12,7 @@
 
 <!-- SLIDE 1 -->
 <div class="carousel-frame">
-  <img src="<?php print path_to_theme() . '/images/modules/' . 'pregnant.jpg'; ?>" alt="Can I get pregnant if..." />                    
+  <img src="<?php print path_to_theme() . '/images/modules/' . 'pregnant.jpg'; ?>" alt="Can I get pregnant if..." />
   <div class="carousel-caption">
     <h3>Can I get pregnant if...</h3>
     <p>Becoming a mother is a very important and amazing transition in life. Bringing a new life into the world brings&hellip;
@@ -31,7 +31,7 @@
 </div><!-- .carousel-frame -->
 
 <!-- SLIDE 3 -->
-<div class="carousel-frame">  
+<div class="carousel-frame">
   <img src="<?php print path_to_theme() . '/images/modules/' . 'love-relationships.jpg'; ?>" alt="Love and Relationships" />
   <div class="carousel-caption">
     <h3>Love &amp; Relationships</h3>
@@ -51,7 +51,7 @@
 </div><!-- .carousel-frame -->
 
 
-<?php 
+<?php
 /*-------------------------
   RIGHT COLUMN
 -------------------------*/
@@ -59,7 +59,7 @@
 
 <!-- SLIDE 5 -->
 <div class="carousel-frame">
-  <img src="<?php print path_to_theme() . '/images/modules/' . 'circumcision.jpg'; ?>" alt="Sexual Behaviors" />                
+  <img src="<?php print path_to_theme() . '/images/modules/' . 'circumcision.jpg'; ?>" alt="Sexual Behaviors" />
   <div class="carousel-caption">
     <h3>Circumcision</h3>
     <p>Male circumcision is a medical procedure in which the foreskin of the penis is surgically removed, exposing the&hellip;
@@ -93,6 +93,6 @@
   <div class="carousel-caption">
     <h3>Homophobia</h3>
     <p>Homophobia is defined as "irrational fear of, aversion to, or discrimination against homosexuality&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/article/sexual-orientation-sexual-identities-homophobia" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/homophobia" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
