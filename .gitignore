@@ -44,4 +44,4 @@ tmp/
 sites/*/settings*.php
 sites/*/files
 sites/*/private
-deploy
+credentials.json

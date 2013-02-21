@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require 'json'
+
+URL='webshare.lsit.ucsb.edu/soci/sexinfo/'
+
+# Check for prerequisite SFTP support in cURL
+curlv     = `curl --version`
+curl_path = `which curl`
+protocols = curlv.split("\n")[1]
+unless protocols.include?("sftp")
+  puts "Warning: SFTP protocol not detected in cURL: #{curl_path}"
+  puts "You may need to recompile your cURL package configured with libssh2"
+end
+
+# Parse credentials
+creds = JSON.parse(File.open('credentials.json').read)
+username = creds["username"] or raise "Username must be specified in credentials.json"
+password = creds["password"] or raise "Password must be specified in credentials.json"
+
+# Deploy with git-ftp
+puts "Deploying to #{URL}..."
+puts %x{ git ftp push -u #{username} -p #{password} sftp://#{URL} }
