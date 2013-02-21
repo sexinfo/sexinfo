@@ -26,7 +26,7 @@
   <div class="carousel-caption">
     <h3>Sexual Behaviors</h3>
     <p>Sexual techniques are methods for increasing a partner's sexual arousal. These include activites that&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/article/sexual-activity-spice-your-sex-life-aphrodisiacs" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/taxonomy/term/444/all" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
@@ -42,7 +42,7 @@
 
 <!-- SLIDE 4 -->
 <div class="carousel-frame">
-  <img src="<?php print path_to_theme() . '/images/modules/' . 'std.jpg'; ?>" alt="Sexually Transmitted Diseases" />
+  <img src="<?php print path_to_theme() . '/images/modules/' . 'std.jpg'; ?>" alt="Sexually Transmitted Infections" />
   <div class="carousel-caption">
     <h3>Sexually Transmitted Infections</h3>
     <p>Sexually transmitted infections (STI's) are passed from one person to another through various types of sexual contact.&hellip;
@@ -69,7 +69,7 @@
 
 <!-- SLIDE 6 -->
 <div class="carousel-frame">
-  <img src="<?php print path_to_theme() . '/images/modules/' . 'contraception.jpg'; ?>" alt="Sexual Behaviors" />
+  <img src="<?php print path_to_theme() . '/images/modules/' . 'contraception.jpg'; ?>" alt="Contraception" />
   <div class="carousel-caption">
     <h3>Contraception</h3>
     <p>Contraception is the intentional prevention of pregnancy. There are many contraceptive methods, also known as&hellip;
@@ -79,7 +79,7 @@
 
 <!-- SLIDE 7 -->
 <div class="carousel-frame">
-  <img src="<?php print path_to_theme() . '/images/modules/' . 'female-orgasm.jpg'; ?>" alt="Sexual Behaviors" />
+  <img src="<?php print path_to_theme() . '/images/modules/' . 'female-orgasm.jpg'; ?>" alt="Female Orgasmic Disorder" />
   <div class="carousel-caption">
     <h3>Female Orgasmic Disorder</h3>
     <p>Known as "anorgasmia" in medical terms, female orgasmic problems are defined as "a sexual difficulty involving&hellip;
@@ -89,7 +89,7 @@
 
 <!-- SLIDE 8 -->
 <div class="carousel-frame">
-  <img src="<?php print path_to_theme() . '/images/modules/' . 'sexual-orientation.jpg'; ?>" alt="Sexual Orientation" />
+  <img src="<?php print path_to_theme() . '/images/modules/' . 'sexual-orientation.jpg'; ?>" alt="Homophobia" />
   <div class="carousel-caption">
     <h3>Homophobia</h3>
     <p>Homophobia is defined as "irrational fear of, aversion to, or discrimination against homosexuality&hellip;
