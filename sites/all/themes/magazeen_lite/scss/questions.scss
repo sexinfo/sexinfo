@@ -55,7 +55,7 @@
   border: none;
   color: white;
   float: right;
-  font-size: 1.1em;
+  font-size: 1.2em;
   padding: 10px 15px;
 
   &:hover {
@@ -73,4 +73,21 @@
   color: #F23183;
   font-size: 1.2em;
   margin-bottom: 5px;
+}
+
+#node-22 .faq-btn {
+  @include border-radius;
+  background-color: #F23183;
+  color: white;
+  display: block;
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding: 12px 10px;
+  text-align: center;
+
+  &:hover {
+    background-color: darken(#F23183, 10);
+    cursor: pointer;
+  }
 }
