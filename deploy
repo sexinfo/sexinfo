@@ -14,7 +14,7 @@ unless protocols.include?("sftp")
 end
 
 # Parse credentials
-creds = JSON.parse(File.open('credentials.json').read)
+creds = JSON.parse(File.read('credentials.json'))
 username = creds["username"] or raise "Username must be specified in credentials.json"
 password = creds["password"] or raise "Password must be specified in credentials.json"
 
