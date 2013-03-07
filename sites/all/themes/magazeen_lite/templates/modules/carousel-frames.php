@@ -46,7 +46,7 @@
   <div class="carousel-caption">
     <h3>Sexually Transmitted Infections</h3>
     <p>Sexually transmitted infections (STI's) are passed from one person to another through various types of sexual contact.&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/category/sexually-transmitted-infections" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/sti-symptom-chart" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
