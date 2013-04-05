@@ -16,7 +16,7 @@
   <div class="carousel-caption">
     <h3>Can I get pregnant if...</h3>
     <p>Becoming a mother is a very important and amazing transition in life. Bringing a new life into the world brings&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/article/pregnancy-getting-pregnant-can-i-get-pregnant-if-her" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/can-i-get-pregnant-if-her" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
@@ -36,7 +36,7 @@
   <div class="carousel-caption">
     <h3>Love &amp; Relationships</h3>
     <p>There are five components that determine with whom you fall in love, and if your love will last. They are&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/article/love-and-relationships-love-love-and-attachment" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/love-and-attachment" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
@@ -63,7 +63,7 @@
   <div class="carousel-caption">
     <h3>Circumcision</h3>
     <p>Male circumcision is a medical procedure in which the foreskin of the penis is surgically removed, exposing the&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/article/health-medical-procedures-elective-male-circumcision" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/male-circumcision" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
@@ -73,7 +73,7 @@
   <div class="carousel-caption">
     <h3>Contraception</h3>
     <p>Contraception is the intentional prevention of pregnancy. There are many contraceptive methods, also known as&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/article/contraception-barrier-methods-male-condom" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/male-condom" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
@@ -83,7 +83,7 @@
   <div class="carousel-caption">
     <h3>Female Orgasmic Disorder</h3>
     <p>Known as "anorgasmia" in medical terms, female orgasmic problems are defined as "a sexual difficulty involving&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/article/sexual-difficulties-female-difficulty-female-orgasmic-disorder" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/female-orgasmic-disorder" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
