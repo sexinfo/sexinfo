@@ -35,8 +35,7 @@
   </div> <!-- /header-container -->
 </div> <!-- /header -->
 
-<!-- TODO update header on questions close -->
-<!--<div class="banner new-banner">
-  The Sexperts are taking questions!
+<div class="banner new-banner">
+  The Sexperts are back and taking questions!
   <a href="<?php print $base_path . "ask-sexperts" ?>">We'd love to hear from you &raquo;</a>
-</div>-->
+</div>
