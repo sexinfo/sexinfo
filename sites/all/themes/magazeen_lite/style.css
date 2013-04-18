@@ -404,10 +404,11 @@ p.copyright {
   background-image: -webkit-linear-gradient(bottom, #f875ab 35%, #f98bb9 70%);
   background-image: -ms-linear-gradient(bottom, #f875ab 35%, #f98bb9 70%);
   background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.35, #f875ab), color-stop(0.7, #f98bb9));
-  color: #333433;
+  color: #FFFFFF;
   font-size: 1.1em;
   font-weight: bold;
-  padding: 11px 0; }
+  padding: 6px 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); }
 
 #logo {
   float: left;
@@ -654,12 +655,24 @@ ul.pager {
   margin: 0;
   padding: 10px 0 15px;
   width: auto; }
+  #footer a:hover,
+  #footer a:active {
+    color: inherit;
+    text-decoration: underline; }
   #footer .left {
-    width: 50%;
+    width: 40%;
     float: left; }
   #footer .right {
-    width: 50%;
+    width: 40%;
     float: right; }
+  #footer ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0; }
+    #footer ul li {
+      margin-bottom: 10px; }
+    #footer ul i {
+      padding-right: 5px; }
 
 #footer p:last-child {
   margin-bottom: 10px; }
@@ -675,9 +688,6 @@ ul.pager {
 #footer .login {
   font-size: 1.1em;
   float: right; }
-  #footer .login:hover, #footer .login:active {
-    color: inherit;
-    text-decoration: underline; }
 
 #snavigation {
   background-color: #171615;
