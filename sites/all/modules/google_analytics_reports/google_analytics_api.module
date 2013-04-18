@@ -75,6 +75,7 @@ function google_analytics_api_theme() {
   );
 }
 
+
 /**
  * Instantiate a new GAFeed object.
  */
@@ -85,6 +86,25 @@ function google_analytics_api_new_gafeed() {
   $oauth_token = variable_get('google_analytics_reports_oauth_token', NULL);
   $oauth_token_secret = variable_get('google_analytics_reports_oauth_token_secret', NULL);
   return new GAFeed($key, $secret, $oauth_token, $oauth_token_secret);
+}
+
+/**
+ * Request account data.
+ *
+ * @param $params
+ *   An associative array containing:
+ *   - start-index: optional [default=1]
+ *   - max-results: optional [default=20]
+ * @param $cache_options
+ *   An optional associative array containing:
+ *   - cid: optional [default=md5 hash]
+ *   - expire: optional [default=CACHE_TEMPORARY]
+ *   - refresh: optional [default=FALSE]
+ */
+function google_analytics_api_account_data($params = array(), $cache_options = array()) {
+  $GAFeed = google_analytics_api_new_gafeed();
+  $GAFeed->queryAccountFeed($params, $cache_options);
+  return $GAFeed;
 }
 
 /**
@@ -152,14 +172,14 @@ function google_analytics_reports_cache_time() {
  *
  * @return Themed string label.
  */
-function theme_google_analytics_api_profile_label($variables) {
-  return $variables['profile']->name . ' (' . $variables['profile']->id . ')';
+function theme_google_analytics_api_profile_label($profile) {
+  return $profile['profileName'] . ' - ' . $profile['webPropertyId'];
 }
 
 /**
- * Implements hook_domain_conf().
+ * Implements hook_domainconf().
  */
-function google_analytics_api_domain_conf() {
+function google_analytics_api_domainconf() {
   $profile_id = variable_get('google_analytics_reports_profile_id', 0);
   $form['google_analytics_reports'] = array(
     '#type' => 'fieldset',

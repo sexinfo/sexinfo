@@ -10,14 +10,23 @@
  */
 class GAFeed {
 
+  /* Methods require at least v2 */
+  const gaFeedVersion = 2;
+
   /* Response object */
   public $response;
 
   /* Formatted array of request results */
   public $results;
 
+  /* Formatted array of request meta info */
+  public $meta;
+
   /* URL to Google Analytics Data Export API */
   public $queryPath;
+
+  /* Aggregate numbers from response */
+  public $totals;
 
   /* Translated error message */
   public $error;
@@ -25,8 +34,9 @@ class GAFeed {
   /* Boolean TRUE if data is from the cache tables */
   public $fromCache = FALSE;
 
-  /* Host and endpoint of Google Analytics API */
-  protected $host = 'www.googleapis.com/analytics/v3';
+  /* Domain of Data Feed API */
+  protected $host = 'www.googleapis.com';
+  protected $OAuthHost = 'www.google.com';
 
   /* Request header source */
   protected $source = 'drupal';
@@ -42,16 +52,6 @@ class GAFeed {
 
   /* Google authorize callback verifier string */
   protected $verifier;
-
-  /* OAuth host */
-  protected $oAuthHost = 'www.google.com';
-
-  /**
-   * Check if object is authenticated with Google.
-   */
-  public function isAuthenticated() {
-    return !empty($this->token);
-  }
 
   /**
    * Constructor for the GAFeed class
@@ -91,7 +91,7 @@ class GAFeed {
    * OAuth step #1: Fetch request token.
    */
   public function getRequestToken() {
-    $this->setHost($this->oAuthHost);
+    $this->setHost($this->OAuthHost);
     $this->setQueryPath('accounts/OAuthGetRequestToken');
 
     /* xoauth_displayname is displayed on the Google Authentication page */
@@ -111,7 +111,7 @@ class GAFeed {
    * OAuth step #2: Authorize request token.
    */
   public function obtainAuthorization($token) {
-    $this->setHost($this->oAuthHost);
+    $this->setHost($this->OAuthHost);
     $this->setQueryPath('accounts/OAuthAuthorizeToken');
 
     /* hd is the best way of dealing with users with multiple domains verified with Google */
@@ -134,7 +134,7 @@ class GAFeed {
    * OAuth step #3: Fetch access token.
    */
   public function getAccessToken() {
-    $this->setHost($this->oAuthHost);
+    $this->setHost($this->OAuthHost);
     $this->setQueryPath('accounts/OAuthGetAccessToken');
 
     $params = array(
@@ -151,7 +151,6 @@ class GAFeed {
    * Revoke OAuth token.
    */
   public function revokeToken() {
-    $this->setHost($this->oAuthHost);
     $this->setQueryPath('accounts/AuthSubRevokeToken');
     $this->query($this->queryPath, array(), 'GET', array('refresh' => TRUE));
   }
@@ -160,9 +159,9 @@ class GAFeed {
    * Public query method for all Data Export API features.
    */
   public function query($path, $params = array(), $method = 'GET', $cache_options = array()) {
+
     $params_defaults = array(
-      'start-index' => 1,
-      'max-results' => 1000,
+      'v' => self::gaFeedVersion,
     );
     $params += $params_defaults;
 
@@ -183,7 +182,6 @@ class GAFeed {
 
     if (!$cache_options['refresh'] && isset($cache) && !empty($cache->data)) {
       $this->response = $cache->data;
-      $this->results = json_decode($this->response->data);      
       $this->fromCache = TRUE;
     }
     else {
@@ -220,14 +218,10 @@ class GAFeed {
         $data = http_build_query($params, '', '&');
       }
     }
-    $headers = array();
-    
-    $this->response = drupal_http_request($url, $headers, $method, $data);
 
-    if ($this->response->code == '200') {
-      $this->results = json_decode($this->response->data);
-    }
-    else {
+    $headers = array();
+    $this->response = drupal_http_request($url, $headers, $method, $data);
+    if ($this->response->code != '200') {
       // data is undefined if the connection failed.
       if (!isset($this->response->data)) {
         $this->response->data = '';
@@ -240,60 +234,54 @@ class GAFeed {
   }
 
   /**
-   * Query Management API - Accounts
+   * Query and sanitize account data
    */
-  public function queryAccounts($params = array(), $cache_options = array()) {
-    $this->setQueryPath('management/accounts');    
-    $this->query($this->queryPath, $params, 'GET', $cache_options);
-    return $this;
-  }
+  public function queryAccountFeed($params = array(), $cache_options = array()) {
 
-  /**
-   * Query Management API - WebProperties
-   */
-  public function queryWebProperties($params = array(), $cache_options = array()) {
-    $params += array(
-      'account-id' => '~all',
+    $params  += array(
+      'start-index' => 1,
+      'max-results' => 1000,
     );
-    $this->setQueryPath('management/accounts/' . $params['account-id'] . '/webproperties');
-    $this->query($this->queryPath, $params, 'GET', $cache_options);
-    return $this;
+
+    $this->setQueryPath('analytics/v2.4/management/accounts/~all/webproperties/~all/profiles');
+    if ($this->query($this->queryPath, $params, 'GET', $cache_options)) {
+      $this->sanitizeAccount();
+    }
   }
 
   /**
-   * Query Management API - Profiles
+   * Sanitize account data
    */
-  public function queryProfiles($params = array(), $cache_options = array()) {    
-    $params += array(
-      'account-id' => '~all',
-      'web-property-id' => '~all',
-    );
-    $this->setQueryPath('management/accounts/' . $params['account-id'] . '/webproperties/' . $params['web-property-id'] . '/profiles');
-    $this->query($this->queryPath, $params, 'GET', $cache_options);
-    return $this;
-  }
+  protected function sanitizeAccount() {
+    $xml = simplexml_load_string($this->response->data);
 
-  /**
-   * Query Management API - Segments
-   */
-  public function querySegments($params = array(), $cache_options = array()) {
-    $this->setQueryPath('management/segments');
-    $this->query($this->queryPath, $params, 'GET', $cache_options);
-    return $this;
-  }
+    $this->results = NULL;
+    $results = array();
+    $meta = array();
 
-  /**
-   * Query Management API - Goals
-   */
-  public function queryGoals($params = array(), $cache_options = array()) {
-    $params += array(
-      'account-id' => '~all',
-      'web-property-id' => '~all',
-      'profile-id' => '~all',
-    );
-    $this->setQueryPath('management/accounts/' . $params['account-id'] . '/webproperties/' . $params['web-property-id'] . '/profiles/' . $params['profile-id'] . '/goals');
-    $this->query($this->queryPath, $params, 'GET', $cache_options);
-    return $this;
+    /* Save meta info */
+    $meta['updated'] = check_plain(strval($xml->updated));
+    $meta['generator'] = check_plain(strval($xml->generator));
+    $meta['generatorVersion'] = check_plain(strval($xml->generator->attributes()));
+
+    $opensearch = $xml->children('http://a9.com/-/spec/opensearchrss/1.0/');
+    foreach ($opensearch as $key => $open_search_result) {
+      $meta[$key] = intval($open_search_result);
+    }
+
+    /* Save results */
+    foreach ($xml->entry as $entry) {
+      $properties = array();
+      foreach ($entry->children('http://schemas.google.com/analytics/2009')->property as $property) {
+        $properties[str_replace('ga:', '', check_plain($property->attributes()->name))] = check_plain(strval($property->attributes()->value));
+      }
+      $properties['title'] = check_plain(strval($entry->title));
+      $properties['updated'] = check_plain(strval($entry->updated));
+      $results[$properties['profileId']] = $properties;
+    }
+
+    $this->meta = $meta;
+    $this->results = $results;
   }
 
   /**
@@ -341,7 +329,7 @@ class GAFeed {
       $parameters['sort'] = $params['sort_metric'];
     }
 
-    if (empty($params['start_date']) || !is_int($params['start_date'])) {
+    if ($params['start_date'] == NULL) {
       /* Use the day that Google Analytics was released (1 Jan 2005) */
       $start_date = '2005-01-01';
     }
@@ -352,14 +340,14 @@ class GAFeed {
 
     $parameters['start-date'] = $start_date;
 
-    if (empty($params['end_date']) || !is_int($params['end_date'])) {
+    if ($params['end_date'] == NULL) {
       $end_date = date('Y-m-d');
     }
     elseif (is_int($params['end_date'])) {
       /* Assume a Unix timestamp */
       $end_date = date('Y-m-d', $params['end_date']);
     }
-    
+
     $parameters['end-date'] = $end_date;
 
     /* Accept only strings, not arrays, for the following parameters */
@@ -368,33 +356,78 @@ class GAFeed {
     $parameters['start-index'] = $params['start_index'];
     $parameters['max-results'] = $params['max_results'];
 
-    $this->setQueryPath('data/ga');
+    $this->setQueryPath('analytics/v2.4/data');
     if ($this->query($this->queryPath, $parameters, 'GET', $cache_options)) {
       $this->sanitizeReport();
     }
-    return $this;
   }
 
   /**
    * Sanitize report data
    */
   protected function sanitizeReport() {
-    /* Named keys for report values */
-    $this->results->rawRows = $this->results->rows;
-    $this->results->rows = array();
-    foreach ($this->results->rawRows as $row_key => $row_value) {
-      foreach ($row_value as $item_key => $item_value) {
-        $this->results->rows[$row_key][str_replace('ga:', '', $this->results->columnHeaders[$item_key]->name)] = $item_value;
+    $xml = simplexml_load_string($this->response->data);
+
+    $this->results = NULL;
+    $results = array();
+    $meta = array();
+    $totals = array();
+
+
+    /* Save meta info */
+    $meta['updated'] = check_plain(strval($xml->updated));
+    $meta['generator'] = check_plain(strval($xml->generator));
+    $meta['generatorVersion'] = check_plain(strval($xml->generator->attributes()));
+
+    $opensearch = $xml->children('http://a9.com/-/spec/opensearchrss/1.0/');
+    foreach ($opensearch as $key => $open_search_result) {
+      $meta[$key] = intval($open_search_result);
+    }
+
+    $google_results = $xml->children('http://schemas.google.com/analytics/2009');
+    foreach ($google_results->dataSource->property as $property_attributes) {
+      $meta[str_replace('ga:', '', check_plain($property_attributes->attributes()->name))] = check_plain(strval($property_attributes->attributes()->value));
+    }
+    $meta['startDate'] = check_plain(strval($google_results->startDate));
+    $meta['endDate'] = check_plain(strval($google_results->endDate));
+
+    /* Save totals */
+    foreach ($google_results->aggregates->metric as $aggregate_metric) {
+      $metric_value = check_plain(strval($aggregate_metric->attributes()->value));
+      /* Check for float, or value with scientific notation */
+      if (preg_match('/^(\d+\.\d+)|(\d+E\d+)|(\d+.\d+E\d+)$/', $metric_value)) {
+        $totals[str_replace('ga:', '', check_plain($aggregate_metric->attributes()->name))] = floatval($metric_value);
+      }
+      else {
+        $totals[str_replace('ga:', '', check_plain($aggregate_metric->attributes()->name))] = intval($metric_value);
       }
     }
-    unset($this->results->rawRows);
 
-    /* Named keys for report totals */
-    $this->results->rawTotals = $this->results->totalsForAllResults;
-    $this->results->totalsForAllResults = array();
-    foreach ($this->results->rawTotals as $row_key => $row_value) {
-      $this->results->totalsForAllResults[str_replace('ga:', '', $row_key)] = $row_value;
+    /* Save results */
+    foreach ($xml->entry as $entry) {
+      $metrics = array();
+      foreach ($entry->children('http://schemas.google.com/analytics/2009')->metric as $metric) {
+        $metric_value = check_plain(strval($metric->attributes()->value));
+
+        //Check for float, or value with scientific notation
+        if (preg_match('/^(\d+\.\d+)|(\d+E\d+)|(\d+.\d+E\d+)$/', $metric_value)) {
+          $metrics[str_replace('ga:', '', check_plain($metric->attributes()->name))] = floatval($metric_value);
+        }
+        else {
+          $metrics[str_replace('ga:', '', check_plain($metric->attributes()->name))] = intval($metric_value);
+        }
+      }
+
+      $dimensions = array();
+      foreach ($entry->children('http://schemas.google.com/analytics/2009')->dimension as $dimension) {
+        $dimensions[str_replace('ga:', '', check_plain($dimension->attributes()->name))] = check_plain(strval($dimension->attributes()->value));
+      }
+
+      $results[] = array_merge($metrics, $dimensions);
     }
-    unset($this->results->rawTotals);
+
+    $this->meta = $meta;
+    $this->totals = $totals;
+    $this->results = $results;
   }
 }

@@ -31,7 +31,7 @@ function template_preprocess_google_analytics_reports_summary(&$vars) {
   $pages = array();
   foreach ($vars['pages'] as $page) {
     if ($page['pagePath'] == '/index.html') {
-      $page['pagePath'] = variable_get('google_analytics_reports_default_page', '/');
+      $page['pagePath'] = '/';
     }
     $pages[] = l($page['pageTitle'], "http://$page[hostname]$page[pagePath]", array('external' => TRUE, 'html' => TRUE)) . ' - ' . format_plural($page['pageviews'], '1 View', '@views Views', array('@views' => number_format($page['pageviews'])));
   }
@@ -76,20 +76,16 @@ function template_preprocess_google_analytics_reports_detail(&$vars) {
   $vars['keywords'] = theme('item_list', array('items' => $keywords, 'type' => 'ol'));
 }
 
-function template_preprocess_google_analytics_reports_dashboard(&$vars) {
-  $pages = array();
-  foreach ($vars['pages'] as $page) {
-    if ($page['pagePath'] == '/index.html') {
-      $page['pagePath'] = variable_get('google_analytics_reports_default_page', '/');
-    }
-    $pages[] = l($page['pageTitle'], "http://$page[hostname]$page[pagePath]", array('external' => TRUE, 'html' => TRUE)) . ' - ' . format_plural($page['pageviews'], '1 View', '@views Views', array('@views' => number_format($page['pageviews'])));
-  }
-  $vars['pages'] = theme('item_list', array('items' => $pages, 'type' => 'ol'));
-}
-
 /**
  * Theme function for path_mini block.
  */
 function theme_google_analytics_reports_path_mini($report) {
   return $report['chart'] . '<p>' . $report['views'] . '</p>';
+}
+
+/**
+ * Theme function for dashboard block.
+ */
+function theme_google_analytics_reports_dashboard($report) {
+  return '<h3>' . t('Visits over the last 30 days') . '</h3>' . $report['chart'] . '<p>' . $report['visits'] . '</p>';
 }
