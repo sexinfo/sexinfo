@@ -1,0 +1,3 @@
+Admin Notes 7.x-1.0-beta1, 2011-08-4
+------------------------------------
+Initial release of admin_notes module for Drupal 7.

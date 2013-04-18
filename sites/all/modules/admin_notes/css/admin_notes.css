@@ -1,0 +1,21 @@
+body.admin-notes-exists #admin-toolbar div.admin-tab.admin_notes-notes span {
+  display: block;
+  background: url('../images/star.png') no-repeat scroll right 0 transparent;
+}
+
+#admin-toolbar div#block-admin_notes-notes textarea {
+  width: 100%;
+}
+
+#admin-toolbar div#block-admin_notes-notes input[type=submit] {
+  margin-right: 10px;
+  position: absolute;
+}
+
+#admin-toolbar div#block-admin_notes-notes input.save-button {
+  right: 60px;
+}
+
+#admin-toolbar div#block-admin_notes-notes input.delete-button {
+  right: 0;
+}

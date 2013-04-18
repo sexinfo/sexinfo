@@ -1,0 +1,13 @@
+name = Views UI: Edit Basic Settings
+description = Interface to edit basic Views settings, such as headers, footers, title, empty text, and items to display.
+package = Views
+core = 7.x
+dependencies[] = views
+configure = admin/structure/views/views_ui_basic
+
+; Information added by drupal.org packaging script on 2013-03-09
+version = "7.x-1.2"
+core = "7.x"
+project = "views_ui_basic"
+datestamp = "1362825016"
+

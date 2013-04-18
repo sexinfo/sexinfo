@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file: To do, some docs about your install file
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function admin_notes_uninstall() {
+  // Remove any variables set by Admin Notes  
+  db_query("DELETE FROM {variable} WHERE name LIKE 'admin_notes%'");
+}
+
+/**
+ * Implementation of hook_schema()
+ */
+function admin_notes_schema() {
+  $schema['admin_notes'] = array(
+    'fields' => array(
+      'anid' => array(
+        'type' => 'serial',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'description' => 'The primary identifier for an admin note.',
+      ),
+      'uid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'The user id of the author of the admin note.',
+      ),
+      'timestamp' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'The UNIX time that the admin note was entered.',
+      ),
+      'note' => array(
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => TRUE,
+        'description' => 'The actual text of the admin note.',
+      ),
+      'path' => array(
+        'type' => 'text',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'description' => 'The internal Drupal path where the admin note was recorded.'),
+    ),
+    'primary key' => array('anid'),
+  );
+  return $schema;
+}
