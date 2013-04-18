@@ -10,6 +10,16 @@
   margin: 0;
   padding: 10px 0 15px;
   width: auto;
+  
+  .left {
+	  width: 50%;
+	  float: left;
+  }
+  
+  .right {
+	  width: 50%;
+	  float: right;
+  }
 }
 
 #footer p:last-child {
