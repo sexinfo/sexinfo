@@ -1,0 +1,13 @@
+name = SEO Checklist
+description = A Search Engine Optimization checklist for Drupal.
+core = 7.x
+dependencies[] = checklistapi
+package = SEO
+configure = admin/config/search/seo-checklist
+
+; Information added by drupal.org packaging script on 2013-02-08
+version = "7.x-4.1"
+core = "7.x"
+project = "seo_checklist"
+datestamp = "1360294437"
+
