@@ -22,7 +22,7 @@
           </div>
 
           <div class="list-half">
-            <a href="<?php print $base_path . "article/sexually-transmitted-infections-stis-sti-symptom-chart" ?>">Sexually Transmitted Infections</a>
+            <a href="<?php print $base_path . "article/sti-symptom-chart" ?>">Sexually Transmitted Infections</a>
             <a href="<?php print $base_path . "category/basics-sexuality" ?>">Basics of Sexuality</a>
             <a href="<?php print $base_path . "category/love-relationships/love" ?>">Love &amp; Relationships</a>
             <a href="<?php print $base_path . "category/sexual-difficulties/male-difficulty" ?>">Sexual Difficulties</a>
