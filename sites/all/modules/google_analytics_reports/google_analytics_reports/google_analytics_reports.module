@@ -102,12 +102,11 @@ function google_analytics_reports_theme() {
       'template' => 'google_analytics_reports_detail',
       'file' => 'google_analytics_reports.theme.inc',
     ),
-    'google_analytics_reports_dashboard' => array(
+    'google_analytics_reports_path_mini' => array(
       'variables' => array('report' => NULL),
-      'template' => 'google_analytics_reports_dashboard',
       'file' => 'google_analytics_reports.theme.inc',
     ),
-    'google_analytics_reports_path_mini' => array(
+    'google_analytics_reports_dashboard' => array(
       'variables' => array('report' => NULL),
       'file' => 'google_analytics_reports.theme.inc',
     ),

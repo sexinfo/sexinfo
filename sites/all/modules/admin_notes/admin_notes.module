@@ -1,0 +1,253 @@
+<?php
+
+/**
+ * IDEAS
+ * - Admin-configurable timestamps
+ */
+
+/**
+ * Implements hook_init().
+ */
+function admin_notes_init() {
+  drupal_add_css(drupal_get_path('module', 'admin_notes') . '/css/admin_notes.css');
+}
+
+
+/**
+ * Implements hook_permission().
+ */
+function admin_notes_permission() {
+  return array(
+    'access admin notes' => array(
+      'title' => 'Access admin notes',
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function admin_notes_preprocess_html(&$vars) {
+  if (_admin_notes_note_exists()) {
+    $vars['classes_array'][] = 'admin-notes-exists';
+  }
+}
+
+
+/**
+ * Implements hook_menu().
+ */
+function admin_notes_menu() {
+  $items = array();
+
+  $items['admin/reports/admin-notes'] = array(
+    'title' => 'Admin Notes',
+    'description' => 'View admin notes.',
+    'page callback' => 'admin_notes_view',
+    'access arguments' => array('access admin notes'),
+    'file' => 'admin_notes.admin.inc',
+  );
+
+  return $items;
+}
+
+
+/**
+ * Implements hook_block_info().
+ */
+function admin_notes_block_info() {
+  $blocks['notes'] = array(
+    'info' => t('Admin Notes'),
+    'admin' => TRUE,
+  );
+  
+  return $blocks;
+}
+
+
+/**
+ * Implements hook_block_view().
+ */
+function admin_notes_block_view($delta = '') {
+  global $user;
+  // Only show the block for users that have correct permission
+  if (user_access('access admin notes')) {
+    $block['subject'] = t('Admin Notes');
+    
+    $note = db_query("SELECT note FROM {admin_notes} WHERE path=:path", array(':path' =>$_GET['q']))->fetchField();
+    
+    $block['content'] .= drupal_render(drupal_get_form('admin_notes_block_form', $note));
+  }
+  return $block;
+}
+
+
+/**
+ * Function for displaying form on admin_notes block
+ */
+function admin_notes_block_form($form, &$form_state, $note) {
+  $form['admin_note'] = array(
+    '#type' => 'textarea',
+    '#default_value' => $note,
+    '#resizable' => FALSE,
+  );
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save'),
+    '#attributes' => array(
+      'class' => array('save-button'),
+    ),
+  );
+  $form['delete'] = array(
+    '#type' => 'submit',
+    '#value' => t('Delete'),
+    '#attributes' => array(
+      'class' => array('delete-button'),
+    ),
+  );
+  
+  return $form;
+}
+
+
+/**
+ * Validation handler for admin_notes_block_form()
+ */
+function admin_notes_block_form_validate($form, &$form_state) {
+  if ($form_state['values']['op'] == 'Save' && $form_state['values']['admin_note'] == '') {
+    form_set_error('admin_note', 'You must provide a note.');
+  }
+}
+
+
+/**
+ * Submission handler for admin_notes_block_form()
+ */
+function admin_notes_block_form_submit($form, &$form_state) {
+  switch($form_state['values']['op']) {
+    case 'Delete':
+      db_delete('admin_notes')
+        ->condition('path', $_GET['q'])
+        ->execute();
+        
+      $message = 'Your admin note has been deleted.';
+      break;
+    
+    case 'Save':
+      global $user;
+      $note = $form_state['values']['admin_note'];
+      
+      // Was there already a note added for this path
+      if (_admin_notes_note_exists()) {
+        db_update('admin_notes')
+          ->fields(array(
+            'uid' => $user->uid,
+            'note' => $note,
+            'timestamp' => time(),
+          ))
+          ->condition('path', $_GET['q'])
+          ->execute();
+          
+        $message = 'Your admin note has been updated.';
+      }
+      else {
+        db_insert('admin_notes')
+          ->fields(array(
+            'uid' => $user->uid,
+            'note' => $note,
+            'path' => $_GET['q'],
+            'timestamp' => time(),
+          ))
+          ->execute();
+          
+        $message = 'Your admin note has been saved.';
+      }
+      break;
+  }
+  
+  drupal_set_message(t($message));
+}
+
+/**
+ * Renders the admin notes report.
+ * This is pretty much taken directly from the Journal module.
+ */
+function admin_notes_output(array $admin_notes, $format = 'table', array $header = array()) {
+  switch ($format) {
+    case 'text':
+      // Output delimiter in first line, since this may change.
+      $output = '\t' . "\n";
+
+      foreach ($admin_notes as $entry) {
+        $row = array(
+          $entry->timestamp,
+          $entry->uid,
+          $entry->message,
+          $entry->location,
+        );
+        $output .= implode("\t", $row) . "\n";
+      }
+      break;
+      
+    case 'list':
+      $output = '';
+      foreach ($admin_notes as $entry) {
+        $output .= '<li>';
+        $output .= '<span class="admin_notes-info">' . format_username($entry) . ' ' . format_date($entry->timestamp, 'small') . ':</span>';
+        $output .= '<span class="admin_notes-entry">' . filter_xss_admin($entry->note) . '</span>';
+        $output .= '</li>';
+      }
+      if ($output) {
+        $output = '<ul id="admin_notes-backlog">' . $output . '</ul>';
+      }
+      break;
+    
+    case 'table':
+    default:
+      $rows = array();
+      foreach ($admin_notes as $entry) {
+        $rows[] = array(
+          format_date($entry->timestamp, 'small'),
+          format_username($entry),
+          filter_xss_admin($entry->note),
+          l(truncate_utf8($entry->path, 32, FALSE, TRUE), $entry->path),
+        );
+      }
+      $output['admin_notes'] = array(
+        '#theme' => 'table',
+        '#header' => $header,
+        '#rows' => $rows,
+        '#empty' => t('No admin notes entries available.'),
+      );
+      $output['pager'] = array(
+        '#theme' => 'pager',
+      );
+      break;
+  }
+
+  return $output;
+}
+
+
+/**
+ * PRIVATE FUNCTIONS
+ ***********************************/
+
+/**
+ * Checks to see whether a note exists for the current path.
+ */
+function _admin_notes_note_exists() {
+  $result = db_select('admin_notes', 'an')
+              ->fields('an')
+              ->condition('path', $_GET['q'])
+              ->execute()
+              ->fetchAssoc();
+  
+  if (is_array($result)) {
+    return $result;
+  }
+  else {
+    return FALSE;
+  }
+}

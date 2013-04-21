@@ -23,20 +23,19 @@
       <?php print render($page['search_area']); ?>
     </div>
 
-    <div class="social-buttons">
+    <!-- <div class="social-buttons">
       <a class="soc-yt" href="http://www.youtube.com/user/UCSBSexInfoOnline">YouTube</a>
       <a class="soc-fb" href="https://www.facebook.com/SexInfoOnline">Facebook</a>
 
       <div style="display: inline-block; margin-top: 3px">
         <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FSexInfoOnline&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=false&amp;font&amp;colorscheme=dark&amp;action=like&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:35px;" allowTransparency="true"></iframe>
       </div>
-    </div><!-- .social-buttons -->
+    </div> --><!-- .social-buttons -->
 
   </div> <!-- /header-container -->
 </div> <!-- /header -->
 
-<!-- TODO update header on questions close -->
-<!--<div class="banner new-banner">
-  The Sexperts are taking questions!
+<div class="banner new-banner">
+  The Sexperts are back and taking questions!
   <a href="<?php print $base_path . "ask-sexperts" ?>">We'd love to hear from you &raquo;</a>
-</div>-->
+</div>

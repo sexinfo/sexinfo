@@ -1,0 +1,11 @@
+name = Admin Notes
+description = Allows administrators to view/post notes on specific pages.
+package = Administration
+core = 7.x
+
+; Information added by drupal.org packaging script on 2011-08-04
+version = "7.x-1.0-beta1"
+core = "7.x"
+project = "admin_notes"
+datestamp = "1312497414"
+

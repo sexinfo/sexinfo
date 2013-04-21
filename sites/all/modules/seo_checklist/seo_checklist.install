@@ -1,0 +1,137 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the seo_checklist module.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function seo_checklist_install() {
+  // Detect and update a pre- name change installation.
+  $result = db_query("SELECT * FROM {system} WHERE name = 'seochecklist'");
+  if ($result->rowCount()) {
+    seo_checklist_update_7400();
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function seo_checklist_uninstall() {
+  variable_del('checklistapi_checklist_seo_checklist');
+}
+
+/**
+ * Rename module machine name and convert saved progress data to new format.
+ *
+ * Note: Drupal won't detect and run this function in the usual way, because
+ * the change of module machine name causes it to lose track of the current
+ * schema version, so it's invoked manually by seo_checklist_install(), if
+ * appropriate.
+ */
+function seo_checklist_update_7400() {
+  // Convert saved progress data.
+  if (db_table_exists('seo_checklist')) {
+    $result = db_query('SELECT id, completed, uid FROM {seo_checklist}');
+    $old_data = $result->fetchAllAssoc('id');
+    $data_mapping = array(
+      'install_page_title' => 1,
+      'enable_clean_urls' => 2,
+      'install_pathauto' => 5,
+      'install_globalredirect' => 6,
+      'get_google_account' => 7,
+      'install_google_analytics' => 9,
+      'create_google_analytics_analytics' => 11,
+      'input_google_analytics_code' => 12,
+      'authenticate_with_google_analytics' => 13,
+      'install_metatags_quick' => 15,
+      'install_scheduler' => 16,
+      'install_htmlpurifier' => 17,
+      'install_search404' => 18,
+      'validate_html' => 19,
+      'check_links' => 20,
+      'install_xmlsitemap' => 21,
+      'authenticate_with_google' => 23,
+      'submit_xml_sitemap_to_google' => 24,
+      'submit_xml_sitemap_to_bing' => 28,
+      'add_to_google_places' => 29,
+      'install_addthis' => 30,
+      'install_service_links' => 31,
+      'install_mollom' => 39,
+      'sign_up_for_mollom_account' => 40,
+      'authenticate_with_bing' => 43,
+      'get_windows_live_id' => 44,
+      'install_htmlpurifier' => 45,
+      'install_site_map' => 46,
+      'install_site_verify' => 47,
+      'install_addtoany' => 49,
+      'add_geo_meta_tags' => 51,
+      'install_admin_menu' => 53,
+      'enable_drupal_caching' => 54,
+      'install_boost' => 55,
+      'install_seo_checker' => 57,
+      'install_fb_social' => 58,
+      'install_follow' => 59,
+      'install_elements' => 60,
+      'install_security_review' => 61,
+      'install_read_more' => 62,
+      'install_ga_tokenizer' => 63,
+      'install_contact_google_analytics' => 64,
+      'install_context_keywords' => 65,
+    );
+    global $user;
+    $new_data = array(
+      '#changed' => $time = time(),
+      '#changed_by' => $user->uid,
+      '#completed_items' => 0,
+    );
+    $definitions = seo_checklist_checklistapi_checklist_info();
+    $groups = $definitions['seo_checklist'];
+    foreach (element_children($groups) as $group_key) {
+      $group = &$groups[$group_key];
+      foreach (element_children($group) as $item_key) {
+        if (!empty($data_mapping[$item_key])) {
+          $old_item = $old_data[$data_mapping[$item_key]];
+          if (!empty($old_item->completed)) {
+            $new_data[$item_key] = array(
+              '#completed' => $old_item->completed,
+              '#uid' => $old_item->uid,
+            );
+            $new_data['#completed_items']++;
+          }
+        }
+        if (!isset($new_data[$item_key])) {
+          $new_data[$item_key] = 0;
+        }
+      }
+    }
+    if (variable_get('seo_checklist_link', 0)) {
+      $new_data['link_to_volacci'] = array(
+        '#completed' => $time,
+        '#uid' => $user->uid,
+      );
+    }
+    ksort($new_data);
+    variable_set('checklistapi_checklist_seo_checklist', $new_data);
+  }
+
+  // Remove old database tables.
+  foreach (array('seo_group', 'seo_checklist') as $table) {
+    if (db_table_exists($table)) {
+      db_drop_table($table);
+    }
+  }
+
+  // Remove the old "seochecklist" row from the system table.
+  db_delete('system')
+    ->condition('name', 'seochecklist')
+    ->execute();
+
+  // Remove now unused variables.
+  variable_del('seo_checklist_book_references');
+  variable_del('seo_checklist_link');
+  variable_del('seo_checklist_podcast');
+  variable_del('seo_checklist_thanks');
+}
