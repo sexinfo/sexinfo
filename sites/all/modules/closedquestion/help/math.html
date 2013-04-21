@@ -1,0 +1,127 @@
+
+<p>If you have a question where a student has to calculate a result form given
+  data it would be nice if you did not have to give fixed ranges for the correct
+  answer, but if the question calculated those from the given data. It would
+  also be nice if the question would give different numbers each time a student
+  makes the question. That is now possible with ClosedQuestion using the
+  <strong>&lt;matheval /&gt;</strong> and <strong>&lt;mathresult /&gt;</strong>
+  tags.</p>
+
+<p>Lets start with an example:</p>
+
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;question type="fillblanks"&gt;
+  &lt;matheval expression="a=random()" store="1" /&gt;
+  &lt;matheval expression="b=random()" store="1" /&gt;
+  &lt;matheval expression="a=round(a*0.8+0.11,2)" /&gt;
+  &lt;matheval expression="b=round(b*5+2,0)" /&gt;
+  &lt;matheval expression="ans=a*b" /&gt;
+  &lt;matheval expression="min=min(round(ans,1),(ans-0.01))" /&gt;
+  &lt;matheval expression="max=max(round(ans,1),(ans+0.01))" /&gt;
+
+  &lt;text&gt;
+    &lt;p&gt;You have measured a concentration of &lt;mathresult expression="a" /&gt;mg/ml in
+       a &lt;mathresult expression="b" /&gt;-times diluted sample.&lt;br/&gt;
+       What was the concentration in the non-diluted solution?&lt;/p&gt;
+    &lt;p&gt;&lt;b&gt;The original concentration was: &lt;inlineChoice identifier="c" freeform="1" /&gt;g/l&lt;/b&gt;&lt;/p&gt;
+  &lt;/text&gt;
+
+  &lt;hint mintries="1"&gt;That's not correct.&lt;/hint&gt;
+  &lt;hint mintries="2"&gt;
+    The concentration in the non-diluted solution is higher than the measured concentration.
+  &lt;/hint&gt;
+  &lt;hint mintries="3"&gt;
+    The correct answer is: &lt;mathresult expression="a" /&gt; * &lt;mathresult expression="b" /&gt;
+     = &lt;mathresult expression="ans" /&gt;.
+  &lt;/hint&gt;
+
+  &lt;mapping correct="1"&gt;
+    &lt;range inlineChoice="c" minval="min" maxval="max" /&gt;
+    &lt;feedback&gt;Very good.&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0" stop="1"&gt;
+    &lt;not&gt;&lt;match inlineChoice="c" pattern="^[+-]?[0-9]+(\.[0-9]+)?(e[+-]?[0-9]+)?$" /&gt;&lt;/not&gt;
+    &lt;feedback&gt;Please give a number.&lt;/feedback&gt;
+  &lt;/mapping&gt;
+&lt;/question&gt;
+</pre>
+
+<p>There are two new tags in this example: <strong>&lt;matheval /&gt;</strong>
+  and <strong>&lt;mathresult /&gt;</strong>.</p>
+<p>The <strong>&lt;matheval /&gt;</strong> tag evaluates an expression. Matheval
+  nodes are placed directly in the &lt;question&gt; node.</p>
+<p>The <strong>&lt;mathresult /&gt;</strong> tag evaluates an expression AND puts
+  the result in it's place in the text. Mathresult nodes can be placed anywhere
+  where output text is placed, like for example in the &lt;text&gt; node and in
+  &lt;feedback&gt; nodes
+</p>
+
+<p>The example first generates two random numbers (between 0 and 1) and stores
+  those in variables a and b.
+</p>
+
+<p><b>store="1"</b> in a <strong>&lt;matheval /&gt;</strong> means all variables
+  up to that expression are stored and loaded the next time a student visits the
+  question. Expressions with store="1" are only evaluated on the first visit. So
+  in our example the values of variable a and b are stored. This makes sure that
+  when the student "reloads" the page to give his answer, the variables stay the
+  same.
+</p>
+
+<p>Next the variables a and b, that have a value between 0 and 1, are changed to
+  have the required range and precision. Variable a is now between 0.11 and 0.91
+  with a two decimal precision, while b is a whole number between 2 and 7.
+</p>
+
+<p>Then the answer is calculated from a and b, and stored in the variable ans.
+</p>
+
+<p>Lastly the minimum and maximum values that will be considered "correct" are
+  calculated form ans. By using this trick with min() and round() we make sure
+  that the student has to give a precision of at least one decimal, but can give
+  more if he wants to.
+</p>
+
+<p>In the question text the different variables are displayed using the
+  <strong>&lt;mathresult /&gt;</strong> tag that evaluates an expression and
+  displays the result.</p>
+
+<p>When a <b>&lt;range&gt;</b> tag finds a non-numeric value in the <b>minval</b>
+  or <b>maxval</b> attributes it will check of the given value is a math variable
+  that was previously defined. If so, it will use the value of that variable.
+</p>
+
+<p>Variable and function names have to start with a letter.</p>
+
+<p>All variable and function names are case insensitive, the whole expression is
+  converted to lower-case.</p>
+
+<p>PHP Functions that are built-in:</p>
+<ul>
+  <li>sin, sinh, asin, asinh</li>
+  <li>cos, cosh, acos, acosh</li>
+  <li>tan, tanh, atan, atanh</li>
+  <li>sqrt</li>
+  <li>log</li>
+  <li>lcg_value</li>
+  <li>abs</li>
+  <li>round</li>
+  <li>floor, ceil</li>
+  <li>min, max</li>
+  <li>number_format(number, decimals)</li>
+</ul>
+
+<p>Function aliases:</p>
+<ul>
+  <li>ln = log</li>
+  <li>arcsin = asin</li>
+  <li>arccos = acos</li>
+  <li>arctan = atan</li>
+  <li>arcsinh = asinh</li>
+  <li>arccosh = acosh</li>
+  <li>arctanh = atanh</li>
+  <li>random = lcg_value</li>
+  <li>nf = number_format</li>
+</ul>

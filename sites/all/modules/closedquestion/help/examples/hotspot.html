@@ -1,0 +1,88 @@
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;question type="hotspot" width="450" height="530"&gt;
+  &lt;text&gt;Point out the enzyme-substrate complex.
+  &lt;/text&gt;
+
+  &lt;!-- 
+  The image on which the user has to point things out. maxChoices is the
+  number of pointers the user can add.
+  Attach it to the node using the upload functionality and de-select the
+  "list" option for each file to hide it from the user.
+
+  This example uses the following image:
+
+  --&gt;
+  &lt;matchImg src="[attachurl:EnzymCyclus.png]" maxChoices="1"&gt;
+    &lt;!-- hotspots work similar to the html imagemap definition --&gt;
+    &lt;hotspot identifier="ESC" shape="circle" coords="275,68,68" /&gt;
+    &lt;hotspot identifier="E" shape="circle" coords="85,259,70" /&gt;
+    &lt;hotspot identifier="EPC" shape="circle" coords="325,335,70" /&gt;
+    &lt;hotspot identifier="EPC" shape="circle" coords="325,335,70" /&gt;
+    &lt;hotspot identifier="S" shape="rect" coords="0,21,43,121" /&gt;
+    &lt;hotspot identifier="P" shape="rect" coords="173,436,278,500" /&gt;
+    &lt;!-- hotspot identifier="shapeB" shape="rect" coords="162,182,180,226" / --&gt;
+    &lt;!-- hotspot identifier="shapeC" shape="poly" coords="174,282,258,293,320,318,366,360,267,468,207,438,149,443,99,465,85,486,7,416,7,354,64,307" / --&gt;
+  &lt;/matchImg&gt;
+
+
+  &lt;hint mintries="1"&gt;It's about a complex, so a combination of substances.&lt;/hint&gt;
+  &lt;hint mintries="2"&gt;It's about a complex where the substrate has not yet been converted into the product.&lt;/hint&gt;
+
+  &lt;!--
+  mapping work like those in dragdrop and fillblanks questions. Use &lt;and&gt; &lt;or&gt;
+  and &lt;not&gt; to combine things.
+  --&gt;
+  &lt;mapping correct="1"&gt;
+    &lt;match hotspot="ESC" /&gt;
+    &lt;feedback mintries="0"&gt;
+      Very good!
+    &lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+    &lt;match hotspot="EPC" /&gt;
+    &lt;feedback&gt;
+      No, this is the enzyme-product complex.
+    &lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+    &lt;match hotspot="E" /&gt;
+    &lt;feedback&gt;
+      No, this is the free enzyme.
+    &lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+    &lt;not&gt;
+      &lt;match hotspot="P" /&gt;
+    &lt;/not&gt;
+
+    &lt;feedback&gt;
+      You have not selected the free product. That's good but not perfect.
+    &lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+    &lt;match hotspot="S" /&gt;
+    &lt;feedback&gt;
+      No, this is the free substrate.
+    &lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+    &lt;not&gt;
+      &lt;or&gt;
+        &lt;match hotspot="ESC" /&gt;
+        &lt;match hotspot="EPC" /&gt;
+        &lt;match hotspot="E" /&gt;
+        &lt;match hotspot="P" /&gt;
+        &lt;match hotspot="S" /&gt;
+      &lt;/or&gt;
+    &lt;/not&gt;
+    &lt;feedback&gt;You have not selected any component!&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+&lt;/question&gt;
+</pre>

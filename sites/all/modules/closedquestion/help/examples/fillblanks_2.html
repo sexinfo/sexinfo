@@ -1,0 +1,45 @@
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;question type="fillblanks"&gt;
+  &lt;!--
+  The values used in the question are calculated first.
+
+  the first two expressions generate random numbers. store="1" means that
+  those two expressions are only evaluated the first time a user views the
+  question. The values are then stored and loaded the next time.
+
+  The other expressions are evaluated every time the user views the question.
+
+  Expressions specifying store="1" should always be the first expressions.
+  --&gt;
+  &lt;matheval expression="a=random()" store="1" /&gt;
+  &lt;matheval expression="b=random()" store="1" /&gt;
+  &lt;matheval expression="a=round(a*0.8+0.11,2)" /&gt;
+  &lt;matheval expression="b=round(b*5+2,0)" /&gt;
+  &lt;matheval expression="ans=a*b" /&gt;
+  &lt;matheval expression="min=ans-0.01" /&gt;
+  &lt;matheval expression="max=ans+0.01" /&gt;
+
+  &lt;text&gt;
+    &lt;p&gt;In this question the values are generated and different for each user. The generated values are also used in the feedback after three incorrect tries.&lt;/p&gt;
+    &lt;p&gt;You have measured a concentration of &lt;mathresult expression="a" /&gt;mg/ml in a &lt;mathresult expression="b" /&gt;-times diluted sample.&lt;br/&gt;
+       What was the concentration in the non-diluted solution?&lt;/p&gt;
+    &lt;p&gt;&lt;b&gt;The original concentration was: &lt;inlineChoice identifier="c" freeform="1" /&gt;g/l&lt;/b&gt;&lt;/p&gt;
+
+  &lt;/text&gt;
+
+  &lt;hint mintries="1"&gt;That's not correct.&lt;/hint&gt;
+  &lt;hint mintries="2"&gt;The concentration in the non-diluted solution is higher than the measured concentration.&lt;/hint&gt;
+  &lt;hint mintries="3"&gt;The correct answer is: &lt;mathresult expression="a" /&gt; * &lt;mathresult expression="b" /&gt; = &lt;mathresult expression="ans" /&gt;.&lt;/hint&gt;
+
+  &lt;mapping correct="1"&gt;
+    &lt;range inlineChoice="c" minval="min" maxval="max" /&gt;
+    &lt;feedback&gt;Very good. The difference between your answer and the "real" answer is: &lt;mathresult e="abs(ans-c)" /&gt;.&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0" stop="1"&gt;
+    &lt;not&gt;&lt;match inlineChoice="c" pattern="^[+-]?[0-9]+(\.[0-9]+)?(e[+-]?[0-9]+)?$" /&gt;&lt;/not&gt;
+    &lt;feedback&gt;Please give a number.&lt;/feedback&gt;
+  &lt;/mapping&gt;
+&lt;/question&gt;
+</pre>

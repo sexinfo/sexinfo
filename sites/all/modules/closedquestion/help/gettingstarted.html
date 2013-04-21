@@ -1,0 +1,43 @@
+
+<p>The Drupal module ClosedQuestion adds the Closed Question node-type to Drupal
+  that takes an XML question definition and displays this question to users. The
+  ClosedQuestion-nodes are stand-alone and can be used anywhere a normal node is
+  used. It is developed and maintained by Hylke van der Schaaf.
+</p>
+
+<h2>Features</h2>
+<ul>
+  <li>Designed for practice: students can take as many attempts as they like.</li>
+  <li>Many feedback options, feedback can change with attempts.</li>
+  <li>Many question types.</li>
+</ul>
+
+<h2>Input format</h2>
+<p>In the XML any input format filter can be used, with the exception of:</p>
+<ul>
+  <li><em>Line break converter</em> as this filter will cause linebreaks in bad
+    places. </li>
+  <li><em>HTML corrector </em>as this will mess up the xml.</li>
+  <li><em>HTML filter</em> unless you add all used XML tags to the exception
+    list, or it will strip out the tags of the xml.</li>
+</ul>
+
+<p>It is most convenient to create an input format for use specifically with
+  ClosedQuestion. The module <em>better_formats</em> can be used to make sure
+  this input format is always used for ClosedQuestion nodes.</p>
+
+<h2>Using images</h2>
+<p>You can use images in questions in two ways:</p>
+<ol>
+  <li>Attach the image to the question-node itself using the <em>File
+      attachments</em> function. You can then get the url of this attached image
+      by using [attachurl:<em>filename</em>] or create a complete
+      &lt;img src=""&gt; tag by using [inline:<em>filename</em>], where
+      <em>filename</em> is the name of the attached file.&nbsp;</li>
+  <li>Insert the image in text using img-assist.</li>
+</ol>
+
+<p>Method two is useful when you want to insert an image in a block of text, and
+  you thus need to complete &lt;img src=""&gt; tag. Method one can also be used
+  if you only need the url of the image to insert into the src="" of a hotspot
+  or drag&amp;drop question.</p>

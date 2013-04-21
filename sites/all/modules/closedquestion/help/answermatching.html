@@ -1,0 +1,213 @@
+
+<p>Most question types use answer matching sections in the XML to define which
+  feedback to give on an answer. An example of a matching section is:</p>
+
+<pre>
+&lt;mapping correct="1" stop="0"&gt;
+  &lt;match inlineChoice="A" inlineOption="2" /&gt;
+  &lt;match inlineChoice="B" inlineOption="4" /&gt;
+  &lt;and&gt;
+    &lt;match inlineChoice="C" inlineOption="1" /&gt;
+    &lt;match inlineChoice="D" inlineOption="3" /&gt;
+  &lt;/and&gt;
+  &lt;not&gt;
+    &lt;match inlineChoice="E" pattern="/^inhibitor$/i" /&gt;
+  &lt;/not&gt;
+  &lt;range inlineChoice="speed" minval="119.999" maxval="120.001" /&gt;
+  &lt;feedback&gt;Very good.&lt;/feedback&gt;
+&lt;/mapping&gt;
+</pre>
+
+<p>A answer mating section always starts with a <strong>&lt;mapping&gt;</strong>
+  tag. The <strong>correct="1"</strong> indicates whether the answer is correct
+  or not if this mapping matches the current answer. The (optional)
+  <strong>stop="0"</strong> means that if this mapping matches, further matches
+  should still be checked. <strong>stop="1"</strong> means that matching should
+  stop if this mapping matches.
+</p>
+
+<p>Inside the &lt;mapping&gt; tag there are two types of tags allowed, tags that
+  do answer-matching, and <a href="feedback">&lt;feedback&gt;</a> tags. If
+  <strong>all</strong> tags that do answer-matching return a positive result,
+  the &lt;feedback&gt; tags are shown to the user. The different answer-matching
+  tags are: match, range, and, or, not.
+</p>
+
+<h2>Tag: &lt;match /&gt;</h2>
+
+<p>Match tags are used to match answers that contain text. This includes Select
+  &amp; Order and Multiple Answer questions, as the "answer" to those questions
+  is a (text) list of the selected options. The &lt;match&gt; tag takes several
+  attributes:
+</p>
+<ul>
+  <li>
+    <strong>pattern="..."</strong>  If only <strong>pattern</strong> is present,
+    the full answer given by the user is matched using the regular expression
+    given.
+  </li>
+  <li>
+    <strong>inlineChoice="A" inlineOption="B"</strong> Used in Fillblanks
+    questions. If inlineChoice and inlineOption are present, it checks whether
+    the user selected option B for the given dropdown box A.
+  </li>
+  <li>
+    <strong>inlineChoice="C" pattern="..."</strong>  Used in Fillblanks
+    questions, for freeform choices where the user can enter any text. It checks
+    if the value entered by the user in text box C matches the given regular
+    expression.
+  </li>
+  <li>
+    <strong>hotspot="D"</strong>  Checks if a draggable is on the given
+    hotspot(s). hotspot can be a regular expression that compares all
+    hotspotId's on the given regular expression and selects those that match.
+    All draggables are checked if no draggables are selected with draggable. If
+    any of the given hotspots in one &lt;match&gt; tag have a draggable the
+    result is true, unless matchAll is <strong>h</strong> or <strong>b</strong>,
+    then all of the given hotspots have to have a draggable for the result to be
+    true.
+  </li>
+  <li>
+    <strong>draggable="E"</strong> Checks if the given draggable(s) are on a
+    hotspot. draggable matches all draggableId's with the given regular
+    expression and selects those that match. If matchAll is <strong>d</strong>
+    or <strong>b</strong>, then all selected draggables have to be on a
+    (selected) hotspot for the match to be true.
+  </li>
+  <li>
+    <strong>matchAll="F"</strong> Selects whether only one or all of the items
+    needs to match, depending on what it's combined with:
+    <ul>
+      <li>inlineChoice="C" pattern="..." If C is a regular expression, a
+        non-zero value for matchAll will make that the values of all
+        inlineChoices with an ID that matches C will have to match the pattern.
+        If any value of an inlineChoice with an ID that matches C does not match
+        the pattern, the match return false.</li>
+      <li>hotspot="D" draggable="E" If D and/or E are regular expressions, F can
+        have three values:
+        <ul>
+          <li>(h)otspots: All selected hotspots should have one of the selected
+            draggable.</li>
+          <li>(d)raggable: All selected draggables should be on one of the
+            selected hotspots.</li>
+          <li>(b)oth: All selected hotspots should have one of the selected
+            draggables and all selected draggables should be on one of the
+            selected hotspots.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<h3>Examples:</h3>
+
+<pre>&lt;match pattern="A" /&gt;</pre>
+<p>Used in Select&amp;Order and Multiple answer questions. Match true if the
+  answer matches the pattern.</p>
+
+<pre>&lt;match inlineChoice="A" inlineOption="B" /&gt;</pre>
+<p>Used in FillBlanks questions. Match true if dropdown-style inlineChoice with
+  id A contains the option with id B.</p>
+
+<pre>&lt;match inlineChoice="A" pattern="B" /&gt;</pre>
+<p>Used in FillBlanks questions. Selects all (freeform-style) inlineChoice with
+  an id that matches pattern A. If the value of <b>any</b> of these inlineChoices
+  matches pattern B the match is successfull.</p>
+
+<pre>&lt;match inlineChoice="A" pattern="B" matchAll="1" /&gt;</pre>
+<p>Used in FillBlanks questions. Selects all (freeform-style) inlineChoice with
+  an id that matches pattern A. If the value of <b>all</b> of these inlineChoices
+  matches pattern B the match is successfull. If any choice does not match the
+  match fails.</p>
+
+<pre>&lt;match hotspot="A" /&gt;</pre>
+<p>Used in Hotspot questions. Selects all hotspots with an id that matches
+  pattern A. If any of these hotspots has a draggable, the match is successfull.</p>
+
+<pre>&lt;match hotspot="A" matchAll="<b>h</b>" /&gt;</pre>
+<p>Used in Hotspot questions. Selects all hotspots with an id that matches
+  pattern A. If <b>all</b> of these hotspots have a draggable, the match is
+  successful.</p>
+
+<pre>&lt;match hotspot="A" draggable="B" /&gt;</pre>
+<p>Used in Drag&amp;Drop questions. Selects all hotspots with an id that matches
+  pattern A. Selects all draggables with an id that matches pattern B. If any of
+  the selected hotspots contains any of the selected draggables the match is
+  successful.</p>
+
+<pre>&lt;match hotspot="A" draggable="B" matchAll="<b>d</b>" /&gt;</pre>
+<p>Used in Drag&amp;Drop questions. Selects all hotspots with an id that matches
+  pattern A. Selects all draggables with an id that matches pattern B. If
+  <b>all</b> of the selected draggables are on a selected hotspot the match is
+  successful.</p>
+
+<pre>&lt;match hotspot="A" draggable="B" matchAll="<b>h</b>" /&gt;</pre>
+<p>Used in Drag&amp;Drop questions. Selects all hotspots with an id that matches
+  pattern A. Selects all draggables with an id that matches pattern B. If
+  <b>all</b> of the selected hotspots contain at least one of the selected
+  draggable the match is successfull. If any hotspot does not contain one of the
+  selected draggables, the match fails. This is thus only possble if there are
+  at least as many selected draggables as there are selected hotspots.</p>
+
+<pre>&lt;match hotspot="A" draggable="B" matchAll="<b>b</b>" /&gt;</pre>
+<p>Used in Drag&amp;Drop questions. Selects all hotspots with an id that matches
+  pattern A. Selects all draggables with an id that matches pattern B. If
+  <b>all</b> of the selected draggables are on a selected hotspot AND all
+  selected hotspots contain at least one of the selected draggables then the
+  match is successfull.</p>
+
+<pre>&lt;match inlineChoice="c" pattern="^[+-]?[0-9]+(\[.,][0-9]+)?([eE][+-]?[0-9]+)?$" /&gt;</pre>
+<p>Checks if (freeform-style) inlineChoice with identifier c holds a valid
+  number.</p>
+
+<h2>Tag: &lt;range /&gt;</h2>
+
+<p>Range checks numeric values against a range. Numeric values come from Value
+  questions, from Fillblanks questions with freeform inlineChoices, or from
+  <a href="math.html">mathematical expressions</a>. Allowed attributes in range
+  tags are:
+</p>
+<ul>
+  <li>
+    <strong>value="..." </strong> If value is present, the value given here is
+    checked against the range instead of the user's answer. If a number is given,
+    this number is used. If text is given, the math variable with the given name
+    is used.
+  </li>
+  <li>
+    <strong>inlineChoice="X"</strong> Checks the value of the inlineChoice with
+    id X. X can be a regular expression to check multiple inlineChoices with the
+    same range.
+  </li>
+  <li>
+    <strong>minval="..."</strong> The minimum value the checked number has to
+    have to match.   If text is given, the math variable with the given name is
+    used.
+  </li>
+  <li>
+    <strong>maxval="..."</strong> The maximum value the checked number has to
+    have to match. If text is given, the math variable with the given name is
+    used.
+  </li>
+  <li>
+    <strong>matchAll="1"</strong> If X is a regular expression, then all values
+    for the choices with an ID that matches the pattern will have to match the
+    range. Normally only one choice with a matching ID has to fall in the range.
+  </li>
+</ul>
+<p>  </p>
+<h2>Tag: &lt;and&gt;...&lt;/and&gt;</h2>
+<p>
+  And can contain multiple other answer-matching tags. The result of and is true
+  only if <strong>all</strong>  of the contained answer-matching tags are true.
+
+</p>
+<h2>Tag: &lt;or&gt;...&lt;/or&gt;</h2>
+<p>
+  Or can contain multiple other answer-matching tags. The result of and is true
+  if <strong>any</strong>  of the  contained answer-matching tags are true.
+
+</p>
+<h2>Tag: &lt;not&gt;...&lt;/not&gt;</h2>
+<p>Not can contain one other answer-matching tags. Not returns true if the
+  containing matching tag returns false.
+</p>

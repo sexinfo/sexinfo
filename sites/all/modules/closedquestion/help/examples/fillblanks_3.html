@@ -1,0 +1,62 @@
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;question type="fillblanks"&gt;
+  &lt;!--
+  More math examples
+  --&gt;
+  &lt;matheval expression="a=random()" store="1" /&gt;
+  &lt;matheval expression="a=round(a*10, 2)" /&gt;
+
+  &lt;text&gt;
+    &lt;p&gt;This demo question does not have a correct answer. It only check the following conditions:&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Number1 &amp;gt;= a &amp;gt;= Number2&lt;/li&gt;
+      &lt;li&gt;Number1 &amp;gt;= Number2&lt;/li&gt;
+      &lt;li&gt;Number1 &amp;lt;= Number2&lt;/li&gt;
+      &lt;li&gt;0 &amp;lt;= Number1 + Number2 &amp;lt;= 100&lt;/li&gt;
+      &lt;li&gt;(Number1 + 10) &amp;lt;= Number3 &amp;lt;= (Number2 + 20)&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;p&gt;
+      &lt;b&gt;a: &lt;mathresult expression="a" /&gt;.&lt;/b&gt;&lt;br/&gt;
+      &lt;b&gt;Number 1: &lt;inlineChoice id="n1" freeform="1" /&gt;.&lt;/b&gt;&lt;br/&gt;
+      &lt;b&gt;Number 2: &lt;inlineChoice id="n2" freeform="1" /&gt;.&lt;/b&gt;&lt;br/&gt;
+      &lt;b&gt;Number 3: &lt;inlineChoice id="n3" freeform="1" /&gt;.&lt;/b&gt;&lt;br/&gt;
+    &lt;/p&gt;
+  &lt;/text&gt;
+
+  &lt;mapping correct="0" stop="0"&gt;
+    &lt;range value="a" minval="n1" maxval="n2" /&gt;
+    &lt;feedback&gt;Number 1 &amp;lt;= a &amp;lt;= Number2&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0" stop="0"&gt;
+    &lt;range value="n1-n2" minval="0" /&gt;
+    &lt;feedback&gt;Number 1 &amp;gt;= Number2&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0" stop="0"&gt;
+    &lt;range value="n1-n2" maxval="0" /&gt;
+    &lt;feedback&gt;Number 1 &amp;lt;= Number2&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0" stop="0"&gt;
+    &lt;range value="n1+n2" minval="0" maxval="100" /&gt;
+    &lt;feedback&gt;0 &amp;lt;= Number1 + Number2 &amp;lt;= 100&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0" stop="0"&gt;
+    &lt;range value="n3" minval="10+n1" maxval="20+n2" /&gt;
+    &lt;feedback&gt;(Number1 + 10) &amp;lt;= Number3 &amp;lt;= (Number2 + 20)&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0" stop="1"&gt;
+    &lt;or&gt;
+      &lt;not&gt;&lt;match inlineChoice="n1" pattern="^[+-]?[0-9]+([,.][0-9]+)?(e[+-]?[0-9]+)?$" /&gt;&lt;/not&gt;
+      &lt;not&gt;&lt;match inlineChoice="n2" pattern="^[+-]?[0-9]+([,.][0-9]+)?(e[+-]?[0-9]+)?$" /&gt;&lt;/not&gt;
+      &lt;not&gt;&lt;match inlineChoice="n3" pattern="^[+-]?[0-9]+([,.][0-9]+)?(e[+-]?[0-9]+)?$" /&gt;&lt;/not&gt;
+    &lt;/or&gt;
+    &lt;feedback&gt;Please give only numbers.&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+&lt;/question&gt;
+</pre>

@@ -1,0 +1,47 @@
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;question type="OPTION"&gt;
+
+  &lt;text&gt;
+    &lt;p&gt;Here goes the question.&lt;/p&gt;
+    &lt;p&gt;You can use &lt;i&gt;any&lt;/i&gt; html in most blocks.&lt;/p&gt;
+  &lt;/text&gt;
+
+  &lt;hint mintries="1"&gt;
+    This is the first hint, it comes up after the first incorrect answer.
+  &lt;/hint&gt;
+  &lt;hint mintries="2" maxtries="3"&gt;
+    This is the second hint, it comes up after the second and third incorrect
+    answer and disappears again at the fourth.
+  &lt;/hint&gt;
+  &lt;hint mintries="3"&gt;
+    You can have as many hints as you like.
+  &lt;/hint&gt;
+
+
+  &lt;option correct="0"&gt;
+    &lt;choice&gt;Option 1.&lt;/choice&gt;
+    &lt;feedback&gt;Feedback for option one.&lt;/feedback&gt;
+    &lt;feedback mintries="2" maxtries="3"&gt;
+      This feedback item is shown when option 1 is selected at the second or
+      third try.
+    &lt;/feedback&gt;
+  &lt;/option&gt;
+
+  &lt;option correct="1"&gt;
+    &lt;choice&gt;Option 2.&lt;/choice&gt;
+    &lt;feedback&gt;
+      &lt;b&gt;Yes&lt;/b&gt;, option two is correct!
+      &lt;br/&gt;
+      the correct="1" attributed indicated this. There can be more than 
+      one correct option.
+    &lt;/feedback&gt;
+  &lt;/option&gt;
+
+  &lt;option correct="0"&gt;
+    &lt;choice&gt;Option 3.&lt;/choice&gt;
+    &lt;feedback&gt;Nope, option three is not correct.&lt;/feedback&gt;
+  &lt;/option&gt;
+
+&lt;/question&gt;
+</pre>

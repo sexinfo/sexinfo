@@ -1,0 +1,100 @@
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!--
+  This example assumes the question has a small image as attachment. This image
+  is used in some of the feedback.
+--&gt;
+&lt;question type="fillblanks"&gt;
+  &lt;text&gt;
+    &lt;p&gt;&lt;b&gt;Place the right term at the right description:&lt;/b&gt;&lt;/p&gt;
+
+    &lt;p&gt;
+      &lt;table&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;inlineChoice identifier="A"/&gt;&lt;/td&gt;&lt;td&gt;To bind a substrate a binding site must have a matching shape.&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;inlineChoice identifier="B"/&gt;&lt;/td&gt;&lt;td&gt;Active sites have a shape complementary to that of the substrate only after the substrate is bound.&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;inlineChoice identifier="C"/&gt;&lt;/td&gt;&lt;td&gt;Amino acids from different parts of the linear amino acid sequence interact with the substrate
+         and create a microenvironment essential for binding and catalysis.&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;inlineChoice identifier="D"/&gt;&lt;/td&gt;&lt;td&gt;Amino acids involved in the chemical reactions.&lt;/td&gt;&lt;/tr&gt;
+      &lt;/table&gt;
+    &lt;/p&gt;
+    &lt;p&gt;A substance that slows an enzymatic reaction is called an &lt;feedbackblock id="i" /&gt;&lt;inlineChoice identifier="E" freeform="1" /&gt;&lt;/p&gt;
+    &lt;p&gt;The maximum speed on dutch highways is &lt;feedbackblock id="s" /&gt;&lt;inlineChoice identifier="speed" freeform="1" /&gt;km/h&lt;/p&gt;
+    &lt;p&gt;There can be more terms than descriptions, or more descriptions than terms.&lt;/p&gt;
+
+  &lt;/text&gt;
+
+  &lt;inlineOption identifier="0"&gt;Pick One&lt;/inlineOption&gt;
+  &lt;inlineOption identifier="1"&gt;the active site&lt;/inlineOption&gt;
+  &lt;inlineOption identifier="2"&gt;lock and key&lt;/inlineOption&gt;
+  &lt;inlineOption identifier="3"&gt;catalytic residues&lt;/inlineOption&gt;
+  &lt;inlineOption identifier="4"&gt;induced fit&lt;/inlineOption&gt;
+
+  &lt;hint mintries="1"&gt;A first general hint.&lt;/hint&gt;
+  &lt;hint mintries="2"&gt;A more specific hint.&lt;/hint&gt;
+
+
+  &lt;mapping correct="1"&gt;
+    &lt;match inlineChoice="A" inlineOption="2" /&gt;
+    &lt;match inlineChoice="B" inlineOption="4" /&gt;
+    &lt;match inlineChoice="C" inlineOption="1" /&gt;
+    &lt;match inlineChoice="D" inlineOption="3" /&gt;
+    &lt;match inlineChoice="E" pattern="/^inhibitor$/i" /&gt;
+    &lt;range inlineChoice="speed" minval="119.999" maxval="120.001" /&gt;
+    &lt;feedback&gt;
+              Very good.
+    &lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+    &lt;not&gt;&lt;match inlineChoice="speed" pattern="^[+-]?[0-9]+(\.[0-9]+)?(e[+-]?[0-9]+)?$" /&gt;&lt;/not&gt;
+    &lt;feedback block="s"&gt;&lt;span&gt;[inline:1]&lt;/span&gt;&lt;span class="hovertip"&gt;Please give a number as a speed.&lt;/span&gt;&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+    &lt;range inlineChoice="speed" minval="120.001" /&gt;
+    &lt;match inlineChoice="speed" pattern="^[+-]?[0-9]+(\.[0-9]+)?(e[+-]?[0-9]+)?$" /&gt;
+    &lt;feedback block="s"&gt;&lt;span&gt;[inline:1]&lt;/span&gt;&lt;span class="hovertip"&gt;No, that's speed is too fast.&lt;/span&gt;&lt;/feedback&gt;
+  &lt;/mapping&gt;
+  &lt;mapping correct="0"&gt;
+    &lt;range inlineChoice="speed" maxval="119.999" /&gt;
+    &lt;match inlineChoice="speed" pattern="^[+-]?[0-9]+(\.[0-9]+)?(e[+-]?[0-9]+)?$" /&gt;
+    &lt;feedback block="s"&gt;&lt;span&gt;[inline:1]&lt;/span&gt;&lt;span class="hovertip"&gt;No, the maximum speed on highways is higher than that.&lt;/span&gt;&lt;/feedback&gt;
+  &lt;/mapping&gt;
+  &lt;mapping correct="0"&gt;
+    &lt;range inlineChoice="speed" minval="129.999" maxval="130.001" /&gt;
+    &lt;match inlineChoice="speed" pattern="^[+-]?[0-9]+(\.[0-9]+)?(e[+-]?[0-9]+)?$" /&gt;
+    &lt;feedback block="s"&gt;&lt;span&gt;[inline:1]&lt;/span&gt;&lt;span class="hovertip"&gt;130km/h is the maximum speed on highways in some other European countries.&lt;/span&gt;&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+    &lt;or&gt;
+      &lt;match inlineChoice="A" inlineOption="0" /&gt;
+      &lt;match inlineChoice="B" inlineOption="0" /&gt;
+      &lt;match inlineChoice="C" inlineOption="0" /&gt;
+      &lt;match inlineChoice="D" inlineOption="0" /&gt;
+      &lt;not&gt;&lt;match inlineChoice="E" pattern="^\S+$" /&gt;&lt;/not&gt;
+      &lt;not&gt;&lt;match inlineChoice="speed" pattern="^\S+$" /&gt;&lt;/not&gt;
+    &lt;/or&gt;
+    &lt;feedback mintries="1"&gt;Please fill in all blanks!&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+    &lt;match inlineChoice="E" pattern="^\S+$" /&gt;
+    &lt;not&gt;&lt;match inlineChoice="E" pattern="/^inhibitor$/i" /&gt;&lt;/not&gt;
+    &lt;feedback block="i" mintries="1"&gt;&lt;span&gt;[inline:1]&lt;/span&gt;&lt;span class="hovertip"&gt;A substance that slows an enzymatic reaction is called an inhibitor.&lt;/span&gt;&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+    &lt;match inlineChoice="B" inlineOption="3" /&gt;
+    &lt;feedback&gt;“catalytic residues” is not about active sites.&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+    &lt;not&gt;
+      &lt;match inlineChoice="B" inlineOption="4" /&gt;
+    &lt;/not&gt;
+    &lt;feedback mintries="2"&gt;You did not select the correct option for the second box.&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+&lt;/question&gt;
+</pre>
