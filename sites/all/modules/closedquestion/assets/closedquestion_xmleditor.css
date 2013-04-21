@@ -1,0 +1,207 @@
+
+/**
+ * Styles for the closedQuestion node-edit screen and the xmlEditor.
+ */
+
+#body_field_wrapper {
+  border: 1px solid #BBB;
+  padding: 0px;
+  margin: 0px;
+}
+
+#xmlJsonEditor_tree {
+}
+
+#xmlJsonEditor_xml {
+}
+
+#xmlJsonEditor_editor {
+  overflow: auto;
+}
+
+.xmlJsonEditor_activeTab {
+  border-top: 1px solid #BBB;
+  border-left: 1px solid #BBB;
+  border-right: 1px solid #BBB;
+  background-color: #FFF;
+  padding: 2px 5px 1px 5px;
+  margin: 0px 2px 0px 2px;
+}
+
+.xmlJsonEditor_inactiveTab {
+  border: 1px solid #BBB;
+  background-color: #F0F0F0;
+  padding: 0px 5px 0px 5px;
+  margin: 4px 2px 0px 2px;
+}
+
+#xmlJsonEditor_container {
+  display: none;
+  width: 100%;
+  height: 450px;
+}
+
+#xmlJsonEditor_template_container {
+  display: none;
+  width: 100%;
+  height: 450px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.xmlJsonEditor_container img {
+  border: 0;
+}
+
+.xmlJsonEditor_container a {
+  text-decoration: none;
+}
+
+.xmlJsonEditor_container label {
+  width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.xmlJsonEditor_container a:hover {
+  text-decoration: underline;
+}
+
+.xmlJsonEditor_container fieldset {
+  padding: 0px;
+}
+
+.xmlJsonEditor_form legend {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.xmlJsonEditor_tree_container {
+  width: 49%;
+  height: 100%;
+  background-color: #eee;
+  float: left;
+  overflow: auto;
+}
+
+.editor_values_contents {
+  overflow: auto;
+  min-height: 200px;
+  margin-bottom: 5px;
+  border: 1px solid rgb(170, 170, 170);
+  background-color: rgb(238, 238, 238);
+}
+
+.xmlJsonEditor_divider {
+  width: 5px;
+  height: 100%;
+  background-color: #555;
+  float: left;
+  cursor:e-resize;
+  z-index: 2;
+}
+
+.xmlJsonEditor_form_elements {
+  width: 49%;
+  height: 100%;
+  float: left;
+}
+
+img.xmlJsonEditor_help_icon {
+  cursor: help;
+}
+
+.xmlJsonEditor_attribute {
+  background-color: #eee;
+  padding: 0px 5px 5px 5px;
+  margin: 1px;
+}
+
+.xmlJsonEditor_attribute textarea {
+  width: 95%;
+  height: 100px;
+  margin-left: 5px;
+}
+
+.xmlJsonEditor_attribute input {
+  width: 95%;
+  margin-left: 5px;
+}
+
+.xmlJsonEditor_attribute.depricated {
+  background-color: #fcc;
+}
+
+.xmlJsonEditor_container img {
+  vertical-align: middle;
+}
+
+.xmlJsonEditor_form_description {
+  min-height: 20px;
+  padding: 5px;
+}
+
+.xmlJsonEditor_form_description > img.icon {
+  float: left;
+}
+
+li.xmlJsonEditor_newNodeHighlighted a {
+  font-weight: bold;
+}
+
+.xmlJsonEditor_container .jstree-classic .jstree-clicked, .xmlJsonEditor_container .jstree-classic .jstree-clicked em{
+  color: white;
+  background-color: #3561B1;
+  border: 0;
+}
+
+.xmlJsonEditor_hotspot_tag {
+  background-color: #666;
+  color: #FFF;
+  font-size: 12px;
+  min-width: 50px;
+  padding: 2px;
+}
+
+.xmlJsonEditor_hotspot_tag.xmlJsonEditor_matched {
+  background-color: #090;
+}
+
+.xmlJsonEditor_container .jstree a {
+  color: #555;
+}
+
+.xmlJsonEditor_container em {
+  color: #000;
+  font-style: normal;
+  font-weight: normal;
+}
+
+input.xmlEditorAttributeFeedback_correct, select.xmlEditorAttributeFeedback_correct {
+  background-color: #efe;
+}
+
+textarea.xmlEditorAttributeFeedback_error, input.xmlEditorAttributeFeedback_error, select.xmlEditorAttributeFeedback_error {
+  background-color: #fee;
+}
+
+div.xmlEditorAttributeFeedback {
+  font-size: 0.85em;
+  margin-left: 5px;
+}
+
+#selectedNodeDescription {
+  font-size: 0.85em;
+  margin-left: 20px;
+}
+
+div.xmlEditorAttributeFeedback ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+}
+
+.xmlEditor_empty {
+  font-style: italic;
+  color: #999;
+}

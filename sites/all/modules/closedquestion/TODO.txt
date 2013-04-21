@@ -1,0 +1,11 @@
+
+ * Change default settings of the attachment field.
+
+ * Make closedquestion_fileobj() search all File fields, not just "attachment".
+
+ * Add a setting to turn off logging.
+
+ * Add validator code to fillblanks question so that for instance filling in a
+   non-numeric value does not count as a "try" but gives a validation error instead.
+
+ * Import/Export

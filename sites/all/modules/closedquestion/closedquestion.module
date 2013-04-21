@@ -1,0 +1,909 @@
+<?php
+
+/**
+ * @file
+ * Module that makes a ClosedQuestion node-type available.
+ */
+
+/**
+ * User-right for accessing closed questions
+ */
+define('CLOSEDQUESTION_RIGHT_ACCESS', 'access closedquestions');
+
+/**
+ * User-right for creating new closed questions
+ */
+define('CLOSEDQUESTION_RIGHT_CREATE', 'create closedquestion');
+
+/**
+ * User-right for editing a user's own closed questions
+ */
+define('CLOSEDQUESTION_RIGHT_EDITOWN', 'edit own closedquestion');
+
+/**
+ * User-right for editing other users' closed questions
+ */
+define('CLOSEDQUESTION_RIGHT_EDITALL', 'edit all closedquestions');
+
+/**
+ * Implements hook_help().
+ */
+function closedquestion_help($path, $arg) {
+  $output = '';
+  switch ($path) {
+    case "admin/help#closedquestion":
+      $output = '<p>' . t("A module for closedquestions.") . '</p>';
+      break;
+  }
+  return $output;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function closedquestion_permission() {
+  $retval = array(
+    CLOSEDQUESTION_RIGHT_ACCESS => array(
+      'title' => t(CLOSEDQUESTION_RIGHT_ACCESS),
+      'description' => t('TODO Add a description for CLOSEDQUESTION_RIGHT_ACCESS'),
+    ),
+    CLOSEDQUESTION_RIGHT_CREATE => array(
+      'title' => t(CLOSEDQUESTION_RIGHT_CREATE),
+      'description' => t('TODO Add a description for CLOSEDQUESTION_RIGHT_CREATE'),
+    ),
+    CLOSEDQUESTION_RIGHT_EDITOWN => array(
+      'title' => t(CLOSEDQUESTION_RIGHT_EDITOWN),
+      'description' => t('TODO Add a description for CLOSEDQUESTION_RIGHT_EDITOWN'),
+    ),
+    CLOSEDQUESTION_RIGHT_EDITALL => array(
+      'title' => t(CLOSEDQUESTION_RIGHT_EDITALL),
+      'description' => t('TODO Add a description for CLOSEDQUESTION_RIGHT_EDITALL'),
+    ),
+    'configure closed question' => array(
+      'title' => t('Configure Closed Question'),
+      'description' => t('Change settings for the Closed Question module.'),
+    ),
+  );
+  return $retval;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function closedquestion_theme() {
+  $themes = array(
+    'closedquestion_node_form' => array(
+      'render element' => 'form',
+      'preprocess functions' => array('closedquestion_node_form_preprocess'),
+      'file' => 'closedquestion.theme.inc.php',
+    ),
+    'closedquestion_feedback_list' => array(
+      'render element' => 'form',
+      'file' => 'closedquestion.theme.inc.php',
+    ),
+    'closedquestion_feedback_item' => array(
+      'render element' => 'form',
+      'file' => 'closedquestion.theme.inc.php',
+    ),
+    'closedquestion_option' => array(
+      'render element' => 'form',
+      'file' => 'closedquestion.theme.inc.php',
+    ),
+    'closedquestion_option_list' => array(
+      'render element' => 'form',
+      'file' => 'closedquestion.theme.inc.php',
+    ),
+    'closedquestion_inline_option_list' => array(
+      'render element' => 'form',
+      'file' => 'closedquestion.theme.inc.php',
+    ),
+    'closedquestion_mapping_list' => array(
+      'render element' => 'form',
+      'file' => 'closedquestion.theme.inc.php',
+    ),
+    'closedquestion_mapping_item' => array(
+      'render element' => 'form',
+      'file' => 'closedquestion.theme.inc.php',
+    ),
+    'closedquestion_mapping' => array(
+      'render element' => 'form',
+      'file' => 'closedquestion.theme.inc.php',
+    ),
+    'closedquestion_range' => array(
+      'render element' => 'form',
+      'file' => 'closedquestion.theme.inc.php',
+    ),
+    'closedquestion_question_general_text' => array(
+      'render element' => 'form',
+      'file' => 'closedquestion.theme.inc.php',
+    ),
+    'closedquestion_question_balance' => array(
+      'render element' => 'form',
+      'file' => 'closedquestion.theme.inc.php',
+    ),
+    'closedquestion_question_check' => array(
+      'render element' => 'form',
+      'file' => 'closedquestion.theme.inc.php',
+    ),
+    'closedquestion_question_drag_drop' => array(
+      'render element' => 'form',
+      'file' => 'closedquestion.theme.inc.php',
+    ),
+    'closedquestion_inline_choice' => array(
+      'render element' => 'form',
+      'file' => 'closedquestion.theme.inc.php',
+    ),
+    'closedquestion_question_hotspot' => array(
+      'render element' => 'form',
+      'file' => 'closedquestion.theme.inc.php',
+    ),
+    'closedquestion_question_select_order' => array(
+      'render element' => 'form',
+      'file' => 'closedquestion.theme.inc.php',
+    ),
+    'closedquestion_sequence_back_next' => array(
+      'variables' => array(
+        'index' => '',
+        'total' => '',
+        'prevUrl' => '',
+        'nextUrl' => '',
+      ),
+      'file' => 'closedquestion.theme.inc.php',
+    ),
+    'closedquestion_question_sequence_text' => array(
+      'render element' => 'form',
+      'file' => 'closedquestion.theme.inc.php',
+    ),
+  );
+  return $themes;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function closedquestion_menu() {
+  $items['node/%node/cq_text'] = array(
+    'title' => 'Text',
+    'description' => 'Show all text in the question for easy review.',
+    'page callback' => 'closedquestion_text',
+    'page arguments' => array(1),
+    'access callback' => 'closedquestion_access_text',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 2,
+  );
+  $items['node/%node/cq_users'] = array(
+    'title' => 'Users',
+    'description' => 'Show all users that answered this question and their performance.',
+    'page callback' => 'closedquestion_users',
+    'page arguments' => array(1),
+    'access callback' => 'closedquestion_access_log',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 3,
+  );
+  $items['node/%node/cq_users/%user_uid_optional'] = array(
+    'title' => 'User Log',
+    'description' => 'Show the log of one user.',
+    'page callback' => 'closedquestion_user_log',
+    'page arguments' => array(1, 3),
+    'access callback' => 'closedquestion_access_log',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 3,
+  );
+  $items['closedquestion/parsecontentjs'] = array(
+    'page callback' => 'closedquestion_parse_content_js',
+    'access arguments' => array(CLOSEDQUESTION_RIGHT_CREATE),
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['admin/config/content/closedquestion'] = array(
+    'title' => 'Closed Question settings',
+    'description' => 'Configure the Closed Question module.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('closedquestion_config'),
+    'access arguments' => array('configure closed question'),
+    'position' => 'left',
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+/**
+ * Menu item access callback - determine if the text tab is accessible.
+ */
+function closedquestion_access_text($node) {
+  $is_question = (isset($node->question) && $node->question instanceof CqQuestionInterface);
+  return $is_question && user_access(CLOSEDQUESTION_RIGHT_CREATE) && node_access('view', $node);
+}
+
+/**
+ * Menu item access callback - determine if the logs are accessible.
+ */
+function closedquestion_access_log($node) {
+  $is_question = (isset($node->question) && $node->question instanceof CqQuestionInterface);
+  return $is_question && user_access(CLOSEDQUESTION_RIGHT_CREATE) && node_access('view', $node);
+}
+
+/**
+ * Menu callback - show all the text for a single question.
+ */
+function closedquestion_text($node) {
+  drupal_set_title(t('Text of: @title', array('@title' => $node->title)), PASS_THROUGH);
+  $retval = $node->question->getAllText();
+  return $retval;
+}
+
+/**
+ * Menu callback - show view with all the users that answered a single question.
+ */
+function closedquestion_users($node) {
+  // add view html to page contents
+  $retval = '<h2>' . t('Users that answered question %nodename', array('%nodename' => $node->title)) . '</h2>';
+  $retval .= views_embed_view('closedquestionusers', 'default', $node->nid);
+  return $retval;
+}
+
+/**
+ * Menu callback - show view with the log of how a single user answered a single question.
+ */
+function closedquestion_user_log($node, $user) {
+  // add view html to page contents
+  $retval = '<h2>' . t('The log of how user %name answered question %nodename', array('%name' => $user->name, '%nodename' => $node->title)) . '</h2>';
+  $retval .= views_embed_view('closedquestionuserlog', 'default', $node->nid, $user->uid);
+  return $retval;
+}
+
+/**
+ * Form builder for our admin settings page.
+ */
+function closedquestion_config() {
+  $form = array();
+
+  $form['closedquestion_anonymous_user_save_answer'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Save answers for anonymous users'),
+    '#default_value' => variable_get('closedquestion_anonymous_user_save_answer', TRUE),
+    '#description' => t("If checked, anonymous users will have their answers saved using cookies.")
+  );
+
+  return system_settings_form($form);
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function closedquestion_views_api() {
+  return array('api' => 3.0);
+}
+
+/**
+ * Implements hook_user_cancel().
+ */
+function closedquestion_user_cancel($edit, $account, $method) {
+  if (TRUE) {
+    db_delete('cq_user_answer')
+      ->condition('uid', $account->uid)
+      ->execute();
+  }
+}
+
+/**
+ * Implements hook_node_info().
+ */
+function closedquestion_node_info() {
+  $retval = array(
+    'closedquestion' => array(
+      'name' => t('Closed Question'),
+      'base' => 'closedquestion',
+      'description' => t('Create a closed question.'),
+      'body_label' => t('Question XML'),
+    ),
+  );
+  return $retval;
+}
+
+/**
+ * Implements hook_form().
+ */
+function closedquestion_form(&$node) {
+  $type = node_type_get_type($node);
+
+  // Add title if required
+  if ($type->has_title) {
+    $helpLink = theme('advanced_help_topic', array('module' => 'closedquestion', 'topic' => 'gettingstarted'));
+    $form['title'] = array(
+        '#type' => 'textfield',
+        '#title' => check_plain($type->title_label),
+        '#required' => TRUE,
+        '#default_value' => $node->title,
+        '#weight' => -5,
+    );
+    $form['title']['#prefix'] = $helpLink;
+  }
+
+  $form['parse_content'] = array(
+    '#type' => 'hidden',
+    '#default_value' => '',
+    '#input' => TRUE,
+  );
+  return $form;
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function closedquestion_form_alter(&$form, &$form_state, $form_id) {
+  // Since the body field is not available in hook_form, we have to modify it
+  // here.
+  if ($form['#form_id'] == 'closedquestion_node_form') {
+    drupal_add_library('system', 'ui.draggable');
+    drupal_add_library('system', 'ui.resizable');
+
+    $libPath = library_get_path('jquery-json', array('jquery.json.min.js', 'jquery.json.js'), FALSE);
+    $type = 'file';
+    if (!$libPath) {
+      $libPath = 'http://other.wmmrc.nl/ClosedQuestion/jquery.json.min.js';
+      $type = 'external';
+    }
+    drupal_add_js($libPath, array('type' => $type, 'weight' => JS_LIBRARY + 8));
+
+    $libPath = library_get_path('jquery-jstree', array('jquery.jstree.min.js', 'jquery.jstree.js'), FALSE);
+    $type = 'file';
+    if (!$libPath) {
+      $libPath = 'http://other.wmmrc.nl/ClosedQuestion/jquery.jstree.js';
+      $type = 'external';
+    }
+    drupal_add_js($libPath, array('type' => $type, 'weight' => JS_LIBRARY + 8));
+
+    $libPath = library_get_path('jsDraw2D', array('jsDraw2D.js'), FALSE);
+    $type = 'file';
+    if (!$libPath) {
+      $libPath = 'http://jsdraw2d.jsfiction.com/jsDraw2D.js';
+      $type = 'external';
+    }
+    drupal_add_js($libPath, array('type' => $type, 'weight' => JS_LIBRARY + 8));
+
+    $path = drupal_get_path('module', 'closedquestion');
+
+    drupal_add_js($path . '/assets/xmlEditor.js', array('weight' => JS_LIBRARY + 9));
+    drupal_add_js($path . '/assets/plugins/matchImgEditor.js', array('weight' => JS_LIBRARY + 9));
+    drupal_add_js($path . '/assets/xmlQuestionTemplates.js', array('weight' => JS_LIBRARY + 10));
+    drupal_add_js($path . '/assets/xmlQuestionConvert.js', array('weight' => JS_LIBRARY + 11));
+
+    $settings['closedquestion']['xmlConfig'] = closedquestion_xml_config();
+    $settings['closedquestion']['basePath'] = base_path() . $path;
+    $settings['closedquestion']['language'] = $form['#node']->language;
+
+    // Find all question templates, alphabetize them, and expose them to our JavaScript.
+    $templates = module_invoke_all('closedquestion_templates');
+    drupal_alter('closedquestion_templates', $templates);
+    uasort($templates, '_closedquestion_template_sort');
+    $settings['closedquestion']['templates'] = $templates;
+
+    drupal_add_js($settings, 'setting');
+    drupal_add_css($path . '/assets/closedquestion_xmleditor.css');
+    drupal_add_js('Drupal.behaviors.closedQuestionEditor = { attach: function (context) { setTimeout(function(){CQ_InitialView(context)}, 1); }}', array('type' => 'inline', 'scope' => 'footer', 'weight' => 5));
+
+    $form['body']['#prefix'] = '
+    <a id="xmlJsonEditor_templates" class="xmlJsonEditor_inactiveTab" href="javascript:void(0)" onclick="CQ_ShowTemplates()">' . t('Choose a Template') . '</a>
+    <a id="xmlJsonEditor_tree" class="xmlJsonEditor_inactiveTab" href="javascript:void(0)" onclick="CQ_ShowTree()">' . t('Edit Question') . '</a>
+    <a id="xmlJsonEditor_xml" class="xmlJsonEditor_activeTab" href="javascript:void(0)" onclick="CQ_ShowXML()">' . t('Edit Source') . '</a>
+    <div id="body_field_wrapper">
+      <div class="xmlJsonEditor_container" id="xmlJsonEditor_container">
+        <div class="xmlJsonEditor_tree_container" id="xmlJsonEditor_tree_container"></div>
+        <div class="xmlJsonEditor_divider" id="xmlJsonEditor_divider"></div>
+        <div class="xmlJsonEditor_form_elements" id="xmlJsonEditor_editor"></div>
+      </div>
+      <div class="xmlJsonEditor_templates" id="xmlJsonEditor_template_container">
+      <h3>' . t('Which kind of question would you like to create?') . '</h3>';
+
+    // Generate a list of links, one for each template.
+    $template_links = array();
+    foreach ($templates as $id => $template) {
+      $template_links[$id] = array(
+          'title' => t($template['name']),
+          'href' => '',
+          'external' => TRUE,
+          // Store the template id in the fragment for our JS.
+          'fragment' => $id,
+          'attributes' => array(
+              'class' => array('cq-select-template'),
+          ),
+      );
+    }
+    $form['body']['#prefix'] .= theme('links', array('links' => $template_links));
+    $form['body']['#prefix'] .= '</div>';
+    $form['body']['#suffix'] = '</div>';
+
+    // Don't let a wysiwyg.module WYSIWYG editor run on the body field.
+    $lang = $form['body']['#language'];
+    $form['body'][$lang][0]['#wysiwyg'] = FALSE;
+  }
+}
+
+/**
+ * uasort() callback used to alphabetically order question templates.
+ */
+function _closedquestion_template_sort($a, $b) {
+  return strcmp($a['name'], $b['name']);
+}
+
+/**
+ * Implements hook_delete().
+ */
+function closedquestion_delete($node) {
+  db_delete('cq_user_answer')
+    ->condition('nid', $node->nid)
+    ->execute();
+}
+
+/**
+ * Implements hook_node_load().
+ */
+function closedquestion_node_load($nodes, $types) {
+  if (!in_array('closedquestion', $types)) {
+    return;
+  }
+
+  module_load_include('inc.php', 'closedquestion', 'question/FactoryQuestion');
+  global $user;
+
+  foreach ($nodes as $node) {
+    if ($node->type != 'closedquestion') {
+      continue;
+    }
+
+    // Create the answer storage.
+    $userAnswer = new CqUserAnswerDefault($node->nid, $user->uid);
+
+    // Create the question object.
+    $body = field_get_items('node', $node, 'body');
+    $node->question = cq_question_from_xml($body[0]['value'], $userAnswer, $node);
+  }
+}
+
+/**
+ * Implements hook_view().
+ */
+function closedquestion_view($node, $view_mode = 'full') {
+  $body_info = field_info_instance('node', 'body', 'closedquestion');
+  $view_mode_settings = field_view_mode_settings('node', 'closedquestion');
+  if (isset($view_mode_settings[$view_mode]) && $view_mode_settings[$view_mode]['custom_settings'] && isset($body_info['display'][$view_mode])) {
+    $body_weight = $body_info['display'][$view_mode]['weight'];
+  }
+  else {
+    $body_weight = $body_info['display']['default']['weight'];
+  }
+
+  if ($view_mode == 'full') {
+    if (isset($node->question) && $node->question != NULL) {
+      $node->content['question'] = $node->question->getOutput();
+      $node->content['question']['#weight'] = $body_weight;
+    }
+    else {
+      $node->content['question'] = array(
+        '#markup' => t('No question defined.'),
+        '#weight' => $body_weight,
+      );
+    }
+  }
+
+  /* include touch events for some question types on mobile devices */
+  if (isset($node->question)) {
+    switch (get_class($node->question)) {
+      case 'CqQuestionSelectOrder':
+      case 'CqQuestionDragDrop':
+        /* load external library for touch screen support */
+        if (($library = libraries_detect('jquery-ui-touch-punch')) && !empty($library['installed'])) {
+          libraries_load('jquery-ui-touch-punch');
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  // After this we don't want anything being done with the body.
+  unset($node->body);
+  return $node;
+}
+
+/**
+ * Implements hook_libraries_info
+ */
+function closedquestion_libraries_info() {
+  $libraries['jquery-ui-touch-punch'] = array(
+    'name' => 'jQuery UI Touch Punch',
+    'vendor url' => 'http://touchpunch.furf.com',
+    'download url' => 'http://touchpunch.furf.com',
+    'version' => '0.2.2',
+    'files' => array(
+      'js' => array('jquery.ui.touch-punch.js'),
+    ),
+  );
+
+  return $libraries;
+}
+
+/**
+ * Implements hook_closedquestion_question_factory().
+ *
+ * @see _closedquestion_closedquestion_question_factory()
+ */
+function closedquestion_closedquestion_question_factory($type, &$user_answer, &$node) {
+  module_load_include('inc', 'closedquestion', 'closedquestion.templates');
+  return _closedquestion_closedquestion_question_factory($type, $user_answer, $node);
+}
+
+/**
+ * Implements hook_closedquestion_templates().
+ */
+function closedquestion_closedquestion_templates() {
+  module_load_include('inc', 'closedquestion', 'closedquestion.templates');
+  return _closedquestion_closedquestion_templates();
+}
+
+/**
+ * Implements hook_closedquestion_question_types().
+ *
+ * Returns an array of question types that our implementation of
+ * hook_closedquestion_question_factory() is able to construct. Each of these
+ * question types is the question tag type attribute (<question type="...">).
+ */
+function closedquestion_closedquestion_question_types() {
+  return array(
+    'balance',
+    'check',
+    'dragdrop',
+    'fillblanks',
+    'flash',
+    'hotspot',
+    'option',
+    'selectorder',
+    'pattern',
+    'sequence',
+    'value',
+  );
+}
+
+/**
+ * Retrieves the list of available question types.
+ *
+ * @return array
+ *   An array of module names keyed by question type (lowercase).
+ */
+function _closedquestion_get_question_types() {
+  $question_types = array();
+  $hook = 'closedquestion_question_types';
+  foreach (module_implements($hook) as $module) {
+    $module_types = module_invoke($module, $hook);
+    foreach ($module_types as $type) {
+      $question_types[drupal_strtolower($type)] = $module;
+    }
+  }
+  return $question_types;
+}
+
+/**
+ * Returns the XML configuration for the question tree editor.
+ */
+function closedquestion_xml_config() {
+  // Load our configuration from our JSON file and decode to PHP arrays.
+  $path = drupal_get_path('module', 'closedquestion') . '/assets/xmlQuestionConfig.json';
+  $xml_config = file_get_contents($path);
+  $xml_config = drupal_json_decode($xml_config);
+
+  // Allow other modules to alter the configuration.
+  drupal_alter('closedquestion_xml_config', $xml_config);
+  return $xml_config;
+}
+
+/**
+ * Form builder wrapper. Fetches the question-form for the passed node.
+ *
+ * @param object $node
+ *   The node to fetch the form for.
+ *
+ * @see closedquestion_submit_answer()
+ * @see closedquestion_submit_answer_js()
+ * @ingroup forms
+ */
+function closedquestion_get_form_for($form, &$form_state, $node) {
+  $form_state['storage']['node'] = $node;
+  if ($node->question) {
+    $retval = $node->question->getForm($form_state);
+    if (!isset($node->noReset)) {
+      $retval['reset'] = array(
+        '#type' => 'submit',
+        '#value' => 'Reset',
+      );
+    }
+    $retval['#attached']['js'][] = drupal_get_path('module', 'closedquestion') . '/assets/closedquestion.js';
+    $retval['#attached']['css'][] = drupal_get_path('module', 'closedquestion') . '/assets/closedquestion.css';
+    return $retval;
+  }
+}
+
+/**
+ * Form submit handler for question forms.
+ *
+ * Receives and processes the form data (the user's answer).
+ *
+ * @param array $form
+ *   The form that was submitted.
+ * @param array $form_state
+ *   The form state of the submitted form.
+ */
+function closedquestion_get_form_for_submit($form, &$form_state) {
+  $node = $form_state['storage']['node'];
+  $question = $node->question;
+  if ($form_state['clicked_button']['#value'] == $form_state['values']['reset'] && !isset($node->noReset)) {
+    $question->reset();
+    drupal_set_message(t('Answer Reset.'));
+    $form_state['redirect'] = array(drupal_get_normal_path($_GET['q']), array('fragment' => 'node-' . $node->nid));
+  }
+  else {
+    $question->submitAnswer($form, $form_state);
+    $form_state['rebuild'] = TRUE;
+  }
+}
+
+/**
+ * AHAH function that receives and processes the form data (the user's answer).
+ */
+function closedquestion_submit_answer_js($form, $form_state) {
+  // Find the feedback and process just that.
+  foreach (array_keys($form) AS $key) {
+    $index = strpos($key, 'cq-feedback-wrapper_');
+    if ($index !== FALSE) {
+      $feedback = $form[$key];
+      return $feedback;
+    }
+  }
+  return $form;
+}
+
+/**
+ * Filters the node to convert attachment URLs.
+ *
+ * @param object $node
+ *   The node (with the attached files).
+ * @param string $text
+ *   The text to convert.
+ *
+ * @return string
+ *   The converted text.
+ */
+function closedquestion_filter_content(&$node, $text) {
+
+  if (preg_match_all("/\[(attachurl):([^=\\]]+)\]/i", $text, $match)) {
+    $s = array();
+    $r = array();
+    foreach ($match[2] as $key => $value) {
+      // Ensure that we deal with a file object.
+      $file = closedquestion_fileobj($node, $value);
+      if ($file['fid'] != NULL) {
+        $replace = file_create_url($file['uri']);
+      }
+      else {
+        $replace = 'filenotfound';
+      }
+      $s[] = $match[0][$key];
+      $r[] = $replace;
+    }
+    // Perform the replacements and return processed field.
+    $text = str_replace($s, $r, $text);
+  }
+
+  // Temporary ugly fix until the inline module is ported to D7.
+  // Basically we just assume the file is an image.
+  // TODO: remove this as soon as the inline module is ported.
+  if (preg_match_all("/\[(inline):([^=\\]]+)\]/i", $text, $match)) {
+    $s = array();
+    $r = array();
+    foreach ($match[2] as $key => $value) {
+      // Ensure that we deal with a file object.
+      $file = closedquestion_fileobj($node, $value);
+      if ($file['fid'] != NULL) {
+        $replace = '<img src="' . file_create_url($file['uri']) . '" alt="' . $file['filename'] . '" />';
+      }
+      else {
+        $replace = 'filenotfound';
+      }
+      $s[] = $match[0][$key];
+      $r[] = $replace;
+    }
+    // Perform the replacements and return processed field.
+    $text = str_replace($s, $r, $text);
+  }
+
+  return $text;
+}
+
+/**
+ * Return the corresponding file object of an Inline tag.
+ *
+ * @param object $node
+ *   The node object that contains the file attachments.
+ * @param mixed $id
+ *   The id of the file object to fetch.
+ *
+ * @return object
+ *   The requested file object or NULL if not found.
+ */
+function closedquestion_fileobj(&$node, $id) {
+  $lang = $node->language;
+  if (isset($node->attachment[$lang])) {
+    if (is_numeric($id)) {
+      // Numeric file reference (deprecated, see #38359).
+      $n = 1;
+      foreach ($node->attachment[$lang] as $file) {
+        if ($n == $id) {
+          return $file;
+        }
+        ++$n;
+      }
+      return NULL;
+    }
+    else {
+      // Named file reference.
+      foreach ($node->attachment[$lang] as $file) {
+        if ($file['description'] == $id) {
+          return $file;
+        }
+        if ($file['filename'] == $id) {
+          return $file;
+        }
+      }
+      return NULL;
+    }
+  }
+  return NULL;
+}
+
+/**
+ * AHAH function used by the editor.
+ *
+ * Converts things like image tags to their resulting url, so the editor can
+ * access the image.
+ */
+function closedquestion_parse_content_js() {
+  module_load_include('inc.php', 'closedquestion', 'question/FactoryQuestion');
+
+  // We fetch the form from the cache, because we need the node.
+  $form_state = array('storage' => NULL, 'submitted' => FALSE);
+  $form_build_id = $_REQUEST['form_build_id'];
+  $form = form_get_cache($form_build_id, $form_state);
+
+  // With the node we can filter the content.
+  $result = closedquestion_filter_content($form['#node'], $_REQUEST['parse_content']);
+
+  // Final rendering callback.
+  drupal_json_output(array('status' => TRUE, 'data' => $result));
+}
+
+/**
+ * Wrapper to quickly create a fieldset.
+ *
+ * @param string $title
+ *   Title of the fieldset.
+ * @param string $body
+ *   Body of the fieldset.
+ * @param boolean $collapsible
+ *   Can this fieldset be collapsed?
+ * @param boolean $collapsed
+ *   Is this fieldset collapsed by default?
+ * @param boolean $render
+ *   Should the fieldset be directly rendered or returned as form array?
+ *
+ * @return string
+ *   A themed fieldset.
+ */
+function closedquestion_make_fieldset($title, $body, $collapsible = TRUE, $collapsed = FALSE, $render = TRUE) {
+  $fieldset = array(
+    '#type' => 'fieldset',
+    '#title' => $title,
+    '#collapsible' => $collapsible,
+    '#collapsed' => $collapsed,
+  );
+  if (gettype($body) == 'array') {
+    $fieldset['children'] = $body;
+  }
+  else {
+    $fieldset['#children'] = $body;
+  }
+  if ($collapsible) {
+    $fieldset['#attached']['library'][] = array('system', 'drupal.collapse');
+    $fieldset['#attributes']['class'][] = 'collapsible';
+    if ($collapsed) {
+      $fieldset['#attributes']['class'][] = 'collapsed';
+    }
+  }
+
+  if ($render) {
+    return drupal_render($fieldset);
+  }
+  else {
+    return $fieldset;
+  }
+}
+
+/**
+ * Takes a value and tries to fix common mistakes in entering numbers.
+ * Currently fixes:
+ * - Using a , instead of .
+ *
+ * @param string $value
+ *   The string to check.
+ *
+ * @return
+ *   A best-fixed value.
+ */
+function closedquestion_fix_number($value) {
+  // There is a , but no .
+  // The student probably thinks , is the decimal separator.
+  if (strpos($value, ',') !== FALSE && strpos($value, '.') === FALSE) {
+    drupal_set_message(t('Please use . not , for decimals.'), 'warning', FALSE);
+    return str_replace(',', '.', $value);
+  }
+  // There is both a , and a .
+  if (strpos($value, ',') !== FALSE && strpos($value, '.') !== FALSE) {
+    drupal_set_message(t('Please do not use , between thousands.'), 'warning', FALSE);
+    return str_replace(',', '', $value);
+  }
+  return $value;
+}
+
+/**
+ * Implements hook_def().
+ * Defined by ImportExportApi.
+ */
+function closedquestion_def() {
+  $defs = array();
+
+  $type = 'closedquestion';
+  $def = importexportapi_node_get_def($type);
+
+  $def['#title'] = 'Closed Question';
+
+  $def['#xml_plural'] = $def['#csv_plural'] = 'closedquestions';
+  $def['revisions']['#csv_plural'] = 'closedquestion-revisions';
+  unset($def['revisions']['teaser']);
+
+  $def['type']['#db_filter'] = array(
+    'values' => array($type),
+  );
+
+  $defs['closedquestion'] = $def;
+
+  return $defs;
+}
+
+/**
+ * Searches for the given library, checking the given filenames. If not found,
+ * returns the fallback.
+ *
+ * @param string $base_name
+ *   The library to search for.
+ * @param array of string $filenames
+ *   The filenames to check.
+ * @param string $fallback
+ *   The fallback to return if the library is not found.
+ *
+ * @return string
+ *   The path to the library.
+ */
+function library_get_path($base_name, $filenames, $fallback) {
+  $path = libraries_get_path($base_name);
+  foreach ($filenames AS $filename) {
+    $file_path = $path . '/' . $filename;
+    if (file_exists($file_path)) {
+      return $file_path;
+    }
+  }
+  return $fallback;
+}

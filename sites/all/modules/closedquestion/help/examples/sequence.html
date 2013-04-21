@@ -1,0 +1,205 @@
+<p>A sequence question is a set of normal questions that count as one.</p>
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;question type="sequence"&gt;
+  &lt;question type="OPTION"&gt;
+    &lt;text&gt;
+      &lt;p&gt;A sequence question is a series of questions that are regarded as one question.&lt;/p&gt;
+      &lt;p&gt;Besides the growth curve in batch of the
+        &lt;span style="color: red;"&gt;first organism&lt;/span&gt; (red diamonds), the growth curve of a
+        &lt;span style="color: blue;"&gt;second organism&lt;/span&gt; is drawn (blue boxes) in the graph:&lt;br /&gt;
+        &lt;img src="[attachurl:intro_ld4_17_1.png]" width="378" height="220" /&gt;&lt;br /&gt;
+        What is the ratio of
+        &lt;span style="color: red;"&gt;&amp;mu;&lt;sub&gt;max,organism 1&lt;/sub&gt;&lt;/span&gt; /
+        &lt;span style="color: blue;"&gt;&amp;mu;&lt;sub&gt;max,organism 2&lt;/sub&gt;&lt;/span&gt;?
+      &lt;/p&gt;
+    &lt;/text&gt;
+    &lt;hint mintries="1"&gt;
+      What is the meaning of &amp;mu;&lt;sub&gt;max&lt;/sub&gt;? And what is the meaning of the slope of both growth curves?
+    &lt;/hint&gt;
+    &lt;hint mintries="2"&gt;
+      The volumetric growth rate r&lt;sub&gt;x &lt;/sub&gt; = dC&lt;sub&gt;x&lt;/sub&gt; / dt (kg / m&lt;sup&gt;3&lt;/sup&gt; / h).
+      When do the organisms grow at &amp;mu;&lt;sub&gt;max&lt;/sub&gt;?
+    &lt;/hint&gt;
+    &lt;hint mintries="3"&gt;
+      When the organisms grow exponentially, they grow at &amp;mu;&lt;sub&gt;max&lt;/sub&gt;. The formula for r&lt;sub&gt;x&lt;/sub&gt; yields:&lt;br /&gt;
+      &lt;b&gt;r&lt;sub&gt;x&lt;/sub&gt; = &amp;mu;&lt;sub&gt;max&lt;/sub&gt; &amp;bull; C&lt;sub&gt;x&lt;/sub&gt;&lt;/b&gt; (kg / m&lt;sup&gt;3&lt;/sup&gt; / h)&lt;br /&gt;
+      So you'll have to compare dC&lt;sub&gt;x,organism1&lt;/sub&gt; / dt and dC&lt;sub&gt;x,organism1&lt;/sub&gt; / dt in the beginning of the batch.
+    &lt;/hint&gt;
+    &lt;hint mintries="4"&gt;
+      The red organisms take 1.25 h to grow to a C&lt;sub&gt;x&lt;/sub&gt; of 10 kg / m&lt;sup&gt;3&lt;/sup&gt;, the
+      blue need 2 h. So the red organism is faster, &amp;mu will be higher, so the value must be above 1.&lt;br /&gt;
+      &amp;mu;&lt;sub&gt;max,organism 1&lt;/sub&gt; / &amp;mu;&lt;sub&gt;max,organism 2&lt;/sub&gt; = 1.5
+    &lt;/hint&gt;
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;It is impossible to tell on basis of this graph&lt;/choice&gt;
+      &lt;feedback&gt;You are wrong. It is possible to tell on basis of this graph&lt;/feedback&gt;
+    &lt;/option&gt;
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;&amp;asymp; 0&lt;/choice&gt;
+      &lt;feedback&gt;Read the question again, to get an anser of zero, one of the growth rates needs to be zero or infinite, which is obviously not the case.&lt;/feedback&gt;
+    &lt;/option&gt;
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;&amp;asymp; 0.4&lt;/choice&gt;
+      &lt;feedback&gt;There is no 0.4 X difference in the growth rates.&lt;/feedback&gt;
+    &lt;/option&gt;
+    &lt;option correct="1"&gt;
+      &lt;choice&gt;&amp;asymp; 0.6&lt;/choice&gt;
+      &lt;feedback&gt;Check again which organism is the first and which is the second.&lt;/feedback&gt;
+    &lt;/option&gt;
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;&amp;asymp; 0.8&lt;/choice&gt;
+      &lt;feedback&gt;There is no 0.8 X difference in the growth rates.&lt;/feedback&gt;
+    &lt;/option&gt;
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;&amp;asymp; 1&lt;/choice&gt;
+      &lt;feedback&gt;Assume they grow at the maximum growth rate, the growth rate is definately not the same!&lt;/feedback&gt;
+    &lt;/option&gt;
+    &lt;option correct="1"&gt;
+      &lt;choice&gt;&amp;asymp; 1.5&lt;/choice&gt;
+      &lt;feedback&gt;That is correct! The slope dC
+        &lt;sub&gt;x&lt;/sub&gt; / dt of the growth curve is given by the volumetric growth rate r&lt;sub&gt;x&lt;/sub&gt;&lt;br /&gt;
+        Because&lt;br /&gt;
+        &lt;b&gt;r&lt;sub&gt;x&lt;/sub&gt; = &amp;mu;&lt;sub&gt;max&lt;/sub&gt; &amp;bull; C&lt;sub&gt;x&lt;/sub&gt;&lt;/b&gt;
+        &amp;nbsp;&amp;nbsp;&amp;nbsp;(kg / m&lt;sup&gt;3&lt;/sup&gt; / h)&lt;br /&gt;
+        in the beginning of the batch:&lt;br /&gt;
+        &lt;b&gt;r&lt;sub&gt;x,organism1&lt;/sub&gt; / r&lt;sub&gt;x,organism2&lt;/sub&gt; = &amp;mu;&lt;sub&gt;max,organism 1&lt;/sub&gt; / &amp;mu;&lt;sub&gt;max,organism 2&lt;/sub&gt;&lt;/b&gt;
+        &amp;nbsp;&amp;nbsp;&amp;nbsp;(-)&lt;br /&gt;
+        Both organisms had the same initial biomass concentration. Organism 1 needed 1.25 h to grow to a C
+        &lt;sub&gt;x&lt;/sub&gt; of 10 kg / m
+        &lt;sup&gt;3&lt;/sup&gt;, organism needed 2 h for that, so &amp;mu;
+        &lt;sub&gt;max,organism 1&lt;/sub&gt; must be higher then &amp;mu;
+        &lt;sub&gt;max,organism 2&lt;/sub&gt; so the answer will ne higher then 1.
+        &lt;br /&gt;
+        &lt;em&gt;Click continue to go to part 2 of this question.&lt;/em&gt;
+
+      &lt;/feedback&gt;
+    &lt;/option&gt;
+  &lt;/question&gt;
+  
+  &lt;question type="OPTION"&gt;
+    &lt;text&gt;
+      Now the growth curve of a
+      &lt;span style="color: blue;"&gt;third organism&lt;/span&gt; (blue x-es) is shown together with the
+      &lt;span style="color: red;"&gt;first organism&lt;/span&gt; (red diamonds):&lt;br /&gt;
+      &lt;img src="[attachurl:intro_ld4_17_2.png]" width="378px" height="220px" /&gt;&lt;br /&gt;
+      What is the ratio of
+      &lt;span style="color: red;"&gt;&amp;mu;&lt;sub&gt;max,organism 1&lt;/sub&gt;&lt;/span&gt; /
+      &lt;span style="color: blue;"&gt;&amp;mu;&lt;sub&gt;max,organism 3&lt;/sub&gt;&lt;/span&gt;?
+    &lt;/text&gt;
+    &lt;hint mintries="1"&gt;
+      Keep in mind that both growth curves have a different initial biomass concentration C&lt;sub&gt;x&lt;/sub&gt; (0)
+    &lt;/hint&gt;
+    &lt;hint mintries="2"&gt;
+      The bacteria grow only at their maximum speed in the beginning of a batch
+    &lt;/hint&gt;
+    &lt;hint mintries="3"&gt;
+      Organism 1 needs about 1 hour to grow from C&lt;sub&gt;x&lt;/sub&gt; = 5 - 10 kg / m&lt;sup&gt;3&lt;/sup&gt;.
+      How much does organism 3 need to grow from 5-10 kg / m&lt;sup&gt;3&lt;/sup&gt;?
+    &lt;/hint&gt;
+    &lt;hint mintries="4"&gt;
+      The answer is that they grow at an identical specific growth rate, the answer is 1!
+    &lt;/hint&gt;
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;It is impossible to tell on basis of this graph&lt;/choice&gt;
+      &lt;feedback&gt;&lt;/feedback&gt;
+    &lt;/option&gt;
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;&amp;asymp; 0&lt;/choice&gt;
+      &lt;feedback&gt;&lt;/feedback&gt;
+    &lt;/option&gt;
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;&amp;asymp; 0.4&lt;/choice&gt;
+      &lt;feedback&gt;&lt;/feedback&gt;
+    &lt;/option&gt;
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;&amp;asymp; 0.6&lt;/choice&gt;
+      &lt;feedback&gt;&lt;/feedback&gt;
+    &lt;/option&gt;
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;&amp;asymp; 0.8&lt;/choice&gt;
+      &lt;feedback&gt;&lt;/feedback&gt;
+    &lt;/option&gt;
+    &lt;option correct="1"&gt;
+      &lt;choice&gt;&amp;asymp; 1&lt;/choice&gt;
+      &lt;feedback&gt;Yes! On first sight, it may look if organism 3 grows faster than organism 1. Organism 3 does have a higher
+        &lt;i&gt;volumetric&lt;/i&gt; growth rate r&lt;sub&gt;x&lt;/sub&gt; than organism 1, but both have the same maximal specific
+        growth rate &amp;mu;&lt;sub&gt;max&lt;/sub&gt;. This can be explained using the formula for r&lt;sub&gt;x&lt;/sub&gt;:&lt;br /&gt;
+        &lt;b&gt;r&lt;sub&gt;x&lt;/sub&gt; = &amp;mu; &amp;bull; C&lt;sub&gt;x&lt;/sub&gt;&lt;/b&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;(kg / m&lt;sup&gt;3&lt;/sup&gt; / h)&lt;br /&gt;
+        Organism 3 started with a higher initial biomass concentration than organism 1, so with equal &amp;mu;, it's
+        r&lt;sub&gt;x&lt;/sub&gt; became higher.
+      &lt;/feedback&gt;
+    &lt;/option&gt;
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;&amp;asymp; 1.5&lt;/choice&gt;
+      &lt;feedback&gt;&lt;/feedback&gt;
+    &lt;/option&gt;
+  &lt;/question&gt;
+
+  &lt;question type="PATTERN" duplicates="0"&gt;
+    &lt;text&gt;Select and order the needed steps. This example question contains only one target box.&lt;/text&gt;
+    &lt;option identifier="a"&gt;
+      &lt;choice&gt;Step A.&lt;/choice&gt;
+      &lt;description name="a"&gt;
+        &lt;b&gt;Step A:&lt;/b&gt;&lt;br /&gt;A description of step A.
+      &lt;/description&gt;
+    &lt;/option&gt;
+
+    &lt;option identifier="b"&gt;
+      &lt;choice&gt;Step B.&lt;/choice&gt;
+      &lt;description name="b"&gt;
+        &lt;b&gt;Step B:&lt;/b&gt;&lt;br /&gt;A description of step B.
+      &lt;/description&gt;
+    &lt;/option&gt;
+
+    &lt;option identifier="c"&gt;
+      &lt;choice&gt;Step C.&lt;/choice&gt;
+      &lt;description name="c"&gt;
+        &lt;b&gt;Step C:&lt;/b&gt;&lt;br /&gt;A description of step C.
+      &lt;/description&gt;
+    &lt;/option&gt;
+
+    &lt;option identifier="d"&gt;
+      &lt;choice&gt;Step D.&lt;/choice&gt;
+      &lt;description name="d"&gt;
+        &lt;b&gt;Step D:&lt;/b&gt;&lt;br /&gt;A description of step D.
+      &lt;/description&gt;
+    &lt;/option&gt;
+
+    &lt;option identifier="e"&gt;
+      &lt;choice&gt;Step E.&lt;/choice&gt;
+      &lt;description name="e"&gt;
+        &lt;b&gt;Step E:&lt;/b&gt;&lt;br /&gt;A description of step E.
+      &lt;/description&gt;
+    &lt;/option&gt;
+
+    &lt;option identifier="f"&gt;
+      &lt;choice&gt;Step F.&lt;/choice&gt;
+      &lt;description name="f"&gt;
+        &lt;b&gt;Step F:&lt;/b&gt;&lt;br /&gt;A description of step F.
+      &lt;/description&gt;
+    &lt;/option&gt;
+
+    &lt;hint mintries="1"&gt;first hint&lt;/hint&gt;
+    &lt;sequence correct="1"&gt;
+      &lt;pattern&gt;^bcd$&lt;/pattern&gt;
+      &lt;feedback&gt;Correct. You only need steps B, C and D.
+      &lt;/feedback&gt;
+    &lt;/sequence&gt;
+
+    &lt;sequence correct="0"&gt;
+      &lt;pattern&gt;^[^b]*c.*$&lt;/pattern&gt;
+      &lt;feedback&gt;You can not do step C unless you first do step B.&lt;/feedback&gt;
+    &lt;/sequence&gt;
+
+    &lt;sequence correct="0"&gt;
+      &lt;pattern&gt;.*&lt;/pattern&gt;
+      &lt;feedback mintries="1"&gt;Nope, that't not correct. Try again.&lt;/feedback&gt;
+      &lt;feedback mintries="2" maxtries="2"&gt;You only need three steps.&lt;/feedback&gt;
+      &lt;feedback mintries="3"&gt;You need steps BCD.&lt;/feedback&gt;
+    &lt;/sequence&gt;
+
+  &lt;/question&gt;
+
+&lt;/question&gt;
+</pre>

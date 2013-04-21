@@ -1,0 +1,83 @@
+
+<p>The Flash question type allows you to use a flash movie, or any other client
+  side technology like a Java applet, as a question. All question logic is done
+  on the client side. The flash movie can save several types of data to
+  closedquestion:
+</p>
+<dl>
+  <dt>answer</dt><dd>The answer field is for data that the user entered, or data
+    that changed because of user actions.</dd>
+  <dt>data</dt><dd>The data field is for data that is different for each user,
+    but not changing because of actions of the user. In math questions this is
+    used to store the generated random numbers that the current user is seeing.
+    Obviously you do not want these numbers to change for each answer attempt
+    the user takes.</dd>
+  <dt>tries</dt><dd>The number of "tries" the user has made so far. This might
+    not make sense for every type of interaction.</dd>
+  <dt>correct</dt><dd>Whether the current state of the users actions is
+    considered to be a correct answer. The current state should be the data
+    stored in the answer field, given the data stored in the data field. <b>This
+    field is stored, but not retrieved</b>. On load the correctness of the state
+    should be deducted from the loaded answer, given the loaded data.</dd>
+  <dt>onceCorrect</dt><dd>Whether the user has ever achieved a "correct" state.
+    <b>This field is retrieved, but not stored</b>. The value of onceCorrect is
+    the value of "tries" + 1, at the first time a non-zero value of "correct" is
+    stored.</dd>
+</dl>
+
+<p>If after doing a set of interactions the state is considered to be a correct
+  answer, then the state should still be considered to be a correct answer after
+  leaving the question and coming back later.</p>
+
+<p>Once the state is considered "correct", a post should be done with a non-zero
+  value for the "correct" parameter. From this point on, the value of the
+  "onceCorrect" parameter will be positive, to indicate that the student has
+  reached a correct state at least once, even if the current state is no longer
+  considered correct.</p>
+
+<p>It is advisable to allow the student to continue exploring the interaction
+  even after finding a correct answer. This allows the student to check feedback
+  on possible incorrect actions and improves learning.</p>
+
+<p>The page containing this question will respond to the following get/post
+  variables:</p>
+
+<ul>
+  <li>Get and Post:
+    <ul>
+      <li>action=getAnswer: returns the current answer, or an empty page when there is no answer.</li>
+      <li>action=getData: returns the current data field, or an empty page when there is no data.</li>
+      <li>action=getInfo: return the current user's data, formatting in the way
+        specified in the format field. The data consists of the following:
+        <ul>
+          <li>username: The current user's username.</li>
+          <li>firstname: If there is a profile field "profile_firstname" then the data of this field is returned.</li>
+          <li>middlename: If there is a profile field "profile_middlename" then the data of this field is returned.</li>
+          <li>lastname: If there is a profile field "profile_lastname" then the data of this field is returned.</li>
+          <li>tries: (int) The number in the tries field.</li>
+          <li>onceCorrect: (int) The number of tries that was listed the first time the correct variable was nonzero.</li>
+        </ul>
+      </li>
+
+      <li>format: The format to return the data of getInfo in. Possible values:
+        <ul>
+          <li>flash: return as flashvars (& seprated key=value pairs)</li>
+          <li>xml: xml data formatted as: &lt;data&gt;&lt;key1&gt;value1&lt;/key1&gt;...&lt;/data&gt;</li>
+          <li>json: {"key":"value"}</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Post only:
+    <ul>
+      <li>action=store: Will read (and store) the following variables, if set.
+        <ul>
+          <li>answer</li>
+          <li>data</li>
+          <li>tries</li>
+          <li>correct</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>

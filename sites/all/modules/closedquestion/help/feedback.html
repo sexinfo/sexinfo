@@ -1,0 +1,22 @@
+
+<p>There are two types of feedback in Closed Question: hints and answer-specific
+  feedback. Hints appear regardless of the answer chosen, feedback depends on
+  the answer.
+</p>
+<h2>&lt;hint&gt;</h2>
+&lt;hint&gt; nodes are put directly in the question node and can have two attributes:
+<dl>
+  <dt>mintries</dt><dd>Optional, the minimum (inclusive) number of tries needed to show this hint.</dd>
+  <dt>maxtries</dt><dd>Optional, the maximum number of tries after which this hint should not be shown anymore.</dd>
+</dl>
+
+<h2>&lt;Feedback&gt;</h2>
+&lt;Feedback&gt; nodes are put in &lt;mapping&gt; nodes, or in option nodes and can have three attributes:
+<dl>
+  <dt>mintries</dt><dd>Optional, the minimum (inclusive) number of tries needed to show this feedback.</dd>
+  <dt>maxtries</dt><dd>Optional, the maximum number of tries after which this feedback should not be shown anymore.</dd>
+  <dt>block</dt><dd>Optional, the id of feedback-block (&lt;feedbackblock id="" &gt;) in which this feedback should appear.</dd>
+</dl>
+
+&lt;feedbackblock id="X" /&gt;
+Used in the question text node to make feedback appear in that spot. Very useful in combination with a popup-plugin like hovertip op qtip.

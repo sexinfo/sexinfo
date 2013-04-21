@@ -1,0 +1,103 @@
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;question type="selectorder" duplicates="1"&gt;
+
+  &lt;text&gt;
+    Select and order the needed steps and on which days they should be
+    performed. This question allows you to select each step more than once.
+  &lt;/text&gt;
+
+  &lt;!--
+  Descriptions are displayed when the user selects an option.
+  --&gt;
+  &lt;option identifier="a"&gt;
+    &lt;choice&gt;Step A.&lt;/choice&gt;
+
+    &lt;description&gt;
+      &lt;b&gt;Step A:&lt;/b&gt;&lt;br /&gt;
+      A description of step A
+    &lt;/description&gt;
+  &lt;/option&gt;
+
+  &lt;option identifier="b"&gt;
+    &lt;choice&gt;Step B.&lt;/choice&gt;
+
+    &lt;description&gt;
+      &lt;b&gt;Step B:&lt;/b&gt;&lt;br /&gt;
+      A description of step B
+    &lt;/description&gt;
+  &lt;/option&gt;
+
+  &lt;option identifier="c"&gt;
+    &lt;choice&gt;Step C.&lt;/choice&gt;
+    &lt;description&gt;
+      &lt;b&gt;Step C:&lt;/b&gt;&lt;br /&gt;
+      A description of step C
+    &lt;/description&gt;
+  &lt;/option&gt;
+
+  &lt;option identifier="d"&gt;
+    &lt;choice&gt;Step D.&lt;/choice&gt;
+    &lt;description&gt;
+      &lt;b&gt;Step D:&lt;/b&gt;&lt;br /&gt;
+      A description of step D
+    &lt;/description&gt;
+  &lt;/option&gt;
+
+  &lt;option identifier="e"&gt;
+    &lt;choice&gt;Step E.&lt;/choice&gt;
+    &lt;description&gt;
+      &lt;b&gt;Step E:&lt;/b&gt;&lt;br /&gt;
+      A description of step E
+    &lt;/description&gt;
+  &lt;/option&gt;
+
+  &lt;option identifier="f"&gt;
+    &lt;choice&gt;Step F.&lt;/choice&gt;
+    &lt;description&gt;
+      &lt;b&gt;Step F:&lt;/b&gt;&lt;br /&gt;
+      A description of step F
+    &lt;/description&gt;
+  &lt;/option&gt;
+
+  &lt;!--
+  numeric identifiers create option groups.
+  --&gt;
+  &lt;option identifier="1"&gt;&lt;choice&gt;Day 1&lt;/choice&gt;&lt;/option&gt;
+  &lt;option identifier="2"&gt;&lt;choice&gt;Day 2&lt;/choice&gt;&lt;/option&gt;
+
+  &lt;!--
+  Default Answer, used if the user sees the question for the first time.
+  --&gt;
+  &lt;!-- default value="12" / --&gt;
+
+  &lt;!--
+    The "answer" is a string with the names of the selected options.
+    the pattern is a regular expression that is matched against this answer.
+  --&gt;
+  &lt;mapping correct="1"&gt;
+    &lt;match pattern="^1bc2d$" /&gt;
+    &lt;feedback&gt;Correct. You need to do steps B and C on day 1 and step D on day 2.
+    &lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+    &lt;match pattern="^[^b]*c.*$" /&gt;
+    &lt;feedback&gt;You can not do step C unless you first do step B.&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+    &lt;match pattern="([^d12]d)|(d[^d12])" /&gt;
+    &lt;feedback&gt;Step D is an all-day event, you can not combine it with other
+    steps on the same day.&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+    &lt;match pattern=".*" /&gt;
+    &lt;feedback mintries="1"&gt;Nope, that't not correct. Try again.&lt;/feedback&gt;
+    &lt;feedback mintries="2" maxtries="2"&gt;You only need three steps.&lt;/feedback&gt;
+    &lt;feedback mintries="3"&gt;You need steps BCD.&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+&lt;/question&gt;
+</pre>

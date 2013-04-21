@@ -1,0 +1,393 @@
+Closed Question 7.x-2.x-dev
+---------------------------
+
+Version 7.x-2.2
+
+* by koosvdkolk, adamdicarlo: Various code cleanup and coding standards fixes.
+* Issue #1920794 by koosvdkolk: Added configuration page and added a setting to that page to control the saving of answers of anonymous u
+sers.
+* By koosvdkolk: Fixed small bug in closedquestion_view
+* Issue #1363574 by pverrier: Added support for blockquote and cite in question text.
+* Issue #1854176 by katherineluan, koosvdkolk: Added jQuery punch touch Library to support d&d on touch-based devices.
+* by adamdicarlo: hook_closedquestion_question_factory() should be in module file.
+* Issue #1238734 followup by adamdicarlo: Default views should be in a separate file.
+* Issue #1334452 by adamdicarlo: Don't let WYSIWYG editor run on body (XML) field.
+* Issue #1415100 by lslinnet,jbrown: Fixed fields being duplicated when entitycache is enabled.
+* by adamdicarlo: Avoid active state on template links.
+* Issue #1351198 by adamdicarlo: Allow other modules to define question types.
+* Issue #1350090 by adamdicarlo: Allow other modules to define XML question templates.
+* Issue #1334836 by adamdicarlo: Added CSS class to feedback wrapper, refactored feedback and submit creation to reduce duplicated code.
+
+Version 7.x-2.1
+ * Issue #1294262 by adamdicarlo: Fixed undeclared dependency on file (file field) module.
+ * Issue #1262702 by HylkeVDS: Added language tests to find the body textarea in the node-edit page.
+ * Issue #1262756 by HylkeVDS: Added a check to make sure there is a body-property before using it.
+ * Issue #1262644 by HylkeVDS: Removed base_path from library filenames, sice they cause problems with the locale parsing of the files.
+ * Issue #1231310 by HylkeVDS: Added TextLabel feature.
+ * Issue #1238734 by HylkeVDS: Converted views to Views 3.
+ * Issue #1213766 & #1221974: Improved language sniffing.
+ * Issue #1229672 by HylkeVDS: Fixed fatal error on empty hotspot.
+ * Issue #1231862 by rekcor: Fixed bug of Notices appearing when Mapping node does not have the "correct" property set.
+ * Issue #1245128 by HylkeVDS: Changed feedback to be in a div instead of a span. Added support for H1-H6.
+ * by HylkeVDS: Fixed problem in editor with array traversion order in IE.
+ * by rekcor: Changed colors of selected item in tree, since they became black on navy in Windows browsers.
+ * by Rekcor: Improved-display-of-node-attribute-descriptions.
+ * by HylkeVDS: Fixed valid_children for check question.
+ * Issue #1213766 by HylkeVDS: Fixed warning when question xml is left empty.
+ * by HylkeVDS: Fixed error when parsing externally added feedback that does not have a context node.
+ * by HylkeVDS: Fixed errors when a sequence question has bad XML.
+
+
+Version 7.x-2.0
+ * Ported version 6.x-2.x to Drupal 7.
+ * For tooltips qtip is now also supported.
+ * Cleaned up question initialisation.
+ * Added a question editor.
+ * Issue #1108240 by HylkeVDS: Added better error reporting.
+ * Issue #1113558 by HylkeVDS: Fix for always selected first option in multiple
+   choice questions.
+ * Issue #1113538 by HylkeVDS: Fixed field-weight of the question being fixed.
+ * Added a Flash question type, that allows the question to be implemented in a
+   client-side technology like a Flash or Java applet.
+ * Added time of answering to the answer table.
+ * Issue #1169356: Added autocomplete="off" to input fields.
+ * Improved user-view by including last-change time.
+ * Issue #1192312 by adamdicarlo: Fix PHP notice in closedquestion_view().
+
+
+Version 6.x-1.9
+ * Issue #1091898: Fixed "nothing selected" being seen as "first option selected"
+   in Option questions.
+ * Fixed a mixup of text and log access callbacks. Callbacks now correctly check
+   if the node is a question.
+
+
+Version 6.x-1.8
+ * Documentation updates.
+ * Fixed "default" node not being an alias for "startstate" node.
+ * #1054792: Fixed math evaluation error by parsing the user-answer
+   variables when any math is found.
+
+
+Version 6.x-1.7
+ * #1048836: Fixed error when using e as id for an inlineChoice in FillBlanks
+   questions.
+ * Math expressions in the feedback can now use the student's answer(s). See
+   example Fill Blanks 2.
+ * Fix case sensitivity problems in variable names.
+ * Fix for "Math evaluation error: illegal character =" when a fill-blanks id is
+   not a valid evalMath variable name.
+
+
+Version 6.x-1.6
+ * Feedback fieldset now hidden when empty.
+ * The attribute 'expression' of the matheval and mathresult tags is now aliased
+   to 'e'. So <matheval expression="1+1" /> can also be shortened to just:
+   <matheval e="1+1" />
+ * The EvalMath library now recognises scientific notation like 1.1E5 which it
+   did not recognise.
+ * Matching blocks now keeps track of the last inlineChoice that was matched
+   against. Feedback can be made to appear in the feedbackblock with the same
+   id by using feedback with block="lastMatchedId". This is useful when checking
+   a large number of entries with the same pattern and you want to indicate
+   which entry has the problem.
+
+
+Version 6.x-1.5
+ * Fixed problem in tries count in sequence questions.
+ * Range checks now support full math equations in the value, minval and maxval
+   fields and can use the student's answers in those equations. See advanced-
+   help example "Fill Blanks 3".
+
+
+Version 6.x-1.4
+ * Fixed reset button.
+ * Fixed bug that caused the resubmission of the same answer to count as a try.
+ * Range checks now try to recognise if a student uses a ',' instead of a
+   decimal '.' as is common in some countries.
+
+
+Version 6.x-1.3
+ * Fixed occasional missing include of XmlLib causing a fatal error.
+
+
+Version 6.x-1.2
+ * Fixed incorrect combination of strpos and drupal_substr, causing problems
+   with multi-byte characters.
+ * Simplified submit handling.
+ * Cleaned up question initialisation.
+
+
+Version 6.x-1.1
+ * Fixed the general stylesheet and javascript not being included when node_view
+   is bypassed.
+ * Updated the view ClosedQuestionUserLog to also show the Log entry id.
+ * Fixed incorrect calculation of number of tries of sequence questions.
+ * Catch #comment nodes in Balance sections.
+ * Fixed error in Balance Questions without 'correct' feedback in a section.
+
+
+Version 6.x-1.0
+ * This is the first release on Drupal.org.
+
+
+________________________________________________________________________________
+Version 0.39 was the last non-Drupal.org release. From this point ClosedQuestion
+is a Drupal.org hosted module and versioning will be changed to reflect this.
+
+
+Version 0.39
+ * The inlinechoice attribute of the range match is now treated as regular
+   expression. This allows one range to check multiple inlineChoices. By default
+   the range will match true if any of the inlineChoices matches.
+ * The range match now has a "matchAll" attribute. A non-zero value causes all
+   of the inlineChoices matched by the inlineChoice attribute to be checked. The
+   range will only match true if all of the inlineChoices match.
+ * The <match> element is changed:
+   - The hotspot attribute now accepts regular expressions, this makes the
+     hotspotpattern attribute superfluous.
+   - The draggable attribute now accepts regular expressions, this makes the
+     draggablepattern attribute superfluous.
+   - A new attribute "matchAll" is added. When doing inlinechoice/pattern
+     matching a non-zero value will cause all selected inlinechoice answers to
+     be matched and the <match> will only return true if all selected
+     inlinechoices match. When doing hotspot/draggable matching there are three
+     accepted values:
+     (h)otspots: All selected hotspots should have one of the selected
+                 draggable.
+     (d)raggable: All selected draggables should be on one of the selected
+                  hotspots.
+     (b)oth: All selected hotspots should have one of the selected draggables
+       and all selected draggables should be on one of the selected hotspots.
+ * Started work on advanced-help pages.
+ * Option-specific feedback in multiple-answer questions is now also shown when
+   the answer is correct.
+
+
+Version 0.38
+ * In this version the file closedquestion/question/XmlLib.inc.php was moved to
+   closedquestion/lib/XmlLib.inc.php. If you upgrade by copying the new version
+   over the old version, make sure to delete the old file.
+ * Check questions, with inline feedback now use the feedback-blocks. This means
+   that this question type can use AHAH submits like all other question types.
+ * The question-form-element can now be surrounded by html without using the
+   prefix and postfix xml tags. If you place a <formblock/> tag in your question
+   text the question's form will be placed at that position in the text. This
+   means you can now embed the question in for instance a table, so you can
+   display information next to the question.
+
+
+Version 0.37
+ * Feedback can appear anywhere in the question-text by putting a
+   <feedbackblock id="some_id" /> placeholder in the spot the feedback should
+   appear, and adding a block="some_id" attribute to the feedback tag.
+ * Inline does not filter using the normal filter api and thus would not filter
+   content loaded through AHAH, such as the feedback. We now call the Inline
+   filter function ourselves, if Inline is enabled for a question.
+ * In all places where the attribute "identifier" is used the alias "id" can be
+   used instead.
+
+
+Version 0.36
+ * EvalMath now has a proper list of function aliases.
+ * Added min, max, floor, ceil and number_format (nf) to EvalMath.
+ * Cleaned up argument gathering for built-in functions in EvalMath.
+ * Improved check for unknown XML nodes.
+ * The match element "range" can now also check if the value of a variable
+   is in a certain range, not just the value of a user's answer. for example:
+   <range maxval="20" maxval="a" value="c" />
+   checks if the value of variable "c" is above 20 and below the value of
+   variable "a".
+
+
+Version 0.35
+ * Fixed a bug that caused target boxes in Select & Order questions to not have
+   the correct titles.
+ * ClosedQuestion now depends on Autoload, make sure you enable that module
+   first if you upgrade!
+ * Lots of cleanups to make the code ready for drupal.org
+ * Integrated EvalMath so questions can generate values using math expressions,
+   see examples/fillblanks2.xml.
+
+
+Version 0.34
+ * [attachurl:...] now also matches against the user-changeable file description
+   and not just the non-changeable filename.
+
+
+Version 0.33
+ * Fixed image map typo. Adding descriptions to areas in hotspot and drag&drop
+   questions now correctly highlights the area (if JQuery map highlight module
+   is active) and shows hovertips (if the hovertip module is active).
+ * Added hook_user to delete a users answers when a user is deleted.
+ * In MC questions, the "Pick One" or "Pick any number" prompt can be changed by
+   adding a <prompt>Your prompt</prompt> tag to your question. Adding an empty
+   <prompt /> will remove the prompt altogether.
+
+
+Version 0.32
+ * Better adherance to the Drupal coding standards.
+ * Fixed bug in hotspot questions that did not generate the answer unless a
+   crosshair was moved (just clicking did not work).
+
+
+Version 0.31
+ * Fix to allow logs to be shown on other content types than ClosedQuestion.
+   Any content type that uses CqUserAnswer (like Proteus) can now show logs
+   using the CQ views.
+ * Fixed use of jquery parentElement where parentNode should be used. This broke
+   the Select&Order question in some browsers.
+
+
+Version 0.30
+ * Small update to the CqQuestion interface.
+ * More documentation.
+
+
+Version 0.29
+ * Fixed access-denied problem for AHAH submits on questions.
+
+
+Version 0.28
+ * Questions now use AHAH to submit the answer and load the feedback.
+
+
+Version 0.27
+ * Added view-based page that shows the log of the tries of a user for a
+   question.
+
+
+Version 0.26
+ * NOTE: Some files have been (re)moved. It's best to delete the old version
+   before upgrading.
+ * Select&Order questions now use Mappings like D&D, Hotspot and Fillblank
+   questions. Old style xml still works normally, so old questions do not need
+   to be updated.
+ * Check (Multiple Answer) questions can now have more than one correct
+   combination of answers by using mappings, just like Select&Order questions.
+   Each option needs an "identifier" attribute, while the "correct" attribute is
+   ignored.
+
+
+Version 0.25
+ * Added view-based page that shows which users attemted a question.
+
+
+Version 0.24
+ * Added hook_requirements to check for XML libraries.
+
+
+Version 0.23
+ * Added attribute "stop" to mapping, to indicate no further mappings should be
+   evaluated if the current mapping matches.
+
+
+Version 0.22
+ * Removed debug output
+ * Warn for duplicate identifiers in S&O, D&D, Hotspot and FillBlanks questions.
+ * Added groups of items for FillBlanks questions. An inlineOption can have a
+   "group" attribute and an inlineChoice can display only items from a certain
+   group.
+
+
+Version 0.21
+ * Horizontal Select&Order now works in IE too (Thanks Koos).
+ * Horizontal Select&Order can have fixed Item-height.
+ * Added prefix and postfix tags to question. With these you can for instance
+   add an image next to a question. Make sure to use <![CDATA[  ]]> if your html
+   would result in invalid XML.
+
+
+Version 0.20
+ * Added ImportExportApi bindings.
+ * Removed "teaser" toggle form edit form.
+
+
+Version 0.19
+ * Changed CqQuestion to an interface and created CqQuestionAbstract
+ * Added function onceCorrect() to CqQuestion class.
+
+
+Version 0.18
+ * Fixed extra feedback not always showing for sequence questions.
+
+
+Version 0.17
+ * Fixed error when putting a "combination" tag in a question type that do not
+   support that tag.
+
+
+Version 0.16
+ * No longer shows feedback for D&D en S&O questions at try 0, when a startstate
+   is used.
+
+
+Version 0.15
+ * Added extra check before insert, to avoid duplicate entry error message.
+
+
+Version 0.14
+ * "Unknown node" messages put in drupal_set_message blocks.
+
+
+Version 0.13
+ * Fixed display of all text in the "Text" tab of a question.
+ * Show answer options in Text view of Select&Order question.
+
+
+Version 0.12
+ * Fixed externally added feedback for Multiple Answer (check) questions.
+
+
+Version 0.11
+ * Horizontal alignment in Select&Order questions, so the student can build
+   a sentence.
+
+
+Version 0.10
+ * Multiple answer (check) question options can be nether correct nor incorrect
+   by using attribute correct="-1"
+
+
+Version 0.9
+ * Make module not give a fatal error when question xml is not correct.
+
+
+Version 0.8
+ * Fixed feedbackunselected for multiple answer questions.
+
+
+Version 0.7
+ * Fix error on preview.
+ * Make sure UserAnswer doesn't do anything with either session or database if
+   there is no node_id.
+
+
+Version 0.6
+ * Dependency on jquery_update, as Select&Order needs a newer version of jquery
+   than Drupal core has.
+ * Small visual improvements to S&O questions.
+
+
+Version 0.5
+ * Fixed "Duplicate entry" error when telling userAnswer twice to save data.
+ * Added missing <pre> element to XML parser.
+ * Added "small" style for draggables.
+ * Added logging of given answers.
+
+
+Version 0.4
+ * Fixed feedback on no answer for select&order questions.
+
+
+Version 0.3
+ * External modules have a simple method of removing the "reset" button.
+
+
+Version 0.2
+ * Fixed not all feedback appearing for multiple answer (check) questions if
+   correct in one try.
+
+
+Version 0.1
+ * Versioning started.

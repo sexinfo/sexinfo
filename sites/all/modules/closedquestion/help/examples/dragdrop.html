@@ -1,0 +1,86 @@
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;question type="dragdrop" width="670" height="450"&gt;
+  &lt;text&gt;This is the text giving the question to the student and explaining him
+    what to do.
+  &lt;/text&gt;
+
+  &lt;!-- 
+  matchImg is the (background) image that the draggables are dragged on.
+
+  Attach an image to the node using the upload functionality and de-select the
+  "list" option for this file to hide it from the user.
+
+  Text inside the &lt;hotspot&gt; tag is used as hovertip for that hotspot.
+  --&gt;
+  &lt;matchImg src="[attachurl:1]"&gt;
+    &lt;!-- hotspots that are checked to see if they contain draggables. --&gt;
+    &lt;hotspot id="h1" shape="rect" coords="2,91,119,124"&gt;This is a rectangle hotspot&lt;/hotspot&gt;
+    &lt;hotspot id="h2" shape="circle" coords="162,182,70"&gt;This is a circle hotspot&lt;/hotspot&gt;
+    &lt;hotspot id="h3" shape="poly" coords="142,46,185,81,128,142,83,84"&gt;This is an polygon hotspot.&lt;/hotspot&gt;
+    &lt;!--
+    draggables are the images that are dragged to hotspots.
+    They can either contain any html or a single image.
+    Image example: &lt;draggable identifier="d1" src="[attachurl:text_damp.png]" /&gt;
+    Html example: &lt;draggable identifier="d2"&gt;Drag Me!&lt;/draggable&gt;
+    --&gt;
+    &lt;draggable identifier="d1"&gt;Drag me!&lt;/draggable&gt;
+    &lt;draggable identifier="d2"&gt;Draggable with a &lt;span&gt;Tooltip&lt;/span&gt;&lt;span class="hovertip"&gt;This is a tooltip!&lt;/span&gt;&lt;/draggable&gt;
+  &lt;/matchImg&gt;
+
+  &lt;hint mintries="1"&gt;
+    This is the first hint, it comes up after the first incorrect answer.
+  &lt;/hint&gt;
+  &lt;hint mintries="2" maxtries="3"&gt;
+    This is the second hint, it comes up after the second and third incorrect
+    answer and disappears again at the fourth.
+  &lt;/hint&gt;
+  &lt;hint mintries="3"&gt;
+    You can have as many hints as you like.
+  &lt;/hint&gt;
+
+
+  &lt;!--
+    Mappings are used to check the answer.
+  --&gt;
+  &lt;mapping correct="1"&gt;
+    &lt;combination hotspot="h1" draggable="d1" /&gt;
+    &lt;combination hotspot="h2" draggable="d2" /&gt;
+    &lt;combination hotspot="h3" draggable="d3" /&gt;
+    &lt;feedback&gt;
+      This feedback appears when the student puts draggable d1 on hotspot h1,
+      draggable d2 on hotspot h2 and draggable d3 on hotspot h3. This is
+      considered to be the correct answer.
+    &lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+    &lt;combination hotspot="h2" draggablepattern="d3" /&gt;
+    &lt;feedback&gt;
+      You have draggable d3 on hotspot h2.
+    &lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+    &lt;combination hotspot="h." draggable="d[0-9]" /&gt;
+    &lt;feedback&gt;
+      You have at least one draggable on one hotspot.
+    &lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+    &lt;combination hotspot="h1" draggablepattern="d[0-9]" /&gt;
+    &lt;feedback&gt;
+      You have at least one draggable on hotspot "h1".
+    &lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+    &lt;combination hotspot="h." draggable="d1" /&gt;
+    &lt;feedback&gt;
+      You have draggable d1 on a hotspot.
+    &lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+&lt;/question&gt;
+</pre>

@@ -1,0 +1,108 @@
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;question type="CHECK" inlinefeedback="0"&gt;
+&lt;text&gt;
+  &lt;p&gt;A multiple-answer question with more than one correct set of options.&lt;/p&gt;
+  &lt;p&gt;What do you need to make Tea? More than one combination of options is correct.&lt;/p&gt;
+&lt;/text&gt;
+&lt;prompt&gt;Pick one or more&lt;/prompt&gt;
+
+  &lt;hint mintries="1"&gt;
+    This is the first hint, it comes up after the first incorrect answer.
+  &lt;/hint&gt;
+  &lt;hint mintries="2" maxtries="3"&gt;
+    This is the second hint, it comes up after the second and third incorrect
+    answer and disappears again at the fourth.
+  &lt;/hint&gt;
+  &lt;hint mintries="3"&gt;
+    You can have as many hints as you like.
+  &lt;/hint&gt;
+
+  &lt;correct&gt;
+    Well done. This feedback appears when the quetsion is answered correctly.
+  &lt;/correct&gt;
+
+  &lt;option identifier="a"&gt;
+      &lt;choice&gt;Water&lt;/choice&gt;
+  &lt;/option&gt;
+
+  &lt;option identifier="b"&gt;
+      &lt;choice&gt;Loose Tea leaves&lt;/choice&gt;
+  &lt;/option&gt;
+
+  &lt;option identifier="c"&gt;
+      &lt;choice&gt;A tea egg&lt;/choice&gt;
+  &lt;/option&gt;
+
+  &lt;option identifier="d"&gt;
+      &lt;choice&gt;A pre filled teabag&lt;/choice&gt;
+  &lt;/option&gt;
+
+  &lt;option identifier="e"&gt;
+      &lt;choice&gt;A kettle&lt;/choice&gt;
+  &lt;/option&gt;
+
+  &lt;option identifier="f"&gt;
+      &lt;choice&gt;A stove&lt;/choice&gt;
+  &lt;/option&gt;
+
+  &lt;option identifier="g"&gt;
+      &lt;choice&gt;A mug&lt;/choice&gt;
+  &lt;/option&gt;
+
+  &lt;option identifier="h"&gt;
+      &lt;choice&gt;A microwave oven&lt;/choice&gt;
+  &lt;/option&gt;
+
+  &lt;mapping correct="1"&gt;
+      &lt;or&gt;
+          &lt;and&gt;&lt;match pattern="b" /&gt;&lt;match pattern="c" /&gt;&lt;match pattern="^[^d]*$" /&gt;&lt;/and&gt;
+          &lt;and&gt;&lt;match pattern="^[^bc]*$" /&gt;&lt;match pattern="d" /&gt;&lt;/and&gt;
+      &lt;/or&gt;
+      &lt;match pattern="a" /&gt;
+      &lt;match pattern="g" /&gt;
+      &lt;or&gt;
+          &lt;and&gt;&lt;match pattern="e" /&gt;&lt;match pattern="f" /&gt;&lt;match pattern="^[^h]*$" /&gt;&lt;/and&gt;
+          &lt;and&gt;&lt;match pattern="^[^ef]*$" /&gt;&lt;match pattern="h" /&gt;&lt;/and&gt;
+      &lt;/or&gt;
+      &lt;feedback&gt;That's right! That is one of the ways to make tea, but there are more ways than one.&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0" stop="1"&gt;
+      &lt;match pattern="^[^a]+$" /&gt;
+      &lt;feedback&gt;Making tea without water?&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+      &lt;not&gt;&lt;or&gt;
+          &lt;and&gt;&lt;match pattern="b" /&gt;&lt;match pattern="c" /&gt;&lt;match pattern="^[^d]*$" /&gt;&lt;/and&gt;
+          &lt;and&gt;&lt;match pattern="^[^bc]*$" /&gt;&lt;match pattern="d" /&gt;&lt;/and&gt;
+      &lt;/or&gt;&lt;/not&gt;
+      &lt;feedback&gt;You need some form of tea, but you don't want loose tea leaves directly in your mug...&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0" stop="1"&gt;
+      &lt;and&gt;&lt;match pattern="f" /&gt;&lt;match pattern="h" /&gt;&lt;/and&gt;
+      &lt;feedback&gt;You only need one way to heat water.&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0" stop="1"&gt;
+      &lt;and&gt;&lt;match pattern="e" /&gt;&lt;match pattern="h" /&gt;&lt;/and&gt;
+      &lt;feedback&gt;You can't put a kettle in a microwave oven, why do you need both?&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0" stop="1"&gt;
+      &lt;not&gt;&lt;or&gt;
+          &lt;and&gt;&lt;match pattern="e" /&gt;&lt;match pattern="f" /&gt;&lt;match pattern="^[^h]*$" /&gt;&lt;/and&gt;
+          &lt;and&gt;&lt;match pattern="^[^ef]*$" /&gt;&lt;match pattern="h" /&gt;&lt;/and&gt;
+      &lt;/or&gt;&lt;/not&gt;
+      &lt;feedback&gt;You need some way to heat your water.&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+  &lt;mapping correct="0"&gt;
+      &lt;match pattern="^[^g]+$" /&gt;
+      &lt;feedback&gt;You need something to drink your tea from.&lt;/feedback&gt;
+  &lt;/mapping&gt;
+
+&lt;/question&gt;
+</pre>

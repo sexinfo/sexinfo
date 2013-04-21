@@ -1,0 +1,174 @@
+<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;question type="BALANCE"&gt;
+
+  &lt;text&gt;
+    Please setup a product balance over a typical cultivation with non-growth-associated production in a batch reactor.
+    Select all relevant entries, so ignore entries that are zero.
+  &lt;/text&gt;
+
+  &lt;hint mintries="1"&gt;Draw a picture of a CSTR&lt;/hint&gt;
+  &lt;hint mintries="2"&gt;You only need one term for accumulation, none for transfer and one for reaction&lt;/hint&gt;
+  &lt;hint mintries="4"&gt;The answer for reaction is q&lt;sub&gt;p&lt;/sub&gt; • M&lt;sub&gt;x&lt;/sub&gt;.&lt;/hint&gt;
+
+  &lt;acc&gt;
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;d(M&lt;sub&gt;s&lt;/sub&gt;)/dt&lt;/choice&gt;
+      &lt;feedback&gt;The d(M&lt;sub&gt;s&lt;/sub&gt;)/dt term isn't appropiate for the product balance.&lt;/feedback&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;d(M&lt;sub&gt;x&lt;/sub&gt;)/dt&lt;/choice&gt;
+      &lt;feedback&gt;While there is biomass in this reactor, you where asked to set up a product balance, not a biomass balance.&lt;/feedback&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="1"&gt;
+      &lt;choice&gt;d(M&lt;sub&gt;p&lt;/sub&gt;)/dt&lt;/choice&gt;
+    &lt;/option&gt;
+
+    &lt;correct&gt;Optional feedback shown if this part is correct. Your accumulation section is correct.&lt;/correct&gt;
+
+  &lt;/acc&gt;
+
+  &lt;flow&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;C&lt;sub&gt;p,in&lt;/sub&gt;&lt;/choice&gt;
+      &lt;feedback&gt;C&lt;sub&gt;p,in&lt;/sub&gt; does not have the correct units for a biomass balance (kg/s)&lt;/feedback&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;-C&lt;sub&gt;p,in&lt;/sub&gt;&lt;/choice&gt;
+      &lt;feedback&gt;-C&lt;sub&gt;p,in&lt;/sub&gt; does not have the correct units for a biomass balance (kg/s)&lt;/feedback&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;C&lt;sub&gt;p,out&lt;/sub&gt;&lt;/choice&gt;
+      &lt;feedback&gt;C&lt;sub&gt;p,out&lt;/sub&gt; does not have the correct units for a biomass balance (kg/s)&lt;/feedback&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;-C&lt;sub&gt;p,out&lt;/sub&gt;&lt;/choice&gt;
+      &lt;feedback&gt;-C&lt;sub&gt;p,out&lt;/sub&gt; does not have the correct units for a biomass balance (kg/s)&lt;/feedback&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;V • C&lt;sub&gt;p,in&lt;/sub&gt;&lt;/choice&gt;
+      &lt;feedback&gt;V • C&lt;sub&gt;p,in&lt;/sub&gt; does not have the correct units for a biomass balance (kg/s)&lt;/feedback&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;- V • C&lt;sub&gt;p,in&lt;/sub&gt;&lt;/choice&gt;
+      &lt;feedback&gt;- V • C&lt;sub&gt;p,in&lt;/sub&gt; does not have the correct units for a biomass balance (kg/s)&lt;/feedback&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;V • C&lt;sub&gt;p,out&lt;/sub&gt;&lt;/choice&gt;
+      &lt;feedback&gt;V • C&lt;sub&gt;p,out&lt;/sub&gt; does not have the correct units for a biomass balance (kg/s)&lt;/feedback&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;- V • C&lt;sub&gt;p,out&lt;/sub&gt;&lt;/choice&gt;
+      &lt;feedback&gt;- V • C&lt;sub&gt;p,out&lt;/sub&gt; does not have the correct units for a biomass balance (kg/s)&lt;/feedback&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;Φ&lt;sub&gt;v&lt;/sub&gt; • C&lt;sub&gt;p,in&lt;/sub&gt;&lt;/choice&gt;
+      &lt;feedback&gt;There is no biomass in the ingoing stream!&lt;/feedback&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;- Φ&lt;sub&gt;v&lt;/sub&gt; • C&lt;sub&gt;p,in&lt;/sub&gt;&lt;/choice&gt;
+      &lt;feedback&gt;Incoming biomass is not a negative transfer, it is positive!&lt;/feedback&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;Φ&lt;sub&gt;v&lt;/sub&gt; • C&lt;sub&gt;p,out&lt;/sub&gt;&lt;/choice&gt;
+      &lt;feedback&gt;Outgoing biomass is not a positive transfer, it is negative!&lt;/feedback&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;- Φ&lt;sub&gt;v&lt;/sub&gt; • C&lt;sub&gt;p,out&lt;/sub&gt;&lt;/choice&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;Φ&lt;sub&gt;v&lt;/sub&gt; • V • C&lt;sub&gt;p,in&lt;/sub&gt;&lt;/choice&gt;
+      &lt;feedback&gt;There is no biomass in the ingoing stream!&lt;/feedback&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;- Φ&lt;sub&gt;v&lt;/sub&gt; • V • C&lt;sub&gt;p,in&lt;/sub&gt;&lt;/choice&gt;
+      &lt;feedback&gt;Incoming biomass is not a negative transfer, it is positive!&lt;/feedback&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;Φ&lt;sub&gt;v&lt;/sub&gt; • V • C&lt;sub&gt;p,out&lt;/sub&gt;&lt;/choice&gt;
+      &lt;feedback&gt;Outgoing biomass is not a positive transfer, it is negative!&lt;/feedback&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;- Φ&lt;sub&gt;v&lt;/sub&gt; • V • C&lt;sub&gt;p,out&lt;/sub&gt;&lt;/choice&gt;
+    &lt;/option&gt;
+
+     &lt;correct&gt;Your transfer section is correct.&lt;/correct&gt;
+
+  &lt;/flow&gt;
+
+  &lt;prod&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;Y&lt;sub&gt;px&lt;/sub&gt; • M&lt;sub&gt;x&lt;/sub&gt;&lt;/choice&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;Y&lt;sub&gt;px&lt;/sub&gt; • M&lt;sub&gt;x&lt;/sub&gt; • μ&lt;/choice&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;Y&lt;sub&gt;px&lt;/sub&gt; • C&lt;sub&gt;x&lt;/sub&gt;&lt;/choice&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;Y&lt;sub&gt;px&lt;/sub&gt; • C&lt;sub&gt;x&lt;/sub&gt; • μ&lt;/choice&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;M&lt;sub&gt;x&lt;/sub&gt; / Y&lt;sub&gt;px&lt;/sub&gt;&lt;/choice&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;M&lt;sub&gt;x&lt;/sub&gt; • μ / Y&lt;sub&gt;px&lt;/sub&gt;&lt;/choice&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;C&lt;sub&gt;x&lt;/sub&gt; / Y&lt;sub&gt;px&lt;/sub&gt;&lt;/choice&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;C&lt;sub&gt;x&lt;/sub&gt; • μ / Y&lt;sub&gt;px&lt;/sub&gt;&lt;/choice&gt;
+    &lt;/option&gt;
+
+
+    &lt;option correct="1"&gt;
+      &lt;choice&gt;q&lt;sub&gt;p&lt;/sub&gt; • M&lt;sub&gt;x&lt;/sub&gt;&lt;/choice&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;q&lt;sub&gt;p&lt;/sub&gt; / M&lt;sub&gt;x&lt;/sub&gt;&lt;/choice&gt;
+    &lt;/option&gt;
+
+    &lt;option correct="0"&gt;
+      &lt;choice&gt;M&lt;sub&gt;x&lt;/sub&gt; / q&lt;sub&gt;p&lt;/sub&gt;&lt;/choice&gt;
+    &lt;/option&gt;
+
+     &lt;correct&gt;Your reaction section is OK&lt;/correct&gt;
+
+  &lt;/prod&gt;
+
+  &lt;correct&gt;Very good! The product balance over a typical cultivation with non-growth-associated production in a batch reactor is:
+    d(M&lt;sub&gt;p&lt;/sub&gt;)/dt = q&lt;sub&gt;p&lt;/sub&gt; • M&lt;sub&gt;x&lt;/sub&gt;.&lt;br/&gt;
+    q&lt;sub&gt;p&lt;/sub&gt; can have all sorts of relations and is different for every product.
+  &lt;/correct&gt;
+
+&lt;/question&gt;
+</pre>
