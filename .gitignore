@@ -43,5 +43,9 @@ tmp/
 # Ignore configuration files that may contain sensitive information.
 sites/*/settings*.php
 sites/*/files/default.settings.php
+sites/default/files/field/*
+sites/default/files/styles/*
+sites/default/files/tmp*
+sites/default/files/u*
 sites/*/private
 credentials.json
