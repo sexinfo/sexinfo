@@ -1,15 +1,12 @@
-/* 01 - TYPOGRAPHY
-/* ----------------------------------------------*/
-
 h1 {
   margin:0; padding:0;
-  font:bold 3.53em Verdana, Arial, Helvetica, sans-serif; color:#30393d;
+  font:bold 3.53em Verdana, Arial, Helvetica, sans-serif; color:$gray-text;
   position:relative; display:block;
 }
 
   .node-content h1 {
       margin:10px 0; padding:0;
-      font:bold 2.50em Arial, Helvetica, sans-serif; color:#53798b;
+      font:bold 2.50em Arial, Helvetica, sans-serif; color:$blue-text;
   }
 
   h1 a:link, h1 a:active, h1 a:visited {
@@ -24,28 +21,28 @@ h1 {
 
 h2 {
   margin:0; padding:0;
-  font:3.13em Verdana, Arial, Helvetica, sans-serif; color:#b9b9b9;
+  font:3.13em Verdana, Arial, Helvetica, sans-serif; color:$light-gray;
 }
 
   .node-content h2, .box h2, .theme-info h2 {
     margin:10px 0; padding:0;
-    font:bold 2.00em Arial, Helvetica, sans-serif; color:#53798b;
+    font:bold 2.00em Arial, Helvetica, sans-serif; color:$blue-text;
   }
 
-  h2.slogan { margin: 10px 0 0 0; font:0.83em Verdana, Arial, Helvetica, sans-serif; color:#b9b9b9;}
+  h2.slogan { margin: 10px 0 0 0; font:0.83em Verdana, Arial, Helvetica, sans-serif; color:$light-gray;}
 
 h3 {
   margin:0; padding:0;
-  font:bold 2.80em Arial, Helvetica, sans-serif; color:#30393d;
+  font:bold 2.80em Arial, Helvetica, sans-serif; color:$gray-text;
 }
 
   .node-content h3, #sidebar h3{
     margin:10px 0; padding:0;
-    font:bold 1.50em Arial, Helvetica, sans-serif; color:#53798b;
+    font:bold 1.50em Arial, Helvetica, sans-serif; color:$blue-text;
   }
 
   h3 a:link, h3 a:active, h3 a:visited {
-    color:#30393d;
+    color:$gray-text;
   }
 
   h3 a:hover {
@@ -55,10 +52,9 @@ h3 {
   h3.node-title {
     float: left;
     margin:0; padding:10px 0;
-    /*width:450px; */
     width: 500px;
     height:auto;
-    border-bottom:4px solid #30393d;
+    border-bottom:4px solid $gray-text;
     font:bold 2.5em Arial, Helvetica, sans-serif;
   }
 
@@ -70,7 +66,7 @@ h4, #footer h2 {
 
   .node-content h4{
     margin:10px 0; padding:0;
-    font:bold 1.17em Arial, Helvetica, sans-serif; color:#53798b;
+    font:bold 1.17em Arial, Helvetica, sans-serif; color:$blue-text;
   }
 
   #footer h4, #footer h2 {
@@ -78,11 +74,11 @@ h4, #footer h2 {
   }
 
 
-a:link, a:active { color:#f23183; text-decoration:none; }
+a:link, a:active { color:$pink; text-decoration:none; }
 
 a:hover { color:#000; }
 
-a:visited { color:#f05898; text-decoration:none; }
+a:visited { color:$light-pink; text-decoration:none; }
 
 p { margin:0 0 1em 0; }
 
@@ -94,7 +90,7 @@ ul, ol { margin-left: 0; padding-left: 2em; }
 /* Table Styles  */
 table { width: 99%; }
 
-thead th { background:none repeat scroll 0 0 #f23183; border:1px solid #e3e3e3; padding:5px; text-align:left; color:#ffffff;}
+thead th { background:none repeat scroll 0 0 $pink; border:1px solid #e3e3e3; padding:5px; text-align:left; color:#ffffff;}
 
 
 tr.even, tr.odd { border:none; }
@@ -130,7 +126,7 @@ ol ol ol    { list-style-type: decimal; }
 #navigation ul.links li.active a:link, #navigation ul.links li.active a:active, #navigation ul.links li.active a:visited {
   /* margin:-3px 0 0 0;*/
   padding:15px 15px 14px 15px;
-  background:#171615 url(images/navigation-hover.gif) repeat-x bottom center;
+  background:$dark-gray url(images/navigation-hover.gif) repeat-x bottom center;
   color:#f1f8ff; position:relative;
 }
 
@@ -161,7 +157,7 @@ a.rss:link, a.rss:active, a.rss:visited, a.rss:hover {
 
 .node-info span a:link, .node-info span a:active, .node-info span a:visited { color:#1e1c1a; text-decoration:none; }
 
-.node-info span a:hover { color:#f23183; }
+.node-info span a:hover { color:$pink; }
 
 .node-readmore { float:right; margin-top: -19px;  }
 

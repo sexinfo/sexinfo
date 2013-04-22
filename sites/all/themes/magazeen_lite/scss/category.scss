@@ -1,12 +1,21 @@
+// Display of articles within a category
+// Largely emulates topic listing in topics.scss
 
+.views-table tbody td:first-child { border-top: 1px solid #d0d0d0; }
+
+tr.odd.cat-row td,
 tr.even.cat-row td {
-  background-color: white;
+  border-left: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  border-bottom: 1px solid #DADADA;
   padding: 5px 7px;
+
+  &:before { content: "-"; }
 }
 
-tr.odd.cat-row td {
-  padding: 5px 7px;
-}
+tr.even.cat-row td { background-color: #eee; }
+
+tr.odd.cat-row td { background-color: white; }
 
 .views-field {
   background: transparent;
