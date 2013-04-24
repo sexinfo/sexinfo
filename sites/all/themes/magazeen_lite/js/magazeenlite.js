@@ -94,20 +94,18 @@ $(".force-previous a").click(function() {
 $('.webform-client-form').submit(function() {
   var errors = false;
 
-  $(this).find("input:not([type='submit']), textarea").each(function(i, field) {
+  $(this).find("input:not([type='submit'])").each(function(i, field) {
     if ($(field).val() === "") {
       errors = true;
-      $(field).css('border', '1px solid #F23183');
-      $(field).css('color', '#F23183');
+      $(field).css('border', '1px solid #d34332');
+      $(field).css('color', '#d34332');
       $(field).val("This is a required field.");
     }
     $(field).focus(function() {
       $(field).val("");  
     });
-    $(field).blur(function() {
-      $(field).val("This is a required field.");  
-    });
   })
+
 
   return !errors;
 });
