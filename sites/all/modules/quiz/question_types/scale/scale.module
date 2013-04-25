@@ -13,11 +13,7 @@
  */
 
 /**
-<<<<<<< HEAD
  * Implements hook_help().
-=======
- * Implementation of hook_help().
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function scale_help($path, $args) {
   if ($path == 'admin/help#scale') {
@@ -26,21 +22,13 @@ function scale_help($path, $args) {
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_menu().
-=======
- * Implementation of hook_menu().
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function scale_menu() {
   $items['scale/collection/manage'] = array(
     'title' => 'Manage your preset collections',
     'access callback' => 'user_access',
-<<<<<<< HEAD
     'access arguments' => array('create quiz content'),
-=======
-    'access arguments' => array('create quiz'),
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     'type' => MENU_SUGGESTED_ITEM,
     'page callback' => 'drupal_get_form',
     'page arguments' => array('scale_manage_collection_form'),
@@ -49,7 +37,6 @@ function scale_menu() {
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_theme().
  */
 function scale_theme($existing, $type, $theme, $path) {
@@ -75,45 +62,12 @@ function scale_theme($existing, $type, $theme, $path) {
     'scale_answering_form' => array(
       'render element' => 'form',
       'path' => $module_path . '/theme',
-=======
- * Implementation of hook_theme
- */
-function scale_theme($existing, $type, $theme, $path) {
-  return array(
-    'scale_creation_form' => array(
-      'arguments' => array(
-        'form' => NULL,
-      ),
-      'path' => drupal_get_path('module', 'scale') .'/theme',
-      'file' => 'scale.theme.inc',
-    ),
-    'scale_response_form' => array(
-      'arguments' => array(
-        'form' => NULL,
-      ),
-      'path' => drupal_get_path('module', 'scale') .'/theme',
-      'file' => 'scale.theme.inc',
-    ),
-    'scale_answer_node_view' => array(
-      'arguments' => array(
-        'alternatives' => NULL,
-      ),
-      'path' => drupal_get_path('module', 'scale') .'/theme',
-      'file' => 'scale.theme.inc',
-    ),
-    'scale_answering_form' => array(
-      'arguments' => array(
-        'form' => NULL,
-      ),
-      'path' => drupal_get_path('module', 'scale') .'/theme',
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       'template' => 'scale-answering-form',
     ),
   );
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_permission().
  */
 function scale_permission() {
@@ -126,16 +80,6 @@ function scale_permission() {
 
 /**
  * Implements hook_quiz_question_info().
-=======
- * Implementation of hook_perm()
- */
-function scale_perm() {
-  return array('Edit global presets');
-}
-
-/**
- * Implementation of hook_quiz_question_info().
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function scale_quiz_question_info() {
   return array(
@@ -150,30 +94,16 @@ function scale_quiz_question_info() {
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_config().
  */
 function scale_config() {
   $form['manage'] = array('#markup' => l(t('Manage presets'), 'scale/collection/manage'));
-=======
- * Implementation off hook_config
- */
-function scale_config() {
-  $form['manage'] = array(
-    '#type' => 'markup',
-    '#value' => l(t('Manage presets'), 'scale/collection/manage'),
-  );
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   $form['scale_max_num_of_alts'] = array(
     '#type' => 'textfield',
     '#title' => t('Maximum number of alternatives allowed'),
     '#default_value' => variable_get('scale_max_num_of_alts', 10),
   );
-<<<<<<< HEAD
   $form['#validate'][] = 'scale_config_validate';
-=======
-  $form['#validate'] = 'scale_config_validate';
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   return $form;
 }
 
@@ -181,7 +111,6 @@ function scale_config() {
  * Validate the scale config form values
  */
 function scale_config_validate($form, $form_state) {
-<<<<<<< HEAD
   if (!_quiz_is_int($form_state['values']['scale_max_num_of_alts'], 2, 50)) {
     form_set_error('scale_max_num_of_alts', t('The number of alternatives must be between 2 and 50'));
   }
@@ -205,40 +134,12 @@ function scale_user_cancel($edit, $account, $method) {
               JOIN {quiz_scale_user} u ON(ac.id = u.answer_collection_id)
               WHERE uid = :uid
               AND ac.for_all = :for_all
-=======
-  if (!_quiz_is_int($form_state['values']['scale_max_num_of_alts'], 2, 50))
-    form_set_error('scale_max_num_of_alts', t('The number of alternatives must be between 2 and 50'));
-}
-
-/**
- * Implementation of hook_autoload_info().
- */
-function scale_autoload_info() {
-  return array(
-    'ScaleQuestion' => array('file' => 'scale.classes.inc'),
-    'ScaleResponse' => array('file' => 'scale.classes.inc'),
-  );
-}
-
-/**
- * Implementation of hook user.
- */
-function scale_user($op, &$edit, &$account, $category = NULL) {
-  switch ($op) {
-    case 'delete': //Remove the users presets if they aren't in use.
-      $sql = 'SELECT id
-              FROM {quiz_scale_answer_collection} ac
-              JOIN {quiz_scale_user} u ON(ac.id = u.answer_collection_id)
-              WHERE uid = %d
-              AND ac.for_all = 0
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
               AND ac.id NOT IN
                 (SELECT answer_collection_id
                  FROM {quiz_scale_node_properties})
               AND ac.id NOT IN
                 (SELECT answer_collection_id
                  FROM {quiz_scale_user}
-<<<<<<< HEAD
                  WHERE NOT uid = :uid)', array(':uid' => $account->uid, ':for_all' => 0));
   foreach ($results as $result) {
     db_delete('quiz_scale_answer')
@@ -252,23 +153,6 @@ function scale_user($op, &$edit, &$account, $category = NULL) {
   db_delete('quiz_scale_user')
     ->condition('uid', $account->uid)
     ->execute();
-=======
-                 WHERE NOT uid = %d)';
-      $res = db_query($sql, $account->uid, $account->uid);
-      while ($res_o = db_fetch_object($res)) {
-        $sql = 'DELETE FROM {quiz_scale_answer}
-            WHERE answer_collection_id = %d';
-        db_query($sql, $res_o->id);
-        $sql = 'DELETE FROM {quiz_scale_answer_collection}
-            WHERE id = %d';
-        db_query($sql, $res_o->id);
-        $sql = 'DELETE FROM {quiz_scale_user}
-            WHERE uid = %d';
-        db_query($sql, $account->uid);
-      }
-    break;
-  }
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 }
 
 /**
@@ -280,11 +164,7 @@ function scale_user($op, &$edit, &$account, $category = NULL) {
  * @param $form_state
  * @return form
  */
-<<<<<<< HEAD
 function scale_manage_collection_form($form, &$form_state) {
-=======
-function scale_manage_collection_form(&$form_state) {
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   global $user;
 
   $edit_globals_access = user_access('Edit global presets');
@@ -303,11 +183,7 @@ function scale_manage_collection_form(&$form_state) {
   $form = array();
   if (count($collections) == 0) {
     $form['no_col'] = array(
-<<<<<<< HEAD
       '#markup' => t("You don't have any preset collections."),
-=======
-      '#value' => t('You don\'t have any preset collections'),
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     );
     return $form;
   }
@@ -318,7 +194,6 @@ function scale_manage_collection_form(&$form_state) {
       '#title' => $collections[$col_id]->name,
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
-<<<<<<< HEAD
       '#group' => 'scale_manage_collection_form',
     );
     $alternatives = isset($collections[$col_id]->alternatives) ? $collections[$col_id]->alternatives : array();
@@ -329,23 +204,11 @@ function scale_manage_collection_form(&$form_state) {
         '#maxlength' => 256,
         '#type' => 'textfield',
         '#default_value' => isset($alternatives[$i]) ? $alternatives[$i] : '',
-=======
-    );
-    $alternatives = $collections[$col_id]->alternatives;
-    for ($i = 0; $i < variable_get('scale_max_num_of_alts', 10); $i++) {
-      $form["collection$col_id"]["alternative$i"] = array(
-        '#title' => t('Alternative !i', array('!i' => ($i+1))),
-        '#size' => 60,
-        '#maxlength' => 256,
-        '#type' => 'textfield',
-        '#default_value' => $alternatives[$i],
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         '#required' => (($i < 2) && $col_id != 'new'),
       );
     }
     if ($col_id != 'new') {
       if ($edit_globals_access) {
-<<<<<<< HEAD
         $form["collection$col_id"]['for_all'] = array(
           '#type' => 'checkbox',
           '#title' => t('Available to all users'),
@@ -355,17 +218,6 @@ function scale_manage_collection_form(&$form_state) {
       $form["collection$col_id"]['to-do'] = array(
         '#type' => 'radios',
         '#title' => t('What will you do?'),
-=======
-        $form["collection$col_id"]["for_all"] = array(
-          '#type' => 'checkbox',
-          '#title' => t("Available to all users"),
-          '#default_value' => $collections[$col_id]->for_all,
-        );
-      }
-      $form["collection$col_id"]["to-do"] = array(
-        '#type' => 'radios',
-        '#title' => t("What will you do?"),
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         '#default_value' => '0',
         '#options' => array(
           t('Save changes, do not change questions using this preset'),
@@ -389,13 +241,9 @@ function scale_manage_collection_form(&$form_state) {
     '#value' => t('Submit'),
   );
   $form['#submit'][] = 'scale_collection_form_submit';
-<<<<<<< HEAD
   if ($edit_globals_access) {
     $form['#validate'][] = 'scale_collection_form_validate';
   }
-=======
-  if ($edit_globals_access) $form['#validate'][] = 'scale_collection_form_validate';
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   $form['#tree'] = TRUE;
   return $form;
 }
@@ -420,17 +268,12 @@ function scale_collection_form_submit($form, &$form_state) {
         case 0: //Save, but don't change
         case 1: //Save and change existing questions
           $new_col_id = $s_q->saveAnswerCollection(FALSE, $alternatives, 1);
-<<<<<<< HEAD
           if (isset($alternatives['for_all'])) {
             _scale_set_for_all($new_col_id, $alternatives['for_all']);
           }
           if ($new_col_id == $col_id) {
             break;
           }
-=======
-          if (isset($alternatives['for_all'])) _scale_set_for_all($new_col_id, $alternatives['for_all']);
-          if ($new_col_id == $col_id) break;
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
           $changed++;
           // We save the changes, but don't change existing questions
           if ($alternatives['to-do'] == 0) {
@@ -439,7 +282,6 @@ function scale_collection_form_submit($form, &$form_state) {
             // If the old version of the collection doesn't belong to any questions it is safe to delete it.
             $s_q->deleteCollectionIfNotUsed($col_id);
 
-<<<<<<< HEAD
             if (isset($alternatives['for_all'])) {
               _scale_set_for_all($new_col_id, $alternatives['for_all']);
             }
@@ -459,48 +301,20 @@ function scale_collection_form_submit($form, &$form_state) {
             $s_q->deleteCollectionIfNotUsed($col_id);
           }
           break;
-=======
-            if (isset($alternatives['for_all'])) _scale_set_for_all($new_col_id, $alternatives['for_all']);
-          }
-          elseif ($alternatives['to-do'] == 1) {
-            // Update all the users questions where the collection is used
-            $sql = 'UPDATE {quiz_scale_node_properties}
-                    SET answer_collection_id = %d
-                    WHERE answer_collection_id = %d
-                    AND nid IN(
-                      SELECT nid
-                      FROM {node}
-                      WHERE uid = %d
-                    )';
-            db_query($sql, $new_col_id, $col_id, $user->uid);
-
-            db_query('DELETE FROM {quiz_scale_user} WHERE answer_collection_id = %d AND uid = %d', $col_id, $user->uid);
-            $s_q->deleteCollectionIfNotUsed($col_id);
-          }
-        break;
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         case 2: //Delete
           $got_deleted = $s_q->deleteCollectionIfNotUsed($col_id);
           if (!$got_deleted) {
             _scale_unpreset_collection($col_id, $user->uid);
           }
           $deleted++;
-<<<<<<< HEAD
           break;
-=======
-        break;
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         case 3: //New
           if (drupal_strlen($alternatives['alternative0']) > 0) {
             $new_col_id = $s_q->saveAnswerCollection(FALSE, $alternatives, 1);
             _scale_set_for_all($new_col_id, $alternatives['for_all']);
             drupal_set_message(t('New preset has been added'));
           }
-<<<<<<< HEAD
           break;
-=======
-        break;
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       }
     }
   }
@@ -536,11 +350,7 @@ function scale_collection_form_validate($form, &$form_state) {
 function _scale_get_col_id($string) {
   $res = array();
   $success = preg_match('/^collection([0-9]{1,}|new)$/', $string, $res);
-<<<<<<< HEAD
   return ($success > 0) ? $res[1] : FALSE;
-=======
-  return ($success>0) ? $res[1] : FALSE;
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 }
 
 /**
@@ -551,7 +361,6 @@ function _scale_get_col_id($string) {
  * @param $user_id
  */
 function _scale_unpreset_collection($col_id, $user_id) {
-<<<<<<< HEAD
   db_delete('quiz_scale_user')
     ->condition('answer_collection_id', $col_id)
     ->condition('uid', $user_id)
@@ -560,15 +369,6 @@ function _scale_unpreset_collection($col_id, $user_id) {
     db_update('quiz_scale_answer_collection')
       ->fields(array('for_all' =>  0))
       ->execute();
-=======
-  $sql = 'DELETE FROM {quiz_scale_user}
-          WHERE answer_collection_id = %d AND uid = %d';
-  db_query($sql, $col_id, $user_id);
-  if (user_access('Edit global presets')) {
-    $sql = 'UPDATE {quiz_scale_answer_collection}
-            SET for_all = 0';
-    db_query($sql);
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   }
 }
 
@@ -582,7 +382,6 @@ function _scale_unpreset_collection($col_id, $user_id) {
  *  1 if for all
  */
 function _scale_set_for_all($new_col_id, $for_all) {
-<<<<<<< HEAD
   db_update('quiz_scale_answer_collection')
     ->fields(array(
       'for_all' => $for_all,
@@ -590,10 +389,3 @@ function _scale_set_for_all($new_col_id, $for_all) {
     ->condition('id', $new_col_id)
     ->execute();
 }
-=======
-  $sql = 'UPDATE {quiz_scale_answer_collection}
-          SET for_all = %d
-          WHERE id = %d';
-  db_query($sql, $for_all, $new_col_id);
-}
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2

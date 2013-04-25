@@ -2,7 +2,6 @@ name = Quiz
 package = Quiz Core
 description = "Create interactive, multipage quizzes. This module must have at least one question-type module enabled in order to function properly. If in doubt, use the Multichoice module."
 dependencies[] = taxonomy
-<<<<<<< HEAD
 core = 7.x
 
 ; Always available CSS
@@ -37,16 +36,4 @@ version = "7.x-4.0-beta1"
 core = "7.x"
 project = "quiz"
 datestamp = "1362397820"
-=======
-core = 6.x
-php = 5.1
-
-; This is (or should be) recommended, but not required.
-;dependencies[] = jquery_countdown
-; Information added by drupal.org packaging script on 2012-03-03
-version = "6.x-4.4"
-core = "6.x"
-project = "quiz"
-datestamp = "1330784753"
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 

@@ -6,7 +6,6 @@
  */
 
 /**
-<<<<<<< HEAD
  * Implements hook_install().
  */
 function matching_install() {
@@ -15,43 +14,18 @@ function matching_install() {
 
   // TODO The drupal_(un)install_schema functions are called automatically in D7.
   // drupal_install_schema('matching')
-=======
- * Implementation of hook_update_N().
- *
- * Add index to improve performance
- */
-function matching_update_6400() {
-  $results = array();
-  db_add_index($results, 'quiz_matching_node', 'question_id', array('nid', 'vid'));
-  return $results;
-}
-
-/**
- * Implementation of hook_install().
- */
-function matching_install() {
-  drupal_install_schema('matching');
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   variable_set('node_options_matching', array('status'));
   cache_clear_all('autoload:', 'cache');
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_uninstall().
-=======
- * Implementation of hook_uninstall().
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function matching_uninstall() {
 
   // Delete tables
-<<<<<<< HEAD
   // TODO The drupal_(un)install_schema functions are called automatically in D7.
   // drupal_uninstall_schema('matching')
-=======
-  drupal_uninstall_schema('matching');
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 
   // Delete data from other tables
 
@@ -61,11 +35,7 @@ function matching_uninstall() {
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_schema().
-=======
- * Implementation of hook_schema().
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function matching_schema() {
   // Properties for a question nodes go in here:
