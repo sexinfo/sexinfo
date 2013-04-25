@@ -1,4 +1,5 @@
-/* 09 - FRONT PAGE MODULES
+/* ----------------------------------------------*/
+/* Front page modules
 /* ----------------------------------------------*/
 
 /*----- LAYOUT -----*/
@@ -8,14 +9,12 @@
 }
 
 #column-large {
-  /* The 2/3 width column container on the left of the front page */
   float: left;
   margin-right: 10px;
-  width: 645px; /* 600px with standard 940px container */
+  width: 645px;
 }
 
 #column-small {
-  /* The 1/3 width column container on the right of the front page */
   float: right;
   width: 330px;
 }
@@ -31,24 +30,22 @@
   margin-bottom: 20px;
   overflow: auto;
   padding: 10px;
-}
-  .column-container.dark {
-    background-color: #ebf6fa;
+
+  &.dark { background-color: #ebf6fa; }
+
+  .question {
+    clear: both;
+    margin-top: 10px;
+    overflow: auto;
   }
-    .question {
-      /* Generic container for questions in Recent Questions module for individual styling if desired */
-      clear: both;
-      margin-top: 10px;
-      overflow: auto;
-    }
+}
 .column-third {
   float: left;
   margin-right: 10px;
   width: 321px;
+
+  &:last-child { margin: 0; }
 }
-  .column-third:last-child {
-    margin: 0; /* Zero the margin used for separation on the other boxes */
-  }
 
 /* Since the node classes are copied from another page, we need
  a few hacks to make it work specifically for the front page */
@@ -62,38 +59,37 @@
   float: left;
   margin-right: 10px;
   width: 130px;
+
+  &:last-child { margin: 0;  }
+
+  a:hover { text-decoration: underline; }
 }
-  .list-half:last-child {
-    margin: 0; /* Zero the margin used for separation */
-  }
-  .list-half a:hover {
-    text-decoration: underline;
-  }
 
   /* FAQ module */
 .faq-image {
   overflow: hidden;
   position: relative;
-}
-  .faq-image img {
+
+  img {
     margin: 0;
     padding: 0;
     width: 290px;
   }
+}
   .caption-slide {
-    background-color: #262626; /* Light -> Dark: #333 --> #2d2d2d --> #262626 */
+    background-color: #262626;
     color: white;
     opacity: 0.8;
     padding: 5px;
     position: absolute;
     bottom: -40px;
     left: 0;
-    width: 285px; /* 5+5 = 10px of padding added */
+    width: 285px;
   }
 
 /* Image carousel module */
 #carousel-window {
-  height: 250px; /* Actual height: 1000px - viewport is 250px tall */
+  height: 250px;
   float: left;
   margin-right: 10px;
   overflow: hidden;
@@ -123,7 +119,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 390px; /* 5+5 = 10px of padding added */
+    width: 390px;
   }
 
 #carousel-nav {
@@ -135,12 +131,9 @@
     width: 277px;
   }
 
-  .carousel-nav-left {
-    float: left;
-  }
-  .carousel-nav-right {
-    float: right;
-  }
+  .carousel-nav-left { float: left; }
+  .carousel-nav-right { float: right; }
+
   #carousel-nav ul {
     list-style: none;
     margin: 0;
@@ -163,7 +156,7 @@
   margin: 10px 0;
 }
 .column-container h4 {
-  color: #F23183;
+  color: $pink;
   font: bold 1.4em Arial, Helvetica, sans-serif;
 }
 .date {
@@ -171,16 +164,14 @@
   color: #A5AEB1;
   margin-bottom: 0.5em;
 }
-.readmore {
-  float: right;
-}
+.readmore { float: right }
+
 /* Modules */
 .module-title {
-  border-bottom: 4px solid #30393d;
-  color: #30393d;
+  border-bottom: 4px solid $gray-text;
+  color: $gray-text;
   font: bold 1.7em Arial, Helvetica, sans-serif;
   margin-bottom: 15px;
-  /*margin-right: 5px;*/ /* Add a little space between the bottom border and the edge to make the separation more distinct. */
   padding-bottom: 5px;
 }
 .list-half a:link,
@@ -189,6 +180,7 @@
   float: left;
   font-weight: bold;
 }
+
 /* Since the node classes are copied from another page, we need
  a few hacks to make it work specifically for the front page */
 .module p { margin: 0; }
@@ -219,7 +211,7 @@
   opacity: 1;
 }
   .carousel-caption h3 {
-    color: #F23183;
+    color: $pink;
     font-size: 2em;
   }
   .carousel-caption p {
@@ -248,7 +240,7 @@ a:visited.more-button  {
   border-bottom-color: #f6fbff;
   color: #5E6568;
   display: block;
-  height: 51px; /* not including 10px off padding */
+  height: 51px;
   outline: none;
   padding: 5px;
   text-align: left;

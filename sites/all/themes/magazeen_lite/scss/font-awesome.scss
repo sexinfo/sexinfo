@@ -24,8 +24,6 @@
 $fontAwesomePath:   "/sexinfo/sites/all/themes/magazeen_lite/font-awesome" !default;
 $borderColor:       #eee;
 $iconMuted:         #eee;
-@mixin border-radius($radius) { -webkit-border-radius: $radius; -moz-border-radius: $radius; border-radius: $radius; }
-
 
 @font-face {
   font-family: 'FontAwesome';

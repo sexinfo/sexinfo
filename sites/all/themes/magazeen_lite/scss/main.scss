@@ -17,7 +17,6 @@
 }
 
   #main-front > .container {
-    /* Entire purpose of #main-front is so the front page can have a wider container. */
     width: 985px;
     margin-bottom: 55px;
   }
@@ -94,7 +93,7 @@ ul.pager {
   .page-content { padding:15px 22px 0; }
 
   .comment-count {
-    background:#f23183;
+    background:$pink;
     display: block;
     height:auto;
     margin:0;

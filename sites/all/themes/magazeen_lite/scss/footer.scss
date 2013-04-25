@@ -1,49 +1,37 @@
-/* 07 - FOOTER
-/* ----------------------------------------------*/
-
 #footer {
-  background: #171615 url(images/footer-stroke.gif) repeat-x top center;
-  border-top: 1px solid #171615;
+  background: $dark-gray url(images/footer-stroke.gif) repeat-x top center;
+  border-top: 1px solid $dark-gray;
   border-bottom: 1px solid #1e1d1d;
   color: #B2B2B2;
   height:auto;
   margin: 0;
   padding: 10px 0 15px;
   width: auto;
-  
+
   a:hover,
   a:active {
     color: inherit;
     text-decoration: underline;
   }
-  
-  .left {
-	  width: 40%;
-	  float: left;
-  }
-  
-  .right {
-	  width: 40%;
-	  float: right;
-  }
-  
+
+  .left, .right { width: 40%; }
+
+  .left { float: left; }
+  .right { float: right; }
+
   ul {
   	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	
-	li {
-		margin-bottom: 10px;
-	}
-	i {
-		padding-right: 5px;
-	}
+  	margin: 0;
+  	padding: 0;
+
+  	li { margin-bottom: 10px; }
+
+  	i { padding-right: 5px; }
   }
+
+  p:last-child { margin-bottom: 10px; }
 }
 
-#footer p:last-child {
-  margin-bottom: 10px;
-}
 
 #footer-message {
   color: #fff;
@@ -58,24 +46,18 @@
 #footer .login {
   font-size: 1.1em;
   float: right;
-
-
 }
 
 #snavigation {
-  background-color: #171615;
+  background-color: $dark-gray;
   border-top: 1px solid #1E1D1D;
   border-bottom: 1px solid #1E1D1D;
   clear: both;
   padding: 10px 0;
-}
 
-#snavigation li a.active {
-  color: #f23183;
-}
+  li a.active { color: $pink; }
 
-#snavigation p {
-  margin-bottom: 0;
+  p { margin-bottom: 0; }
 }
 
 ul.slinks {

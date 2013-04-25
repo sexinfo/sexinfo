@@ -90,4 +90,25 @@ $(".force-previous a").click(function() {
     return false; //Prevent browser jump to link anchor
 });
 
+//Form-Validation
+$('.webform-client-form').submit(function() {
+  var errors = false;
+
+  $(this).find("input:not([type='submit'])").each(function(i, field) {
+    if ($(field).val() === "") {
+      errors = true;
+      $(field).css('border', '1px solid #d34332');
+      $(field).css('color', '#d34332');
+      $(field).val("This is a required field.");
+    }
+    $(field).focus(function() {
+      $(field).val("");  
+    });
+  })
+
+
+  return !errors;
+});
+
+
 });

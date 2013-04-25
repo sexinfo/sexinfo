@@ -1,93 +1,93 @@
 /* ----------------------------------------------*/
-/* 10 - ASK THE SEXPERTS WEBFORM
+/* Ask the Sexperts webform
 /* ----------------------------------------------*/
 
 /*----- RESETS + BASIC LAYOUT -----*/
 #node-22 {
   width: 600px;
-}
 
-#node-22 .node-box {
-  // Container resets
-  background: none;
-  background-image: none;
-  border: none;
-}
-
-#node-22 .node-content {
-  @include border-radius;
-  background-color: #EFEFEF;
-  border: 1px solid #ccc;
-  padding: 25px 30px;
-}
-
-#node-22 .node-footer,
-.grippie {
-  // Get rid of the footer box ("Category: etc"), and the weird textarea drag thing
-  display: none;
-}
-
-
-/*----- FORM ELEMENTS-----*/
-#node-22 input:not([type="submit"]),
-#node-22 textarea {
-  @include border-box;
-  border: 1px solid #ccc;
-  font-size: 1.2em;
-  padding: 10px 5px;
-  width: 100%;
-
-  &:focus {
-    border: 1px solid #F23183;
-    outline: none;
-  }
-}
-
-#node-22 textarea {
-  font: 1.2em Arial, Helvetica, sans-serif;
-  overflow: auto; // Remove scrollbar in IE
-  width: 100%;
-}
-
-#node-22 input[type="submit"] {
-  @include border-radius;
-  background-color: #3099DF;
-  border: none;
-  color: white;
-  float: right;
-  font-size: 1.2em;
-  padding: 10px 15px;
-
-  &:hover {
+  .node-box {
+    // Container resets
     background: none;
-    background-color: #008AB8;
-    cursor: pointer;
+    background-image: none;
+    border: none;
   }
 
-  &:active {
-    background-color: #007298;
+  .node-content {
+    @include border-radius;
+    background-color: #EFEFEF;
+    border: 1px solid #ccc;
+    padding: 25px 30px;
+  }
+
+  /*----- FORM ELEMENTS-----*/
+  input:not([type="submit"]),
+  textarea {
+    @include border-box;
+    border: 1px solid #ccc;
+    font-size: 1.2em;
+    padding: 10px 5px;
+    width: 100%;
+
+    &:focus {
+      border: 1px solid $pink;
+      outline: none;
+    }
+  }
+
+  textarea {
+    font: 1.2em Arial, Helvetica, sans-serif;
+    overflow: auto; // Remove scrollbar in IE
+    width: 100%;
+  }
+
+  input[type="submit"] {
+    @include border-radius;
+    background-color: #3099DF;
+    border: none;
+    color: white;
+    float: right;
+    font-size: 1.2em;
+    padding: 10px 15px;
+
+    &:hover {
+      background: none;
+      background-color: #008AB8;
+      cursor: pointer;
+    }
+
+    &:active { background-color: #007298; }
+  }
+
+  label {
+    color: $pink;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+  }
+
+  .faq-btn {
+    @include border-radius;
+    background-color: $pink;
+    color: white;
+    display: block;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding: 12px 10px;
+    text-align: center;
+
+    border-bottom: 3px solid darken($pink, 16);
+
+    &:hover {
+      background-color: darken($pink, 10);
+      cursor: pointer;
+    }
   }
 }
 
-#node-22 label {
-  color: #F23183;
-  font-size: 1.2em;
-  margin-bottom: 5px;
-}
+#node-22 .node-footer { display: none; }
 
-#node-22 .faq-btn {
-  @include border-radius;
-  background-color: #F23183;
-  color: white;
-  display: block;
-  font-size: 1.3em;
-  font-weight: bold;
-  margin-bottom: 20px;
-  padding: 12px 10px;
-  text-align: center;
-
-  &:hover {
-    background-color: darken(#F23183, 10);
-    cursor: pointer;
-  }
+.grippie {
+  // Get rid of the textarea drag thing
+  // display: none;
 }

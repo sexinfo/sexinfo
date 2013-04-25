@@ -5,7 +5,7 @@
   margin: 0;
   padding: 0;
   width: auto;
-  background: lighten(#171615, 2); //url(images/header.gif) repeat-x top center;
+  background: lighten($dark-gray, 2); //url(images/header.gif) repeat-x top center;
   border-bottom:1px solid #4a4d4c;
   clear: both;
 }
@@ -71,7 +71,7 @@ input#edit-search-block-form--2 {
   width: 165px;
 
   &:focus {
-    color: #30393d;
+    color: $gray-text;
   }
 }
 
