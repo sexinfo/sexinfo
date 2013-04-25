@@ -95,22 +95,20 @@ img#logo-image {
 
 .social-buttons {
   float: right;
+	margin: 20px 10px 5px 0;
+	width: 284px;
 }
   .social-buttons a {
     float: left;
     height: 32px;
-    margin-right: 20px;
-    overflow: hidden;
-    text-indent: 100%;
+    margin-right: 30px;
     white-space: nowrap;
     width: 32px;
   }
-    .social-buttons a:last-child { margin: 0; }
-    /* http://dribbble.com/shots/112573-Mighty-Social-Icons */
-    .social-buttons .soc-fb  { background: url('./images/social/fb_32.png');  }
-    .social-buttons .soc-yt  { background: url('./images/social/yt_32.png');  }
-    .social-buttons .soc-rss { background: url('./images/social/rss_32.png'); }
-
+	
+	.social-buttons a:hover {
+		color: #B2B2B2;
+	};
 
 /* Navigation
 /* -------------- */

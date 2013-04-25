@@ -23,14 +23,15 @@
       <?php print render($page['search_area']); ?>
     </div>
 
-    <!-- <div class="social-buttons">
-      <a class="soc-yt" href="http://www.youtube.com/user/UCSBSexInfoOnline">YouTube</a>
-      <a class="soc-fb" href="https://www.facebook.com/SexInfoOnline">Facebook</a>
-
-      <div style="display: inline-block; margin-top: 3px">
-        <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FSexInfoOnline&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=false&amp;font&amp;colorscheme=dark&amp;action=like&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:35px;" allowTransparency="true"></iframe>
-      </div>
-    </div> --><!-- .social-buttons -->
+    <div class="social-buttons">
+	
+	
+	<a class="btn" href="https://www.facebook.com/SexInfoOnline"><i class="icon-2x icon-facebook-sign"></i></a>
+	<a class="btn" href="https://twitter.com/sexinfoonline"><i class="icon-2x icon-twitter-sign"></i></a>
+	<a class="btn" href="http://www.youtube.com/user/UCSBSexInfoOnline"><i class="icon-2x icon-facetime-video"></i></a>
+	<a class="btn" href="https://github.com/sexinfo/sexinfo"><i class="icon-2x icon-github-alt"></i></a>
+	
+    </div> <!-- .social-buttons -->
 
   </div> <!-- /header-container -->
 </div> <!-- /header -->
