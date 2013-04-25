@@ -7,7 +7,6 @@
  */
 
 /**
-<<<<<<< HEAD
  * Implements hook_install().
  */
 function truefalse_install() {
@@ -53,42 +52,12 @@ function truefalse_install() {
   ->condition('type', 'true_false')
   ->execute();
   */
-=======
- * Implementation of hook_update_N
- *
- * truefalse has actually changed its name from true_false. We try to fix any problems this might result in here...
- */
-function truefalse_update_6400() {
-  $results = array();
-
-  $results[] = update_sql("UPDATE {system} SET name = 'truefalse' WHERE name = 'true_false'");
-  $results[] = update_sql("UPDATE {node} SET type = 'truefalse' WHERE type = 'true_false'");
-  $results[] = update_sql("UPDATE {system} SET type = 'truefalse' WHERE type = 'true_false'");
-  $results[] = update_sql("UPDATE {vocabulary_node_types} SET type = 'truefalse' WHERE type = 'true_false'");
-
-  return $results;
-}
-
-/**
- * Implementation of hook_install().
- */
-function truefalse_install() {
-  if (!db_table_exists('quiz_truefalse_node')) {
-    drupal_install_schema('truefalse');
-  }
-  else {
-    db_query("UPDATE {system} SET name = 'truefalse' WHERE name = 'true_false'");
-    db_query("UPDATE {node} SET type = 'truefalse' WHERE type = 'true_false'");
-    db_query("UPDATE {system} SET type = 'truefalse' WHERE type = 'true_false'");
-    db_query("UPDATE {vocabulary_node_types} SET type = 'truefalse' WHERE type = 'true_false'");
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   }
   variable_set('node_options_truefalse', array('status'));
   cache_clear_all('autoload:', 'cache');
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_uninstall().
  */
 function truefalse_uninstall() {
@@ -98,16 +67,6 @@ function truefalse_uninstall() {
 
 /**
  * Implements hook_schema().
-=======
- * Implementation of hook_uninstall().
- */
-function truefalse_uninstall() {
-  drupal_uninstall_schema('truefalse');
-}
-
-/**
- * Implementation of hook_schema().
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function truefalse_schema() {
 

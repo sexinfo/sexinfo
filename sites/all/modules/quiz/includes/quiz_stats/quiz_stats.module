@@ -8,11 +8,7 @@
  */
 
 /**
-<<<<<<< HEAD
  * Implements hook_help().
-=======
- * Implementation of hook_help().
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function quiz_stats_help($path, $arg) {
   if ($path == 'admin/help#quiz_stats') {
@@ -21,7 +17,6 @@ function quiz_stats_help($path, $arg) {
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_permission().
  */
 function quiz_stats_permission() {
@@ -33,27 +28,13 @@ function quiz_stats_permission() {
       'title' => t('access author stats'),
     ),
   );
-=======
- * Implementation of hook_perm()
- */
-function quiz_stats_perm() {
-  $permission = array('access user stats', 'access author stats');
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   return $permission;
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_menu().
  */
 function quiz_stats_menu() {
-=======
- * Implementation of hook_menu()
- */
-function quiz_stats_menu() {
-  global $user;
-  $items = array();
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   $items['admin/quiz/reports/stats/creator'] = array(
     'title' => 'Quiz Statistics',
     'description' => 'Generates a report on quiz results for quiz creators.',
@@ -81,11 +62,7 @@ function quiz_stats_menu() {
     'page arguments' => array(3),
     'access callback' => 'quiz_stats_validate_vid',
     'access arguments' => array(1, 3),
-<<<<<<< HEAD
     'type' => MENU_CALLBACK,
-=======
-    'type' => MENU_LOCAL_TASK,
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     'weight' => 4,
   );
   $items['user/%/stats'] = array(
@@ -103,17 +80,12 @@ function quiz_stats_menu() {
     'page callback' => 'quiz_stats_get_adv_stats',
     'page arguments' => array(3, 1),
     'access arguments' => array('access user stats'),
-<<<<<<< HEAD
     'type' => MENU_CALLBACK,
-=======
-    'type' => MENU_LOCAL_TASK,
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   );
   return $items;
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_theme().
  */
 function quiz_stats_theme() {
@@ -147,40 +119,6 @@ function quiz_stats_theme() {
     'quiz_stats_charts' => array(
       'variables' => array('charts' => NULL),
       'path' => $path,
-=======
- * Implementation of hook_theme().
- */
-function quiz_stats_theme() {
-  return array(
-    'quiz_stats_get_basic_stats' => array(
-      'arguments' => array('results' => NULL),
-      'file' => 'quiz_stats.admin.inc',
-    ),
-    'date_vs_takeup_count' => array(
-      'arguments' => array('takeup' => NULL),
-      'file' => 'quiz_stats.admin.inc',
-    ),
-    'get_quiz_status_chart' => array(
-      'arguments' => array('quiz' => NULL),
-      'file' => 'quiz_stats.admin.inc',
-    ),
-    'quiz_top_scorers' => array(
-      'arguments' => array('scorer' => NULL),
-      'file' => 'quiz_stats.admin.inc',
-    ),
-    'quiz_grade_range' => array(
-      'arguments' => array('range' => NULL),
-      'file' => 'quiz_stats.admin.inc',
-    ),
-    'quiz_stats_revision_selector' => array(
-      'arguments' => array('content' => NULL),
-      'path' => drupal_get_path('module', 'quiz_stats') . '/theme',
-      'template' => 'quiz_stats_revision_selector',
-    ),
-    'quiz_stats_charts' => array(
-      'arguments' => array('charts' => NULL),
-      'path' => drupal_get_path('module', 'quiz_stats') . '/theme',
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       'template' => 'quiz_stats_charts',
     ),
   );
@@ -203,20 +141,5 @@ function quiz_stats_validate_vid($quiz, $vid) {
   if (!user_access('access author stats')) {
     return FALSE;
   }
-<<<<<<< HEAD
   return $quiz->nid == db_query('SELECT n.nid FROM {node} n INNER JOIN {node_revision} nr ON (n.nid = nr.nid) WHERE nr.vid = :vid', array(':vid' => $vid))->fetchField();
 }
-=======
-  $sql = db_rewrite_sql(
-    'SELECT n.nid
-     FROM {node} n
-     WHERE n.nid = (
-       SELECT nr.nid
-       FROM {node_revisions} nr
-       WHERE nr.vid = %d
-     )'
-  );
-  $nid = db_result(db_query($sql, $vid));
-  return $quiz->nid == $nid;
-}
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2

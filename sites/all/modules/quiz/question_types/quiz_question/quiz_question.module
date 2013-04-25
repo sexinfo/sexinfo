@@ -13,11 +13,7 @@
 define('QUIZ_QUESTION_NUM_LATEST', 10);
 
 /**
-<<<<<<< HEAD
  * Implements hook_help().
-=======
- * Implementation of hook_help().
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function quiz_question_help($path, $args) {
   if ($path == 'admin/help#quiz_quesion') {
@@ -26,24 +22,7 @@ function quiz_question_help($path, $args) {
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_menu().
-=======
- * Implementation of hook_autoload_info().
- */
-function quiz_question_autoload_info() {
-  return array(
-  // Base interfaces and classes:
-    'QuizQuestion' => array('file' => 'quiz_question.core.inc'),
-    'AbstractQuizQuestion' => array('file' => 'quiz_question.core.inc'),
-    'QuizQuestionResponse' => array('file' => 'quiz_question.core.inc'),
-    'AbstractQuizQuestionResponse' => array('file' => 'quiz_question.core.inc'),
-  );
-}
-
-/**
- * Implementation of hook_menu().
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function quiz_question_menu() {
   $items = array();
@@ -68,28 +47,16 @@ function quiz_question_menu() {
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_theme().
-=======
- * Implementation of hook_theme().
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function quiz_question_theme() {
   return array(
     'quiz_question_creation_form' => array(
-<<<<<<< HEAD
       'render element' => 'form',
       'file' => 'quiz_question.theme.inc',
     ),
     'quiz_question_navigation_form' => array(
       'render element' => 'form',
-=======
-      'arguments' => array('form' => NULL),
-      'file' => 'quiz_question.theme.inc',
-    ),
-    'quiz_question_navigation_form' => array(
-      'arguments' => array('form' => NULL),
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       'file' => 'quiz_question.theme.inc',
     ),
   );
@@ -97,7 +64,6 @@ function quiz_question_theme() {
 
 
 /**
-<<<<<<< HEAD
  * Implements hook_node_info().
  */
 function quiz_question_node_info() {
@@ -149,47 +115,6 @@ function quiz_question_node_access($node, $op, $account) {
   }
   // Returning nothing from this function would have the same effect.
   return NODE_ACCESS_IGNORE;
-=======
- * Implementation of hook_node_info().
- */
-function quiz_question_node_info() {
-  $types = _quiz_question_get_implementations();
-  $info = array();
-  $defaults = array(
-    'module' => 'quiz_question',
-    'has_body' => TRUE,
-    'has_title' => TRUE,
-    'body_label' => t('Question'),
-  );
-  foreach ($types as $type => $definition) {
-    $node_info = array(
-      'name' => $definition['name'],
-      'description' => $definition['description']
-    );
-    $info[$type] = $node_info + $defaults;
-  }
-  return $info;
-}
-
-/**
- * Implementation of hook_access().
- */
-function quiz_question_access($op, $node, $account) {
-  switch ($op) {
-    case 'view':
-      return user_access('view quiz question outside of a quiz');
-    case 'create':
-      return user_access('create quiz', $account);
-    case 'update':
-      if (user_access('edit any quiz', $account) || user_access('edit own quiz', $account) && ($account->uid == $node->uid)) {
-        return TRUE;
-      }
-    case 'delete':
-      if (user_access('delete any quiz', $account) || user_access('delete own quiz', $account) && ($account->uid == $node->uid)) {
-        return TRUE;
-      }
-  }
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 }
 
 /**
@@ -204,7 +129,6 @@ function quiz_question_access($op, $node, $account) {
  */
 function quiz_question_access_to_score($vid, $rid) {
   global $user;
-<<<<<<< HEAD
   $sql = 'SELECT * FROM {quiz_node_results_answers} WHERE result_id = :result_id AND question_vid = :question_vid';
   $answer = db_query($sql, array(':result_id' => $rid, ':question_vid' => $vid))->fetch();
   if (!$answer) {
@@ -224,49 +148,20 @@ function quiz_question_access_to_score($vid, $rid) {
             JOIN {quiz_node_results} qnr ON (r.nid = qnr.nid)
             WHERE qnr.result_id = :result_id
             ', array(':result_id' => $rid))->fetchField() == $user->uid;
-=======
-  $sql = 'SELECT *
-          FROM {quiz_node_results_answers}
-          WHERE result_id = %d AND question_vid = %d';
-  if (!db_fetch_object(db_query($sql, $rid, $vid)))
-    return FALSE;
-  if (user_access('score any quiz')) {
-    return TRUE;
-  }
-  if (user_access('score own quiz')) {
-    $sql = 'SELECT r.uid
-            FROM {node_revisions} r
-            WHERE r.nid = (
-              SELECT nid
-              FROM {quiz_node_results}
-              WHERE result_id = %d
-            )';
-    return db_result(db_query($sql, $rid)) == $user->uid;
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   }
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_form().
  */
 function quiz_question_form(&$node, &$form_state) {
-=======
- * Implementation of hook_form().
- */
-function quiz_question_form(&$node, $form_state) {
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   $question = _quiz_question_get_instance($node);
   $form = $question->getNodeForm($form_state);
   return $form;
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_validate().
-=======
- * Implementation of hook_validate().
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function quiz_question_validate($node, &$form) {
   // Check to make sure that there is a question.
@@ -279,16 +174,11 @@ function quiz_question_validate($node, &$form) {
 /**
  * Get the form to show to the quiz taker.
  */
-<<<<<<< HEAD
 function quiz_question_answering_form($form, $form_state, $node, $include_nid_in_id = FALSE) {
-=======
-function quiz_question_answering_form($form_state, $node, $include_nid_in_id = FALSE) {
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   $question = _quiz_question_get_instance($node);
   $form = $question->getAnsweringForm($form_state, isset($node->rid) ? $node->rid : NULL);
   $quiz = quiz_type_access_load(arg(1));
 
-<<<<<<< HEAD
   $form['#attributes']['class'] = array('answering-form');
 
   $is_last = _quiz_is_last_question();
@@ -310,27 +200,14 @@ function quiz_question_answering_form($form_state, $node, $include_nid_in_id = F
     }
   }
 
-=======
-  $form['#attributes']['class'] = 'answering-form';
-
-  $is_last = _quiz_is_last_question();
-  $form['navigation']['#theme'] = 'quiz_question_navigation_form';
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   if (!empty($quiz->backwards_navigation) && !empty($node->question_number)) {
     $form['navigation']['back'] = array(
       '#type' => 'submit',
       '#value' => t('Back'),
-<<<<<<< HEAD
       '#attributes' => array('class' => array('q-back-button')),
     );
     if ($is_last) {
       $form['navigation']['#last'] = TRUE;
-=======
-      '#attributes' => array('class' => 'q-back-button'),
-    );
-    if ($is_last) {
-      drupal_set_message(t('This is the last question. If you would like to go back and check some of your answers, click "Back", otherwise click the "Finish" button.'), 'status', FALSE);
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     }
   }
 
@@ -339,19 +216,11 @@ function quiz_question_answering_form($form_state, $node, $include_nid_in_id = F
     '#type' => 'submit',
     '#value' => $is_last ? t('Finish') : t('Next'),
   );
-<<<<<<< HEAD
   if ($quiz->allow_skipping) {
     $form['navigation']['op']  = array(
       '#type' => 'submit',
       '#value' => $is_last ? t('Leave blank and finish') : t('Leave blank'),
       '#attributes' => array('class' => array('q-skip-button')),
-=======
-  if ($node->allow_skipping) {
-    $form['navigation']['op']  = array(
-      '#type' => 'submit',
-      '#value' => $is_last ? t('Leave blank and finish') : t('Leave blank'),
-      '#attributes' => array('class' => 'q-skip-button'),
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     );
     if ($quiz->allow_jumping) {
       $form['jump_to_question'] = array(
@@ -372,34 +241,15 @@ function quiz_question_answering_form($form_state, $node, $include_nid_in_id = F
  *  Content array
  */
 function _quiz_question_teaser_content($node) {
-<<<<<<< HEAD
   $content['question_type'] = array(
     '#markup' => '<div class="question_type_name">' . node_type_get_type($node)->name . '</div>',
     '#weight' => -100,
   );
-=======
-  $content['question'] = array(
-    '#type' => 'markup',
-    '#value' => check_markup($node->body, $node->format, FALSE),
-  );
-
-  $type = node_get_types('type', $node);
-  $content['question_type'] = array(
-    '#type'  => 'markup',
-    '#value' => '<div class="question_type_name">' . $type->name . '</div>',
-    '#weight' => -1,
-  );
-
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   return $content;
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_evaluate_question().
-=======
- * Implementation of Quiz's hook_evaluate_question().
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  *
  * @param $question
  *  The question node
@@ -411,11 +261,7 @@ function _quiz_question_teaser_content($node) {
  *  Object with nid, vid, rid, score, is_correct flags set.
  */
 function quiz_question_evaluate_question($question, $result_id, $answer = NULL) {
-<<<<<<< HEAD
   if (empty($answer) && isset($_POST['tries'])) {
-=======
-  if (empty($answer)) {
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     // FIXME this use of POST array is hacky. We will try to use FAPI mor accurately in Quiz 5.x
     $answer = $_POST['tries'];
   }
@@ -437,11 +283,7 @@ function quiz_question_evaluate_question($question, $result_id, $answer = NULL) 
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_skip_question().
-=======
- * Implementation of quiz hook_skip_question().
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function quiz_question_skip_question($question, $result_id) {
   unset($_POST['tries']); // Unset any answer that might have been set.
@@ -455,21 +297,16 @@ function quiz_question_skip_question($question, $result_id) {
   $response->vid = $question->vid;
   $response->rid = $result_id;
   $response->is_skipped = TRUE;
-<<<<<<< HEAD
   if (isset($_POST['is_doubtful'])) {
     $response->is_doubtful = $_POST['is_doubtful'];
   }
   else {
     $response->is_doubtful = db_query('SELECT is_doubtful FROM {quiz_node_results_answers} WHERE result_id = :result_id AND question_nid = :question_nid AND question_vid = :question_vid', array(':result_id' => $result_id, ':question_nid' => $question->nid, ':question_vid' => $question->vid))->fetchField();
   }
-=======
-
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   return $response;
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_list_questions().
  */
 function quiz_question_list_questions($count = 0, $offset = 0) {
@@ -482,14 +319,6 @@ function quiz_question_list_questions($count = 0, $offset = 0) {
   /*
   $sql = "SELECT n.nid, n.vid, r.body, r.format FROM {node} AS n
     INNER JOIN {node_revision} AS r USING(vid)
-=======
- * Implementation of hook_list_questions().
- */
-function quiz_question_list_questions($count = 0, $offset = 0) {
-  $sql = "SELECT n.nid, n.vid, r.body, r.format
-    FROM {node} AS n
-    INNER JOIN {node_revisions} AS r USING(vid)
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     WHERE n.type IN (%s) ORDER BY n.type, n.changed";
   $types = array();
   foreach (array_keys(_quiz_question_get_implementations()) as $key) {
@@ -499,15 +328,11 @@ function quiz_question_list_questions($count = 0, $offset = 0) {
 
   if ($count == 0) {
     // Return all results
-<<<<<<< HEAD
     // TODO Please convert this statement to the D7 database API syntax.
-=======
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     $result = db_query(db_rewrite_sql($sql), $type);
   }
   else {
     // return only $count results
-<<<<<<< HEAD
     // TODO Please convert this statement to the D7 database API syntax.
     $result = db_query_range(db_rewrite_sql($sql), $type);
   }
@@ -522,14 +347,6 @@ function quiz_question_list_questions($count = 0, $offset = 0) {
   $questions = array();
   while ($question = $query->fetch()) {
     $question->question = check_markup($question->body, $question->body['und'][0]['format']);
-=======
-    $result = db_query_range(db_rewrite_sql($sql), $type, $offset, $count);
-  }
-
-  $questions = array();
-  while ($question = db_fetch_object($result)) {
-    $question->question = check_markup($question->body, $question->format, FALSE);
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     $questions[] = $question;
   }
   return $questions;
@@ -553,24 +370,17 @@ function quiz_question_get_report($nid, $vid, $rid) {
   return $response_instance->question;
 }
 
-<<<<<<< HEAD
 /**
  * @todo Please document this function.
  * @see http://drupal.org/node/1354
  */
-=======
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 function quiz_question_has_been_answered($node) {
   $question_instance = _quiz_question_get_instance($node, true);
   return $question_instance->hasBeenAnswered();
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_quiz_question_score().
-=======
- * Implementation of hook_quiz_question_score().
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function quiz_question_quiz_question_score($quiz, $question_nid, $question_vid = NULL, $rid = NULL) {
   if (!isset($quiz) && !isset($rid)) {
@@ -583,14 +393,9 @@ function quiz_question_quiz_question_score($quiz, $question_nid, $question_vid =
   $dummy_node->vid = $question_vid;
 
   $question = _quiz_question_get_instance($dummy_node, TRUE);
-<<<<<<< HEAD
   if (!$question) {
     return FALSE;
   }
-=======
-  if (!$question)
-    return FALSE;
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 
   $score = new stdClass();
   $score->possible = $question->getMaximumScore();
@@ -607,11 +412,7 @@ function quiz_question_quiz_question_score($quiz, $question_nid, $question_vid =
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_delete_result().
-=======
- * Implementation of hook_delete_result
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  *
  * @param $rid
  *  Result id
@@ -633,7 +434,6 @@ function quiz_question_delete_result($rid, $nid, $vid) {
 /**
  * Get the configuration form for all enabled question types.
  */
-<<<<<<< HEAD
 function quiz_question_config($form, $context) {
   $q_types = _quiz_question_get_implementations();
   $form = array();
@@ -641,29 +441,16 @@ function quiz_question_config($form, $context) {
   // Go through all question types and merge their config forms
   foreach ($q_types as $type => $values) {
     $function = $type . '_config';
-=======
-function quiz_question_config($context) {
-  $q_types = _quiz_question_get_implementations();
-  $form = array();
-  // Go through all question types and merge their config forms
-  foreach ($q_types as $type => $values) {
-    $function = $type .'_config';
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     if ($admin_form = $function()) {
       $form[$type] = $admin_form;
       $form[$type]['#type'] = 'fieldset';
       $form[$type]['#title'] = $values['name'];
       $form[$type]['#collapsible'] = TRUE;
       $form[$type]['#collapsed'] = TRUE;
-<<<<<<< HEAD
       if (isset($admin_form['#validate'])) {
         $form['#validate'] = array_merge($form['#validate'], $admin_form['#validate']);
 	unset($form[$type]['#validate']);
       }
-=======
-      if (isset($admin_form['#validate']))
-        $form['#validate'][] = $admin_form['#validate'];
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     }
   }
   return system_settings_form($form);
@@ -672,7 +459,6 @@ function quiz_question_config($context) {
 // NODE API
 
 /**
-<<<<<<< HEAD
  * Implements hook_node_revision_delete().
  */
 function quiz_question_node_revision_delete($node) {
@@ -699,37 +485,10 @@ function quiz_question_node_presave($node) {
         }
         else {
           $node->title = $markup;
-=======
- * Implementation of hook_nodeapi().
- */
-function quiz_question_nodeapi(&$node, $op) {
-  // If a question is deleted it should also be removed from quizzes it belongs to.
-  if ($op == 'delete revision') {
-    $q_types = _quiz_question_get_implementations();
-    foreach ($q_types as $q_type => $info) {
-      if ($node->type == $q_type) {
-        _quiz_delete_question($node, TRUE); // true for only this version
-      }
-    }
-  }
-  // If a question don't have a title we autogenerate it from the question body
-  elseif ($op == 'presave') {
-    $q_types = _quiz_question_get_implementations();
-    foreach ($q_types as $q_type => $info) {
-      if ($node->type == $q_type) {
-        if (drupal_strlen($node->title) == 0 || !user_access('edit question titles')) {
-          if (drupal_strlen(strip_tags(check_markup($node->body, $node->format, FALSE))) > variable_get('quiz_autotitle_length', 50)) {
-            $node->title = drupal_substr(strip_tags(check_markup($node->body, $node->format, FALSE)), 0, variable_get('quiz_autotitle_length', 50) - 3) . '...';
-          }
-          else {
-            $node->title = strip_tags(check_markup($node->body, $node->format, FALSE));
-          }
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         }
       }
     }
   }
-<<<<<<< HEAD
 }
 
 /**
@@ -759,28 +518,11 @@ function quiz_question_node_delete($node) {
   // Make sure the latest quizzes table is maintained when a quiz changes
   if ($node->type == 'quiz') {
     quiz_question_remove_latest_quizzes($node->nid);
-=======
-  // Make sure the latest quizzes table is maintained when a quiz changes
-  elseif ($node->type == 'quiz') {
-    switch ($op) {
-      case 'insert':
-      case 'update':
-        quiz_question_refresh_latest_quizzes($node->nid);
-        break;
-      case 'delete':
-        quiz_question_remove_latest_quizzes($node->nid);
-        break;
-    }
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   }
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_insert().
-=======
- * Implementation of hook_insert()
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function quiz_question_insert(stdClass $node) {
   _quiz_question_get_instance($node)->save(TRUE);
@@ -790,18 +532,11 @@ function quiz_question_insert(stdClass $node) {
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_view().
  */
 //function quiz_question_view($node, $teaser = FALSE, $page = FALSE) {
 function quiz_question_view($node, $view_mode) {
   if ($view_mode == 'search_index' && !variable_get('quiz_index_questions', 1)) {
-=======
- * Implementation of hook_view()
- */
-function quiz_question_view($node, $teaser = FALSE, $page = FALSE) {
-  if ($node->build_mode == NODE_BUILD_SEARCH_INDEX && !variable_get('quiz_index_questions', 1)) {
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     $node->body = '';
     $node->content = array();
     $node->title = '';
@@ -809,20 +544,12 @@ function quiz_question_view($node, $teaser = FALSE, $page = FALSE) {
     return $node;
   }
   $content = '';
-<<<<<<< HEAD
 
   if (_quiz_is_taking_context()) {
-=======
-  if ($teaser) {
-    $content = _quiz_question_teaser_content($node);
-  }
-  elseif (_quiz_is_taking_context()) {
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     /*
      * @todo: I see no reason why this should be a part of view anymore.
      * In quiz 5 we should stop using hook_view to view the answering form
      */
-<<<<<<< HEAD
     $form = drupal_get_form('quiz_question_answering_form', $node);
     $form_markup = drupal_render($form);
 
@@ -837,54 +564,24 @@ function quiz_question_view($node, $teaser = FALSE, $page = FALSE) {
     // normal node view
     //$question = _quiz_question_get_instance($node, TRUE);
     $content = _quiz_question_get_instance($node, TRUE)->getNodeView();
-=======
-    $form_markup = drupal_get_form('quiz_question_answering_form', $node);
-  }
-  else {
-    // normal node view
-    $question = _quiz_question_get_instance($node, TRUE);
-    $content = $question->getNodeView();
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   }
 
   // put it into the node->content
   if (!empty($content)) {
-<<<<<<< HEAD
     $node->content = (isset($node->content)) ? $node->content + $content : $content;
   }
-=======
-    if (isset($node->content)) {
-      $node->content += $content;
-    }
-    else {
-      $node->content = $content;
-    }
-  }
-  if (!empty($form_markup)) {
-    $node->content['body']['#value'] = $form_markup;
-  }
-
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   return $node;
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_update().
-=======
- * Implementation of hook_update().
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function quiz_question_update($node) {
   _quiz_question_get_instance($node)->save();
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_delete().
-=======
- * Implementation of hook_delete().
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function quiz_question_delete(&$node) {
   _quiz_delete_question($node, FALSE);
@@ -907,7 +604,6 @@ function _quiz_delete_question(&$node, $only_this_version) {
   // @todo reconsider this QUESTION_NEVER status, since the node is actually gone
 
   // then remove it from {quiz_node_relationship} linking table
-<<<<<<< HEAD
   //$base_sql = "UPDATE {quiz_node_relationship} SET question_status = " . QUESTION_NEVER;
   $select_sql = 'SELECT parent_vid FROM {quiz_node_relationship}';
   if ($only_this_version) {
@@ -933,25 +629,10 @@ function _quiz_delete_question(&$node, $only_this_version) {
   $quizzes_to_update = array();
   while ($quizzes_to_update[] = $res->fetchField()) {
   }
-=======
-  $base_sql = "UPDATE {quiz_node_relationship} SET question_status = ". QUESTION_NEVER;
-  $select_sql = "SELECT parent_vid FROM {quiz_node_relationship}";
-  if ($only_this_version) {
-    $filter_sql = ' WHERE child_nid = %d AND child_vid = %d';
-  }
-  else {
-    $filter_sql = ' WHERE child_nid = %d';
-  }
-  $res = db_query($select_sql . $filter_sql, $node->nid, $node->vid);
-  db_query($base_sql . $filter_sql, $node->nid, $node->vid);
-  $quizzes_to_update = array();
-  while ($quizzes_to_update[] = db_result($res)) {}
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   quiz_update_max_score_properties($quizzes_to_update);
 }
 
 /**
-<<<<<<< HEAD
  * Implements hook_load().
  */
 function quiz_question_load($nodes) {
@@ -961,12 +642,6 @@ function quiz_question_load($nodes) {
       $node->$property = $value;
     }
   }
-=======
- * Implementation of hook_load().
- */
-function quiz_question_load($node) {
-  return _quiz_question_get_instance($node, TRUE)->getNodeProperties();
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 }
 
 // END NODE API
@@ -998,24 +673,12 @@ function _quiz_question_get_instance(&$node, $use_cached = FALSE) {
     // If $node don't have a type it is a dummy node
     if (!isset($node->type)) {
       // To substanitally improve performance(especially on the result page) we avoid node_load()...
-<<<<<<< HEAD
       $sql = 'SELECT n.type, r.nid, r.vid, r.title, p.max_score
               FROM {node_revision} r
               JOIN {node} n ON r.nid = n.nid
               JOIN {quiz_question_properties} p ON r.vid = p.vid
               WHERE r.vid = :vid';
       $node = db_query($sql, array(':vid' => $node->vid))->fetch();
-=======
-      $sql = 'SELECT n.type, r.nid, r.vid, r.title, r.body, p.max_score, r.format
-              FROM {node_revisions} r
-              JOIN {node} n
-              ON r.nid = n.nid
-              JOIN {quiz_question_properties} p
-              ON r.vid = p.vid
-              WHERE r.vid = %d';
-      $res = db_query($sql, $node->vid);
-      $node = db_fetch_object($res);
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       $using_dummy_node = TRUE;
     }
     $name = $node->type;
@@ -1079,7 +742,6 @@ function _quiz_question_response_get_instance($rid, $question, $answer = NULL, $
   if (is_object($question) && isset($quiz_responses[$rid][$question->vid])) {
     // We refresh the question node in case it has been changed since we cached the response
     $quiz_responses[$rid][$question->vid]->refreshQuestionNode($question);
-<<<<<<< HEAD
     if ($quiz_responses[$rid][$question->vid]->is_skipped !== FALSE) {
       return $quiz_responses[$rid][$question->vid];
     }
@@ -1088,16 +750,6 @@ function _quiz_question_response_get_instance($rid, $question, $answer = NULL, $
     if ($quiz_responses[$rid][$vid]->is_skipped !== FALSE) {
       return $quiz_responses[$rid][$vid];
     }
-=======
-    if ($quiz_responses[$rid][$question->vid]->is_skipped !== FALSE)
-      // Return a cached instance of the response
-      return $quiz_responses[$rid][$question->vid];
-  }
-  elseif (isset($quiz_responses[$rid][$vid])) {
-    if ($quiz_responses[$rid][$vid]->is_skipped !== FALSE)
-      // Return a cached instance of the response
-      return $quiz_responses[$rid][$vid];
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   }
   if (!isset($quiz_responses[$rid])) {
     // Prepare to cache responses for this result id
@@ -1110,13 +762,9 @@ function _quiz_question_response_get_instance($rid, $question, $answer = NULL, $
     $dummy_node->vid = $vid;
     $question = _quiz_question_get_instance($dummy_node, TRUE)->node;
   }
-<<<<<<< HEAD
   if (!$question) {
     return FALSE;
   }
-=======
-  if (!$question) return FALSE;
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   $info = _quiz_question_get_implementations();
   $constructor = $info[$question->type]['response provider'];
   $to_return = new $constructor($rid, $question, $answer);
@@ -1165,7 +813,6 @@ function _quiz_question_get_implementations($name = NULL, $reset = FALSE) {
 function quiz_question_refresh_latest_quizzes($nid) {
   global $user;
   // Delete entry if it allready exists
-<<<<<<< HEAD
   db_delete('quiz_question_latest_quizzes')
     ->condition('uid', $user->uid)
     ->condition('quiz_nid', $nid)
@@ -1194,27 +841,6 @@ function quiz_question_refresh_latest_quizzes($nid) {
       ->condition('id', $min_id, '<')
       ->condition('uid', $user->uid)
       ->execute();
-=======
-  $sql = 'DELETE FROM {quiz_question_latest_quizzes}
-          WHERE uid = %d AND quiz_nid = %d';
-  db_query($sql, $user->uid, $nid);
-  // Inserts as new entry to get new id. Latest quizzes are ordered by id(descending)
-  $sql = 'INSERT INTO {quiz_question_latest_quizzes}
-          (uid, quiz_nid)
-          VALUES (%d, %d)';
-  db_query($sql, $user->uid, $nid);
-  // If we have to many entries for current user, delete the oldest entries...
-  $sql = 'SELECT COUNT(*)
-          FROM {quiz_question_latest_quizzes}
-          WHERE uid = %d';
-  $count = db_result(db_query($sql, $user->uid));
-  $n_to_delete = (int)$count - QUIZ_QUESTION_NUM_LATEST;
-  if ($n_to_delete > 0) {
-    $sql = 'DELETE FROM {quiz_question_latest_quizzes}
-            WHERE uid = %d
-            ORDER BY id LIMIT %d';
-    db_query($sql, $user->uid, $n_to_delete);
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   }
 }
 
@@ -1225,15 +851,9 @@ function quiz_question_refresh_latest_quizzes($nid) {
  *   the nid of a quiz that shall be removed
  */
 function quiz_question_remove_latest_quizzes($nid) {
-<<<<<<< HEAD
   db_delete('quiz_question_latest_quizzes')
   ->condition('quiz_nid', $nid)
   ->execute();
-=======
-  $sql = 'DELETE FROM {quiz_question_latest_quizzes}
-          WHERE quiz_nid = %d';
-  db_query($sql, $nid);
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 }
 
 /**
@@ -1247,7 +867,6 @@ function quiz_question_remove_latest_quizzes($nid) {
  *  Max score(int)
  */
 function quiz_question_get_max_score($nid, $vid) {
-<<<<<<< HEAD
   return db_query('SELECT max_score
           FROM {quiz_question_properties}
           WHERE nid = :nid AND vid = :vid', array(':nid' => $nid, ':vid' => $vid))->fetchField();
@@ -1267,44 +886,11 @@ function quiz_question_field_extra_fields() {
         'weight' => -3,
       );
     }
-=======
-  $sql = 'SELECT max_score
-          FROM {quiz_question_properties}
-          WHERE nid = %d AND vid = %d';
-  return db_result(db_query($sql, $nid, $vid));
-}
-
-/**
- * Implementation of hook_content_extra_fields(cck)
- */
-function quiz_question_content_extra_fields($type_name) {
-  $extra = array();
-  $question_types = array_keys(_quiz_question_get_implementations());
-  if (in_array($type_name, $question_types)) {
-    $extra['add_directly'] = array(
-      'label' => t('Add directly'),
-      'description' => t('Fieldset for adding a question directly into quizzes'),
-      'weight' => -3,
-    );
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   }
   return $extra;
 }
 
 /**
-<<<<<<< HEAD
-=======
- * Implementation of hook_content_extra_fields_alter(cck)
- */
-function quiz_question_content_extra_fields_alter(&$extras, $type_name) {
-  $question_types = array_keys(_quiz_question_get_implementations());
-  if (in_array($type_name, $question_types)) {
-    $extras['body_field']['weight'] = -15;
-  }
-}
-
-/**
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  * Returns a result report for a question response.
  *
  * The retaurned value is a form array because in some contexts the scores in the form
@@ -1323,7 +909,6 @@ function quiz_question_report_form($question, $showpoints, $showfeedback, $allow
   $response_instance = _quiz_question_response_get_instance($answer['result_id'], $question, $answer);
   // If need to specify the score weight if it isn't already specified.
   if (!isset($response_instance->question->score_weight)) {
-<<<<<<< HEAD
     $vid = db_query('SELECT vid FROM {quiz_node_results}
       WHERE result_id = :rid',
       array(':rid' => $answer['result_id']))
@@ -1367,31 +952,3 @@ function quiz_question_add_body_field($type) {
   $instance['widget']['settings']['rows'] = 6;
   field_update_instance($instance);
 }
-=======
-    $sql = 'SELECT qnr.max_score
-            FROM {quiz_node_relationship} qnr
-            WHERE qnr.child_vid = %d
-            AND qnr.parent_vid = (
-              SELECT vid
-              FROM {quiz_node_results}
-              WHERE result_id = %d
-            )';
-    $qnr_max_score = db_result(db_query($sql, $question->vid, $answer['result_id']));
-    if ($qnr_max_score === FALSE) {
-      $qnr_max_score = db_result(db_query(
-        'SELECT qt.max_score
-         FROM {quiz_node_results} qnr
-         JOIN {quiz_node_results_answers} qnra ON (qnr.result_id = qnra.result_id)
-         JOIN {quiz_terms} qt ON (qt.vid = qnr.vid AND qt.tid = qnra.tid)
-         WHERE qnr.result_id = %d AND qnra.question_nid = %d AND qnra.question_vid = %d',
-        $answer['result_id'], $question->nid, $question->vid
-      ));
-    }
-    if ($qnr_max_score == 0) $weight = 0;
-    else $weight = $qnr_max_score / $response_instance->question->max_score;
-    $response_instance->question->score_weight = $weight;
-  }
-
-  return $response_instance->getReportForm($showpoints, $showfeedback, $allow_scoring);
-}
->>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
