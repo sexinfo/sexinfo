@@ -15,6 +15,12 @@ function quiz_views_handlers() {
       'quiz_views_handler_field_takes' => array(
         'parent' => 'views_handler_field',
       ),
+<<<<<<< HEAD
+      'quiz_views_handler_field_node_link_take' => array(
+        'parent' => 'views_handler_field_node_link',
+      ),
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       'quiz_views_handler_field_time' => array(
         'parent' => 'views_handler_field',
       ),
@@ -85,7 +91,11 @@ function quiz_views_data() {
           'field' => 'nid',
           'type' => 'INNER',
         ),
+<<<<<<< HEAD
+        'node_revision' => array(
+=======
         'node_revisions' => array(
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
           'left_field' => 'vid',
           'field' => 'vid',
           'type' => 'INNER',
@@ -104,7 +114,11 @@ function quiz_views_data() {
       'argument' => array(
         'handler' => 'quiz_views_handler_argument_quiz_nid',
         'name field' => 'title',
+<<<<<<< HEAD
+        'name table' => 'node_revision',
+=======
         'name table' => 'node_revisions',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'numeric' => TRUE,
         'validate type' => 'vid',
         'nid field' => 'nid',
@@ -134,14 +148,22 @@ function quiz_views_data() {
       'argument' => array(
         'handler' => 'views_handler_argument_numeric',
         'name field' => 'title',
+<<<<<<< HEAD
+        'name table' => 'node_revision',
+=======
         'name table' => 'node_revisions',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'numeric' => TRUE,
         'validate type' => 'vid',
       ),
       // Related to NODE
       'relationship' => array(
         'handler' => 'views_handler_relationship',
+<<<<<<< HEAD
+        'base' => 'node_revision',
+=======
         'base' => 'node_revisions',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'field' => 'vid',
         'label' => t('quiz node revision'),
       ),
@@ -270,6 +292,18 @@ function quiz_views_data() {
       ),
       'sort' => array('handler' => 'views_handler_sort'),
     ),
+<<<<<<< HEAD
+    'take' => array(
+      'field' => array(
+        'title' => t('Take quiz link'),
+        'help' => t('Allows users to take the quiz if available.'),
+        'handler' => 'quiz_views_handler_field_node_link_take',
+        'click sortable' => TRUE,
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+    ),
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     'tid' => array(
       'title' => t('Term ID'),
       'help' => t('The term ID used to select questions based on taxonomy.'),
@@ -286,13 +320,21 @@ function quiz_views_data() {
       // Related to TERM
       'relationship' => array(
         'handler' => 'views_handler_relationship',
+<<<<<<< HEAD
+        'base' => 'taxonomy_term_data',
+=======
         'base' => 'term_data',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'field' => 'tid',
         'label' => t('term'),
       ),
     ), // End tid
   ); // End quiz_node_properties
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   $data['quiz_node_relationship'] = array(
     'table' => array(
       'group' => t('Quiz Questions'),
@@ -331,7 +373,11 @@ function quiz_views_data() {
       'relationship' => array(
         'handler' => 'views_handler_relationship',
         'base' => 'node',
+<<<<<<< HEAD
+        'field' => 'parent_nid',
+=======
         'field' => 'nid',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'label' => t('Quiz node id'),
       ),
       'sort' => array(
@@ -353,8 +399,13 @@ function quiz_views_data() {
       ),
       'relationship' => array(
         'handler' => 'views_handler_relationship',
+<<<<<<< HEAD
+        'base' => 'node_revision',
+        'field' => 'parent_vid',
+=======
         'base' => 'node_revisions',
         'field' => 'vid',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'label' => t('Quiz node revision'),
       ),
       'sort' => array(
@@ -379,7 +430,11 @@ function quiz_views_data() {
       'relationship' => array(
         'handler' => 'views_handler_relationship',
         'base' => 'node',
+<<<<<<< HEAD
+        'field' => 'child_nid',
+=======
         'field' => 'nid',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'label' => t('Question node nid'),
       ),
       'sort' => array(
@@ -401,8 +456,13 @@ function quiz_views_data() {
       ),
       'relationship' => array(
         'handler' => 'views_handler_relationship',
+<<<<<<< HEAD
+        'base' => 'node_revision',
+        'field' => 'child_vid',
+=======
         'base' => 'node_revisions',
         'field' => 'vid',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'label' => t('Question node revision'),
       ),
       'sort' => array(
@@ -434,18 +494,61 @@ function quiz_views_data() {
         )
       ),
     ),
+<<<<<<< HEAD
+    'max_score' => array(
+      'title' => t('Maximum possible score'),
+      'help' => t('Maximum question score'),
+      'field' => array(
+        'handler' => 'views_handler_field_numeric',
+        'click sortable' => TRUE,
+      ),
+      'argument' => array(
+        'handler' => 'views_handler_argument_numeric',
+        'numeric' => TRUE,
+        'validate type' => 'nid',
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+    ),
+    'weight' => array(
+      'title' => t('Question weight'),
+      'help' => t('Question weight or order'),
+      'field' => array(
+        'handler' => 'views_handler_field_numeric',
+        'click sortable' => TRUE,
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+    ),
   ); // End quiz_node_relationship
 
+
+=======
+  ); // End quiz_node_relationship
+
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   $data['quiz_node_results'] = array(
     // Table Definition
     'table' => array(
       'group' => 'Quiz Results',
       'join' => array(
         // This is vid because vid is always more specific.
+<<<<<<< HEAD
+		'node' => array(
+      		'left_field' => 'vid',
+      		'field' => 'vid',
+    	),
+    	'node_revisions' => array(
+      		'left_field' => 'vid',
+      		'field' => 'vid',
+    	),
+        'quiz_node_properties' => array(
+          'left_field' => 'vid',
+          'field' => 'vid',
+=======
         'quiz_node_properties' => array(
           'left_field' => 'vid',
           'field' => 'vid',
           'type' => 'LEFT', // I think...
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         ),
       ),
     ),
@@ -464,6 +567,13 @@ function quiz_views_data() {
         'numeric' => TRUE,
         'validate type' => 'result_id',
       ),
+<<<<<<< HEAD
+      'filter' => array(
+        'handler' => 'views_handler_filter_numeric',
+        'help' => t('Filter results to a particular result set'),
+      ),
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       'sort' => array('handler' => 'views_handler_sort'),
     ),
     'nid' => array(
@@ -475,6 +585,10 @@ function quiz_views_data() {
         //'name_field' => 'title',
         'numeric' => TRUE,
         'validate type' => 'vid',
+<<<<<<< HEAD
+        'nid field' => 'nid',
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       ),
       'filter' => array(
         'handler' => 'quiz_views_handler_filter_quiz_nid',
@@ -506,7 +620,11 @@ function quiz_views_data() {
       // Related to NODE
       'relationship' => array(
         'handler' => 'views_handler_relationship',
+<<<<<<< HEAD
+        'base' => 'node_revision',
+=======
         'base' => 'node_revisions',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'field' => 'vid',
         'label' => t('node revision'),
       ),
@@ -586,11 +704,18 @@ function quiz_views_data() {
         'validate type' => 'nid',
       ),
       'sort' => array('handler' => 'views_handler_sort'),
+<<<<<<< HEAD
+	  'filter' => array(
+		'handler' => 'views_handler_filter_numeric',
+		'help' => t('Filter the results based on the score of the quiz.')
+	  ),
+=======
       'filter' => array(
         'handler' => 'views_handler_filter_numeric',
         'help' => t('Filter quiz results by Score.'),
         'allow empty' => TRUE,
       ),
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     ),
     'is_invalid' => array(
       'title' => t('Is Invalid'),
@@ -626,5 +751,408 @@ function quiz_views_data() {
       ),
     )
   ); // End quiz_node_results
+<<<<<<< HEAD
+
+
+  $data['quiz_node_results_answers'] = array(
+    // Table Definition
+    'table' => array(
+      'group' => 'Quiz Results by Question',
+      'join' => array(
+        'quiz_node_properties' => array(
+          'left_table' => 'quiz_node_relationship',
+          'left_field' => 'child_nid',
+          'field' => 'question_nid',
+          'extra' => 'quiz_node_results_answers.result_id = quiz_node_results.result_id'
+        ),
+      ),
+    ),
+
+    // Field descriptions:
+    'result_id' => array(
+      'title' => t('Result ID'),
+      'help' => t('The ID identifying a particular set of quiz results. This ID is unique with respect to the quiz nid and vid of the quiz, uid of the quizee, and the take of the quiz.'),
+      'field' => array(
+        'handler' => 'views_handler_field_numeric',
+        'click sortable' => TRUE,
+      ),
+      'argument' => array(
+        'handler' => 'views_handler_argument_numeric',
+        'name_field' => 'title',
+        'numeric' => TRUE,
+        'validate type' => 'result_id',
+      ),
+      'filter' => array(
+        'handler' => 'views_handler_filter_numeric',
+        'help' => t('Filter results to a particular result set'),
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+      'relationship' => array(
+      	'handler' => 'views_handler_relationship',
+      	'base' => 'quiz_node_results',
+      	'field' => 'result_id',
+      	'label' => t('Result ID')
+      ),
+    ),
+    'question_nid' => array(
+      'title' => t('Question Node NID'),
+      'help' => t('The ID of the Question Node.'),
+      'argument' => array(
+        'handler' => 'views_handler_argument_numeric',
+        //'name_field' => 'title',
+        'numeric' => TRUE,
+        'validate type' => 'nid',
+      ),
+      'filter' => array(
+        'handler' => 'quiz_views_handler_filter_numeric',
+        'help' => t('Filter results to a particular subset of question versions.'),
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+      'relationship' => array(
+        'handler' => 'views_handler_relationship',
+        'base' => 'node',
+        'field' => 'question_nid',
+        'label' => t('node'),
+      ),
+    ),
+    'question_vid' => array(
+      'title' => t('Question Node VID'),
+      'help' => t('The Version ID of the Question Node.'),
+      'field' => array(
+        'handler' => 'views_handler_field',
+        'click sortable' => TRUE,
+      ),
+      'argument' => array(
+        'handler' => 'views_handler_argument_numeric',
+        //'name_field' => 'title',
+        'numeric' => TRUE,
+        'validate type' => 'vid',
+      ),
+      // Related to NODE
+      'relationship' => array(
+        'handler' => 'views_handler_relationship',
+        'base' => 'node_revision',
+        'field' => 'question_vid',
+        'label' => t('node revision'),
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+    ),
+    'answer_timestamp' => array(
+      'title' => t('Quiz Answer Time'),
+      'help' => t('Time the answer was provided.'),
+      'field' => array(
+        'handler' => 'views_handler_field_date',
+        'click sortable' => TRUE,
+      ),
+      'argument' => array(
+        'handler' => 'views_handler_argument_date',
+        //'name_field' => 'title',
+        'numeric' => TRUE,
+        'validate type' => 'nid',
+      ),
+      'sort' => array('handler' => 'views_handler_sort_date'),
+      'filter' => array(
+        'handler' => 'views_handler_filter_date',
+        'allow empty' => TRUE,
+      ),
+    ),
+    'points_awarded' => array(
+      'title' => t('Points awarded'),
+      'help' => t('Points awarded for answer(s) given'),
+      'field' => array(
+        'handler' => 'views_handler_field_numeric',
+        'click sortable' => TRUE,
+      ),
+      'argument' => array(
+        'handler' => 'views_handler_argument_numeric',
+        'numeric' => TRUE,
+        'validate type' => 'nid',
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+    ),
+    'is_correct' => array(
+      'title' => t('Is Correct'),
+      'help' => t('Indicates whether or not a quiz answer was correct.'),
+      'field' => array(
+        'handler' => 'views_handler_field_boolean',
+        'click sortable' => TRUE,
+      ),
+      'filter' => array(
+        'handler' => 'views_handler_filter_boolean_operator',
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+    ),
+    'result_id' => array(
+      'title' => t('Result ID'),
+      'help' => t('The ID identifying a particular set of quiz results. This ID is unique with respect to the quiz nid and vid of the quiz, uid of the quizee, and the take of the quiz.'),
+      'field' => array(
+        'handler' => 'views_handler_field_numeric',
+        'click sortable' => TRUE,
+      ),
+      'argument' => array(
+        'handler' => 'views_handler_argument_numeric',
+        'name_field' => 'title',
+        'numeric' => TRUE,
+        'validate type' => 'result_id',
+      ),
+      'filter' => array(
+        'handler' => 'views_handler_filter_numeric',
+        'help' => t('Filter results to a particular result set'),
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+    ),
+    'is_skipped' => array(
+      'title' => t('Is Skipped'),
+      'help' => t('Indicates whether or not a quiz question was skipped.'),
+      'field' => array(
+        'handler' => 'views_handler_field_boolean',
+      ),
+      'filter' => array(
+        'handler' => 'views_handler_filter_boolean_operator',
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+    ),
+  ); // End quiz_node_results_answers
+
+
+  $data['quiz_multichoice_answers'] = array(
+    // Table Definition
+    'table' => array(
+      'group' => 'Quiz Multichoice Answers',
+      'join' => array(
+        'quiz_node_properties' => array(
+          'left_table' => 'quiz_node_relationship',
+          'left_field' => 'child_nid',
+          'field' => 'question_nid',
+        ),
+      ),
+    ),
+
+    // Field descriptions:
+    'id' => array(
+      'title' => t('Answer ID'),
+      'help' => t('The ID identifying an individual answer.'),
+      'field' => array(
+        'handler' => 'views_handler_field_numeric',
+        'click sortable' => TRUE,
+      ),
+      'argument' => array(
+        'handler' => 'views_handler_argument_numeric',
+        'name_field' => 'title',
+        'numeric' => TRUE,
+        'validate type' => 'result_id',
+      ),
+      'filter' => array(
+        'handler' => 'views_handler_filter_numeric',
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+    ),
+    'question_nid' => array(
+      'title' => t('Answers Question Node NID'),
+      'help' => t('The ID of the Question Node.'),
+      'argument' => array(
+        'handler' => 'views_handler_argument_numeric',
+        //'name_field' => 'title',
+        'numeric' => TRUE,
+        'validate type' => 'nid',
+      ),
+      'filter' => array(
+        'handler' => 'quiz_views_handler_filter_numeric',
+        'help' => t('Filter results to a particular subset of question versions.'),
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+      'relationship' => array(
+        'handler' => 'views_handler_relationship',
+        'base' => 'node',
+        'field' => 'nid',
+        'label' => t('node'),
+      ),
+    ),
+    'question_vid' => array(
+      'title' => t('Answers Question Node VID'),
+      'help' => t('The Version ID of the Question Node.'),
+      'field' => array(
+        'handler' => 'views_handler_field',
+        'click sortable' => TRUE,
+      ),
+      'argument' => array(
+        'handler' => 'views_handler_argument_numeric',
+        //'name_field' => 'title',
+        'numeric' => TRUE,
+        'validate type' => 'vid',
+      ),
+      // Related to NODE
+      'relationship' => array(
+        'handler' => 'views_handler_relationship',
+        'base' => 'node_revision',
+        'field' => 'vid',
+        'label' => t('node revision'),
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+    ),
+    'answer' => array(
+      'title' => t('Answer'),
+      'help' => t('Answer text'),
+      'field' => array(
+        'handler' => 'views_handler_field',
+        'click sortable' => TRUE,
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+    ),
+  ); // End quiz_multichoice_answers
+
+
+  $data['quiz_multichoice_user_answers'] = array(
+    // Table Definition
+    'table' => array(
+      'group' => 'Quiz Multichoice Answers',
+      'join' => array(
+        'quiz_node_properties' => array(
+          'left_table' => 'quiz_node_relationship',
+          'left_field' => 'child_nid',
+          'field' => 'question_nid',
+        ),
+      ),
+    ),
+
+    // Field descriptions:
+    'id' => array(
+      'title' => t('User answer set ID'),
+      'help' => t('The ID identifying an answer set for a user.'),
+      'field' => array(
+        'handler' => 'views_handler_field_numeric',
+        'click sortable' => TRUE,
+      ),
+      'argument' => array(
+        'handler' => 'views_handler_argument_numeric',
+        'name_field' => 'title',
+        'numeric' => TRUE,
+        'validate type' => 'result_id',
+      ),
+      'filter' => array(
+        'handler' => 'views_handler_filter_numeric',
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+    ),
+    'result_id' => array(
+      'title' => t('Result ID'),
+      'help' => t('The ID identifying a particular set of quiz results. This ID is unique with respect to the quiz nid and vid of the quiz, uid of the quizee, and the take of the quiz.'),
+      'field' => array(
+        'handler' => 'views_handler_field_numeric',
+        'click sortable' => TRUE,
+      ),
+      'argument' => array(
+        'handler' => 'views_handler_argument_numeric',
+        'name_field' => 'title',
+        'numeric' => TRUE,
+        'validate type' => 'result_id',
+      ),
+      'filter' => array(
+        'handler' => 'views_handler_filter_numeric',
+        'help' => t('Filter results to a particular result set'),
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+      'relationship' => array(
+        'handler' => 'views_handler_relationship',
+        'base' => 'quiz_node_results',
+        'field' => 'result_id',
+        'base field' => 'result_id',
+        'label' => t('Result'),
+      ),
+    ),
+    'question_nid' => array(
+      'title' => t('Result Question Node NID'),
+      'help' => t('The ID of the Question Node.'),
+      'argument' => array(
+        'handler' => 'views_handler_argument_numeric',
+        //'name_field' => 'title',
+        'numeric' => TRUE,
+        'validate type' => 'nid',
+      ),
+      'filter' => array(
+        'handler' => 'quiz_views_handler_filter_numeric',
+        'help' => t('Filter results to a particular subset of question versions.'),
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+      'relationship' => array(
+        'handler' => 'views_handler_relationship',
+        'base' => 'node',
+        'field' => 'nid',
+        'label' => t('node'),
+      ),
+    ),
+    'question_vid' => array(
+      'title' => t('Result Question Node VID'),
+      'help' => t('The Version ID of the Question Node.'),
+      'field' => array(
+        'handler' => 'views_handler_field',
+        'click sortable' => TRUE,
+      ),
+      'argument' => array(
+        'handler' => 'views_handler_argument_numeric',
+        //'name_field' => 'title',
+        'numeric' => TRUE,
+        'validate type' => 'vid',
+      ),
+      // Related to NODE
+      'relationship' => array(
+        'handler' => 'views_handler_relationship',
+        'base' => 'node_revision',
+        'field' => 'vid',
+        'label' => t('node revision'),
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+    ),
+  ); // End quiz_multichoice_user_answers
+
+  $data['quiz_multichoice_user_answer_multi'] = array(
+    'table' => array(
+      'group' => t('Quiz Multichoice Answers'),
+      'join' => array(
+        'quiz_node_properties' => array(
+          'left_table' => 'quiz_multichoice_user_answers',
+          'left_field' => 'id',
+          'field' => 'user_answer_id',
+        ),
+      ),
+    ),
+
+    // Field descriptions:
+    'user_answer_id' => array(
+      'title' => t('User answer set id'),
+      'help' => t("The ID of a user's answer set."),
+      'argument' => array(
+        'handler' => 'views_handler_argument_numeric',
+        'numeric' => TRUE,
+      ),
+      'filter' => array(
+        'handler' => 'views_handler_filter_numeric',
+        'help' => t("Filter results to a particular subset of a user's answer set."),
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+    ),
+    'answer_id' => array(
+      'title' => t('Answer id'),
+      'help' => t("The ID of a user's answer."),
+      'argument' => array(
+        'handler' => 'views_handler_argument_numeric',
+        'numeric' => TRUE,
+      ),
+      'filter' => array(
+        'handler' => 'views_handler_filter_numeric',
+      ),
+      'sort' => array('handler' => 'views_handler_sort'),
+      'relationship' => array(
+        'handler' => 'views_handler_relationship',
+        'base' => 'quiz_multichoice_answers',
+        'field' => 'answer_id',
+        'base field' => 'id',
+        'label' => t('answer'),
+      ),
+    ),
+  ); // End quiz_multichoice_user_answer_multi
+
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   return $data;
 }

@@ -23,7 +23,13 @@ class MatchingQuestion extends QuizQuestion {
    */
   public function __construct(stdClass $node) {
     parent::__construct($node);
+<<<<<<< HEAD
+    if (empty($this->node->match)) {
+      $this->node->match = array();
+    }
+=======
     if (empty($this->node->match)) $this->node->match = array();
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   }
 
   /**
@@ -39,19 +45,55 @@ class MatchingQuestion extends QuizQuestion {
       if (empty($match['match_id']) || $this->node->revision) {
         if (!empty($match['question']) && !empty($match['answer'])) {
           $sql = "INSERT INTO {quiz_matching_node} (nid, vid, question, answer, feedback) VALUES (%d, %d, '%s', '%s', '%s')";
+<<<<<<< HEAD
+          // TODO Please review the conversion of this statement to the D7 database API syntax.
+          /* db_query($sql, $this->node->nid, $this->node->vid, $match['question'], $match['answer'], $match['feedback']) */
+          $id = db_insert('quiz_matching_node')
+                  ->fields(array(
+                    'nid' => $this->node->nid,
+                    'vid' => $this->node->vid,
+                    'question' => $match['question'],
+                    'answer' => $match['answer'],
+                    'feedback' => $match['feedback'],
+                  ))
+                  ->execute();
+=======
           db_query($sql, $this->node->nid, $this->node->vid, $match['question'], $match['answer'], $match['feedback']);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         }
       }
       // match_id is set, user may remove or update existing question.
       else {
         if (empty($match['question']) && empty($match['answer'])) {
           // remove sub question.
+<<<<<<< HEAD
+          // TODO Please review the conversion of this statement to the D7 database API syntax.
+          /* db_query("DELETE FROM {quiz_matching_node} WHERE match_id = %d", $match['match_id']) */
+          db_delete('quiz_matching_node')
+            ->condition('match_id', $match['match_id'])
+            ->execute();
+        }
+        else {
+          // update sub question.
+          //$sql = "UPDATE {quiz_matching_node} SET question = '%s', answer = '%s', feedback = '%s' WHERE match_id = %d";
+          // TODO Please review the conversion of this statement to the D7 database API syntax.
+          /* db_query($sql, $match['question'], $match['answer'], $match['feedback'], $match['match_id']) */
+          db_update('quiz_matching_node')
+            ->fields(array(
+              'question' => $match['question'],
+              'answer' => $match['answer'],
+              'feedback' => $match['feedback'],
+            ))
+            ->condition('match_id', $match['match_id'])
+            ->execute();
+=======
           db_query("DELETE FROM {quiz_matching_node} WHERE match_id = %d", $match['match_id']);
         }
         else {
           // update sub question.
           $sql = "UPDATE {quiz_matching_node} SET question = '%s', answer = '%s', feedback = '%s' WHERE match_id = %d";
           db_query($sql, $match['question'], $match['answer'], $match['feedback'], $match['match_id']);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         }
       }
     }
@@ -74,6 +116,29 @@ class MatchingQuestion extends QuizQuestion {
    */
   public function delete($only_this_version = FALSE) {
     parent::delete($only_this_version);
+<<<<<<< HEAD
+    if ($only_this_version) {
+      $match_id = db_query('SELECT match_id FROM {quiz_matching_node} WHERE nid = :nid AND vid = :vid', array(':nid' => $this->node->nid, ':vid' => $this->node->vid))->fetchCol();
+      db_delete('quiz_matching_user_answers')
+        ->condition('match_id', is_array($match_id) ? $match_id : array(0), 'IN')
+        ->execute();
+
+      db_delete('quiz_matching_node')
+        ->condition('nid', $this->node->nid)
+        ->condition('vid', $this->node->vid)
+        ->execute();
+    }
+    // Delete all versions of this question.
+    else {
+      $match_id = db_query('SELECT match_id FROM {quiz_matching_node} WHERE nid = :nid', array(':nid' => $this->node->nid))->fetchCol();
+      db_delete('quiz_matching_user_answers')
+        ->condition('match_id', is_array($match_id) ? $match_id : array(0), 'IN')
+        ->execute();
+
+      db_delete('quiz_matching_node')
+        ->condition('nid', $this->node->nid)
+        ->execute();
+=======
 
     if ($only_this_version) {
       $sql = 'DELETE FROM {quiz_matching_user_answers}
@@ -97,6 +162,7 @@ class MatchingQuestion extends QuizQuestion {
       db_query($sql, $this->node->nid);
       $sql = 'DELETE FROM {quiz_matching_node} WHERE nid = %d';
       db_query($sql, $this->node->nid, $this->node->vid);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     }
   }
 
@@ -106,12 +172,23 @@ class MatchingQuestion extends QuizQuestion {
    * @see QuizQuestion#getNodeProperties()
    */
   public function getNodeProperties() {
+<<<<<<< HEAD
+    if (isset($this->nodeProperties)) {
+      return $this->nodeProperties;
+    }
+    $props = parent::getNodeProperties();
+
+    //$sql = "SELECT match_id, question, answer, feedback FROM {quiz_matching_node} WHERE nid = %d AND vid = %d";
+    $query = db_query('SELECT match_id, question, answer, feedback FROM {quiz_matching_node} WHERE nid = :nid AND vid = :vid', array(':nid' => $this->node->nid, ':vid' => $this->node->vid));
+    while ($result = $query->fetch()) {
+=======
     if (isset($this->nodeProperties)) return $this->nodeProperties;
     $props = parent::getNodeProperties();
 
     $sql = "SELECT match_id, question, answer, feedback FROM {quiz_matching_node} WHERE nid = %d AND vid = %d";
     $results = db_query($sql, $this->node->nid, $this->node->vid);
     while ($result = db_fetch_object($results)) {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       $props['match'][] = array(
         'match_id' => $result->match_id,
         'question' => $result->question,
@@ -136,7 +213,11 @@ class MatchingQuestion extends QuizQuestion {
     if ($this->viewCanRevealCorrect()) {
       foreach ($matches as $match) {
         $subquestions[] = array(
+<<<<<<< HEAD
+          'question' => $match['question'],
+=======
           'question' =>$match['question'],
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
           'correct' => $match['answer'],
           'feedback' => $match['feedback']
         );
@@ -157,7 +238,11 @@ class MatchingQuestion extends QuizQuestion {
       }
     }
     $content['answers'] = array(
+<<<<<<< HEAD
+       '#markup' => theme('matching_match_node_view', array('subquestions' => $subquestions)),
+=======
        '#value' => theme('matching_match_node_view', $subquestions),
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
        '#weight' => 2,
     );
     return $content;
@@ -170,7 +255,11 @@ class MatchingQuestion extends QuizQuestion {
    */
   public function getAnsweringForm(array $form_state = NULL, $rid) {
     $form = parent::getAnsweringForm($form_state, $rid);
+<<<<<<< HEAD
+    //$form['#theme'] = 'matching_answering_form';
+=======
     $form['#theme'] = 'matching_answering_form';
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 
     if (isset($rid)) {
       // The question has already been answered. We load the answers
@@ -180,8 +269,12 @@ class MatchingQuestion extends QuizQuestion {
     list($matches, $select_option) = $this->getSubquestions();
     $form['subquestions']['#theme'] = 'matching_subquestion_form';
     foreach ($matches as $match) {
+<<<<<<< HEAD
+      $form['subquestions'][$match['match_id']]['#question'] = check_markup($match['question']);
+=======
       $form['subquestions'][$match['match_id']]['#question'] = check_markup($match['question'], FILTER_FORMAT_DEFAULT, FALSE);
 
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       $form['subquestions'][$match['match_id']]['tries[' . $match['match_id'] . ']'] = array(
         '#type' => 'select',
         '#options' => $this->customShuffle($select_option),
@@ -192,8 +285,12 @@ class MatchingQuestion extends QuizQuestion {
       }
     }
     $form['scoring_info'] = array(
+<<<<<<< HEAD
+      '#markup' => '<p><em>' . t('You lose points by selecting incorrect options. You may leave an option blank to avoid losing points.') . '</em></p>',
+=======
       '#type' => 'markup',
       '#value' => '<p><em>'. t('You lose points by selecting incorrect options. You may leave an option blank to avoid losing points.') .'</em></p>',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     );
     if (variable_get('quiz_matching_shuffle_options', TRUE)) {
       $form['subquestions'] = $this->customShuffle($form['subquestions']);
@@ -228,9 +325,15 @@ class MatchingQuestion extends QuizQuestion {
    */
   private function getSubquestions() {
     $matches = $select_option = array();
+<<<<<<< HEAD
+    //$sql = "SELECT match_id, question, answer, feedback FROM {quiz_matching_node} WHERE nid = %d AND vid = %d";
+    $query = db_query('SELECT match_id, question, answer, feedback FROM {quiz_matching_node} WHERE nid = :nid AND vid = :vid', array(':nid' => $this->node->nid, ':vid' => $this->node->vid));
+    while ($result = $query->fetch()) {
+=======
     $sql = "SELECT match_id, question, answer, feedback FROM {quiz_matching_node} WHERE nid = %d AND vid = %d";
     $results = db_query($sql, $this->node->nid, $this->node->vid);
     while ($result = db_fetch_object($results)) {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       $matches[] = array(
         'match_id' => $result->match_id,
         'question' => $result->question,
@@ -256,7 +359,11 @@ class MatchingQuestion extends QuizQuestion {
    *
    * @see QuizQuestion#getCreationForm($form_state)
    */
+<<<<<<< HEAD
+  public function getCreationForm(array &$form_state = NULL) {
+=======
   public function getCreationForm(array $form_state = NULL) {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     $form['match'] = array(
       '#type' => 'fieldset',
       '#title' => t('Answer'),
@@ -268,29 +375,49 @@ class MatchingQuestion extends QuizQuestion {
     for ($i = 1; $i <= variable_get('quiz_matching_form_size', 5); ++$i) {
       $form['match'][$i] = array(
         '#type' => 'fieldset',
+<<<<<<< HEAD
+        '#title' => t('Question ' . $i),
+      );
+      $form['match'][$i]['match_id'] = array(
+        '#type' => 'value',
+        '#default_value' => isset($this->node->match[$i -1]['match_id']) ? $this->node->match[$i -1]['match_id'] : ''
+=======
         '#title' => t('Question '. $i),
       );
       $form['match'][$i]['match_id'] = array(
         '#type' => 'hidden',
         '#default_value' => isset($this->node->match[$i-1]['match_id']) ? $this->node->match[$i-1]['match_id'] : ''
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       );
       $form['match'][$i]['question'] = array(
         '#type' => 'textarea',
         '#rows' => 2,
+<<<<<<< HEAD
+        '#default_value' => isset($this->node->match[$i -1]['question']) ? $this->node->match[$i -1]['question'] : '',
+=======
         '#default_value' => isset($this->node->match[$i-1]['question']) ? $this->node->match[$i-1]['question'] : '',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         '#required' => $i < 3,
       );
       $form['match'][$i]['answer'] = array(
         '#type' => 'textarea',
         '#rows' => 2,
+<<<<<<< HEAD
+        '#default_value' => isset($this->node->match[$i -1]['answer']) ? $this->node->match[$i -1]['answer'] : '',
+=======
         '#default_value' => isset($this->node->match[$i-1]['answer']) ? $this->node->match[$i-1]['answer'] : '',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         '#required' => $i < 3,
       );
 
       $form['match'][$i]['feedback'] = array(
         '#type' => 'textarea',
         '#rows' => 2,
+<<<<<<< HEAD
+        '#default_value' => isset($this->node->match[$i -1]['feedback']) ? $this->node->match[$i -1]['feedback'] : ''
+=======
         '#default_value' => isset($this->node->match[$i-1]['feedback']) ? $this->node->match[$i-1]['feedback'] : ''
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       );
     }
     return $form;
@@ -321,6 +448,10 @@ class MatchingQuestion extends QuizQuestion {
    */
   public function getCorrectAnswer() {
     $correct_answers = array();
+<<<<<<< HEAD
+    $query = db_query('SELECT match_id, question, answer, feedback FROM {quiz_matching_node} WHERE nid = :nid AND vid = :vid', array(':nid' => $this->node->nid, ':vid' => $this->node->vid));
+    while ($result = $query->fetch()) {
+=======
 
     $results = db_query('SELECT match_id, question, answer, feedback
       FROM {quiz_matching_node}
@@ -328,6 +459,7 @@ class MatchingQuestion extends QuizQuestion {
       $this->node->nid, $this->node->vid);
 
     while ($result = db_fetch_object($results)) {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       $correct_answers[$result->match_id] = array(
         'match_id'  => $result->match_id,
         'question'  => $result->question,
@@ -350,6 +482,13 @@ class MatchingResponse extends QuizQuestionResponse {
   public function __construct($result_id, stdClass $question_node, $answer = NULL) {
     parent::__construct($result_id, $question_node, $answer);
     if (!isset($answer)) {
+<<<<<<< HEAD
+      $res = db_query('SELECT ua.answer, score, ua.match_id FROM {quiz_matching_user_answers} ua
+              JOIN {quiz_matching_node} n ON n.match_id = ua.match_id
+              WHERE n.nid = :nid AND n.vid = :vid AND ua.result_id = :result_id', array(':nid' => $question_node->nid, ':vid' => $question_node->vid, ':result_id' => $result_id));
+      $this->answer = array();
+      while ($obj = $res->fetch()) {
+=======
       $sql = 'SELECT ua.answer, score, ua.match_id
               FROM {quiz_matching_user_answers} ua
               JOIN {quiz_matching_node} n
@@ -358,6 +497,7 @@ class MatchingResponse extends QuizQuestionResponse {
       $res = db_query($sql, $question_node->nid, $question_node->vid, $result_id);
       $this->answer = array();
       while ($obj = db_fetch_object($res)) {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         $this->answer[$obj->match_id] = $obj->answer;
       }
     }
@@ -370,8 +510,16 @@ class MatchingResponse extends QuizQuestionResponse {
    * @see QuizQuestionResponse#isValid()
    */
   public function isValid() {
+<<<<<<< HEAD
+    foreach ($this->answer as $value) {
+      if ($value != 'def') {
+        return TRUE;
+      }
+    }
+=======
     foreach ($this->answer as $value)
       if ($value != 'def') return TRUE;
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     return t('You need to match at least one of the items.');
   }
 
@@ -381,6 +529,21 @@ class MatchingResponse extends QuizQuestionResponse {
    * @see QuizQuestionResponse#save()
    */
   public function save() {
+<<<<<<< HEAD
+    if (!isset($this->answer) || !is_array($this->answer)) {
+      return;
+    }
+    $insert = db_insert('quiz_matching_user_answers')->fields(array('match_id', 'result_id', 'answer', 'score'));
+    foreach ($this->answer as $key => $value) {
+      $insert->values(array(
+        'match_id' => $key,
+        'result_id' => $this->rid,
+        'answer' => (int) $value,
+        'score' => ($key == $value) ? 1 : 0,
+      ));
+    }
+    $insert->execute();
+=======
     $user_answers = isset($this->answer) ? $this->answer : array();
     // to prevent warning : Invalid argument supplied for foreach()
     foreach ((array)$user_answers as $key => $value) {
@@ -388,6 +551,7 @@ class MatchingResponse extends QuizQuestionResponse {
       $sql = 'INSERT INTO {quiz_matching_user_answers} (match_id, result_id, answer, score) VALUES (%d, %d, %d, %d)';
       db_query($sql, $key, $this->rid, (int)$value, $score);
     }
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   }
 
   /**
@@ -396,6 +560,13 @@ class MatchingResponse extends QuizQuestionResponse {
    * @see QuizQuestionResponse#delete()
    */
   public function delete() {
+<<<<<<< HEAD
+    $match_id = db_query('SELECT match_id FROM {quiz_matching_node} WHERE nid = :nid AND vid = :vid', array(':nid' => $this->question->nid, ':vid' => $this->question->vid))->fetchCol();
+    db_delete('quiz_matching_user_answers')
+      ->condition('match_id', is_array($match_id) ? $match_id : array(0), 'IN')
+      ->condition('result_id', $this->rid)
+      ->execute();
+=======
     $sql = 'DELETE FROM {quiz_matching_user_answers}
             WHERE match_id IN (
               SELECT match_id
@@ -404,6 +575,7 @@ class MatchingResponse extends QuizQuestionResponse {
             )
             AND result_id = %d';
     db_query($sql, $this->question->nid, $this->question->vid, $this->rid);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   }
 
   /**
@@ -415,7 +587,11 @@ class MatchingResponse extends QuizQuestionResponse {
     $wrong_answer = 0;
     $correct_answer = 0;
     $user_answers = isset($this->answer['answer']) ? $this->answer['answer'] : $this->answer;
+<<<<<<< HEAD
+    foreach ((array) $user_answers as $key => $value) {
+=======
     foreach ((array)$user_answers as $key => $value) {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       if ($key == $value) {
         $correct_answer++;
       }
@@ -451,13 +627,51 @@ class MatchingResponse extends QuizQuestionResponse {
       $metadata[] = t('Correct Answer');
     }
     $metadata[] = t('User answer');
+<<<<<<< HEAD
+=======
     if ($showfeedback) {
       $metadata[] = t('Feedback');
     }
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 
     $MatchingQuestion = new MatchingQuestion($this->question);
     $correct_answers = $MatchingQuestion->getCorrectAnswer();
     $user_answers = isset($this->answer['answer']) ? $this->answer['answer'] : $this->answer;
+<<<<<<< HEAD
+    $has_feedback = TRUE;
+    foreach ($correct_answers as $correct_answer) {
+      $answer_data = array();      
+      $correct = FALSE;
+      $id = NULL;
+      $answer_data['question'] = check_markup($correct_answer['question'], $this->getFormat());
+      if ( isset($user_answers[$correct_answer['match_id']])) {
+        $id = $user_answers[$correct_answer['match_id']];
+        $correct = isset($correct_answers[$id]) && $correct_answer['answer'] == $correct_answers[$id]['answer'];
+        $answer_data['user_answer'] = isset($correct_answers[$id]) ? check_markup($correct_answers[$id]['answer'], $this->getFormat()) : NULL;
+      }      
+      if ($showpoints) {
+        $answer_data['correct_answer'] = $correct_answer['answer'];
+      }      
+      if ($showfeedback && !empty($correct_answer['feedback'])) {
+        $answer_data['feedback'] = check_markup($correct_answer['feedback'], $this->getFormat());        
+      }      
+      else {
+        //$has_feedback = FALSE;
+        if ($showfeedback)  {
+          $answer_data['feedback'] = '';
+        }
+      }
+      $answer_data['is_correct'] = $correct;
+      $data[] = $answer_data;
+    }
+
+    if ($showfeedback && $has_feedback) {
+      $metadata[] = t('Feedback');
+    }
+
+    return array(
+      '#markup' => theme('matching_response', array('metadata' => $metadata, 'data' => $data)),
+=======
 
     foreach ($correct_answers as $correct_answer) {
       $answer_data = array();
@@ -477,6 +691,7 @@ class MatchingResponse extends QuizQuestionResponse {
     return array(
       '#type' => 'markup',
       '#value' => theme('matching_response', $metadata, $data),
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     );
   }
 }

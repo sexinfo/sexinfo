@@ -6,15 +6,34 @@
  */
 
 /**
+<<<<<<< HEAD
+ * Implements hook_install().
+ */
+function short_answer_install() {
+  // Add body field to short answer node
+  quiz_question_add_body_field('short_answer');
+=======
  * Implementation of hook_install().
  */
 function short_answer_install() {
   drupal_install_schema('short_answer');
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   variable_set('node_options_short_answer', array('status'));
   cache_clear_all('autoload:', 'cache');
 }
 
 /**
+<<<<<<< HEAD
+ * Implements hook_uninstall().
+ */
+function short_answer_uninstall() {
+  // TODO The drupal_(un)install_schema functions are called automatically in D7.
+  // drupal_uninstall_schema('short_answer')
+}
+
+/**
+ * Implements hook_schema().
+=======
  * Implementation of hook_uninstall().
  */
 function short_answer_uninstall() {
@@ -23,6 +42,7 @@ function short_answer_uninstall() {
 
 /**
  * Implementation of hook_schema().
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function short_answer_schema() {
   // Properties for a question nodes go in here:
@@ -38,12 +58,20 @@ function short_answer_schema() {
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
+<<<<<<< HEAD
+      'maximum_score' => array(
+=======
       /*'maximum_score' => array(
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'type' => 'int',
         'unsigned' => TRUE,
         'not null' => TRUE,
         'default' => 1,
+<<<<<<< HEAD
+      ),
+=======
       ),*/
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       // One of (0) textfield and (1) textare
       'text_entry_type' => array(
         'type' => 'int',
@@ -116,6 +144,12 @@ function short_answer_schema() {
       'answer' => array(
         'type' => 'text'
       ),
+<<<<<<< HEAD
+      'answer_feedback' => array(
+        'type' => 'text'
+      ),
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     ),
     'primary key' => array('answer_id'),
     'unique keys' => array(
@@ -125,6 +159,32 @@ function short_answer_schema() {
   return $schema;
 }
 
+<<<<<<< HEAD
+
+/**
+ * Adding feedback field to table {quiz_short_answer_user_answers}
+ */
+function short_answer_update_7401() {
+  $spec = array(
+    'type' => 'text',
+    'not null' => FALSE,
+  );
+  db_add_field('quiz_short_answer_user_answers', 'answer_feedback', $spec);
+}
+
+/**
+ * Implementation of hook_update_N()
+ *
+ * Adding feedback field to table {quiz_short_answer_user_answers}
+ */
+function short_answer_update_6401() {
+  $to_return = array();
+  $spec = array(
+    'type' => 'text',
+    'not null' => FALSE,
+  );
+  db_add_field($to_return, 'quiz_short_answer_user_answers', 'answer_feedback', $spec);
+=======
 /**
  * Implementation of hook_update_N()
  *
@@ -140,5 +200,6 @@ function short_answer_update_6400() {
     'default' => 0,
   );
   db_change_field($to_return, 'quiz_short_answer_user_answers', 'score', 'score', $spec);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   return $to_return;
 }

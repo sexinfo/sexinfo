@@ -13,6 +13,14 @@
  */
 function quiz_user_results($result_id) {
   global $user;
+<<<<<<< HEAD
+  $result = db_query('SELECT qnp.nid, qnp.vid, qnrs.uid
+    FROM {quiz_node_properties} qnp
+    INNER JOIN {quiz_node_results} qnrs ON qnrs.vid = qnp.vid
+    WHERE qnrs.result_id = :rid', array(':rid' => $result_id))->fetch();
+
+  if ($result->nid) {
+=======
 
   $sql = 'SELECT qnp.nid, qnp.vid, qnrs.uid
     FROM {quiz_node_properties} qnp
@@ -21,6 +29,7 @@ function quiz_user_results($result_id) {
   $result = db_fetch_object(db_query($sql, $result_id));
   if ($result->nid) {
 
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     // User can view own results (quiz_menu sets access to 'own results').
     // User with role 'user results' can view other user's results.
     if ($result->uid != $user->uid && !user_access('view any quiz results')) {
@@ -32,7 +41,18 @@ function quiz_user_results($result_id) {
     $questions = _quiz_get_answers($quiz, $result_id);
     $score = quiz_calculate_score($quiz, $result_id);
     $summary = _quiz_get_summary_text($quiz, $score);
+<<<<<<< HEAD
+    $data = array(
+      'quiz' => $quiz,
+      'questions' => $questions,
+      'score' => $score,
+      'summary' => $summary,
+      'rid' => $result_id,
+    );
+    return theme('quiz_user_summary', $data);
+=======
     return theme('quiz_user_summary', $quiz, $questions, $score, $summary);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   }
   else {
     drupal_not_found();
@@ -55,17 +75,32 @@ function quiz_user_results($result_id) {
  * @return $form
  *   FAPI form array
  */
+<<<<<<< HEAD
+function quiz_report_form($form, $form_state, $questions, $showpoints = TRUE, $showfeedback = TRUE, $allow_scoring = FALSE) {
+=======
 function quiz_report_form($form_state, $questions, $showpoints = TRUE, $showfeedback = TRUE, $allow_scoring = FALSE) {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   $form = array();
   // The submit button is only shown if one or more of the questions has input elements
   $show_submit = FALSE;
   foreach ($questions as $question) {
     $module = quiz_question_module_for_type($question->type);
+<<<<<<< HEAD
+    if (!$module) {
+      return array();
+    }
+    $function = $module . '_report_form';
+    $form_to_add = $function($question, $showpoints, $showfeedback, $allow_scoring);
+    if (isset($form_to_add['submit'])) {
+      $show_submit = TRUE;
+    }
+=======
     if (!$module) return array();
     $function = $module .'_report_form';
     $form_to_add = $function($question, $showpoints, $showfeedback, $allow_scoring);
     if (isset($form_to_add['submit']))
       $show_submit = TRUE;
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     $form[] = $form_to_add;
   }
   $form['#theme'] = 'quiz_report_form';
@@ -77,7 +112,11 @@ function quiz_report_form($form_state, $questions, $showpoints = TRUE, $showfeed
       '#type' => 'submit',
       '#submit' => array('quiz_report_form_submit'),
       '#validate' => array('quiz_report_form_validate'),
+<<<<<<< HEAD
+      '#value' => t('Save Score'),
+=======
       '#value' => t('Submit'),
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     );
   }
   return $form;
@@ -92,11 +131,25 @@ function quiz_report_form_validate($form, &$form_state) {
    */
   foreach ($form_state['values'] as $key => $q_values) {
     // Questions has numeric keys in the report form
+<<<<<<< HEAD
+    if (!is_numeric($key)) {
+      continue;
+    }
+    // Questions store the name of the validation function with the key 'validate'
+    if (!isset($q_values['validate'])) {
+      continue;
+    }
+    // The validation function must exist
+    if (!function_exists($q_values['validate'])) {
+      continue;
+    }
+=======
     if (!is_numeric($key)) continue;
     // Questions store the name of the validation function with the key 'validate'
     if (!isset($q_values['validate'])) continue;
     // The validation function must exist
     if (!function_exists($q_values['validate'])) continue;
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     // We call the validation function provided by the question
     call_user_func($q_values['validate'], $q_values, $key);
   }
@@ -109,6 +162,26 @@ function quiz_report_form_submit($form, &$form_state) {
   /* We go through the form state values and submit all
    * questiontypes with validation functions declared.
    */
+<<<<<<< HEAD
+  global $user;
+  foreach ($form_state['values'] as $key => $q_values) {
+    // Questions has numeric keys in the report form
+    if (!is_numeric($key)) {
+      continue;
+    }
+    // Questions store the name of the validation function with the key 'submit'
+    if (!isset($q_values['submit'])) {
+      continue;
+    }
+    // The submit function must exist
+    if (!function_exists($q_values['submit'])) {
+      continue;
+    }
+
+    // Load the quiz
+    if (!isset($quiz)) {
+      $result = db_query('SELECT nid, uid, vid FROM {quiz_node_results} WHERE result_id = :result_id', array(':result_id' => $q_values['rid']))->fetchObject();
+=======
   foreach ($form_state['values'] as $key => $q_values) {
     // Questions has numeric keys in the report form
     if (!is_numeric($key)) continue;
@@ -121,6 +194,7 @@ function quiz_report_form_submit($form, &$form_state) {
     if (!isset($quiz)) {
       $sql = 'SELECT nid, vid FROM {quiz_node_results} WHERE result_id = %d';
       $result = db_fetch_object(db_query($sql, $q_values['rid']));
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       $quiz = node_load($result->nid, $result->vid);
       $rid = $q_values['rid'];
     }
@@ -132,6 +206,34 @@ function quiz_report_form_submit($form, &$form_state) {
   }
   // Scores may have been changed. We take the necessary actions
   quiz_update_total_score_fast($rid, $quiz->vid);
+<<<<<<< HEAD
+  $changed = db_update('quiz_node_results')
+  ->fields(array(
+    'is_evaluated' =>  1,
+  ))
+  ->condition('result_id', $rid)
+  ->execute();
+  $results_got_deleted = _quiz_maintain_results($quiz, $rid);
+
+  // A message saying the quiz is unscored has already been set. We unset it here...
+  if($changed > 0) {
+    _quiz_remove_unscored_message();
+  }
+
+  // Notify the user if results got deleted as a result of him scoring an answer.
+  $add = $quiz->keep_results == QUIZ_KEEP_BEST && $results_got_deleted ? ' ' . t('Note that this quiz is set to only keep each users best answer.') : '';
+
+  $score_data = quiz_get_score_array($rid, $quiz->vid, TRUE);
+
+  module_invoke_all('quiz_scored', $quiz, $score_data, $rid);
+
+  drupal_set_message(t('The scoring data you provided has been saved.') . $add);
+  if (user_access('score taken quiz answer') && !user_access('view any quiz results')) {
+    if ($result && $result->uid == $user->uid) {
+      $form_state['redirect'] = 'node/' . $quiz->nid . '/results/' . $rid;
+    }
+  }
+=======
   db_query('UPDATE {quiz_node_results} SET is_evaluated = 1 WHERE result_id = %d', $rid);
   $results_got_deleted = _quiz_maintain_results($quiz, $rid);
 
@@ -146,6 +248,7 @@ function quiz_report_form_submit($form, &$form_state) {
 
   drupal_set_message(t('The scoring data you provided has been saved.') . $add);
   $form_state['redirect'] = 'node/' . $quiz->nid . '/results';
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 }
 
 /**
@@ -178,6 +281,24 @@ function _quiz_remove_unscored_message() {
  *  Quiz node version id
  */
 function quiz_update_total_score_fast($rid, $quiz_vid) {
+<<<<<<< HEAD
+	$subq1 = db_select('quiz_node_results_answers', 'a');
+	$subq1
+		->condition('a.result_id', $rid)
+		->addExpression('SUM(a.points_awarded)');
+	$res1 = $subq1->execute()->fetchField();
+
+	$subq2 = db_select('quiz_node_properties', 'qnp');
+	$subq2
+		->condition('qnp.vid', $quiz_vid)
+		->addField('qnp', 'max_score');
+	$res2 = $subq2->execute()->fetchField();
+
+	db_update('quiz_node_results')
+		->expression('score', 'ROUND(100*(:res1/:res2))', array(':res1' => $res1, ':res2' => $res2))
+		->condition('result_id', $rid)
+		->execute();
+=======
   $sql = 'UPDATE {quiz_node_results} r
           SET r.score = ROUND(
             100 * (
@@ -192,6 +313,7 @@ function quiz_update_total_score_fast($rid, $quiz_vid) {
           )
           WHERE r.result_id = %d';
   db_query($sql, $rid, $quiz_vid, $rid);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 }
 
 /**
@@ -202,6 +324,14 @@ function quiz_update_total_score_fast($rid, $quiz_vid) {
  * @param unknown_type $is_evaluated
  */
 function quiz_get_score_array($rid, $quiz_vid, $is_evaluated) {
+<<<<<<< HEAD
+  $properties = db_query('SELECT max_score, number_of_random_questions
+          FROM {quiz_node_properties}
+          WHERE vid = :vid', array(':vid' => $quiz_vid))->fetchObject();
+  $total_score = db_query('SELECT SUM(points_awarded)
+          FROM (quiz_node_results_answers)
+          WHERE result_id = :result_id', array(':result_id' => $rid))->fetchField();
+=======
   $sql = 'SELECT max_score, number_of_random_questions
           FROM {quiz_node_properties}
           WHERE vid = %d';
@@ -211,6 +341,7 @@ function quiz_get_score_array($rid, $quiz_vid, $is_evaluated) {
           FROM (quiz_node_results_answers)
           WHERE result_id = %d';
   $total_score = db_result(db_query($sql, $rid));
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 
   return array(
     'question_count' => $properties->number_of_random_questions + _quiz_get_num_always_questions($quiz_vid),
@@ -229,13 +360,31 @@ function quiz_get_score_array($rid, $quiz_vid, $is_evaluated) {
  * @return
  *  HTML output for page.
  */
+<<<<<<< HEAD
+function quiz_get_user_results($uid) {
+  $results = array();
+  $dbresult = db_query('SELECT DISTINCT(n.nid), n.title, qnp.pass_rate, qnrs.result_id, qnrs.time_start, qnrs.time_end, qnrs.score, qnrs.is_evaluated
+=======
 function quiz_get_user_results($user_id) {
   $results = array();
   $sql = "SELECT n.nid, n.title, qnp.pass_rate, qnrs.result_id, qnrs.time_start, qnrs.time_end, qnrs.score, qnrs.is_evaluated
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     FROM {node} n
     INNER JOIN {quiz_node_properties} qnp ON n.nid = qnp.nid
     INNER JOIN {quiz_node_results} qnrs ON qnrs.vid = qnp.vid
     INNER JOIN {users} u ON u.uid = qnrs.uid
+<<<<<<< HEAD
+    WHERE n.type = :type
+      AND u.uid = :uid
+    ORDER BY qnrs.result_id ASC', array(':type' => 'quiz', ':uid' => $uid));
+
+  // Create an array out of the results.
+  foreach ($dbresult as $result) {
+    $result = (array) $result;
+    $results[$result['result_id']] = $result;
+  }
+  return theme('quiz_get_user_results', array('results' => $results));
+=======
     WHERE n.type = 'quiz'
       AND u.uid = %d
       AND qnrs.time_end > 0
@@ -247,6 +396,7 @@ function quiz_get_user_results($user_id) {
     $results[$line['result_id']] = $line;
   }
   return theme('quiz_get_user_results', $results);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 }
 
 /**
@@ -255,6 +405,21 @@ function quiz_get_user_results($user_id) {
 function quiz_my_results($node) {
   global $user;
   $results = array();
+<<<<<<< HEAD
+  $res = db_query('
+    SELECT qnp.nid, qnp.pass_rate, qnrs.result_id, qnrs.time_start, qnrs.time_end, qnrs.score
+    FROM {quiz_node_properties} qnp
+    INNER JOIN {quiz_node_results} qnrs ON qnrs.vid = qnp.vid
+    WHERE qnrs.uid = :uid AND qnrs.nid = :nid AND qnrs.is_evaluated = 1
+    ORDER BY qnrs.result_id DESC',
+    array(':uid' => $user->uid, ':nid' => $node->nid)
+  );
+  // Create an array out of the results.
+  while ($line = $res->fetchAssoc()) {
+    $results[$line['result_id']] = $line;
+  }
+  return theme('quiz_my_results_for_quiz', array('rows' => $results));
+=======
   $res = db_query("
     SELECT qnp.nid, qnp.pass_rate, qnrs.result_id, qnrs.time_start, qnrs.time_end, qnrs.score
     FROM {quiz_node_properties} qnp
@@ -267,6 +432,7 @@ function quiz_my_results($node) {
     $results[$line['result_id']] = $line;
   }
   return theme('quiz_my_results_for_quiz', $results);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 }
 
 // THEME FUNCTIONS
@@ -281,7 +447,12 @@ function quiz_my_results($node) {
  *
  * @ingroup themeable
  */
+<<<<<<< HEAD
+function theme_quiz_get_user_results($variables) {
+  $results = $variables['results'];
+=======
 function theme_quiz_get_user_results($results) {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   $rows = array();
 
   while (list($key, $result) = each($results)) {
@@ -289,6 +460,18 @@ function theme_quiz_get_user_results($results) {
     $passed = $result['score'] >= $result['pass_rate'];
     $grade = $passed ? t('Passed') : t('Failed');
     $passed_class = $passed ? 'quiz-passed' : 'quiz-failed';
+<<<<<<< HEAD
+    if (!is_numeric($result['score'])) {
+      $score = t('In progress');
+    }
+    elseif (!$result['is_evaluated']) {
+      $score = t('Not evaluated');
+    }
+    else {
+      if (!empty($result['pass_rate']) && is_numeric($result['score'])) {
+        $pre_score = '<span class = "' . $passed_class . '">';
+        $post_score = ' %<br><em>' . $grade . '</em></span>';
+=======
     if (!is_numeric($result['score']))
       $score = t('In progress');
     elseif (!$result['is_evaluated'])
@@ -297,6 +480,7 @@ function theme_quiz_get_user_results($results) {
       if (!empty($result['pass_rate']) && is_numeric($result['score'])) {
         $pre_score = '<span class = "' . $passed_class . '">';
         $post_score = ' %<br><em>'. $grade .'</em></span>';
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       }
       else {
         $post_score = ' %';
@@ -304,12 +488,22 @@ function theme_quiz_get_user_results($results) {
       $score = $pre_score . $result['score'] . $post_score;
     }
     $rows[] = array(
+<<<<<<< HEAD
+      'title'       => l($result['title'], 'node/' . $result['nid']),
+      'time_start'  => format_date($result['time_start'], 'short'),
+      'time_end'    => ($result['time_end'] > 0) ? format_date($result['time_end'], 'short') . '<br />' . t('Duration :  @value', array('@value' => $interval)) : t('In Progress'),
+
+      'score'       => $score,
+      'evaluated'   => $result['is_evaluated'] ? t('Yes') : t('No'),
+      'op'          => l(t('View answers'), 'user/quiz/' . $result['result_id'] . '/userresults'),
+=======
       'title'       => l($result['title'], 'user/quiz/'. $result['result_id'] .'/userresults'),
       'time_start'  => format_date($result['time_start'], 'small'),
       'time_end'    =>($result['time_end'] > 0) ? format_date($result['time_end'], 'small') . '<br />' . t('Duration :  @value', array('@value' => $interval)) : t('In Progress'),
 
       'score'       => $score,
       'evaluated'   => $result['is_evaluated'] ? t('Yes') : t('No'),
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     );
 
   }
@@ -324,10 +518,18 @@ function theme_quiz_get_user_results($results) {
     t('Finished'),
     t('Score'),
     t('Evaluated'),
+<<<<<<< HEAD
+    t('Operation'),
+  );
+
+  $output = theme('table', array('header' => $header, 'rows' => $rows));
+  $output .= '<p><em>' . t('@quizzes that are not evaluated may have a different score and grade once evaluated.', array('@quizzes' => QUIZ_NAME)) . '</em></p>';
+=======
   );
 
   $output = theme('table', $header, $rows);
   $output .= '<p><em>' . t('@quizzes that are not evaluated may have different score and grade when it is done.', array('@quizzes' => QUIZ_NAME)) . '</em></p>';
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   return $output;
 }
 
@@ -341,7 +543,12 @@ function theme_quiz_get_user_results($results) {
  *
  * @ingroup themeable
  */
+<<<<<<< HEAD
+function theme_quiz_my_results_for_quiz($variables) {
+  $results = $variables['rows'];
+=======
 function theme_quiz_my_results_for_quiz($results) {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   $rows = array();
   $with_passing = FALSE;
   while (list($key, $result) = each($results)) {
@@ -349,7 +556,11 @@ function theme_quiz_my_results_for_quiz($results) {
     $score = $result['score'] . ' %';
 
     $row = array(
+<<<<<<< HEAD
+      'time_start'  => format_date($result['time_start'], 'short'),
+=======
       'time_start'  => format_date($result['time_start'], 'small'),
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       'duration' => $interval,
       'score'       => $score,
     );
@@ -378,7 +589,11 @@ function theme_quiz_my_results_for_quiz($results) {
     $header[] = t('Passed');
   }
   $header[] = '';
+<<<<<<< HEAD
+  $output = theme('table', array('header' => $header, 'rows' => $rows));
+=======
   $output = theme('table', $header, $rows);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   return $output;
 }
 
@@ -388,7 +603,16 @@ function theme_quiz_my_results_for_quiz($results) {
  * @ingroup themeable
  */
 function theme_quiz_score_correct() {
+<<<<<<< HEAD
+  $variables = array(
+    'path' => drupal_get_path('module', 'quiz') . '/images/correct.gif',
+    'alt' => t('correct'),
+    'title' => t('correct'),
+  );
+  return theme('image', $variables);
+=======
   return theme('image', drupal_get_path('module', 'quiz') .'/images/correct.gif', t('correct'));
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 }
 
 /**
@@ -397,7 +621,16 @@ function theme_quiz_score_correct() {
  * @ingroup themeable
  */
 function theme_quiz_score_incorrect() {
+<<<<<<< HEAD
+  $variables = array(
+    'path' => drupal_get_path('module', 'quiz') . '/images/incorrect.gif',
+    'alt' => t('incorrect'),
+    'title' => t('incorrect'),
+  );
+  return theme('image', $variables);
+=======
   return theme('image', drupal_get_path('module', 'quiz') .'/images/incorrect.gif', t('incorrect'));
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 }
 
 /**
@@ -412,35 +645,78 @@ function theme_quiz_score_incorrect() {
  *
  * @ingroup themeable
  */
+<<<<<<< HEAD
+function theme_quiz_progress($variables) {
+  $question_number = $variables['question_number'];
+  $num_of_question = $variables['num_questions'];
+  // TODO Number of parameters in this theme funcion does not match number of parameters found in hook_theme.
+=======
 function theme_quiz_progress($question_number, $num_of_question, $jumper = FALSE, $time_limit = FALSE) {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   // Determine the percentage finished (not used, but left here for other implementations).
   //$progress = ($question_number*100)/$num_of_question;
 
   // Get the current question # by adding one.
   $current_question = $question_number + 1;
 
+<<<<<<< HEAD
+  if ($variables['allow_jumping']) {
+    $current_question = theme('quiz_jumper', array('current' => $current_question, 'num_questions' => $num_of_question));
+=======
   if ($jumper) {
     $current_question = theme('quiz_jumper', $current_question, $num_of_question);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   }
 
   $output  = '';
   $output .= '<div id="quiz_progress">';
   $output .= t('Question <span id="quiz-question-number">!x</span> of <span id="quiz-num-questions">@y</span>', array('!x' => $current_question, '@y' => $num_of_question));
+<<<<<<< HEAD
+  $output .= '</div>' . "\n";
+  // Add div to be used by jQuery countdown
+  if ($variables['time_limit']) {
+=======
   $output .= '</div>'."\n";
   // Add div to be used by jQuery countdown
   if ($time_limit) {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     $output .= '<div class="countdown"></div>';
   }
   return $output;
 }
 
+<<<<<<< HEAD
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
+function theme_quiz_jumper($variables) {
+  $current = $variables['current'];
+  $num_questions = $variables['num_questions'];
+=======
 function theme_quiz_jumper($current, $num_questions) {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   $output = '<select name="quiz-jumper" class="form-select" id="quiz-jumper">';
   for ($i = 1; $i <= $num_questions; $i++) {
     $extra = $i == $current ? ' selected="selected"' : '';
     $output .= '<option value="' . $i . '"' . $extra . '>' . $i . '</option>';
   }
   $output .= '</select><span id="quiz-jumper-no-js">' . $current . '</span>';
+<<<<<<< HEAD
+  drupal_add_js('
+    (function ($) {
+      Drupal.behaviors.quizJumper = {
+        attach: function(context, settings) {
+          $("#quiz-jumper:not(.quizJumper-processed)", context).show().addClass("quizJumper-processed").change(function(){
+            $("[name=jump_to_question]").val($(this).val());
+            $("#edit-submit").trigger("click");
+          });
+          $("#quiz-jumper-no-js:not(.quizJumper-processed)").hide().addClass("quizJumper-processed");
+        }
+      };
+    })(jQuery);
+  ', array('type' => 'inline', 'scope' => JS_DEFAULT));
+=======
   drupal_add_js("
     Drupal.behaviors.quizJumper = function () {
       $('#quiz-jumper:not(.quizJumper-processed)').show().addClass('quizJumper-processed').change(function(){
@@ -450,6 +726,7 @@ function theme_quiz_jumper($current, $num_questions) {
       $('#quiz-jumper-no-js:not(.quizJumper-processed)').hide().addClass('quizJumper-processed');
     };
   ", 'inline');
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   return $output;
 }
 
@@ -469,14 +746,48 @@ function theme_quiz_jumper($current, $num_questions) {
  *
  * @ingroup themeable
  */
+<<<<<<< HEAD
+function theme_quiz_take_summary($variables) {
+  $quiz = $variables['quiz'];
+  $questions = $variables['questions'];
+  $score = $variables['score'];
+  $summary = $variables['summary'];
+  $rid =  $variables['rid'];
+  // Set the title here so themers can adjust.
+  drupal_set_title($quiz->title);
+=======
 function theme_quiz_take_summary($quiz, $questions, $score, $summary) {
   // Set the title here so themers can adjust.
   drupal_set_title(check_plain($quiz->title));
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 
   // Display overall result.
   $output = '';
   if (!empty($score['possible_score'])) {
     if (!$score['is_evaluated']) {
+<<<<<<< HEAD
+      if (user_access('score taken quiz answer')) {
+        $msg = t('Parts of this @quiz have not been evaluated yet. The score below is not final. <a class="self-score" href="!result_url">Click here</a> to give scores on your own.', array('@quiz' => QUIZ_NAME, '!result_url' => url('node/' . $quiz->nid . '/results/' . $rid)));
+      }
+      else {
+        $msg = t('Parts of this @quiz have not been evaluated yet. The score below is not final.', array('@quiz' => QUIZ_NAME));
+      }
+      drupal_set_message($msg, 'warning');
+    }
+    $output .= '<div id="quiz_score_possible">' . t('You got %num_correct of %question_count possible points.', array('%num_correct' => $score['numeric_score'], '%question_count' => $score['possible_score'])) . '</div>' . "\n";
+    $output .= '<div id="quiz_score_percent">' . t('Your score: %score %', array('%score' => $score['percentage_score'])) . '</div>' . "\n";
+  }
+  if (isset($summary['passfail'])) {
+    $output .= '<div id="quiz_summary">' . $summary['passfail'] . '</div>' . "\n";
+  }
+  if (isset($summary['result'])) {
+    $output .= '<div id="quiz_summary">' . $summary['result'] . '</div>' . "\n";
+  }
+  // Get the feedback for all questions. These are included here to provide maximum flexibility for themers
+  if ($quiz->display_feedback) {
+    $form = drupal_get_form('quiz_report_form', $questions);
+    $output .= drupal_render($form);
+=======
       $msg = t('Parts of this @quiz have not been evaluated yet. The score below is not final.', array('@quiz' => QUIZ_NAME));
       drupal_set_message($msg, 'warning');
     }
@@ -490,6 +801,7 @@ function theme_quiz_take_summary($quiz, $questions, $score, $summary) {
   // Get the feedback for all questions. These are included here to provide maximum flexibility for themers
   if ($quiz->display_feedback) {
     $output .= drupal_get_form('quiz_report_form', $questions);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   }
   return $output;
 }
@@ -510,6 +822,24 @@ function theme_quiz_take_summary($quiz, $questions, $score, $summary) {
  *
  * @ingroup themeable
  */
+<<<<<<< HEAD
+function theme_quiz_user_summary($variables) {
+  $quiz = $variables['quiz'];
+  $questions = $variables['questions'];
+  $score = $variables['score'];
+  $summary = $variables['summary'];
+  $rid = $variables['rid'];
+  // Set the title here so themers can adjust.
+  drupal_set_title($quiz->title);
+
+  if (!$score['is_evaluated']) {
+    if (user_access('score taken quiz answer')) {
+      $msg = t('Parts of this @quiz have not been evaluated yet. The score below is not final. <a class="self-score" href="!result_url">Click here</a> to give scores on your own.', array('@quiz' => QUIZ_NAME, '!result_url' => url('node/' . $quiz->nid . '/results/' . $rid)));
+    }
+    else {
+      $msg = t('Parts of this @quiz have not been evaluated yet. The score below is not final.', array('@quiz' => QUIZ_NAME));
+    }
+=======
 function theme_quiz_user_summary($quiz, $questions, $score, $summary) {
   // Set the title here so themers can adjust.
   drupal_set_title(check_plain($quiz->title));
@@ -517,10 +847,29 @@ function theme_quiz_user_summary($quiz, $questions, $score, $summary) {
   if (!$score['is_evaluated']) {
     $msg = t('Parts of this @quiz have not been evaluated yet. The score below is not final.', array('@quiz' => QUIZ_NAME));
     drupal_set_message($msg, 'status');
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   }
 
   // Display overall result.
   $output = '';
+<<<<<<< HEAD
+  $output .= '<div id="quiz_score_possible">' .
+    t('You got %num_correct of %question_count possible points.', array('%num_correct' => $score['numeric_score'], '%question_count' => $score['possible_score'])) .
+    '</div>';
+  $output .= '<div id="quiz_score_percent">' .
+    t('Your score was: @score %', array('@score' => $score['percentage_score'])) .
+    '</div>';
+
+  if (isset($summary['passfail'])) {
+    $output .= '<div id="quiz_summary">' . $summary['passfail'] . '</div>' . "\n";
+  }
+  if (isset($summary['result'])) {
+    $output .= '<div id="quiz_summary">' . $summary['result'] . '</div>' . "\n";
+  }
+  // Get the feedback for all questions.
+  $form = drupal_get_form('quiz_report_form', $questions, FALSE, TRUE);
+  $output .= drupal_render($form);
+=======
   $output .= '<div id="quiz_score_possible">'. t('You got %num_correct of %question_count possible points.', array('%num_correct' => $score['numeric_score'], '%question_count' => $score['possible_score'])) .'</div>'."\n";
   $output .= '<div id="quiz_score_percent">'. t('Your score was: @score %', array('@score' => $score['percentage_score'])) .'</div>'."\n";
   if (isset($summary['passfail']))
@@ -529,6 +878,7 @@ function theme_quiz_user_summary($quiz, $questions, $score, $summary) {
     $output .= '<div id="quiz_summary">'. $summary['result'] .'</div>'."\n";
   // Get the feedback for all questions.
   $output .= drupal_get_form('quiz_report_form', $questions, FALSE, TRUE);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   return $output;
 }
 
@@ -552,10 +902,18 @@ function theme_quiz_no_feedback() {
  * @return
  *  Themed html feedback
  */
+<<<<<<< HEAD
+function theme_quiz_single_question_node($variables) {
+  $node = $variables['question_node'];
+  // This might seem meaningless, but it is designed this way to allow themes to add more
+  // meaningful stuff here...
+  return drupal_render($node->content['body']);
+=======
 function theme_quiz_single_question_node($node) {
   // This might seem meaningless, but it is designed this way to allow themes to add more
   // meaningful stuff here...
   return $node->body;
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 }
 
 /**
@@ -564,7 +922,12 @@ function theme_quiz_single_question_node($node) {
  * @param $node
  *   The quiz node
  */
+<<<<<<< HEAD
+function theme_quiz_view_stats($variables) {
+  $node = $variables['node'];
+=======
 function theme_quiz_view_stats($node) {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   // Fetch data
   $stats = array(
     array(
@@ -588,17 +951,29 @@ function theme_quiz_view_stats($node) {
   else {
     $stats[] = array(
       'title' => t('Opens'),
+<<<<<<< HEAD
+      'data' => format_date($node->quiz_open, 'short'),
+    );
+    $stats[] = array(
+      'title' => t('Closes'),
+      'data' => format_date($node->quiz_close, 'short'),
+=======
       'data' => format_date($node->quiz_open, 'small'),
     );
     $stats[] = array(
       'title' => t('Closes'),
       'data' => format_date($node->quiz_close, 'small'),
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     );
   }
   if (!empty($node->pass_rate)) {
     $stats[] = array(
       'title' => t('Pass rate'),
+<<<<<<< HEAD
+      'data' => $node->pass_rate . ' %',
+=======
       'data' => $node->pass_rate .' %',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     );
   }
   if (!empty($node->time_limit)) {
@@ -614,7 +989,11 @@ function theme_quiz_view_stats($node) {
   // Format and output the data
   $out = '<table id="quiz-view-table">' . "\n";
   foreach ($stats as $stat) {
+<<<<<<< HEAD
+    $out .= '<tr><td class="quiz-view-table-title"><strong>' . $stat['title'] . ':</strong></td><td class="quiz-view-table-data"><em>' . $stat['data'] . '</em></td></tr>' . "\n";
+=======
     $out .= '<tr><td class="quiz-view-table-title"><strong>'. $stat['title'] .':</strong></td><td class="quiz-view-table-data"><em>'. $stat['data'] .'</em></td></tr>' . "\n";
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   }
   $out .= '</table>' . "\n";
   return $out;

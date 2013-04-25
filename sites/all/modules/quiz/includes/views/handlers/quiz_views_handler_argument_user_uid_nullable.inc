@@ -25,6 +25,15 @@ class quiz_views_handler_argument_user_uid_nullable extends views_handler_argume
     );
   }
 
+<<<<<<< HEAD
+  function query($group_by = FALSE) {
+    $this->ensure_my_table();
+    $operator = empty($this->options['not']) ? '=' : '!=';
+    $where = "$this->table_alias.$this->real_field";
+    if ($this->options['allow_null']) {
+      $group = $this->query->set_where_group('AND', 'qnr_user');
+      //$where .= " OR ISNULL($this->table_alias.$this->real_field)";
+=======
   function query() {
     $this->ensure_my_table();
     $operator = empty($this->options['not']) ? '=' : '!=';
@@ -32,6 +41,7 @@ class quiz_views_handler_argument_user_uid_nullable extends views_handler_argume
     if ($this->options['allow_null']) {
       $group = $this->query->set_where_group('AND', 'qnr_user');
       $where .= " OR ISNULL($this->table_alias.$this->real_field)";
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     }
     else {
       $group = 0;

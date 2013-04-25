@@ -10,16 +10,31 @@
 
 
 /**
+<<<<<<< HEAD
+ * Implements hook_install().
+ */
+function multichoice_install() {
+  // Add body field to multichoice node
+  quiz_question_add_body_field('multichoice');
+
+  // TODO The drupal_(un)install_schema functions are called automatically in D7.
+  // drupal_install_schema('multichoice')
+=======
  * Implementation of hook_install()
  */
 function multichoice_install() {
   drupal_install_schema('multichoice');
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   cache_clear_all('autoload:', 'cache');
   variable_set('node_options_multichoice', array('status'));
 }
 
 /**
+<<<<<<< HEAD
+ * Implements hook_schema().
+=======
  * Implementation of hook_schema().
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function multichoice_schema() {
   // Stores the users answers to a question.
@@ -128,19 +143,37 @@ function multichoice_schema() {
         'type' => 'text',
       ),
       'answer_format' => array(
+<<<<<<< HEAD
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+=======
         'type' => 'int',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       ),
       'feedback_if_chosen' => array(
         'type' => 'text',
       ),
       'feedback_if_chosen_format' => array(
+<<<<<<< HEAD
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+=======
         'type' => 'int',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       ),
       'feedback_if_not_chosen' => array(
         'type' => 'text',
       ),
       'feedback_if_not_chosen_format' => array(
+<<<<<<< HEAD
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+=======
         'type' => 'int',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       ),
       'score_if_chosen' => array(
         'type' => 'int',
@@ -208,6 +241,13 @@ function multichoice_schema() {
 }
 
 /**
+<<<<<<< HEAD
+ * Implements hook_uninstall().
+ */
+function multichoice_uninstall() {
+  // TODO The drupal_(un)install_schema functions are called automatically in D7.
+  // drupal_uninstall_schema('multichoice')
+=======
  * Implementation of hook_update_N().
  */
 function multichoice_update_6300() {
@@ -324,6 +364,7 @@ function multichoice_update_6405() {
  */
 function multichoice_uninstall() {
   drupal_uninstall_schema('multichoice');
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   $var = array(
     'multichoice_def_scoring',
     'multichoice_def_num_of_alts',
@@ -332,4 +373,8 @@ function multichoice_uninstall() {
     variable_del($v);
   }
   drupal_set_message(t("The multichoice module has been uninstalled. multichoice nodes may still exist, but they will not function properly."));
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2

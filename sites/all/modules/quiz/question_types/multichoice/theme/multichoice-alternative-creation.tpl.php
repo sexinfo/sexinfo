@@ -30,7 +30,11 @@ $row[] = drupal_render($form['answer']);
 $rows[] = $row;
 $header[] = array('data' => $title_correct);
 $header[] = array('data' => $title_answer);
+<<<<<<< HEAD
+print theme('table', array('header' => $header, 'rows' => $rows));
+=======
 print theme('table', $header, $rows);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 
 //These lines make things look alot beter if user only has one input format available:
 _quiz_format_mod($form['format']);
@@ -39,4 +43,8 @@ _quiz_format_mod($form['advanced']['helper']['format']);
 
 print drupal_render($form['format']);
 print drupal_render($form['advanced']);
+<<<<<<< HEAD
 ?>
+=======
+?>
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2

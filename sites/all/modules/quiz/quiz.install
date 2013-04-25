@@ -7,6 +7,14 @@
  */
 
 /**
+<<<<<<< HEAD
+ * Implements hook_install().
+ */
+function quiz_install() {
+  node_types_rebuild();
+  $types = node_type_get_types();
+  node_add_body_field($types['quiz']);
+=======
  * Implementation of hook_update_N
  * 
  * Increase the maximum quiz size
@@ -834,15 +842,23 @@ function quiz_update_6300() {
 function quiz_install() {
   // Create Tables
   drupal_install_schema('quiz');
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 
   // Default the "Show Author and Date" for quiz nodes to OFF.
   $temp_array = variable_get('theme_settings', array());
   $temp_array['toggle_node_info_quiz'] = 0;
   variable_set('theme_settings', $temp_array);
+<<<<<<< HEAD
+
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   // Default the comment settings to disabled.
   variable_set('comment_quiz', '0');
 
   // Create the quiz_def_uid variable holding an artificial uid to use when storing default settings.
+<<<<<<< HEAD
+  variable_set('quiz_def_uid', 1);
+=======
   db_lock_table('users');
   $sql = 'INSERT INTO {users} (name) VALUES(\'def user\')';
   db_query($sql);
@@ -850,13 +866,19 @@ function quiz_install() {
   db_query('DELETE FROM {users} WHERE uid = '. intval($def_uid));
   db_unlock_tables();
   variable_set('quiz_def_uid', $def_uid);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 
   drupal_set_message(t('Quiz module has been enabled. To !create_a_quiz go to Create Content -> Quiz.', array('!create_a_quiz' => l(t('create a quiz'), 'node/add/quiz'))));
 }
 
 /**
+<<<<<<< HEAD
+ * Implements hook_schema().
+ */
+=======
 * Implementation of hook_schema().
 */
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 function quiz_schema() {
   $schema = array();
   /**
@@ -904,9 +926,25 @@ function quiz_schema() {
       'summary_pass' => array(
         'type' => 'text',
       ),
+<<<<<<< HEAD
+      'summary_pass_format' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
       'summary_default' => array(
         'type' => 'text',
       ),
+      'summary_default_format' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+=======
+      'summary_default' => array(
+        'type' => 'text',
+      ),
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       'randomization' => array(
         'type' => 'int',
         'size' => 'small',
@@ -1025,6 +1063,22 @@ function quiz_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+<<<<<<< HEAD
+      'show_passed' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'unsigned' => FALSE,
+        'not null' => TRUE,
+        'default' => 1,
+      ),
+      'mark_doubtful' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     ),
     'primary key' => array('vid'),
     // 'unique keys' => array('vid'),
@@ -1081,10 +1135,23 @@ function quiz_schema() {
         'not null' => TRUE,
         'default' => 0,
       ),
+<<<<<<< HEAD
+      'auto_update_max_score' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     ),
     'primary key' => array('parent_nid', 'parent_vid', 'child_nid', 'child_vid'),
     'indexes' => array(
       'parent_id' => array('parent_vid'),
+<<<<<<< HEAD
+      'child_id' => array('child_vid'),
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     ),
   );
 
@@ -1118,12 +1185,20 @@ function quiz_schema() {
       ),
       'time_start' => array(
         'type' => 'int',
+<<<<<<< HEAD
+        'unsigned' => FALSE,
+=======
         'unsigned' => TRUE,
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'default' => 0,
       ),
       'time_end' => array(
         'type' => 'int',
+<<<<<<< HEAD
+        'unsigned' => FALSE,
+=======
         'unsigned' => TRUE,
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'default' => 0,
       ),
       'released' => array(
@@ -1160,6 +1235,10 @@ function quiz_schema() {
     'primary key' => array('result_id'),
     'indexes' => array(
       'user_results' => array('uid', 'vid', 'nid'),
+<<<<<<< HEAD
+      'vid' => array('vid'),
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     ),
   );
 
@@ -1173,7 +1252,11 @@ function quiz_schema() {
         'type' => 'int',
         'unsigned' => TRUE,
         'not null' => TRUE,
+<<<<<<< HEAD
+      ),
+=======
     ),
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       'question_nid' => array(
         'type' => 'int',
         'unsigned' => TRUE,
@@ -1221,6 +1304,15 @@ function quiz_schema() {
         'not null' => TRUE,
         'default' => 1,
       ),
+<<<<<<< HEAD
+      'is_doubtful' => array(
+	'type' => 'int',
+	'not null' => TRUE,
+	'default'=> 0,
+	'size'=> 'tiny'
+      ),
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     ),
     'primary key' => array('result_id', 'question_nid', 'question_vid'),
     'indexes' => array(
@@ -1259,6 +1351,14 @@ function quiz_schema() {
       'option_summary' => array(
         'type' => 'text',
       ),
+<<<<<<< HEAD
+      'option_summary_format' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       'option_start' => array(
         'type' => 'int',
         'unsigned' => TRUE,
@@ -1310,9 +1410,25 @@ function quiz_schema() {
       'summary_pass' => array(
         'type' => 'text',
       ),
+<<<<<<< HEAD
+      'summary_pass_format' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
       'summary_default' => array(
         'type' => 'text',
       ),
+      'summary_default_format' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+      ),
+=======
+      'summary_default' => array(
+        'type' => 'text',
+      ),
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       'randomization' => array(
         'type' => 'int',
         'size' => 'small',
@@ -1398,10 +1514,22 @@ function quiz_schema() {
       'allow_jumping' => array(
         'type' => 'int',
         'size' => 'tiny',
+<<<<<<< HEAD
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'show_passed' => array(
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 1,
+      ),
+=======
         'unsigned' => FALSE,
         'not null' => TRUE,
         'default' => 0,
       ),
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     ),
     'primary key' => array('uid'),
   );
@@ -1455,6 +1583,121 @@ function quiz_schema() {
   );
   return $schema;
 }
+<<<<<<< HEAD
+/**
+ * Implements hook_update_N()
+ */
+
+// should have been named quiz_update_7400
+function quiz_update_7100(&$sandbox) {
+  db_add_field('quiz_node_properties', 'show_passed', array('type' => 'int', 'not null' => TRUE,'default' => 1,'size' => 'tiny'));
+  return t('Show passed field added to quiz config.');
+}
+
+// should have been named quiz_update_7401
+function quiz_update_7101(&$sandbox) {
+  db_add_field('quiz_user_settings', 'show_passed', array('type' => 'int', 'not null' => TRUE,'default' => 1,'size' => 'tiny'));
+  return t('Done !');
+}
+
+/**
+ * Implements hook_update_N
+ */
+function quiz_update_7402(&$sandbox) {
+  if (!db_field_exists('quiz_node_properties', 'summary_pass_format')) {
+    db_add_field('quiz_node_properties', 'summary_pass_format', array('type' => 'varchar', 'length' => 255));
+    db_add_field('quiz_node_properties', 'summary_default_format', array('type' => 'varchar', 'length' => 255));
+    db_add_field('quiz_node_result_options', 'option_summary_format', array('type' => 'varchar', 'length' => 255));
+    db_add_field('quiz_user_settings', 'summary_pass_format', array('type' => 'varchar', 'length' => 255));
+    db_add_field('quiz_user_settings', 'summary_default_format', array('type' => 'varchar','length' => 255));
+  }
+  return t("Added new format fields to the tables if they didn't already exist.");
+}
+
+/**
+ * Adds index on vid column to the quiz_node_results table and on child_vid to
+ * the quiz_node_relationship table.
+ */
+function quiz_update_7403() {
+  db_add_index('quiz_node_results', 'vid', array('vid'));
+  db_add_index('quiz_node_relationship', 'child_id', array('child_vid'));
+}
+
+/**
+ * Increase the maximum quiz size
+ */
+function quiz_update_7404() {
+  $results[] = db_change_field('quiz_node_properties', 'number_of_random_questions', 'number_of_random_questions', array(
+    'type' => 'int',
+    'size' => 'small',
+    'unsigned' => TRUE,
+    'not null' => TRUE,
+    'default' => 0,
+  ));
+  $results[] = db_change_field('quiz_node_results_answers', 'number', 'number', array(
+    'type' => 'int',
+    'size' => 'small',
+    'unsigned' => FALSE,
+    'not null' => TRUE,
+    'default' => 1,
+  ));
+  return $results;
+}
+
+/**
+ * Remove unsigned attribute from field time_start and time_end in quiz_node_results table.
+ */
+function quiz_update_7405() {
+  $spec = array(
+    'type' => 'int',
+    'unsigned' => FALSE,
+    'default' => 0,
+  );
+  db_change_field('quiz_node_results', 'time_start', 'time_start', $spec);
+  db_change_field('quiz_node_results', 'time_end', 'time_end', $spec);
+  return t('Removed unsigned attribute from field time_start and time_end in quiz_node_results table');
+}
+
+/**
+ * Adding columns mark answers as doubtful
+ */
+function quiz_update_7406(&$sandbox) {
+  $spec = array(
+    'type' => 'int',
+    'not null' => TRUE,
+    'default'=> 0,
+    'size'=> 'tiny'
+  );
+  db_add_field('quiz_node_results_answers','is_doubtful', $spec);
+  db_add_field('quiz_node_properties', 'mark_doubtful', $spec);
+  return t('Added new format fields to the tables');
+}
+
+/**
+ * Adding auto update max score
+ */
+function quiz_update_7407(&$sandbox) {
+  $spec = array(
+    'type' => 'int',
+    'size' => 'tiny',
+    'not null' => TRUE,
+    'default' => 0,
+  );
+  db_add_field('quiz_node_relationship','auto_update_max_score', $spec);
+  return t('Added new auto update max score field to the quiz_node_relationship table');
+}
+
+
+
+/**
+ * Implements hook_uninstall().
+ */
+function quiz_uninstall() {
+  db_delete('variable')
+    ->condition('name', "quiz_%", 'like')
+    ->execute();
+}
+=======
 
 /**
  * Implementation of hook_uninstall()
@@ -1489,3 +1732,4 @@ function quiz_uninstall() {
     variable_del($v);
   }
 }
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2

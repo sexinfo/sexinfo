@@ -14,7 +14,11 @@ function refreshAlternatives(selection) {
   var colId = selection.options[selection.selectedIndex].value;
   var numberOfOptions = scaleCollections[colId].length;
   for(var i = 0; i<numberOfOptions;i++){
+<<<<<<< HEAD
+	jQuery('#edit-alternative' + (i)).val(scaleCollections[colId][i]);
+=======
 	$('#edit-alternative' + (i)).val(scaleCollections[colId][i]);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   }
 }
 
@@ -23,6 +27,12 @@ function refreshAlternatives(selection) {
  */
 function clearAlternatives() {
   for ( var i = 0; i < scale_max_num_of_alts; i++) {
+<<<<<<< HEAD
+	jQuery('#edit-alternative' + (i)).val('');
+  }
+}
+=======
 	$('#edit-alternative' + (i)).val('');
   }
 }
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2

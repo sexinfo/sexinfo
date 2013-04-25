@@ -1,6 +1,9 @@
+<<<<<<< HEAD
+=======
 
 
 
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 /*
  * Definitions that apply while viewing questions
  */
@@ -64,8 +67,22 @@ td.quiz_summary_qcell table td {
 }
 
 #quiz-question-browser-filters {
+<<<<<<< HEAD
+  /*background-color: black;*/
+  /* Black bg in seven theme looks horrible. */
+  background: none repeat scroll 0 0 #E1E2DC;
+  border-color: #BEBFB9;
+  border-style: solid;
+  border-width: 1px;
+  font-weight: normal;
+  padding: 3px 10px;
+  text-transform: uppercase;
+}
+
+=======
   background-color: black;
 }
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 #quiz-question-browser-filters td.active {
   background-color: #666;
 }
@@ -98,18 +115,30 @@ tr.selected.quiz-question-browser-row td, tr.selected.quiz-question-browser-row 
  * Definitions that apply on the quiz report pages.
  */
 
+<<<<<<< HEAD
+div.quiz-report {
+=======
 dl.quiz-report {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   margin: 0;
   padding: 0;
 }
 
+<<<<<<< HEAD
+div.quiz-report .dt {
+=======
 dl.quiz-report dt {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   background: #eee;
   border-top: solid 1px gray;
   padding-left: 5px;
 }
 
+<<<<<<< HEAD
+div.quiz-report .dt div.quiz-report-score-container {
+=======
 dl.quiz-report dt div.quiz-report-score-container {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   border-right: solid 1px gray;
   border-left: solid 1px gray;
   border-bottom: solid 1px gray;
@@ -117,6 +146,20 @@ dl.quiz-report dt div.quiz-report-score-container {
   padding: 4px 6px;
 }
 
+<<<<<<< HEAD
+div.quiz-report .dt div.quiz-report-score-container span div.form-item {
+  display: inline;
+}
+
+div.quiz-report .dd {
+  margin: 10px 0 50px 0;
+}
+
+div.quiz-score-submit {
+  float: right;
+}
+
+=======
 dl.quiz-report dt div.quiz-report-score-container span div.form-item {
   display: inline;
 }
@@ -125,6 +168,7 @@ dl.quiz-report dd {
   margin: 10px 0 50px 0;
 }
 
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 .quiz-report-skipped {
   float: right;
 }
@@ -141,6 +185,9 @@ dl.quiz-report dd {
   background-color: #FFFFDD;
 }
 
+<<<<<<< HEAD
+input#edit-op, input#edit-back {
+=======
 .q-back-button {
   background: 0 none;
   border: 0 none;
@@ -154,12 +201,17 @@ dl.quiz-report dd {
 }
 
 .q-skip-button {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   background: 0 none;
   border: 0 none;
   color: #666699;
 }
 
+<<<<<<< HEAD
+input.q-skip-button:hover, input#edit-back:hover {
+=======
 .q-skip-button:hover {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   color: #6666ff;
   cursor: pointer;
   text-decoration: underline;
@@ -249,4 +301,86 @@ dl.quiz-report dd {
 #quiz-categorized-form #autocomplete {
   overflow: auto;
   max-height: 300px;
+<<<<<<< HEAD
 }
+
+.mark-doubtful .toggle {
+  margin: auto;
+  position: relative;
+  width: 100px;
+  overflow: hidden;
+  height: 18px;
+  line-height: 18px;
+  font-size: 11px;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+  -moz-box-shadow: 0 0 10px rgba(0,0,0,0.50) inset;
+  -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.50) inset;
+  box-shadow: 0 0 10px rgba(0,0,0,0.50) inset;
+}
+
+.mark-doubtful .toggle.off {
+  background-clip: padding-box;
+  background-image: -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(50%, red), color-stop(50%, white), color-stop(100%, white));
+  background-image: -moz-linear-gradient(left, red 50%, white 50%, white 100%);
+  background-image: linear-gradient(left, red 50%, white 50%, white 100%);
+}
+
+.mark-doubtful .toggle {
+  background-image: -webkit-gradient(linear, 0% 0%, 100% 0%, color-stop(50%, white), color-stop(50%, green), color-stop(100%, green));
+  background-image: -moz-linear-gradient(left, white 50%, green 50%, green 100%);
+  background-image: linear-gradient(left, white 50%, green 50%, green 100%);
+}
+
+.mark-doubtful .toggle div {
+  position: relative;
+  color: #777;
+  width: 52px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  border-radius: 2px;
+  background: white;
+  text-shadow: 1px 1px 0 white;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #FEFEFE), color-stop(100%, #EAEAEA));
+  background-image: -moz-linear-gradient(top, #FEFEFE 0%, #EAEAEA 100%);
+  background-image: linear-gradient(top, #FEFEFE 0%, #EAEAEA 100%);
+  -webkit-transition: left 0.2s;
+  -mox-transition: left 0.2s;
+  -o-transition: left 0.2s;
+  transition: left 0.2s;
+}
+
+
+.mark-doubtful .toggle div:after,
+.mark-doubtful .toggle div:before {
+  color: white;
+  text-shadow: none;
+  width: 50px;
+  position: absolute;
+  top: 0;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.mark-doubtful .toggle div:before {
+  content: "Doubtful";
+  left: -48px;
+}
+
+.mark-doubtful .toggle div:after {
+  content: "Clear";
+  right: -48px;
+}
+.mark-doubtful .toggle.off div {
+  left: 48px;
+}
+
+=======
+}
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2

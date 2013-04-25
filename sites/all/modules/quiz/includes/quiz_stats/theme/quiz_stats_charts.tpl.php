@@ -18,7 +18,11 @@
  * $charts['top_scorers']['chart'] (string - img tag - google chart)
  * $charts['top_scorers']['explanation'] (string)
  */
+<<<<<<< HEAD
+$chart_found = FALSE;
+=======
 
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 if (!function_exists('_quiz_stats_print_chart')) {
   function _quiz_stats_print_chart(&$chart) {
     if (is_array($chart)) {
@@ -34,6 +38,12 @@ _quiz_stats_print_chart($charts['top_scorers']);
 _quiz_stats_print_chart($charts['status']);
 _quiz_stats_print_chart($charts['grade_range']);
 if (!$chart_found) {
+<<<<<<< HEAD
+  echo t('There are no statistics for this quiz (or quiz revision). This is probably because nobody has yet run this quiz (or quiz revision). If the quiz has multiple revisions, it is possible that the other revisions do have statistics. If this is the last revision, taking the quiz should generate some statistics.');
+}
+?>
+=======
   echo t("There aren't enough data to generate statistics for this quiz.");
 }
 ?>
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2

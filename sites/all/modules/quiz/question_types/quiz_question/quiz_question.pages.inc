@@ -19,10 +19,18 @@
  * @return
  *  FAPI form array
  */
+<<<<<<< HEAD
+function quiz_question_revision_actions($form, $form_state, $nid, $vid) {
+  // If no questions were kept we shouldn't get here...
+  if (!isset($_SESSION['quiz_question_kept'])) {
+    drupal_goto('node/' . $nid);
+  }
+=======
 function quiz_question_revision_actions($form_state, $nid, $vid) {
   // If no questions were kept we shouldn't get here...
   if (!isset($_SESSION['quiz_question_kept']))
     drupal_goto('node/'. $nid);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 
   $form = array();
   $form['q_nid'] = array('#type' => 'value', '#value' => intval($nid));
@@ -39,20 +47,33 @@ function quiz_question_revision_actions($form_state, $nid, $vid) {
     }
   }
   $quizzes = array();
+<<<<<<< HEAD
+  $sql = 'SELECT nr.nid, nr.vid, nr.title, n.status FROM {node_revision} nr
+          JOIN {node} n ON n.nid = nr.nid
+          WHERE nr.vid IN (:vids)';
+  $res = db_query($sql, array(':vids' => $quiz_vids));
+  //while ($res_o = db_fetch_object($res)) {
+  foreach ($res as $res_o) {
+=======
   $sql = "SELECT nr.nid, nr.vid, nr.title, n.status
           FROM {node_revisions} nr
           JOIN {node} n ON n.nid = nr.nid
           WHERE nr.vid IN (". implode(',', $quiz_vids) .")";
   $res = db_query($sql);
   while ($res_o = db_fetch_object($res)) {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     $res_o->answered = quiz_has_been_answered($res_o);
     $quizzes[] = $res_o;
   }
 
   $text = t('You have created a new revision of a question that belongs to %num quizzes. Choose what you want to do with the different quizzes.', array('%num' => count($quizzes)));
   $form['intro'] = array(
+<<<<<<< HEAD
+    '#markup' => $text,
+=======
     '#type' => 'markup',
     '#value' => $text,
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   );
   $form['quizzes'] = array();
   // Create a form element for each quiz
@@ -63,9 +84,15 @@ function quiz_question_revision_actions($form_state, $nid, $vid) {
     // We fetch the revision options from a helper function
     $options = _quiz_question_revision_options($quiz->status == 1, $quiz->answered);
 
+<<<<<<< HEAD
+    $form['quizzes'][$quiz->nid . '-' . $quiz->vid . '-' . $quiz->status . '-' . ($quiz->answered ? '1' : '0')] = array(
+      '#type' => 'radios',
+      '#title' => check_plain($quiz->title) . ' (' . $published . ' ' . t('and') . ' ' . $answered . ')',
+=======
     $form['quizzes'][$quiz->nid .'-'. $quiz->vid .'-'. $quiz->status .'-'. ($quiz->answered ? '1' : '0')] = array(
       '#type' => 'radios',
       '#title' => check_plain($quiz->title) .' ('. $published .' '. t('and') .' '. $answered .')',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       '#default_value' => $options['default'],
       '#options' => $options['options'],
     );
@@ -87,7 +114,11 @@ function quiz_question_revision_actions($form_state, $nid, $vid) {
   $form['revise_expl'] = array(
     '#type' => 'item',
     '#title' => t('Revise'),
+<<<<<<< HEAD
+    '#value' => t('If a quiz has been answered you should make a new revision to ensure that existing answer statistics and reports remain correct.'),
+=======
     '#value' => t('If a quiz has been answered you should make a new revision to ensure that excisting answer statistics and reports remain correct.'),
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     '#description' => t('If the new revision of the question only correct spelling errors etc. you don\'t need to revise.'),
   );
   return $form;
@@ -165,17 +196,32 @@ function quiz_question_revision_actions_submit($form, &$form_state) {
   unset($_SESSION['quiz_question_kept']);
 
   foreach ($form_state['values'] as $key => $value) {
+<<<<<<< HEAD
+    if (!preg_match('/^[0-9]+-[0-9]+-[0,1]-[0,1]$/', $key)) {
+      continue;
+    }
+=======
     if (!preg_match('/^[0-9]+-[0-9]+-[0,1]-[0,1]$/', $key)) continue;
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     list($update, $revise, $publish) = str_split($value); //FORMAT: Update[0,1], revise[0,1] and publish[0,1]
     list($nid, $vid, $published, $answered) = explode('-', $key); //FORMAT: nid(int), vid(int), published[0,1] and answered[0,1]
 
     //If we are to revise the quiz we need to do that first...
     if ($revise == '1') {
+<<<<<<< HEAD
+      $quiz_node = node_load((int) $nid, (int) $vid);
+      $quiz_node->revision = 1;
+    }
+    if (!isset($quiz_node) && $publish != $published) {
+      $quiz_node = node_load((int) $nid, (int) $vid);
+    }
+=======
       $quiz_node = node_load((int)$nid, (int)$vid);
       $quiz_node->revision = 1;
     }
     if (!isset($quiz_node) && $publish != $published)
       $quiz_node = node_load((int)$nid, (int)$vid);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 
     // If the quiz node is to be revised and/or (un)published we save it now
     if (isset($quiz_node)) {
@@ -186,6 +232,39 @@ function quiz_question_revision_actions_submit($form, &$form_state) {
       $quiz_vid = $quiz_node->vid;
     }
     else {
+<<<<<<< HEAD
+      $quiz_nid = (int) $nid;
+      $quiz_vid = (int) $vid;
+    }
+
+    if ($update == '1') {
+      $res_relationship = db_query('SELECT max_score, auto_update_max_score FROM {quiz_node_relationship}
+              WHERE parent_vid = :parent_vid AND child_nid = :child_nid',
+              array(':parent_vid' => $quiz_vid, ':child_nid' => $form_state['values']['q_nid']))->fetch();
+      
+      $auto_update_max_score = isset($res_relationship->auto_update_max_score) ? $res_relationship->auto_update_max_score : 0; 
+      
+      if($res_relationship) {
+        $max_score = $res_relationship->max_score;
+      }
+      
+      if (!$res_relationship || $auto_update_max_score) {
+        $res = db_query('SELECT max_score FROM {quiz_question_properties}
+                WHERE vid = :vid', array(':vid' => $form_state['values']['q_vid']));
+        $max_score = $res->fetchField();
+      }
+
+      $res = db_query('SELECT weight, question_status FROM {quiz_node_relationship}
+              WHERE parent_nid = :parent_nid AND parent_vid = :parent_vid AND child_nid = :child_nid',
+              array(':parent_nid' => $quiz_nid, ':parent_vid' => $quiz_vid, ':child_nid' => $form_state['values']['q_nid']));
+      if ($res_o = $res->fetch()) {
+        // Remove old revsions of the question from the quiz
+        db_delete('quiz_node_relationship')
+          ->condition('parent_nid', $quiz_nid)
+          ->condition('parent_vid', $quiz_vid)
+          ->condition('child_nid', $form_state['values']['q_nid'])
+          ->execute();
+=======
       $quiz_nid = (int)$nid;
       $quiz_vid = (int)$vid;
     }
@@ -215,10 +294,42 @@ function quiz_question_revision_actions_submit($form, &$form_state) {
         $sql = 'DELETE FROM {quiz_node_relationship}
                 WHERE parent_nid = %d AND parent_vid = %d AND child_nid = %d';
         db_query($sql, $quiz_nid, $quiz_vid, $form_state['values']['q_nid']);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         $weight = $res_o->weight;
         $question_status = $res_o->question_status;
       }
       else {
+<<<<<<< HEAD
+        $weight = 1 + db_query(
+          "SELECT MAX(weight)
+          FROM {quiz_node_relationship}
+          WHERE parent_vid = :parent_vid",
+          array(':parent_vid' => $quiz_vid))->fetchField();
+        $quiz_randomization = db_query(
+          "SELECT randomization
+          FROM {quiz_node_properties}
+          WHERE nid = :nid AND vid = :vid",
+          array(':nid' => $quiz_nid, ':vid' => $quiz_vid))->fetchField();
+        $question_status = $quiz_randomization == 2 ? QUESTION_RANDOM : QUESTION_ALWAYS;
+      }
+      // Insert the newest revision of the question into the quiz
+      $insert_qnr = db_insert('quiz_node_relationship')
+        ->fields(array('parent_nid', 'parent_vid', 'child_nid', 'child_vid', 'max_score', 'weight', 'question_status', 'auto_update_max_score'))
+        ->values(array(
+          'parent_nid' => $quiz_nid,
+          'parent_vid' => $quiz_vid,
+          'child_nid' => $form_state['values']['q_nid'],
+          'child_vid' => $form_state['values']['q_vid'],
+          'max_score' => $max_score,
+          'weight' => $weight,
+          'question_status' => $question_status,
+          'auto_update_max_score' => $auto_update_max_score,
+        ))
+        ->execute();
+    }
+  }
+}
+=======
         $weight = 1 + db_result(
           db_query('SELECT MAX(weight)
                     FROM {quiz_node_relationship}
@@ -236,3 +347,4 @@ function quiz_question_revision_actions_submit($form, &$form_state) {
     }
   }
 }
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2

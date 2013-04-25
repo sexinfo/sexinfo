@@ -6,6 +6,15 @@
  */
 
 /**
+<<<<<<< HEAD
+ * Implements hook_install().
+ */
+function quiz_question_install() {
+}
+
+/**
+ * Implements hook_schema().
+=======
  * Implementation of hook_install
  */
 function quiz_question_install() {
@@ -14,6 +23,7 @@ function quiz_question_install() {
 
 /**
  * Implementation of hook_schema
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function quiz_question_schema() {
   $schema = array();
@@ -37,7 +47,11 @@ function quiz_question_schema() {
       ),
     ),
     'primary key' => array(
+<<<<<<< HEAD
+      'nid', 'vid'
+=======
       'nid' , 'vid'
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     ),
   );
   $schema['quiz_question_latest_quizzes'] = array(
@@ -67,6 +81,12 @@ function quiz_question_schema() {
 }
 
 /**
+<<<<<<< HEAD
+ * Implements hook_uninstall().
+ */
+function quiz_question_uninstall() {
+}
+=======
  * Implementation of hook_update_N()
  */
 function quiz_question_update_6400() {
@@ -124,3 +144,4 @@ function quiz_question_update_6402() {
 function quiz_question_uninstall() {
   drupal_uninstall_schema('quiz_question');
 }
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2

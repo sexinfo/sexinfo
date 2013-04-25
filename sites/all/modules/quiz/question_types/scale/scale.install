@@ -10,6 +10,20 @@
 
 
 /**
+<<<<<<< HEAD
+ * Implements hook_install().
+ */
+function scale_install() {
+  // Add body field to scale node
+  quiz_question_add_body_field('scale');
+
+  // TODO The drupal_(un)install_schema functions are called automatically in D7.
+  // drupal_install_schema('scale')
+  _scale_insert_collection(array('Always', 'Very often', 'Some times', 'Rarely', 'Very rarely', 'Never'));
+  _scale_insert_collection(array('Excellent', 'Very good', 'Good', 'Ok', 'Poor', 'Very poor'));
+  _scale_insert_collection(array('Totally agree', 'Agree', 'Not sure', 'Disagree', 'Totally disagree'));
+  _scale_insert_collection(array('Very important', 'Important', 'Moderately important', 'Less important', 'Least important'));
+=======
  * Implementation of hook_install()
  */
 function scale_install() {
@@ -18,12 +32,17 @@ function scale_install() {
   _scale_insert_collection(array('Excellent', 'Very good', 'Good', 'Ok', 'Poor', 'Very poor'));
   _scale_insert_collection(array('Totally agree', 'Agree', 'Not sure', 'Disagree', 'Totally disagree'));
   _scale_insert_collection(array('Very important', 'Important', 'Moderately important', 'Less important' , 'Least important'));
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   variable_set('node_options_scale', array('status'));
   cache_clear_all('autoload:', 'cache');
 }
 
 /**
+<<<<<<< HEAD
+ * Implements hook_schema().
+=======
  * Implementation of hook_schema().
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function scale_schema() {
   $schema['quiz_scale_node_properties'] = array(
@@ -146,6 +165,14 @@ function scale_schema() {
 }
 
 /**
+<<<<<<< HEAD
+ * Implements hook_uninstall().
+ */
+function scale_uninstall() {
+  variable_del('scale_max_num_of_alts');
+  cache_clear_all('variables', 'cache');
+  drupal_set_message(t('The Scale module has been uninstalled. Scale nodes may still exist, but they will not function properly.'));
+=======
  * Implementation of hook_update_N().
  *
  * NOTE: We shouldn't create update hooks for rebuilding the theme registry, but since this is already here we can't remove it...
@@ -181,6 +208,7 @@ function scale_uninstall() {
   variable_del('scale_max_num_of_alts');
   cache_clear_all('variables', 'cache');
   drupal_set_message(t("The Scale module has been uninstalled. Scale nodes may still exist, but they will not function properly."));
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 }
 
 /**
@@ -191,6 +219,33 @@ function scale_uninstall() {
  */
 function _scale_insert_collection($answers) {
   // Save the collection as a global preset
+<<<<<<< HEAD
+  $collection_id = db_insert('quiz_scale_answer_collection')
+    ->fields(array(
+      'for_all' => 1
+    ))
+    ->execute();
+
+  // Save the collections as a preset collection for user 1
+  db_insert('quiz_scale_user')
+    ->fields(array(
+      'answer_collection_id' => $collection_id,
+      'uid' => 1,
+    ))
+    ->execute();
+
+  $insert = db_insert('quiz_scale_answer')->fields(array('answer_collection_id', 'answer'));
+  $values = array();
+  // Save the answers belonging to the collection
+  for ($i = 0; $i < count($answers); $i++) {
+    $values = array(
+      'answer_collection_id' => $collection_id,
+      'answer' => $answers[$i],
+    );
+    $insert->values($values);
+  }
+  $insert->execute();
+=======
   $sql = 'INSERT INTO {quiz_scale_answer_collection}
          (for_all) VALUES(1)';
   db_query($sql);
@@ -208,4 +263,5 @@ function _scale_insert_collection($answers) {
            VALUES(%d, \'%s\')';
     db_query($sql, $collection_id, $answers[$i]);
   }
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 }

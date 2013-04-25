@@ -9,7 +9,11 @@ class quiz_views_handler_filter_user_quiz_state extends views_handler_filter {
   var $no_operator = TRUE; // for nicer formatting of the form
   var $no_single = TRUE; // always only a single value, at least for now
 
+<<<<<<< HEAD
+  function init(&$view, &$options) {
+=======
   function init(&$view, $options) {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     parent::init($view, $options);
     $this->states = array(
       'any' => t('All Results (Do not filter)'),
@@ -63,11 +67,19 @@ class quiz_views_handler_filter_user_quiz_state extends views_handler_filter {
     }
     $this->ensure_my_table();
     if ($val == 'not_started') {
+<<<<<<< HEAD
+      $this->query->add_where($this->options['group'], "$this->table_alias.time_end", NULL, "IS NULL");
+    }
+    else {
+      $operator = $val == 'in_progress' ? '=' : '>';
+      $this->query->add_where($this->options['group'], "$this->table_alias.time_end", 0, $operator);
+=======
       $this->query->add_where(0, "$this->table_alias.time_end IS NULL");
     }
     else {
       $operator = $val == 'in_progress' ? '=' : '>';
       $this->query->add_where(0, "$this->table_alias.time_end $operator 0");
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     }
   }
 }

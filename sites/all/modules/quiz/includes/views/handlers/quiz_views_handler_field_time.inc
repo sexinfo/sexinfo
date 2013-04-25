@@ -9,4 +9,8 @@ class quiz_views_handler_field_time extends views_handler_field {
     $value = $values->{$this->field_alias};
     return _quiz_format_duration($value);
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2

@@ -6,21 +6,41 @@
  */
 
 /**
+<<<<<<< HEAD
+ * Implements hook_install().
+ */
+function long_answer_install() {
+  // Add body field to long answer node
+  quiz_question_add_body_field('long_answer');
+
+  // TODO The drupal_(un)install_schema functions are called automatically in D7.
+  // drupal_install_schema('long_answer')
+=======
  * Implementation of hook_install().
  */
 function long_answer_install() {
   drupal_install_schema('long_answer');
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   variable_set('node_options_long_answer', array('status'));
   cache_clear_all('autoload:', 'cache');
 }
 
 /**
+<<<<<<< HEAD
+ * Implements hook_uninstall().
+=======
  * Implementation of hook_uninstall().
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function long_answer_uninstall() {
 
   // Delete tables
+<<<<<<< HEAD
+  // TODO The drupal_(un)install_schema functions are called automatically in D7.
+  // drupal_uninstall_schema('long_answer')
+=======
   drupal_uninstall_schema('long_answer');
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 
   // Delete data from other tables
 
@@ -31,7 +51,11 @@ function long_answer_uninstall() {
 }
 
 /**
+<<<<<<< HEAD
+ * Implements hook_schema().
+=======
  * Implementation of hook_schema().
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function long_answer_schema() {
   // Properties for a question nodes go in here:
@@ -93,6 +117,12 @@ function long_answer_schema() {
       'answer' => array(
         'type' => 'text'
       ),
+<<<<<<< HEAD
+      'answer_feedback' => array(
+        'type' => 'text'
+      ),
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     ),
     'primary key' => array('answer_id'),
     'unique keys' => array(
@@ -104,6 +134,16 @@ function long_answer_schema() {
 }
 
 /**
+<<<<<<< HEAD
+ * Adding feedback field to table {quiz_long_answer_user_answers}
+ */
+function long_answer_update_7401() {
+  $spec = array(
+    'type' => 'text',
+    'not null' => FALSE,
+  );
+  db_add_field('quiz_long_answer_user_answers', 'answer_feedback', $spec);
+=======
  * Implementation of hook_update_N()
  *
  * Use float instead of int on the score field. This is to better suit the use of max score...
@@ -157,4 +197,5 @@ function long_answer_update_6401() {
     $results[] = update_sql($sql);
   }
   return $results;
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 }
