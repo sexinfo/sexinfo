@@ -22,7 +22,7 @@
  */
 ?>
 <?php if ($search_results): ?>
-  <h2><?php print t('Search results');?></h2>
+  <h2 class="search-title"><?php print t('Search results');?></h2>
   <ol class="search-results <?php print $module; ?>-results">
     <?php print $search_results; ?>
   </ol>
