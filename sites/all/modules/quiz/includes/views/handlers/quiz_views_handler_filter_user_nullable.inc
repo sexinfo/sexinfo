@@ -39,6 +39,7 @@ class quiz_views_handler_filter_user_nullable extends views_handler_filter {
     $this->ensure_my_table();
 
     $operator = empty($this->options['use_current']) ? '!=' : '=';
+<<<<<<< HEAD
     // By adding the isNull, joins can properly inform us about quiz state
     $this->query->add_where(
         $group,
@@ -46,5 +47,9 @@ class quiz_views_handler_filter_user_nullable extends views_handler_filter {
           ->condition("$this->table_alias.$this->real_field", "***CURRENT_USER***", $operator)
           ->isNull("$this->table_alias.$this->real_field")
     );
+=======
+    // By adding the ISNULL, joins can properly inform us about quiz state
+    $this->query->add_where($group, "$this->table_alias.$this->real_field $operator ***CURRENT_USER*** OR ISNULL($this->table_alias.$this->real_field)", $this->argument);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   }
 }

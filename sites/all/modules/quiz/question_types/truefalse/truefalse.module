@@ -9,7 +9,11 @@
 
 
 /**
+<<<<<<< HEAD
  * Implements hook_help().
+=======
+ * Implementation of hook_help().
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function truefalse_help($path, $args) {
   switch ($path) {
@@ -24,7 +28,11 @@ function truefalse_help($path, $args) {
 }
 
 /**
+<<<<<<< HEAD
  * Implements hook_quiz_question_info().
+=======
+ * Implementation of hook_quiz_question_info().
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function truefalse_quiz_question_info() {
   return array(
@@ -39,24 +47,53 @@ function truefalse_quiz_question_info() {
 }
 
 /**
+<<<<<<< HEAD
  * Implements hook_config().
+=======
+ * Implementation of the quiz_question hook_config
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function truefalse_config() {
   return FALSE;
 }
 
 /**
+<<<<<<< HEAD
  * Implements hook_theme().
+=======
+ * Implementation of hook_autoload_info().
+ */
+function truefalse_autoload_info() {
+  return array(
+    'TrueFalseQuestion' => array('file' => 'truefalse.classes.inc'),
+    'TrueFalseResponse' => array('file' => 'truefalse.classes.inc'),
+  );
+}
+
+/**
+ * Implementation of hook_theme().
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function truefalse_theme() {
   return array(
     'truefalse_answering_form' => array(
+<<<<<<< HEAD
       'render element' => 'form',
       'path' => drupal_get_path('module', 'truefalse') . '/theme',
       'template' => 'truefalse-answering-form',
     ),
     'truefalse_response' => array(
       'variables' => array(
+=======
+      'arguments' => array(
+        'form' => NULL,
+      ),
+      'path' => drupal_get_path('module', 'truefalse') .'/theme',
+      'template' => 'truefalse-answering-form',
+    ),
+    'truefalse_response' => array(
+      'arguments' => array(
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'metadata' => array(),
         'data' => array(),
       ),
@@ -72,6 +109,7 @@ function truefalse_theme() {
  * @param $data
  *  Can be used as table rows
  */
+<<<<<<< HEAD
 function theme_truefalse_response($variables) {
   $metadata = $variables['metadata'];
   $data = $variables['data'];
@@ -98,3 +136,8 @@ function truefalse_field_extra_fields() {
   );
   return $extra;
 }
+=======
+function theme_truefalse_response($metadata, $data) {
+  return theme('table', $metadata, $data);
+}
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 (function ($) {
+=======
+
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 /**
  * Sponsored by: Norwegian Centre for Telemedicine
  * Code: falcon
@@ -13,6 +17,7 @@ var Quiz = Quiz || {inputEnabled:true};
 /**
  * Adding behavior. Behaviors are called everytime a page is refreshed fully or through ahah.
  */
+<<<<<<< HEAD
 
 Drupal.behaviors.quizQuestionBrowserBehavior = {
   attach: function(context, settings) {
@@ -171,10 +176,136 @@ Drupal.behaviors.quizQuestionBrowserBehavior = {
     $('.pager-item a'+ notDone +', .pager-first a'+ notDone +', .pager-next a'+ notDone +', .pager-previous a'+ notDone +', .pager-last a'+ notDone)
     .addClass(done)
     .click(function(event){
+=======
+Drupal.behaviors.quizQuestionBrowserBehavior = function(context) {
+
+  // Using variables for readability and to ease change of names...
+  var done = 'quizQuestionBrowserBehavior-processed';
+  var notDone = ':not(.'+ done +')';
+
+  // Question rows in the browser
+  $('.quiz-question-browser-row'+ notDone)
+  .addClass(done)
+
+  // Add selected class to already selected questions
+  .filter(':has(:checkbox:checked)')
+  .addClass('selected')
+  .end()
+
+  // When the browser row is clicked toggle the selected class and add the questions to the question list
+  .click(function(event) {
+    $(this).toggleClass('selected');
+    if (event.target.type !== 'checkbox') {
+      $(':checkbox', this).attr('checked', function() {
+        return !this.checked;
+      });
+    }
+	  var idToShow = Quiz.findNidVidString(this.id);
+	  var oldHeight = $(document).height();
+	  if ($(this).hasClass('selected')) {
+	    // Show the question in the question list
+      $('#question-list').css('display', 'table');
+      $('#no-questions').hide();
+      $('#q-' + idToShow).removeClass('hidden-question');
+	  } else {
+	    // Hide the question in the question list
+      $('#q-' + idToShow).addClass('hidden-question');
+	  }
+	  $('#edit-stayers-' + idToShow).attr('checked', ($('#q-' + idToShow).hasClass('hidden-question')) ? false : true);
+    Quiz.fixColorAndWeight($('#q-' + idToShow));
+    var toScroll = $(document).height() - oldHeight;
+    window.scrollBy(0, toScroll);
+  });
+
+  // Filter row in the browser
+
+  // Mark all button
+  $('#edit-browser-table-filters-all'+ notDone)
+  .addClass(done)
+  .click(function(event) {
+    var ch = $(this).attr('checked');
+    $('.quiz-question-browser-row').each(function() {
+      if (!ch) {
+        $(this).filter(':has(:checkbox:checked)').each(function() {
+          $(this).click();
+        });
+      }
+      else {
+        $(this).filter(':has(:checkbox:not(:checked))').each(function() {
+          $(this).click();
+        });
+      }
+    });
+  });
+
+  // Type and date filters
+  var selector = '#edit-browser-table-filters-type'+ notDone;
+  selector += ', #edit-browser-table-filters-changed'+ notDone;
+  $(selector)
+  .addClass(done)
+  .change(function(event) {
+    $('.quiz-question-browser-row').each(function() {
+      $(this).remove();
+    });
+    $('#browser-pager').remove();
+    Quiz.setInputEnabled(false);
+  });
+
+  //Title and username filters
+  var quizRefreshId;
+  selector = '#edit-browser-table-filters-title'+ notDone;
+  selector += ', #edit-browser-table-filters-name'+ notDone;
+  $(selector)
+  .addClass(done)
+  // triggering custom event "doneTyping" one second after the last key up in the text fields...
+  .keyup(function(event) {
+	  clearInterval(quizRefreshId);
+	  var quizClicked = this;
+    quizRefreshId = setInterval(function(){
+      $('.quiz-question-browser-row').each(function() {
+        $(this).remove();
+      });
+      $('#browser-pager').remove();
+      $(quizClicked).trigger('doneTyping');
+      clearInterval(quizRefreshId);
+      Quiz.setInputEnabled(false);
+    }, 1000);
+  });
+
+  // Sorting
+
+  // Making datastructure holding all sortable colums and the events that triggers sorting
+  var toSort = [
+    {
+      name: 'title',
+      event: 'doneTyping'
+    },
+    {
+      name: 'name',
+      event: 'doneTyping'
+    },
+    {
+      name: 'type',
+      event: 'change'
+    },
+    {
+      name: 'changed',
+      event: 'change'
+    }
+  ];
+
+  for (i in toSort) {
+    $('.quiz-browser-header-'+ toSort[i].name +' > a'+ notDone)
+    .addClass(done)
+    .attr('myName', toSort[i].name)
+    .attr('myEvent', toSort[i].event)
+    .click(function(event) {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       if (!Quiz.inputEnabled) {
         event.preventDefault();
         return;
       }
+<<<<<<< HEAD
       var myUrl = $(this).attr('href').substr(2);
       Quiz.updatePageInUrl(myUrl);
       $('.quiz-question-browser-row').remove();
@@ -213,10 +344,70 @@ Drupal.behaviors.quizQuestionBrowserBehavior = {
   }
 };
 
+=======
+      var myUrl = $(this).attr('href');
+      myUrl = myUrl.slice(myUrl.indexOf('?') + 1);
+      // add-to-get is the query string used by drupals tablesort api.
+      // We need to post the query string to drupal since we are using ajax.
+      // The querystring will be added to $_REQUEST on the server.
+      $('#edit-browser-table-add-to-get').val(myUrl);
+      $('#edit-browser-table-filters-'+ $(this).attr('myName')).trigger($(this).attr('myEvent'));
+      event.preventDefault();
+      Quiz.setInputEnabled(false);
+    });
+  }
+
+  // Pager
+  $('.pager-item a'+ notDone +', .pager-first a'+ notDone +', .pager-next a'+ notDone +', .pager-previous a'+ notDone +', .pager-last a'+ notDone)
+  .addClass(done)
+  .click(function(event){
+    if (!Quiz.inputEnabled) {
+      event.preventDefault();
+      return;
+    }
+	  var myUrl = $(this).attr('href').substr(2);
+  	Quiz.updatePageInUrl(myUrl);
+	  $('.quiz-question-browser-row').remove();
+    $('#edit-browser-table-filters-title').trigger('doneTyping');
+    event.preventDefault();
+    Quiz.setInputEnabled(false);
+  });
+
+  // If js is active we don't want to show a checkbox for selecting questions
+  $('.q-staying').css('display', 'none');
+
+  // If js is active we use a link to remove questions from the question list
+  $('.q-remove').css('display', 'inline');
+
+  $('.handle-changes').click(function(event){
+    if ($('#mq-fieldset .tabledrag-changed').length) {
+      var proceed = confirm(Drupal.t('Any unsaved changes will be lost. Are you sure you want to proceed?'));
+      if (!proceed)
+        event.preventDefault();
+    }
+  });
+  $('.q-compulsory').click(function(event){
+    var idToToggle = Quiz.findNidVidString(this.id);
+    if(this.checked) {
+      $('#edit-max-scores-' + idToToggle).show();
+    }
+    else {
+      $('#edit-max-scores-' + idToToggle).hide();
+    }
+  });
+  $('.q-compulsory').each(function(){
+    var idToToggle = Quiz.findNidVidString(this.id);
+    if(!this.checked) {
+      $('#edit-max-scores-' + idToToggle).hide();
+    }
+  });
+};
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 
 /**
  * Adding behavior. Behaviors are called everytime a page is refreshed fully or through ahah.
  */
+<<<<<<< HEAD
 Drupal.behaviors.attachRemoveAction = {
   attach: function (context, settings) {
     $('.rem-link:not(.attachRemoveAction-processed)')
@@ -254,6 +445,40 @@ Drupal.behaviors.attachRemoveAction = {
 
 
 
+=======
+Drupal.behaviors.attachRemoveAction = function () {
+  $('.rem-link:not(.attachRemoveAction-processed)')
+  .addClass('attachRemoveAction-processed')
+  .click(function (e) {
+    var $this = $(this);
+    var remID = $this.parents('tr').attr('id');
+    var matches = remID.match(/[0-9]+-[0-9]+/);
+    if (!matches || matches.length < 1) {
+      return false;
+    }
+    Quiz.fixColorAndWeight($this.parents('tr'));
+
+    //Hide the question
+    $this.parents('tr').filter(':first').addClass('hidden-question');
+
+    // Mark the question as removed
+    $('#edit-stayers-' + matches[0]).attr('checked', false);
+
+    // Uncheck the question in the browser
+    $('#browser-'+ matches[0]).click();
+
+    var table = Drupal.tableDrag['question-list'];
+    if (!table.changed) {
+      table.changed = true;
+      $(Drupal.theme('tableDragChangedWarning')).insertAfter(table.table).hide().fadeIn('slow');
+    }
+
+    e.preventDefault();
+    return true;
+  });
+};
+
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 // This is only called once, not on ajax refreshes...
 $(document).ready(function () {
 
@@ -261,8 +486,13 @@ $(document).ready(function () {
   var oldTableHeader = Drupal.behaviors.tableHeader;
   Drupal.behaviors.tableHeader = function(context) {
     if (!$('table.sticky-enabled', context).size()) {
+<<<<<<< HEAD
     return;
   }
+=======
+	  return;
+	}
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     oldTableHeader(context);
   };
 
@@ -279,6 +509,62 @@ $(document).ready(function () {
 });
 
 /**
+<<<<<<< HEAD
+=======
+ * Adds new rows to the browser. This function is called from a inline js added to the page using ahah.
+ *
+ * @param rows
+ *   Browser rows(html string)
+ * @param newBuildId
+ *   Id of the new form(string)
+ * @param pager
+ *   The browsers new pager(html string)
+ */
+Quiz.addBrowserRows = function(rows, newBuildId, pager) {
+  // The previous questions in the browser are added to the question list as invisible questions
+  // Since they cannot be selected anymore we remove them here...
+  $('.hidden-question').remove();
+  // Add the new rows to the browser and replace the pager
+  $('#quiz-question-browser-filters').after(rows);
+  $('#before-pager').after(pager);
+  //$('#quiz-question-browser-pager').replaceWith(pager);
+
+  // Change build id to the new id provided by the server(prevents validation error):
+  $('[name="form_build_id"]').val(newBuildId);
+
+  Drupal.behaviors.quizQuestionBrowserBehavior();
+  Quiz.setInputEnabled(true);
+};
+
+/**
+ * Replaces the entire browser. This function is called from a inline js added to the page using ahah.
+ *
+ * @param renderedBrowser
+ *   The entire browser(html string)
+ * @param newBuildId
+ *   Id of the new form(string)
+ */
+Quiz.replaceBrowser = function(renderedBrowser, newBuildId, hiddenRows) {
+  // Change build id to the new id provided by the server:
+  $('.hidden-question').remove();
+  $('[name="form_build_id"]').val(newBuildId);
+
+  var $this = $('#all-ahah-target');
+  var par = $this.parent();
+  var sib = $this.prev();
+  $this.remove();
+
+  if (sib[0])
+    sib.after(renderedBrowser);
+  else
+    par.prepend(renderedBrowser);
+
+  Drupal.attachBehaviors($('#all-ahah-target'));
+  Quiz.setInputEnabled(true);
+};
+
+/**
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  * Updates the page part of the query string in the add-to-get hidden field
  *
  * @param myUrl
@@ -292,10 +578,17 @@ Quiz.updatePageInUrl = function(myUrl) {
   if (pageQuery == null) pageQuery = 'page=0';
 
   //Replaces stored query strings page with our page
+<<<<<<< HEAD
   var currentQuery = jQuery('#edit-browser-table-add-to-get').val() + '';
   currentQuery = currentQuery.replace(pattern, '');
   currentQuery += pageQuery;
   jQuery('#edit-browser-table-add-to-get').val(currentQuery);
+=======
+  var currentQuery = $('#edit-browser-table-add-to-get').val() + '';
+  currentQuery = currentQuery.replace(pattern, '');
+  currentQuery += pageQuery;
+  $('#edit-browser-table-add-to-get').val(currentQuery);
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 };
 
 /**
@@ -311,6 +604,7 @@ Quiz.fixColorAndWeight = function(newest) {
   var lastQuestion = null;
   var numQRows = 0;
 
+<<<<<<< HEAD
 
     $('.q-row').each(function() {
       if (!$(this).hasClass('hidden-question') && $(this).attr('id') != newest.attr('id')) {
@@ -330,6 +624,25 @@ Quiz.fixColorAndWeight = function(newest) {
       }
     });
 
+=======
+  $('.q-row').each(function() {
+    if (!$(this).hasClass('hidden-question') && $(this).attr('id') != newest.attr('id')) {
+      // Color:
+      numQRows++;
+      if (!$(this).hasClass(nextClass)) $(this).removeClass(lastClass).addClass(nextClass);
+      var currentClass = nextClass;
+      nextClass = lastClass;
+      lastClass = currentClass;
+      lastQuestion = $(this);
+
+      // Weight:
+      var myId = Quiz.findNidVidString($(this).attr('id') + '');
+      var weightField = $('#edit-weights-' + myId);
+      weightField.val(lastWeight);
+      lastWeight++;
+    }
+  });
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 
   if (numQRows < 2) return;
 
@@ -362,7 +675,10 @@ Quiz.findNidVidString = function(str) {
   return pattern.exec(str);
 };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 /**
  * Adds question rows to the question list
  *
@@ -397,8 +713,14 @@ Quiz.setInputEnabled = function(enabled) {
     $('.quizQuestionBrowserBehavior-processed').removeAttr('disabled');
   }
   else {
+<<<<<<< HEAD
   jQuery('.quizQuestionBrowserBehavior-processed').attr('disabled', true);
   }
 }
 
 })(jQuery);
+=======
+    $('.quizQuestionBrowserBehavior-processed').attr('disabled', true);
+  }
+}
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2

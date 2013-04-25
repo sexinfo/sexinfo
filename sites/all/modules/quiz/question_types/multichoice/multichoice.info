@@ -1,6 +1,7 @@
 name = Quiz Multichoice
 package = Quiz Question
 description = Multiple choice question type for quiz.
+<<<<<<< HEAD
 core = 7.x
 php = 5
 dependencies[] = quiz
@@ -14,4 +15,15 @@ version = "7.x-4.0-beta1"
 core = "7.x"
 project = "quiz"
 datestamp = "1362397820"
+=======
+core = 6.x
+php = 5
+dependencies[] = quiz
+dependencies[] = quiz_question
+; Information added by drupal.org packaging script on 2012-03-03
+version = "6.x-4.4"
+core = "6.x"
+project = "quiz"
+datestamp = "1330784753"
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 

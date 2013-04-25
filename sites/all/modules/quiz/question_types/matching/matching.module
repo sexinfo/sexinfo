@@ -9,7 +9,11 @@
  */
 
 /**
+<<<<<<< HEAD
  * Implements hook_help().
+=======
+ * Implementation of hook_help().
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function matching_help($path, $args) {
   switch ($path) {
@@ -24,7 +28,11 @@ function matching_help($path, $args) {
 }
 
 /**
+<<<<<<< HEAD
  * Implements hook_quiz_question_info().
+=======
+ * Implementation of hook_quiz_question_info().
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function matching_quiz_question_info() {
   return array(
@@ -56,7 +64,11 @@ function matching_config() {
     '#default_value' => variable_get('quiz_matching_shuffle_options', TRUE),
     '#description' => t('If checked matching questions will be shuffled'),
   );
+<<<<<<< HEAD
   $form['#validate'][] = 'matching_config_validate';
+=======
+  $form['#validate'] = 'matching_config_validate';
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   return $form;
 }
 
@@ -64,6 +76,7 @@ function matching_config() {
  * Validate the matching config form values
  */
 function matching_config_validate($form, $form_state) {
+<<<<<<< HEAD
   if (!_quiz_is_int($form_state['values']['quiz_matching_form_size'], 2, 50)) {
     form_set_error('quiz_matching_form_size', t('The number of questions must be between 2 and 50'));
   }
@@ -71,10 +84,29 @@ function matching_config_validate($form, $form_state) {
 
 /**
  * Implements hook_theme().
+=======
+  if (!_quiz_is_int($form_state['values']['quiz_matching_form_size'], 2, 50))
+    form_set_error('quiz_matching_form_size', t('The number of questions must be between 2 and 50'));
+}
+
+/**
+ * Implementation of hook_autoload_info().
+ */
+function matching_autoload_info() {
+  return array(
+    'MatchingQuestion' => array('file' => 'matching.classes.inc'),
+    'MatchingResponse' => array('file' => 'matching.classes.inc'),
+  );
+}
+
+/**
+ * Implementation of hook_theme().
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function matching_theme() {
   return array(
     'matching_question_form' => array(
+<<<<<<< HEAD
       'render element' => 'form',
       'path' => drupal_get_path('module', 'matching') . '/theme',
       'file' => 'matching.theme.inc',
@@ -97,11 +129,38 @@ function matching_theme() {
     'matching_answering_form' => array(
       'render element' => 'form',
       'path' => drupal_get_path('module', 'matching') . '/theme',
+=======
+      'arguments' => array('form' => NULL),
+      'path' => drupal_get_path('module', 'matching') .'/theme',
+      'file' => 'matching.theme.inc',
+    ),
+    'matching_response' => array(
+      'arguments' => array('metadata' => NULL, 'data' => NULL),
+      'path' => drupal_get_path('module', 'matching') .'/theme',
+      'file' => 'matching.theme.inc',
+    ),
+    'matching_subquestion_form' => array(
+      'arguments' => array('form' => NULL),
+      'path' => drupal_get_path('module', 'matching') .'/theme',
+      'file' => 'matching.theme.inc',
+    ),
+    'matching_match_node_view' => array(
+      'arguments' => array('subquestions' => NULL),
+      'path' => drupal_get_path('module', 'matching') .'/theme',
+      'file' => 'matching.theme.inc',
+    ),
+    'matching_answering_form' => array(
+      'arguments' => array(
+        'form' => NULL,
+      ),
+      'path' => drupal_get_path('module', 'matching') .'/theme',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       'template' => 'matching-answering-form',
     ),
 
   );
 }
+<<<<<<< HEAD
 
 /**
  * Implements hook_field_extra_fields().
@@ -118,3 +177,5 @@ function matching_field_extra_fields() {
   );
   return $extra;
 }
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2

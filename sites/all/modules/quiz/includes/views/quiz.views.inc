@@ -15,9 +15,12 @@ function quiz_views_handlers() {
       'quiz_views_handler_field_takes' => array(
         'parent' => 'views_handler_field',
       ),
+<<<<<<< HEAD
       'quiz_views_handler_field_node_link_take' => array(
         'parent' => 'views_handler_field_node_link',
       ),
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       'quiz_views_handler_field_time' => array(
         'parent' => 'views_handler_field',
       ),
@@ -88,7 +91,11 @@ function quiz_views_data() {
           'field' => 'nid',
           'type' => 'INNER',
         ),
+<<<<<<< HEAD
         'node_revision' => array(
+=======
+        'node_revisions' => array(
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
           'left_field' => 'vid',
           'field' => 'vid',
           'type' => 'INNER',
@@ -107,7 +114,11 @@ function quiz_views_data() {
       'argument' => array(
         'handler' => 'quiz_views_handler_argument_quiz_nid',
         'name field' => 'title',
+<<<<<<< HEAD
         'name table' => 'node_revision',
+=======
+        'name table' => 'node_revisions',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'numeric' => TRUE,
         'validate type' => 'vid',
         'nid field' => 'nid',
@@ -137,14 +148,22 @@ function quiz_views_data() {
       'argument' => array(
         'handler' => 'views_handler_argument_numeric',
         'name field' => 'title',
+<<<<<<< HEAD
         'name table' => 'node_revision',
+=======
+        'name table' => 'node_revisions',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'numeric' => TRUE,
         'validate type' => 'vid',
       ),
       // Related to NODE
       'relationship' => array(
         'handler' => 'views_handler_relationship',
+<<<<<<< HEAD
         'base' => 'node_revision',
+=======
+        'base' => 'node_revisions',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'field' => 'vid',
         'label' => t('quiz node revision'),
       ),
@@ -273,6 +292,7 @@ function quiz_views_data() {
       ),
       'sort' => array('handler' => 'views_handler_sort'),
     ),
+<<<<<<< HEAD
     'take' => array(
       'field' => array(
         'title' => t('Take quiz link'),
@@ -282,6 +302,8 @@ function quiz_views_data() {
       ),
       'sort' => array('handler' => 'views_handler_sort'),
     ),
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     'tid' => array(
       'title' => t('Term ID'),
       'help' => t('The term ID used to select questions based on taxonomy.'),
@@ -298,14 +320,21 @@ function quiz_views_data() {
       // Related to TERM
       'relationship' => array(
         'handler' => 'views_handler_relationship',
+<<<<<<< HEAD
         'base' => 'taxonomy_term_data',
+=======
+        'base' => 'term_data',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'field' => 'tid',
         'label' => t('term'),
       ),
     ), // End tid
   ); // End quiz_node_properties
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   $data['quiz_node_relationship'] = array(
     'table' => array(
       'group' => t('Quiz Questions'),
@@ -344,7 +373,11 @@ function quiz_views_data() {
       'relationship' => array(
         'handler' => 'views_handler_relationship',
         'base' => 'node',
+<<<<<<< HEAD
         'field' => 'parent_nid',
+=======
+        'field' => 'nid',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'label' => t('Quiz node id'),
       ),
       'sort' => array(
@@ -366,8 +399,13 @@ function quiz_views_data() {
       ),
       'relationship' => array(
         'handler' => 'views_handler_relationship',
+<<<<<<< HEAD
         'base' => 'node_revision',
         'field' => 'parent_vid',
+=======
+        'base' => 'node_revisions',
+        'field' => 'vid',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'label' => t('Quiz node revision'),
       ),
       'sort' => array(
@@ -392,7 +430,11 @@ function quiz_views_data() {
       'relationship' => array(
         'handler' => 'views_handler_relationship',
         'base' => 'node',
+<<<<<<< HEAD
         'field' => 'child_nid',
+=======
+        'field' => 'nid',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'label' => t('Question node nid'),
       ),
       'sort' => array(
@@ -414,8 +456,13 @@ function quiz_views_data() {
       ),
       'relationship' => array(
         'handler' => 'views_handler_relationship',
+<<<<<<< HEAD
         'base' => 'node_revision',
         'field' => 'child_vid',
+=======
+        'base' => 'node_revisions',
+        'field' => 'vid',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'label' => t('Question node revision'),
       ),
       'sort' => array(
@@ -447,6 +494,7 @@ function quiz_views_data() {
         )
       ),
     ),
+<<<<<<< HEAD
     'max_score' => array(
       'title' => t('Maximum possible score'),
       'help' => t('Maximum question score'),
@@ -473,12 +521,17 @@ function quiz_views_data() {
   ); // End quiz_node_relationship
 
 
+=======
+  ); // End quiz_node_relationship
+
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   $data['quiz_node_results'] = array(
     // Table Definition
     'table' => array(
       'group' => 'Quiz Results',
       'join' => array(
         // This is vid because vid is always more specific.
+<<<<<<< HEAD
 		'node' => array(
       		'left_field' => 'vid',
       		'field' => 'vid',
@@ -490,6 +543,12 @@ function quiz_views_data() {
         'quiz_node_properties' => array(
           'left_field' => 'vid',
           'field' => 'vid',
+=======
+        'quiz_node_properties' => array(
+          'left_field' => 'vid',
+          'field' => 'vid',
+          'type' => 'LEFT', // I think...
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         ),
       ),
     ),
@@ -508,10 +567,13 @@ function quiz_views_data() {
         'numeric' => TRUE,
         'validate type' => 'result_id',
       ),
+<<<<<<< HEAD
       'filter' => array(
         'handler' => 'views_handler_filter_numeric',
         'help' => t('Filter results to a particular result set'),
       ),
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       'sort' => array('handler' => 'views_handler_sort'),
     ),
     'nid' => array(
@@ -523,7 +585,10 @@ function quiz_views_data() {
         //'name_field' => 'title',
         'numeric' => TRUE,
         'validate type' => 'vid',
+<<<<<<< HEAD
         'nid field' => 'nid',
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       ),
       'filter' => array(
         'handler' => 'quiz_views_handler_filter_quiz_nid',
@@ -555,7 +620,11 @@ function quiz_views_data() {
       // Related to NODE
       'relationship' => array(
         'handler' => 'views_handler_relationship',
+<<<<<<< HEAD
         'base' => 'node_revision',
+=======
+        'base' => 'node_revisions',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
         'field' => 'vid',
         'label' => t('node revision'),
       ),
@@ -635,10 +704,18 @@ function quiz_views_data() {
         'validate type' => 'nid',
       ),
       'sort' => array('handler' => 'views_handler_sort'),
+<<<<<<< HEAD
 	  'filter' => array(
 		'handler' => 'views_handler_filter_numeric',
 		'help' => t('Filter the results based on the score of the quiz.')
 	  ),
+=======
+      'filter' => array(
+        'handler' => 'views_handler_filter_numeric',
+        'help' => t('Filter quiz results by Score.'),
+        'allow empty' => TRUE,
+      ),
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     ),
     'is_invalid' => array(
       'title' => t('Is Invalid'),
@@ -674,6 +751,7 @@ function quiz_views_data() {
       ),
     )
   ); // End quiz_node_results
+<<<<<<< HEAD
 
 
   $data['quiz_node_results_answers'] = array(
@@ -1074,5 +1152,7 @@ function quiz_views_data() {
     ),
   ); // End quiz_multichoice_user_answer_multi
 
+=======
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   return $data;
 }

@@ -8,7 +8,11 @@
  */
 
 /**
+<<<<<<< HEAD
  * Implements hook_help().
+=======
+ * Implementation of hook_help().
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function quiz_directions_help($path, $args) {
   if ($path == 'admin/help#quiz_directions') {
@@ -17,7 +21,11 @@ function quiz_directions_help($path, $args) {
 }
 
 /**
+<<<<<<< HEAD
  * Implements hook_quiz_question_info().
+=======
+ * Implementation of hook_quiz_question_info().
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function quiz_directions_quiz_question_info() {
   return array(
@@ -32,21 +40,50 @@ function quiz_directions_quiz_question_info() {
 }
 
 /**
+<<<<<<< HEAD
  * Implements hook_config().
+=======
+ * Implementation of hook_config
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function quiz_directions_config() {
   return FALSE;
 }
 
 /**
+<<<<<<< HEAD
  * Implements hook_theme().
+=======
+ * Implementation of hook_autoload_info().
+ */
+function quiz_directions_autoload_info() {
+  return array(
+    'QuizDirectionsQuestion' => array('file' => 'quiz_directions.classes.inc'),
+    'QuizDirectionsResponse' => array('file' => 'quiz_directions.classes.inc'),
+  );
+}
+
+/**
+ * Implementation of hook_theme().
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
  */
 function quiz_directions_theme() {
   return array(
     'quiz_directions_answering_form' => array(
+<<<<<<< HEAD
       'render element' => 'form',
       'path' => drupal_get_path('module', 'quiz_directions') . '/theme',
       'template' => 'quiz-directions-answering-form',
     ),
   );
 }
+=======
+      'arguments' => array(
+        'form' => NULL,
+      ),
+      'path' => drupal_get_path('module', 'quiz_directions') .'/theme',
+      'template' => 'quiz-directions-answering-form',
+    ),
+  );
+}
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2

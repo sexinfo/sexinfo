@@ -12,8 +12,12 @@
  * @param $unscored
  *  An array of objects, each with the question_nid, question_vid, and result_id of an unscored question.
  */
+<<<<<<< HEAD
 function theme_long_answer_view_unscored($variables) {
   $unscored = $variables['unscored'];
+=======
+function theme_long_answer_view_unscored($unscored) {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   $output = '';
   $header = array(
     t('Question'),
@@ -31,7 +35,11 @@ function theme_long_answer_view_unscored($variables) {
       );
     }
   }
+<<<<<<< HEAD
   $output .= !empty($rows) ? theme('table', array('header' => $header, 'rows' => $rows)) : t('There are no unscored essays.');
+=======
+  $output .= !empty($rows) ? theme('table', $header, $rows) : t('There are no unscored essays.');
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   return $output;
 }
 
@@ -41,7 +49,13 @@ function theme_long_answer_view_unscored($variables) {
  * @param $form
  *  The response form
  */
+<<<<<<< HEAD
 function theme_long_answer_response_form($variables) {
   $form = $variables['form'];
   return drupal_render_children($form);
 }
+=======
+function theme_long_answer_response_form($form) {
+  return drupal_render($form);
+}
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2

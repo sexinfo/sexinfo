@@ -125,7 +125,11 @@ $handler->override_option('fields', array(
     'custom_date_format' => '',
     'exclude' => 0,
     'id' => 'timestamp',
+<<<<<<< HEAD
     'table' => 'node_revision',
+=======
+    'table' => 'node_revisions',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     'field' => 'timestamp',
     'relationship' => 'parent_vid',
   ),
@@ -155,7 +159,11 @@ $handler->override_option('fields', array(
     'link_to_node' => 1,
     'exclude' => 0,
     'id' => 'title',
+<<<<<<< HEAD
     'table' => 'node_revision',
+=======
+    'table' => 'node_revisions',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     'field' => 'title',
     'relationship' => 'child_vid',
   ),

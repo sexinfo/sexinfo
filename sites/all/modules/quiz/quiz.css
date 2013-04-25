@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 /*
  * Definitions that apply while viewing questions
  */
@@ -61,6 +67,7 @@ td.quiz_summary_qcell table td {
 }
 
 #quiz-question-browser-filters {
+<<<<<<< HEAD
   /*background-color: black;*/
   /* Black bg in seven theme looks horrible. */
   background: none repeat scroll 0 0 #E1E2DC;
@@ -72,6 +79,10 @@ td.quiz_summary_qcell table td {
   text-transform: uppercase;
 }
 
+=======
+  background-color: black;
+}
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 #quiz-question-browser-filters td.active {
   background-color: #666;
 }
@@ -104,18 +115,30 @@ tr.selected.quiz-question-browser-row td, tr.selected.quiz-question-browser-row 
  * Definitions that apply on the quiz report pages.
  */
 
+<<<<<<< HEAD
 div.quiz-report {
+=======
+dl.quiz-report {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   margin: 0;
   padding: 0;
 }
 
+<<<<<<< HEAD
 div.quiz-report .dt {
+=======
+dl.quiz-report dt {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   background: #eee;
   border-top: solid 1px gray;
   padding-left: 5px;
 }
 
+<<<<<<< HEAD
 div.quiz-report .dt div.quiz-report-score-container {
+=======
+dl.quiz-report dt div.quiz-report-score-container {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   border-right: solid 1px gray;
   border-left: solid 1px gray;
   border-bottom: solid 1px gray;
@@ -123,6 +146,7 @@ div.quiz-report .dt div.quiz-report-score-container {
   padding: 4px 6px;
 }
 
+<<<<<<< HEAD
 div.quiz-report .dt div.quiz-report-score-container span div.form-item {
   display: inline;
 }
@@ -135,6 +159,16 @@ div.quiz-score-submit {
   float: right;
 }
 
+=======
+dl.quiz-report dt div.quiz-report-score-container span div.form-item {
+  display: inline;
+}
+
+dl.quiz-report dd {
+  margin: 10px 0 50px 0;
+}
+
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 .quiz-report-skipped {
   float: right;
 }
@@ -151,13 +185,33 @@ div.quiz-score-submit {
   background-color: #FFFFDD;
 }
 
+<<<<<<< HEAD
 input#edit-op, input#edit-back {
+=======
+.q-back-button {
   background: 0 none;
   border: 0 none;
   color: #666699;
 }
 
+.q-back-button:hover {
+  color: #6666ff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.q-skip-button {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
+  background: 0 none;
+  border: 0 none;
+  color: #666699;
+}
+
+<<<<<<< HEAD
 input.q-skip-button:hover, input#edit-back:hover {
+=======
+.q-skip-button:hover {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   color: #6666ff;
   cursor: pointer;
   text-decoration: underline;
@@ -247,6 +301,7 @@ input.q-skip-button:hover, input#edit-back:hover {
 #quiz-categorized-form #autocomplete {
   overflow: auto;
   max-height: 300px;
+<<<<<<< HEAD
 }
 
 .mark-doubtful .toggle {
@@ -326,3 +381,6 @@ input.q-skip-button:hover, input#edit-back:hover {
   left: 48px;
 }
 
+=======
+}
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2

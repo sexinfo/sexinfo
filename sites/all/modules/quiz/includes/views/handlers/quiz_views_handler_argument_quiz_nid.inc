@@ -34,9 +34,15 @@ class quiz_views_handler_argument_quiz_nid extends views_handler_argument_numeri
     parent::options_form($form, $form_state);
     // Set weighting so that our element can sanely ordered
     $form['title']['#weight'] = -2;
+<<<<<<< HEAD
     //    $form['default_action']['#weight'] = -3;
     //    $form['wildcard']['#weight'] = -4;
     //    $form['wildcard_substitution']['#weight'] = -4;
+=======
+//    $form['default_action']['#weight'] = -3;
+//    $form['wildcard']['#weight'] = -4;
+//    $form['wildcard_substitution']['#weight'] = -4;
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     $form['which_vid'] = array(
       '#type' => 'select',
       '#title' => t('Quiz revision(s) to use'),
@@ -53,9 +59,16 @@ class quiz_views_handler_argument_quiz_nid extends views_handler_argument_numeri
 
   function title_query() {
     $titles = array();
+<<<<<<< HEAD
 
     $result = db_query("SELECT n.title FROM {node_revision} n WHERE n.vid IN (:vids)", array(':vids' => implode(', ', $this->corresponding_vids)));
     while ($term = $result->fetch()) {
+=======
+    $placeholders = implode(', ', array_fill(0, count($this->corresponding_vids), '%d'));
+
+    $result = db_query("SELECT n.title FROM {node_revisions} n WHERE n.vid IN ($placeholders)", $this->corresponding_vids);
+    while ($term = db_fetch_object($result)) {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       $titles[] = check_plain($term->title);
     }
     return $titles;
@@ -65,13 +78,27 @@ class quiz_views_handler_argument_quiz_nid extends views_handler_argument_numeri
    * Override the default behavior of query() to introduce the medial step of
    * retrieving vids from the provided nids.
    */
+<<<<<<< HEAD
   function query($group_by = FALSE) {
+=======
+  function query() {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     $this->ensure_my_table();
     $this->break_phrase();
 
     // Do subselect to get relevant vids, then add where clause
+<<<<<<< HEAD
     $this->subselect_vids();
     $this->query->add_where(0, "$this->table_alias.$this->nid_field", $this->corresponding_vids);
+=======
+    if ($this->subselect_vids()) {
+      $placeholders = implode(', ', array_fill(0, count($this->corresponding_vids), '%d'));
+      $this->query->add_where(0, "$this->table_alias.$this->nid_field IN ($placeholders)", $this->corresponding_vids);
+    }
+    else {
+      $this->query->add_where(0, "$this->table_alias.$this->nid_field = %d", $this->corresponding_vids);
+    }
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
   }
 
   /**
@@ -114,22 +141,41 @@ class quiz_views_handler_argument_quiz_nid extends views_handler_argument_numeri
    * that time. So, called from set_argument().
    */
   function subselect_vids() {
+<<<<<<< HEAD
     $query = db_select('quiz_node_properties', 'qnp');
     if (count($this->value) > 1) {
       // Guaranteed to produce multiple values; therefore may need the group by
       $use_group_by = TRUE;
       $operator = empty($this->options['not']) ? 'IN' : 'NOT IN';
       $query->condition('nid', $this->value, $operator);
+=======
+    $from = 'FROM {quiz_node_properties} qnp';
+    $field = 'qnp.vid';
+    if (count($this->value) > 1) {
+      // Guaranteed to produce multiple values; therefore may need the group by
+      $use_group_by = TRUE;
+
+      $operator = empty($this->options['not']) ? 'IN' : 'NOT IN';
+      $placeholders = implode(', ', array_fill(0, count($this->value), '%d'));
+      $where = "WHERE qnp.nid $operator ($placeholders)";
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     }
     else {
       // Multiple values only possible with a NOT; only then do we need group by
       $use_group_by = !empty($this->options['not']);
+<<<<<<< HEAD
       $operator = empty($this->options['not']) ? '=' : '!=';
       $query->condition('nid', reset($this->value), $operator);
+=======
+
+      $operator = empty($this->options['not']) ? '=' : '!=';
+      $where = "WHERE qnp.nid $operator %d";
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     }
 
     switch ($this->options['which_vid']) {
       case 'initial':
+<<<<<<< HEAD
         // SQL operation for getting the initial vids based on view config settings
         $query->addExpression('MIN(vid)', 'vid');
         break;
@@ -146,13 +192,36 @@ class quiz_views_handler_argument_quiz_nid extends views_handler_argument_numeri
       $query->groupBy('nid');
     }
     $result = $query->execute();
+=======
+      case 'latest':
+        // SQL operation for getting a single vids based on view config settings
+        $operation = ($this->options['which_vid'] == 'initial' ? 'MIN' : 'MAX');
+        // If we need a group by clause, tag it onto the end.
+        $where .= ($use_group_by) ? ' GROUP BY qnp.nid' : '';
+
+        $result = db_query("SELECT $operation(qnp.vid) AS vid $from $where", $this->value);
+        break;
+
+      case 'all':
+        $result = db_query("SELECT qnp.vid AS vid $from $where", $this->value);
+        break;
+    }
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
 
     $this->nid_field = $this->vid_field;
 
     $this->corresponding_vids = array();
+<<<<<<< HEAD
     foreach ($result as $item) {
+=======
+    while ($item = db_fetch_object($result)) {
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
       $this->corresponding_vids[] = $item->vid;
     }
     return (count($this->corresponding_vids) > 1);
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2

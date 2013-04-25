@@ -58,7 +58,11 @@ class MatchingUnitTest extends DrupalWebTestCase {
 
     // array of drupal permission
     $permission = array('administer site configuration', 'access administration pages',
+<<<<<<< HEAD
     'administer quiz', 'access quiz', 'administer blocks', 'import questions', 'create quiz content',
+=======
+    'administer quiz', 'access quiz', 'administer blocks', 'import questions', 'create quiz',
+>>>>>>> a20eda4303412d09a1a1ea545ed9255115fd0ad2
     'administer quiz configuration', 'use PHP for block visibility', 'administer blocks',
     'create multichoice', 'edit any multichoice', 'administer taxonomy', 'allow multiple correct answers',
     'allow any number of answers', 'export questions');
