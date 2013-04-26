@@ -94,3 +94,29 @@ div.status { color: #360; background: #cf8; border-color: #be7; }
 html[xmlns] .clearfix { display: block; }
 
 * html .clearfix { height: 1%; }
+
+
+/* Login Form
+/* -------------- */
+#user-login {
+  @extend %grey-form;
+  margin: 15px auto;
+  padding: 5px 15px;
+  width: 75%;
+
+  input:not([type="submit"]) {
+    @extend %input-full;
+    padding: 7px 5px;
+  }
+
+  input[type="submit"] {
+    @extend %button;
+    float: right;
+    padding: 10px 25px;
+  }
+
+  label { @extend %pink-label; }
+
+  .description { display: none; }
+}
+

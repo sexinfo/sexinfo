@@ -45,3 +45,55 @@
   font-size: $font_size;
   font-weight: bold;
 }
+
+
+// Form Mixins
+// -------------------------------
+
+// Grey form container with padding
+%grey-form {
+  @include border-radius;
+  @include clearfix;
+  background-color: #EFEFEF;
+  border: 1px solid #ccc;
+  padding: 25px 30px;
+}
+
+// Pink field labels with some margins
+%pink-label {
+  color: $pink;
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+// Full-width inputs with border on focus
+%input-full {
+  @include border-box;
+  border: 1px solid #ccc;
+  font-size: 1.2em;
+  padding: 10px 5px;
+  width: 100%;
+
+  &:focus {
+    border: 1px solid $pink;
+    outline: none;
+  }
+}
+
+// Pink submit buttons
+%button {
+  @include border-radius;
+  background-color: $pink;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  padding: 10px 15px;
+  text-align: center;
+
+  &:hover {
+    background-color: darken($pink, 10);
+    cursor: pointer;
+  }
+
+  &:active { background-color: darken($pink, 13); }
+}

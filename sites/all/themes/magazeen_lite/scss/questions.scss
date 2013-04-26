@@ -13,26 +13,12 @@
     border: none;
   }
 
-  .node-content {
-    @include border-radius;
-    background-color: #EFEFEF;
-    border: 1px solid #ccc;
-    padding: 25px 30px;
-  }
+  .node-content { @extend %grey-form; }
 
   /*----- FORM ELEMENTS-----*/
   input:not([type="submit"]),
   textarea {
-    @include border-box;
-    border: 1px solid #ccc;
-    font-size: 1.2em;
-    padding: 10px 5px;
-    width: 100%;
-
-    &:focus {
-      border: 1px solid $pink;
-      outline: none;
-    }
+    @extend %input-full;
   }
 
   textarea {
@@ -41,47 +27,26 @@
     width: 100%;
   }
 
+  // TODO: blue doesn't look great here
   input[type="submit"] {
-    @include border-radius;
+    @extend %button;
     background-color: #3099DF;
-    border: none;
-    color: white;
     float: right;
-    font-size: 1.2em;
-    padding: 10px 15px;
 
-    &:hover {
-      background: none;
-      background-color: #008AB8;
-      cursor: pointer;
-    }
-
+    &:hover { background-color: #008AB8; }
     &:active { background-color: #007298; }
   }
 
-  label {
-    color: $pink;
-    font-size: 1.2em;
-    margin-bottom: 5px;
-  }
+  label { @extend %pink-label; }
 
   .faq-btn {
+    @extend %button;
     @include border-radius;
-    background-color: $pink;
-    color: white;
+    @include bold(1.3em);
     display: block;
-    font-size: 1.3em;
-    font-weight: bold;
     margin-bottom: 20px;
     padding: 12px 10px;
-    text-align: center;
-
     border-bottom: 3px solid darken($pink, 16);
-
-    &:hover {
-      background-color: darken($pink, 10);
-      cursor: pointer;
-    }
   }
 }
 
