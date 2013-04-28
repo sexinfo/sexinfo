@@ -1,114 +1,117 @@
-jQuery(document).ready(function($) {
+// Suck it Drupal
+window.$ = jQuery;
 
-$(".node-info").html("");
+$(function() {
 
-//Set Default State of each portfolio piece
-$(".paging").show();
-$(".paging a:first").addClass("active");
+  $(".node-info").html("");
 
-//Get size of images, how many there are, then determin the size of the image reel.
-var imageWidth = $(".window").width();
-var imageSum = $(".image_reel img").size();
-var imageReelWidth = imageWidth * imageSum;
+  //Set Default State of each portfolio piece
+  $(".paging").show();
+  $(".paging a:first").addClass("active");
 
-//Adjust the image reel to its new size
-$(".image_reel").css({'width' : imageReelWidth});
+  //Get size of images, how many there are, then determin the size of the image reel.
+  var imageWidth = $(".window").width();
+  var imageSum = $(".image_reel img").size();
+  var imageReelWidth = imageWidth * imageSum;
 
-//Paging + Slider Function
-rotate = function(){
-    var triggerID = $active.attr("rel") - 1; //Get number of times to slide
-    var image_reelPosition = triggerID * imageWidth; //Determines the distance the image reel needs to slide
+  //Adjust the image reel to its new size
+  $(".image_reel").css({'width' : imageReelWidth});
 
-    $(".paging a").removeClass('active'); //Remove all active class
-    $active.addClass('active'); //Add active class (the $active is declared in the rotateSwitch function)
+  //Paging + Slider Function
+  rotate = function(){
+      var triggerID = $active.attr("rel") - 1; //Get number of times to slide
+      var image_reelPosition = triggerID * imageWidth; //Determines the distance the image reel needs to slide
 
-    //Slider Animation
-    $(".image_reel").animate({
-        left: -image_reelPosition
-    }, 500 );
+      $(".paging a").removeClass('active'); //Remove all active class
+      $active.addClass('active'); //Add active class (the $active is declared in the rotateSwitch function)
 
-
-
-};
-
-//Rotation + Timing Event
-rotateSwitch = function(){
-    play = setInterval(function(){ //Set timer - this will repeat itself every 3 seconds
-        $active = $('.paging a.active').next();
-        if ( $active.length === 0) { //If paging reaches the end...
-            $active = $('.paging a:first'); //go back to first
-        }
-        rotate(); //Trigger the paging and slider function
-    }, 5000); //Timer speed in milliseconds (3 seconds)
+      //Slider Animation
+      $(".image_reel").animate({
+          left: -image_reelPosition
+      }, 500 );
 
 
-};
 
-rotateSwitch(); //Run function on launch
+  };
 
-//On Hover
-$(".image_reel a").hover(function() {
-    clearInterval(play); //Stop the rotation
-}, function() {
-    rotateSwitch(); //Resume rotation
-});
-
-//On Click
-$(".paging a").click(function() {
-    $active = $(this); //Activate the clicked paging
-    //Reset Timer
-    clearInterval(play); //Stop the rotation
-    rotate(); //Trigger rotation immediately
-    rotateSwitch(); // Resume rotation
-    return false; //Prevent browser jump to link anchor
-});
+  //Rotation + Timing Event
+  rotateSwitch = function(){
+      play = setInterval(function(){ //Set timer - this will repeat itself every 3 seconds
+          $active = $('.paging a.active').next();
+          if ( $active.length === 0) { //If paging reaches the end...
+              $active = $('.paging a:first'); //go back to first
+          }
+          rotate(); //Trigger the paging and slider function
+      }, 5000); //Timer speed in milliseconds (3 seconds)
 
 
-//On Click
-$(".force-next a").click(function() {
-    $active = $('.paging a.active').next(); //Activate the clicked paging
-	if ( $active.length === 0) { //If paging reaches the end...
-            $active = $('.paging a:first'); //go back to first
-    }
-    //Reset Timer
-    clearInterval(play); //Stop the rotation
-    rotate(); //Trigger rotation immediately
-    rotateSwitch(); // Resume rotation
-    return false; //Prevent browser jump to link anchor
-});
+  };
 
-//On Click
-$(".force-previous a").click(function() {
-    $active = $('.paging a.active').prev(); //Activate the clicked paging
-	if ( $active.length === 0) { //If paging reaches the end...
-            $active = $('.paging a:last'); //go back to first
-    }
-    //Reset Timer
-    clearInterval(play); //Stop the rotation
-    rotate(); //Trigger rotation immediately
-    rotateSwitch(); // Resume rotation
-    return false; //Prevent browser jump to link anchor
-});
+  rotateSwitch(); //Run function on launch
 
-//Form-Validation
-$('.webform-client-form').submit(function() {
-  var errors = false;
+  //On Hover
+  $(".image_reel a").hover(function() {
+      clearInterval(play); //Stop the rotation
+  }, function() {
+      rotateSwitch(); //Resume rotation
+  });
 
-  $(this).find("input:not([type='submit'])").each(function(i, field) {
-    if ($(field).val() === "") {
-      errors = true;
-      $(field).css('border', '1px solid #d34332');
-      $(field).css('color', '#d34332');
-      $(field).val("This is a required field.");
-    }
-    $(field).focus(function() {
-      $(field).val("");  
-    });
-  })
+  //On Click
+  $(".paging a").click(function() {
+      $active = $(this); //Activate the clicked paging
+      //Reset Timer
+      clearInterval(play); //Stop the rotation
+      rotate(); //Trigger rotation immediately
+      rotateSwitch(); // Resume rotation
+      return false; //Prevent browser jump to link anchor
+  });
 
 
-  return !errors;
-});
+  //On Click
+  $(".force-next a").click(function() {
+      $active = $('.paging a.active').next(); //Activate the clicked paging
+  	if ( $active.length === 0) { //If paging reaches the end...
+              $active = $('.paging a:first'); //go back to first
+      }
+      //Reset Timer
+      clearInterval(play); //Stop the rotation
+      rotate(); //Trigger rotation immediately
+      rotateSwitch(); // Resume rotation
+      return false; //Prevent browser jump to link anchor
+  });
+
+  //On Click
+  $(".force-previous a").click(function() {
+      $active = $('.paging a.active').prev(); //Activate the clicked paging
+  	if ( $active.length === 0) { //If paging reaches the end...
+              $active = $('.paging a:last'); //go back to first
+      }
+      //Reset Timer
+      clearInterval(play); //Stop the rotation
+      rotate(); //Trigger rotation immediately
+      rotateSwitch(); // Resume rotation
+      return false; //Prevent browser jump to link anchor
+  });
+
+  //Form-Validation
+  $('.webform-client-form').submit(function() {
+    var errors = false;
+
+    $(this).find("input:not([type='submit'])").each(function(i, field) {
+      if ($(field).val() === "") {
+        errors = true;
+        $(field).css('border', '1px solid #d34332');
+        $(field).css('color', '#d34332');
+        $(field).val("This is a required field.");
+      }
+      $(field).focus(function() {
+        $(field).val("");
+      });
+    })
+
+
+    return !errors;
+  });
 
 
 });
