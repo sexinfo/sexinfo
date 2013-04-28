@@ -1,79 +1,49 @@
-
-document.onkeydown = check
-document.onkeyup = check;
-
-var previousQuestionText;
-
-function check() 
-{
-	if (document.getElementById("edit-submitted-message") != null)
-	{
-		var questionField = document.getElementById("edit-submitted-message");
-		var questionText = questionField.value;
-		if (questionText != previousQuestionText) {
-			previousQuestionText = questionText;
-			changed(previousQuestionText);
-		}
-	}
-}
-
-var xmlhttp;
-function changed(text)
-{
-	// If there is already an async request sent, 
-	// abort the previous one because it is no longer relevant
-	if (xmlhttp != null) xmlhttp.abort();
-	
-	// If there hasn't been a request yet, create a new one
-	else {
-		xmlhttp = new XMLHttpRequest();
-		xmlhttp.onreadystatechange = readyStateChange;
-	}
-	console.log(previousQuestionText);
-	xmlhttp.open("GET", "./search/node/" + text, true);
-	xmlhttp.send();
-}
-
-function readyStateChange() {
-	if (xmlhttp.readyState==4 && xmlhttp.status==200)
-	{
-		// Parse the response as a new "document"
-		var tempDocument = document.createElement('div');
-		tempDocument.innerHTML = xmlhttp.responseText;
-		
-		// Extract the list of results from the document
-		var list = getElementByClassname(tempDocument, "search-results node-results");
-
-		// TODO: 
-		// If there are no results, show the top viewed topics
-		// If there are results, show those results
-
-
-		console.log(list.innerHTML);
-	}
-}
-
-function initIFrame() {
-	// TODO: Create an iframe to display the search result
-}
-
-function setiframecontent(html) {
-	// TODO: Set the content of the iframe
+// Query the search API and dispatch success/error handlers
+function fetchSuggestions() {
+  var $field = $("#edit-submitted-message");
+  $.get('/sexinfo/search/node/' + $field.val())
+  .success(showSuggestions)
+  .error(error);
 }
 
 
-function getElementByClassname(document, classname) {
-	// Iterate through all elements
-	var elems = document.getElementsByTagName('*'), i;
-	for (i in elems) {
-		// If the class names match, return the element found
-		if( (' ' + elems[i].className + ' ')
-				.indexOf(' ' + classname + ' ') 
-				> -1) {
-			return elems[i];
-		}
-	}
+// Parse node links out of our search result html and
+// display them on the form
+function showSuggestions(html) {
+  var $results = $(html).find('.search-result');
 
-	// Failure of search is to return null
-	return null;
+  // Bit of a hack here - clear out suggestions if we already have some,
+  // else create a new div to contain them
+  var $suggestions = $("#suggestions");
+  if ($suggestions.length)
+    $suggestions.empty();
+  else
+    $suggestions = $('<div>').attr('id', 'suggestions');
+
+  // Wrap each link in a <div> and append it to our suggestions container
+  $.each($results, function(i, el) {
+    var $link      = $(el).find('h4 a'),
+        $container = $('<div>');
+    $container.append($link);
+    $suggestions.append($container);
+  });
+
+  $("#webform-component-message").append($suggestions);
 }
+
+// TODO: what to do here?
+function error() {
+  console.log("An error occurred");
+}
+
+
+$(function() {
+  // Wait a bit after keyup before hitting the API
+  var timeout = -1;
+
+  $("#edit-submitted-message").keyup(function() {
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(fetchSuggestions, 300);
+  });
+
+});
