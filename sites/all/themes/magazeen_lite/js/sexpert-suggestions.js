@@ -1,7 +1,9 @@
 // Query the search API and dispatch success/error handlers
 function fetchSuggestions() {
   var $field = $("#edit-submitted-message");
-  $.get('/sexinfo/search/node/' + $field.val())
+  var $value = $field.val();
+  $value = $value.replace(/ /g, " OR ");
+  $.get('/sexinfo/search/node/' + $value)
   .success(showSuggestions)
   .error(error);
 }
