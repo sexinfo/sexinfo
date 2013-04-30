@@ -20,7 +20,7 @@ function showSuggestions(html) {
   if ($suggestions.length)
     $suggestions.empty();
   else
-    $suggestions = $('<div>').attr('id', 'suggestions');
+    $suggestions = $("<div id='suggestions'>")
 
   // Wrap each link in a <div> and append it to our suggestions container
   $.each($results, function(i, el) {
