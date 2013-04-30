@@ -25,7 +25,7 @@
 
   <div class="carousel-nav-right">
   <li>
-    <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'circumcision-small.jpg'; ?>" />
+    <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'banana-circumcision-small.jpg'; ?>" />
     <a rel="5" href="#">Circumcision</a>
   </li>
   <li>
@@ -37,8 +37,8 @@
     <a rel="7" href="#">Female Orgasmic Disorder</a>
   </li>
   <li>
-    <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'sexual-orientation-small.jpg'; ?>" />
-    <a rel="8" href="#">Homophobia</a>
+    <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'coming-out-small.jpg'; ?>" />
+    <a rel="8" href="#">Advice on Coming Out</a>
   </li>
   </div><!-- .carousel-nav-left -->
 </ul>

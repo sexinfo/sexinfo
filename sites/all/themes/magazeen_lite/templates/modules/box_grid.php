@@ -48,11 +48,11 @@
       <div class="node-box">
         <div class="node-content">
           <div class="faq-image">
-            <img class="" src="<?php print path_to_theme() . '/images/modules/' . 'masturbation.jpg'; ?>" />
+            <img class="" src="<?php print path_to_theme() . '/images/modules/' . 'arousal.jpg'; ?>" />
             <div class="caption-slide">
-              <h3>Is Masturbation Dangerous?</h3>
-              <p>Masturbation, or self-stimulation of the genitals for pleasure, is not a dangerous or bad activity for men or women. In facts &hellip;
-              <a href="http://www.soc.ucsb.edu/sexinfo/question/faq-masturbation-dangerous" class="more-button">Read More</a></p>
+              <h3>How Do I Increase Sexual Arousal?</h3>
+              <p>There are many ways to increase your and your partner’s sexual arousal. Sexual arousal is&hellip;
+              <a href="http://www.soc.ucsb.edu/sexinfo/question/faq-how-do-i-increase-sexual-arousal" class="more-button">Read More</a></p>
             </div><!-- .caption-slide -->
           </div><!-- .faq-image -->
         </div><!--.node-content-->
