@@ -8,6 +8,8 @@ files[] = search404.install
 
 configure = admin/config/search/search404
 
+package = Sexinfo Core Modules
+
 
 ; Information added by drupal.org packaging script on 2012-07-30
 version = "7.x-1.2"
