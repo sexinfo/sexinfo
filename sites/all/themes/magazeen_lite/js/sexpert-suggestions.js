@@ -2,20 +2,18 @@ var words = [];
 
 // Query the search API and dispatch success/error handlers
 function fetchSuggestions() {
-  var $field = $("#edit-submitted-message");
-  var input = $field.val();
+  var $field      = $("#edit-submitted-message"),
+      inputQuery  = $field.val().split(' '),
+      resultQuery = [];
 
-  var queryWords = input.split(' ');
-
-  for(var i = 0, len = queryWords.length; i < len; i++){
-    if($.inArray(queryWords[i], words) == -1){
-      queryWords.splice(i, 1); //delete word from query
+  for(var i = 0, len = inputQuery.length; i < len; i++){
+    var word = inputQuery[i];
+    if($.inArray(word, words) > -1) {
+      resultQuery.push(word);
     }
   }
 
-  var search = queryWords.join(" OR ")
-
-  $.get('/sexinfo/search/node/' + search)
+  $.get('/sexinfo/search/node/' + resultQuery.join(" OR "))
   .success(showSuggestions)
   .error(error);
 }
