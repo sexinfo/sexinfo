@@ -1,9 +1,21 @@
+var words = [];
+
 // Query the search API and dispatch success/error handlers
 function fetchSuggestions() {
   var $field = $("#edit-submitted-message");
-  var $value = $field.val();
-  $value = $value.replace(/ /g, " OR ");
-  $.get('/sexinfo/search/node/' + $value)
+  var input = $field.val();
+
+  var queryWords = input.split(' ');
+
+  for(var i = 0, len = queryWords.length; i < len; i++){
+    if($.inArray(queryWords[i], words) == -1){
+      queryWords.splice(i, 1); //delete word from query
+    }
+  }
+
+  var search = queryWords.join(" OR ")
+
+  $.get('/sexinfo/search/node/' + search)
   .success(showSuggestions)
   .error(error);
 }
@@ -13,6 +25,7 @@ function fetchSuggestions() {
 // display them on the form
 function showSuggestions(html) {
   var $results = $(html).find('.search-result');
+
 
   // Bit of a hack here - clear out suggestions if we already have some,
   // else create a new div to contain them
@@ -42,6 +55,10 @@ function error() {
 $(function() {
   // Wait a bit after keyup before hitting the API
   var timeout = -1;
+
+  $.getJSON('/sexinfo/words.json').then(function(json){
+    words = json.words;
+  });
 
   $("#edit-submitted-message").keyup(function() {
     if (timeout) clearTimeout(timeout);
