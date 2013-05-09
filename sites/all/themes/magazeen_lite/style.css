@@ -1057,6 +1057,14 @@ a:active.more-button {
 #node-22 .node-footer {
   display: none; }
 
+#suggestions {
+  margin-top: 10px; }
+  #suggestions a {
+    font-size: 1.2em; }
+    #suggestions a:before {
+      content: "- ";
+      color: #666; }
+
 #node-508 .node-footer {
   display: none; }
 

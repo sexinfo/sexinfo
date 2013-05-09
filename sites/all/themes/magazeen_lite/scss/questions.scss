@@ -56,3 +56,19 @@
   // Get rid of the textarea drag thing
   // display: none;
 }
+
+
+#suggestions {
+  margin-top: 10px;
+
+  h3 {}
+
+  a {
+    font-size: 1.2em;
+
+    &:before {
+      content: "- ";
+      color: #666;
+    }
+  }
+}
