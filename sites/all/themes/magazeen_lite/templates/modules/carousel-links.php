@@ -18,8 +18,8 @@
       <a rel="3" href="#">Love &amp; Relationships</a>
     </li>
     <li>
-      <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'std-small.jpg'; ?>" />
-      <a rel="4" href="#">Sexually Transmitted Infections</a>
+      <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'hymennn.jpg'; ?>" />
+      <a rel="4" href="#">The Hymen</a>
     </li>
   </div><!-- .carousel-nav-left -->
 

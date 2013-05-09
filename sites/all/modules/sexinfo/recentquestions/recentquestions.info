@@ -5,7 +5,7 @@ name = Recent Questions
 description = Retrieves and displays recently published questions to the homepage sidebar
 
 ; the module's package, will be the name of the module's group on the modules list page
-package = Sexinfo Custom Modules
+package = Sexinfo Core Modules
 
 ; the Drupal core package
 core = 7.x

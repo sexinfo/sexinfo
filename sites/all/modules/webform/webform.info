@@ -2,7 +2,7 @@
 name = Webform
 description = Enables the creation of forms and questionnaires.
 core = 7.x
-package = Webform
+package = Sexinfo Core Modules
 configure = admin/config/content/webform
 
 ; Files that contain classes:
