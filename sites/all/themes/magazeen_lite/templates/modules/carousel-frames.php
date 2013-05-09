@@ -42,11 +42,15 @@
 
 <!-- SLIDE 4 -->
 <div class="carousel-frame">
-  <img src="<?php print path_to_theme() . '/images/modules/' . 'hymennn.jpg'; ?>" alt="The Hymen" />
+  <!-- <img src="<?php #print path_to_theme() . '/images/modules/' . 'hymennn.jpg'; ?>" alt="The Hymen" /> -->
+  <img src="<?php print path_to_theme() . '/images/modules/' . 'std.jpg'; ?>" alt="Sexually Transmitted Infections" />
   <div class="carousel-caption">
-    <h3>The Hymen</h3>
+    <!-- <h3>The Hymen</h3>
     <p>The hymen is a thin piece of skin that surrounds and partially covers the vaginal opening (also called the introitus) in females.&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/article/hymen" class="more-button">Read More</a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/hymen" class="more-button">Read More</a></p> -->
+     <h3>Sexually Transmitted Infections</h3>
+     <p>Sexually transmitted infections (STI's) are passed from one person to another through various types of sexual contact.&hellip;
+     <a href="http://www.soc.ucsb.edu/sexinfo/article/sti-symptom-chart" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
