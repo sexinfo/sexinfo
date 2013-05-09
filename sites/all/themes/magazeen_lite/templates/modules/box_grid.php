@@ -48,11 +48,11 @@
       <div class="node-box">
         <div class="node-content">
           <div class="faq-image">
-            <img class="" src="<?php print path_to_theme() . '/images/modules/' . 'masturbation.jpg'; ?>" />
+            <img class="" src="<?php print path_to_theme() . '/images/modules/' . 'arousal.jpg'; ?>" />
             <div class="caption-slide">
-              <h3>Is Masturbation Dangerous?</h3>
-              <p>Masturbation, or self-stimulation of the genitals for pleasure, is not a dangerous or bad activity for men or women. In facts &hellip;
-              <a href="http://www.soc.ucsb.edu/sexinfo/question/faq-masturbation-dangerous" class="more-button">Read More</a></p>
+              <h3>How Do I Increase Sexual Arousal?</h3>
+              <p>There are many ways to increase your and your partner’s sexual arousal. Sexual arousal is&hellip;
+              <a href="http://www.soc.ucsb.edu/sexinfo/question/faq-how-do-i-increase-sexual-arousal" class="more-button">Read More</a></p>
             </div><!-- .caption-slide -->
           </div><!-- .faq-image -->
         </div><!--.node-content-->
@@ -68,14 +68,14 @@
   ========================-->
   <div class="column-third">
     <!-- BOX TITLE -->
-    <h4 class="module-title">Ask the Sexperts</h4>
+    <h4 class="module-title">Test Your Knowledge</h4>
     <div class="module ask-module">
       <div class="node-box">
         <div class="node-content">
-          <p>Can't find an answer to your question? Want to send in feedback on the site? We'd love to hear from you! Click <a href="<?php print $base_path . "ask-sexperts" ?>">here</a> to send a question to the Sexperts.</p>
+          <p>Do you think you know it all? Are you an expert on masturbation, LGBTQ facts, paraphilias, or pregnancy and abortion? Quiz yourself <a href="<?php print $base_path . "quizzes" ?>">here</a> to see if you really are.</p>
         </div><!--.node-content-->
         <div class="node-footer">
-          <a href="<?php print $base_path . "ask-sexperts" ?>">Ask a Question &raquo;</a>
+          <a href="<?php print $base_path . "quizzes" ?>">Take a quiz &raquo;</a>
         </div><!--.node-footer-->
       </div><!--.node-box-->
     </div><!-- .module -->

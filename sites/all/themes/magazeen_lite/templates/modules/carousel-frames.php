@@ -42,11 +42,11 @@
 
 <!-- SLIDE 4 -->
 <div class="carousel-frame">
-  <img src="<?php print path_to_theme() . '/images/modules/' . 'std.jpg'; ?>" alt="Sexually Transmitted Infections" />
+  <img src="<?php print path_to_theme() . '/images/modules/' . 'hymennn.jpg'; ?>" alt="The Hymen" />
   <div class="carousel-caption">
-    <h3>Sexually Transmitted Infections</h3>
-    <p>Sexually transmitted infections (STI's) are passed from one person to another through various types of sexual contact.&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/article/sti-symptom-chart" class="more-button">Read More</a></p>
+    <h3>The Hymen</h3>
+    <p>The hymen is a thin piece of skin that surrounds and partially covers the vaginal opening (also called the introitus) in females.&hellip;
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/hymen" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
@@ -59,7 +59,7 @@
 
 <!-- SLIDE 5 -->
 <div class="carousel-frame">
-  <img src="<?php print path_to_theme() . '/images/modules/' . 'circumcision.jpg'; ?>" alt="Sexual Behaviors" />
+  <img src="<?php print path_to_theme() . '/images/modules/' . 'banana-circumcision.jpg'; ?>" alt="Sexual Behaviors" />
   <div class="carousel-caption">
     <h3>Circumcision</h3>
     <p>Male circumcision is a medical procedure in which the foreskin of the penis is surgically removed, exposing the&hellip;
@@ -89,10 +89,10 @@
 
 <!-- SLIDE 8 -->
 <div class="carousel-frame">
-  <img src="<?php print path_to_theme() . '/images/modules/' . 'sexual-orientation.jpg'; ?>" alt="Homophobia" />
+  <img src="<?php print path_to_theme() . '/images/modules/' . 'coming-out.jpg'; ?>" alt="Advice on Coming Out" />
   <div class="carousel-caption">
-    <h3>Homophobia</h3>
-    <p>Homophobia is defined as "irrational fear of, aversion to, or discrimination against homosexuality&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/article/homophobia" class="more-button">Read More</a></p>
+    <h3>Advice on Coming Out</h3>
+    <p>For gay men and lesbians, coming out to parents or guardians can seem like a terrifying event&hellip;
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/advice-coming-out" class="more-button">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->

@@ -1,0 +1,165 @@
+<?php
+/**
+ * @file import nodewords data to metatags_quick fields
+ * @author Valery L. Lourie <http://drupal.org/user/239562>
+ */
+
+/**
+ * Implements hook_menu().
+ * @see http://api.drupal.org/api/drupal/modules--system--system.api.php/function/hook_menu/7
+ */
+function metatags_quick_extra_menu() {
+  $items['admin/config/search/metatags_quick/auto'] = array(
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('metatags_quick_admin_auto_settings'),
+    'title' => 'Auto settings',
+    'access arguments' => array('administer metatags_quick'),
+  	'file' => 'metatags_quick_extra.admin.inc',
+ 	'type' => MENU_LOCAL_TASK,
+ 	'weight' => 10,
+  );
+  return $items;
+}
+
+/***
+ * Implementation of hook_html_head_alter(). The auto tagging ops happen here
+ */
+function metatags_quick_extra_html_head_alter(&$head_elements) {
+  // auto-tag only if the page is node
+  if (arg(0) == 'node' && is_numeric(arg(1)) && !arg(2)) {
+    $auto_settings = variable_get('metatags_quick_auto_settings', '');
+    $node = node_load(arg(1));
+    $applicable_content_type = false;
+    if (isset($auto_settings['applicable_content_types'])) {
+      $applicable_content_type = in_array($node->type, $auto_settings['applicable_content_types'], true);
+    }		
+ 		
+    // apply auto tags if the content type is one of target content types 
+    if ($applicable_content_type) {
+      // Generate automatic meta keywords 
+      $keywords = array();
+      // Node-specific keywords entered in node add/edit form
+      $node_keywords = array();
+      if (isset($head_elements['metatags_quick_keywords'])) {
+        $node_keywords = explode(',',$head_elements['metatags_quick_keywords']['#attributes']['content']);	
+      }
+      // Taxonomy keywords
+      $vocabularies = array_values($auto_settings['auto_keywords_vocabularies']);
+      $taxonomy_keywords = array();
+      foreach ($vocabularies as $vocabulary) {
+        if ($vocabulary) {
+          $vocabulary_keywords = _metatags_quick_get_vocabulary_keywords($vocabulary,$node);
+          $taxonomy_keywords = array_merge($taxonomy_keywords, $vocabulary_keywords);
+        }
+      }
+      // Default keywords
+      $default_keywords = array();
+      if (isset($auto_settings['default_keywords'][$node->type]) && $auto_settings['default_keywords'][$node->type]) {
+        $default_keywords = explode(',',$auto_settings['default_keywords'][$node->type]);
+        // Token support
+        foreach ($default_keywords as $index => $keyword) {
+          $default_keywords[$index] = token_replace($keyword, array('node' => $node));
+        }
+      }
+      // Global keywords
+      $global_keywords = array();
+      if ($auto_settings['global_keywords']) {
+        $global_keywords = explode(',', $auto_settings['global_keywords']);
+        // Token support
+        foreach ($global_keywords as $index => $keyword) {
+          $global_keywords[$index] = token_replace($keyword);
+        }
+      }
+      
+      // Add/alter meta keywords
+      $keywords = array_merge($node_keywords, $taxonomy_keywords, $default_keywords, $global_keywords);
+      if (count($keywords)) {
+        if (isset($head_elements['metatags_quick_keywords'])) {
+          $head_elements['metatags_quick_keywords']['#attributes']['content'] = implode(',',$keywords);
+        }
+        else {
+          $head_elements['metatags_quick_keywords'] = array(
+            '#tag' => 'meta',
+            '#type' => 'html_tag',
+            '#attributes' => array(
+              'name' => 'keywords',
+              'content' => implode(',',$keywords),
+            ),
+          );
+        }
+      }
+      
+      // Generate automatic meta description
+      // If no meta description exists and if autogeneration is required
+      $meta_description_exists = false;
+      if (isset($head_elements['metatags_quick_description'])) {
+        $head_elements['metatags_quick_description']['#attributes']['content'] = trim($head_elements['metatags_quick_description']['#attributes']['content']);
+        $meta_description_exists = !empty($head_elements['metatags_quick_description']['#attributes']['content']);
+      }
+      if (!empty($node->body) && !$meta_description_exists && isset($auto_settings['meta_description']) && $auto_settings['meta_description']['auto_generate']) {
+	$language = field_language('node', $node, 'body');
+        $source = $auto_settings['meta_description']['source'];
+        if ($source == 'teaser') {
+          $content = $node->body[$language][0]['summary'];
+        }
+        elseif ($source == 'body') {
+          $content = $node->body[$language][0]['value'];
+        }
+        else {
+          $content = $node->body[$language][0]['summary'] ? $node->body[$language][0]['summary'] : $node->body[$language][0]['value'];
+        }
+ 				
+	// Trim content
+        $content = drupal_substr(trim(strip_tags($content)), 0, 255);
+        // Stop on word boundary
+        if (drupal_strlen($content) == 255) {
+          $space_position = strrpos($content,' ');
+          $content = drupal_substr($content, 0, $space_position);
+        }
+        // Add meta description
+        $head_elements['metatags_quick_description'] = array(
+          '#tag' => 'meta',
+          '#type' => 'html_tag',
+          '#attributes' => array(
+            'name' => 'description',
+            'content' => $content,
+          ),
+        );
+      }
+    }
+  }
+}
+ 
+ 
+/**
+ * Helper function to return an array of keywords for the given node and vocabulary 
+ * @param string $vocabulary_name
+ * @param stdObject $node
+ */
+function _metatags_quick_get_vocabulary_keywords($vocabulary_name, $node) {
+  // Identify the correct taxonomy field
+  $keywords = array();
+  $fields = field_info_fields();
+  $field_name = '';
+  foreach ($fields as $field) {
+    if ($field['type'] == 'taxonomy_term_reference' && isset($field['bundles']['node']) && in_array($node->type, $field['bundles']['node'])
+    && $field['settings']['allowed_values'][0]['vocabulary'] == $vocabulary_name) {
+      $field_name = $field['field_name'];
+      break;
+    }
+  }
+  
+  if ($field_name) {
+    $language = field_language('node', $node, $field_name);
+    if (!empty($node->{$field_name})) {
+      $node_terms = $node->{$field_name}[$language];
+      foreach ($node_terms as $node_term) {
+        $term = taxonomy_term_load($node_term['tid']);
+        if(isset($term->name)){
+          $keywords[] = $term->name;
+        }
+      }
+    }
+  }
+  return $keywords;
+}
