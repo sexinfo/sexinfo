@@ -1,0 +1,13 @@
+name = Meta tags (quick)
+description = Meta tags support build using FieldAPI/EntityAPI
+core = 7.x
+package = Meta tags (quick)
+
+files[] = metatags_quick.migrate.inc
+
+; Information added by drupal.org packaging script on 2013-01-06
+version = "7.x-2.7"
+core = "7.x"
+project = "metatags_quick"
+datestamp = "1357466252"
+
