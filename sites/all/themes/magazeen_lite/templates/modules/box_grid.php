@@ -72,7 +72,7 @@
     <div class="module ask-module">
       <div class="node-box">
         <div class="node-content">
-          <p>Do you think you know it all? Quiz yourself <a href="<?php print $base_path . "quizzes" ?>">here</a> to see if you really do.</p>
+          <p>Do you think you know it all? Are you an expert on masturbation, LGBTQ facts, paraphilias, or pregnancy and abortion? Quiz yourself <a href="<?php print $base_path . "quizzes" ?>">here</a> to see if you really are.</p>
         </div><!--.node-content-->
         <div class="node-footer">
           <a href="<?php print $base_path . "quizzes" ?>">Take a quiz &raquo;</a>
