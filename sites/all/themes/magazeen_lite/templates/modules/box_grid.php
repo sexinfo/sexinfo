@@ -68,14 +68,14 @@
   ========================-->
   <div class="column-third">
     <!-- BOX TITLE -->
-    <h4 class="module-title">Ask the Sexperts</h4>
+    <h4 class="module-title">Test Your Knowledge</h4>
     <div class="module ask-module">
       <div class="node-box">
         <div class="node-content">
-          <p>Can't find an answer to your question? Want to send in feedback on the site? We'd love to hear from you! Click <a href="<?php print $base_path . "ask-sexperts" ?>">here</a> to send a question to the Sexperts.</p>
+          <p>Do you think you know it all? Quiz yourself <a href="<?php print $base_path . "quizzes" ?>">here</a> to see if you really do.</p>
         </div><!--.node-content-->
         <div class="node-footer">
-          <a href="<?php print $base_path . "ask-sexperts" ?>">Ask a Question &raquo;</a>
+          <a href="<?php print $base_path . "quizzes" ?>">Take a quiz &raquo;</a>
         </div><!--.node-footer-->
       </div><!--.node-box-->
     </div><!-- .module -->
