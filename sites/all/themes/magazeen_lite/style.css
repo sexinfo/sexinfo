@@ -886,7 +886,7 @@ ul.slinks {
   background-color: #262626;
   color: white;
   height: 70px;
-  opacity: 0.8;
+  background: rgba(0, 0, 0, 0.6);
   padding: 5px;
   position: absolute;
   bottom: 0;
@@ -984,7 +984,8 @@ ul.slinks {
 
 .carousel-caption h3 {
   color: #f23183;
-  font-size: 2em; }
+  font-size: 2em; 
+	text-shadow: 1px 1px 3px #111; }
 
 .carousel-caption p {
   color: white; }

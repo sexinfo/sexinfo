@@ -7,7 +7,7 @@
   <div class="carousel-nav-left">
     <li>
       <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'pregnant-small.jpg'; ?>" />
-      <a class="current" rel="1" href="#">Can I get pregnant if...</a>
+      <a class="current" rel="1" href="#">Can I Get Pregnant If...</a>
     </li>
     <li>
       <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'stdtalking-small.jpg'; ?>" />
