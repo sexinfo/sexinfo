@@ -1896,7 +1896,7 @@ img#logo-image {
 #navigation ul li a:link, #navigation ul li a:active, #navigation ul li a:visited {
   margin: 0;
   padding: 13px 15px;
-  font: bold 1.08em Arial, Helvetica, sans-serif;
+  font: bold 1.1em Arial, Helvetica, sans-serif;
   color: #34393e;
   display: block;
   height: auto; }
@@ -1910,7 +1910,7 @@ img#logo-image {
   border-top: none; }
 
 #navigation ul li a:hover {
-  color: #000;
+  color: white;
   cursor: pointer;
   font-weight: bold;
   text-decoration: underline; }
