@@ -61,7 +61,7 @@
   background: no-repeat scroll right top transparent;
   float: right;
   height: auto;
-  margin: 38px 20px 0 0;
+  margin: 35px 20px 0 0;
   width:284px;
 
   @include mobile {
@@ -111,26 +111,26 @@ img#logo-image {
 	margin: 20px 10px 5px 0;
 	width: 284px;
 
-  @include mobile {
-    float: none;
-    margin: 20px auto 10px;
-    text-align: center;
-    width: auto;
-  }
-}
-  .social-buttons a {
+  a {
     float: left;
     height: 32px;
     margin-right: 30px;
     white-space: nowrap;
     width: 32px;
 
-    @include mobile { float: none; }
+    &:hover { color: #B2B2B2; }
   }
 
-	.social-buttons a:hover {
-		color: #B2B2B2;
-	};
+  @include mobile {
+    float: none;
+    margin: 20px auto 10px;
+    text-align: center;
+    width: auto;
+
+    a { float: none; }
+  }
+}
+
 
 /* Navigation
 /* -------------- */
