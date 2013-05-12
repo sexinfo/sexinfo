@@ -52,14 +52,13 @@
 
 <!-- Ask Sexperts -->
 <div class="span4 front-module">
-  <h4 class="module-title">Ask the Sexperts</h4>
+  <h4 class="module-title">Test Your Knowledge</h4>
 
   <div class="module-content ask-module">
-    <p>Can't find an answer to your question? Want to send in feedback on the site? We'd love to hear from you!
-      Click <a href="<?php print $base_path . "ask-sexperts" ?>">here</a> to send a question to the Sexperts.</p>
+    <p>Do you think you know it all? Are you an expert on masturbation, LGBTQ facts, paraphilias, or pregnancy and abortion? Quiz yourself <a href="<?php print $base_path . "quizzes" ?>">here</a> to see if you really are.</p>
   </div>
 
   <div class="module-footer">
-    <a href="<?php print $base_path . "ask-sexperts" ?>">Ask a Question &raquo;</a>
+    <a href="<?php print $base_path . "quizzes" ?>">Take a quiz &raquo;</a>
   </div>
 </div>

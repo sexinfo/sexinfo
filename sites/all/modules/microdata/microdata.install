@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the microdata module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function microdata_schema() {
+  $schema['microdata_mapping'] = array(
+    'description' => 'Stores custom RDF mappings for user defined content types or overriden module-defined mappings',
+    'fields' => array(
+      'type' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'description' => 'The name of the entity type a mapping applies to (node, user, comment, etc.).',
+      ),
+      'bundle' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'description' => 'The name of the bundle a mapping applies to.',
+      ),
+      'mapping' => array(
+        'description' => 'The serialized mapping of the bundle type and fields to RDF terms.',
+        'type' => 'blob',
+        'not null' => FALSE,
+        'size' => 'big',
+        'serialize' => TRUE,
+      ),
+    ),
+    'primary key' => array('type', 'bundle'),
+  );
+
+  $schema['cache_microdata_vocabulary'] = drupal_get_schema_unprocessed('system', 'cache');
+  $schema['cache_microdata_vocabulary']['description'] = 'Cache table for imported microdata vocabulary schemas.';
+
+  return $schema;
+}

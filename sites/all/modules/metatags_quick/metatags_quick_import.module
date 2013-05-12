@@ -1,0 +1,23 @@
+<?php
+/**
+ * @file import nodewords data to metatags_quick fields
+ * @author Valery L. Lourie <http://drupal.org/user/239562>
+ */
+
+/**
+ * Implements hook_menu().
+ * @see http://api.drupal.org/api/drupal/modules--system--system.api.php/function/hook_menu/7
+ */
+function metatags_quick_import_menu() {
+  $items['admin/config/search/metatags_quick/import'] = array(
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('metatags_quick_upgrade'),
+    'title' => 'Upgrade from nodewords',
+    'access arguments' => array('administer metatags_quick'),
+    'file' => 'metatags_quick_import.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+

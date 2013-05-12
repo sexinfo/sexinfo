@@ -1,0 +1,3 @@
+@CHARSET "UTF-8";
+.entity_type_collapsible { font-weight: bold; text-decoration: underline; cursor:pointer; }
+.entity_type_child_title{ padding-left:20px}
