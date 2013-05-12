@@ -30,6 +30,15 @@
   }
 
   p:last-child { margin-bottom: 10px; }
+
+  @include mobile {
+    padding: 10px;
+
+    .left, .right {
+      float: none;
+      width: auto;
+    }
+  }
 }
 
 

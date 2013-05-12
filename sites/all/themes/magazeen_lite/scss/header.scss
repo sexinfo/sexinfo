@@ -49,6 +49,12 @@
   margin: 0;
   padding: 0;
   width: 580px;
+
+  @include mobile {
+    float: none;
+    text-align: center;
+    width: auto;
+  }
 }
 
 #searchform-header {
@@ -57,6 +63,12 @@
   height: auto;
   margin: 38px 20px 0 0;
   width:284px;
+
+  @include mobile {
+    float: none;
+    margin: 10px auto 0;
+    width: 75%;
+  }
 }
 
 input#edit-search-block-form--2 {
@@ -94,9 +106,17 @@ img#logo-image {
 }
 
 .social-buttons {
+  @include clearfix;
   float: right;
 	margin: 20px 10px 5px 0;
 	width: 284px;
+
+  @include mobile {
+    float: none;
+    margin: 20px auto 10px;
+    text-align: center;
+    width: auto;
+  }
 }
   .social-buttons a {
     float: left;
@@ -104,8 +124,10 @@ img#logo-image {
     margin-right: 30px;
     white-space: nowrap;
     width: 32px;
+
+    @include mobile { float: none; }
   }
-	
+
 	.social-buttons a:hover {
 		color: #B2B2B2;
 	};
@@ -128,6 +150,10 @@ img#logo-image {
   margin: 0 auto;
   padding: 0;
   width: 880px;
+
+  @include mobile {
+    width: 100%;
+  }
 }
 
 #navigation ul li {
@@ -140,4 +166,56 @@ img#logo-image {
     background-color: rgba(0,0,0,0.5);
     color: #F1F8FF;
   }
+
+  @include mobile {
+    float: none;
+    margin: 0;
+    width: 100%;
+  }
 }
+
+
+
+#navigation ul li a:link, #navigation ul li a:active, #navigation ul li a:visited {
+  margin:0; padding:13px 15px;
+  font:bold 1.08em Arial, Helvetica, sans-serif; color:#34393e;
+  display:block; height:auto;
+
+  @include mobile {
+    border-top: 1px solid #eee;
+    padding: 5px;
+    text-align: center;
+  }
+}
+
+#navigation ul li:first-child a { border-top: none; }
+
+#navigation ul li a:hover {
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration:underline;
+}
+
+#navigation ul.links li.active a:link, #navigation ul.links li.active a:active, #navigation ul.links li.active a:visited {
+  /* margin:-3px 0 0 0;*/
+  padding:15px 15px 14px 15px;
+  background:$dark-gray url(images/navigation-hover.gif) repeat-x bottom center;
+  color:#f1f8ff; position:relative;
+
+  @include mobile { padding: 5px; }
+}
+
+a.rss:link, a.rss:active, a.rss:visited, a.rss:hover {
+  margin:13px 15px 0 0; padding:0;
+  width:16px; height:17px;
+  background:url(images/rss.png) no-repeat top center;
+  text-indent:-9999px; display:block; outline:0;
+}
+
+.rss {
+  margin:0 30px 0 0; padding:0;
+  width:16px; height:17px;
+  float:right;
+}
+

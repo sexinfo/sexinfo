@@ -2,27 +2,15 @@
 /* Front page modules
 /* ----------------------------------------------*/
 
-/*----- LAYOUT -----*/
-.box-module-container {
-  margin-bottom: 20px;
-  overflow: auto;
-}
-
-#column-large {
-  float: left;
-  margin-right: 10px;
-  width: 645px;
-}
-
-#column-small {
-  float: right;
-  width: 330px;
+.front-container {
+  background: url(images/main-content.gif) no-repeat top center;
+  padding: 20px 0;
 }
 
 .column-container {
-  /* A generic padded container with background/rounded edges for modules  */
-
+  @include border-box;
   @include border-radius;
+  @include clearfix;
   background-color: #f6fbff;
   -webkit-box-shadow: inset 0px 0px 2px 1px #fff;
      -moz-box-shadow: inset 0px 0px 2px 1px #fff;
@@ -31,49 +19,53 @@
   overflow: auto;
   padding: 10px;
 
-  &.dark { background-color: #ebf6fa; }
-
-  .question {
-    clear: both;
-    margin-top: 10px;
-    overflow: auto;
-  }
-}
-.column-third {
-  float: left;
-  margin-right: 10px;
-  width: 321px;
-
-  &:last-child { margin: 0; }
-}
-
-/* Since the node classes are copied from another page, we need
- a few hacks to make it work specifically for the front page */
-.module .node-content {
-  overflow: auto;
-  padding: 10px;
+  @include mobile { padding: 0; } // TODO: make this less general
 }
 
 /* Popular Topics module */
 .list-half {
   float: left;
-  margin-right: 10px;
-  width: 130px;
-
-  &:last-child { margin: 0;  }
+  width: 50%;
 
   a:hover { text-decoration: underline; }
 }
 
-  /* FAQ module */
+
+.front-module {
+  @include mobile { margin-bottom: 15px; }
+
+  .module-title {}
+
+  .module-content {
+    @include clearfix;
+    background: #fdfefe url(images/node-box-top.gif) repeat-x top center;
+    padding: 10px;
+  }
+
+  .module-footer {
+    background-color: #FCFDFE;
+    border-top: 1px solid #eee;
+    padding: 15px;
+
+    a {
+      font-style: italic !important; // wat?
+      font: bold 1.17em Georgia, "Times New Roman", Times, serif;
+      color: $pink;
+    }
+  }
+}
+
+
+/* FAQ module */
 .faq-image {
   overflow: hidden;
   position: relative;
 
   img {
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
-    width: 290px;
+    max-height: 200px;
+    max-width: 100%;
   }
 }
   .caption-slide {
@@ -84,17 +76,36 @@
     position: absolute;
     bottom: -40px;
     left: 0;
-    width: 285px;
   }
 
-/* Image carousel module */
+
+// Image carousel module
+// TODO: this is getting really awful, needs refactoring
+.carousel-container {
+  margin: 20px auto 10px;
+  width: 985px;
+
+  @include mobile { width: auto; }
+}
+
+#image-carousel {
+  @include clearfix;
+  @include mobile { margin: 0 auto; }
+}
+
 #carousel-window {
   height: 250px;
   float: left;
+  margin: 0;
   margin-right: 10px;
   overflow: hidden;
   position: relative;
   width: 400px;
+
+  @include mobile {
+    margin: 0 auto 10px;
+    float: none;
+  }
 }
   #window-inner {
     /* An inner container that's scrolled by JS - sort of like a film reel */
@@ -109,7 +120,7 @@
   overflow: hidden;
   position: relative;
   width: 400px;
-}
+
   .carousel-caption {
     background-color: #262626;
     color: white;
@@ -121,14 +132,27 @@
     left: 0;
     width: 390px;
   }
+}
 
 #carousel-nav {
   float: left;
   width: 555px;
+
+  @include mobile {
+    @include clearfix;
+    float: none;
+    margin: 0 auto;
+    width: 400px;
+  }
 }
   .carousel-nav-left,
   .carousel-nav-right {
     width: 277px;
+
+    @include mobile {
+      float: none;
+      width: 100%;
+    }
   }
 
   .carousel-nav-left { float: left; }
@@ -193,11 +217,15 @@
 .module .node-footer a:active {
   text-decoration: underline;
 }
+
 .caption-slide h3,
 .caption-slide p {
   color: white;
   margin: 0;
   opacity: 1;
+}
+.caption-slide h3 {
+  font: bold 1.50em Arial, Helvetica, sans-serif;
 }
 .ask-module {
   font-size: 1.1em;

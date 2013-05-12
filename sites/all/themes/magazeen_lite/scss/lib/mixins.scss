@@ -46,6 +46,21 @@
   font-weight: bold;
 }
 
+// Specific styling for small-width devices
+//
+// Ex:
+//
+//   @include mobile {
+//     .container { width: 100%; }
+//     etc ...
+//   }
+//
+@mixin mobile {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
 
 // Form Mixins
 // -------------------------------
