@@ -1,7 +1,10 @@
 #! /bin/sh
 
+username=$1
+password=$2
+
 # Root path for phpmyadmin
-indexURL=http://localhost/phpmyadmin/
+indexURL=https://secure.lsit.ucsb.edu/phpmyadmin/
 
 # databaseName variable for future compatability with multiple databases to dump
 # or perhaps non-conventional database name
@@ -10,16 +13,54 @@ databaseName=sexweb00
 # Which file to output the backup to
 outputFile=$databaseName.sql
 
-# Execute a query to phpmyadmin and store the response/cookies
-indexPHPResult=$(curl $indexURL -s -c cookies.txt )
 
-# Extract the token from the index.php response
-tokenDelimiter=token
-token=$(echo $indexPHPResult | grep -o "$tokenDelimiter=[a-z0-9]*")
-token=`expr substr "$token" 7 32`
+
+
+# Execute a query to phpmyadmin and store the response/cookies
+
+# Authenticate
+dataString="pma_username=$username&pma_password=$password&server=1&lang=en-iso-8859-1&convcharset=iso-8859-1"
+curl --silent -c cookies.txt -D - -L "https://secure.lsit.ucsb.edu/phpmyadmin/" --data "$dataString" > output.txt
+loginResponse=$(cat output.txt)
+
+# Extract the token from the query response
+token=$( awk -F"token=" '{print $2}' output.txt)
+token=$( echo $token | cut -d'&' -f 1)
+
+# Fetch the html showing the tables of our db
+tableValues=$(curl --silent -b cookies.txt "https://secure.lsit.ucsb.edu/phpmyadmin/db_structure.php?db=sexweb00&token=$token")
+rm output.txt -f
+
+# parse the html so we have one tablename per line
+tableValues=$(echo "$tableValues" | grep -A 1 "label for=\"checkbox_tbl_[0-9]\+\"" | grep "title" |  cut -d'"' -f 2)
+
+# This block of code parses the values as individual strings and constructs a get request
+OIFS=$IFS
+IFS='
+'
+arr2=$tableValues
+
+quote='"'
+formData=""
+prefix="db=$databaseName&token=$token&export_type=database"
+postfix="&what=sql&csv_separator=;&csv_enclosed=\"&csv_escaped=\&csv_terminated=AUTO&csv_null=NULL&csv_data=&excel_null=NULL&excel_edition=win&excel_data=&htmlexcel_null=NULL&htmlexcel_data=&htmlword_structure=something&htmlword_data=something&htmlword_null=NULL&latex_caption=something&latex_structure=something&latex_structure_caption=Structure+of+table+__TABLE__&latex_structure_continued_caption=Structure+of+table+__TABLE__+(continued)&latex_structure_label=tab:__TABLE__-structure&latex_comments=something&latex_data=something&latex_columns=something&latex_data_caption=Content+of+table+__TABLE__&latex_data_continued_caption=Content+of+table+__TABLE__+(continued)&latex_data_label=tab:__TABLE__-data&latex_null=\textit{NULL}&ods_null=NULL&ods_data=&odt_structure=something&odt_comments=something&odt_data=something&odt_columns=something&odt_null=NULL&pdf_report_title=&pdf_data=1&sql_header_comment=&sql_compatibility=NONE&sql_if_not_exists=something&sql_auto_increment=something&sql_backquotes=something&sql_columns=something&sql_extended=something&sql_max_query_size=50000&sql_hex_for_blob=something&sql_type=REPLACE&xml_data=&yaml_data=&asfile=sendit&filename_template=__DB__&remember_template=on&compression=gzip"
+formData="$prefix$formData"
+for x in $arr2
+do
+	formData="$formData&table_select[]=$x"
+done
+formData="$formData$postfix"
+
+
 
 # Execute a curl request to the export api endpoint using the cookies we 
 # retrieved from the index.php request.  I've removed the cookies header, 
 # replaced the database names with the variable, and the tokens with the variable.
 # Also, we store the downloaded file as 'file.sql' in the local dir
-curl "$indexURL/export.php" -b cookies.txt -H "Origin: http://localhost" -H "Accept-Encoding: gzip,deflate,sdch" -H "Host: localhost" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.12 Safari/537.36" -H "Content-Type: application/x-www-form-urlencoded" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" -H "Cache-Control: max-age=0" -H "Referer: http://localhost/phpmyadmin/db_export.php?db=$databaseName&server=1&token=$token" -H "Connection: keep-alive" --data "db=$databaseName&token=$token&export_type=database&export_method=quick&quick_or_custom=quick&table_select%5B%5D=actions&table_select%5B%5D=authmap&table_select%5B%5D=batch&table_select%5B%5D=block&table_select%5B%5D=blocked_ips&table_select%5B%5D=block_custom&table_select%5B%5D=block_node_type&table_select%5B%5D=block_role&table_select%5B%5D=cache&table_select%5B%5D=cache_block&table_select%5B%5D=cache_bootstrap&table_select%5B%5D=cache_field&table_select%5B%5D=cache_filter&table_select%5B%5D=cache_form&table_select%5B%5D=cache_image&table_select%5B%5D=cache_menu&table_select%5B%5D=cache_page&table_select%5B%5D=cache_path&table_select%5B%5D=cache_token&table_select%5B%5D=cache_update&table_select%5B%5D=cache_views&table_select%5B%5D=cache_views_data&table_select%5B%5D=ckeditor_input_format&table_select%5B%5D=ckeditor_settings&table_select%5B%5D=comment&table_select%5B%5D=contact&table_select%5B%5D=ctools_css_cache&table_select%5B%5D=ctools_object_cache&table_select%5B%5D=date_formats&table_select%5B%5D=date_format_locale&table_select%5B%5D=date_format_type&table_select%5B%5D=field_config&table_select%5B%5D=field_config_instance&table_select%5B%5D=field_data_body&table_select%5B%5D=field_data_comment_body&table_select%5B%5D=field_data_field_categort&table_select%5B%5D=field_data_field_category&table_select%5B%5D=field_data_field_img&table_select%5B%5D=field_data_field_question&table_select%5B%5D=field_data_field_question_type&table_select%5B%5D=field_data_field_tags&table_select%5B%5D=field_revision_body&table_select%5B%5D=field_revision_comment_body&table_select%5B%5D=field_revision_field_categort&table_select%5B%5D=field_revision_field_category&table_select%5B%5D=field_revision_field_img&table_select%5B%5D=field_revision_field_question&table_select%5B%5D=field_revision_field_question_type&table_select%5B%5D=field_revision_field_tags&table_select%5B%5D=file_managed&table_select%5B%5D=file_usage&table_select%5B%5D=filter&table_select%5B%5D=filter_format&table_select%5B%5D=flood&table_select%5B%5D=history&table_select%5B%5D=image_effects&table_select%5B%5D=image_styles&table_select%5B%5D=menu_custom&table_select%5B%5D=menu_links&table_select%5B%5D=menu_router&table_select%5B%5D=node&table_select%5B%5D=node_access&table_select%5B%5D=node_comment_statistics&table_select%5B%5D=node_revision&table_select%5B%5D=node_type&table_select%5B%5D=oauth_common_consumer&table_select%5B%5D=oauth_common_context&table_select%5B%5D=oauth_common_nonce&table_select%5B%5D=oauth_common_provider_consumer&table_select%5B%5D=oauth_common_provider_token&table_select%5B%5D=oauth_common_token&table_select%5B%5D=openid_association&table_select%5B%5D=openid_nonce&table_select%5B%5D=page_manager_handlers&table_select%5B%5D=page_manager_pages&table_select%5B%5D=page_manager_weights&table_select%5B%5D=queue&table_select%5B%5D=rdf_mapping&table_select%5B%5D=registry&table_select%5B%5D=registry_file&table_select%5B%5D=role&table_select%5B%5D=role_permission&table_select%5B%5D=search_dataset&table_select%5B%5D=search_index&table_select%5B%5D=search_node_links&table_select%5B%5D=search_total&table_select%5B%5D=semaphore&table_select%5B%5D=sequences&table_select%5B%5D=sessions&table_select%5B%5D=sex_bridge&table_select%5B%5D=sex_bug&table_select%5B%5D=sex_category&table_select%5B%5D=sex_config&table_select%5B%5D=sex_content&table_select%5B%5D=sex_flag&table_select%5B%5D=sex_legacy&table_select%5B%5D=sex_question&table_select%5B%5D=sex_question_config&table_select%5B%5D=sex_type&table_select%5B%5D=sex_user&table_select%5B%5D=shortcut_set&table_select%5B%5D=shortcut_set_users&table_select%5B%5D=system&table_select%5B%5D=taxonomy_index&table_select%5B%5D=taxonomy_term_data&table_select%5B%5D=taxonomy_term_hierarchy&table_select%5B%5D=taxonomy_vocabulary&table_select%5B%5D=url_alias&table_select%5B%5D=users&table_select%5B%5D=users_roles&table_select%5B%5D=variable&table_select%5B%5D=views_display&table_select%5B%5D=views_view&table_select%5B%5D=watchdog&table_select%5B%5D=webform&table_select%5B%5D=webform_component&table_select%5B%5D=webform_emails&table_select%5B%5D=webform_last_download&table_select%5B%5D=webform_roles&table_select%5B%5D=webform_submissions&table_select%5B%5D=webform_submitted_data&output_format=sendit&filename_template=%40DATABASE%40&remember_template=on&charset_of_file=utf-8&compression=none&what=sql&codegen_structure_or_data=data&codegen_format=0&csv_separator=%2C&csv_enclosed=%22&csv_escaped=%22&csv_terminated=AUTO&csv_null=NULL&csv_structure_or_data=data&excel_null=NULL&excel_edition=win&excel_structure_or_data=data&htmlword_structure_or_data=structure_and_data&htmlword_null=NULL&json_structure_or_data=data&latex_caption=something&latex_structure_or_data=structure_and_data&latex_structure_caption=Structure+of+table+%40TABLE%40&latex_structure_continued_caption=Structure+of+table+%40TABLE%40+%28continued%29&latex_structure_label=tab%3A%40TABLE%40-structure&latex_relation=something&latex_comments=something&latex_mime=something&latex_columns=something&latex_data_caption=Content+of+table+%40TABLE%40&latex_data_continued_caption=Content+of+table+%40TABLE%40+%28continued%29&latex_data_label=tab%3A%40TABLE%40-data&latex_null=%5Ctextit%7BNULL%7D&mediawiki_structure_or_data=data&ods_null=NULL&ods_structure_or_data=data&odt_structure_or_data=structure_and_data&odt_relation=something&odt_comments=something&odt_mime=something&odt_columns=something&odt_null=NULL&pdf_report_title=&pdf_structure_or_data=data&php_array_structure_or_data=data&sql_include_comments=something&sql_header_comment=&sql_compatibility=NONE&sql_structure_or_data=structure_and_data&sql_procedure_function=something&sql_create_table_statements=something&sql_if_not_exists=something&sql_auto_increment=something&sql_backquotes=something&sql_type=INSERT&sql_insert_syntax=both&sql_max_query_size=50000&sql_hex_for_blob=something&sql_utc_time=something&texytext_structure_or_data=structure_and_data&texytext_null=NULL&xml_structure_or_data=data&xml_export_functions=something&xml_export_procedures=something&xml_export_tables=something&xml_export_triggers=something&xml_export_views=something&xml_export_contents=something&yaml_structure_or_data=data" >> $outputFile
+echo "Downloading structure.sql.gz"
+rm structure.sql.gz -f
+curl -b cookies.txt "https://secure.lsit.ucsb.edu/phpmyadmin/export.php" --data "$formData&sql_structure=something" > structure.sql.gz
+
+echo "Downloading data.sql.gz"
+rm data.sql.gz -f
+curl -b cookies.txt "https://secure.lsit.ucsb.edu/phpmyadmin/export.php" --data "$formData&sql_data=something" > data.sql.gz
