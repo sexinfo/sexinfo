@@ -8,19 +8,19 @@ indexURL=https://secure.lsit.ucsb.edu/phpmyadmin/
 
 # databaseName variable for future compatability with multiple databases to dump
 # or perhaps non-conventional database name
-databaseName=sexweb00
+databaseName="sexweb00"
 
 # Which file to output the backup to
-outputFile=$databaseName.sql
+dataOutput="${databaseName}_dataECReplace.sql.gz"
+structureOutput="${databaseName}_struct.sql.gz"
 
-
-
+cookies="cookies.txt"
 
 # Execute a query to phpmyadmin and store the response/cookies
 
 # Authenticate
 dataString="pma_username=$username&pma_password=$password&server=1&lang=en-iso-8859-1&convcharset=iso-8859-1"
-curl --silent -c cookies.txt -D - -L "https://secure.lsit.ucsb.edu/phpmyadmin/" --data "$dataString" > output.txt
+curl --silent -c "$cookies" -D - -L "https://secure.lsit.ucsb.edu/phpmyadmin/" --data "$dataString" > output.txt
 loginResponse=$(cat output.txt)
 
 # Extract the token from the query response
@@ -28,7 +28,7 @@ token=$( awk -F"token=" '{print $2}' output.txt)
 token=$( echo $token | cut -d'&' -f 1)
 
 # Fetch the html showing the tables of our db
-tableValues=$(curl --silent -b cookies.txt "https://secure.lsit.ucsb.edu/phpmyadmin/db_structure.php?db=sexweb00&token=$token")
+tableValues=$(curl --silent -b "$cookies" "https://secure.lsit.ucsb.edu/phpmyadmin/db_structure.php?db=sexweb00&token=$token")
 rm output.txt -f
 
 # parse the html so we have one tablename per line
@@ -57,10 +57,13 @@ formData="$formData$postfix"
 # retrieved from the index.php request.  I've removed the cookies header, 
 # replaced the database names with the variable, and the tokens with the variable.
 # Also, we store the downloaded file as 'file.sql' in the local dir
-echo "Downloading structure.sql.gz"
+echo "Downloading $structureOutput"
 rm structure.sql.gz -f
-curl -b cookies.txt "https://secure.lsit.ucsb.edu/phpmyadmin/export.php" --data "$formData&sql_structure=something" > structure.sql.gz
+curl -b "$cookies" "https://secure.lsit.ucsb.edu/phpmyadmin/export.php" --data "$formData&sql_structure=something" > "$structureOutput"
 
-echo "Downloading data.sql.gz"
+echo "Downloading $dataOutput"
 rm data.sql.gz -f
-curl -b cookies.txt "https://secure.lsit.ucsb.edu/phpmyadmin/export.php" --data "$formData&sql_data=something" > data.sql.gz
+curl -b "$cookies" "https://secure.lsit.ucsb.edu/phpmyadmin/export.php" --data "$formData&sql_data=something" > "$dataOutput"
+
+echo "Removing cookies"
+rm "$cookies" -f
