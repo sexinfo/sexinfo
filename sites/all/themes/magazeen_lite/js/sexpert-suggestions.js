@@ -56,7 +56,7 @@ $(function() {
   // Wait a bit after keyup before hitting the API
   var timeout = -1;
 
-  $.getJSON('/sexinfo/words.json').then(function(json){
+  $.getJSON('/sexinfo/data/words.json').then(function(json){
     words = json.words;
   });
 
