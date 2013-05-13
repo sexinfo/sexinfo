@@ -1,0 +1,132 @@
+<?php
+
+/**
+ * @file
+ * Tests for Email module.
+ */
+
+
+/**
+ * Test Email module microdata placement.
+ *
+ * The Email module should output microdata when the email field formatter type
+ * is 'email_default' or 'email_plan'. Because the 'email_contact' and
+ * 'email_spamspan' formatters are meant to obscure the email address from
+ * machines, there should be no microdata. This class tests for both of these
+ * cases.
+ */
+class EmailTestCase extends MicrodataFieldTestCase {
+
+  /**
+   * Sets the display information for the tests
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'Microdata markup - email field',
+      'description' => 'Microdata integration test for Email field.',
+      'group' => 'Microdata Field Integration',
+    );
+  }
+
+  /**
+   * Implements DrupalWebTestCase::setUp().
+   */
+  public function setUp() {
+    $this->fieldFormatterTypesMicrodata = array(
+      'email_default',
+      'email_plain',
+    );
+    $this->fieldFormatterTypesNoMicrodata = array(
+      'email_contact',
+      'email_spamspan',
+    );
+    $this->fieldFormatterTypes = array_merge($this->fieldFormatterTypesMicrodata, $this->fieldFormatterTypesNoMicrodata);
+
+    parent::setUp(array(
+      'email',
+      'spamspan',
+    ));
+  }
+
+  /**
+   * Implements MicrodataFieldTestCase::getFields().
+   */
+  protected function getFields() {
+    // Create fields for the field collection and for the field group.
+    $fields = array();
+    foreach ($this->fieldFormatterTypes as $type) {
+      $fields[] = array(
+        'field_name' => $type,
+        'type' => 'email',
+      );
+    }
+    return $fields;
+  }
+
+  /**
+   * Implements MicrodataFieldTestCase::getInstances().
+   */
+  protected function getInstances() {
+    // Create instances for the field collection and for the field group.
+    $instances = array();
+    foreach ($this->fieldFormatterTypes as $type) {
+      $instances[] = array(
+        'field_name' => $type,
+        'entity_type' => $this->entityType,
+        'bundle' => $this->bundleType,
+        'display' => array(
+          'default' => array(
+            'label' => 'hidden',
+            'type' => $type,
+          ),
+        ),
+      );
+    }
+    return $instances;
+  }
+
+  /**
+   * Implements MicrodataFieldTestCase::getMapping().
+   */
+  protected function getMapping() {
+    foreach ($this->fieldFormatterTypes as $type) {
+      $mapping[$this->entityType][$this->bundleType][$type] = array(
+        '#itemprop' => array($type),
+      );
+    }
+    return $mapping;
+  }
+
+  /**
+   * Tests whether microdata is correctly outputted, depending on the field
+   * formatter type.
+   */
+  public function testMarkup() {
+    $text = 'example@test.org';
+
+    $node = $this->drupalCreateNode(array('type' => $this->bundleType, 'promote' => 1));
+    foreach ($this->fieldFormatterTypes as $type) {
+      $edit["{$type}[und][0][email]"] = $text;
+    }
+    $this->drupalPost('node/' . $node->nid . '/edit', $edit, t('Save'));
+
+    // Get the microdata result for the page.
+    $md = $this->parseMicrodata();
+
+    // Get the entity as a microdata item.
+    $item = $md->items[0];
+
+    // Test fields enriched with microdata.
+    foreach ($this->fieldFormatterTypesMicrodata as $type) {
+      $text_itemprop = $type;
+      $this->assertEqual($text, $item->properties[$text_itemprop][0], "Itemprop is placed on $type");
+    }
+
+    // Test fields without microdata.
+    foreach ($this->fieldFormatterTypesNoMicrodata as $type) {
+      $text_itemprop = $type;
+      $this->assertTrue(empty($item->properties[$text_itemprop][0]), "Itemprop is not placed on $type");
+    }
+  }
+
+}

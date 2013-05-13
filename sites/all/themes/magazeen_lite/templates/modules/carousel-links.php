@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // NAV LINKS FOR FRONT PAGE CAROUSEL MODULE
 
@@ -7,7 +7,7 @@
   <div class="carousel-nav-left">
     <li>
       <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'pregnant-small.jpg'; ?>" />
-      <a class="current" rel="1" href="#">Can I get pregnant if...</a>
+      <a class="current" rel="1" href="#">Can I Get Pregnant If...</a>
     </li>
     <li>
       <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'stdtalking-small.jpg'; ?>" />
@@ -18,8 +18,11 @@
       <a rel="3" href="#">Love &amp; Relationships</a>
     </li>
     <li>
-      <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'hymennn.jpg'; ?>" />
+      <!-- <img class="carousel-thumb" src="<?php #print path_to_theme() . '/images/modules/' . 'hymennn.jpg'; ?>" />
       <a rel="4" href="#">The Hymen</a>
+       -->
+       <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'std-small.jpg'; ?>" />
+       <a rel="4" href="#">Sexually Transmitted Infections</a>
     </li>
   </div><!-- .carousel-nav-left -->
 
@@ -33,7 +36,7 @@
     <a rel="6" href="#">Contraception</a>
   </li>
   <li>
-    <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'female-orgasm-small.jpg'; ?>" />    
+    <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'female-orgasm-small.jpg'; ?>" />
     <a rel="7" href="#">Female Orgasmic Disorder</a>
   </li>
   <li>

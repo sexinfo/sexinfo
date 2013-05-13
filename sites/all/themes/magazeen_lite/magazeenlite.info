@@ -24,3 +24,4 @@ core = "7.x"
 project = "magazeen_lite"
 datestamp = "1321978843"
 
+scripts[] = js/sexpert-suggestions.js

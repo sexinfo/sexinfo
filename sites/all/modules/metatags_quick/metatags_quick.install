@@ -1,0 +1,127 @@
+<?php
+/**
+ * @file
+ * Defines schema for metatags_quick fields
+ */
+
+/**
+ * Implements hook_schema().
+ * 
+ */
+function metatags_quick_schema() {
+  $schema['metatags_quick_path_based'] = array(
+    'description' => 'Path based meta tags',
+    'fields' => array(
+      'id'  => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Entity id',
+      ),
+      'path'  => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'The path of the page to apply meta tags to',
+      ),
+      'lang'  => array(
+        'type' => 'varchar',
+        'length' => 8,
+        'not null' => TRUE,
+        'description' => 'Language code',
+      ),
+    ),
+    'primary key' => array('id'),
+    'unique keys' => array(
+      'lang_path' => array('lang', 'path'),
+    ),
+  );
+  return $schema;
+}
+
+function metatags_quick_install() {
+  variable_set('metatags_quick_default_field_length', 160);
+  drupal_set_message(t('Meta tags (quick) installed. To start, please visit !here',
+    array('!here' => l(t('module settings screen'), 'admin/config/search/metatags_quick'))), 'status');
+}
+
+function metatags_quick_uninstall() {
+  // Delete fields handled by module.
+  $fields = field_read_fields(array(), array('include_inactive' => 1));
+  foreach ($fields as $key => $field) {
+    if ($field['module'] == 'metatags_quick') {
+      field_delete_field($key);
+      field_purge_field($field);
+    }
+  }
+  
+  variable_del('metatags_quick_settings');
+  variable_del('metatags_quick_use_path_based');
+  variable_del('metatags_quick_default_field_length');
+}
+
+/**
+ * Implements hook_field_schema().
+ * 
+ */
+function metatags_quick_field_schema($field) {
+  if(!isset($field['settings']['max_length'])) {
+    $field['settings']['max_length'] = 255;
+  }
+  return array(
+    'columns' => array(
+      'metatags_quick' => array(
+        'type' => 'varchar',
+        'length' => $field['settings']['max_length'],
+        'not null' => FALSE,
+      ),
+    ),
+  );
+}
+
+/**
+ * Install metatags_quick_path_based table (upgrade from 7.x-1.x)
+ */
+function metatags_quick_update_7002() {
+  drupal_install_schema('metatags_quick');
+}
+
+/**
+ * Add id field to metatags_quick_path_based
+ */
+function metatags_quick_update_7003() {
+  if (!db_field_exists('metatags_quick_path_based', 'id')) {
+    db_drop_primary_key('metatags_quick_path_based');
+    db_drop_index('metatags_quick_path_based', 'field_config');
+    db_add_field('metatags_quick_path_based', 'id', array(
+      'type' => 'serial',
+      'not null' => TRUE,
+      'description' => 'Entity id',
+      ),
+      array('primary key' => array('id', 'path', 'lang', ), )
+    );
+    db_drop_field('metatags_quick_path_based', 'fid');
+    db_drop_field('metatags_quick_path_based', 'value');
+  }
+}
+
+/**
+ * Change primary key to id field and add unique index on path and lang.
+ */
+function metatags_quick_update_7004() {
+  /*
+   * Normally we'd use db_drop_primary_key()/db_add_primary_key(), but MySQL
+   * wont let us drop the primary key if it's an autoincrement field. Altering
+   * like this, however, works.
+   *
+   * This will fail on SQLite, as its ALTER TABLE is rather simplified, but as
+   * this change is introduced because of SQLites failure to install in the
+   * first place, that's irrelevant. PostgreSQL seems to support the same
+   * syntax, so it should work.
+   */
+  if (db_driver() == 'mysql') {
+    db_query('ALTER TABLE {metatags_quick_path_based} DROP PRIMARY KEY, ADD PRIMARY KEY (`id`)');
+  }
+  if (!db_index_exists('metatags_quick_path_based', 'lang_path')) {
+    db_add_unique_key('metatags_quick_path_based', 'lang_path', array('lang', 'path'));
+  }
+}

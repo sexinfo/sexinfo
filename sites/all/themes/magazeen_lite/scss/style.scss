@@ -2,6 +2,8 @@
 @import "lib/mixins";
 @import "dev";
 
+@import "lib/bootstrap"; // Bootstrap responsive grid
+
 @import "globals";
 @import "typography";
 @import "header";
