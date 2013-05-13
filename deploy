@@ -21,4 +21,4 @@ password = creds["password"] or raise "Password must be specified in credentials
 
 # Deploy with git-ftp
 puts "Deploying to #{URL}..."
-puts %x{ git ftp push -u #{username} -p #{password} sftp://#{URL} }
+puts %x{ git ftp push -u #{username} -p '#{password}' sftp://#{URL} }
