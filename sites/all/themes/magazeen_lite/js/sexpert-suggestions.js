@@ -38,7 +38,11 @@ function showSuggestions(html) {
   // Wrap each link in a <div> and append it to our suggestions container
   $.each($results, function(i, el) {
     var $link      = $(el).find('h4 a'),
-        $container = $('<div>');
+        $container = $('<div>'),
+        href = $link.attr('href');
+
+    $link.attr('href', href+"?ref=ask"); // Add query param for analytics
+    $link.attr('target', '_blank');      // Open links in new tabs
     $container.append($link);
     $suggestions.append($container);
   });
