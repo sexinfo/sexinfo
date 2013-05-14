@@ -1,0 +1,19 @@
+tr.even.seo_checker_result_failed td {
+  background-color: #ffcccc;
+}
+
+tr.odd.seo_checker_result_failed td {
+  background-color: #ffe6e6;
+}
+
+tr.even.seo_checker_result_passed td {
+  background-color: #ccffcc;
+}
+
+tr.odd.seo_checker_result_passed td {
+  background-color: #e6ffe6;
+}
+
+div.status .seo-check-results {
+  color: #494949;
+}
