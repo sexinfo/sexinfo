@@ -1,0 +1,202 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * The core of the SEO Checker.
+ *
+ * This file contains the hook_menu implementation such as the different
+ * functions that hook into the process of node creation and modification
+ * in order to perform the checks based on the implemented rules.
+ *
+ * The SEO Checker requires at least one submodule that defines SEO rules and
+ * implements the checks for them. The core module comes along with two
+ * submodules that implement some basic checks.
+ *
+ * In order to implement your own rules, implement hook_register_seo_rules().
+ */
+
+require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'seo_checker') . '/inc/seo_checker.admin.inc';
+require_once DRUPAL_ROOT . '/' . drupal_get_path('module', 'seo_checker') . '/inc/seo_checker.theme.inc';
+
+/**
+ * Implements hook_menu().
+ *
+ * @return array
+ */
+function seo_checker_menu() {
+  $items['admin/config/content/seo_checker'] = array(
+    'title' => 'SEO Checker',
+    'description' => 'Manage SEO Checker',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('seo_checker_settings'),
+    'access arguments' => array('administer seo_checker configuration'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['admin/config/content/seo_checker/thresholds'] = array(
+    'title' => 'SEO Rule Thresholds',
+    'description' => 'Set the tresholds for the different SEO rules.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('seo_checker_settings'),
+    'access arguments' => array('administer seo_checker configuration'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -1,
+  );
+  return $items;
+}
+
+function seo_checker_node_validate($node, $form, &$form_state) {
+  if (variable_get('seo_checker_' . $form['type']['#value'], 0) != 0) {
+    seo_checker_perform_checks($node, $form);
+  }
+}
+
+/**
+ * Get the threshold of a rule. Pass the rule array and the ID.
+ */
+function seo_checker_get_rule_threshold($rule, $rid) {
+  $threshold = variable_get('seo_threshold_' . $rid, !empty($rule['default threshold'])?$rule['default threshold']:array(1000, 100));
+  if (!is_array($threshold)) {
+    $threshold = array($threshold, 100);
+  }
+  return $threshold;
+}
+
+/**
+ * This is the main seo checker function. It checks the submitted node
+ * by applying all the rules and includes the summary to the node form.
+ */
+function seo_checker_perform_checks($node, $form) {
+  global $user;
+
+  /* overall status */
+  $checks_passed = TRUE;
+
+  /* the results will be prepended to the node_preview block */
+  $results = array();
+
+  /* loop over all the rules and apply them to the form_values */
+  $rules = module_invoke_all('register_seo_rules');
+  foreach ($rules as $rid => $rule) {
+    if (!function_exists($rule['callback'])) {
+      drupal_set_message(sprintf(t('The function <i>%s()</i> for seo_checker rule <b>%s</b> was not found.'), $rule['callback'], check_plain($rule['name'])), 'error');
+      continue;
+    }
+
+    /* threshold == 0 implies that this rule is desabled. */
+    if (($threshold = seo_checker_get_rule_threshold($rule, $rid)) == array(0, 100)) {
+      continue;
+    }
+    $threshold_text = '';
+    if ($threshold[1] == 100) {
+      $threshold_text = '&ge;&nbsp;' . $threshold[0] . '%';
+    }
+    else {
+      $threshold_text = '&#8712;&nbsp;[' . $threshold[0] . '%,' . $threshold[1] . '%]';
+    }
+
+    /* here we apply the rules to the values. It should return an integer result or FALSE if not applicable. */
+    $arguments = isset($rule['callback arguments']) ? $rule['callback arguments'] : array();
+    array_unshift($arguments, $form);
+    $check_result = call_user_func_array($rule['callback'], $arguments);
+    if ($check_result === FALSE) {
+      /* skip this rule */
+      continue;
+    }
+    $check_result = round($check_result);
+
+    /* check if the submitted node has passed the test. */
+    $passed = $check_result >= $threshold[0] && $check_result <= $threshold[1] ? 'passed' : 'failed';
+    $data = array(
+      'rule' => check_plain($rule['name']),
+      'message' => $rule[$passed . ' feedback'],
+      'achieved' => $check_result . '%',
+      'required' => $threshold_text,
+      'passed' => '<img src="' . file_create_url(drupal_get_path('module', 'seo_checker') . '/img/' . $passed) . '.gif" alt="' . $passed . '" />',
+    );
+
+    /* append the results to the array and update the overall status variable */
+    $results[] = array(
+      'data' => $data,
+      'class' => array('seo_checker_result_' . $passed),
+    );
+    $checks_passed &= ($check_result >= $threshold[0] && $check_result <= $threshold[1]);
+  }
+
+  /* append the check results just before the title field */
+  $seo_check_results = array(
+    '#type' => 'seo_check_results',
+    '#title' => t('SEO Check Results'),
+    '#results' => $results,
+  );
+
+  $message = drupal_render($seo_check_results);
+
+  if (!$checks_passed && (!user_access('allow seo check failures', $user))) {
+    form_set_error('check_results', t('The SEO compliance check was not successful. Check the table and modify your content as required.'));
+    drupal_set_message($message);
+  }
+  else {
+    /* throw an error if failures are not allowed */
+    $check_policy = variable_get('seo_checker_allow_failures', 'show-preview-only');
+    switch ($check_policy) {
+      case 'show-always':
+        drupal_set_message($message);
+        break;
+      case 'show-preview-only':
+        if ($node->op == 'Preview') {
+          drupal_set_message($message);
+        }
+    }
+  }
+}
+
+/**
+ * The SEO Checker has to be enabled per content type
+ */
+function seo_checker_form_node_type_form_alter(&$form, $form_status) {
+  if (!isset($form['seo_checker'])) {
+    $form['seo_checker'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('SEO Complicance Checker'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#weight' => 1,
+      "#group" => "additional_settings",
+    );
+  }
+  $form['seo_checker']['seo_checker'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable SEO checking'),
+    '#default_value' => variable_get('seo_checker_' . $form['#node_type']->type, 0),
+    '#description' => t('Check this box to enable SEO checking for this node type.'),
+  );
+}
+
+
+/********************************** HELPERS **********************************/
+
+/**
+ * Find position of first occurrence of a case-insensitive WORD
+ * @return int
+ * @param array $haystack
+ * @param string $needle
+ */
+function seo_checker_wordipos($haystack, $needle, $offset=0) {
+  $pos = -1;
+  $found = FALSE;
+  while ($found === FALSE) {
+    $pos = stripos($haystack, $needle, $offset);
+    if ($pos === FALSE) {
+      return FALSE;
+    }
+
+    /* check if the characters before and after the found tag are non-word characters */
+    $expanded_string = (isset($haystack[$pos-1]) ? $haystack[$pos-1] :' ') . (isset($haystack[$pos+strlen($needle)]) ? $haystack[$pos+strlen($needle)] : ' ');
+    if (preg_match_all('/[\W_]/', $expanded_string, $null) == 2) {
+      $found = TRUE;
+    }
+    $offset = $pos+1;
+  }
+  return $pos;
+}
