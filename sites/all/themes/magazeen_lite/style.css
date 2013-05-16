@@ -1613,6 +1613,10 @@ a:visited {
 p {
   margin: 0 0 1em 0; }
 
+p:link, p:active {
+  color: #FFFFFF;
+  text-decoration: none; }
+
 /* List Styles  */
 ul, ol {
   margin-left: 0;
