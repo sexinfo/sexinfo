@@ -47,8 +47,7 @@
             }
           ?>
           <!--Facebook like button-->
-          <div class="fb-like" data-send="false" data-width="450" data-show-faces="true" data-font="arial" data-colorscheme="dark"></div>
-          
+          <div class="fb-like" data-send="false" data-width="450" data-show-faces="false" data-font="arial" data-colorscheme="dark"></div>
           <div class="terms">
 
             <!--Tags + Category -->
