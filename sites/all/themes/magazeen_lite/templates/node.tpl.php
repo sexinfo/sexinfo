@@ -6,6 +6,17 @@
     <div class="node-meta clearfix">
       <?php print render($title_prefix); ?>
       <h3 class="node-title"><a href="<?php print $node_url ?>" title="<?php print $title; ?>"><?php print $title; ?></a></h3>
+      <div id="fb-root"></div>
+
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+
       <?php print render($title_suffix); ?>
       <span class="submitted node-info"><?php if ($display_submitted): ?><?php print $submitted; ?><?php endif; ?></span>
     </div><!--/node-meta-->
@@ -35,13 +46,15 @@
               $tags .= l($record->name, 'taxonomy/term/' . $record->tid);
             }
           ?>
-
+          <!--Facebook like button-->
+          <div class="fb-like" data-send="false" data-width="450" data-show-faces="true" data-font="arial" data-colorscheme="dark"></div>
+          
           <div class="terms">
+
             <!--Tags + Category -->
             <span class="node-category">Category: </span>
             <?php print $tags; ?>
           </div>
-
           <?php if ($content['links']): ?>
             <div class="nodelinks">
               <!--Read More -->
@@ -53,6 +66,7 @@
       </div><!--/node-footer-->
     </div><!--/node-box-->
   </div>
+
 
   <?php if ($content['comments']): ?>
     <?php print render($content['comments']); ?>
