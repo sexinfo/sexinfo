@@ -47,7 +47,11 @@ function showSuggestions(html) {
     $suggestions.append($container);
   });
 
-  $("#webform-component-message").append($suggestions);
+
+  // Append suggestions unless we have an empty result set
+  if ($suggestions.find('a').length) {
+    $("#webform-component-message").append($suggestions);
+  }
 }
 
 // TODO: what to do here?
