@@ -33,11 +33,12 @@
 
   <div class="module-content">
     <div class="faq-image">
+      <a href="http://www.soc.ucsb.edu/sexinfo/question/faq-how-do-i-increase-sexual-arousal">
       <img class="" src="<?php print path_to_theme() . '/images/modules/' . 'arousal.jpg'; ?>" />
 
 <<<<<<< HEAD
       <div class="caption-slide">
-        <h3>How Do I Increase Sexual Arousal?</h3>
+        <h3>How Do I Increase Sexual Arousal?</h3></a>
         <p>There are many ways to increase your and your partner’s sexual arousal. Sexual arousal is&hellip;
         <a href="http://www.soc.ucsb.edu/sexinfo/question/faq-how-do-i-increase-sexual-arousal" class="more-button">Read More</a></p>
       </div>
