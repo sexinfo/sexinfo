@@ -28,6 +28,6 @@
 <!-- ______________________ SECONDARY NAVIGATION _______________________ -->
 <div id="snavigation">
   <div class="container clearfix">
-  <p>UCSB SexInfo Copyright &copy; 2012 University of California, Santa Barbara. All Rights Reserved.</p>
+  <p>UCSB SexInfo Copyright &copy; 2013 University of California, Santa Barbara. All Rights Reserved.</p>
   </div> <!-- /snavigation-container -->
 </div> <!-- /snavigation -->
