@@ -1613,10 +1613,6 @@ a:visited {
 p {
   margin: 0 0 1em 0; }
 
-p:link, p:active {
-  color: #FFFFFF;
-  text-decoration: none; }
-
 /* List Styles  */
 ul, ol {
   margin-left: 0;
@@ -2287,10 +2283,9 @@ ul.slinks {
   position: relative;
   width: 400px; }
   .carousel-frame .carousel-caption {
-    background-color: #262626;
+    background: rgba(0, 0, 0, 0.6);
     color: white;
     height: 70px;
-    opacity: 0.8;
     padding: 5px;
     position: absolute;
     bottom: 0;
