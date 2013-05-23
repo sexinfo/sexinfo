@@ -42,33 +42,6 @@
       </div>
     </div>
   </div>
-=======
-  <!-- Middle box
-  ========================-->
-  <div class="column-third">
-    <!-- Frequently Asked Questions -->
-    <h4 class="module-title">Frequently Asked Questions</h4>
-    <div class="module">
-      <div class="node-box">
-        <div class="node-content">
-          <div class="faq-image">
-            <a href="http://www.soc.ucsb.edu/sexinfo/question/faq-how-do-i-increase-sexual-arousal"><img class="" src="<?php print path_to_theme() . '/images/modules/' . 'arousal.jpg'; ?>" />
-            <div class="caption-slide">
-              <h3>How Do I Increase Sexual Arousal?</h3></a>
-              <p>There are many ways to increase your and your partner’s sexual arousal. Sexual arousal is&hellip;
-              <a href="http://www.soc.ucsb.edu/sexinfo/question/faq-how-do-i-increase-sexual-arousal" class="more-button">Read More</a></p>
-            </div><!-- .caption-slide -->
-          </div><!-- .faq-image -->
-        </div><!--.node-content-->
-        <div class="node-footer">
-          <a href="<?php print $base_path . "question" ?>">All Questions &raquo;</a>
-        </div><!--.node-footer-->
-      </div><!--.node-box-->
-    </div><!-- .module -->
-  </div><!-- .column-third -->
-  <div class="module-footer">
-    <a href="<?php print $base_path . "question" ?>">All Questions &raquo;</a>
-  </div>
 </div>
 
 
@@ -79,7 +52,8 @@
 
   <div class="module-content ask-module">
     <p>Do you think you know it all? Are you an expert on masturbation, LGBTQ facts, paraphilias, or pregnancy and abortion? Quiz yourself <a href="<?php print $base_path . "quizzes" ?>">here</a> to see if you really are.
-    
+
+
     <tbody id="quiz-browser-body" class="browser-table">
 <?php
 /**
@@ -106,7 +80,7 @@ foreach ($form['titles']['#options'] as $key => $value): ?>
   preg_match('/([0-9]+)-([0-9]+)/', $key, $matches);
   $quest_nid = $matches[1];
   $quest_vid = $matches[2]; ?>
-  
+
   <tr class="quiz-question-browser-row" id="browser-<?php print $key ?>">
     <td width="35"><?php print drupal_render($full_options[$key]) ?> </td>
     <td>
