@@ -1,18 +1,9 @@
 // Query the search API and dispatch success/error handlers
 function fetchSuggestions() {
-  SexInfo.getPopularWords(function(words) {
-    var $field      = $("#edit-submitted-message"),
-        inputQuery  = $field.val().split(' '),
-        resultQuery = [];
+  var input = $("#edit-submitted-message").val().split(' ');
 
-    for(var i = 0, len = inputQuery.length; i < len; i++){
-      var word = inputQuery[i];
-      if($.inArray(word, words) > -1) {
-        resultQuery.push(word);
-      }
-    }
-
-    $.get('/sexinfo/search/node/' + resultQuery.join(" OR "))
+  SexInfo.filterPopularWords(input, function(words) {
+    $.get('/sexinfo/search/node/' + words.join(" OR "))
     .success(showSuggestions)
     .error(error);
   });
