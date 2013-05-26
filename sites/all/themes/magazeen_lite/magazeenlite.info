@@ -26,5 +26,5 @@ datestamp = "1321978843"
 
 scripts[] = js/front.js
 scripts[] = js/validation.js
-scripts[] = js/sexpert-suggestions.js
+scripts[] = js/suggestions.js
 
