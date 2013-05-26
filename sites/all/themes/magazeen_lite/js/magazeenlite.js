@@ -5,6 +5,10 @@ window.$ = jQuery;
 window.SexInfo = {}
 
 
+// Cache popular words once we fetch them from the server
+SexInfo.popularWords = []
+
+
 // Parse a list of popular words stored at data/words.json
 // As this is a deferred action, you must use a callback
 // instead of a return value.
@@ -24,9 +28,14 @@ window.SexInfo = {}
 // See jQuery deferred.then: http://api.jquery.com/deferred.then/
 //
 SexInfo.getPopularWords = function(handler, errHandler) {
-  $.getJSON('/sexinfo/data/words.json').then(function(json) {
-    handler(json.words);
-  }, errHandler);
+  if (SexInfo.popularWords.length) {
+    handler(SexInfo.popularWords);
+  } else {
+    $.getJSON('/sexinfo/data/words.json').then(function(json) {
+      SexInfo.popularWords = json.words
+      handler(json.words);
+    }, errHandler);
+  }
 }
 
 
