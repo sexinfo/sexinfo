@@ -1741,6 +1741,21 @@ p.copyright {
   font: 0.92em Arial, Helvetica, sans-serif;
   color: #404040; }
 
+/* Search Results
+/* -------------- */
+.pink-header {
+  color: #f23183;
+  font-size: 1.8em;
+  font-weight: normal;
+  text-align: center; }
+
+#search-suggestions {
+  font-size: 1.5em;
+  margin: 15px 0 25px;
+  text-align: center; }
+  #search-suggestions a {
+    font-style: italic; }
+
 /* 03 - HEADER
 /* ----------------------------------------------*/
 #header {
@@ -2441,10 +2456,8 @@ a:active.more-button {
 /* ----------------------------------------------*/
 /* Ask the Sexperts webform
 /* ----------------------------------------------*/
-/*----- RESETS + BASIC LAYOUT -----*/
 #node-22 {
-  width: 600px;
-  /*----- FORM ELEMENTS-----*/ }
+  width: 600px; }
   #node-22 .node-box {
     background: none;
     background-image: none;

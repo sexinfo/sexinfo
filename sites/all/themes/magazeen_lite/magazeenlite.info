@@ -27,4 +27,5 @@ datestamp = "1321978843"
 scripts[] = js/front.js
 scripts[] = js/validation.js
 scripts[] = js/suggestions.js
+scripts[] = js/spellcorrect.js
 
