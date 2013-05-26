@@ -52,30 +52,29 @@ function suggestionLink(text) {
 // Compares input words to popular words using the sift3Distance function,
 // and looks for close matches
 $(function() {
-  var input = $("#edit-keys").val().split(' '),
-      threshold      = 3,
-      minDist        = 99,
-      closestWords   = [],
-      anySuggestions = false;
+  var rawInput  = $("#edit-keys").val(),
+      threshold = 3;
 
-
-  if (input.length) {
-    for (var i=0; i<input.length; i++) closestWords[i] = input[i]; // Hacky clone
+  if (rawInput) {
+    var input = rawInput.split(' '),
+        anySuggestions = false,
+        closestWords   = Array.prototype.slice.call(input); // Clone array
 
     SexInfo.getPopularWords(function(words) {
-      for (var i=0, wlen=words.length; i<wlen; i++) {
-        for (var j=0, ilen=input.length; j<ilen; j++) {
+      for (var i=0, ilen=input.length; i<ilen; i++) {
+        var minDist = 99;
 
+        for (var j=0, wlen=words.length; j<wlen; j++) {
           // Reject short words and exact matches in wordlist
-          if (input[j].length <= 2 || $.inArray(input[j], words) > -1) continue;
+          if (input[i].length <= 2 || $.inArray(input[i], words) > -1) continue;
 
-          dist = sift3Distance(input[j], words[i]);
+          dist = sift3Distance(input[i], words[j]);
           if (dist < minDist) {
             anySuggestions = true;
             minDist = dist;
 
             if (minDist < threshold) {
-              closestWords[j] = words[i];
+              closestWords[i] = words[j];
             }
           }
 
