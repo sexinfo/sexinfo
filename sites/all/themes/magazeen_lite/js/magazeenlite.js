@@ -63,3 +63,10 @@ SexInfo.filterPopularWords = function(input, callback) {
     callback(result);
   });
 }
+
+
+
+$(function() {
+  // Hide author info
+  $('.node-info').empty();
+})
