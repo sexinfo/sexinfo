@@ -60,12 +60,12 @@ $(function() {
   /*----------------------------
     Sliding FAQ captions
   ----------------------------*/
-  $(".caption-slide").hover(
+  $(".faq-image").hover(
     function () {
-      $(this).animate({ bottom: '0' }, 300);     // Slide up
+      $(".caption-slide").animate({ bottom: '0' }, 300);     // Slide up
     },
     function () {
-      $(this).animate({ bottom: '-40px' }, 300); // Slide down
+      $(".caption-slide").animate({ bottom: '-40px' }, 300); // Slide down
     }
   );
 
