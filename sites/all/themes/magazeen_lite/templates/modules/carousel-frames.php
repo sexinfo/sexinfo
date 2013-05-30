@@ -90,7 +90,7 @@
 <!-- SLIDE 7 -->
 <div class="carousel-frame">
   <a href="http://www.soc.ucsb.edu/sexinfo/article/female-orgasmic-disorder">
-  <img src="<?php print path_to_theme() . '/images/modules/' . 'female-orgasm.jpg'; ?>" alt="Female Orgasmic Disorder" />
+  <img src="<?php print path_to_theme() . '/images/modules/' . 'female-orgasm-3.jpg'; ?>" alt="Female Orgasmic Disorder" />
   <div class="carousel-caption">
     <h3>Female Orgasmic Disorder</h3></a>
     <p>Known as "anorgasmia" in medical terms, female orgasmic problems are defined as "a sexual difficulty involving&hellip;

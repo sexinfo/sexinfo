@@ -36,7 +36,7 @@
     <a data-num="6" href="#">Contraception</a>
   </li>
   <li>
-    <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'female-orgasm-small.jpg'; ?>" />
+    <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . 'female-orgasm-small-3.jpg'; ?>" />
     <a data-num="7" href="#">Female Orgasmic Disorder</a>
   </li>
   <li>
