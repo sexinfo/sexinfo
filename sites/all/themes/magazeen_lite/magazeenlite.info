@@ -24,4 +24,8 @@ core = "7.x"
 project = "magazeen_lite"
 datestamp = "1321978843"
 
-scripts[] = js/sexpert-suggestions.js
+scripts[] = js/front.js
+scripts[] = js/validation.js
+scripts[] = js/suggestions.js
+scripts[] = js/spellcorrect.js
+

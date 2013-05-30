@@ -1,8 +1,6 @@
 /* ----------------------------------------------*/
 /* Ask the Sexperts webform
 /* ----------------------------------------------*/
-
-/*----- RESETS + BASIC LAYOUT -----*/
 #node-22 {
   width: 600px;
 
@@ -15,7 +13,6 @@
 
   .node-content { @extend %grey-form; }
 
-  /*----- FORM ELEMENTS-----*/
   input:not([type="submit"]),
   textarea {
     @extend %input-full;
@@ -47,6 +44,11 @@
     margin-bottom: 20px;
     padding: 12px 10px;
     border-bottom: 3px solid darken($pink, 16);
+  }
+
+  .field-error {
+    border: 1px solid #d34332 !important;
+    color: #d34332 !important;
   }
 }
 

@@ -1,116 +1,72 @@
 // Suck it Drupal
 window.$ = jQuery;
 
+// Global SexInfo object
+window.SexInfo = {}
+
+
+// Cache popular words once we fetch them from the server
+SexInfo.popularWords = []
+
+
+// Parse a list of popular words stored at data/words.json
+// As this is a deferred action, you must use a callback
+// instead of a return value.
+//
+// Ex:
+//
+//   SexInfo.getPopularWords(function(words) {
+//     console.log(words);
+//   });
+//
+// You can optionally pass in an error handler:
+//
+//   SexInfo.getPopularWords(function(words) {
+//     console.log(words);
+//   }, function() { console.log("Error!") });
+//
+// See jQuery deferred.then: http://api.jquery.com/deferred.then/
+//
+SexInfo.getPopularWords = function(handler, errHandler) {
+  if (SexInfo.popularWords.length) {
+    handler(SexInfo.popularWords);
+  } else {
+    $.getJSON('/sexinfo/data/words.json').then(function(json) {
+      SexInfo.popularWords = json.words
+      handler(json.words);
+    }, errHandler);
+  }
+}
+
+
+// Take an array of words and select all that among the most popular words
+// stored at data/words.json
+// Invokes a callback with the result words
+//
+// Ex:
+//
+//   SexInfo.filterPopularWords("my penis hurts", function(words) {
+//     console.log(words); // => ["penis"]
+//   });
+//
+SexInfo.filterPopularWords = function(input, callback) {
+  SexInfo.getPopularWords(function(words) {
+    var result = [];
+
+    for(var i=0, len=input.length; i<len; i++) {
+      var word = input[i];
+      if($.inArray(word, words) > -1) {
+        result.push(word);
+      }
+    }
+
+    callback(result);
+  });
+}
+
+
+
 $(function() {
-
-  $(".node-info").html("");
-
-  //Set Default State of each portfolio piece
-  $(".paging").show();
-  $(".paging a:first").addClass("active");
-
-  //Get size of images, how many there are, then determin the size of the image reel.
-  var imageWidth = $(".window").width();
-  var imageSum = $(".image_reel img").size();
-  var imageReelWidth = imageWidth * imageSum;
-
-  //Adjust the image reel to its new size
-  $(".image_reel").css({'width' : imageReelWidth});
-
-  //Paging + Slider Function
-  rotate = function(){
-      var triggerID = $active.attr("rel") - 1; //Get number of times to slide
-      var image_reelPosition = triggerID * imageWidth; //Determines the distance the image reel needs to slide
-
-      $(".paging a").removeClass('active'); //Remove all active class
-      $active.addClass('active'); //Add active class (the $active is declared in the rotateSwitch function)
-
-      //Slider Animation
-      $(".image_reel").animate({
-          left: -image_reelPosition
-      }, 500 );
-
-
-
-  };
-
-  //Rotation + Timing Event
-  rotateSwitch = function(){
-      play = setInterval(function(){ //Set timer - this will repeat itself every 3 seconds
-          $active = $('.paging a.active').next();
-          if ( $active.length === 0) { //If paging reaches the end...
-              $active = $('.paging a:first'); //go back to first
-          }
-          rotate(); //Trigger the paging and slider function
-      }, 5000); //Timer speed in milliseconds (3 seconds)
-
-
-  };
-
-  rotateSwitch(); //Run function on launch
-
-  //On Hover
-  $(".image_reel a").hover(function() {
-      clearInterval(play); //Stop the rotation
-  }, function() {
-      rotateSwitch(); //Resume rotation
-  });
-
-  //On Click
-  $(".paging a").click(function() {
-      $active = $(this); //Activate the clicked paging
-      //Reset Timer
-      clearInterval(play); //Stop the rotation
-      rotate(); //Trigger rotation immediately
-      rotateSwitch(); // Resume rotation
-      return false; //Prevent browser jump to link anchor
-  });
-
-
-  //On Click
-  $(".force-next a").click(function() {
-      $active = $('.paging a.active').next(); //Activate the clicked paging
-  	if ( $active.length === 0) { //If paging reaches the end...
-              $active = $('.paging a:first'); //go back to first
-      }
-      //Reset Timer
-      clearInterval(play); //Stop the rotation
-      rotate(); //Trigger rotation immediately
-      rotateSwitch(); // Resume rotation
-      return false; //Prevent browser jump to link anchor
-  });
-
-  //On Click
-  $(".force-previous a").click(function() {
-      $active = $('.paging a.active').prev(); //Activate the clicked paging
-  	if ( $active.length === 0) { //If paging reaches the end...
-              $active = $('.paging a:last'); //go back to first
-      }
-      //Reset Timer
-      clearInterval(play); //Stop the rotation
-      rotate(); //Trigger rotation immediately
-      rotateSwitch(); // Resume rotation
-      return false; //Prevent browser jump to link anchor
-  });
-
-  //Form-Validation
-  $('.webform-client-form').submit(function() {
-    var errors = false;
-
-    $(this).find("input:not([type='submit'])").each(function(i, field) {
-      if ($(field).val() === "") {
-        errors = true;
-        $(field).css('border', '1px solid #d34332');
-        $(field).css('color', '#d34332');
-        $(field).val("This is a required field.");
-      }
-      $(field).focus(function() {
-        $(field).val("");
-      });
-    })
-
-
-    return !errors;
-  });
-
-});
+  // Hide author info
+  $('.node-info').empty();
+})
