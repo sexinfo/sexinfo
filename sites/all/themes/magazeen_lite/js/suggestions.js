@@ -1,11 +1,15 @@
 // Query the search API and dispatch success/error handlers
+// The query is first spell corrected, then filtered for popular words
+// to pass to the search API
 function fetchSuggestions() {
   var input = $("#edit-submitted-message").val().split(' ');
 
-  SexInfo.filterPopularWords(input, function(words) {
-    $.get('/sexinfo/search/node/' + words.join(" OR "))
-    .success(showSuggestions)
-    .error(error);
+  SexInfo.spellCorrect(input, function(suggestion) {
+    SexInfo.filterPopularWords(suggestion, function(words) {
+      $.get('/sexinfo/search/node/' + words.join(" OR "))
+      .success(showSuggestions)
+      .error(error);
+    })
   });
 }
 
@@ -20,15 +24,19 @@ function showSuggestions(html) {
   var $suggestions = $("#suggestions");
   if ($suggestions.length) {
     $suggestions.empty();
-    $suggestions.append("<h3>Suggested Articles</h3>")
+    $suggestions.append( h3("Suggested Articles") );
   } else {
-    $suggestions = $("<div id='suggestions'><h3>Suggested Articles</h3></div>")
+    $suggestions = $(
+      div("#suggestions", function() {
+        return h3("Suggested Articles")
+      })
+    );
   }
 
   // Wrap each link in a <div> and append it to our suggestions container
   $.each($results, function(i, el) {
     var $link      = $(el).find('h4 a'),
-        $container = $('<div>'),
+        $container = $(div()),
         href = $link.attr('href');
 
     $link.attr('href', href+"?ref=ask"); // Add query param for analytics
