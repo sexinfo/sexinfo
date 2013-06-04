@@ -39,7 +39,7 @@ SexInfo.getPopularWords = function(handler, errHandler) {
 }
 
 
-// Take an array of words and select all that among the most popular words
+// Take a string or array of words and select all that among the most popular words
 // stored at data/words.json
 // Invokes a callback with the result words
 //
@@ -49,9 +49,10 @@ SexInfo.getPopularWords = function(handler, errHandler) {
 //     console.log(words); // => ["penis"]
 //   });
 //
-SexInfo.filterPopularWords = function(input, callback) {
+SexInfo.filterPopularWords = function(rawInput, callback) {
   SexInfo.getPopularWords(function(words) {
-    var result = [];
+    var result = [],
+        input  = (typeof rawInput === 'string') ? rawInput.split(" ") : rawInput;
 
     for(var i=0, len=input.length; i<len; i++) {
       var word = input[i];
