@@ -16,7 +16,7 @@
   <img src="<?php print path_to_theme() . '/images/modules/' . 'pregnant.jpg'; ?>" alt="Can I get pregnant if..." />
   <div class="carousel-caption">
     <h3>Can I Get Pregnant If...</h3></a>
-    <p>Becoming a mother is a very important and amazing transition in life. Bringing a new life into the world brings&hellip; 
+    <p>Becoming a mother is a very important and amazing transition in life. Bringing a new life into the world brings&hellip;
     <a href="http://www.soc.ucsb.edu/sexinfo/article/can-i-get-pregnant-if-her"> Read More ></a></p>
   </div>
 </div><!-- .carousel-frame -->
@@ -94,7 +94,7 @@
   <div class="carousel-caption">
     <h3>Female Orgasmic Disorder</h3></a>
     <p>Known as "anorgasmia" in medical terms, female orgasmic problems are defined as "a sexual difficulty involving&hellip;
-    <a href="http://www.soc.ucsb.edu/sexinfo/article/female-orgasmic-disorder">Read More ></a></p>
+    <a href="http://www.soc.ucsb.edu/sexinfo/article/female-orgasmic-disorder">Read More</a></p>
   </div>
 </div><!-- .carousel-frame -->
 
