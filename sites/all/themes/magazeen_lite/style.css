@@ -1458,9 +1458,19 @@ div.warning {
   border-color: #ed5; }
 
 div.error {
-  color: #fff;
-  background: #e63;
-  border-color: #d52; }
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background-color: #DE0C00;
+  border-color: #d40b00;
+  color: white;
+  font-weight: bold; }
+  div.error a {
+    font-weight: normal;
+    color: white;
+    text-decoration: underline; }
+    div.error a:hover {
+      color: #eee; }
 
 div.status {
   color: #360;
