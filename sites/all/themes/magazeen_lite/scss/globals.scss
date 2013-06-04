@@ -91,6 +91,24 @@ html[xmlns] .clearfix { display: block; }
 
 * html .clearfix { height: 1%; }
 
+.button-bar{
+  @extend %buttonBar;
+}
+
+.search-button{
+  padding: 6px 5px;
+  width: 50%;
+  margin-top: 50px;
+  font-size: 1.1em;
+  margin-bottom: 25px;
+}
+
+#edit-submit{
+  @extend %button-blue;
+  float: none;
+  font-size: 1em;
+  padding: 6px 15px;
+}
 
 /* Login Form
 /* -------------- */
