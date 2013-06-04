@@ -1,4 +1,3 @@
-<div>
   <div id="node-<?php print $node->nid; ?>" class="node<?php if ($sticky) { print ' sticky'; } ?><?php if (!$status) { print ' node-unpublished'; } ?>">
 
     <?php print $user_picture; ?>
@@ -6,7 +5,11 @@
     <div class="node-meta clearfix">
       <?php print render($title_prefix); ?>
       <h3 class="node-title"><a href="<?php print $node_url ?>" title="<?php print $title; ?>"><?php print $title; ?></a></h3>
+
       <div id="fb-root"></div>
+      <!-- <?php  if($type == "quiz") : ?> <?php print $type ?> <?php endif; ?> -->
+      
+      
 
       <script>(function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -15,7 +18,6 @@
             js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
-
 
       <?php print render($title_suffix); ?>
       <span class="submitted node-info"><?php if ($display_submitted): ?><?php print $submitted; ?><?php endif; ?></span>
@@ -46,9 +48,14 @@
               $tags .= l($record->name, 'taxonomy/term/' . $record->tid);
             }
           ?>
+
           <!--Facebook like button-->
+          <?php if(($node->type) != 'quiz') {?>
           <div class="fb-like" data-send="false" data-width="450" data-show-faces="false" data-font="arial" data-colorscheme="dark"></div>
+          <?php } ?>
           <div class="terms">
+         
+
 
             <!--Tags + Category -->
             <span class="node-category">Category: </span>
