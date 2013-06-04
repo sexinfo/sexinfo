@@ -171,6 +171,157 @@
       padding: 2px;
     }
 
+#htmltagcloud
+{
+  font-size:100%;
+  width:auto;
+  font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-image: none;
+  background-color: #000000;
+  @include border-radius (15px);
+  border:0 solid #ddd;
+  line-height:2.4em;
+  word-spacing:normal;
+  letter-spacing:normal;
+  text-transform:none;
+  text-align:justify;
+  text-indent:0;
+  margin:1em 1em 0;
+  padding:2em;
+  @media (min-width: 1200px) {
+    background-color: transparent;
+    background-image:url(http://www.clker.com/cliparts/u/z/E/C/F/1/black-cloud-hi.png);
+    background-repeat:no-repeat;
+    background-size:440px;
+    background-position:left -42px bottom -20px;
+  }
+}
+
+#htmltagcloud a:hover
+{
+  color:#fff;
+}
+
+#htmltagcloud a:active
+{
+  color:#FFF;
+  background-color:#03d;
+}
+
+.wrd
+{
+  position:relative;
+  padding:0;
+}
+
+.tagcloud0
+{
+  font-size:1em;
+  color:#F6F;
+  z-index:10;
+}
+
+.tagcloud0 a
+{
+  color:#F6F;
+}
+
+.tagcloud1
+{
+  font-size:1.7em;
+  color:#f8bdca;
+  z-index:9;
+}
+
+.tagcloud1 a
+{
+  color:#f8bdca;
+}
+
+.tagcloud3
+{
+  font-size:2.2em;
+  color:#fa87aa;
+  z-index:7;
+}
+
+.tagcloud3 a
+{
+  color:#fa87aa;
+}
+
+.tagcloud4
+{
+  font-size:2.6em;
+  color:#F9c;
+  z-index:6;
+}
+
+.tagcloud4 a
+{
+  color:#ff4d74;
+}
+
+.tagcloud5
+{
+  font-size:2.8em;
+  color:#ff4d74;
+  z-index:5;
+}
+
+.tagcloud5 a
+{
+  color:#f96693;
+}
+
+.tagcloud6
+{
+  font-size:3.2em;
+  color:#f25f80;
+  z-index:4;
+}
+
+.tagcloud6 a
+{
+  color:#f25f80;
+}
+
+.tagcloud7
+{
+  font-size:3.6em;
+  color:#F99;
+  z-index:3;
+}
+
+.tagcloud7 a
+{
+  color:#F99;
+}
+
+.tagcloud8
+{
+  font-size:3.9em;
+  color:#F69;
+  z-index:2;
+}
+
+.tagcloud8 a
+{
+  color:#F69;
+}
+
+.tagcloud9
+{
+  font-size:4.2em;
+  color:#F69;
+  z-index:1;
+}
+
+#htmltagcloud a:link,#htmltagcloud a:visited,.wrd a
+{
+  text-decoration:none;
+}
+
 
 /*----- TYPOGRAPHY -----*/
 /* Columns */

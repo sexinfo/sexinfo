@@ -2348,6 +2348,115 @@ ul.slinks {
   margin: 3.125px;
   padding: 2px; }
 
+#htmltagcloud {
+  font-size: 100%;
+  width: auto;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-image: none;
+  background-color: #000000;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  border: 0 solid #ddd;
+  line-height: 2.4em;
+  word-spacing: normal;
+  letter-spacing: normal;
+  text-transform: none;
+  text-align: justify;
+  text-indent: 0;
+  margin: 1em 1em 0;
+  padding: 2em; }
+  @media (min-width: 1200px) {
+    #htmltagcloud {
+      background-color: transparent;
+      background-image: url(http://www.clker.com/cliparts/u/z/E/C/F/1/black-cloud-hi.png);
+      background-repeat: no-repeat;
+      background-size: 440px;
+      background-position: left -42px bottom -20px; } }
+
+#htmltagcloud a:hover {
+  color: #fff; }
+
+#htmltagcloud a:active {
+  color: #FFF;
+  background-color: #03d; }
+
+.wrd {
+  position: relative;
+  padding: 0; }
+
+.tagcloud0 {
+  font-size: 1em;
+  color: #F6F;
+  z-index: 10; }
+
+.tagcloud0 a {
+  color: #F6F; }
+
+.tagcloud1 {
+  font-size: 1.7em;
+  color: #f8bdca;
+  z-index: 9; }
+
+.tagcloud1 a {
+  color: #f8bdca; }
+
+.tagcloud3 {
+  font-size: 2.2em;
+  color: #fa87aa;
+  z-index: 7; }
+
+.tagcloud3 a {
+  color: #fa87aa; }
+
+.tagcloud4 {
+  font-size: 2.6em;
+  color: #F9c;
+  z-index: 6; }
+
+.tagcloud4 a {
+  color: #ff4d74; }
+
+.tagcloud5 {
+  font-size: 2.8em;
+  color: #ff4d74;
+  z-index: 5; }
+
+.tagcloud5 a {
+  color: #f96693; }
+
+.tagcloud6 {
+  font-size: 3.2em;
+  color: #f25f80;
+  z-index: 4; }
+
+.tagcloud6 a {
+  color: #f25f80; }
+
+.tagcloud7 {
+  font-size: 3.6em;
+  color: #F99;
+  z-index: 3; }
+
+.tagcloud7 a {
+  color: #F99; }
+
+.tagcloud8 {
+  font-size: 3.9em;
+  color: #F69;
+  z-index: 2; }
+
+.tagcloud8 a {
+  color: #F69; }
+
+.tagcloud9 {
+  font-size: 4.2em;
+  color: #F69;
+  z-index: 1; }
+
+#htmltagcloud a:link, #htmltagcloud a:visited, .wrd a {
+  text-decoration: none; }
+
 /*----- TYPOGRAPHY -----*/
 /* Columns */
 .column-container h2 {
@@ -2366,7 +2475,6 @@ ul.slinks {
 
 .readmore {
   float: right; }
-
 
 /* Modules */
 .module-title {
@@ -3566,26 +3674,3 @@ ul.icons {
 
 .icon-folder-open-alt:before {
   content: "\f115"; }
-
-#htmltagcloud{
-  font-size: 100%;
-  width: auto;    /* auto or fixed width, e.g. 500px   */
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-image:url('http://www.clker.com/cliparts/u/z/E/C/F/1/black-cloud-hi.png');
-
-  background-repeat:no-repeat;
-  background-size: 440px;
-  background-position:left -42px bottom -20px; 
-  margin:1em 1em 0 1em;
-  border:0px solid #ddd;
-  padding:2em; 
-
-}#htmltagcloud{line-height:2.4em;word-spacing:normal;letter-spacing:normal;text-transform:none;text-align:justify;text-indent:0}
-#htmltagcloud a:link{text-decoration:none}
-#htmltagcloud a:visited{text-decoration:none}
-#htmltagcloud a:hover{color: #ffffff;}
-
-
-#htmltagcloud a:active{color:white;background-color:#03d}.wrd
-{padding:0;position:relative}.wrd 
-a{text-decoration:none}.tagcloud0{font-size:1.0em;color:#FF66FF;z-index:10}.tagcloud0 a{color:#FF66FF}.tagcloud1{font-size:1.7em;color:#f8bdca;z-index:9}.tagcloud1 a{color:#f8bdca}.tagcloud3{font-size:2.2em;color:#fa87aa;z-index:7}.tagcloud3 a{color:#fa87aa}.tagcloud4{font-size:2.6em;color:#FF99cc;z-index:6}.tagcloud4 a{color:#ff4d74}.tagcloud5{font-size:2.8em;color:#ff4d74;z-index:5}.tagcloud5 a{color:#f96693}.tagcloud6{font-size:3.2em;color:#f25f80;z-index:4}.tagcloud6 a{color:#f25f80}.tagcloud7{font-size:3.6em;color:#FF9999;z-index:3}.tagcloud7 a{color:#FF9999}.tagcloud8{font-size:3.9em;color:#FF6699;z-index:2}.tagcloud8 a{color:#FF6699}.tagcloud9{font-size:4.2em;color:#FF6699;z-index:1}.tagcloud9 
