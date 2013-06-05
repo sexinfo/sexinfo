@@ -1,21 +1,27 @@
 <div class="topics-container">
 
 
-
-
   <div class="parent-topic">
     <h2>Parent topic title</h2>
 
     <div class="grid-left">
-      <div class="topic-half red"></div>
+      <div class="topic-half">
+        <img src="http://placehold.it/428x300" alt="" class="red">
+        <p>Lorem Ipsum</p>
+      </div>
     </div>
 
     <div class="grid-right">
-      <div class="topic-quarter green"></div>
-      <div class="topic-quarter yellow"></div>
+      <div class="topic-quarter">
+        <img src="http://placehold.it/408x130" alt="" class="green">
+        <p>Lorem Ipsum</p>
+      </div>
+      <div class="topic-quarter">
+        <img src="http://placehold.it/408x130" alt="" class="yellow">
+        <p>Lorem Ipsum</p>
+      </div>
     </div>
   </div>
-
 
 
 
@@ -23,11 +29,17 @@
     <h2>Another parent topic title</h2>
 
     <div class="grid-left">
-      <div class="topic-half orange"></div>
+      <div class="topic-half">
+        <img src="http://placehold.it/428x300" alt="" class="orange">
+        <p>Lorem Ipsum</p>
+      </div>
     </div>
 
     <div class="grid-right">
-      <div class="topic-half blue"></div>
+      <div class="topic-half">
+        <img src="http://placehold.it/428x300" alt="" class="blue">
+        <p>Lorem Ipsum</p>
+      </div>
     </div>
   </div>
 
@@ -37,13 +49,23 @@
     <h2>Yet another parent topic title</h2>
 
     <div class="grid-left">
-      <div class="topic-quarter green"></div>
-      <div class="topic-quarter yellow"></div>
+      <div class="topic-quarter">
+        <img src="http://placehold.it/408x130" alt="" class="yellow">
+        <p>Lorem Ipsum</p>
+      </div>
+      <div class="topic-quarter">
+        <img src="http://placehold.it/408x130" alt="" class="blue">
+        <p>Lorem Ipsum</p>
+      </div>
     </div>
 
     <div class="grid-right">
-      <div class="topic-half red"></div>
+      <div class="topic-half">
+        <img src="http://placehold.it/428x300" alt="" class="red">
+        <p>Lorem Ipsum</p>
+      </div>
     </div>
   </div>
+
 
 </div>
