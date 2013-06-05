@@ -148,3 +148,26 @@ html[xmlns] .clearfix { display: block; }
   .description { display: none; }
 }
 
+
+/* Striped gray/white list
+/* -------------- */
+.stripe-list {
+    // background-color: white;
+    // padding: 0;
+  background-color: #eee;
+  border: 1px solid #d0d0d0;
+  font-size: 1.1em;
+  padding: 0;
+
+  li {
+    border-bottom: 1px solid #DADADA;
+    list-style: none;
+    padding: 5px 7px 5px 14px;
+
+    &:last-child { border: none; }
+    a:hover { color: #000; }
+  }
+
+  .item-even { background-color: #fff; }
+  .item-odd  { background-color: #eee; }
+}

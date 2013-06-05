@@ -428,3 +428,36 @@ a:visited.more-button  {
     background-color: #ebf6fa;
     border: 1px solid #EAF1F4;
   }
+
+
+.recent-changes-container {
+  @include border-radius(3px);
+  background-color: #eee;
+  border: 2px solid $pink;
+  display: none;
+  position: absolute;
+  top: 18%; right: 10px;
+
+  h3 {
+    float: left;
+    font-size: 1.6em;
+    padding: 10px;
+  }
+
+  .close-changes {
+    color: $gray-text;
+    font-size: 1.7em;
+    font-weight: bold;
+    float: right;
+    margin: 13px 10px 10px;
+
+    &:hover { color: $pink; }
+  }
+
+  ul {
+    border: none;
+    margin: 0;
+  }
+
+  @media(min-width: 1200px) { display: block; }
+}

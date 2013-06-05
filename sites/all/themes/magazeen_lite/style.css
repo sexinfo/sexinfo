@@ -1557,6 +1557,26 @@ html[xmlns] .clearfix {
   #user-login .description {
     display: none; }
 
+/* Striped gray/white list
+/* -------------- */
+.stripe-list {
+  background-color: #eee;
+  border: 1px solid #d0d0d0;
+  font-size: 1.1em;
+  padding: 0; }
+  .stripe-list li {
+    border-bottom: 1px solid #DADADA;
+    list-style: none;
+    padding: 5px 7px 5px 14px; }
+    .stripe-list li:last-child {
+      border: none; }
+    .stripe-list li a:hover {
+      color: #000; }
+  .stripe-list .item-even {
+    background-color: #fff; }
+  .stripe-list .item-odd {
+    background-color: #eee; }
+
 h1 {
   margin: 0;
   padding: 0;
@@ -2604,6 +2624,35 @@ a:active.more-button {
   background-color: #ebf6fa;
   border: 1px solid #EAF1F4; }
 
+.recent-changes-container {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #eee;
+  border: 2px solid #f23183;
+  display: none;
+  position: absolute;
+  top: 18%;
+  right: 10px; }
+  .recent-changes-container h3 {
+    float: left;
+    font-size: 1.6em;
+    padding: 10px; }
+  .recent-changes-container .close-changes {
+    color: #30393d;
+    font-size: 1.7em;
+    font-weight: bold;
+    float: right;
+    margin: 13px 10px 10px; }
+    .recent-changes-container .close-changes:hover {
+      color: #f23183; }
+  .recent-changes-container ul {
+    border: none;
+    margin: 0; }
+  @media (min-width: 1200px) {
+    .recent-changes-container {
+      display: block; } }
+
 /* ----------------------------------------------*/
 /* Ask the Sexperts webform
 /* ----------------------------------------------*/
@@ -2639,33 +2688,20 @@ a:active.more-button {
   font-size: 2em;
   margin-top: 15px; }
 
-.taxonomy-parent {
+.topics-container .stripe-list {
   background-color: #eee;
   border: 1px solid #d0d0d0;
   font-size: 1.1em;
   padding: 0; }
-  .taxonomy-parent ul {
+  .topics-container .stripe-list ul {
     background-color: white;
     padding: 0; }
-    .taxonomy-parent ul li {
+    .topics-container .stripe-list ul li {
       padding-left: 26px; }
 
 .taxonomy-nested {
   border-bottom: 1px solid #DADADA;
   margin: 0; }
-
-.taxonomy-item {
-  background-color: white;
-  border-bottom: 1px solid #DADADA;
-  list-style: none;
-  padding: 5px 7px; }
-  .taxonomy-item:last-child {
-    border: none; }
-  .taxonomy-item a:hover {
-    color: #000; }
-
-.item-odd {
-  background-color: #eee; }
 
 .taxonomy-nested .taxonomy-item:before {
   content: "- ";
