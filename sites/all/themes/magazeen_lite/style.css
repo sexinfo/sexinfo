@@ -2650,8 +2650,7 @@ a:active.more-button {
 .topics-container {
   *zoom: 1;
   border: 1px solid #ccc;
-  background-color: white;
-  padding: 0 10px 10px; }
+  background-color: white; }
   .topics-container:before, .topics-container:after {
     display: table;
     content: ""; }
@@ -2672,6 +2671,7 @@ a:active.more-button {
   *zoom: 1;
   border-bottom: 1px solid #ccc;
   margin-bottom: 5px;
+  padding: 0 10px 10px;
   padding-bottom: 20px; }
   .parent-topic:before, .parent-topic:after {
     display: table;
@@ -2681,7 +2681,7 @@ a:active.more-button {
   .parent-topic:last-child {
     border-bottom: none;
     margin-bottom: 0;
-    padding-bottom: 0; }
+    padding-bottom: 10px; }
   .parent-topic h2 {
     color: #30393d;
     font-size: 1.9em;
