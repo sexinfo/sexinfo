@@ -1,39 +1,49 @@
-<div class="container">
-  <h1 class="topic-header">SexInfo Topics</h1>
-  
-  <?php
-  // The ID of the taxonomy vocabulary for which you'd like to create a nested list
-  $vid = 3;
-  $depth = 0;
-  $tree = taxonomy_get_tree($vid);
-  $counter = 0;
+<div class="topics-container">
 
-  print '<ul class="taxonomy-parent">';
 
-  foreach ($tree as $term) {
-    if ($term->depth > $depth) {
-      print '<ul class="taxonomy-nested">';
-      $depth = $term->depth;
-    }
-    if ($term->depth < $depth) {
-      print '</ul>';
-      $depth = $term->depth;
-    }
 
-    // Color for every other list item
-    if ($counter % 2 == 0) $className = "item-even";
-    else $className = "item-odd";
 
-    if ($term->depth == 0) {
-      print "<li class='taxonomy-item " . $className . "' style='font-weight: bold;'>" . $term->name . "</li>";
-    } else {
-      print "<li class='taxonomy-item " . $className . "'>" . l($term->name, "taxonomy/term/" . 
-        $term->tid . "/all") . "</li>";
-    }
-    
-    $counter++;
-  }
+  <div class="parent-topic">
+    <h2>Parent topic title</h2>
 
-  print '</ul>';
-  ?>
+    <div class="grid-left">
+      <div class="topic-half red"></div>
+    </div>
+
+    <div class="grid-right">
+      <div class="topic-quarter green"></div>
+      <div class="topic-quarter yellow"></div>
+    </div>
+  </div>
+
+
+
+
+  <div class="parent-topic">
+    <h2>Another parent topic title</h2>
+
+    <div class="grid-left">
+      <div class="topic-half orange"></div>
+    </div>
+
+    <div class="grid-right">
+      <div class="topic-half blue"></div>
+    </div>
+  </div>
+
+
+
+  <div class="parent-topic">
+    <h2>Yet another parent topic title</h2>
+
+    <div class="grid-left">
+      <div class="topic-quarter green"></div>
+      <div class="topic-quarter yellow"></div>
+    </div>
+
+    <div class="grid-right">
+      <div class="topic-half red"></div>
+    </div>
+  </div>
+
 </div>
