@@ -1236,6 +1236,7 @@ function webform_node_defaults() {
     'total_submit_limit' => '-1',
     'total_submit_interval' => '-1',
     'status' => '1',
+	'status_message' => '',
     'record_exists' => FALSE,
     'roles' => array('1', '2'),
     'emails' => array(),
@@ -1577,9 +1578,13 @@ function theme_webform_view_messages($variables) {
   $type = 'status';
 
   if ($closed) {
-	  // TODO temporary close question fix for message.
-	  // This module should accept an optional message parameter
-    $message = t("Sorry the Sexperts are gone for break, we will be back to answer your questions in September! <br /> <br /> In the meantime check out our <a href='frequently-asked-questions'>Frequently Asked Questions</a>!");
+	  $message = $node->webform['status_message'];
+
+	  // if (is_null($status_message))
+// 		  $message = "TITTYSPRINKLES";
+// 	  else
+//     	  $message = t("Sorry the Sexperts are gone for break, we will be back to answer your questions in September! <br /> <br /> In the meantime check out our <a href='frequently-asked-questions'>Frequently Asked Questions</a>!");
+
   }
   // If open and not allowed to submit the form, give an explanation.
   elseif (array_search(TRUE, $allowed_roles) === FALSE && $user->uid != 1) {

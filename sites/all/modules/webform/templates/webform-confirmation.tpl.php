@@ -20,7 +20,7 @@
   <?php if ($confirmation_message): ?>
     <?php print $confirmation_message ?>
   <?php else: ?>
-    <p><?php print t('Thank you, your submission has been received.'); ?></p>
+    <p><?php print t('Thank you for submitting your question to the Sex Info. Your question has been received and will be be answered within 1-2 weeks by a Sexpert. <br/> <br/>In the meantime you may want to check out our <a href='frequently-asked-questions'>Frequently Asked Questions</a>!'); ?></p>
   <?php endif; ?>
 </div>
 

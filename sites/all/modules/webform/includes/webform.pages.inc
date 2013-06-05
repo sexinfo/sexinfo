@@ -32,7 +32,26 @@ function webform_configure_form($form, &$form_state, $node) {
     '#collapsed' => FALSE,
     '#weight' => -4,
   );
-
+	
+  $form['submission']['status'] = array(
+    '#type' => 'radios',
+    '#title' => t('Status of Ask the Sexperts question box.'),
+    '#default_value' => $node->webform['status'] == 0 ? 0 : 1,
+    '#description' => t('Closing a form prevents any further submissions by any users. <br/> ** BE SURE TO SET CLOSED MESSAGE IF CLOSED**'),
+    '#parents' => array('status'),
+    '#options' => array(1 => t('Open'), 0 => t('Closed')),
+  );
+	
+  $form['submission']['status_message'] = array(
+		'#type' => 'text_format',
+		'#title' => t('Closed question box away message'),
+		'#description' => t('Message to be shown for when the question box is closed and the Sexperts are on break.'),
+		'#default_value' => $node->webform['status_message'],
+		'#cols' => 40,
+		'#rows' => 5,
+		'#parents' => array('status_message'),
+  );
+	
   $form['submission']['confirmation'] = array(
     '#type' => 'text_format',
     '#title' => t('Confirmation message'),
@@ -43,118 +62,6 @@ function webform_configure_form($form, &$form_state, $node) {
     '#format' => $node->webform['confirmation_format'],
     '#parents' => array('confirmation'),
   );
-
-  // Redirection settings.
-  if (strpos($node->webform['redirect_url'], '<') === 0) {
-    $redirect = trim($node->webform['redirect_url'], '<>');
-    // Redirection is set to front page.
-    if ($redirect == 'front') {
-      $redirect = 'url';
-      $redirect_url = $node->webform['redirect_url'];
-    }
-    else {
-      $redirect_url = '';
-    }
-  }
-  else {
-    $redirect = 'url';
-    $redirect_url = $node->webform['redirect_url'];
-  }
-  $form['submission']['redirection'] = array(
-    '#type' => 'item',
-    '#title' => t('Redirection location'),
-    '#theme' => 'webform_advanced_redirection_form',
-    '#description' => t('Choose where to redirect the user upon successful submission.') . ' ' . t('The <em>Custom URL</em> option supports Webform token replacements.') . theme('webform_token_help', array('groups' => array('basic', 'node', 'special', 'submission'))),
-  );
-  $form['submission']['redirection']['redirect']= array(
-    '#type' => 'radios',
-    '#default_value' => $redirect,
-    '#options' => array(
-      'confirmation' => t('Confirmation page'),
-      'url' => t('Custom URL'),
-      'none' => t('No redirect (reload current page)'),
-    ),
-  );
-  $form['submission']['redirection']['redirect_url'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Redirect URL'),
-    '#description' => t('URL to redirect the user to upon successful submission.'),
-    '#default_value' => $redirect_url,
-    '#maxlength' => 255,
-  );
-
-  // Submission limit settings for all submissions.
-  $form['submission']['total_submit_limit'] = array(
-    '#type' => 'item',
-    '#title' => t('Total submissions limit'),
-    '#theme' => 'webform_advanced_total_submit_limit_form',
-    '#description' => t('Limit the total number of allowed submissions.'),
-  );
-  $form['submission']['total_submit_limit']['enforce_total_limit'] = array(
-    '#type' => 'radios',
-    '#options' => array('no' => t('Unlimited'), 'yes' => 'Limit to !count total submission(s) !timespan'),
-    '#default_value' => $node->webform['total_submit_limit'] == -1 ? 'no' : 'yes',
-    '#parents' => array('enforce_total_limit'),
-  );
-  $form['submission']['total_submit_limit']['total_submit_limit'] = array(
-    '#type' => 'textfield',
-    '#maxlength' => 8,
-    '#size' => 8,
-    '#default_value' => $node->webform['total_submit_limit'] != -1 ? $node->webform['total_submit_limit'] : '',
-    '#parents' => array('total_submit_limit'),
-  );
-  $form['submission']['total_submit_limit']['total_submit_interval'] = array(
-    '#type' => 'select',
-    '#options' => array(
-      '-1' => t('ever'),
-      '3600' => t('every hour'),
-      '86400' => t('every day'),
-      '604800' => t('every week'),
-    ),
-    '#default_value' => $node->webform['total_submit_interval'],
-    '#parents' => array('total_submit_interval'),
-  );
-
-  // Submission limit per user settings.
-  $form['submission']['submit_limit'] = array(
-    '#type' => 'item',
-    '#title' => t('Per user submission limit'),
-    '#theme' => 'webform_advanced_submit_limit_form',
-    '#description' => t('Limit the number of submissions <em>per user</em>. A user is identified by their user login if logged-in, or by their IP Address and Cookie if anonymous. Use of cookies may be modified in the global <a href="!url">Webform settings</a>.', array('!url' => url('admin/config/content/webform'))),
-  );
-  $form['submission']['submit_limit']['enforce_limit'] = array(
-    '#type' => 'radios',
-    '#options' => array('no' => t('Unlimited'), 'yes' => 'Limit each user to !count submission(s) !timespan'),
-    '#default_value' => $node->webform['submit_limit'] == -1 ? 'no' : 'yes',
-    '#parents' => array('enforce_limit'),
-  );
-  $form['submission']['submit_limit']['submit_limit'] = array(
-    '#type' => 'textfield',
-    '#maxlength' => 2,
-    '#size' => 2,
-    '#default_value' => $node->webform['submit_limit'] != -1 ? $node->webform['submit_limit'] : '',
-    '#parents' => array('submit_limit'),
-  );
-  $form['submission']['submit_limit']['submit_interval'] = array(
-    '#type' => 'select',
-    '#options' => array(
-      '-1' => t('ever'),
-      '3600' => t('every hour'),
-      '86400' => t('every day'),
-      '604800' => t('every week'),
-    ),
-    '#default_value' => $node->webform['submit_interval'],
-    '#parents' => array('submit_interval'),
-  );
-
-  $form['submission']['status'] = array(
-    '#type' => 'radios',
-    '#title' => t('Status of this form'),
-    '#default_value' => $node->webform['status'] == 0 ? 0 : 1,
-    '#description' => t('Closing a form prevents any further submissions by any users.'),
-    '#parents' => array('status'),
-    '#options' => array(1 => t('Open'), 0 => t('Closed')),
-  );
   /* End Edit Form */
 
   /* Start per-role submission control */
@@ -162,7 +69,7 @@ function webform_configure_form($form, &$form_state, $node) {
     '#type' => 'fieldset',
     '#title' => t('Submission access'),
     '#collapsible' => TRUE,
-    '#collapsed' => FALSE,
+    '#collapsed' => TRUE,
     '#weight' => -3,
     '#description' => t('These permissions affect which roles can submit this webform. It does not prevent access to the webform page. If needing to prevent access to the webform page entirely, use a content access module such as <a href="http://drupal.org/project/taxonomy_access">Taxonomy Access</a> or <a href="http://drupal.org/project/node_privacy_byrole">Node Privacy by Role</a>.'),
     '#access' => variable_get('webform_submission_access_control', 1),
@@ -190,6 +97,108 @@ function webform_configure_form($form, &$form_state, $node) {
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     '#weight' => -1,
+  );
+  // Redirection settings.
+  if (strpos($node->webform['redirect_url'], '<') === 0) {
+    $redirect = trim($node->webform['redirect_url'], '<>');
+    // Redirection is set to front page.
+    if ($redirect == 'front') {
+      $redirect = 'url';
+      $redirect_url = $node->webform['redirect_url'];
+    }
+    else {
+      $redirect_url = '';
+    }
+  }
+  else {
+    $redirect = 'url';
+    $redirect_url = $node->webform['redirect_url'];
+  }
+  $form['advanced']['redirection'] = array(
+    '#type' => 'item',
+    '#title' => t('Redirection location'),
+    '#theme' => 'webform_advanced_redirection_form',
+    '#description' => t('Choose where to redirect the user upon successful submission.') . ' ' . t('The <em>Custom URL</em> option supports Webform token replacements.') . theme('webform_token_help', array('groups' => array('basic', 'node', 'special', 'submission'))),
+  );
+  $form['advanced']['redirection']['redirect']= array(
+    '#type' => 'radios',
+    '#default_value' => $redirect,
+    '#options' => array(
+      'confirmation' => t('Confirmation page'),
+      'url' => t('Custom URL'),
+      'none' => t('No redirect (reload current page)'),
+    ),
+  );
+  $form['advanced']['redirection']['redirect_url'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Redirect URL'),
+    '#description' => t('URL to redirect the user to upon successful submission.'),
+    '#default_value' => $redirect_url,
+    '#maxlength' => 255,
+  );
+
+  // Submission limit settings for all submissions.
+  $form['advanced']['total_submit_limit'] = array(
+    '#type' => 'item',
+    '#title' => t('Total submissions limit'),
+    '#theme' => 'webform_advanced_total_submit_limit_form',
+    '#description' => t('Limit the total number of allowed submissions.'),
+  );
+  $form['advanced']['total_submit_limit']['enforce_total_limit'] = array(
+    '#type' => 'radios',
+    '#options' => array('no' => t('Unlimited'), 'yes' => 'Limit to !count total submission(s) !timespan'),
+    '#default_value' => $node->webform['total_submit_limit'] == -1 ? 'no' : 'yes',
+    '#parents' => array('enforce_total_limit'),
+  );
+  $form['advanced']['total_submit_limit']['total_submit_limit'] = array(
+    '#type' => 'textfield',
+    '#maxlength' => 8,
+    '#size' => 8,
+    '#default_value' => $node->webform['total_submit_limit'] != -1 ? $node->webform['total_submit_limit'] : '',
+    '#parents' => array('total_submit_limit'),
+  );
+  $form['advanced']['total_submit_limit']['total_submit_interval'] = array(
+    '#type' => 'select',
+    '#options' => array(
+      '-1' => t('ever'),
+      '3600' => t('every hour'),
+      '86400' => t('every day'),
+      '604800' => t('every week'),
+    ),
+    '#default_value' => $node->webform['total_submit_interval'],
+    '#parents' => array('total_submit_interval'),
+  );
+
+  // Submission limit per user settings.
+  $form['advanced']['submit_limit'] = array(
+    '#type' => 'item',
+    '#title' => t('Per user submission limit'),
+    '#theme' => 'webform_advanced_submit_limit_form',
+    '#description' => t('Limit the number of submissions <em>per user</em>. A user is identified by their user login if logged-in, or by their IP Address and Cookie if anonymous. Use of cookies may be modified in the global <a href="!url">Webform settings</a>.', array('!url' => url('admin/config/content/webform'))),
+  );
+  $form['advanced']['submit_limit']['enforce_limit'] = array(
+    '#type' => 'radios',
+    '#options' => array('no' => t('Unlimited'), 'yes' => 'Limit each user to !count submission(s) !timespan'),
+    '#default_value' => $node->webform['submit_limit'] == -1 ? 'no' : 'yes',
+    '#parents' => array('enforce_limit'),
+  );
+  $form['advanced']['submit_limit']['submit_limit'] = array(
+    '#type' => 'textfield',
+    '#maxlength' => 2,
+    '#size' => 2,
+    '#default_value' => $node->webform['submit_limit'] != -1 ? $node->webform['submit_limit'] : '',
+    '#parents' => array('submit_limit'),
+  );
+  $form['advanced']['submit_limit']['submit_interval'] = array(
+    '#type' => 'select',
+    '#options' => array(
+      '-1' => t('ever'),
+      '3600' => t('every hour'),
+      '86400' => t('every day'),
+      '604800' => t('every week'),
+    ),
+    '#default_value' => $node->webform['submit_interval'],
+    '#parents' => array('submit_interval'),
   );
   $form['advanced']['block'] = array(
     '#type' => 'checkbox',
@@ -258,25 +267,7 @@ function webform_configure_form_validate($form, &$form_state) {
     }
   }
 
-  // Ensure the entered redirect URL is valid.
-  if ($form_state['values']['redirect'] == 'url') {
-    $redirect_url = trim($form_state['values']['redirect_url']);
-    if (empty($redirect_url)) {
-      form_error($form['submission']['redirection']['redirect_url'], t('A valid URL is required for custom redirection.'));
-    }
-    elseif (strpos($redirect_url, 'http') === 0 && !valid_url($redirect_url, TRUE)) {
-      form_error($form['submission']['redirection']['redirect_url'], t('The entered URL is not a valid address.'));
-    }
-    else {
-      form_set_value($form['submission']['redirection']['redirect_url'], $redirect_url, $form_state);
-    }
-  }
-  elseif ($form_state['values']['redirect'] == 'confirmation') {
-    form_set_value($form['submission']['redirection']['redirect_url'], '<confirmation>', $form_state);
-  }
-  else {
-    form_set_value($form['submission']['redirection']['redirect_url'], '<none>', $form_state);
-  }
+
 }
 
 /**
@@ -295,6 +286,9 @@ function webform_configure_form_submit($form, &$form_state) {
 
   // Overall form status.
   $node->webform['status'] = $form_state['values']['status'];
+	
+  // Status message.
+  $node->webform['status_message'] = $form_state['values']['status_message'];
 
   // Save roles.
   $node->webform['roles'] = array_keys(array_filter($form_state['values']['roles']));
