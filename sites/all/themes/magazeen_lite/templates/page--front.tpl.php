@@ -2,6 +2,14 @@
 
 <?php include 'navigation.php' ?>
 
+<h3>Recent Changes:</h3>
+<ul>
+<?php $query = db_select('node', 'n')->fields('n', array('title'))->range(0, 10)->orderBy('changed', 'DESC');
+      $result = $query->execute()->fetchCol();
+      foreach($result as $item) {
+        echo '<li>'; echo $item; echo '</li>';
+      } ?>
+</ul>
 <div class="container">
   <?php if ($breadcrumb): print $breadcrumb; endif; ?>
 
