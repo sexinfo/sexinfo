@@ -49,6 +49,7 @@ function webform_configure_form($form, &$form_state, $node) {
 		'#default_value' => $node->webform['status_message'],
 		'#cols' => 40,
 		'#rows' => 5,
+		'#format' => $node->webform['status_message_format'],
 		'#parents' => array('status_message'),
   );
 	
@@ -288,7 +289,8 @@ function webform_configure_form_submit($form, &$form_state) {
   $node->webform['status'] = $form_state['values']['status'];
 	
   // Status message.
-  $node->webform['status_message'] = $form_state['values']['status_message'];
+  $node->webform['status_message'] = $form_state['values']['status_message']['value'];
+	$node->webform['status_message_format'] = $form_state['values']['status_message']['format'];
 
   // Save roles.
   $node->webform['roles'] = array_keys(array_filter($form_state['values']['roles']));
