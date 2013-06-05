@@ -60,6 +60,7 @@ $spacer: 20px;
   @include clearfix;
   border: 1px solid #ccc;
   background-color: white;
+  padding: 0 10px 10px;
 }
 
 .grid-left, .grid-right {

@@ -2519,7 +2519,8 @@ a:active.more-button {
 .topics-container {
   *zoom: 1;
   border: 1px solid #ccc;
-  background-color: white; }
+  background-color: white;
+  padding: 0 10px 10px; }
   .topics-container:before, .topics-container:after {
     display: table;
     content: ""; }
