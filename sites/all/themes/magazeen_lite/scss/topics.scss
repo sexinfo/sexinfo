@@ -62,7 +62,8 @@ $spacer: 20px;
   background-color: white;
 }
 
-.grid-left, .grid-right {
+.grid-left,
+.grid-right {
   @include border-box;
   float: left;
   width: 50%;
@@ -93,14 +94,26 @@ $spacer: 20px;
     padding: 8px 10px 0;
   }
 
+  .topic-half, .topic-quarter {
+    @include clearfix;
+    outline: 1px dotted red;
+  }
+
   .topic-half {
-    height: 300px + $spacer;
+    // height: 300px + $spacer;
   }
 
   .topic-quarter {
-    height: 150px;
+    // height: 150px;
 
     &:first-child { margin-bottom: $spacer; }
+  }
+
+
+  img { width: 100%; }
+
+  p {
+    margin-bottom: 5px;
   }
 }
 
