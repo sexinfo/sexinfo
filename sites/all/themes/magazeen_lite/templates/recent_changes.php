@@ -1,15 +1,37 @@
-<h3>Recent Changes:</h3>
-<ul>
-<?php $query = db_select('node', 'n')->fields('n', array('nid'))->range(0, 10)->orderBy('changed', 'DESC')->where('`promote` = 1');
+<?php
+  include 'utils/utils.php';
+  include 'utils/content_tag.php';
+?>
 
-      $nodeIDs = $query->execute()->fetchCol();
-      $type = 'node';
-      $conditions = array();
-      $resetCache = FALSE;
+<?php if (logged_in()): ?>
+  <div class="recent-changes-container">
+    <div class="clearfix">
+      <h3>Recent Changes:</h3>
+      <a href="#" class="close-changes">&times;</a>
+    </div>
 
-      $nodes = entity_load($type, $nodeIDs, $conditions, $resetCache);
-      foreach($nodes as $node) {
-        echo '<li><a href="node/' . $node->nid . '">' . $node->title . '</a></li>';
-      }
+    <ul class="stripe-list">
+      <?php
+        $query   = db_select('node', 'n')->fields('n', array('nid'))->range(0, 10)->orderBy('changed', 'DESC')->where('`promote` = 1');
+        $nodeIDs = $query->execute()->fetchCol();
+        $type    = 'node';
+        $conditions = array();
+        $resetCache = FALSE;
+        $counter    = 0;
+
+        $nodes = entity_load($type, $nodeIDs, $conditions, $resetCache);
+        foreach($nodes as $node) {
+          if ($counter % 2 == 0) $className = "item-even";
+          else $className = "item-odd";
+
+          $link = content_tag('a', $node->title, array('href' => 'node/' . $node->nid));
+          print content_tag('li', $link, array('class' => $className));
+
+          $counter++;
+        }
       ?>
-</ul>
+    </ul>
+  </div>
+<?php endif; ?>
+
+

@@ -69,4 +69,15 @@ $(function() {
     }
   );
 
+
+
+  /*----------------------------
+    Recent Changes
+  ----------------------------*/
+  var $changesContainer = $('.recent-changes-container');
+  $('.close-changes').click(function() {
+    $changesContainer.slideUp(function() {
+      $changesContainer.remove();
+    });
+  });
 });
