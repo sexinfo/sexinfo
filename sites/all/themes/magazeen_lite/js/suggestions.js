@@ -34,8 +34,8 @@ function showSuggestions(html) {
   }
 
   // Wrap each link in a <div> and append it to our suggestions container
-  $.each($results, function(i, el) {
-    var $link      = $(el).find('h4 a'),
+  $results.each(function() {
+    var $link      = $(this).find('h4 a'),
         $container = $(div()),
         href = $link.attr('href');
 
