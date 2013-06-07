@@ -2167,10 +2167,6 @@ ul.pager {
 .footer-divider {
   background: url("images/footer-divider.gif") repeat-y scroll left top transparent; }
 
-#footer .login {
-  font-size: 1.1em;
-  float: right; }
-
 #snavigation {
   background-color: #171615;
   border-top: 1px solid #1E1D1D;
@@ -2180,7 +2176,11 @@ ul.pager {
   #snavigation li a.active {
     color: #f23183; }
   #snavigation p {
+    float: left;
     margin-bottom: 0; }
+  #snavigation .login {
+    font-size: 1.1em;
+    float: right; }
 
 ul.slinks {
   margin: 0;
