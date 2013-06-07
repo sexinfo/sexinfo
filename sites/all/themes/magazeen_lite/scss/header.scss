@@ -157,7 +157,7 @@ img#logo-image {
 
 #navigation ul li {
   float: left;
-  margin: 0 3px;
+  margin: 0 0px;
   overflow: visible;
   padding: 0;
 
@@ -176,7 +176,7 @@ img#logo-image {
 
 
 #navigation ul li a:link, #navigation ul li a:active, #navigation ul li a:visited {
-  margin:0; padding:13px 15px;
+  margin:0; padding:15px 15px 14px 15px;
   font:bold 1.1em Arial, Helvetica, sans-serif;
   color:#34393e;
   display:block; height:auto;
@@ -202,6 +202,8 @@ img#logo-image {
   padding:15px 15px 14px 15px;
   background:$dark-gray url(images/navigation-hover.gif) repeat-x bottom center;
   color:#f1f8ff; position:relative;
+	border-left: 1px solid #eee;
+	border-right: 1px solid #eee;
 
   @include mobile { padding: 5px; }
 }

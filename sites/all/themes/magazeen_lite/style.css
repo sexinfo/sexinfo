@@ -1934,7 +1934,7 @@ img#logo-image {
 
 #navigation ul li {
   float: left;
-  margin: 0 3px;
+  margin: 0 0px;
   overflow: visible;
   padding: 0; }
   #navigation ul li a:hover, #navigation ul li a:active {
@@ -1948,7 +1948,7 @@ img#logo-image {
 
 #navigation ul li a:link, #navigation ul li a:active, #navigation ul li a:visited {
   margin: 0;
-  padding: 13px 15px;
+  padding: 15px 15px 14px 15px;
   font: bold 1.1em Arial, Helvetica, sans-serif;
   color: #34393e;
   display: block;
@@ -1973,7 +1973,9 @@ img#logo-image {
   padding: 15px 15px 14px 15px;
   background: #171615 url(images/navigation-hover.gif) repeat-x bottom center;
   color: #f1f8ff;
-  position: relative; }
+  position: relative;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee; }
   @media (max-width: 767px) {
     #navigation ul.links li.active a:link, #navigation ul.links li.active a:active, #navigation ul.links li.active a:visited {
       padding: 5px; } }
