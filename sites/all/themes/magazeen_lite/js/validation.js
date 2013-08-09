@@ -5,19 +5,17 @@ $(function() {
   $('.webform-client-form').submit(function() {
     var errors = false;
 
-    $(this).find("input[type=text],input[type=email],textarea").each(function(i, field) {
+    $(this).find("input[type=text],input[type=email],textarea").each(function(_, field) {
       if ($(field).val() === "" || $(field).hasClass(errClass)) {
         errors = true;
-        $(field).addClass(errClass);
-        $(field).val("This is a required field.");
+        $(field).addClass(errClass).val('This is a required field')
       }
     })
 
     return !errors;
   });
 
-  $(document.body).delegate('.field-error', 'focus', function() {
-    $(this).removeClass(errClass);
-    $(this).val("");
+  $(document).on('focus', '.field-error', function() {
+    $(this).removeClass(errClass).val('');
   });
 });

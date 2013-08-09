@@ -22,6 +22,7 @@ function showSuggestions(html) {
   // Bit of a hack here - clear out suggestions if we already have some,
   // else create a new div to contain them
   var $suggestions = $("#suggestions");
+
   if ($suggestions.length) {
     $suggestions.empty();
     $suggestions.append( h3("Suggested Articles") );
@@ -69,5 +70,4 @@ $(function() {
     if (timeout) clearTimeout(timeout);
     timeout = setTimeout(fetchSuggestions, 300);
   });
-
 });

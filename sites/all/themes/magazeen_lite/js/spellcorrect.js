@@ -46,9 +46,9 @@ sift3Distance = function(s1, s2) {
 // Compares input words to popular words using the sift3Distance function,
 // and looks for close matches
 //
-// Accepts a string or array of words as input, and a callback which will be invoked
-// with the corrected query. Note that if there are no suggestions, the callback
-// will be invoked with the original input.
+// rawInput - String or Array[String] consisting of input to be corrected
+// callback - Function to be invoked with corrected content
+//            (or original content if no suggestions)
 //
 // Ex:
 //

@@ -2,16 +2,19 @@
 window.$ = jQuery;
 
 // Global SexInfo object
-window.SexInfo = {}
+window.SexInfo = {};
 
 
 // Cache popular words once we fetch them from the server
-SexInfo.popularWords = []
+SexInfo.popularWords = [];
 
 
 // Parse a list of popular words stored at data/words.json
 // As this is a deferred action, you must use a callback
 // instead of a return value.
+//
+// handler    - Callback function invoked with word list
+// errHandler - Optional callback function invoked in case of AJAX failure
 //
 // Ex:
 //
@@ -19,7 +22,7 @@ SexInfo.popularWords = []
 //     console.log(words);
 //   });
 //
-// You can optionally pass in an error handler:
+// Ex:
 //
 //   SexInfo.getPopularWords(function(words) {
 //     console.log(words);
@@ -43,6 +46,9 @@ SexInfo.getPopularWords = function(handler, errHandler) {
 // stored at data/words.json
 // Invokes a callback with the result words
 //
+// rawInput - String or Array[String] consisting of input to be filtered
+// callback - Function to be invoked with filtered content on completion
+//
 // Ex:
 //
 //   SexInfo.filterPopularWords("my penis hurts", function(words) {
@@ -52,7 +58,7 @@ SexInfo.getPopularWords = function(handler, errHandler) {
 SexInfo.filterPopularWords = function(rawInput, callback) {
   SexInfo.getPopularWords(function(words) {
     var result = [],
-        input  = (typeof rawInput === 'string') ? rawInput.split(" ") : rawInput;
+        input  = (typeof rawInput === 'string') ? rawInput.split(' ') : rawInput;
 
     for(var i=0, len=input.length; i<len; i++) {
       var word = input[i];
