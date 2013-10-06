@@ -14,6 +14,23 @@
  * - $submission_information: The next submission ID.
  */
 ?>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+  function goPrevious() {
+    document.getElementsByClassName("webform-submission-previous")[0].click();
+  }
+
+
+  function goNext() {
+    document.getElementsByClassName("webform-submission-next")[0].click()
+  }
+
+  $('body').keydown(function(e) {
+    if (e.keyCode == 37) goPrevious();
+    else if (e.keyCode == 39) goNext();
+  });
+
+</script>
 
 <?php if ($mode == 'display' || $mode == 'form'): ?>
   <div class="clearfix">
