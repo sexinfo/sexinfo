@@ -61,7 +61,7 @@ function error() {
   console.log("An error occurred");
 }
 
-
+//bind change on select and check its value
 $(function() {
   // Wait a bit after keyup before hitting the API
   var timeout = -1;
@@ -70,4 +70,27 @@ $(function() {
     if (timeout) clearTimeout(timeout);
     timeout = setTimeout(fetchSuggestions, 300);
   });
+
+  console.log($("#edit-submitted-gender"));
+
+  $("#edit-submitted-gender").on("change", function(){
+    console.log("gender changed");
+    if ($(this).find("option:selected").val() == "3"){ // "Other"
+      {
+        console.log("showing other!");
+      $("#webform-component-gender-field").slideDown(500);
+      }
+    }
+    else if ($(this).find("option:selected").val() != "3")
+    {
+      $("#webform-component-gender-field").slideUp(300);
+    }
+  });
 });
+
+
+
+
+  //$(this).toggleClass("#webform-component-gender-field.other");
+  //document.getElementById('#webform-component-gender-field').style.display='inline';
+//});
