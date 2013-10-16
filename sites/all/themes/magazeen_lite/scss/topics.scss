@@ -1,58 +1,52 @@
 // // Main category listing
 
-// .topic-header {
-//   font-size: 2em;
-//   margin-top: 15px;
-// }
+.topic-header {
+  font-size: 2em;
+  margin-top: 15px;
+}
 
-// .taxonomy-parent {
-//   background-color: #eee;
-//   border: 1px solid #d0d0d0;
-//   font-size: 1.1em;
-//   padding: 0;
+.taxonomy-parent {
+  background-color: #eee;
+  border: 1px solid #d0d0d0;
+  font-size: 1.1em;
+  padding: 0;
 
-//   ul {
-//     background-color: white;
-//     padding: 0;
+  ul {
+    background-color: white;
+    padding: 0;
 
-//     li { padding-left: 26px; }
-//   }
-// }
+    li { padding-left: 26px; }
+  }
+}
 
-// .taxonomy-nested {
-//   border-bottom: 1px solid #DADADA;
-//   margin: 0;
-// }
+.taxonomy-nested {
+  border-bottom: 1px solid #DADADA;
+  margin: 0;
+}
 
-// .taxonomy-item {
-//   background-color: white;
-//   border-bottom: 1px solid #DADADA;
-//   list-style: none;
-//   padding: 5px 7px;
+.taxonomy-item {
+  background-color: white;
+  border-bottom: 1px solid #DADADA;
+  list-style: none;
+  padding: 5px 7px;
 
-//   &:last-child { border: none; }
-//   a:hover { color: #000; }
-// }
+  &:last-child { border: none; }
+  a:hover { color: #000; }
+}
 
-// .item-odd { background-color: #eee; }
+.item-odd { background-color: #eee; }
 
-// .taxonomy-nested .taxonomy-item:before {
-//   // Nested sub-categories
-//   content: "- ";
-//   display: inline-block;
-//   margin-right: 5px;
-// }
+.taxonomy-nested .taxonomy-item:before {
+  // Nested sub-categories
+  content: "- ";
+  display: inline-block;
+  margin-right: 5px;
+}
 
 
 
 
 $spacer: 20px;
-
-.red { background-color: red !important; }
-.green { background-color: green !important; }
-.blue { background-color: blue !important; }
-.orange { background-color: orange !important; }
-.yellow { background-color: yellow !important; }
 
 
 
@@ -66,20 +60,17 @@ $spacer: 20px;
 .grid-right {
   @include border-box;
   float: left;
-  width: 50%;
+  width: 417px;
 }
 
-.grid-right {
-  padding-left: $spacer;
-}
-
+.grid-right { margin-left: $spacer; }
 
 .parent-topic {
+  @include border-box;
   @include clearfix;
   border-bottom: 1px solid #ccc;
   margin-bottom: 5px;
-  padding: 0 10px 10px;
-  padding-bottom: 20px;
+  padding: 10px;
 
   &:last-child {
     border-bottom: none;
@@ -87,33 +78,53 @@ $spacer: 20px;
     padding-bottom: 10px;
   }
 
-  h2 {
-    color: $gray-text;
-    font-size: 1.9em;
-    margin-bottom: 10px;
-    padding: 8px 10px 0;
-  }
-
   .topic-half, .topic-quarter {
     @include clearfix;
-    outline: 1px dotted red;
+    border: 1px solid #ccc;
   }
 
-  .topic-half {
-    // height: 300px + $spacer;
-  }
+  .topic-half {}
 
   .topic-quarter {
-    // height: 150px;
-
     &:first-child { margin-bottom: $spacer; }
   }
 
 
   img { width: 100%; }
+}
 
-  p {
-    margin-bottom: 5px;
+.topic-link {
+  display: block;
+  position: relative;
+
+  &:hover .text-on-image-text {
+    text-decoration: underline;
   }
 }
 
+
+.topic-half .text-on-image    { height: 360px; }
+.topic-quarter .text-on-image { height: 170px; }
+
+.text-on-image {
+  background-position: center;
+  background-size: cover;
+  color: white;
+  font-size: 2em;
+  overflow: hidden;
+  position: relative;
+  text-shadow: 0 2px 6px rgba(48,48,48,0.7);
+
+  // TODO: for demo
+  background-position: -355px -250px !important;
+}
+
+.text-on-image-text {
+  @include border-box;
+  color: white;
+  bottom: 0;
+  left: 0;
+  padding: 0 15px 15px;
+  position: absolute;
+  width: 100%;
+}
