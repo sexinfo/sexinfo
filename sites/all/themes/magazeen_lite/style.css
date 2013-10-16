@@ -73,7 +73,7 @@
 / ----------------------------------------------*/
 /*  _____Header _____ */
 /* _____Content + Node_____ */
-/*
+/*!
  * Bootstrap v2.3.1
  *
  * Copyright 2012 Twitter, Inc
@@ -2618,6 +2618,9 @@ a:active.more-button {
 #node-22 .node-footer {
   display: none; }
 
+#webform-component-gender-field {
+  display: none; }
+
 #suggestions {
   margin-top: 10px; }
   #suggestions a {
@@ -2690,7 +2693,7 @@ tr.odd.cat-row td {
   padding: none;
   border: none; }
 
-/*
+/*!
  *  Font Awesome 3.0.2
  *  the iconic font designed for use with Twitter Bootstrap
  *  -------------------------------------------------------
