@@ -1,71 +1,39 @@
-<div class="topics-container">
+<div class="container">
+  <h1 class="topic-header">SexInfo Topics</h1>
+  
+  <?php
+  // The ID of the taxonomy vocabulary for which you'd like to create a nested list
+  $vid = 3;
+  $depth = 0;
+  $tree = taxonomy_get_tree($vid);
+  $counter = 0;
 
+  print '<ul class="taxonomy-parent">';
 
-  <div class="parent-topic">
-    <h2>Parent topic title</h2>
+  foreach ($tree as $term) {
+    if ($term->depth > $depth) {
+      print '<ul class="taxonomy-nested">';
+      $depth = $term->depth;
+    }
+    if ($term->depth < $depth) {
+      print '</ul>';
+      $depth = $term->depth;
+    }
 
-    <div class="grid-left">
-      <div class="topic-half">
-        <img src="http://placehold.it/428x300" alt="" class="red">
-        <p>Lorem Ipsum</p>
-      </div>
-    </div>
+    // Color for every other list item
+    if ($counter % 2 == 0) $className = "item-even";
+    else $className = "item-odd";
 
-    <div class="grid-right">
-      <div class="topic-quarter">
-        <img src="http://placehold.it/408x130" alt="" class="green">
-        <p>Lorem Ipsum</p>
-      </div>
-      <div class="topic-quarter">
-        <img src="http://placehold.it/408x130" alt="" class="yellow">
-        <p>Lorem Ipsum</p>
-      </div>
-    </div>
-  </div>
+    if ($term->depth == 0) {
+      print "<li class='taxonomy-item " . $className . "' style='font-weight: bold;'>" . $term->name . "</li>";
+    } else {
+      print "<li class='taxonomy-item " . $className . "'>" . l($term->name, "taxonomy/term/" . 
+        $term->tid . "/all") . "</li>";
+    }
+    
+    $counter++;
+  }
 
-
-
-  <div class="parent-topic">
-    <h2>Another parent topic title</h2>
-
-    <div class="grid-left">
-      <div class="topic-half">
-        <img src="http://placehold.it/428x300" alt="" class="orange">
-        <p>Lorem Ipsum</p>
-      </div>
-    </div>
-
-    <div class="grid-right">
-      <div class="topic-half">
-        <img src="http://placehold.it/428x300" alt="" class="blue">
-        <p>Lorem Ipsum</p>
-      </div>
-    </div>
-  </div>
-
-
-
-  <div class="parent-topic">
-    <h2>Yet another parent topic title</h2>
-
-    <div class="grid-left">
-      <div class="topic-quarter">
-        <img src="http://placehold.it/408x130" alt="" class="yellow">
-        <p>Lorem Ipsum</p>
-      </div>
-      <div class="topic-quarter">
-        <img src="http://placehold.it/408x130" alt="" class="blue">
-        <p>Lorem Ipsum</p>
-      </div>
-    </div>
-
-    <div class="grid-right">
-      <div class="topic-half">
-        <img src="http://placehold.it/428x300" alt="" class="red">
-        <p>Lorem Ipsum</p>
-      </div>
-    </div>
-  </div>
-
-
+  print '</ul>';
+  ?>
 </div>
