@@ -61,6 +61,10 @@
             </div>
           <?php endif; ?>
 
+            <!--Suggested Articles -->
+            
+
+
         </div><!--/meta-->
       </div><!--/node-footer-->
     </div><!--/node-box-->
