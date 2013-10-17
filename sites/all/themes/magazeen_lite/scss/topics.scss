@@ -1,4 +1,4 @@
-// Main category listing
+// // Main category listing
 
 .topic-header {
   font-size: 2em;
@@ -41,4 +41,90 @@
   content: "- ";
   display: inline-block;
   margin-right: 5px;
+}
+
+
+
+
+$spacer: 20px;
+
+
+
+.topics-container {
+  @include clearfix;
+  border: 1px solid #ccc;
+  background-color: white;
+}
+
+.grid-left,
+.grid-right {
+  @include border-box;
+  float: left;
+  width: 417px;
+}
+
+.grid-right { margin-left: $spacer; }
+
+.parent-topic {
+  @include border-box;
+  @include clearfix;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 5px;
+  padding: 10px;
+
+  &:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+  }
+
+  .topic-half, .topic-quarter {
+    @include clearfix;
+    border: 1px solid #ccc;
+  }
+
+  .topic-half {}
+
+  .topic-quarter {
+    &:first-child { margin-bottom: $spacer; }
+  }
+
+
+  img { width: 100%; }
+}
+
+.topic-link {
+  display: block;
+  position: relative;
+
+  &:hover .text-on-image-text {
+    text-decoration: underline;
+  }
+}
+
+
+.topic-half .text-on-image    { height: 360px; }
+.topic-quarter .text-on-image { height: 170px; }
+
+.text-on-image {
+  background-position: center;
+  background-size: cover;
+  color: white;
+  font-size: 2em;
+  overflow: hidden;
+  position: relative;
+  text-shadow: 0 2px 6px rgba(48,48,48,0.7);
+
+  // TODO: for demo
+  background-position: -355px -250px !important;
+}
+
+.text-on-image-text {
+  @include border-box;
+  color: white;
+  bottom: 0;
+  left: 0;
+  padding: 0 15px 15px;
+  position: absolute;
+  width: 100%;
 }

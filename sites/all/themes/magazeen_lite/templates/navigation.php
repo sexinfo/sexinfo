@@ -37,6 +37,7 @@
   <script type="text/javascript" src="js/jquery.js"></script>
   <script type="text/javascript">
 $(document).ready(function () { 
+<<<<<<< HEAD
 
   var $menu = $('.menu-537 div');
   
@@ -44,11 +45,22 @@ $(document).ready(function () {
     function () {
       //show its submenu
       $menu.show();
+=======
+  
+  $('#navigation ul li.menu-537').hover(
+    function () {
+      //show its submenu
+      $('#navigation ul li.menu-537 div').show();
+>>>>>>> 0d48228ca5ba26eda52f67a49c4919501754f8b9
 
     }, 
     function () {
       //hide its submenu
+<<<<<<< HEAD
       $menu.hide();   
+=======
+      $('#navigation ul li.menu-537 div').hide();   
+>>>>>>> 0d48228ca5ba26eda52f67a49c4919501754f8b9
     }
   );
   

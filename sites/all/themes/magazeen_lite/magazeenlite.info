@@ -29,3 +29,7 @@ scripts[] = js/front.js
 scripts[] = js/validation.js
 scripts[] = js/suggestions.js
 scripts[] = js/spellcorrect.js
+<<<<<<< HEAD
+=======
+scripts[] = js/suggestions-articles.js
+>>>>>>> 0d48228ca5ba26eda52f67a49c4919501754f8b9
