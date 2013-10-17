@@ -1996,7 +1996,7 @@ a.rss:link, a.rss:active, a.rss:visited, a.rss:hover {
   width: 16px;
   height: 17px;
   float: right; }
-  
+
 /*Topics menu*/
 #navigation ul li.menu-537 div {
   display: none;
@@ -2009,7 +2009,7 @@ a.rss:link, a.rss:active, a.rss:visited, a.rss:hover {
   -moz-box-shadow: inset 0 0 30px #000000;
   -webkit-box-shadow: inset 0 0 30px #000000;
   box-shadow: inset 0 0 30px #000000; }
-
+  
 #navigation ul li.menu-537 div li {
   display: block;
   float: left;
