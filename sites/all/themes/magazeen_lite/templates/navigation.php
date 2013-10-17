@@ -37,16 +37,18 @@
   <script type="text/javascript" src="js/jquery.js"></script>
   <script type="text/javascript">
 $(document).ready(function () { 
+
+  var $menu = $('.menu-537 div');
   
-  $('#navigation ul li.menu-537').hover(
+  $('.menu-537').hover(
     function () {
       //show its submenu
-      $('#navigation ul li.menu-537 div').show();
+      $menu.show();
 
     }, 
     function () {
       //hide its submenu
-      $('#navigation ul li.menu-537 div').hide();   
+      $menu.hide();   
     }
   );
   

@@ -29,4 +29,3 @@ scripts[] = js/front.js
 scripts[] = js/validation.js
 scripts[] = js/suggestions.js
 scripts[] = js/spellcorrect.js
-scripts[] = js/suggestions-articles.js
