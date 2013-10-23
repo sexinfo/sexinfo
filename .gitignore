@@ -49,3 +49,6 @@ sites/default/files/tmp*
 sites/default/files/u*
 sites/*/private
 credentials.json
+
+# Ignoring database backup files #
+*.sql.gz
