@@ -33,6 +33,25 @@
 
   .faq-btn {
     @extend %buttonBar;
+    margin-top: 5px;
+    margin-left: 73px;
+    margin-right: 73px;
+    margin-bottom: 25px;
+    border-style: solid;
+    border-color: #7C7777;
+    border-width: 2px;
+
+    background: #ff5db1; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ff5db1 0%, #ef017c 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff5db1), color-stop(100%,#ef017c)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ff5db1 0%,#ef017c 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ff5db1 0%,#ef017c 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ff5db1 0%,#ef017c 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ff5db1 0%,#ef017c 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5db1', endColorstr='#ef017c',GradientType=0 ); /* IE6-9 */
+
+
+
   }
 
   .field-error {
