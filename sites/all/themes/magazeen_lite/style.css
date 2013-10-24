@@ -2659,6 +2659,7 @@ a:active.more-button {
     border-style: solid;
     border-color: #7C7777;
     border-width: 2px;
+    opacity: .8;
     background: #ff5db1;
     /* Old browsers */
     background: -moz-linear-gradient(top, #ff5db1 0%, #ef017c 100%);
@@ -2675,6 +2676,8 @@ a:active.more-button {
     /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5db1', endColorstr='#ef017c',GradientType=0 );
     /* IE6-9 */ }
+  #node-22 .faq-btn:hover {
+    opacity: 1; }
   #node-22 .field-error {
     border: 1px solid #d34332 !important;
     color: #d34332 !important; }

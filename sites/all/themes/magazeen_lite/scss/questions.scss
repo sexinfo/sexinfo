@@ -40,6 +40,7 @@
     border-style: solid;
     border-color: #7C7777;
     border-width: 2px;
+    opacity: .8;
 
     background: #ff5db1; /* Old browsers */
     background: -moz-linear-gradient(top,  #ff5db1 0%, #ef017c 100%); /* FF3.6+ */
@@ -49,9 +50,10 @@
     background: -ms-linear-gradient(top,  #ff5db1 0%,#ef017c 100%); /* IE10+ */
     background: linear-gradient(to bottom,  #ff5db1 0%,#ef017c 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5db1', endColorstr='#ef017c',GradientType=0 ); /* IE6-9 */
+  }
 
-
-
+  .faq-btn:hover {
+    opacity: 1;
   }
 
   .field-error {
