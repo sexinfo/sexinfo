@@ -34,6 +34,9 @@
         <li class="menu-549"><a href="/sexinfo/frequently-asked-questions">FAQs</a></li>
         <li class="menu-400"><a href="/sexinfo/ask-sexperts">Ask the Sexperts</a></li>
         <li class="menu-543"><a href="/sexinfo/article/resources">Resources</a></li>
+        <?php $result = db_query("SELECT * FROM {node} WHERE status=1 AND promote=1 ORDER BY RAND() LIMIT 1");
+          $randomNode = $result->fetch() ?>
+        <li class="menu-543"><a href="/sexinfo/node/<?php echo $randomNode->nid;?>" title="<?php echo $randomNode->title?>">Random Article</a></li>
         <li class="menu-739 last"><a href="/sexinfo/quizzes">Test Your Knowledge</a></li>
       </ul><!-- #main-menu -->
     </div>
