@@ -1,18 +1,18 @@
 [
   {
     "title": "Can I Get Pregnant If...",
-    "description": Becoming a mother is a very important and amazing transition in life. Bringing a new lifeinto the world brings&hellip;",
+    "description": "Becoming a mother is a very important and amazing transition in life. Bringing a new lifeinto the world brings&hellip;",
     "url": "http://www.soc.ucsb.edu/sexinfo/article/can-i-get-pregnant-if-her",
     "image": "pregnant.jpg",
-    "thumbnail": "pregnant-small.jpg"
-    "alt-text": "Can I get pregnant if...",
+    "thumbnail": "pregnant-small.jpg",
+    "alt-text": "Can I get pregnant if..."
   },
 
   {
     "title": "Sexual Behaviors",
     "description": "Sexual techniques are methods for increasing a partner's sexual arousal. These include activites that&hellip;",
     "url": "http://www.soc.ucsb.edu/sexinfo/taxonomy/term/444/all",
-    "image": stdtalking.jpg",
+    "image": "stdtalking.jpg",
     "thumbnail": "stdtalking-small.jpg",
     "alt-text": "Sexual Behaviors"
   },
@@ -23,7 +23,7 @@
     "url": "http://www.soc.ucsb.edu/sexinfo/article/love-and-attachment",
     "image": "love-relationships.jpg",
     "thumbnail": "love-relationships-small.jpg",
-    "alt-text": Love and Relationships"
+    "alt-text": "Love and Relationships"
   },
 
   {
@@ -47,7 +47,7 @@
   {
     "title": "Contraception",
     "description": "Contraception is the intentional prevention of pregnancy. There are many contraceptive methods, also known as&hellip;",
-    "url": " "http://www.soc.ucsb.edu/sexinfo/article/male-condom",
+    "url": "http://www.soc.ucsb.edu/sexinfo/article/male-condom",
     "image": "contraception.jpg",
     "thumbnail": "contraception-small.jpg",
     "alt-text": "Contraception"
@@ -55,8 +55,8 @@
 
   {
     "title": "Female Orgasmic Disorder",
-    "description": "Known as \"anorgasmia\" in medical terms, female orgasmic problems are defined as \"a sexual difficulty involving&hellip;"
-    "url": " "http://www.soc.ucsb.edu/sexinfo/article/female-orgasmic-disorder",
+    "description": "Known as \"anorgasmia\" in medical terms, female orgasmic problems are defined as \"a sexual difficulty involving&hellip;",
+    "url": "http://www.soc.ucsb.edu/sexinfo/article/female-orgasmic-disorder",
     "image": "female-orgasm-3.jpg",
     "thumbnail": "female-orgasm-3-small.jpg",
     "alt-text": "Female Orgasmic Disorder"
