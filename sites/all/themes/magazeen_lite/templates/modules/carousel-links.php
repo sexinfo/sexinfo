@@ -10,7 +10,7 @@ $phpArray = json_decode($jsonData, true);
   <?php for ($i = 0; $i < 4; $i++) { $linkItem = $phpArray[$i];?>
     <li>
       <a class="current" data-num="<?php echo $i+1; ?>" href="#">
-      <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . $linkItem['image']; ?>" />
+      <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . $linkItem['thumbnail']; ?>" />
         <?php echo $linkItem['title']; ?>
       </a>
     </li>
@@ -21,7 +21,7 @@ $phpArray = json_decode($jsonData, true);
   <?php for ($i = 4; $i < count($phpArray); $i++) { $linkItem = $phpArray[$i];?>
     <li>
       <a class="current" data-num="<?php echo $i+1; ?>" href="#">
-      <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . $linkItem['image']; ?>" />
+      <img class="carousel-thumb" src="<?php print path_to_theme() . '/images/modules/' . $linkItem['thumbnail']; ?>" />
         <?php echo $linkItem['title']; ?>
       </a>
     </li>
