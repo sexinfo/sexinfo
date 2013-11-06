@@ -1,41 +1,73 @@
 [
   {
-    "image": "pregnant-small.jpg",
-    "title": "Can I Get Pregnant If..."
+    "title": "Can I Get Pregnant If...",
+    "description": Becoming a mother is a very important and amazing transition in life. Bringing a new lifeinto the world brings&hellip;",
+    "url": "http://www.soc.ucsb.edu/sexinfo/article/can-i-get-pregnant-if-her",
+    "image": "pregnant.jpg",
+    "thumbnail": "pregnant-small.jpg"
+    "alt-text": "Can I get pregnant if...",
   },
 
   {
-    "image": "stdtalking-small.jpg",
-    "title": "Sexual Behaviors"
+    "title": "Sexual Behaviors",
+    "description": "Sexual techniques are methods for increasing a partner's sexual arousal. These include activites that&hellip;",
+    "url": "http://www.soc.ucsb.edu/sexinfo/taxonomy/term/444/all",
+    "image": stdtalking.jpg",
+    "thumbnail": "stdtalking-small.jpg",
+    "alt-text": "Sexual Behaviors"
   },
 
   {
-    "image": "love-relationships-small.jpg",
-    "title": "Love &amp; Relationships"
+    "title": "Love &amp; Relationships",
+    "description": "There are five components that determine with whom you fall in love, and if your love will last. They are&hellip;",
+    "url": "http://www.soc.ucsb.edu/sexinfo/article/love-and-attachment",
+    "image": "love-relationships.jpg",
+    "thumbnail": "love-relationships-small.jpg",
+    "alt-text": Love and Relationships"
   },
 
   {
-    "image": "std-small.jpg",
-    "title": "Sexually Transmitted Infections"
+    "title": "Sexually Transmitted Infections",
+    "description": "Sexually transmitted infections (STI's) are passed from one person to another through various types of sexual contact.&hellip;",
+    "url": "http://www.soc.ucsb.edu/sexinfo/article/sti-symptom-chart",
+    "image": "std.jpg",
+    "thumbnail": "std-small.jpg",
+    "alt-text": "Sexually Transmitted Infections"
   },
 
   {
-    "image": "banana-circumcision-small.jpg",
-    "title": "Circumcision"
+    "title": "Circumcision",
+    "description": "Male circumcision is a medical procedure in which the foreskin of the penis is surgically removed, exposing the&hellip;",
+    "url": "http://www.soc.ucsb.edu/sexinfo/article/male-circumcision",
+    "image": "banana-circumcision.jpg",
+    "thumbnail": "banana-circumcision-small.jpg",
+    "alt-text": "Sexual Behaviors"
   },
 
   {
-    "image": "contraception-small.jpg",
-    "title": "Contraception"
+    "title": "Contraception",
+    "description": "Contraception is the intentional prevention of pregnancy. There are many contraceptive methods, also known as&hellip;",
+    "url": " "http://www.soc.ucsb.edu/sexinfo/article/male-condom",
+    "image": "contraception.jpg",
+    "thumbnail": "contraception-small.jpg",
+    "alt-text": "Contraception"
   },
 
   {
-    "image": "female-orgasm-3-small.jpg",
-    "title": "Female Orgasmic Disorder"
+    "title": "Female Orgasmic Disorder",
+    "description": "Known as \"anorgasmia\" in medical terms, female orgasmic problems are defined as \"a sexual difficulty involving&hellip;"
+    "url": " "http://www.soc.ucsb.edu/sexinfo/article/female-orgasmic-disorder",
+    "image": "female-orgasm-3.jpg",
+    "thumbnail": "female-orgasm-3-small.jpg",
+    "alt-text": "Female Orgasmic Disorder"
   },
 
   {
-    "image": "coming-out-small.jpg",
-    "title": "Advice on Coming Out"
+    "title": "Advice on Coming Out",
+    "description": "For gay men and lesbians, coming out to parents or guardians can seem like a terrifying event&hellip;",
+    "url": "http://www.soc.ucsb.edu/sexinfo/article/advice-coming-out",
+    "image": "coming-out.jpg",
+    "thumbnail": "coming-out-small.jpg",
+    "alt-text": "Advice on Coming Out"
   }
 ]
