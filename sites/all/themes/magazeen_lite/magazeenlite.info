@@ -5,6 +5,7 @@ core = "7.x"
 project = "magazeenlite"
 
 stylesheets[all][] = style.css
+stylesheets[all][] = scss/lib/bootsrap.scss
 
 regions[search_area] = Search area
 regions[highlighted] = Highlighted
@@ -30,3 +31,5 @@ scripts[] = js/validation.js
 scripts[] = js/suggestions.js
 scripts[] = js/spellcorrect.js
 scripts[] = js/dropdown.js
+scripts[] = js/lib/typeahead.js
+scripts[] = js/lib/autocomplete.js
