@@ -119,12 +119,21 @@ $spacer: 20px;
   background-position: -355px -250px !important;
 }
 
-.text-on-image-text {
+.text-on-image .text-on-image-text {
   @include border-box;
   color: white;
   bottom: 0;
   left: 0;
-  padding: 0 15px 15px;
+  top: auto;
+  padding: 15px;
+  margin: auto;
   position: absolute;
   width: 100%;
+  -webkit-transition-property: top, bottom;
+  -webkit-transition-duration: 2s;
+}
+
+.text-on-image:hover .text-on-image-text {
+  top: 0;
+  bottom: auto;
 }

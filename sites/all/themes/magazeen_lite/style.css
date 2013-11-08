@@ -2802,16 +2802,24 @@ a:active.more-button {
   text-shadow: 0 2px 6px rgba(48, 48, 48, 0.7);
   background-position: -355px -250px !important; }
 
-.text-on-image-text {
+.text-on-image .text-on-image-text {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   color: white;
   bottom: 0;
   left: 0;
-  padding: 0 15px 15px;
+  top: auto;
+  padding: 15px;
+  margin: auto;
   position: absolute;
-  width: 100%; }
+  width: 100%;
+  -webkit-transition-property: top, bottom;
+  -webkit-transition-duration: 2s; }
+
+.text-on-image:hover .text-on-image-text {
+  top: 0;
+  bottom: auto; }
 
 .views-table tbody td:first-child {
   border-top: 1px solid #d0d0d0; }
