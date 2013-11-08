@@ -122,18 +122,14 @@ $spacer: 20px;
 .text-on-image .text-on-image-text {
   @include border-box;
   color: white;
-  bottom: 0;
-  left: 0;
-  top: auto;
   padding: 15px;
-  margin: auto;
   position: absolute;
+  bottom: 0px;
   width: 100%;
-  -webkit-transition-property: top, bottom;
-  -webkit-transition-duration: 2s;
+  -webkit-transition: opacity 0.5s, bottom 0.5s;
 }
 
 .text-on-image:hover .text-on-image-text {
-  top: 0;
-  bottom: auto;
+  opacity: 0;
+  bottom: 360px; 
 }
