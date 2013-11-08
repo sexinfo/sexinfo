@@ -2813,7 +2813,11 @@ a:active.more-button {
   width: 100%;
   -webkit-transition: opacity 0.5s, bottom 0.5s; }
 
-.text-on-image:hover .text-on-image-text {
+.topic-quarter .text-on-image:hover .text-on-image-text {
+  opacity: 0;
+  bottom: 170px; }
+
+.topic-half .text-on-image:hover .text-on-image-text {
   opacity: 0;
   bottom: 360px; }
 
