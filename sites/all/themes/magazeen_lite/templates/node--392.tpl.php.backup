@@ -17,6 +17,17 @@
       <div class="topic-half">
           <div class="text-on-image" style="background: url('<?php echo $imgBoat ?>') no-repeat">
               <div class="text-on-image-text">Basics of Sexuality</div>
+              <ul class="text-on-image-articles">
+                <li class="text-on-image-article">alsdkjf9032asdfsadfasdfas dfasd fasd asdf ads au 0qfu3 okjdsl fa 1</li>
+                <li class="text-on-image-article">alsdkjf9dsf ads fs adfasd fsaf 032u 0qfu3 okjdsl fa 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+              </ul>
             </div>
       </div>
     </div>
@@ -25,11 +36,29 @@
       <div class="topic-quarter">
             <div class="text-on-image" style="background: url('<?php echo $imgDrops ?>') no-repeat">
               <div class="text-on-image-text">Anatomy</div>
+              <ul class="text-on-image-articles">
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+              </ul>
             </div>
       </div>
       <div class="topic-quarter">
             <div class="text-on-image" style="background: url('<?php echo $imgForest ?>') no-repeat">
               <div class="text-on-image-text">Sexual Activity</div>
+              <ul class="text-on-image-articles">
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+              </ul>
             </div>
       </div>
     </div>
@@ -44,6 +73,24 @@
       <div class="topic-half">
             <div class="text-on-image" style="background: url('<?php echo $imgBench ?>') no-repeat">
               <div class="text-on-image-text">Pregnancy</div>
+              <ul class="text-on-image-articles">
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+              </ul>
             </div>
       </div>
     </div>
@@ -52,6 +99,24 @@
       <div class="topic-half">
             <div class="text-on-image" style="background: url('<?php echo $imgBridge ?>') no-repeat">
               <div class="text-on-image-text">Contraception</div>
+              <ul class="text-on-image-articles">
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+              </ul>
             </div>
       </div>
     </div>
@@ -66,11 +131,29 @@
       <div class="topic-quarter">
             <div class="text-on-image" style="background: url('<?php echo $imgHouse ?>') no-repeat">
               <div class="text-on-image-text">Abortion</div>
+              <ul class="text-on-image-articles">
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+              </ul>
             </div>
       </div>
       <div class="topic-quarter">
             <div class="text-on-image" style="background: url('<?php echo $imgDrops ?>') no-repeat">
               <div class="text-on-image-text">STI's</div>
+              <ul class="text-on-image-articles">
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+              </ul>
             </div>
       </div>
     </div>
@@ -79,6 +162,24 @@
       <div class="topic-half">
             <div class="text-on-image" style="background: url('<?php echo $imgSpace ?>') no-repeat">
               <div class="text-on-image-text">Health</div>
+              <ul class="text-on-image-articles">
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article">Article 1</li>
+              </ul>
             </div>
       </div>
     </div>

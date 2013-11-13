@@ -128,7 +128,7 @@ $quarter-height: 170px;
   position: absolute;
   bottom: 0px;
   width: 100%;
-  -webkit-transition: opacity 0.5s, bottom 0.5s;
+  transition: opacity 1s, bottom 1s;
 }
 
 .topic-quarter .text-on-image:hover .text-on-image-text {
@@ -138,4 +138,34 @@ $quarter-height: 170px;
 .topic-half .text-on-image:hover .text-on-image-text {
   opacity: 0;
   bottom: $half-height; 
+}
+
+.text-on-image .text-on-image-articles {
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  transition: opacity 1s ease-in, top 1s;
+  list-style: none;
+  padding: 15px;
+  margin: 0px;
+}
+
+.topic-half .text-on-image .text-on-image-articles {
+  top: $half-height;
+}
+
+.topic-quarter .text-on-image .text-on-image-articles {
+  top: $quarter-height;
+}
+
+.text-on-image:hover .text-on-image-articles {
+  opacity: 1;
+  top: 0px;
+}
+
+.text-on-image-article {
+  padding: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow:hidden;
 }
