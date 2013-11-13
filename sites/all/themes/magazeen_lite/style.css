@@ -2730,9 +2730,7 @@ a:active.more-button {
   margin-right: 5px; }
 
 .topics-container {
-  *zoom: 1;
-  border: 1px solid #ccc;
-  background-color: white; }
+  *zoom: 1; }
   .topics-container:before, .topics-container:after {
     display: table;
     content: ""; }
@@ -2755,8 +2753,9 @@ a:active.more-button {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   *zoom: 1;
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  margin: 16px;
   padding: 10px; }
   .parent-topic:before, .parent-topic:after {
     display: table;

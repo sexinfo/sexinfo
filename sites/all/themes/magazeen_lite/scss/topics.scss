@@ -52,8 +52,6 @@ $spacer: 20px;
 
 .topics-container {
   @include clearfix;
-  border: 1px solid #ccc;
-  background-color: white;
 }
 
 .grid-left,
@@ -68,8 +66,9 @@ $spacer: 20px;
 .parent-topic {
   @include border-box;
   @include clearfix;
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  margin: 16px 0px;
   padding: 10px;
 
   &:last-child {
