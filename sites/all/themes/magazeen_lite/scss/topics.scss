@@ -68,7 +68,7 @@ $spacer: 20px;
   @include clearfix;
   border: 1px solid #ccc;
   background-color: white;
-  margin: 16px 0px;
+  margin: 48px 0px;
   padding: 10px;
 
   &:last-child {
@@ -163,7 +163,8 @@ $quarter-height: 170px;
 }
 
 .text-on-image-article {
-  padding: 8px;
+  font-size: 0.75em;
+  line-height: normal;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow:hidden;

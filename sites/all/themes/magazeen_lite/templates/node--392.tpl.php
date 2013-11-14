@@ -1,4 +1,4 @@
-<div class="topics-container">
+	<div class="topics-container">
 
   <?php
     # TODO: these are temporary demo placeholders
@@ -12,21 +12,24 @@
   ?>
 
   <div class="parent-topic">
-
+    <h2>Basics of Sexuality</h2>
     <div class="grid-left">
-      <div class="topic-half">
-          <div class="text-on-image" style="background: url('<?php echo $imgBoat ?>') no-repeat">
-              <div class="text-on-image-text">Basics of Sexuality</div>
+      <div class="topic-quarter">
+          <div class="text-on-image" style="background: url('<?php echo $imgBench ?>') no-repeat">
+              <div class="text-on-image-text">An Overview of Sexuality</div>
               <ul class="text-on-image-articles">
-                <li class="text-on-image-article">alsdkjf9032asdfsadfasdfas dfasd fasd asdf ads au 0qfu3 okjdsl fa 1</li>
-                <li class="text-on-image-article">alsdkjf9dsf ads fs adfasd fsaf 032u 0qfu3 okjdsl fa 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article"><a href="#">An Overview of Sexuality</a></li>
+              </ul>
+            </div>
+      </div>
+      <div class="topic-quarter">
+          <div class="text-on-image" style="background: url('<?php echo $imgBoat ?>') no-repeat">
+              <div class="text-on-image-text">Puberty</div>
+              <ul class="text-on-image-articles">
+                <li class="text-on-image-article"><a href="#">Male Puberty</a></li>
+                <li class="text-on-image-article"><a href="#">Nocturnal Orgasms and Emissions</a></li>
+                <li class="text-on-image-article"><a href="#">Female Puberty</a></li>
+                <li class="text-on-image-article"><a href="#">Getting Your Period</a></li>
               </ul>
             </div>
       </div>
@@ -35,15 +38,9 @@
     <div class="grid-right">
       <div class="topic-quarter">
             <div class="text-on-image" style="background: url('<?php echo $imgDrops ?>') no-repeat">
-              <div class="text-on-image-text">Anatomy</div>
+              <div class="text-on-image-text">Aging and the Sexual Response</div>
               <ul class="text-on-image-articles">
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article"><a href="#">Aging and the Sexual Response</a></li>
               </ul>
             </div>
       </div>
@@ -51,13 +48,7 @@
             <div class="text-on-image" style="background: url('<?php echo $imgForest ?>') no-repeat">
               <div class="text-on-image-text">Sexual Activity</div>
               <ul class="text-on-image-articles">
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article"><a href="#">Sex Education within Schools</a></li>
               </ul>
             </div>
       </div>
@@ -68,54 +59,52 @@
 
 
   <div class="parent-topic">
-
+    <h2>Anatomy</h2>
     <div class="grid-left">
-      <div class="topic-half">
+      <div class="topic-quarter">
             <div class="text-on-image" style="background: url('<?php echo $imgBench ?>') no-repeat">
-              <div class="text-on-image-text">Pregnancy</div>
+              <div class="text-on-image-text">Male Reproductive System</div>
               <ul class="text-on-image-articles">
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article"><a href="#">Overview of the Male Reproductive System</a></li>
+                <li class="text-on-image-article"><a href="#">The Penis</a></li>
+                <li class="text-on-image-article"><a href="#">The Testes</a></li>
+                <li class="text-on-image-article"><a href="#">The Prostate Gland</a></li>
+              </ul>
+            </div>
+      </div>
+      <div class="topic-quarter">
+            <div class="text-on-image" style="background: url('<?php echo $imgBench ?>') no-repeat">
+              <div class="text-on-image-text">Female Reproductive System</div>
+              <ul class="text-on-image-articles">
+                <li class="text-on-image-article"><a href="#">Overview of the Female Reproductive System</a></li>
+                <li class="text-on-image-article"><a href="#">Egg Facts</a></li>
+                <li class="text-on-image-article"><a href="#">The Breasts</a></li>
+                <li class="text-on-image-article"><a href="#">The G-Spot</a></li>
+                <li class="text-on-image-article"><a href="#">The Clitoris</a></li>
+                <li class="text-on-image-article"><a href="#">The Hymen</a></li>
+                <li class="text-on-image-article"><a href="#">The Menstrual Cycle</a></li>
               </ul>
             </div>
       </div>
     </div>
 
     <div class="grid-right">
-      <div class="topic-half">
+      <div class="topic-quarter">
             <div class="text-on-image" style="background: url('<?php echo $imgBridge ?>') no-repeat">
-              <div class="text-on-image-text">Contraception</div>
+              <div class="text-on-image-text">Sexual Response</div>
               <ul class="text-on-image-articles">
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article"><a href="#">The Sexual Response Cycle</a></li>
+                <li class="text-on-image-article"><a href="#">Epididymal Hypertension (Blue Balls)</a></li>
+                <li class="text-on-image-article"><a href="#">Pelvic Congestion</a></li>
+              </ul>
+            </div>
+      </div>
+      <div class="topic-quarter">
+            <div class="text-on-image" style="background: url('<?php echo $imgBridge ?>') no-repeat">
+              <div class="text-on-image-text">Sex Determination</div>
+              <ul class="text-on-image-articles">
+                <li class="text-on-image-article"><a href="#">Sex Determination and Differentiation</a></li>
+                <li class="text-on-image-article"><a href="#">Intersex</a></li>
               </ul>
             </div>
       </div>
@@ -126,33 +115,43 @@
 
 
   <div class="parent-topic">
-
+    <h2>Sexual Activity</h2>
     <div class="grid-left">
       <div class="topic-quarter">
             <div class="text-on-image" style="background: url('<?php echo $imgHouse ?>') no-repeat">
-              <div class="text-on-image-text">Abortion</div>
+              <div class="text-on-image-text">Masturbation</div>
               <ul class="text-on-image-articles">
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article"><a href="#">Female Masturbation</a></li>
+                <li class="text-on-image-article"><a href="#">Male Masturbation</a></li>
+                <li class="text-on-image-article"><a href="#">Fantaasy and Erogenous Zones</a></li>
+                <li class="text-on-image-article"><a href="#">A Guide to Sex Toys</a></li>
               </ul>
             </div>
       </div>
       <div class="topic-quarter">
             <div class="text-on-image" style="background: url('<?php echo $imgDrops ?>') no-repeat">
-              <div class="text-on-image-text">STI's</div>
+              <div class="text-on-image-text">Sex with Others</div>
               <ul class="text-on-image-articles">
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article"><a href="#">Manual Stimulation</a></li>
+                <li class="text-on-image-article"><a href="#">Penile/Vaginal Sex</a></li>
+                <li class="text-on-image-article"><a href="#">Article 1</a></li>
+                <li class="text-on-image-article"><a href="#">Article 1</a></li>
+                <li class="text-on-image-article"><a href="#">Article 1</a></li>
+                <li class="text-on-image-article"><a href="#">Article 1</a></li>
+                <li class="text-on-image-article"><a href="#">Manual Stimulation</a></li>
+                <li class="text-on-image-article"><a href="#">Penile/ Vaginal Sex (Intercourse)</a></li>
+                <li class="text-on-image-article"><a href="#">Oral Sex</a></li>
+                <li class="text-on-image-article"><a href="#">Deep-Throating During Oral Sex</a></li>
+                <li class="text-on-image-article"><a href="#">Using Barriers During Oral Sex</a></li>
+                <li class="text-on-image-article"><a href="#">Dental Dams</a></li>
+                <li class="text-on-image-article"><a href="#">Swallowing Your Partner’s Ejaculation</a></li>
+                <li class="text-on-image-article"><a href="#">Dry Sex</a></li>
+                <li class="text-on-image-article"><a href="#">Anal Sex</a></li>
+                <li class="text-on-image-article"><a href="#">Group Sex</a></li>
+                <li class="text-on-image-article"><a href="#">Swinging</a></li>
+                <li class="text-on-image-article"><a href="#">Sexual Positions for Overweight Individuals and Pregnant Couples</a></li>
+                <li class="text-on-image-article"><a href="#">Sex on Your Period</a></li>
+                <li class="text-on-image-article"><a href="#">Queefing Demystified</a></li>
               </ul>
             </div>
       </div>
@@ -161,24 +160,22 @@
     <div class="grid-right">
       <div class="topic-half">
             <div class="text-on-image" style="background: url('<?php echo $imgSpace ?>') no-repeat">
-              <div class="text-on-image-text">Health</div>
+              <div class="text-on-image-text">Sex with Others</div>
               <ul class="text-on-image-articles">
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
-                <li class="text-on-image-article">Article 1</li>
+                <li class="text-on-image-article"><a href="#">Manual Stimulation</a></li>
+                <li class="text-on-image-article"><a href="#">Penile/Vaginal Sex (Intercourse)</a></li>
+                <li class="text-on-image-article"><a href="#">Oral Sex</a></li>
+                <li class="text-on-image-article"><a href="#">Deep-Throating During Oral Sex</a></li>
+                <li class="text-on-image-article"><a href="#">Using Barriers During Oral Sex</a></li>
+                <li class="text-on-image-article"><a href="#">Dental Dams</a></li>
+                <li class="text-on-image-article"><a href="#">Swallowing Your Partner's Ejaculation</a></li>
+                <li class="text-on-image-article"><a href="#">Dry Sex</a></li>
+                <li class="text-on-image-article"><a href="#">Anal Sex</a></li>
+                <li class="text-on-image-article"><a href="#">Group Sex</a></li>
+                <li class="text-on-image-article"><a href="#">Swinging</a></li>
+                <li class="text-on-image-article"><a href="#">Sexual Positions for Overweight Individuals and Pregnant Couples</a></li>
+                <li class="text-on-image-article"><a href="#">Sex on Your Period</a></li>
+                <li class="text-on-image-article"><a href="#">Queefing Demystified</a></li>
               </ul>
             </div>
       </div>
