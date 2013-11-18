@@ -169,3 +169,14 @@ $quarter-height: 170px;
   white-space: nowrap;
   overflow:hidden;
 }
+
+.text-on-image-tint {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 1s;
+}
+
+.text-on-image-tint:hover {
+  background-color: rgba(0, 0, 0, 0.75);
+}
