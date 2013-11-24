@@ -2,6 +2,11 @@
 # Exit status codes:
 #   1 = Login failure (username password incorrect)
 
+errorColor="\e[0;31m"
+noColor="\e[0m"
+infoColor="\e[0;36m"
+successColor="\e[0;32m"
+
 username=$1
 password=$2
 
@@ -21,15 +26,18 @@ cookies="cookies.txt"
 # Execute a query to phpmyadmin and store the response/cookies
 
 # Authenticate
-echo -e  "\n\nAuthenticating with $username and $password"
+echo -e "${infoColor}Authenticating with $username and ${password}${noColor}"
 dataString="pma_username=$username&pma_password=$password&server=1&lang=en-iso-8859-1&convcharset=iso-8859-1"
 curl --silent -c "$cookies" -D - -L "https://secure.lsit.ucsb.edu/phpmyadmin/" --data "$dataString" > output.txt
 loginResponse=$(cat output.txt)
 
 # Check if user is authenticated.  If not quit with error
-if [[ "$loginResponse" == *"<label for=\"input_username\">Username:</label>"* ]]; then
-  echo "Redirected to login page. Username or password invalid?";
+if [[ "$loginResponse" == *"<label for=\"input_username\">Username:</label>"* ]];
+then
+  echo -e "${errorColor}Redirected to login page. Username or password invalid?${noColor}";
   exit 1;
+else
+  echo -e "${successColor}Successfully authenticated${noColor}"
 fi
 
 # Extract the token from the query response
@@ -37,7 +45,7 @@ token=$( awk -F"token=" '{print $2}' output.txt)
 token=$( echo $token | cut -d'&' -f 1)
 
 # Fetch the html showing the tables of our db
-echo -e  "\n\nDownloading tables"
+echo -e  "${infoColor}Downloading tables${noColor}"
 tableValues=$(curl --silent -b "$cookies" "https://secure.lsit.ucsb.edu/phpmyadmin/db_structure.php?db=sexweb00&token=$token")
 rm output.txt -f
 
@@ -63,17 +71,19 @@ formData="$formData$postfix"
 
 
 
-# Execute a curl request to the export api endpoint using the cookies we 
-# retrieved from the index.php request.  I've removed the cookies header, 
+# Execute a curl request to the export api endpoint using the cookies we
+# retrieved from the index.php request.  I've removed the cookies header,
 # replaced the database names with the variable, and the tokens with the variable.
 # Also, we store the downloaded file as 'file.sql' in the local dir
-echo -e  "\n\nDownloading $structureOutput"
+echo -e "${infoColor}Downloading $structureOutput${noColor}"
 rm structure.sql.gz -f
 curl -b "$cookies" "https://secure.lsit.ucsb.edu/phpmyadmin/export.php" --data "$formData&sql_structure=something" > "$structureOutput"
 
-echo -e  "\n\nDownloading $dataOutput"
+echo -e  "${infoColor}Downloading $dataOutput${noColor}"
 rm data.sql.gz -f
 curl -b "$cookies" "https://secure.lsit.ucsb.edu/phpmyadmin/export.php" --data "$formData&sql_data=something" > "$dataOutput"
 
-echo -e  "\n\nRemoving cookies"
+echo -e  "${infoColor}Removing cookies${noColor}"
 rm "$cookies" -f
+
+echo -e "${successColor}Successfully downloaded $structureOutput and $dataOutput${noColor}"
