@@ -4,7 +4,7 @@
   border-radius: 3px;
   *zoom: 1;
   background-color: #EFEFEF;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   padding: 25px 30px; }
   #user-login:before, #node-22 .node-content:before, #user-login:after, #node-22 .node-content:after {
     display: table;
@@ -22,7 +22,7 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   font-size: 1.2em;
   padding: 10px 5px;
   width: 100%; }
@@ -73,7 +73,7 @@
 / ----------------------------------------------*/
 /*  _____Header _____ */
 /* _____Content + Node_____ */
-/*
+/*!
  * Bootstrap v2.3.1
  *
  * Copyright 2012 Twitter, Inc
@@ -544,7 +544,7 @@
 
   input[type="checkbox"],
   input[type="radio"] {
-    border: 1px solid #cccccc; }
+    border: 1px solid #ccc; }
 
   .form-horizontal .control-label {
     float: none;
@@ -1470,7 +1470,7 @@ div.messages {
   margin: 1em 0;
   color: #036;
   background: #bdf;
-  border: 1px solid #aaccee; }
+  border: 1px solid #ace; }
 
 div.warning {
   color: #840;
@@ -1568,7 +1568,7 @@ h1 {
 .node-content h1 {
   margin: 10px 0;
   padding: 0;
-  font: bold 2.5em Arial, Helvetica, sans-serif;
+  font: bold 2.50em Arial, Helvetica, sans-serif;
   color: #53798b; }
 
 h1 a:link, h1 a:active, h1 a:visited {
@@ -1588,7 +1588,7 @@ h2 {
 .node-content h2, .box h2, .theme-info h2 {
   margin: 10px 0;
   padding: 0;
-  font: bold 2em Arial, Helvetica, sans-serif;
+  font: bold 2.00em Arial, Helvetica, sans-serif;
   color: #53798b; }
 
 h2.slogan {
@@ -1599,13 +1599,13 @@ h2.slogan {
 h3 {
   margin: 0;
   padding: 0;
-  font: bold 2.8em Arial, Helvetica, sans-serif;
+  font: bold 2.80em Arial, Helvetica, sans-serif;
   color: #30393d; }
 
 .node-content h3, #sidebar h3 {
   margin: 10px 0;
   padding: 0;
-  font: bold 1.5em Arial, Helvetica, sans-serif;
+  font: bold 1.50em Arial, Helvetica, sans-serif;
   color: #53798b; }
 
 h3 a:link, h3 a:active, h3 a:visited {
@@ -1917,7 +1917,7 @@ img#logo-image {
 #navigation {
   background: white url(images/navigation.gif) repeat-x bottom center;
   border-top: 2px solid #393b3b;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #FFF;
   font-size: 1.1em;
   margin: 0;
   padding: 0; }
@@ -1955,7 +1955,7 @@ img#logo-image {
   height: auto; }
   @media (max-width: 767px) {
     #navigation ul li a:link, #navigation ul li a:active, #navigation ul li a:visited {
-      border-top: 1px solid #eeeeee;
+      border-top: 1px solid #eee;
       padding: 5px;
       text-align: center; } }
 
@@ -1974,8 +1974,8 @@ img#logo-image {
   background: #171615 url(images/navigation-hover.gif) repeat-x bottom center;
   color: #f1f8ff;
   position: relative;
-  border-left: 1px solid #eeeeee;
-  border-right: 1px solid #eeeeee; }
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee; }
   @media (max-width: 767px) {
     #navigation ul.links li.active a:link, #navigation ul.links li.active a:active, #navigation ul.links li.active a:visited {
       padding: 5px; } }
@@ -2047,7 +2047,7 @@ a.rss:link, a.rss:active, a.rss:visited, a.rss:hover {
 
 ul.pager {
   background-color: #DCE8EE;
-  border-color: #ebf2f5 #ebf2f5 #d4e0e6;
+  border-color: #EBF2F5 #EBF2F5 #D4E0E6;
   border-style: solid;
   border-width: 1px;
   font-family: Georgia,'Times New Roman',Times,serif;
@@ -2079,7 +2079,7 @@ ul.pager {
   display: block;
   margin: 0 auto 10px;
   padding: 3px;
-  border: 1px solid #e8e8e8; }
+  border: 1px solid #E8E8E8; }
 
 .breadcrumb {
   font: 1.2em Verdana, Arial, Helvetica, sans-serif; }
@@ -2087,7 +2087,7 @@ ul.pager {
 .node-meta {
   margin: 0 0 23px 0;
   padding: 0;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #FFF;
   position: relative; }
 
 .node-info {
@@ -2103,7 +2103,7 @@ ul.pager {
 .node-content,
 .page-content,
 .comment-content {
-  border: 1px solid white;
+  border: 1px solid #FFF;
   border-bottom: 1px solid #e8ebec;
   margin: 0;
   padding: 22px 22px 11px;
@@ -2130,7 +2130,7 @@ ul.pager {
 /* --------------- */
 .node-footer {
   background: #FCFDFE;
-  border-top: 1px solid #eeeeee;
+  border-top: 1px solid #eee;
   margin: 0;
   padding: 15px;
   position: relative;
@@ -2209,8 +2209,8 @@ ul.pager {
 
 #snavigation {
   background-color: #171615;
-  border-top: 1px solid #1e1d1d;
-  border-bottom: 1px solid #1e1d1d;
+  border-top: 1px solid #1E1D1D;
+  border-bottom: 1px solid #1E1D1D;
   clear: both;
   padding: 10px 0; }
   #snavigation li a.active {
@@ -2240,7 +2240,7 @@ ul.slinks {
 #sidebar .block h2 {
   background: url("images/sidebar-top.gif") no-repeat scroll center top #f5fbfe;
   color: #587682;
-  font: bold 2.25em Arial, Helvetica, sans-serif;
+  font: bold 2.25em Arial,Helvetica,sans-serif;
   height: 55px;
   margin: 0;
   padding: 28px 0 0 20px;
@@ -2274,9 +2274,9 @@ ul.slinks {
   border-radius: 3px;
   *zoom: 1;
   background-color: #f6fbff;
-  -webkit-box-shadow: inset 0px 0px 2px 1px white;
-  -moz-box-shadow: inset 0px 0px 2px 1px white;
-  box-shadow: inset 0px 0px 2px 1px white;
+  -webkit-box-shadow: inset 0px 0px 2px 1px #fff;
+  -moz-box-shadow: inset 0px 0px 2px 1px #fff;
+  box-shadow: inset 0px 0px 2px 1px #fff;
   margin-bottom: 20px;
   overflow: auto;
   padding: 10px; }
@@ -2310,7 +2310,7 @@ ul.slinks {
     clear: both; }
 .front-module .module-footer {
   background-color: #FCFDFE;
-  border-top: 1px solid #eeeeee;
+  border-top: 1px solid #eee;
   padding: 15px; }
   .front-module .module-footer a {
     font-style: italic !important;
@@ -2427,8 +2427,13 @@ ul.slinks {
 
 .carousel-thumb {
   background-color: #FFF;
-  border: 1px solid #eaf1f4;
-  float: left; }
+  border: 1px solid #EAF1F4;
+  float: left;
+  margin-right: 5px; }
+
+.carousel-link-text {
+  display: inline-block;
+  margin-top: 5px; }
 
 #htmltagcloud {
   font-size: 100%;
@@ -2439,7 +2444,7 @@ ul.slinks {
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
   border-radius: 15px;
-  border: 0 solid #dddddd;
+  border: 0 solid #ddd;
   line-height: 2.4em;
   word-spacing: normal;
   letter-spacing: normal;
@@ -2535,7 +2540,7 @@ ul.slinks {
 /* Columns */
 .column-container h2 {
   color: #587682;
-  font: bold 2em Arial, Helvetica, sans-serif;
+  font: bold 2.00em Arial, Helvetica, sans-serif;
   margin: 10px 0; }
 
 .column-container h4 {
@@ -2585,7 +2590,7 @@ ul.slinks {
   opacity: 1; }
 
 .caption-slide h3 {
-  font: bold 1.5em Arial, Helvetica, sans-serif; }
+  font: bold 1.50em Arial, Helvetica, sans-serif; }
 
 .ask-module {
   font-size: 1.1em;
@@ -2623,7 +2628,7 @@ a:active.more-button {
 
 #carousel-nav a {
   background-color: #FFF;
-  border: 1px solid white;
+  border: 1px solid #FFF;
   border-bottom-color: #f6fbff;
   color: #5E6568;
   display: block;
@@ -2634,7 +2639,7 @@ a:active.more-button {
 
 #carousel-nav a.current {
   background-color: #ebf6fa;
-  border: 1px solid #eaf1f4; }
+  border: 1px solid #EAF1F4; }
 
 /* ----------------------------------------------*/
 /* Ask the Sexperts webform
@@ -2708,12 +2713,12 @@ a:active.more-button {
       padding-left: 26px; }
 
 .taxonomy-nested {
-  border-bottom: 1px solid #dadada;
+  border-bottom: 1px solid #DADADA;
   margin: 0; }
 
 .taxonomy-item {
   background-color: white;
-  border-bottom: 1px solid #dadada;
+  border-bottom: 1px solid #DADADA;
   list-style: none;
   padding: 5px 7px; }
   .taxonomy-item:last-child {
@@ -2731,7 +2736,7 @@ a:active.more-button {
 
 .topics-container {
   *zoom: 1;
-  border: 1px solid #cccccc;
+  border: 1px solid #ccc;
   background-color: white; }
   .topics-container:before, .topics-container:after {
     display: table;
@@ -2755,7 +2760,7 @@ a:active.more-button {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   *zoom: 1;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #ccc;
   margin-bottom: 5px;
   padding: 10px; }
   .parent-topic:before, .parent-topic:after {
@@ -2769,7 +2774,7 @@ a:active.more-button {
     padding-bottom: 10px; }
   .parent-topic .topic-half, .parent-topic .topic-quarter {
     *zoom: 1;
-    border: 1px solid #cccccc; }
+    border: 1px solid #ccc; }
     .parent-topic .topic-half:before, .parent-topic .topic-half:after, .parent-topic .topic-quarter:before, .parent-topic .topic-quarter:after {
       display: table;
       content: ""; }
@@ -2820,7 +2825,7 @@ tr.odd.cat-row td,
 tr.even.cat-row td {
   border-left: 1px solid #d0d0d0;
   border-right: 1px solid #d0d0d0;
-  border-bottom: 1px solid #dadada;
+  border-bottom: 1px solid #DADADA;
   padding: 5px 7px; }
   tr.odd.cat-row td:before,
   tr.even.cat-row td:before {
@@ -2837,7 +2842,7 @@ tr.odd.cat-row td {
   padding: none;
   border: none; }
 
-/*
+/*!
  *  Font Awesome 3.0.2
  *  the iconic font designed for use with Twitter Bootstrap
  *  -------------------------------------------------------
@@ -2967,7 +2972,7 @@ ul.icons {
 
 .icon-border {
   border: solid 1px #eeeeee;
-  padding: 0.2em 0.25em 0.15em;
+  padding: .2em .25em .15em;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px; }
