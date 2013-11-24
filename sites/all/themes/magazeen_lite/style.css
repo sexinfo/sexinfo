@@ -73,7 +73,7 @@
 / ----------------------------------------------*/
 /*  _____Header _____ */
 /* _____Content + Node_____ */
-/*
+/*!
  * Bootstrap v2.3.1
  *
  * Copyright 2012 Twitter, Inc
@@ -2716,43 +2716,6 @@ tr.odd.cat-row td {
   padding: none;
   border: none; }
 
-.topic-header {
-  font-size: 2em;
-  margin-top: 15px; }
-
-.taxonomy-parent {
-  background-color: #eee;
-  border: 1px solid #d0d0d0;
-  font-size: 1.1em;
-  padding: 0; }
-  .taxonomy-parent ul {
-    background-color: white;
-    padding: 0; }
-    .taxonomy-parent ul li {
-      padding-left: 26px; }
-
-.taxonomy-nested {
-  border-bottom: 1px solid #DADADA;
-  margin: 0; }
-
-.taxonomy-item {
-  background-color: white;
-  border-bottom: 1px solid #DADADA;
-  list-style: none;
-  padding: 5px 7px; }
-  .taxonomy-item:last-child {
-    border: none; }
-  .taxonomy-item a:hover {
-    color: #000; }
-
-.item-odd {
-  background-color: #eee; }
-
-.taxonomy-nested .taxonomy-item:before {
-  content: "- ";
-  display: inline-block;
-  margin-right: 5px; }
-
 .topics-container {
   *zoom: 1; }
   .topics-container:before, .topics-container:after {
@@ -2760,6 +2723,10 @@ tr.odd.cat-row td {
     content: ""; }
   .topics-container:after {
     clear: both; }
+  .topics-container h2 {
+    color: #30393d;
+    font-size: 2em;
+    margin-bottom: 15px; }
 
 .grid-left,
 .grid-right {
@@ -2790,16 +2757,6 @@ tr.odd.cat-row td {
     border-bottom: none;
     margin-bottom: 0;
     padding-bottom: 10px; }
-  .parent-topic .topic-half, .parent-topic .topic-quarter {
-    *zoom: 1;
-    border: 1px solid #ccc; }
-    .parent-topic .topic-half:before, .parent-topic .topic-half:after, .parent-topic .topic-quarter:before, .parent-topic .topic-quarter:after {
-      display: table;
-      content: ""; }
-    .parent-topic .topic-half:after, .parent-topic .topic-quarter:after {
-      clear: both; }
-  .parent-topic .topic-quarter:first-child {
-    margin-bottom: 20px; }
   .parent-topic img {
     width: 100%; }
 
@@ -2809,11 +2766,32 @@ tr.odd.cat-row td {
   .topic-link:hover .text-on-image-text {
     text-decoration: underline; }
 
+.topic-half, .topic-quarter {
+  *zoom: 1;
+  border: 1px solid #ccc; }
+  .topic-half:before, .topic-half:after, .topic-quarter:before, .topic-quarter:after {
+    display: table;
+    content: ""; }
+  .topic-half:after, .topic-quarter:after {
+    clear: both; }
+
 .topic-half .text-on-image {
   height: 360px; }
+  .topic-half .text-on-image:hover .text-on-image-text {
+    opacity: 0;
+    bottom: 360px; }
+  .topic-half .text-on-image .text-on-image-articles {
+    top: 360px; }
 
+.topic-quarter:first-child {
+  margin-bottom: 20px; }
 .topic-quarter .text-on-image {
   height: 170px; }
+  .topic-quarter .text-on-image:hover .text-on-image-text {
+    opacity: 0;
+    bottom: 170px; }
+  .topic-quarter .text-on-image .text-on-image-articles {
+    top: 170px; }
 
 .text-on-image {
   background-position: center;
@@ -2824,62 +2802,51 @@ tr.odd.cat-row td {
   position: relative;
   text-shadow: 0 2px 6px rgba(48, 48, 48, 0.7);
   background-position: -355px -250px !important; }
-
-.text-on-image .text-on-image-text {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  color: white;
-  padding: 15px;
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
-  transition: opacity 1s, bottom 1s; }
-
-.topic-quarter .text-on-image:hover .text-on-image-text {
-  opacity: 0;
-  bottom: 170px; }
-
-.topic-half .text-on-image:hover .text-on-image-text {
-  opacity: 0;
-  bottom: 360px; }
-
-.text-on-image .text-on-image-articles {
-  opacity: 0;
-  position: absolute;
-  width: 100%;
-  transition: opacity 1s ease-in, top 1s;
-  list-style: none;
-  padding: 15px;
-  margin: 0px; }
-
-.topic-half .text-on-image .text-on-image-articles {
-  top: 360px; }
-
-.topic-quarter .text-on-image .text-on-image-articles {
-  top: 170px; }
-
-.text-on-image:hover .text-on-image-articles {
-  opacity: 1;
-  top: 0px; }
+  .text-on-image .text-on-image-text {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: white;
+    padding: 15px;
+    transition: opacity 0.4s, bottom 0.4s;
+    position: absolute;
+    bottom: 0px;
+    width: 100%; }
+  .text-on-image .text-on-image-articles {
+    list-style: none;
+    margin: 0px;
+    opacity: 0;
+    padding: 15px;
+    position: absolute;
+    transition: opacity 0.4s ease-in, top 0.4s;
+    width: 100%; }
+  .text-on-image:hover .text-on-image-articles {
+    opacity: 1;
+    top: 0px; }
 
 .text-on-image-article {
   font-size: 0.75em;
-  line-height: normal;
+  margin-bottom: 5px;
+  overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden; }
+  white-space: nowrap; }
+  .text-on-image-article:before {
+    color: #a0a0a0;
+    content: '-';
+    display: inline-block;
+    margin-right: 5px; }
+  .text-on-image-article:hover {
+    text-decoration: underline; }
 
 .text-on-image-tint {
-  width: 100%;
-  height: 100%;
   background-color: rgba(0, 0, 0, 0);
-  transition: background-color 1s; }
+  transition: background-color 0.4s;
+  height: 100%;
+  width: 100%; }
+  .text-on-image-tint:hover {
+    background-color: rgba(0, 0, 0, 0.75); }
 
-.text-on-image-tint:hover {
-  background-color: rgba(0, 0, 0, 0.75); }
-
-/*
+/*!
  *  Font Awesome 3.0.2
  *  the iconic font designed for use with Twitter Bootstrap
  *  -------------------------------------------------------
