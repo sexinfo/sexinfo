@@ -44,6 +44,11 @@ function webform_schema() {
         'not null' => TRUE,
         'default' => 1,
       ),
+	  'status_message' => array(
+		  'description' => 'Ask the Sexperts away message when box is closed.',
+          'type' => 'varchar',
+          'length' => 255,
+	  ),
       'block' => array(
          'description' => 'Boolean value for whether this form be available as a block.',
          'type' => 'int',
@@ -830,4 +835,12 @@ function webform_update_7319(&$sandbox) {
  */
 function webform_update_7320() {
   db_query("UPDATE {file_managed} SET status = 1 WHERE fid IN (SELECT fid FROM {file_usage} WHERE module = :module_name)", array(':module_name' => 'webform'));
+}
+
+/* Sex Info add message when question box should be turned off */
+function webform_update_7321() {
+    if (!db_field_exists('webform', 'status_message')) {
+      db_add_field('webform', 'status_message', array('type' => 'varchar', 'length' => 255));
+    }
+	
 }

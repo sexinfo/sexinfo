@@ -1,8 +1,6 @@
 /* ----------------------------------------------*/
 /* Ask the Sexperts webform
 /* ----------------------------------------------*/
-
-/*----- RESETS + BASIC LAYOUT -----*/
 #node-22 {
   width: 600px;
 
@@ -15,7 +13,6 @@
 
   .node-content { @extend %grey-form; }
 
-  /*----- FORM ELEMENTS-----*/
   input:not([type="submit"]),
   textarea {
     @extend %input-full;
@@ -29,24 +26,33 @@
 
   // TODO: blue doesn't look great here
   input[type="submit"] {
-    @extend %button;
-    background-color: #3099DF;
-    float: right;
-
-    &:hover { background-color: #008AB8; }
-    &:active { background-color: #007298; }
+    @extend %button-blue;
   }
 
   label { @extend %pink-label; }
 
   .faq-btn {
-    @extend %button;
-    @include border-radius;
-    @include bold(1.3em);
-    display: block;
-    margin-bottom: 20px;
-    padding: 12px 10px;
-    border-bottom: 3px solid darken($pink, 16);
+    @extend %buttonBar;
+    background: $pink;
+    background: -webkit-linear-gradient(top,  #ff5db1 0%,#ef017c 100%); /* Chrome10+,Safari5.1+ */
+    background:    -moz-linear-gradient(top,  #ff5db1 0%, #ef017c 100%); /* FF3.6+ */
+    background:     -ms-linear-gradient(top,  #ff5db1 0%,#ef017c 100%); /* IE10+ */
+    background:      -o-linear-gradient(top,  #ff5db1 0%,#ef017c 100%); /* Opera 11.10+ */
+    background:        -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff5db1), color-stop(100%,#ef017c)); /* Chrome,Safari4+ */
+    background:         linear-gradient(top bottom,  #ff5db1 0%,#ef017c 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5db1', endColorstr='#ef017c',GradientType=0 ); /* IE6-9 */
+
+    border: 2px solid darken($pink, 10);
+    margin: 5px auto 25px;
+    opacity: .9;
+    width: 75%;
+
+    &:hover { opacity: 1; }
+  }
+
+  .field-error {
+    border: 1px solid #d34332 !important;
+    color: #d34332 !important;
   }
 }
 
@@ -55,6 +61,10 @@
 .grippie {
   // Get rid of the textarea drag thing
   // display: none;
+}
+
+#webform-component-gender-field {
+  display: none;
 }
 
 

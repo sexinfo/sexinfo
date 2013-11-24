@@ -1,0 +1,51 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Installer for the SEO Compliance Checker
+ */
+
+/**
+ * Implements hook_requirements().
+ * @param string $phase
+ */
+function seo_checker_requirements($phase) {
+  $t = get_t();
+  $requirements = array();
+
+  if ($phase == 'runtime') {
+    $ok = FALSE;
+    foreach (_node_types_build()->types as $type => $name) {
+      $ok |= variable_get('seo_checker_' . $type, 0);
+    }
+    if (!$ok) {
+      $requirements['content_types']['title'] = $t('SEO Compliance Checker');
+      $requirements['content_types']['value'] = $t('No Content Types Enabled');
+      $requirements['content_types']['description'] = $t("In order for the SEO Compliance Checker to work you have to enable it for at least one content type.");
+      $requirements['content_types']['severity'] = REQUIREMENT_WARNING;
+    }
+  }
+  return $requirements;
+}
+
+/**
+ * Implements hook_install().
+ */
+function seo_checker_install() {
+  variable_set('jquery_update_compression_type', 'none');
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function seo_checker_update_7000() {
+  $allow_failures = variable_get('seo_checker_allow_failures', 1);
+  if ($allow_failures == 0) {
+    variable_set('seo_checker_allow_failures', 'no-failures');
+  }
+  elseif ($allow_failures == 1) {
+    variable_set('seo_checker_allow_failures', 'show-preview-only');
+  }
+  return array();
+}

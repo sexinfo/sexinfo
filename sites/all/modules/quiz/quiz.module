@@ -3889,7 +3889,7 @@ function quiz_get_quiz_options() {
  *   Boolean.
  */
 function _quiz_is_taking_context() {
-  return arg(2) == 'take';
+  return arg(2) == 'take' || arg(2)=='ajax-quiz';
 }
 
 /**

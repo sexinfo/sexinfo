@@ -117,3 +117,14 @@ tr.webform-add-form .tabledrag-changed {
 #webform-components tr.webform-add-form {
   background-color: inherit;
 }
+
+.webform-component-display {
+  display: inline-block;
+  width: 32%;
+  padding: 0;
+  margin: 0;
+}
+
+#webform-component-message {
+  width: 100%;
+}

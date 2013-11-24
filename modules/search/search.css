@@ -2,12 +2,24 @@
 	color: #30393d;
 }
 .search-form {
+  margin-top: 10px;
   margin-bottom: 1em;
+  text-align:center;
+  font-size:1.3em;
 }
 .search-form input {
   margin-top: 0;
   margin-bottom: 0;
+
 }
+
+.search-form input[type="text"]{
+  width: 55%;
+  padding: 6px 6px;
+  font-size: 0.9em;
+  border: 2px solid #f23183;
+}
+
 .search-results {
   list-style: none;
   padding: 0;
