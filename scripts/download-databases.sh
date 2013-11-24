@@ -1,4 +1,6 @@
-#! /bin/sh
+#! /bin/bash
+# Exit status codes:
+#   1 = Login failure (username password incorrect)
 
 username=$1
 password=$2
@@ -19,17 +21,23 @@ cookies="cookies.txt"
 # Execute a query to phpmyadmin and store the response/cookies
 
 # Authenticate
-echo "\n\nAuthenticating with $username and $password"
+echo -e  "\n\nAuthenticating with $username and $password"
 dataString="pma_username=$username&pma_password=$password&server=1&lang=en-iso-8859-1&convcharset=iso-8859-1"
 curl --silent -c "$cookies" -D - -L "https://secure.lsit.ucsb.edu/phpmyadmin/" --data "$dataString" > output.txt
 loginResponse=$(cat output.txt)
+
+# Check if user is authenticated.  If not quit with error
+if [[ "$loginResponse" == *"<label for=\"input_username\">Username:</label>"* ]]; then
+  echo "Redirected to login page. Username or password invalid?";
+  exit 1;
+fi
 
 # Extract the token from the query response
 token=$( awk -F"token=" '{print $2}' output.txt)
 token=$( echo $token | cut -d'&' -f 1)
 
 # Fetch the html showing the tables of our db
-echo "\n\nDownloading tables"
+echo -e  "\n\nDownloading tables"
 tableValues=$(curl --silent -b "$cookies" "https://secure.lsit.ucsb.edu/phpmyadmin/db_structure.php?db=sexweb00&token=$token")
 rm output.txt -f
 
@@ -59,13 +67,13 @@ formData="$formData$postfix"
 # retrieved from the index.php request.  I've removed the cookies header, 
 # replaced the database names with the variable, and the tokens with the variable.
 # Also, we store the downloaded file as 'file.sql' in the local dir
-echo "\n\nDownloading $structureOutput"
+echo -e  "\n\nDownloading $structureOutput"
 rm structure.sql.gz -f
 curl -b "$cookies" "https://secure.lsit.ucsb.edu/phpmyadmin/export.php" --data "$formData&sql_structure=something" > "$structureOutput"
 
-echo "\n\nDownloading $dataOutput"
+echo -e  "\n\nDownloading $dataOutput"
 rm data.sql.gz -f
 curl -b "$cookies" "https://secure.lsit.ucsb.edu/phpmyadmin/export.php" --data "$formData&sql_data=something" > "$dataOutput"
 
-echo "\n\nRemoving cookies"
+echo -e  "\n\nRemoving cookies"
 rm "$cookies" -f
