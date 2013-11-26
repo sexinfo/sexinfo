@@ -2842,6 +2842,48 @@ tr.odd.cat-row td {
   padding: none;
   border: none; }
 
+.suggestions-container {
+  border: 1px solid #ccc;
+  background-color: white;
+  position: static;
+  width: 75%;
+  margin: -35px auto 20px;
+  top: auto;
+  left: auto; }
+  @media (min-width: 1100px) {
+    .suggestions-container {
+      max-width: 350px;
+      position: absolute;
+      top: 285px;
+      left: 1050px; } }
+  .suggestions-container h2 {
+    font-size: 1.5em;
+    color: #30393d;
+    background-color: #ebebeb;
+    padding: 10px; }
+  .suggestions-container ul {
+    padding: 0px;
+    list-style: none;
+    margin: 0; }
+  .suggestions-container li {
+    border-top: 1px solid #e0e0e0;
+    padding: 8px;
+    color: #f23183; }
+    .suggestions-container li:nth-of-type(even) {
+      background-color: #f2f2f2; }
+
+#title-bar .faq-btn {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 1.3em;
+  font-weight: bold;
+  display: block;
+  color: white !important;
+  background-color: #f23183;
+  margin-bottom: 20px;
+  padding: 12px 10px; }
+
 /*!
  *  Font Awesome 3.0.2
  *  the iconic font designed for use with Twitter Bootstrap
