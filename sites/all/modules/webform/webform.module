@@ -1578,14 +1578,7 @@ function theme_webform_view_messages($variables) {
   $type = 'status';
 
   if ($closed) {
-	  // $message = $node->webform['status_message'];
-	  $message = t("Sorry the Sexperts are gone for break, we will be back to answer your questions in September! <br /> <br /> In the meantime check out our <a href='frequently-asked-questions'>Frequently Asked Questions</a>!");
-	  
-	  // if (is_null($status_message))
-// 		  $message = "TITTYSPRINKLES";
-// 	  else
-//     	  
-
+	  $message = $node->webform['status_message'];
   }
   // If open and not allowed to submit the form, give an explanation.
   elseif (array_search(TRUE, $allowed_roles) === FALSE && $user->uid != 1) {
