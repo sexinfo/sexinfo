@@ -2735,6 +2735,15 @@ tr.odd.cat-row td {
   box-sizing: border-box;
   float: left;
   width: 417px; }
+  @media (max-width: 1200px) {
+    .grid-left,
+    .grid-right {
+      float: none;
+      margin: 0 !important;
+      width: 100%; }
+      .grid-left .topic-quarter,
+      .grid-right .topic-quarter {
+        margin-bottom: 20px; } }
 
 .grid-right {
   margin-left: 20px; }

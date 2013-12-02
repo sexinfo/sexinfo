@@ -63,9 +63,18 @@ $spacer: 20px;
   @include border-box;
   float: left;
   width: 417px;
+
+  @media(max-width: 1200px) {
+    float: none;
+    margin: 0 !important;
+    width: 100%;
+
+    .topic-quarter { margin-bottom: $spacer; }
+  }
 }
 
 .grid-right { margin-left: $spacer; }
+
 
 .parent-topic {
   @include border-box;
