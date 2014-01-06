@@ -53,8 +53,9 @@ $spacer: 20px;
 
   h2 {
     color: $gray-text;
-    font-size: 2em;
-    margin-bottom: 15px;
+    font-size: 2.3em;
+    margin: 10px 0 20px;
+    text-align: center;
   }
 }
 
@@ -91,6 +92,11 @@ $spacer: 20px;
   }
 
   img { width: 100%; }
+
+  section {
+    @include clearfix;
+    margin-bottom: $spacer;
+  }
 }
 
 .topic-link {
@@ -139,16 +145,12 @@ $quarter-height: 170px;
 $transition-time: 0.4s;
 
 .text-on-image {
-  background-position: center;
   background-size: cover;
   color: white;
   font-size: 2em;
   overflow: hidden;
   position: relative;
   text-shadow: 0 2px 6px rgba(48,48,48,0.7);
-
-  // TODO: for demo
-  background-position: -355px -250px !important;
 
   .text-on-image-text {
     @include border-box;

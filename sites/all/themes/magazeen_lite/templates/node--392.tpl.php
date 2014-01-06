@@ -19,9 +19,8 @@
   // See http://php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc
   function renderTopicSection($size, $topicName) {
     $topics = $GLOBALS['topics'];
-
     $topic  = $topics[$topicName];
-    $image  = $topic['image'];
+    $image  = path_to_theme() . '/images/topics/' .  $topic['image'];
 
     // Pre-construct children list items to substitute into heredoc string
     // Ex: <li class="text-on-image-article"><a href="http://...">Sex Around The World</a></li>
@@ -55,32 +54,311 @@ HTML;
 
 <div class="topics-container">
 
-  <div class="parent-topic">
+  <div class="parent-topic" id="basics_of_sexuality">
     <h2>Basics of Sexuality</h2>
 
     <div class="grid-left">
-      <?php echo renderTopicHalf('Sex In The Life Cycle') ?>
+      <?php echo renderTopicQuarter('An Overview of Sexuality') ?>
+      <?php echo renderTopicQuarter('Puberty') ?>
     </div>
 
     <div class="grid-right">
-      <?php echo renderTopicHalf('Talking About Sex') ?>
+      <?php echo renderTopicQuarter('Aging and the Sexual Response') ?>
+      <?php echo renderTopicQuarter('Talking About Sex') ?>
     </div>
   </div><!-- .parent-topic -->
 
 
 
-  <div class="parent-topic">
+  <div class="parent-topic" id="the_body">
     <h2>The Body</h2>
 
     <div class="grid-left">
-      <?php echo renderTopicQuarter('Sex Determination') ?>
-      <?php echo renderTopicQuarter('Sexual Response') ?>
+      <?php echo renderTopicQuarter('Female Reproductive System') ?>
+      <?php echo renderTopicQuarter('Male Reproductive System') ?>
     </div>
 
     <div class="grid-right">
-      <?php echo renderTopicQuarter('Female Body') ?>
-      <?php echo renderTopicQuarter('Male Body') ?>
+      <?php echo renderTopicQuarter('Sexual Response') ?>
+      <?php echo renderTopicQuarter('Sex Determination') ?>
     </div>
   </div><!-- .parent-topic -->
+
+
+
+  <div class="parent-topic" id="sexual_activity">
+    <h2>Sexual Activity</h2>
+
+    <section>
+      <div class="grid-left">
+        <?php echo renderTopicHalf('Masturbation') ?>
+      </div>
+
+      <div class="grid-right">
+        <?php echo renderTopicQuarter('Sex With Others') ?>
+        <?php echo renderTopicQuarter('Kinky Sex and Paraphilia') ?>
+      </div>
+    </section>
+
+    <section>
+      <div class="grid-left">
+        <?php echo renderTopicHalf('Spice Up Your Sex Life') ?>
+      </div>
+
+      <div class="grid-right">
+        <?php echo renderTopicHalf('Sex Under the Influence') ?>
+      </div>
+    </section>
+  </div><!-- .parent-topic -->
+
+
+
+  <div class="parent-topic" id="pregnancy">
+    <h2>Pregnancy</h2>
+
+    <section>
+      <div class="grid-left">
+        <?php echo renderTopicHalf('Getting Pregnant') ?>
+      </div>
+
+      <div class="grid-right">
+        <?php echo renderTopicHalf('During Pregnancy') ?>
+      </div>
+    </section>
+
+    <section>
+      <div class="grid-left">
+        <?php echo renderTopicQuarter('Adolescent Pregnancy') ?>
+        <?php echo renderTopicQuarter('Risks While Pregnant') ?>
+      </div>
+
+      <div class="grid-right">
+        <?php echo renderTopicHalf('After Pregnancy') ?>
+      </div>
+    </section>
+  </div><!-- .parent-topic -->
+
+
+
+  <div class="parent-topic" id="contraception">
+    <h2>Contraception</h2>
+
+    <section>
+      <div class="grid-left">
+        <?php echo renderTopicHalf('Birth Control Overview') ?>
+      </div>
+
+      <div class="grid-right">
+        <?php echo renderTopicQuarter('Barrier Methods') ?>
+        <?php echo renderTopicQuarter('Hormonal Methods') ?>
+      </div>
+    </section>
+
+    <section>
+      <div class="grid-left">
+        <?php echo renderTopicHalf('Natural Methods') ?>
+      </div>
+
+      <div class="grid-right">
+        <?php echo renderTopicHalf('Other Methods') ?>
+      </div>
+    </section>
+  </div><!-- .parent-topic -->
+
+
+
+  <div class="parent-topic" id="abortion">
+    <h2>Abortion</h2>
+
+    <div class="grid-left">
+      <?php echo renderTopicQuarter('Making the Decision') ?>
+      <?php echo renderTopicQuarter('Types of Abortion') ?>
+    </div>
+
+    <div class="grid-right">
+      <?php echo renderTopicHalf('Alternative Options') ?>
+    </div>
+  </div><!-- .parent-topic -->
+
+
+
+  <div class="parent-topic" id="sexually_transmitted_infections">
+    <h2>Sexually Transmitted Infections</h2>
+
+    <section>
+      <div class="grid-left">
+        <?php echo renderTopicHalf('STI Overview') ?>
+      </div>
+
+      <div class="grid-right">
+        <?php echo renderTopicHalf('Bacterial Infections') ?>
+      </div>
+    </section>
+
+    <section>
+      <div class="grid-left">
+        <?php echo renderTopicHalf('Parasitic Infections') ?>
+      </div>
+
+      <div class="grid-right">
+        <?php echo renderTopicHalf('Viral Infections') ?>
+      </div>
+    </section>
+
+    <section>
+      <div class="grid-left">
+        <?php echo renderTopicHalf('Dealing with STIs') ?>
+      </div>
+
+      <div class="grid-right">
+        <?php echo renderTopicHalf('Non-STIs') ?>
+      </div>
+    </section>
+  </div><!-- .parent-topic -->
+
+
+
+  <div class="parent-topic" id="health">
+    <h2>Health</h2>
+
+    <section>
+      <div class="grid-left">
+        <?php echo renderTopicHalf('General Male Health') ?>
+      </div>
+
+      <div class="grid-right">
+        <?php echo renderTopicHalf('General Female Health') ?>
+      </div>
+    </section>
+
+    <section>
+      <div class="grid-left">
+        <?php echo renderTopicHalf('Appearance/Body Image') ?>
+      </div>
+
+      <div class="grid-right">
+        <?php echo renderTopicQuarter('Fitness and Sexuality') ?>
+        <?php echo renderTopicQuarter('Medical Conditions') ?>
+      </div>
+    </section>
+
+    <section>
+      <div class="grid-left">
+        <?php echo renderTopicHalf('Cancer') ?>
+      </div>
+
+      <div class="grid-right">
+        <?php echo renderTopicHalf('Medical Procedures') ?>
+      </div>
+    </section>
+  </div><!-- .parent-topic -->
+
+
+
+  <div class="parent-topic" id="love_and_relationships">
+    <h2>Love &amp; Relationships</h2>
+
+    <div class="grid-left">
+      <?php echo renderTopicHalf('Communication') ?>
+    </div>
+
+    <div class="grid-right">
+      <?php echo renderTopicQuarter('Dating') ?>
+      <?php echo renderTopicQuarter('Love') ?>
+    </div>
+  </div><!-- .parent-topic -->
+
+
+
+  <div class="parent-topic" id="sexual_orientations">
+    <h2>Sexual Orientations</h2>
+
+    <section>
+      <div class="grid-left">
+        <?php echo renderTopicHalf('Sexual Identities') ?>
+      </div>
+
+      <div class="grid-right">
+        <?php echo renderTopicHalf('Queer Sexuality') ?>
+      </div>
+    </section>
+
+    <section>
+      <div class="grid-left">
+        <?php echo renderTopicHalf('Coming Out') ?>
+      </div>
+
+      <div class="grid-right">
+        <?php echo renderTopicHalf('Rights') ?>
+      </div>
+    </section>
+  </div><!-- .parent-topic -->
+
+
+
+  <div class="parent-topic" id="sexual_difficulties">
+    <h2>Sexual Difficulties</h2>
+
+    <div class="grid-left">
+      <?php echo renderTopicHalf('Male Difficulty') ?>
+    </div>
+
+    <div class="grid-right">
+      <?php echo renderTopicHalf('Female Difficulty') ?>
+    </div>
+  </div><!-- .parent-topic -->
+
+
+
+  <div class="parent-topic" id="sex_and_the_law">
+    <h2>Sex and the Law</h2>
+
+    <section>
+      <div class="grid-left">
+        <?php echo renderTopicHalf('Sexual Abuse in Childhood') ?>
+      </div>
+
+      <div class="grid-right">
+        <?php echo renderTopicHalf('Domestic Violence') ?>
+      </div>
+    </section>
+
+    <section>
+      <div class="grid-left">
+        <?php echo renderTopicQuarter('Sexual Assault') ?>
+        <?php echo renderTopicQuarter('Pornography') ?>
+      </div>
+
+      <div class="grid-right">
+        <?php echo renderTopicHalf('Other Non-Consensual Sexual Behaviors') ?>
+      </div>
+    </section>
+
+    <section>
+      <div class="grid-left">
+        <?php echo renderTopicHalf('Laws') ?>
+      </div>
+
+      <div class="grid-right">
+        <?php echo renderTopicHalf('Resources') ?>
+      </div>
+    </section>
+  </div><!-- .parent-topic -->
+
+
+
+  <div class="parent-topic" id="beliefs_and_sexuality">
+    <h2>Beliefs and Sexuality</h2>
+
+    <div class="grid-left">
+      <?php echo renderTopicHalf('Sex and Religion') ?>
+    </div>
+
+    <div class="grid-right">
+      <?php echo renderTopicHalf('Sex Around the World') ?>
+    </div>
+  </div><!-- .parent-topic -->
+
+
 
 </div><!-- .topics-container -->
