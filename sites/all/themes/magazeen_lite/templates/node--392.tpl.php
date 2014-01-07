@@ -150,13 +150,13 @@ HTML;
 
       <div class="grid-right">
         <?php echo renderTopicQuarter('Barrier Methods') ?>
-        <?php echo renderTopicQuarter('Hormonal Methods') ?>
+        <?php echo renderTopicQuarter('Natural Methods') ?>
       </div>
     </section>
 
     <section>
       <div class="grid-left">
-        <?php echo renderTopicHalf('Natural Methods') ?>
+        <?php echo renderTopicHalf('Hormonal Methods') ?>
       </div>
 
       <div class="grid-right">
@@ -171,12 +171,12 @@ HTML;
     <h2>Abortion</h2>
 
     <div class="grid-left">
-      <?php echo renderTopicQuarter('Making the Decision') ?>
+      <?php echo renderTopicQuarter('Alternative Options') ?>
       <?php echo renderTopicQuarter('Types of Abortion') ?>
     </div>
 
     <div class="grid-right">
-      <?php echo renderTopicHalf('Alternative Options') ?>
+      <?php echo renderTopicHalf('Making the Decision') ?>
     </div>
   </div><!-- .parent-topic -->
 
@@ -227,7 +227,7 @@ HTML;
       </div>
 
       <div class="grid-right">
-        <?php echo renderTopicHalf('General Female Health') ?>
+        <?php echo renderTopicHalf('Fitness and Sexuality') ?>
       </div>
     </section>
 
@@ -237,7 +237,7 @@ HTML;
       </div>
 
       <div class="grid-right">
-        <?php echo renderTopicQuarter('Fitness and Sexuality') ?>
+        <?php echo renderTopicQuarter('General Female Health') ?>
         <?php echo renderTopicQuarter('Medical Conditions') ?>
       </div>
     </section>
@@ -259,12 +259,12 @@ HTML;
     <h2>Love &amp; Relationships</h2>
 
     <div class="grid-left">
-      <?php echo renderTopicHalf('Communication') ?>
+      <?php echo renderTopicHalf('Love') ?>
     </div>
 
     <div class="grid-right">
       <?php echo renderTopicQuarter('Dating') ?>
-      <?php echo renderTopicQuarter('Love') ?>
+      <?php echo renderTopicQuarter('Communication') ?>
     </div>
   </div><!-- .parent-topic -->
 
