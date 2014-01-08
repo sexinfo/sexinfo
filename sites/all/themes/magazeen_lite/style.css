@@ -2777,6 +2777,9 @@ tr.odd.cat-row td {
       content: ""; }
     .parent-topic section:after {
       clear: both; }
+    @media (max-width: 767px) {
+      .parent-topic section {
+        margin-bottom: 0; } }
 
 .topic-link {
   display: block;
@@ -2792,6 +2795,9 @@ tr.odd.cat-row td {
     content: ""; }
   .topic-half:after, .topic-quarter:after {
     clear: both; }
+  @media (max-width: 767px) {
+    .topic-half, .topic-quarter {
+      margin-bottom: 20px; } }
 
 .topic-half .text-on-image {
   height: 360px; }

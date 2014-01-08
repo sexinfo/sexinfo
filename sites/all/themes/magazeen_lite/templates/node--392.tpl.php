@@ -96,7 +96,7 @@ HTML;
 
       <div class="grid-right">
         <?php echo renderTopicQuarter('Sex With Others') ?>
-        <?php echo renderTopicQuarter('Kinky Sex and Paraphilia') ?>
+        <?php echo renderTopicQuarter('Sex Under the Influence') ?>
       </div>
     </section>
 
@@ -106,7 +106,7 @@ HTML;
       </div>
 
       <div class="grid-right">
-        <?php echo renderTopicHalf('Sex Under the Influence') ?>
+        <?php echo renderTopicHalf('Kinky Sex and Paraphilia') ?>
       </div>
     </section>
   </div><!-- .parent-topic -->
@@ -149,7 +149,7 @@ HTML;
       </div>
 
       <div class="grid-right">
-        <?php echo renderTopicQuarter('Barrier Methods') ?>
+        <?php echo renderTopicQuarter('Other Methods') ?>
         <?php echo renderTopicQuarter('Natural Methods') ?>
       </div>
     </section>
@@ -160,7 +160,7 @@ HTML;
       </div>
 
       <div class="grid-right">
-        <?php echo renderTopicHalf('Other Methods') ?>
+        <?php echo renderTopicHalf('Barrier Methods') ?>
       </div>
     </section>
   </div><!-- .parent-topic -->
@@ -325,12 +325,12 @@ HTML;
 
     <section>
       <div class="grid-left">
-        <?php echo renderTopicQuarter('Sexual Assault') ?>
+        <?php echo renderTopicQuarter('Other Non-Consensual Sexual Behaviors') ?>
         <?php echo renderTopicQuarter('Pornography') ?>
       </div>
 
       <div class="grid-right">
-        <?php echo renderTopicHalf('Other Non-Consensual Sexual Behaviors') ?>
+        <?php echo renderTopicHalf('Sexual Assault') ?>
       </div>
     </section>
 

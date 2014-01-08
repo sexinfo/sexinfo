@@ -96,6 +96,8 @@ $spacer: 20px;
   section {
     @include clearfix;
     margin-bottom: $spacer;
+
+    @include mobile { margin-bottom: 0; }
   }
 }
 
@@ -112,6 +114,8 @@ $quarter-height: 170px;
 .topic-half, .topic-quarter {
   @include clearfix;
   border: 1px solid #ccc;
+
+  @include mobile { margin-bottom: $spacer; }
 }
 
 .topic-half {

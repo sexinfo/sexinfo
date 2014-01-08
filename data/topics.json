@@ -1,6 +1,6 @@
 {
   "An Overview of Sexuality": {
-    "image": "findme",
+    "image": "overview_of_sexuality.jpg",
     "children": {
       "Test": "http://www.google.com",
       "Test": "http://www.google.com"
@@ -194,7 +194,7 @@
     }
   },
   "Alternative Options": {
-    "image": "alternative_options.jpeg",
+    "image": "alternative_options.jpg",
     "children": {
       "Test": "http://www.google.com",
       "Test": "http://www.google.com"
