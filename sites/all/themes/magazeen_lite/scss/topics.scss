@@ -1,50 +1,59 @@
-// // Main category listing
+// Old topic table listings
+// ---------------------------------------
+.topic-header {
+  font-size: 2em;
+  margin-top: 15px;
+}
 
-// .topic-header {
-//   font-size: 2em;
-//   margin-top: 15px;
-// }
-//
-// .taxonomy-parent {
-//   background-color: #eee;
-//   border: 1px solid #d0d0d0;
-//   font-size: 1.1em;
-//   padding: 0;
-//
-//   ul {
-//     background-color: white;
-//     padding: 0;
-//
-//     li { padding-left: 26px; }
-//   }
-// }
-//
-// .taxonomy-nested {
-//   border-bottom: 1px solid #DADADA;
-//   margin: 0;
-// }
-//
-// .taxonomy-item {
-//   background-color: white;
-//   border-bottom: 1px solid #DADADA;
-//   list-style: none;
-//   padding: 5px 7px;
-//
-//   &:last-child { border: none; }
-//   a:hover { color: #000; }
-// }
-//
-// .item-odd { background-color: #eee; }
-//
-// .taxonomy-nested .taxonomy-item:before {
-//   // Nested sub-categories
-//   content: "- ";
-//   display: inline-block;
-//   margin-right: 5px;
-// }
+.taxonomy-parent {
+  background-color: #eee;
+  border: 1px solid #d0d0d0;
+  font-size: 1.1em;
+  padding: 0;
+
+  ul {
+    background-color: white;
+    padding: 0;
+
+    li { padding-left: 26px; }
+  }
+}
+
+.taxonomy-nested {
+  border-bottom: 1px solid #DADADA;
+  margin: 0;
+}
+
+.taxonomy-item {
+  background-color: white;
+  border-bottom: 1px solid #DADADA;
+  list-style: none;
+  padding: 5px 7px;
+
+  &:last-child { border: none; }
+  a:hover { color: #000; }
+}
+
+.item-odd { background-color: #eee; }
+
+.taxonomy-nested .taxonomy-item:before {
+  // Nested sub-categories
+  content: "- ";
+  display: inline-block;
+  margin-right: 5px;
+}
 
 
 
+
+
+
+// Topics page v2
+// ---------------------------------------
+// Huge hack to get the page full width for mobile
+.main-392 .main {
+  @include mobile { width: 100% !important; }
+}
 
 $spacer: 20px;
 

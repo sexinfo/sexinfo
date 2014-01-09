@@ -2,7 +2,8 @@
 
 <?php include 'navigation.php' ?>
 
-<div id="main" class="clearfix">
+<?php $mainClass = ($node == NULL) ? '' : 'main-'.$node->nid; ?>
+<div id="main" class="clearfix <?php echo $mainClass ?>">
   <div class="container clearfix">
     <div class="main">
       <?php if ($breadcrumb): print $breadcrumb; endif; ?>

@@ -2716,6 +2716,47 @@ tr.odd.cat-row td {
   padding: none;
   border: none; }
 
+.topic-header {
+  font-size: 2em;
+  margin-top: 15px; }
+
+.taxonomy-parent {
+  background-color: #eee;
+  border: 1px solid #d0d0d0;
+  font-size: 1.1em;
+  padding: 0; }
+  .taxonomy-parent ul {
+    background-color: white;
+    padding: 0; }
+    .taxonomy-parent ul li {
+      padding-left: 26px; }
+
+.taxonomy-nested {
+  border-bottom: 1px solid #dadada;
+  margin: 0; }
+
+.taxonomy-item {
+  background-color: white;
+  border-bottom: 1px solid #dadada;
+  list-style: none;
+  padding: 5px 7px; }
+  .taxonomy-item:last-child {
+    border: none; }
+  .taxonomy-item a:hover {
+    color: #000; }
+
+.item-odd {
+  background-color: #eee; }
+
+.taxonomy-nested .taxonomy-item:before {
+  content: "- ";
+  display: inline-block;
+  margin-right: 5px; }
+
+@media (max-width: 767px) {
+  .main-392 .main {
+    width: 100% !important; } }
+
 .topics-container {
   *zoom: 1; }
   .topics-container:before, .topics-container:after {
