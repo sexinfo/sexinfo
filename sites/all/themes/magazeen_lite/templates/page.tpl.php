@@ -2,7 +2,8 @@
 
 <?php include 'navigation.php' ?>
 
-<?php $mainClass = ($node == NULL) ? '' : 'main-'.$node->nid; ?>
+<?php $mainClass = (isset($node)) ? 'main-'.$node->nid : " "; ?>
+
 <div id="main" class="clearfix <?php echo $mainClass ?>">
   <div class="container clearfix">
     <div class="main">
