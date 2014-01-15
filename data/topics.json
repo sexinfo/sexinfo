@@ -198,36 +198,55 @@
   "Birth Control Overview": {
     "image": "birth_control_overview.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Birth Control Comparison Chart": "http://www.soc.ucsb.edu/sexinfo/article/birth-control-comparison-chart",
+      "Estrogen and Progestin Overview": "http://www.soc.ucsb.edu/sexinfo/article/estrogen-and-progestin-overview"
     }
   },
   "Barrier Methods": {
     "image": "barrier_methods.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Cervical Cap": "http://www.soc.ucsb.edu/sexinfo/article/cervical-cap",
+      "Contraceptive Sponge": "http://www.soc.ucsb.edu/sexinfo/article/contraceptive-sponge",
+      "Diaphragm": "http://www.soc.ucsb.edu/sexinfo/article/diaphragm",
+      "Female Condom": "http://www.soc.ucsb.edu/sexinfo/article/female-condom",
+      "Male Condom": "http://www.soc.ucsb.edu/sexinfo/article/male-condom"
     }
   },
   "Hormonal Methods": {
     "image": "hormonal_methods.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Birth Control Implant": "http://www.soc.ucsb.edu/sexinfo/article/birth-control-implant",
+      "Birth Control Patch": "http://www.soc.ucsb.edu/sexinfo/article/birth-control-patch",
+      "Birth Control pill Overview": "http://www.soc.ucsb.edu/sexinfo/article/birth-control-pill-overview",
+      "Birth Control Pills and Antibiotics": "http://www.soc.ucsb.edu/sexinfo/article/birth-control-pills-and-antibiotics",
+      "Birth Control Shot": "http://www.soc.ucsb.edu/sexinfo/article/birth-control-shot",
+      "Combination Pills": "http://www.soc.ucsb.edu/sexinfo/article/combination-pills",
+      "Lybrel": "http://www.soc.ucsb.edu/sexinfo/article/lybrel",
+      "Male Birth Control: Coming Soon?": "http://www.soc.ucsb.edu/sexinfo/article/male-birth-control-coming-soon",
+      "Progestin-Only Pills?": "http://www.soc.ucsb.edu/sexinfo/article/progestin-only-pills",
+      "Seasonique": "http://www.soc.ucsb.edu/sexinfo/article/seasonique",
+      "Vaginal Ring": "http://www.soc.ucsb.edu/sexinfo/article/vaginal-ring"
     }
   },
   "Natural Methods": {
     "image": "natural_methods.jpeg",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Abstinence": "http://www.soc.ucsb.edu/sexinfo/article/abstinence",
+      "Basal Body Temperature Method (BBT)": "http://www.soc.ucsb.edu/sexinfo/article/basal-body-temperature-method-bbt",
+      "Calendar Method": "http://www.soc.ucsb.edu/sexinfo/article/calendar-method",
+      "Cervical Mucus Method": "http://www.soc.ucsb.edu/sexinfo/article/cervical-mucus-method",
+      "Withdrawal": "http://www.soc.ucsb.edu/sexinfo/article/withdrawal"
     }
   },
   "Other Methods": {
     "image": "other_methods.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Copper IUD": "http://www.soc.ucsb.edu/sexinfo/article/copper-iud",
+      "Emergency Contraceptive Pills (ECPs)": "http://www.soc.ucsb.edu/sexinfo/article/emergency-contraceptive-pills-ecps-0",
+      "Intrauterine Device (IUD)": "http://www.soc.ucsb.edu/sexinfo/article/intrauterine-device-iud",
+      "Spermicides": "http://www.soc.ucsb.edu/sexinfo/article/spermicides",
+      "Tubal Ligation": "http://www.soc.ucsb.edu/sexinfo/article/tubal-ligation",
+      "Vasectomy": "http://www.soc.ucsb.edu/sexinfo/article/vasectomy"
     }
   },
 
@@ -236,22 +255,26 @@
   "Making the Decision": {
     "image": "making_the_decision.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "After an Abortion": "http://www.soc.ucsb.edu/sexinfo/article/after-abortion",
+      "Arguments For and Against Abortion": "http://www.soc.ucsb.edu/sexinfo/article/arguments-and-against-abortion",
+      "Choosing Abortion": "http://www.soc.ucsb.edu/sexinfo/article/choosing-abortion",
+      "Finding a Reputable Clinic": "http://www.soc.ucsb.edu/sexinfo/article/finding-reputable-clinic",
+      "Important Phone Numbers/Resources": "http://www.soc.ucsb.edu/sexinfo/article/important-phone-numbersresources"
     }
   },
   "Types of Abortion": {
     "image": "types_of_abortion.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Late-Term Abortions": "http://www.soc.ucsb.edu/sexinfo/article/late-term-abortions",
+      "Medically Induced Abortions": "http://www.soc.ucsb.edu/sexinfo/article/late-term-abortions",
+      "Surgical Abortions": "http://www.soc.ucsb.edu/sexinfo/article/surgical-abortions"
     }
   },
   "Alternative Options": {
     "image": "alternative_options.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Option: Adoption": "http://www.soc.ucsb.edu/sexinfo/article/option-adoption",
+      "Safe Surrender": "http://www.soc.ucsb.edu/sexinfo/article/safe-surrender"
     }
   },
 
@@ -260,43 +283,68 @@
   "STI Overview": {
     "image": "sti_overview.png",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "An Overview of STIs": "http://www.soc.ucsb.edu/sexinfo/article/overview-stis",
+      "STI Symptom Chart": "http://www.soc.ucsb.edu/sexinfo/article/sti-symptom-chart"
     }
   },
   "Bacterial Infections": {
     "image": "bacterial_infections.png",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "An Overview of Bacterial Infections": "http://www.soc.ucsb.edu/sexinfo/article/overview-bacterial-infections",
+      "Chancroid": "http://www.soc.ucsb.edu/sexinfo/article/chancroid",
+      "Chlamydia": "http://www.soc.ucsb.edu/sexinfo/article/chlamydia",
+      "Gonorrhea": "http://www.soc.ucsb.edu/sexinfo/article/gonorrhea",
+      "Nongonococcal Urethritis": "http://www.soc.ucsb.edu/sexinfo/article/nongonococcal-urethritis",
+      "Pelvic Inflammatory Disease and Trachoma": "http://www.soc.ucsb.edu/sexinfo/article/pelvic-inflammatory-disease-and-trachoma",
+      "Syphilis": "http://www.soc.ucsb.edu/sexinfo/article/syphilis",
+      "Urinary Tract Infections (UTIs)": "http://www.soc.ucsb.edu/sexinfo/article/urinary-tract-infections-utis",
+      "Vaginitis": "http://www.soc.ucsb.edu/sexinfo/article/vaginitis"
     }
   },
   "Parasitic Infections": {
     "image": "parasitic_infections.png",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "An Overview of Parasitic Infections": "http://www.soc.ucsb.edu/sexinfo/article/overview-parasitic-infections",
+      "Pubic Lice": "http://www.soc.ucsb.edu/sexinfo/article/pubic-lice",
+      "Scabies": "http://www.soc.ucsb.edu/sexinfo/article/scabies",
+      "Trichomoniasis": "http://www.soc.ucsb.edu/sexinfo/article/scabies"
     }
   },
   "Viral Infections": {
     "image": "viral_infections.png",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Anal Warts": "http://www.soc.ucsb.edu/sexinfo/article/anal-warts",
+      "Genital Warts": "http://www.soc.ucsb.edu/sexinfo/article/genital-warts",
+      "Hepatitis (A, B, and C)": "http://www.soc.ucsb.edu/sexinfo/article/hepatitis-b-and-c-0",
+      "Herpes": "http://www.soc.ucsb.edu/sexinfo/article/herpes",
+      "HIV/AIDS": "http://www.soc.ucsb.edu/sexinfo/article/hivaids",
+      "Human Papillomavirus (HPV)": "http://www.soc.ucsb.edu/sexinfo/article/human-papillomavirus-hpv",
+      "Molluscum Contagiosum": "http://www.soc.ucsb.edu/sexinfo/article/molluscum-contagiosum",
+      "Penile and Anal Cancer": "http://www.soc.ucsb.edu/sexinfo/article/penile-and-anal-cancer"
     }
   },
   "Dealing with STIs": {
     "image": "dealing_with_stis.png",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Could You Have an STI?": "http://www.soc.ucsb.edu/sexinfo/article/could-you-have-sti",
+      "Drug Treatments to Control Herpes": "http://www.soc.ucsb.edu/sexinfo/article/drug-treatments-control-herpes",
+      "Emergence of the 'Down Low'": "http://www.soc.ucsb.edu/sexinfo/article/emergence-down-low",
+      "New Developments in HIV/AIDS Prevention and Treatment": "http://www.soc.ucsb.edu/sexinfo/article/new-developments-hivaids-prevention-and-treatment",
+      "Oral Sex and STIs": "http://www.soc.ucsb.edu/sexinfo/article/oral-sex-and-stis",
+      "OraQuick: First at-home HIV Test": "http://www.soc.ucsb.edu/sexinfo/article/oraquick-first-home-hiv-test",
+      "Psychological Issues Related to Herpes": "http://www.soc.ucsb.edu/sexinfo/article/psychological-issues-related-herpes",
+      "STI Testing": "http://www.soc.ucsb.edu/sexinfo/article/sti-testing",
+      "What To Do If You Have An STI": "http://www.soc.ucsb.edu/sexinfo/article/what-do-if-you-have-sti",
+      "Who Is At Risk?": "http://www.soc.ucsb.edu/sexinfo/article/who-risk"
     }
   },
   "Non-STIs": {
     "image": "non_stis.png",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Bacterial Meningitis": "http://www.soc.ucsb.edu/sexinfo/article/bacterial-meningitis",
+      "Folliculitis": "http://www.soc.ucsb.edu/sexinfo/article/folliculitis",
+      "Pearly Penile Papules": "http://www.soc.ucsb.edu/sexinfo/article/pearly-penile-papules",
+      "Toxic Shock Syndrome": "http://www.soc.ucsb.edu/sexinfo/article/toxic-shock-syndrome"
     }
   },
 
@@ -305,34 +353,55 @@
   "General Male Health": {
     "image": "general_male_health.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Genital Self-Exam": "http://www.soc.ucsb.edu/sexinfo/article/genital-self-exam"
     }
   },
   "General Female Health": {
     "image": "general_female_health.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Annual Gynecological Exams: What to Expect": "http://www.soc.ucsb.edu/sexinfo/article/annual-gynecological-exams-what-expect",
+      "Genital Self-Exam": "http://www.soc.ucsb.edu/sexinfo/article/genital-self-exam-0",
+      "The Downside of Douching": "http://www.soc.ucsb.edu/sexinfo/article/downside-douching",
+      "The Pap Smear": "http://www.soc.ucsb.edu/sexinfo/article/pap-smear"
     }
   },
   "Appearance/Body Image": {
     "image": "appearance_body_image.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "A Guide to Washing Your Hands": "http://www.soc.ucsb.edu/sexinfo/article/guide-washing-your-hands",
+      "Body Dysmorphic Disorder (BDD)": "http://www.soc.ucsb.edu/sexinfo/article/body-dysmorphic-disorder-bdd",
+      "Body Dysmorphic Disorder (BDD) and its Effects on Gay Males": "http://www.soc.ucsb.edu/sexinfo/article/body-dysmorphic-disorder-bdd-and-its-effects-gay-males",
+      "Body Piercing": "http://www.soc.ucsb.edu/sexinfo/article/body-piercing",
+      "Importance of a Positive Self-Image": "http://www.soc.ucsb.edu/sexinfo/article/importance-positive-self-image",
+      "Improving Your Body Image": "http://www.soc.ucsb.edu/sexinfo/article/improving-your-body-image",
+      "Looking Past Body Image to Enjoy Your Sex Life": "http://www.soc.ucsb.edu/sexinfo/article/looking-past-body-image-enjoy-your-sex-life",
+      "Loving Your Breasts": "http://www.soc.ucsb.edu/sexinfo/article/loving-your-breasts",
+      "Modification of Pubic Hair": "http://www.soc.ucsb.edu/sexinfo/article/modification-pubic-hair"
     }
   },
   "Fitness and Sexuality": {
     "image": "fitness_sexuality.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "A Better Life Through Exercise": "http://www.soc.ucsb.edu/sexinfo/article/better-sex-life-through-exercise",
+      "Health, Exercise, and Gender": "http://www.soc.ucsb.edu/sexinfo/article/health-exercise-and-gender",
+      "Sensual Snacks": "http://www.soc.ucsb.edu/sexinfo/article/sensual-snacks",
+      "Sex and Athletic Performance": "http://www.soc.ucsb.edu/sexinfo/article/sex-and-athletic-performance",
+      "Tips for Eating Healthy": "http://www.soc.ucsb.edu/sexinfo/article/tips-eating-healthy"
     }
   },
   "Medical Conditions": {
     "image": "medical_conditions.jpg",
     "children": {
+      "Test": "url",
+      "Test": "url",
+      "Test": "url",
+      "Test": "url",
+      "Test": "url",
+      "Test": "url",
+      "Test": "url",
+      "Test": "url",
+      "Test": "url",
+      "Test": "url",
       "Test": "url",
       "Test": "url"
     }
@@ -341,12 +410,21 @@
     "image": "cancer.jpg",
     "children": {
       "Test": "url",
+      "Test": "url",
+      "Test": "url",
+      "Test": "url",
+      "Test": "url",
       "Test": "url"
     }
   },
   "Medical Procedures": {
     "image": "medical_procedures.jpg",
     "children": {
+      "Test": "url",
+      "Test": "url",
+      "Test": "url",
+      "Test": "url",
+      "Test": "url",
       "Test": "url",
       "Test": "url"
     }
