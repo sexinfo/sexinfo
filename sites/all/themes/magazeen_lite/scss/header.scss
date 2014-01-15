@@ -157,7 +157,7 @@ img#logo-image {
 
 #navigation ul li {
   float: left;
-  margin: 0 3px;
+  margin: 0 0px;
   overflow: visible;
   padding: 0;
 
@@ -176,7 +176,7 @@ img#logo-image {
 
 
 #navigation ul li a:link, #navigation ul li a:active, #navigation ul li a:visited {
-  margin:0; padding:13px 15px;
+  margin:0; padding:15px 15px 14px 15px;
   font:bold 1.1em Arial, Helvetica, sans-serif;
   color:#34393e;
   display:block; height:auto;
@@ -202,6 +202,8 @@ img#logo-image {
   padding:15px 15px 14px 15px;
   background:$dark-gray url(images/navigation-hover.gif) repeat-x bottom center;
   color:#f1f8ff; position:relative;
+	border-left: 1px solid #eee;
+	border-right: 1px solid #eee;
 
   @include mobile { padding: 5px; }
 }
@@ -219,3 +221,54 @@ a.rss:link, a.rss:active, a.rss:visited, a.rss:hover {
   float:right;
 }
 
+
+
+
+
+
+
+/*Topics menu*/
+#navigation ul li.menu-537 div{
+}
+
+#navigation ul {
+  @include clearfix;
+  display: block;
+  padding: 0;
+}
+
+#navigation ul li.menu-537 {
+  #topics-menu {
+    display: none;
+    @include box-shadow(0, 0, 30px, #000);
+    background: white;
+    border: 2px solid lighten($light-gray, 10);
+    position: absolute;
+    width: 510px;
+    z-index: 500;
+  }
+
+  .dropdown-half {
+    @include border-box;
+    border-right: 1px solid $border-color;
+    float: left;
+    width: 50%;
+  }
+
+  #topics-menu li {
+    border-bottom: 1px solid $border-color;
+    display: block;
+    width: 100%;
+
+    a {
+      display: block;
+      color: $gray-text;
+
+      &:hover {
+        background-color: $pink;
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
+}

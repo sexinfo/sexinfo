@@ -1,11 +1,15 @@
 // Query the search API and dispatch success/error handlers
+// The query is first spell corrected, then filtered for popular words
+// to pass to the search API
 function fetchSuggestions() {
   var input = $("#edit-submitted-message").val().split(' ');
 
-  SexInfo.filterPopularWords(input, function(words) {
-    $.get('/sexinfo/search/node/' + words.join(" OR "))
-    .success(showSuggestions)
-    .error(error);
+  SexInfo.spellCorrect(input, function(suggestion) {
+    SexInfo.filterPopularWords(suggestion, function(words) {
+      $.get('/sexinfo/search/node/' + words.join(" OR "))
+      .success(showSuggestions)
+      .error(error);
+    })
   });
 }
 
@@ -18,17 +22,22 @@ function showSuggestions(html) {
   // Bit of a hack here - clear out suggestions if we already have some,
   // else create a new div to contain them
   var $suggestions = $("#suggestions");
+
   if ($suggestions.length) {
     $suggestions.empty();
-    $suggestions.append("<h3>Suggested Articles</h3>")
+    $suggestions.append( h3("Suggested Articles") );
   } else {
-    $suggestions = $("<div id='suggestions'><h3>Suggested Articles</h3></div>")
+    $suggestions = $(
+      div("#suggestions", function() {
+        return h3("Suggested Articles")
+      })
+    );
   }
 
   // Wrap each link in a <div> and append it to our suggestions container
-  $.each($results, function(i, el) {
-    var $link      = $(el).find('h4 a'),
-        $container = $('<div>'),
+  $results.each(function() {
+    var $link      = $(this).find('h4 a'),
+        $container = $(div()),
         href = $link.attr('href');
 
     $link.attr('href', href+"?ref=ask"); // Add query param for analytics
@@ -52,7 +61,7 @@ function error() {
   console.log("An error occurred");
 }
 
-
+//bind change on select and check its value
 $(function() {
   // Wait a bit after keyup before hitting the API
   var timeout = -1;
@@ -62,4 +71,26 @@ $(function() {
     timeout = setTimeout(fetchSuggestions, 300);
   });
 
+  console.log($("#edit-submitted-gender"));
+
+  $("#edit-submitted-gender").on("change", function(){
+    console.log("gender changed");
+    if ($(this).find("option:selected").val() == "3"){ // "Other"
+      {
+        console.log("showing other!");
+      $("#webform-component-gender-field").slideDown(500);
+      }
+    }
+    else if ($(this).find("option:selected").val() != "3")
+    {
+      $("#webform-component-gender-field").slideUp(300);
+    }
+  });
 });
+
+
+
+
+  //$(this).toggleClass("#webform-component-gender-field.other");
+  //document.getElementById('#webform-component-gender-field').style.display='inline';
+//});

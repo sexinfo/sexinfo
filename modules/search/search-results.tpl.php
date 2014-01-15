@@ -33,9 +33,9 @@
   <div id="search404-result-text">
     <h3 class="pink-header" style="margin-top: 20px">Your search yielded no results.</h3>
     <div id="search-suggestions"></div>
-    <h3 class="pink-header" style="font-size: 1.2em; margin-bottom: 25px;">Try another search above or send us a question or comment.</h3>
+    <h3 class="pink-header" style="font-size: 1.3em; margin-bottom: 25px; color: #858885">Try another search above or send us a question or comment.</h3>
 </div>
 
-<center><a class="button" href="/sexinfo/ask-sexperts">Click here to send us a question or comment.</a></center>
+<center><a class="button-bar search-button" href="/sexinfo/ask-sexperts">Click here to send us a question or comment.</a></center>
 
 <?php endif; ?>

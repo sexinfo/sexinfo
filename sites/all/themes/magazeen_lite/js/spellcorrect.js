@@ -42,21 +42,25 @@ sift3Distance = function(s1, s2) {
 }
 
 
-// Build the HTML for a suggested query link
-function suggestionLink(text) {
-  return "<a href='/sexinfo/search/node/"+ encodeURI(text) +"'>"+ text +"</a>"
-}
-
-
 // Attempt to spell-correct queries in the search bar, in a lovely n^2 fashion.
 // Compares input words to popular words using the sift3Distance function,
 // and looks for close matches
-$(function() {
-  var rawInput  = $("#edit-keys").val(),
-      threshold = 3;
+//
+// rawInput - String or Array[String] consisting of input to be corrected
+// callback - Function to be invoked with corrected content
+//            (or original content if no suggestions)
+//
+// Ex:
+//
+//   SexInfo.spellCorrect("my pennis hurts", function(suggestion) {
+//     console.log(suggestion); // => "my penis hurts"
+//   });
+//
+SexInfo.spellCorrect = function(rawInput, callback) {
+  var threshold = 3;
 
   if (rawInput) {
-    var input = rawInput.split(' '),
+    var input = (typeof rawInput === 'string') ? rawInput.split(' ') : rawInput,
         anySuggestions = false,
         closestWords   = Array.prototype.slice.call(input); // Clone array
 
@@ -83,10 +87,26 @@ $(function() {
 
       if (anySuggestions) {
         var suggestion = closestWords.join(" ");
-        $("#search-suggestions").html("Did you mean: " + suggestionLink(suggestion));
+        callback(suggestion);
+      } else {
+        callback(rawInput);
       }
-
     });
   }
+}
 
+
+// Build the HTML for a suggested query link
+function suggestionLink(text) {
+  return "<a href='/sexinfo/search/node/"+ encodeURI(text) +"'>"+ text +"</a>"
+}
+
+
+$(function() {
+  var rawInput  = $("#edit-keys").val();
+
+  SexInfo.spellCorrect(rawInput, function(suggestion) {
+    if (suggestion !== rawInput)
+      $("#search-suggestions").html("Did you mean: " + suggestionLink(suggestion));
+  });
 });

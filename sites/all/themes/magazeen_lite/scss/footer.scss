@@ -52,10 +52,7 @@
   background: url("images/footer-divider.gif") repeat-y scroll left top transparent;
 }
 
-#footer .login {
-  font-size: 1.1em;
-  float: right;
-}
+
 
 #snavigation {
   background-color: $dark-gray;
@@ -66,7 +63,15 @@
 
   li a.active { color: $pink; }
 
-  p { margin-bottom: 0; }
+  p {
+    float: left;
+    margin-bottom: 0;
+  }
+
+  .login {
+    font-size: 1.1em;
+    float: right;
+  }
 }
 
 ul.slinks {

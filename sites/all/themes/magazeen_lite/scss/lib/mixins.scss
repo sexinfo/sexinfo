@@ -112,3 +112,24 @@
 
   &:active { background-color: darken($pink, 13); }
 }
+
+%buttonBar {
+  @extend %button;
+  @include border-radius;
+  @include bold(1.3em);
+  display: block;
+  color: white !important;
+  margin-bottom: 20px;
+  padding: 12px 10px;
+  border-bottom: 3px solid darken($pink, 16);
+}
+
+//Blue button
+%button-blue {
+  @extend %button;
+  background-color: #3099DF;
+  float: right;
+
+  &:hover { background-color: #008AB8; }
+  &:active { background-color: #007298; }
+}

@@ -52,7 +52,21 @@ div.messages { padding: 9px; margin: 1em 0; color: #036; background: #bdf; borde
 
 div.warning { color: #840; background: #fe6; border-color: #ed5; }
 
-div.error { color: #fff; background: #e63; border-color: #d52; }
+div.error {
+  @include border-radius(2px);
+  background-color: #DE0C00;
+  border-color: darken(#DE0C00, 2);
+  color: white;
+  font-weight: bold;
+
+  a {
+    font-weight: normal;
+    color: white;
+    text-decoration: underline;
+
+    &:hover { color: #eee; }
+  }
+}
 
 div.status { color: #360; background: #cf8; border-color: #be7; }
 
@@ -91,6 +105,24 @@ html[xmlns] .clearfix { display: block; }
 
 * html .clearfix { height: 1%; }
 
+.button-bar{
+  @extend %buttonBar;
+}
+
+.search-button{
+  padding: 6px 5px;
+  width: 50%;
+  margin-top: 50px;
+  font-size: 1.1em;
+  margin-bottom: 25px;
+}
+
+#edit-submit{
+  @extend %button-blue;
+  float: none;
+  font-size: 1em;
+  padding: 6px 15px;
+}
 
 /* Login Form
 /* -------------- */
