@@ -2,33 +2,33 @@
   "An Overview of Sexuality": {
     "image": "overview_of_sexuality.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "An Overview of Sexuality": "http://www.soc.ucsb.edu/sexinfo/article/overview-sexuality",
+      "The Benefits of Sex": "http://www.soc.ucsb.edu/sexinfo/article/benefits-sex"
     }
   },
   "Puberty": {
     "image": "puberty.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Female Puberty": "http://www.soc.ucsb.edu/sexinfo/article/female-puberty",
+      "Male Puberty": "http://www.soc.ucsb.edu/sexinfo/article/male-puberty",
+      "Nocturnal Orgasms and Emissions": "http://www.soc.ucsb.edu/sexinfo/article/nocturnal-orgasms-and-emissions",
+      "The Vulva During Puberty": "http://www.soc.ucsb.edu/sexinfo/article/vulva-during-puberty"
     }
   },
   "Aging and the Sexual Response": {
     "image": "aging_sexual_response.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Aging and the Sexual Response Cycle": "http://www.soc.ucsb.edu/sexinfo/article/aging-and-sexual-response-cycle-0",
+      "Childhood Sexuality": "http://www.soc.ucsb.edu/sexinfo/article/childhood-sexuality",
+      "Pubic Hair": "http://www.soc.ucsb.edu/sexinfo/article/pubic-hair"
     }
   },
   "Talking About Sex": {
     "image": "talking_about_sex.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Primary School Sex Education": "http://www.soc.ucsb.edu/sexinfo/article/primary-school-sex-education",
+      "Talking To Your Child About Sex": "http://www.soc.ucsb.edu/sexinfo/article/basics-sexuality-talking-about-sex-talking-your-child-about-sex-0",
+      "Talking To Your Parent About Sex": "http://www.soc.ucsb.edu/sexinfo/article/talking-your-parent-about-sex"
     }
   },
 
@@ -37,29 +37,39 @@
   "Male Reproductive System": {
     "image": "male_reproductive_system.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Overview of the Male Reproductive System": "http://www.soc.ucsb.edu/sexinfo/article/overview-male-reproductive-system",
+      "Semen": "http://www.soc.ucsb.edu/sexinfo/article/semen",
+      "Spermatogenesis": "http://www.soc.ucsb.edu/sexinfo/article/spermatogenesis",
+      "The Penis": "http://www.soc.ucsb.edu/sexinfo/article/penis-0",
+      "The Prostate Gland": "http://www.soc.ucsb.edu/sexinfo/article/prostate-gland",
+      "The Testes": "http://www.soc.ucsb.edu/sexinfo/article/testes"
     }
   },
   "Female Reproductive System": {
     "image": "female_reproductive_system.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Egg Facts": "http://www.soc.ucsb.edu/sexinfo/article/egg-facts",
+      "Menstrual Products": "http://www.soc.ucsb.edu/sexinfo/article/menstrual-products",
+      "Overview of the Female Reproductive System": "http://www.soc.ucsb.edu/sexinfo/article/overview-female-reproductive-system",
+      "The Breasts": "http://www.soc.ucsb.edu/sexinfo/article/breasts",
+      "The Clitoris": "http://www.soc.ucsb.edu/sexinfo/article/clitoris",
+      "The G Spot": "http://www.soc.ucsb.edu/sexinfo/article/g-spot",
+      "The Hymen": "http://www.soc.ucsb.edu/sexinfo/article/hymen",
+      "The Menstrual Cycle": "http://www.soc.ucsb.edu/sexinfo/article/menstrual-cycle"
     }
   },
   "Sexual Response": {
     "image": "sexual_response.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Pelvic Congestion": "http://www.soc.ucsb.edu/sexinfo/article/pelvic-congestion",
+      "The Sexual Response Cycle": "http://www.soc.ucsb.edu/sexinfo/article/sexual-response-cycle"
     }
   },
   "Sex Determination": {
     "image": "sex_determination.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Intersex": "http://www.soc.ucsb.edu/sexinfo/article/intersex",
+      "Sex Determination and Differentiation": "http://www.soc.ucsb.edu/sexinfo/article/sex-determination-and-differentiation"
     }
   },
 
@@ -68,36 +78,66 @@
   "Masturbation": {
     "image": "masturbation.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "A Guide to Sex Toys": "http://www.soc.ucsb.edu/sexinfo/article/guide-sex-toys",
+      "Fantasy and Erogenous Zones": "http://www.soc.ucsb.edu/sexinfo/article/fantasy-erogenous-zones",
+      "Female Masturbation": "http://www.soc.ucsb.edu/sexinfo/article/female-masturbation",
+      "Male Masturbation": "http://www.soc.ucsb.edu/sexinfo/article/male-masturbation"
     }
   },
   "Sex With Others": {
     "image": "sex_with_others.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Anal Sex": "http://www.soc.ucsb.edu/sexinfo/article/anal-sex",
+      "Barriers During Oral Sex: The Wise Choice": "http://www.soc.ucsb.edu/sexinfo/article/barriers-during-oral-sex-wise-choice",
+      "Deep Throating During Oral Sex": "http://www.soc.ucsb.edu/sexinfo/article/deep-throating-during-oral-sex",
+      "Dental Dams": "http://www.soc.ucsb.edu/sexinfo/article/dental-dams",
+      "Dry Sex": "http://www.soc.ucsb.edu/sexinfo/article/dry-sex",
+      "Group Sex": "http://www.soc.ucsb.edu/sexinfo/article/group-sex",
+      "Manual Stimulation": "http://www.soc.ucsb.edu/sexinfo/article/manual-stimulation",
+      "Oral Sex": "http://www.soc.ucsb.edu/sexinfo/article/oral-sex",
+      "Penile/Vaginal Sex (Intercourse)": "http://www.soc.ucsb.edu/sexinfo/article/penilevaginal-sex-intercourse",
+      "Queefing Demystified": "http://www.soc.ucsb.edu/sexinfo/article/queefing-demystified",
+      "Sex On Your Period": "http://www.soc.ucsb.edu/sexinfo/article/sex-your-period",
+      "Sexual Positions for Overweight Individuals and Pregnant Couples": "http://www.soc.ucsb.edu/sexinfo/article/sexual-positions-overweight-individuals-pregnant-couples",
+      "Swallowing Your Partner's Ejaculate": "http://www.soc.ucsb.edu/sexinfo/article/swallowing-your-partners-ejaculate",
+      "Swinging": "http://www.soc.ucsb.edu/sexinfo/article/swinging"
     }
   },
   "Kinky Sex and Paraphilia": {
     "image": "kinky_sex_paraphilia.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Autoerotic Asphyxiophilia": "http://www.soc.ucsb.edu/sexinfo/article/autoerotic-asphyxiophilia",
+      "BDSM (Bondage, Dominance, Sadomasochism)": "http://www.soc.ucsb.edu/sexinfo/article/bdsm-bondage-dominance-sadomasochism",
+      "Coprophilia": "http://www.soc.ucsb.edu/sexinfo/article/coprophilia",
+      "Fetishism": "http://www.soc.ucsb.edu/sexinfo/article/fetishism",
+      "Furry Fandom": "http://www.soc.ucsb.edu/sexinfo/article/furry-fandom",
+      "Transvestism": "http://www.soc.ucsb.edu/sexinfo/article/transvestism",
+      "Urophilia": "http://www.soc.ucsb.edu/sexinfo/article/urophilia"
     }
   },
   "Spice Up Your Sex Life": {
     "image": "spice_up_sex_life.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Aphrodisiacs": "http://www.soc.ucsb.edu/sexinfo/article/aphrodisiacs",
+      "How to Give a Massage": "http://www.soc.ucsb.edu/sexinfo/article/how-give-massage",
+      "How to Give a Sensual Massage": "http://www.soc.ucsb.edu/sexinfo/article/how-give-sensual-massage",
+      "Interview With a Sex Therapist": "http://www.soc.ucsb.edu/sexinfo/article/interview-sex-therapist",
+      "Jelqing": "http://www.soc.ucsb.edu/sexinfo/article/jelqing",
+      "Personal Lubricants": "http://www.soc.ucsb.edu/sexinfo/article/personal-lubricants",
+      "Sensate Focus": "http://www.soc.ucsb.edu/sexinfo/article/sensate-focus",
+      "Sexpert Approved Sex Positions": "http://www.soc.ucsb.edu/sexinfo/article/sexpert-approved-sex-positions",
+      "Tantric Sexuality and Kama Sutra": "http://www.soc.ucsb.edu/sexinfo/article/tantric-sexuality-and-kama-sutra"
     }
   },
   "Sex Under the Influence": {
     "image": "sex_under_the_influence.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Sex and Alcohol": "http://www.soc.ucsb.edu/sexinfo/article/sex-and-alcohol",
+      "Sex and Antidepressants": "http://www.soc.ucsb.edu/sexinfo/article/sex-and-antidepressants",
+      "Sex and Cocaine": "http://www.soc.ucsb.edu/sexinfo/article/sex-and-cocaine",
+      "Sex and Ecstasy": "http://www.soc.ucsb.edu/sexinfo/article/sex-and-ecstasy",
+      "Sex and Marijuana": "http://www.soc.ucsb.edu/sexinfo/article/sex-and-marijuana",
+      "Sex and Methamphetamine": "http://www.soc.ucsb.edu/sexinfo/article/sex-and-methamphetamine"
     }
   },
 
@@ -106,36 +146,50 @@
   "Getting Pregnant": {
     "image": "getting_pregnant.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Assisted Reproductive Technology (ART)": "http://www.soc.ucsb.edu/sexinfo/article/assisted-reproductive-technology-art/",
+      "Can I Get Her Pregnant If... (For Him)": "http://www.soc.ucsb.edu/sexinfo/article/can-i-get-her-pregnant-if-him",
+      "Can I Get Pregnant If... (For Her)": "http://www.soc.ucsb.edu/sexinfo/article/can-i-get-pregnant-if-her",
+      "Pregnancy Tests": "http://www.soc.ucsb.edu/sexinfo/article/pregnancy-tests",
+      "Pregnancy: Important Phone Numbers/Resources": "http://www.soc.ucsb.edu/sexinfo/article/pregnancy-important-phone-numbersresources",
+      "Signs and Symptoms of Pregnancy": "http://www.soc.ucsb.edu/sexinfo/article/signs-and-symptoms-pregnancy",
+      "Steps to Becoming Pregnant": "http://www.soc.ucsb.edu/sexinfo/article/steps-becoming-pregnant"
     }
   },
   "During Pregnancy": {
     "image": "during_pregnancy.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "A Man's Guide to Pregnancy": "http://www.soc.ucsb.edu/sexinfo/article/mans-guide-pregnancy",
+      "Childbirth": "http://www.soc.ucsb.edu/sexinfo/article/childbirth",
+      "My Friend is Pregnant": "http://www.soc.ucsb.edu/sexinfo/article/my-friend-pregnant",
+      "Pregnancy by Trimester": "http://www.soc.ucsb.edu/sexinfo/article/pregnancy-trimester",
+      "Prenatal Vitamins": "http://www.soc.ucsb.edu/sexinfo/article/prenatal-vitamins",
+      "Tips for a Healthy Pregnancy": "http://www.soc.ucsb.edu/sexinfo/article/tips-healthy-pregnancy"
     }
   },
   "Adolescent Pregnancy": {
     "image": "adolescent_pregnancy.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Teen Pregnancy Options": "http://www.soc.ucsb.edu/sexinfo/article/teen-pregnancy-options"
     }
   },
   "Risks While Pregnant": {
     "image": "risks_while_pregnant.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Ectopic Pregnancy": "http://www.soc.ucsb.edu/sexinfo/article/ectopic-pregnancy",
+      "Effects of Drugs Taken During Pregnancy": "http://www.soc.ucsb.edu/sexinfo/article/effects-drugs-taken-during-pregnancy",
+      "Effects of STIs on Pregnancy": "http://www.soc.ucsb.edu/sexinfo/article/effects-stis-pregnancy",
+      "Fetal Alcohol Syndrome (FAS)": "http://www.soc.ucsb.edu/sexinfo/article/fetal-alcohol-syndrome-fas",
+      "Miscarriage": "http://www.soc.ucsb.edu/sexinfo/article/miscarriage"
     }
   },
   "After Pregnancy": {
     "image": "after_pregnancy.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Breastfeeding and the Workplace": "http://www.soc.ucsb.edu/sexinfo/article/breastfeeding-and-workplace",
+      "Breastfeeding Tips": "http://www.soc.ucsb.edu/sexinfo/article/breastfeeding-tips",
+      "Breastfeeding: Benefits and Disadvantages": "http://www.soc.ucsb.edu/sexinfo/article/breastfeeding-benefits-and-disadvantages",
+      "Postpartum Depression": "http://www.soc.ucsb.edu/sexinfo/article/postpartum-depression",
+      "Sex and Intimacy After Childbirth": "http://www.soc.ucsb.edu/sexinfo/article/sex-and-intimacy-after-childbirth"
     }
   },
 
@@ -144,36 +198,36 @@
   "Birth Control Overview": {
     "image": "birth_control_overview.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Barrier Methods": {
     "image": "barrier_methods.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Hormonal Methods": {
     "image": "hormonal_methods.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Natural Methods": {
     "image": "natural_methods.jpeg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Other Methods": {
     "image": "other_methods.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
 
@@ -182,22 +236,22 @@
   "Making the Decision": {
     "image": "making_the_decision.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Types of Abortion": {
     "image": "types_of_abortion.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Alternative Options": {
     "image": "alternative_options.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
 
@@ -206,43 +260,43 @@
   "STI Overview": {
     "image": "sti_overview.png",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Bacterial Infections": {
     "image": "bacterial_infections.png",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Parasitic Infections": {
     "image": "parasitic_infections.png",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Viral Infections": {
     "image": "viral_infections.png",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Dealing with STIs": {
     "image": "dealing_with_stis.png",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Non-STIs": {
     "image": "non_stis.png",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
 
@@ -251,50 +305,50 @@
   "General Male Health": {
     "image": "general_male_health.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "General Female Health": {
     "image": "general_female_health.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Appearance/Body Image": {
     "image": "appearance_body_image.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Fitness and Sexuality": {
     "image": "fitness_sexuality.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Medical Conditions": {
     "image": "medical_conditions.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Cancer": {
     "image": "cancer.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Medical Procedures": {
     "image": "medical_procedures.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
 
@@ -303,22 +357,22 @@
   "Communication": {
     "image": "communication.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Dating": {
     "image": "dating.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Love": {
     "image": "love.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
 
@@ -327,29 +381,29 @@
   "Sexual Identities": {
     "image": "sexual_identities.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Queer Sexuality": {
     "image": "queer_sexuality.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Coming Out": {
     "image": "coming_out.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Rights": {
     "image": "rights.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
 
@@ -358,15 +412,15 @@
   "Male Difficulty": {
     "image": "male_difficulty.png",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Female Difficulty": {
     "image": "female_difficulty.png",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
 
@@ -375,50 +429,50 @@
   "Sexual Abuse in Childhood": {
     "image": "sexual_abuse_childhood.png",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Domestic Violence": {
     "image": "domestic_violence.png",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Sexual Assault": {
     "image": "sexual_assault.png",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Pornography": {
     "image": "pornography.png",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Other Non-Consensual Sexual Behaviors": {
     "image": "other_non_consensual.png",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Laws": {
     "image": "laws.png",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Resources": {
     "image": "resources.png",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
 
@@ -427,15 +481,15 @@
   "Sex and Religion": {
     "image": "sex_and_religion.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   },
   "Sex Around the World": {
     "image": "sex_around_the_world.jpg",
     "children": {
-      "Test": "http://www.google.com",
-      "Test": "http://www.google.com"
+      "Test": "url",
+      "Test": "url"
     }
   }
 
