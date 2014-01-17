@@ -392,41 +392,41 @@
   "Medical Conditions": {
     "image": "medical_conditions.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url",
-      "Test": "url",
-      "Test": "url",
-      "Test": "url",
-      "Test": "url",
-      "Test": "url",
-      "Test": "url",
-      "Test": "url",
-      "Test": "url",
-      "Test": "url",
-      "Test": "url"
+      "Effects of Spinal Cord Injuries on Sexuality": "http://www.soc.ucsb.edu/sexinfo/article/effects-spinal-cord-injuries-sexuality",
+      "Endometriosis": "http://www.soc.ucsb.edu/sexinfo/article/endometriosis",
+      "Fibrocystic Breasts": "http://www.soc.ucsb.edu/sexinfo/article/fibrocystic-breasts",
+      "Folliculitis": "http://www.soc.ucsb.edu/sexinfo/article/folliculitis-0",
+      "Hydrocele (of the Testes)": "http://www.soc.ucsb.edu/sexinfo/article/hydrocele-testes",
+      "Hypospadias (Abnormal Urethral Opening)": "http://www.soc.ucsb.edu/sexinfo/article/hypospadias-abnormal-urethral-opening",
+      "Mittelschmerz": "http://www.soc.ucsb.edu/sexinfo/article/mittelschmerz",
+      "Penile Fracture": "http://www.soc.ucsb.edu/sexinfo/article/penile-fracture",
+      "Polycystic Ovaries": "http://www.soc.ucsb.edu/sexinfo/article/polycystic-ovaries",
+      "Sex and Autism": "http://www.soc.ucsb.edu/sexinfo/article/sex-and-autism",
+      "sex and Type 1 Diabetes": "http://www.soc.ucsb.edu/sexinfo/article/sex-and-type-1-diabetes",
+      "Testicular Torsion": "http://www.soc.ucsb.edu/sexinfo/article/testicular-torsion"
     }
   },
   "Cancer": {
     "image": "cancer.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url",
-      "Test": "url",
-      "Test": "url",
-      "Test": "url",
-      "Test": "url"
+      "Breast Cancer": "http://www.soc.ucsb.edu/sexinfo/article/breast-cancer",
+      "Breast Cancer Awareness": "http://www.soc.ucsb.edu/sexinfo/article/breast-cancer-awareness",
+      "Cervical Cancer": "http://www.soc.ucsb.edu/sexinfo/article/cervical-cancer",
+      "Ovarian Cancer": "http://www.soc.ucsb.edu/sexinfo/article/ovarian-cancer",
+      "Prostate Cancer": "http://www.soc.ucsb.edu/sexinfo/article/prostate-cancer",
+      "Testicular Cancer": "http://www.soc.ucsb.edu/sexinfo/article/testicular-cancer"
     }
   },
   "Medical Procedures": {
     "image": "medical_procedures.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url",
-      "Test": "url",
-      "Test": "url",
-      "Test": "url",
-      "Test": "url",
-      "Test": "url"
+      "Breast Augmentation": "http://www.soc.ucsb.edu/sexinfo/article/health-medical-procedures-elective-breast-augmentation-0",
+      "Hysterectomy": "http://www.soc.ucsb.edu/sexinfo/article/hysterectomy",
+      "Labiaplasty": "http://www.soc.ucsb.edu/sexinfo/article/labiaplasty",
+      "Male Circumcision": "http://www.soc.ucsb.edu/sexinfo/article/labiaplasty",
+      "Mastectomy": "http://www.soc.ucsb.edu/sexinfo/article/mastectomy",
+      "Orchiectomy": "http://www.soc.ucsb.edu/sexinfo/article/orchiectomy",
+      "Vaginoplasty": "http://www.soc.ucsb.edu/sexinfo/article/health-medical-procedures-elective-vaginoplasty-0"
     }
   },
 
@@ -435,22 +435,34 @@
   "Communication": {
     "image": "communication.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Effective Communication": "http://www.soc.ucsb.edu/sexinfo/article/effective-communication",
+      "First-Time Sex Worries": "http://www.soc.ucsb.edu/sexinfo/article/first-time-sex-worries",
+      "How to Ask Your Partner to Get Tested": "http://www.soc.ucsb.edu/sexinfo/article/first-time-sex-worries",
+      "How to Have a Fair Fight": "http://www.soc.ucsb.edu/sexinfo/article/how-have-fair-fight",
+      "Negotiating Safer Sex": "http://www.soc.ucsb.edu/sexinfo/article/negotiating-safer-sex"
     }
   },
   "Dating": {
     "image": "dating.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Friends With Benefits": "http://www.soc.ucsb.edu/sexinfo/article/friends-benefits",
+      "Fun Date Ideas": "http://www.soc.ucsb.edu/sexinfo/article/fun-date-ideas",
+      "Hooking Up": "http://www.soc.ucsb.edu/sexinfo/article/hooking",
+      "Planning a Romantic Getaway": "http://www.soc.ucsb.edu/sexinfo/article/planning-romantic-getaway",
+      "The History of Dating": "http://www.soc.ucsb.edu/sexinfo/article/history-dating"
     }
   },
   "Love": {
     "image": "love.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "A Neuropsychological Perspective on Falling in Love": "http://www.soc.ucsb.edu/sexinfo/article/neuropsychological-perspective-falling-love",
+      "Break-Ups": "http://www.soc.ucsb.edu/sexinfo/article/break-ups",
+      "Cheating and Jealousy": "http://www.soc.ucsb.edu/sexinfo/article/cheating-and-jealousy",
+      "Falling in Love": "http://www.soc.ucsb.edu/sexinfo/article/falling-love",
+      "Long Distance Relationships": "http://www.soc.ucsb.edu/sexinfo/article/long-distance-relationships",
+      "Love and Attachment": "http://www.soc.ucsb.edu/sexinfo/article/love-and-attachment",
+      "Polyamory": "http://www.soc.ucsb.edu/sexinfo/article/polyamory",
+      "Staying in Love": "http://www.soc.ucsb.edu/sexinfo/article/staying-love"
     }
   },
 
@@ -459,29 +471,45 @@
   "Sexual Identities": {
     "image": "sexual_identities.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Androgyny": "http://www.soc.ucsb.edu/sexinfo/article/androgyny",
+      "Asexuality": "http://www.soc.ucsb.edu/sexinfo/article/asexuality",
+      "Kinsey Scale": "http://www.soc.ucsb.edu/sexinfo/article/kinsey-scale"
     }
   },
   "Queer Sexuality": {
     "image": "queer_sexuality.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Becoming an Ally": "http://www.soc.ucsb.edu/sexinfo/article/becoming-ally",
+      "Famous Queer Identified Figures": "http://www.soc.ucsb.edu/sexinfo/article/famous-queer-identified-figures",
+      "Homophobia": "http://www.soc.ucsb.edu/sexinfo/article/homophobia",
+      "Homosexuality and Religion": "http://www.soc.ucsb.edu/sexinfo/article/homosexuality-and-religion",
+      "Interview with a Sex Reassignment Therapist": "http://www.soc.ucsb.edu/sexinfo/article/interview-sex-reassignment-therapist",
+      "Situational Homosexuality": "http://www.soc.ucsb.edu/sexinfo/article/situational-homosexuality",
+      "Support Groups and Organizations": "http://www.soc.ucsb.edu/sexinfo/article/support-groups-and-organizations",
+      "The Tearoom Trade": "http://www.soc.ucsb.edu/sexinfo/article/tearoom-trade",
+      "Transgender": "http://www.soc.ucsb.edu/sexinfo/article/transgender",
+      "Transsexualism": "http://www.soc.ucsb.edu/sexinfo/article/transsexualism"
     }
   },
   "Coming Out": {
     "image": "coming_out.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Advice on Coming Out": "http://www.soc.ucsb.edu/sexinfo/article/advice-coming-out",
+      "Finding a Queer Partner": "http://www.soc.ucsb.edu/sexinfo/article/finding-queer-partner",
+      "Out In The Workplace": "http://www.soc.ucsb.edu/sexinfo/article/out-workplace",
+      "Personal Coming Out Stories": "http://www.soc.ucsb.edu/sexinfo/article/personal-coming-out-stories",
+      "Supporting Someone Who is Coming Out": "http://www.soc.ucsb.edu/sexinfo/article/supporting-someone-who-coming-out",
+      "The Process of Coming Out": "http://www.soc.ucsb.edu/sexinfo/article/process-coming-out"
     }
   },
   "Rights": {
     "image": "rights.jpg",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Conversion Therapy": "http://www.soc.ucsb.edu/sexinfo/article/conversion-therapy",
+      "Proposition 8": "http://www.soc.ucsb.edu/sexinfo/article/proposition-8",
+      "Rights in the LGBT Community": "http://www.soc.ucsb.edu/sexinfo/article/rights-lgbt-community",
+      "Same-Sex Marriages": "http://www.soc.ucsb.edu/sexinfo/article/same-sex-marriages",
+      "Sodomy": "http://www.soc.ucsb.edu/sexinfo/article/sodomy-0"
     }
   },
 
@@ -490,15 +518,26 @@
   "Male Difficulty": {
     "image": "male_difficulty.png",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Benign Sexual Headaches": "http://www.soc.ucsb.edu/sexinfo/article/benign-sexual-headaches",
+      "Erectile Drugs": "http://www.soc.ucsb.edu/sexinfo/article/erectile-drugs",
+      "Erectile Dysfunction: A Deeper Look": "http://www.soc.ucsb.edu/sexinfo/article/erectile-dysfunction-deeper-look",
+      "Hypersexuality": "http://www.soc.ucsb.edu/sexinfo/article/hypersexuality",
+      "Pelvic Congestion": "http://www.soc.ucsb.edu/sexinfo/article/pelvic-congestion-0",
+      "Penis Enlargement": "http://www.soc.ucsb.edu/sexinfo/article/penis-enlargement",
+      "Phimosis and Paraphimosis": "http://www.soc.ucsb.edu/sexinfo/article/phimosis-and-paraphimosis",
+      "Premature Ejaculation": "http://www.soc.ucsb.edu/sexinfo/article/premature-ejaculation",
+      "Retrograde Ejaculation": "http://www.soc.ucsb.edu/sexinfo/article/retrograde-ejaculation",
+      "What is Erectile Dysfunction?": "http://www.soc.ucsb.edu/sexinfo/article/what-erectile-dysfunction"
     }
   },
   "Female Difficulty": {
     "image": "female_difficulty.png",
     "children": {
-      "Test": "url",
-      "Test": "url"
+      "Female Orgasmic Disorder": "http://www.soc.ucsb.edu/sexinfo/article/female-orgasmic-disorder",
+      "Inadequate Lubrication": "http://www.soc.ucsb.edu/sexinfo/article/inadequate-lubrication",
+      "Low Sexual Desire": "http://www.soc.ucsb.edu/sexinfo/article/low-sexual-desire",
+      "Painful Intercourse": "http://www.soc.ucsb.edu/sexinfo/article/painful-intercourse",
+      "Vaginismus": "http://www.soc.ucsb.edu/sexinfo/article/vaginismus-0"
     }
   },
 
