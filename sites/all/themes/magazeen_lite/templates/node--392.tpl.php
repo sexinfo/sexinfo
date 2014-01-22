@@ -73,15 +73,26 @@ HTML;
   <div class="parent-topic" id="the_body">
     <h2>The Body</h2>
 
-    <div class="grid-left">
-      <?php echo renderTopicQuarter('Female Reproductive System') ?>
-      <?php echo renderTopicQuarter('Male Reproductive System') ?>
-    </div>
+    <section>
+      <div class="grid-left">
+        <?php echo renderTopicHalf('Female Reproductive System') ?>
+      </div>
 
-    <div class="grid-right">
-      <?php echo renderTopicQuarter('Sexual Response') ?>
-      <?php echo renderTopicQuarter('Sex Determination') ?>
-    </div>
+      <div class="grid-right">
+        <?php echo renderTopicHalf('Male Reproductive System') ?>
+      </div>
+    </section>
+
+
+    <section>
+      <div class="grid-left">
+        <?php echo renderTopicQuarter('Sexual Response') ?>
+      </div>
+
+      <div class="grid-right">
+        <?php echo renderTopicQuarter('Sex Determination') ?>
+      </div>
+    </section>
   </div><!-- .parent-topic -->
 
 
@@ -91,11 +102,11 @@ HTML;
 
     <section>
       <div class="grid-left">
-        <?php echo renderTopicHalf('Masturbation') ?>
+        <?php echo renderTopicHalf('Sex With Others') ?>
       </div>
 
       <div class="grid-right">
-        <?php echo renderTopicQuarter('Sex With Others') ?>
+        <?php echo renderTopicQuarter('Masturbation') ?>
         <?php echo renderTopicQuarter('Sex Under the Influence') ?>
       </div>
     </section>
@@ -223,7 +234,7 @@ HTML;
 
     <section>
       <div class="grid-left">
-        <?php echo renderTopicHalf('General Male Health') ?>
+        <?php echo renderTopicHalf('Medical Conditions') ?>
       </div>
 
       <div class="grid-right">
@@ -238,7 +249,7 @@ HTML;
 
       <div class="grid-right">
         <?php echo renderTopicQuarter('General Female Health') ?>
-        <?php echo renderTopicQuarter('Medical Conditions') ?>
+        <?php echo renderTopicQuarter('General Male Health') ?>
       </div>
     </section>
 
@@ -325,7 +336,7 @@ HTML;
 
     <section>
       <div class="grid-left">
-        <?php echo renderTopicQuarter('Other Non-Consensual Sexual Behaviors') ?>
+        <?php echo renderTopicQuarter('Resources') ?>
         <?php echo renderTopicQuarter('Pornography') ?>
       </div>
 
@@ -340,7 +351,7 @@ HTML;
       </div>
 
       <div class="grid-right">
-        <?php echo renderTopicHalf('Resources') ?>
+        <?php echo renderTopicHalf('Other Non-Consensual Sexual Behaviors') ?>
       </div>
     </section>
   </div><!-- .parent-topic -->
