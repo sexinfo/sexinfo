@@ -2903,7 +2903,8 @@ tr.odd.cat-row td {
     content: '-';
     display: inline-block;
     margin-right: 5px; }
-  .text-on-image-article:hover {
+  .text-on-image-article a:hover {
+    color: #ececec;
     text-decoration: underline; }
 
 .text-on-image-tint {
