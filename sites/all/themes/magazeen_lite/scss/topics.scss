@@ -222,3 +222,52 @@ $transition-time: 0.4s;
     background-color: rgba(0, 0, 0, 0.75);
   }
 }
+
+
+.topics-nav {
+  background-color: white;
+  border: 1px solid #ccc;
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  @media(min-width: 1100px) {
+    position: fixed;
+    right: 32px;
+    top: 234px;
+  }
+
+  .header-container {
+    border-bottom: 1px solid $border-color;
+    padding: 10px;
+  }
+
+  h4 {
+    color: lighten($gray-text, 10);
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-size: 1.9em;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  li {
+    &:nth-of-type(even) { background-color: lighten($border-color, 5); }
+
+    &:last-child a { border-bottom: 0; }
+  }
+
+  a {
+    border-bottom: 1px solid $border-color;
+    display: block;
+    color: $pink;
+    font-size: 1.2em;
+    padding: 6px 70px 6px 10px;
+
+
+    &:hover {
+      background-color: $pink;
+      color: white;
+    }
+  }
+}
