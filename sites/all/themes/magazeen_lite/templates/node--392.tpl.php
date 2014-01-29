@@ -52,8 +52,11 @@ HTML;
 
 ?>
 
-<ul id="topics-nav">
-  <h4>Explore Our Topics!</h4>
+<ul class="topics-nav">
+  <div class="header-container">
+    <h4>Explore Our Topics!</h4>
+  </div>
+
   <li><a href="#basics_of_sexuality">Basics of Sexuality</a></li>
   <li><a href="#the_body">The Body</a></li>
   <li><a href="#sexual_activity">Sexual Activity</a></li>
@@ -68,6 +71,8 @@ HTML;
   <li><a href="#sex_and_the_law">Sex and the Law</a></li>
   <li><a href="#beliefs_and_sexuality">Beliefs and Sexuality</a></li>
 </ul>
+
+
 <div class="topics-container">
 
   <div class="parent-topic" id="basics_of_sexuality">
