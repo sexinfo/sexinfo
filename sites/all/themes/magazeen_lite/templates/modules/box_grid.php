@@ -33,7 +33,7 @@
   <p>Are you an expert on masturbation, LGBTQ facts, paraphilias, or pregnancy and abortion?</p>
   <p>Quiz yourself <a href="http://www.soc.ucsb.edu/sexinfo/quizzes">here</a> to see if you really are.</p>
 
-  <a class="pink-block-btn" href="#">Take the quiz</a>
+  <a class="pink-block-btn" href="/sexinfo/quizzes">Take the quiz</a>
 </div>
 
 
