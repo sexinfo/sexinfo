@@ -105,11 +105,11 @@ html[xmlns] .clearfix { display: block; }
 
 * html .clearfix { height: 1%; }
 
-.button-bar{
+.button-bar {
   @extend %buttonBar;
 }
 
-.search-button{
+.search-button {
   padding: 6px 5px;
   width: 50%;
   margin-top: 50px;
@@ -123,6 +123,28 @@ html[xmlns] .clearfix { display: block; }
   font-size: 1em;
   padding: 6px 15px;
 }
+
+
+// TODO: this doesn't belong here
+.pink-block-btn {
+  @extend %buttonBar;
+  background: $pink;
+  background: -webkit-linear-gradient(top,  #ff5db1 0%,#ef017c 100%); /* Chrome10+,Safari5.1+ */
+  background:    -moz-linear-gradient(top,  #ff5db1 0%, #ef017c 100%); /* FF3.6+ */
+  background:     -ms-linear-gradient(top,  #ff5db1 0%,#ef017c 100%); /* IE10+ */
+  background:      -o-linear-gradient(top,  #ff5db1 0%,#ef017c 100%); /* Opera 11.10+ */
+  background:        -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff5db1), color-stop(100%,#ef017c)); /* Chrome,Safari4+ */
+  background:         linear-gradient(top bottom,  #ff5db1 0%,#ef017c 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5db1', endColorstr='#ef017c',GradientType=0 ); /* IE6-9 */
+
+  border: 1px solid darken($pink, 10);
+  margin: 5px auto 25px;
+  opacity: .9;
+  width: 75%;
+
+  &:hover { opacity: 1; }
+}
+
 
 /* Login Form
 /* -------------- */

@@ -2,6 +2,7 @@
 
 <?php include 'navigation.php' ?>
 
+
 <div class="container">
   <?php if ($breadcrumb): print $breadcrumb; endif; ?>
 
@@ -11,18 +12,16 @@
   ?>
 
   <?php print render($page['help']); ?>
-</div>
 
-
-<div class="carousel-container">
-  <?php include 'modules/carousel.php' ?>
-</div>
-
-
-<div class="container front-container">
-  <div class="row">
-    <?php include 'modules/box_grid.php' ?>
+  <div class="carousel-container">
+    <?php include 'modules/carousel.php' ?>
   </div>
+
+
+  <div class="front-container">
+      <?php include 'modules/box_grid.php' ?>
+  </div>
+
 </div>
 
 

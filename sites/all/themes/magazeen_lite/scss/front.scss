@@ -3,8 +3,9 @@
 /* ----------------------------------------------*/
 
 .front-container {
-  background: url(images/main-content.gif) no-repeat top center;
-  padding: 20px 0;
+  @include clearfix;
+  background-color: white;
+  padding: 0;
   margin-bottom: 55px;
 }
 
@@ -31,29 +32,41 @@
   a:hover { text-decoration: underline; }
 }
 
+.third {
+  float: left;
+  width: 33.33%;
+}
 
 .front-module {
-  @include mobile { margin-bottom: 15px; }
+  @include border-box;
+  border-right: 1px solid $border-color;
+  background-color: white;
+  min-height: 250px;
+  padding: 8px 15px 15px;
+  text-align: center;
 
-  .module-title {}
+  &:last-child { border-right: 0; }
 
-  .module-content {
-    @include clearfix;
-    background: #fdfefe url(images/node-box-top.gif) repeat-x top center;
-    padding: 10px;
+  h3 {
+    font-family: 'Open Sans';
+    font-size: 2.2em;
+    font-weight: 300;
+    margin-bottom: 15px;
   }
 
-  .module-footer {
-    background-color: #FCFDFE;
-    border-top: 1px solid #eee;
-    padding: 15px;
-
-    a {
-      font-style: italic !important; // wat?
-      font: bold 1.17em Georgia, "Times New Roman", Times, serif;
-      color: $pink;
-    }
+  p {
+    color: lighten($gray-text, 20);
+    font-family: 'Open Sans';
+    font-size: 1.2em;
+    margin-bottom: 10px;
   }
+
+  .pink-block-btn {
+    margin: 20px auto 0;
+  }
+
+  .module-content { border: 1px solid $border-color; }
+
 }
 
 
@@ -61,6 +74,11 @@
 .faq-image {
   overflow: hidden;
   position: relative;
+
+  .faq-image-box {
+    background-size: cover;
+    padding-bottom: 57%; // Hackety hack! Arbitrarily chosen to look good
+  }
 
   img {
     margin: 0 auto;
