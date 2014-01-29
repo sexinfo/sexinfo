@@ -175,7 +175,9 @@ img#logo-image {
 
 
 
-#navigation ul li a:link, #navigation ul li a:active, #navigation ul li a:visited {
+#navigation ul li a:link,
+#navigation ul li a:active,
+#navigation ul li a:visited {
   margin:0; padding:15px 15px 14px 15px;
   font:bold 1.1em Arial, Helvetica, sans-serif;
   color:#34393e;
@@ -197,7 +199,9 @@ img#logo-image {
   text-decoration:underline;
 }
 
-#navigation ul.links li.active a:link, #navigation ul.links li.active a:active, #navigation ul.links li.active a:visited {
+#navigation ul.links li.active > a:link,
+#navigation ul.links li.active > a:active,
+#navigation ul.links li.active > a:visited {
   /* margin:-3px 0 0 0;*/
   padding:15px 15px 14px 15px;
   background:$dark-gray url(images/navigation-hover.gif) repeat-x bottom center;

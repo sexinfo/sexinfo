@@ -1946,7 +1946,9 @@ img#logo-image {
       margin: 0;
       width: 100%; } }
 
-#navigation ul li a:link, #navigation ul li a:active, #navigation ul li a:visited {
+#navigation ul li a:link,
+#navigation ul li a:active,
+#navigation ul li a:visited {
   margin: 0;
   padding: 15px 15px 14px 15px;
   font: bold 1.1em Arial, Helvetica, sans-serif;
@@ -1954,7 +1956,9 @@ img#logo-image {
   display: block;
   height: auto; }
   @media (max-width: 767px) {
-    #navigation ul li a:link, #navigation ul li a:active, #navigation ul li a:visited {
+    #navigation ul li a:link,
+    #navigation ul li a:active,
+    #navigation ul li a:visited {
       border-top: 1px solid #eeeeee;
       padding: 5px;
       text-align: center; } }
@@ -1968,7 +1972,9 @@ img#logo-image {
   font-weight: bold;
   text-decoration: underline; }
 
-#navigation ul.links li.active a:link, #navigation ul.links li.active a:active, #navigation ul.links li.active a:visited {
+#navigation ul.links li.active > a:link,
+#navigation ul.links li.active > a:active,
+#navigation ul.links li.active > a:visited {
   /* margin:-3px 0 0 0;*/
   padding: 15px 15px 14px 15px;
   background: #171615 url(images/navigation-hover.gif) repeat-x bottom center;
@@ -1977,7 +1983,9 @@ img#logo-image {
   border-left: 1px solid #eeeeee;
   border-right: 1px solid #eeeeee; }
   @media (max-width: 767px) {
-    #navigation ul.links li.active a:link, #navigation ul.links li.active a:active, #navigation ul.links li.active a:visited {
+    #navigation ul.links li.active > a:link,
+    #navigation ul.links li.active > a:active,
+    #navigation ul.links li.active > a:visited {
       padding: 5px; } }
 
 a.rss:link, a.rss:active, a.rss:visited, a.rss:hover {
