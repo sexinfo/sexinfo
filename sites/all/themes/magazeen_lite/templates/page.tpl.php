@@ -33,4 +33,6 @@
   </div><!-- .container.clearfix -->
 </div><!-- #main.clearfix -->
 
+<!--<div class="suggestions-container"></div>-->
+
 <?php include 'footer.php' ?>

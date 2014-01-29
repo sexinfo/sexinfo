@@ -1946,7 +1946,9 @@ img#logo-image {
       margin: 0;
       width: 100%; } }
 
-#navigation ul li a:link, #navigation ul li a:active, #navigation ul li a:visited {
+#navigation ul li a:link,
+#navigation ul li a:active,
+#navigation ul li a:visited {
   margin: 0;
   padding: 15px 15px 14px 15px;
   font: bold 1.1em Arial, Helvetica, sans-serif;
@@ -1954,7 +1956,9 @@ img#logo-image {
   display: block;
   height: auto; }
   @media (max-width: 767px) {
-    #navigation ul li a:link, #navigation ul li a:active, #navigation ul li a:visited {
+    #navigation ul li a:link,
+    #navigation ul li a:active,
+    #navigation ul li a:visited {
       border-top: 1px solid #eee;
       padding: 5px;
       text-align: center; } }
@@ -1968,7 +1972,9 @@ img#logo-image {
   font-weight: bold;
   text-decoration: underline; }
 
-#navigation ul.links li.active a:link, #navigation ul.links li.active a:active, #navigation ul.links li.active a:visited {
+#navigation ul.links li.active > a:link,
+#navigation ul.links li.active > a:active,
+#navigation ul.links li.active > a:visited {
   /* margin:-3px 0 0 0;*/
   padding: 15px 15px 14px 15px;
   background: #171615 url(images/navigation-hover.gif) repeat-x bottom center;
@@ -1977,7 +1983,9 @@ img#logo-image {
   border-left: 1px solid #eee;
   border-right: 1px solid #eee; }
   @media (max-width: 767px) {
-    #navigation ul.links li.active a:link, #navigation ul.links li.active a:active, #navigation ul.links li.active a:visited {
+    #navigation ul.links li.active > a:link,
+    #navigation ul.links li.active > a:active,
+    #navigation ul.links li.active > a:visited {
       padding: 5px; } }
 
 a.rss:link, a.rss:active, a.rss:visited, a.rss:hover {
@@ -2428,7 +2436,12 @@ ul.slinks {
 .carousel-thumb {
   background-color: #FFF;
   border: 1px solid #EAF1F4;
-  float: left; }
+  float: left;
+  margin-right: 5px; }
+
+.carousel-link-text {
+  display: inline-block;
+  margin-top: 5px; }
 
 #htmltagcloud {
   font-size: 100%;
@@ -2898,7 +2911,8 @@ tr.odd.cat-row td {
     content: '-';
     display: inline-block;
     margin-right: 5px; }
-  .text-on-image-article:hover {
+  .text-on-image-article a:hover {
+    color: #ececec;
     text-decoration: underline; }
 
 .text-on-image-tint {
@@ -2933,6 +2947,48 @@ tr.odd.cat-row td {
   color: #f05898;
   padding: 8px 0px;
   font-size: 1.2em; }
+
+.suggestions-container {
+  border: 1px solid #ccc;
+  background-color: white;
+  position: static;
+  width: 75%;
+  margin: -35px auto 20px;
+  top: auto;
+  left: auto; }
+  @media (min-width: 1100px) {
+    .suggestions-container {
+      max-width: 350px;
+      position: absolute;
+      top: 285px;
+      left: 1050px; } }
+  .suggestions-container h2 {
+    font-size: 1.5em;
+    color: #30393d;
+    background-color: #ebebeb;
+    padding: 10px; }
+  .suggestions-container ul {
+    padding: 0px;
+    list-style: none;
+    margin: 0; }
+  .suggestions-container li {
+    border-top: 1px solid #e0e0e0;
+    padding: 8px;
+    color: #f23183; }
+    .suggestions-container li:nth-of-type(even) {
+      background-color: #f2f2f2; }
+
+#title-bar .faq-btn {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 1.3em;
+  font-weight: bold;
+  display: block;
+  color: white !important;
+  background-color: #f23183;
+  margin-bottom: 20px;
+  padding: 12px 10px; }
 
 /*!
  *  Font Awesome 3.0.2
