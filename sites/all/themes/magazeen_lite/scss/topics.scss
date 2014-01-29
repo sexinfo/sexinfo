@@ -219,3 +219,32 @@ $transition-time: 0.4s;
     background-color: rgba(0, 0, 0, 0.75);
   }
 }
+
+#topics-nav {
+  list-style-type: none;
+  position: fixed;
+  right: 32px;
+  padding: 16px 32px 32px 32px;
+  top: 234px;
+  background-color: white;
+  border: 1px solid #ccc;
+}
+
+#topics-nav h4 {
+  color: #30393d;
+  padding: 8px 0px;
+  margin: 10px 0px 20px;
+  font-size: 2.3em;
+  text-align: center;
+  border-bottom: 4px solid #ccc;
+}
+
+#topics-nav li {
+  text-align: left;
+}
+
+#topics-nav a {
+  color: #f05898;
+  padding: 8px 0px;
+  font-size: 1.2em;
+}

@@ -52,6 +52,22 @@ HTML;
 
 ?>
 
+<ul id="topics-nav">
+  <h4>Explore Our Topics!</h4>
+  <li><a href="#basics_of_sexuality">Basics of Sexuality</a></li>
+  <li><a href="#the_body">The Body</a></li>
+  <li><a href="#sexual_activity">Sexual Activity</a></li>
+  <li><a href="#pregnancy">Pregnancy</a></li>
+  <li><a href="#contraception">Contraception</a></li>
+  <li><a href="#abortion">Abortion</a></li>
+  <li><a href="#sexually_transmitted_infections">Sexually Transmitted Infections</a></li>
+  <li><a href="#health">Health</a></li>
+  <li><a href="#love_and_relationships">Love &amp; Relationships</a></li>
+  <li><a href="#sexual_orientations">Sexual Orientations</a></li>
+  <li><a href="#sexual_difficulties">Sexual Difficulties</a></li>
+  <li><a href="#sex_and_the_law">Sex and the Law</a></li>
+  <li><a href="#beliefs_and_sexuality">Beliefs and Sexuality</a></li>
+</ul>
 <div class="topics-container">
 
   <div class="parent-topic" id="basics_of_sexuality">
