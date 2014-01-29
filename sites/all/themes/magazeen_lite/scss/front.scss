@@ -35,13 +35,18 @@
 .third {
   float: left;
   width: 33.33%;
+
+  @include mobile {
+    float: none;
+    width: 100%;
+  }
 }
 
 .front-module {
   @include border-box;
   border-right: 1px solid $border-color;
   background-color: white;
-  min-height: 250px;
+  min-height: 280px;
   padding: 8px 15px 15px;
   text-align: center;
 
@@ -61,12 +66,14 @@
     margin-bottom: 10px;
   }
 
-  .pink-block-btn {
-    margin: 20px auto 0;
-  }
+  .pink-block-btn { margin: 20px auto 0; }
 
   .module-content { border: 1px solid $border-color; }
 
+  @include mobile {
+    min-height: 0px;
+    border-top: 1px solid $border-color;
+  }
 }
 
 

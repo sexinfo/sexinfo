@@ -2336,6 +2336,10 @@ ul.slinks {
 .third {
   float: left;
   width: 33.33%; }
+  @media (max-width: 767px) {
+    .third {
+      float: none;
+      width: 100%; } }
 
 .front-module {
   -webkit-box-sizing: border-box;
@@ -2343,7 +2347,7 @@ ul.slinks {
   box-sizing: border-box;
   border-right: 1px solid #e0e0e0;
   background-color: white;
-  min-height: 250px;
+  min-height: 280px;
   padding: 8px 15px 15px;
   text-align: center; }
   .front-module:last-child {
@@ -2362,6 +2366,10 @@ ul.slinks {
     margin: 20px auto 0; }
   .front-module .module-content {
     border: 1px solid #e0e0e0; }
+  @media (max-width: 767px) {
+    .front-module {
+      min-height: 0px;
+      border-top: 1px solid #e0e0e0; } }
 
 /* FAQ module */
 .faq-image {
