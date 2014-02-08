@@ -239,11 +239,11 @@ HTML;
 
     <section>
       <div class="grid-left">
-        <?php echo renderTopicHalf('Dealing with STIs') ?>
+        <?php echo renderTopicHalf('Living with STIs') ?>
       </div>
 
       <div class="grid-right">
-        <?php echo renderTopicHalf('Non-STIs') ?>
+        <?php echo renderTopicHalf('False Alarms: Non-STIs') ?>
       </div>
     </section>
   </div><!-- .parent-topic -->

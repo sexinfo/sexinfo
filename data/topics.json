@@ -323,7 +323,7 @@
       "Penile and Anal Cancer": "http://www.soc.ucsb.edu/sexinfo/article/penile-and-anal-cancer"
     }
   },
-  "Dealing with STIs": {
+  "Living with STIs": {
     "image": "dealing_with_stis.png",
     "children": {
       "Could You Have an STI?": "http://www.soc.ucsb.edu/sexinfo/article/could-you-have-sti",
@@ -338,7 +338,7 @@
       "Who Is At Risk?": "http://www.soc.ucsb.edu/sexinfo/article/who-risk"
     }
   },
-  "Non-STIs": {
+  "False Alarms: Non-STIs": {
     "image": "non_stis.png",
     "children": {
       "Bacterial Meningitis": "http://www.soc.ucsb.edu/sexinfo/article/bacterial-meningitis",
