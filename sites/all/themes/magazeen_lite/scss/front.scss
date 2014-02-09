@@ -67,7 +67,7 @@
   &:last-child { border-right: 0; }
 
   h3 {
-    font-family: 'Open Sans';
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
     font-size: 2.2em;
     font-weight: 300;
     margin-bottom: 15px;
@@ -75,7 +75,7 @@
 
   p {
     color: lighten($gray-text, 20);
-    font-family: 'Open Sans';
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
     font-size: 1.2em;
     margin-bottom: 10px;
   }
