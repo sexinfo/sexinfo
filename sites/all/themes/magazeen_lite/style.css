@@ -2365,13 +2365,13 @@ ul.slinks {
   .front-module:last-child {
     border-right: 0; }
   .front-module h3 {
-    font-family: 'Open Sans';
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
     font-size: 2.2em;
     font-weight: 300;
     margin-bottom: 15px; }
   .front-module p {
     color: #5d6e76;
-    font-family: 'Open Sans';
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
     font-size: 1.2em;
     margin-bottom: 10px; }
   .front-module .pink-block-btn {
@@ -2955,6 +2955,10 @@ tr.odd.cat-row td {
     background-color: #ededed; }
   .topics-nav li:last-child a {
     border-bottom: 0; }
+  .topics-nav li.active {
+    background-color: #f23183; }
+    .topics-nav li.active a {
+      color: white; }
   .topics-nav a {
     border-bottom: 1px solid #e0e0e0;
     display: block;
@@ -2962,8 +2966,7 @@ tr.odd.cat-row td {
     font-size: 1.2em;
     padding: 6px 70px 6px 10px; }
     .topics-nav a:hover {
-      background-color: #f23183;
-      color: white; }
+      text-decoration: underline; }
 
 .suggestions-container {
   border: 1px solid #cccccc;

@@ -28,6 +28,6 @@ scripts[] = js/lib/html.min.js
 scripts[] = js/front.js
 scripts[] = js/validation.js
 scripts[] = js/suggestions.js
-scripts[] = js/sidebar.js
+scripts[] = js/topics_nav.js
 scripts[] = js/spellcorrect.js
 scripts[] = js/dropdown.js

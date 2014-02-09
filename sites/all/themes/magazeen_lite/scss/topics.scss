@@ -251,10 +251,18 @@ $transition-time: 0.4s;
     text-align: center;
   }
 
+
   li {
     &:nth-of-type(even) { background-color: lighten($border-color, 5); }
 
     &:last-child a { border-bottom: 0; }
+
+    // Scrollspy
+    &.active {
+      background-color: $pink;
+
+      a { color: white; }
+    }
   }
 
   a {
@@ -264,10 +272,6 @@ $transition-time: 0.4s;
     font-size: 1.2em;
     padding: 6px 70px 6px 10px;
 
-
-    &:hover {
-      background-color: $pink;
-      color: white;
-    }
+    &:hover { text-decoration: underline; }
   }
 }
