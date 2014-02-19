@@ -2,7 +2,9 @@
 
 <?php include 'navigation.php' ?>
 
-<div id="main" class="clearfix">
+<?php $mainClass = (isset($node)) ? 'main-'.$node->nid : " "; ?>
+
+<div id="main" class="clearfix <?php echo $mainClass ?>">
   <div class="container clearfix">
     <div class="main">
       <?php if ($breadcrumb): print $breadcrumb; endif; ?>
@@ -30,5 +32,7 @@
     </div><!-- .main -->
   </div><!-- .container.clearfix -->
 </div><!-- #main.clearfix -->
+
+<!--<div class="suggestions-container"></div>-->
 
 <?php include 'footer.php' ?>

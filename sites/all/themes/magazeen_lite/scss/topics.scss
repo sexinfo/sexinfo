@@ -1,5 +1,5 @@
-// // Main category listing
-
+// Old topic table listings
+// ---------------------------------------
 .topic-header {
   font-size: 2em;
   margin-top: 15px;
@@ -46,14 +46,26 @@
 
 
 
+
+
+// Topics page v2
+// ---------------------------------------
+// Huge hack to get the page full width for mobile
+.main-392 .main {
+  @include mobile { width: 100% !important; }
+}
+
 $spacer: 20px;
-
-
 
 .topics-container {
   @include clearfix;
-  border: 1px solid #ccc;
-  background-color: white;
+
+  h2 {
+    color: $gray-text;
+    font-size: 2.3em;
+    margin: 10px 0 20px;
+    text-align: center;
+  }
 }
 
 .grid-left,
@@ -61,15 +73,25 @@ $spacer: 20px;
   @include border-box;
   float: left;
   width: 417px;
+
+  @media(max-width: 1200px) {
+    float: none;
+    margin: 0 !important;
+    width: 100%;
+
+    .topic-quarter { margin-bottom: $spacer; }
+  }
 }
 
 .grid-right { margin-left: $spacer; }
 
+
 .parent-topic {
   @include border-box;
   @include clearfix;
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 5px;
+  border: 1px solid #ccc;
+  background-color: white;
+  margin: 48px 0px;
   padding: 10px;
 
   &:last-child {
@@ -78,36 +100,64 @@ $spacer: 20px;
     padding-bottom: 10px;
   }
 
-  .topic-half, .topic-quarter {
-    @include clearfix;
-    border: 1px solid #ccc;
-  }
-
-  .topic-half {}
-
-  .topic-quarter {
-    &:first-child { margin-bottom: $spacer; }
-  }
-
-
   img { width: 100%; }
+
+  section {
+    @include clearfix;
+    margin-bottom: $spacer;
+
+    @include mobile { margin-bottom: 0; }
+  }
 }
 
 .topic-link {
   display: block;
   position: relative;
 
-  &:hover .text-on-image-text {
-    text-decoration: underline;
+  &:hover .text-on-image-text { text-decoration: underline; }
+}
+
+$half-height: 360px;
+$quarter-height: 170px;
+
+.topic-half, .topic-quarter {
+  @include clearfix;
+  border: 1px solid #ccc;
+
+  @include mobile { margin-bottom: $spacer; }
+}
+
+.topic-half {
+  .text-on-image {
+    height: $half-height;
+
+    &:hover .text-on-image-text {
+      opacity: 0;
+      bottom: $half-height;
+    }
+
+    .text-on-image-articles { top: $half-height; }
   }
 }
 
+.topic-quarter {
+  &:first-child { margin-bottom: $spacer; }
 
-.topic-half .text-on-image    { height: 360px; }
-.topic-quarter .text-on-image { height: 170px; }
+  .text-on-image {
+    height: $quarter-height;
+
+    &:hover .text-on-image-text {
+      opacity: 0;
+      bottom: $quarter-height;
+    }
+
+    .text-on-image-articles { top: $quarter-height; }
+  }
+}
+
+$transition-time: 0.4s;
 
 .text-on-image {
-  background-position: center;
   background-size: cover;
   color: white;
   font-size: 2em;
@@ -115,16 +165,113 @@ $spacer: 20px;
   position: relative;
   text-shadow: 0 2px 6px rgba(48,48,48,0.7);
 
-  // TODO: for demo
-  background-position: -355px -250px !important;
+  .text-on-image-text {
+    @include border-box;
+    color: white;
+    padding: 15px;
+    //transition: opacity 1s, bottom 1s;
+    transition: opacity $transition-time, bottom $transition-time;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+  }
+
+  .text-on-image-articles {
+    list-style: none;
+    margin: 0px;
+    opacity: 0;
+    padding: 15px;
+    position: absolute;
+    transition: opacity $transition-time ease-in, top $transition-time;
+    width: 100%;
+  }
+
+  &:hover .text-on-image-articles {
+    opacity: 1;
+    top: 0px;
+  }
 }
 
-.text-on-image-text {
-  @include border-box;
-  color: white;
-  bottom: 0;
-  left: 0;
-  padding: 0 15px 15px;
-  position: absolute;
+.text-on-image-article {
+  font-size: 0.75em;
+  margin-bottom: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:before {
+    color: darken($light-gray, 10);
+    content: '-';
+    display: inline-block;
+    margin-right: 5px;
+  }
+
+  a:hover {
+    color: lighten($light-gray, 20);
+    text-decoration: underline;
+  }
+}
+
+.text-on-image-tint {
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color $transition-time;
+  height: 100%;
   width: 100%;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.75);
+  }
+}
+
+
+.topics-nav {
+  background-color: white;
+  border: 1px solid #ccc;
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  @media(min-width: 1100px) {
+    position: fixed;
+    right: 32px;
+    top: 234px;
+  }
+
+  .header-container {
+    border-bottom: 1px solid $border-color;
+    padding: 10px;
+  }
+
+  h4 {
+    color: lighten($gray-text, 10);
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-size: 1.9em;
+    font-weight: normal;
+    text-align: center;
+  }
+
+
+  li {
+    &:nth-of-type(even) { background-color: lighten($border-color, 5); }
+
+    &:last-child a { border-bottom: 0; }
+
+    // Scrollspy
+    &.active {
+      background-color: $pink;
+
+      a { color: white; }
+    }
+  }
+
+  a {
+    border-bottom: 1px solid $border-color;
+    display: block;
+    color: $pink;
+    font-size: 1.2em;
+    padding: 6px 70px 6px 10px;
+
+    &:hover { text-decoration: underline; }
+  }
 }

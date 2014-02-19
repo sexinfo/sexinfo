@@ -2,12 +2,6 @@
 /* Front page modules
 /* ----------------------------------------------*/
 
-.front-container {
-  background: url(images/main-content.gif) no-repeat top center;
-  padding: 20px 0;
-  margin-bottom: 55px;
-}
-
 .column-container {
   @include border-box;
   @include border-radius;
@@ -31,36 +25,88 @@
   a:hover { text-decoration: underline; }
 }
 
+.third {
+  float: left;
+  width: 33.33%;
 
-.front-module {
-  @include mobile { margin-bottom: 15px; }
-
-  .module-title {}
-
-  .module-content {
-    @include clearfix;
-    background: #fdfefe url(images/node-box-top.gif) repeat-x top center;
-    padding: 10px;
-  }
-
-  .module-footer {
-    background-color: #FCFDFE;
-    border-top: 1px solid #eee;
-    padding: 15px;
-
-    a {
-      font-style: italic !important; // wat?
-      font: bold 1.17em Georgia, "Times New Roman", Times, serif;
-      color: $pink;
-    }
+  @include mobile {
+    float: none;
+    width: 100%;
   }
 }
 
 
-/* FAQ module */
+// Generic white container
+.front-container {
+  @include border-radius(2px);
+  @include clearfix;
+  background-color: white;
+  border: 1px solid $border-color;
+  margin-bottom: 25px;
+  padding: 0;
+
+  &:last-child { margin-bottom: 55px; }
+}
+
+.cloud-container {
+  padding: 30px;
+  margin-left: auto; margin-right: auto;
+  max-width: 75%;
+}
+
+
+// For the box grid
+.front-module {
+  @include border-box;
+  border-right: 1px solid $border-color;
+  background-color: white;
+  min-height: 280px;
+  padding: 8px 15px 15px;
+  text-align: center;
+
+  &:last-child { border-right: 0; }
+
+  h3 {
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-size: 2.2em;
+    font-weight: 300;
+    margin-bottom: 15px;
+  }
+
+  p {
+    color: lighten($gray-text, 20);
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+
+  .pink-block-btn { margin: 20px auto 0; }
+
+  .module-content { border: 1px solid $border-color; }
+
+  @include mobile {
+    min-height: 0px;
+    border-top: 1px solid $border-color;
+  }
+}
+
+
+
+
+
+
+
+
+
+// FAQ module
 .faq-image {
   overflow: hidden;
   position: relative;
+
+  .faq-image-box {
+    background-size: cover;
+    padding-bottom: 57%; // Hackety hack! Arbitrarily chosen to look good
+  }
 
   img {
     margin: 0 auto;
@@ -83,7 +129,7 @@
 // Image carousel module
 // TODO: this is getting really awful, needs refactoring
 .carousel-container {
-  margin: 20px auto 10px;
+  margin: 20px auto 25px;
   width: 985px;
 
   @include mobile { width: auto; }
@@ -167,115 +213,76 @@
       background-color: #FFF;
       border: 1px solid #EAF1F4;
       float: left;
+      margin-right: 5px;
+    }
+    .carousel-link-text {
+      display: inline-block;
+      margin-top: 5px;
     }
 
-#htmltagcloud
-{
-  font-size:100%;
-  width:auto;
-  font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-image: none;
-  background-color: #000000;
-  @include border-radius (15px);
-  border:0 solid #ddd;
-  line-height:2.4em;
-  word-spacing:normal;
-  letter-spacing:normal;
-  text-transform:none;
-  text-align:justify;
-  text-indent:0;
-  margin:1em 1em 0;
-  padding:2em;
-
-  a {
-    &:hover { color:#fff; }
-    &:active {
-      color:#FFF;
-      background-color:#03d;
-    }
+// Tag cloud
+#htmltagcloud {
+  line-height: 2.4em;
+  a:hover { text-decoration: underline; }
+}
+  .wrd {
+    position:relative;
+    padding: 10px;
   }
-
-  @media (min-width: 1200px) {
-    background-color: transparent;
-    background-image:url('images/cloud.png');
-    background-repeat:no-repeat;
-    background-size:440px;
-    background-position:left -42px bottom -20px;
+  .tagcloud0 {
+    font-size:1em;
+    color:#F6F;
+    z-index:10;
+    a { color:#F6F; }
   }
-}
-
-.wrd {
-  position:relative;
-  padding:0;
-}
-
-.tagcloud0 {
-  font-size:1em;
-  color:#F6F;
-  z-index:10;
-  a { color:#F6F; }
-}
-
-.tagcloud1 {
-  font-size:1.7em;
-  color:#f8bdca;
-  z-index:9;
-  a { color: #f8bdca }
-}
-
-.tagcloud3 {
-  font-size:2.2em;
-  color:#fa87aa;
-  z-index:7;
-  a { color:#fa87aa;}
-}
-
-.tagcloud4 {
-  font-size:2.6em;
-  color:#F9c;
-  z-index:6;
-  a { color:#ff4d74;}
-}
-
-.tagcloud5 {
-  font-size:2.8em;
-  color:#ff4d74;
-  z-index:5;
-  a { color:#f96693;}
-}
-
-.tagcloud6 {
-  font-size:3.2em;
-  color:#f25f80;
-  z-index:4;
-  a { color:#f25f80;}
-}
-
-.tagcloud7 {
-  font-size:3.6em;
-  color:#F99;
-  z-index:3;
-  a { color:#F99;}
-}
-
-.tagcloud7
-
-.tagcloud8 {
-  font-size:3.9em;
-  color:#F69;
-  z-index:2;
-  a { color:#F69;}
-}
-
-.tagcloud9 {
-  font-size:4.2em;
-  color:#F69;
-  z-index:1;
-}
-
-#htmltagcloud a:link,#htmltagcloud a:visited,.wrd a {
-  text-decoration:none;
-}
+  .tagcloud1 {
+    font-size:1.7em;
+    color:#f8bdca;
+    z-index:9;
+    a { color: #f8bdca }
+  }
+  .tagcloud3 {
+    font-size:2.2em;
+    color:#fa87aa;
+    z-index:7;
+    a { color:#fa87aa;}
+  }
+  .tagcloud4 {
+    font-size:2.6em;
+    color:#F9c;
+    z-index:6;
+    a { color:#ff4d74;}
+  }
+  .tagcloud5 {
+    font-size:2.8em;
+    color:#ff4d74;
+    z-index:5;
+    a { color:#f96693;}
+  }
+  .tagcloud6 {
+    font-size:3.2em;
+    color:#f25f80;
+    z-index:4;
+    a { color:#f25f80;}
+  }
+  .tagcloud7 {
+    font-size:3.6em;
+    color:#F99;
+    z-index:3;
+    a { color:#F99;}
+  }
+  .tagcloud7 {}
+  .tagcloud8 {
+    font-size:3.9em;
+    color:#F69;
+    z-index:2;
+    a { color:#F69;}
+  }
+  .tagcloud9 {
+    font-size:4.2em;
+    color:#F69;
+    z-index:1;
+  }
 
 
 /*----- TYPOGRAPHY -----*/

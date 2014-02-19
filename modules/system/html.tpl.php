@@ -48,6 +48,7 @@
   <?php print $head; ?>
   <meta name="viewport" content="width=device-width">
   <title><?php print $head_title; ?></title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
   <?php print $styles; ?>
   <?php print $scripts; ?>
 
