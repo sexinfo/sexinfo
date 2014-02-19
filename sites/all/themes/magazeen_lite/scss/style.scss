@@ -4,6 +4,8 @@
 
 @import "lib/bootstrap"; // Bootstrap responsive grid
 
+@import "font-awesome"; // Font Awesome icons
+
 @import "globals";
 @import "typography";
 @import "header";
@@ -11,11 +13,10 @@
 @import "footer";
 @import "sidebar";
 
-@import "front";     // Custom front page elements
-@import "questions"; // Ask the Sexperts form
-@import "quiz";      // Quiz module
-@import "category";  // Articles within a category
-@import "topics";    // Custom topics listing page
-@import "recommendations"; //Recommended article sidebar
-
-@import "font-awesome"; // Font Awesome icons
+@import "front";           // Custom front page elements
+@import "questions";       // Ask the Sexperts form
+@import "quiz";            // Quiz module
+@import "category";        // Articles within a category
+@import "topics";          // Custom topics listing page
+@import "recommendations"; // Recommended article sidebar
+@import "faqs";            // Frequently asked questions

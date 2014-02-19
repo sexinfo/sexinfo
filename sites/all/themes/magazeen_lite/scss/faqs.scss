@@ -1,0 +1,19 @@
+.view-frequently-asked-questions2 {
+  li {
+    @include border-radius;
+    background-color: white;
+    border: 1px solid #ccc;
+    font-size: 1.2em;
+    list-style: none !important;
+    margin: 0 0 10px !important;
+    padding: 15px !important;
+
+    &:hover { background-color: #ededed; }
+
+    &:nth-of-type(even) {
+      background-color: lighten(#ededed, 2);
+      &:hover { background-color: darken(#ededed, 4); }
+    }
+
+  }
+}
