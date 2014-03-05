@@ -1424,7 +1424,10 @@
 .carousel {
   position: relative;
   margin-top: 25px;
-  margin-bottom: 25px; }
+  margin-bottom: 25px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto; }
 
 .carousel-inner {
   position: relative;
@@ -1589,7 +1592,7 @@
 .carousel-caption .btn {
   text-shadow: none; }
 
-.carousel-caption .container {
+.carousel-caption .carouselContainer {
   width: 45%;
   margin-left: 20%;
   position: relative; }
@@ -1598,7 +1601,8 @@
   font-family: 'Open Sans';
   font-size: 18px;
   opacity: 1;
-  line-height: 25px; }
+  line-height: 25px;
+  padding-bottom: 3px; }
 
 .carousel-caption h3 {
   font-size: 28px;
@@ -1952,7 +1956,7 @@ fieldset[disabled] .btn-link:focus {
 .btn-lg {
   position: absolute;
   bottom: 35px;
-  right: 250px;
+  right: 200px;
   padding: 14px 24px;
   font-size: 18px;
   line-height: 1.33;
@@ -2235,7 +2239,7 @@ a:hover {
   color: #000; }
 
 a:visited {
-  color: #f05898;
+  color: #ffffff;
   text-decoration: none; }
 
 p {
