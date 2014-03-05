@@ -297,7 +297,6 @@
       "Nongonococcal Urethritis": "http://www.soc.ucsb.edu/sexinfo/article/nongonococcal-urethritis",
       "Pelvic Inflammatory Disease and Trachoma": "http://www.soc.ucsb.edu/sexinfo/article/pelvic-inflammatory-disease-and-trachoma",
       "Syphilis": "http://www.soc.ucsb.edu/sexinfo/article/syphilis",
-      "Urinary Tract Infections (UTIs)": "http://www.soc.ucsb.edu/sexinfo/article/urinary-tract-infections-utis",
       "Vaginitis": "http://www.soc.ucsb.edu/sexinfo/article/vaginitis"
     }
   },
@@ -319,8 +318,7 @@
       "Herpes": "http://www.soc.ucsb.edu/sexinfo/article/herpes",
       "HIV/AIDS": "http://www.soc.ucsb.edu/sexinfo/article/hivaids",
       "Human Papillomavirus (HPV)": "http://www.soc.ucsb.edu/sexinfo/article/human-papillomavirus-hpv",
-      "Molluscum Contagiosum": "http://www.soc.ucsb.edu/sexinfo/article/molluscum-contagiosum",
-      "Penile and Anal Cancer": "http://www.soc.ucsb.edu/sexinfo/article/penile-and-anal-cancer"
+      "Molluscum Contagiosum": "http://www.soc.ucsb.edu/sexinfo/article/molluscum-contagiosum"
     }
   },
   "Living with STIs": {
@@ -341,10 +339,10 @@
   "False Alarms: Non-STIs": {
     "image": "non_stis.png",
     "children": {
-      "Bacterial Meningitis": "http://www.soc.ucsb.edu/sexinfo/article/bacterial-meningitis",
       "Folliculitis": "http://www.soc.ucsb.edu/sexinfo/article/folliculitis",
       "Pearly Penile Papules": "http://www.soc.ucsb.edu/sexinfo/article/pearly-penile-papules",
-      "Toxic Shock Syndrome": "http://www.soc.ucsb.edu/sexinfo/article/toxic-shock-syndrome"
+      "Toxic Shock Syndrome": "http://www.soc.ucsb.edu/sexinfo/article/toxic-shock-syndrome",
+      "Urinary Tract Infections (UTIs)": "http://www.soc.ucsb.edu/sexinfo/article/urinary-tract-infections-utis"
     }
   },
 
@@ -353,14 +351,14 @@
   "General Male Health": {
     "image": "general_male_health.jpg",
     "children": {
-      "Genital Self-Exam": "http://www.soc.ucsb.edu/sexinfo/article/genital-self-exam"
+      "Male Genital Self-Exam": "http://www.soc.ucsb.edu/sexinfo/article/genital-self-exam"
     }
   },
   "General Female Health": {
     "image": "general_female_health.jpg",
     "children": {
       "Annual Gynecological Exams: What to Expect": "http://www.soc.ucsb.edu/sexinfo/article/annual-gynecological-exams-what-expect",
-      "Genital Self-Exam": "http://www.soc.ucsb.edu/sexinfo/article/genital-self-exam-0",
+      "Female Genital Self-Exam": "http://www.soc.ucsb.edu/sexinfo/article/genital-self-exam-0",
       "The Downside of Douching": "http://www.soc.ucsb.edu/sexinfo/article/downside-douching",
       "The Pap Smear": "http://www.soc.ucsb.edu/sexinfo/article/pap-smear"
     }
@@ -392,6 +390,7 @@
   "Medical Conditions": {
     "image": "medical_conditions.jpg",
     "children": {
+      "Bacterial Meningitis": "http://www.soc.ucsb.edu/sexinfo/article/bacterial-meningitis",
       "Effects of Spinal Cord Injuries on Sexuality": "http://www.soc.ucsb.edu/sexinfo/article/effects-spinal-cord-injuries-sexuality",
       "Endometriosis": "http://www.soc.ucsb.edu/sexinfo/article/endometriosis",
       "Fibrocystic Breasts": "http://www.soc.ucsb.edu/sexinfo/article/fibrocystic-breasts",
@@ -413,6 +412,7 @@
       "Breast Cancer Awareness": "http://www.soc.ucsb.edu/sexinfo/article/breast-cancer-awareness",
       "Cervical Cancer": "http://www.soc.ucsb.edu/sexinfo/article/cervical-cancer",
       "Ovarian Cancer": "http://www.soc.ucsb.edu/sexinfo/article/ovarian-cancer",
+      "Penile and Anal Cancer": "http://www.soc.ucsb.edu/sexinfo/article/penile-and-anal-cancer",
       "Prostate Cancer": "http://www.soc.ucsb.edu/sexinfo/article/prostate-cancer",
       "Testicular Cancer": "http://www.soc.ucsb.edu/sexinfo/article/testicular-cancer"
     }
@@ -509,7 +509,7 @@
       "Proposition 8": "http://www.soc.ucsb.edu/sexinfo/article/proposition-8",
       "Rights in the LGBT Community": "http://www.soc.ucsb.edu/sexinfo/article/rights-lgbt-community",
       "Same-Sex Marriages": "http://www.soc.ucsb.edu/sexinfo/article/same-sex-marriages",
-      "Sodomy": "http://www.soc.ucsb.edu/sexinfo/article/sodomy-0"
+      "Sodomy Laws in the U.S.": "http://www.soc.ucsb.edu/sexinfo/article/sodomy-0"
     }
   },
 
@@ -571,12 +571,12 @@
   "Sexual Assault": {
     "image": "sexual_assault.png",
     "children": {
+      "Different Types of Sexual Assault": "http://www.soc.ucsb.edu/sexinfo/article/sexual-assault-continuum",
       "How to Help a Sexual Assault Survivor": "http://www.soc.ucsb.edu/sexinfo/article/how-help-sexual-assault-survivor",
       "Male Rape": "http://www.soc.ucsb.edu/sexinfo/article/male-rape",
       "Myths and Facts About Sexual Assault and Harassment": "http://www.soc.ucsb.edu/sexinfo/article/myths-and-facts-about-sexual-assault-and-harassment",
       "Rape": "http://www.soc.ucsb.edu/sexinfo/article/rape",
       "Reducing Risk for Sexual Assault": "http://www.soc.ucsb.edu/sexinfo/article/reducing-risk-sexual-assault",
-      "Sexual Assault Continuum": "http://www.soc.ucsb.edu/sexinfo/article/sexual-assault-continuum",
       "Sexual Harassment": "http://www.soc.ucsb.edu/sexinfo/article/sexual-harassment",
       "The Aftermath of Sexual Violence": "http://www.soc.ucsb.edu/sexinfo/article/aftermath-sexual-violence",
       "What To Do If You Have Been Sexually Assaulted": "http://www.soc.ucsb.edu/sexinfo/article/what-do-if-you-have-been-sexually-assaulted"
@@ -626,14 +626,14 @@
   "Sex and Religion": {
     "image": "sex_and_religion.jpg",
     "children": {
-      "Cultural Significance of an In-Tact Hymen": "http://www.soc.ucsb.edu/sexinfo/article/cultural-significance-tact-hymen",
-      "The Catholic Church and Condom Use": "http://www.soc.ucsb.edu/sexinfo/article/catholic-church-and-condom-use",
+      "The Catholic Church and Contraception": "http://www.soc.ucsb.edu/sexinfo/article/catholic-church-and-condom-use",
       "Virginity Pledges and Sexually Transmitted Infections": "http://www.soc.ucsb.edu/sexinfo/article/virginity-pledges-and-sexually-transmitted-infections"
     }
   },
   "Sex Around the World": {
     "image": "sex_around_the_world.jpg",
     "children": {
+      "Cultural Significance of an Intact Hymen": "http://www.soc.ucsb.edu/sexinfo/article/cultural-significance-tact-hymen",
       "Female Genital Mutilation (FGM)": "http://www.soc.ucsb.edu/sexinfo/article/female-genital-mutilation-fgm",
       "Magdalene Laundries in Ireland": "http://www.soc.ucsb.edu/sexinfo/article/magdalene-laundries-ireland",
       "Risks of HIV/AIDS and Gender Inequality in Sub-Saharan Africa":"http://www.soc.ucsb.edu/sexinfo/article/risks-hivaids-and-gender-inequality-sub-saharan-africa",
