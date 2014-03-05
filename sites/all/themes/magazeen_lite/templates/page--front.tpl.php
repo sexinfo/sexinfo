@@ -11,7 +11,7 @@
     <div class="carousel-inner">
 
       <div class="item active">
-        <img src="http://localhost:8888/sites/all/themes/magazeen_lite/images/modules/sexOnPeriod.png" alt="">
+        <img src="/sites/all/themes/magazeen_lite/images/modules/sexOnPeriod.png" alt="">
         <div class="carousel-caption">
 
          <div class="carouselContainer">
@@ -22,7 +22,7 @@
       </div>
 
       <div class="item">
-        <img src="http://localhost:8888/sites/all/themes/magazeen_lite/images/modules/ejaculate.png" alt="">
+        <img src="/sites/all/themes/magazeen_lite/images/modules/ejaculate.png" alt="">
         <div class="carousel-caption">
         
           <div class="carouselContainer">
@@ -33,7 +33,7 @@
       </div>
 
       <div class="item">
-        <img src="http://localhost:8888/sites/all/themes/magazeen_lite/images/modules/hymen.png" alt="">
+        <img src="/sites/all/themes/magazeen_lite/images/modules/hymen.png" alt="">
         <div class="carousel-caption">
           
           <div class = "carouselContainer">
