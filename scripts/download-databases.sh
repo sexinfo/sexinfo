@@ -2,10 +2,10 @@
 # Exit status codes:
 #   1 = Login failure (username password incorrect)
 
-errorColor="\x1B[0;31m"
-noColor="\x1B[0m"
-infoColor="\x1B[0;36m"
-successColor="\x1B[0;32m"
+errorColor="\033[0;31m"
+noColor="\033[0m"
+infoColor="\033[0;36m"
+successColor="\033[0;32m"
 
 username=$1
 password=$2
