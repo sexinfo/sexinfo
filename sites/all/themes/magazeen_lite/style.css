@@ -3008,9 +3008,11 @@ ul.slinks {
   top: 0;
   left: 0; }
 
-.carousel-caption {
+.item .carousel-caption {
   opacity: 0.7;
   padding-bottom: 10px; }
+.item .btn {
+  color: white; }
 
 #carousel-nav {
   font-size: 0.9em;
