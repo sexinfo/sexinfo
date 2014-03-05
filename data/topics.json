@@ -7,16 +7,15 @@
       "Male Puberty": "http://www.soc.ucsb.edu/sexinfo/article/male-puberty",
 
       "Female Puberty": "http://www.soc.ucsb.edu/sexinfo/article/female-puberty",
-          "Pubic Hair": "http://www.soc.ucsb.edu/sexinfo/article/pubic-hair",
-          "The Vulva During Puberty": "http://www.soc.ucsb.edu/sexinfo/article/vulva-during-puberty",
-
-      "Nocturnal Orgasms and Emissions": "http://www.soc.ucsb.edu/sexinfo/article/nocturnal-orgasms-and-emissions",
+      "Pubic Hair": "http://www.soc.ucsb.edu/sexinfo/article/pubic-hair",
+      "The Vulva During Puberty": "http://www.soc.ucsb.edu/sexinfo/article/vulva-during-puberty",
+      "Nocturnal Orgasms and Emissions": "http://www.soc.ucsb.edu/sexinfo/article/nocturnal-orgasms-and-emissions"
     }
   },
   "Aging and the Sexual Response": {
     "image": "aging_sexual_response.jpg",
     "children": {
-      "Aging and the Sexual Response Cycle": "http://www.soc.ucsb.edu/sexinfo/article/aging-and-sexual-response-cycle-0",
+      "Aging and the Sexual Response Cycle": "http://www.soc.ucsb.edu/sexinfo/article/aging-and-sexual-response-cycle-0"
     }
   },
   "Talking About Sex": {
@@ -31,6 +30,7 @@
   },
 
 
+
   "Male Reproductive System": {
     "image": "male_reproductive_system.jpg",
     "children": {
@@ -41,8 +41,7 @@
           "Semen": "http://www.soc.ucsb.edu/sexinfo/article/semen",
           "Spermatogenesis": "http://www.soc.ucsb.edu/sexinfo/article/spermatogenesis",
 
-
-      "The Prostate Gland": "http://www.soc.ucsb.edu/sexinfo/article/prostate-gland",
+      "The Prostate Gland": "http://www.soc.ucsb.edu/sexinfo/article/prostate-gland"
     }
   },
   "Female Reproductive System": {
@@ -58,20 +57,21 @@
       "The Menstrual Cycle": "http://www.soc.ucsb.edu/sexinfo/article/menstrual-cycle"
     }
   },
+  "Intersex Reproductive System": {
+    "image": "TODO.jpg",
+    "children": {
+      "Intersex": "http://www.soc.ucsb.edu/sexinfo/article/intersex"
+    }
+  },
   "Bodily Sexual Response": {
     "image": "sexual_response.jpg",
     "children": {
-      "The Sexual Response Cycle": "http://www.soc.ucsb.edu/sexinfo/article/sexual-response-cycle"
+      "The Sexual Response Cycle": "http://www.soc.ucsb.edu/sexinfo/article/sexual-response-cycle",
       "Epididymal Hypertension (Blue Balls)": "???",
-      "Pelvic Congestion": "http://www.soc.ucsb.edu/sexinfo/article/pelvic-congestion",
+      "Pelvic Congestion": "http://www.soc.ucsb.edu/sexinfo/article/pelvic-congestion"
     }
   },
-
-
-      "Intersex": "http://www.soc.ucsb.edu/sexinfo/article/intersex",
-
-
-  "Sex Determination": {
+  "Sex Determination and Differentiation": {
     "image": "sex_determination.jpg",
     "children": {
       "Sex Determination and Differentiation": "http://www.soc.ucsb.edu/sexinfo/article/sex-determination-and-differentiation"
@@ -80,22 +80,13 @@
 
 
 
-
-
-
-
-
   "Masturbation": {
     "image": "masturbation.jpg",
     "children": {
-      "A Guide to Sex Toys": "http://www.soc.ucsb.edu/sexinfo/article/guide-sex-toys",
-      "Fantasy and Erogenous Zones": "http://www.soc.ucsb.edu/sexinfo/article/fantasy-erogenous-zones",
       "Female Masturbation": "http://www.soc.ucsb.edu/sexinfo/article/female-masturbation",
       "Male Masturbation": "http://www.soc.ucsb.edu/sexinfo/article/male-masturbation"
     }
   },
-
-
   "Penetrative Sex": {
     "image": "TODO.jpg",
     "children": {
@@ -103,23 +94,17 @@
       "Anal Sex": "http://www.soc.ucsb.edu/sexinfo/article/anal-sex"
     }
   },
-
-
-
   "Oral Sex": {
-    "image": "TODO.jpg", // TODO; image
+    "image": "TODO.jpg",
     "children": {
       "Oral Sex": "http://www.soc.ucsb.edu/sexinfo/article/oral-sex",
       "Deep Throating During Oral Sex": "http://www.soc.ucsb.edu/sexinfo/article/deep-throating-during-oral-sex",
       "Barriers During Oral Sex: The Wise Choice": "http://www.soc.ucsb.edu/sexinfo/article/barriers-during-oral-sex-wise-choice",
-      "Increasing Popularity of Oral Sex": "http://www.soc.ucsb.edu/sexinfo/article/increasing-popularity-oral-sex"
+      "Increasing Popularity of Oral Sex": "http://www.soc.ucsb.edu/sexinfo/article/increasing-popularity-oral-sex",
       "Dental Dams": "http://www.soc.ucsb.edu/sexinfo/article/dental-dams",
-      "Swallowing Your Partner's Ejaculate": "http://www.soc.ucsb.edu/sexinfo/article/swallowing-your-partners-ejaculate",
+      "Swallowing Your Partner's Ejaculate": "http://www.soc.ucsb.edu/sexinfo/article/swallowing-your-partners-ejaculate"
     }
   },
-
-
-
   "Sex With Others": {
     "image": "sex_with_others.jpg",
     "children": {
@@ -132,18 +117,35 @@
       "Swinging": "http://www.soc.ucsb.edu/sexinfo/article/swinging"
     }
   },
-
-
-  "Kinky Sex and Paraphilia": {
-    "image": "kinky_sex_paraphilia.jpg",
+  "Autoeroticism": {
+    "image": "TODO.jpg",
+    "children": {
+      "Fantasy and Erogenous Zones": "http://www.soc.ucsb.edu/sexinfo/article/fantasy-erogenous-zones",
+      "A Guide to Sex Toys": "http://www.soc.ucsb.edu/sexinfo/article/guide-sex-toys"
+    }
+  },
+  "Kinky Sex": {
+    "image": "TODO.jpg",
+    "children": {
+      "BDSM (Bondage, Dominance, Sadomasochism)": "http://www.soc.ucsb.edu/sexinfo/article/bdsm-bondage-dominance-sadomasochism",
+      "Furry Fandom": "http://www.soc.ucsb.edu/sexinfo/article/furry-fandom"
+    }
+  },
+  "Atypical Sexual Behaviors": {
+    "image": "TODO.jpg",
     "children": {
       "Autoerotic Asphyxiophilia": "http://www.soc.ucsb.edu/sexinfo/article/autoerotic-asphyxiophilia",
-      "BDSM (Bondage, Dominance, Sadomasochism)": "http://www.soc.ucsb.edu/sexinfo/article/bdsm-bondage-dominance-sadomasochism",
       "Coprophilia": "http://www.soc.ucsb.edu/sexinfo/article/coprophilia",
+      "Exhibitionism": "http://www.soc.ucsb.edu/sexinfo/article/exhibitionism",
+      "Fetishistic Transvestism": "http://www.soc.ucsb.edu/sexinfo/article/transvestism",
       "Fetishism": "http://www.soc.ucsb.edu/sexinfo/article/fetishism",
-      "Furry Fandom": "http://www.soc.ucsb.edu/sexinfo/article/furry-fandom",
-      "Transvestism": "http://www.soc.ucsb.edu/sexinfo/article/transvestism",
-      "Urophilia": "http://www.soc.ucsb.edu/sexinfo/article/urophilia"
+      "Frotteurism": "http://www.soc.ucsb.edu/sexinfo/article/frotteurism",
+      "Necrophilia": "http://www.soc.ucsb.edu/sexinfo/article/necrophilia",
+      "Scatolophilia": "http://www.soc.ucsb.edu/sexinfo/article/scatolophilia",
+      "Stalking": "http://www.soc.ucsb.edu/sexinfo/article/stalking",
+      "Urophilia": "http://www.soc.ucsb.edu/sexinfo/article/urophilia",
+      "Voyeurism": "http://www.soc.ucsb.edu/sexinfo/article/voyeurism",
+      "Zoophilia/Bestiality": "http://www.soc.ucsb.edu/sexinfo/article/zoophiliabestiality"
     }
   },
   "Spice Up Your Sex Life": {
@@ -178,8 +180,8 @@
     "image": "getting_pregnant.jpg",
     "children": {
       "Assisted Reproductive Technology (ART)": "http://www.soc.ucsb.edu/sexinfo/article/assisted-reproductive-technology-art/",
-      "Can I Get Her Pregnant If... (For Him)": "http://www.soc.ucsb.edu/sexinfo/article/can-i-get-her-pregnant-if-him",
-      "Can I Get Pregnant If... (For Her)": "http://www.soc.ucsb.edu/sexinfo/article/can-i-get-pregnant-if-her",
+      "Can We Get Pregnant If... (For Him)": "http://www.soc.ucsb.edu/sexinfo/article/can-i-get-her-pregnant-if-him",
+      "Can We Get Pregnant If... (For Her)": "http://www.soc.ucsb.edu/sexinfo/article/can-i-get-pregnant-if-her",
       "Pregnancy Tests": "http://www.soc.ucsb.edu/sexinfo/article/pregnancy-tests",
       "Pregnancy: Important Phone Numbers/Resources": "http://www.soc.ucsb.edu/sexinfo/article/pregnancy-important-phone-numbersresources",
       "Signs and Symptoms of Pregnancy": "http://www.soc.ucsb.edu/sexinfo/article/signs-and-symptoms-pregnancy",
@@ -189,12 +191,13 @@
   "During Pregnancy": {
     "image": "during_pregnancy.jpg",
     "children": {
-      "A Man's Guide to Pregnancy": "http://www.soc.ucsb.edu/sexinfo/article/mans-guide-pregnancy",
+      "A Male's Guide to Pregnancy": "http://www.soc.ucsb.edu/sexinfo/article/mans-guide-pregnancy",
       "Childbirth": "http://www.soc.ucsb.edu/sexinfo/article/childbirth",
       "My Friend is Pregnant": "http://www.soc.ucsb.edu/sexinfo/article/my-friend-pregnant",
       "Pregnancy by Trimester": "http://www.soc.ucsb.edu/sexinfo/article/pregnancy-trimester",
       "Prenatal Vitamins": "http://www.soc.ucsb.edu/sexinfo/article/prenatal-vitamins",
-      "Tips for a Healthy Pregnancy": "http://www.soc.ucsb.edu/sexinfo/article/tips-healthy-pregnancy"
+      "Tips for a Healthy Pregnancy": "http://www.soc.ucsb.edu/sexinfo/article/tips-healthy-pregnancy",
+      "The Odon Childbirth Device": "http://www.soc.ucsb.edu/sexinfo/article/odon-childbirth-device"
     }
   },
   "Adolescent Pregnancy": {
@@ -229,8 +232,7 @@
   "Birth Control Overview": {
     "image": "birth_control_overview.jpg",
     "children": {
-      "Birth Control Comparison Chart": "http://www.soc.ucsb.edu/sexinfo/article/birth-control-comparison-chart",
-      "Estrogen and Progestin Overview": "http://www.soc.ucsb.edu/sexinfo/article/estrogen-and-progestin-overview"
+      "Birth Control Comparison Chart": "http://www.soc.ucsb.edu/sexinfo/article/birth-control-comparison-chart"
     }
   },
   "Barrier Methods": {
@@ -251,6 +253,7 @@
       "Birth Control pill Overview": "http://www.soc.ucsb.edu/sexinfo/article/birth-control-pill-overview",
       "Birth Control Pills and Antibiotics": "http://www.soc.ucsb.edu/sexinfo/article/birth-control-pills-and-antibiotics",
       "Birth Control Shot": "http://www.soc.ucsb.edu/sexinfo/article/birth-control-shot",
+      "Estrogen and Progestin Overview": "http://www.soc.ucsb.edu/sexinfo/article/estrogen-and-progestin-overview",
       "Combination Pills": "http://www.soc.ucsb.edu/sexinfo/article/combination-pills",
       "Lybrel": "http://www.soc.ucsb.edu/sexinfo/article/lybrel",
       "Male Birth Control: Coming Soon?": "http://www.soc.ucsb.edu/sexinfo/article/male-birth-control-coming-soon",
@@ -619,18 +622,6 @@
       "Internet Porn": "http://www.soc.ucsb.edu/sexinfo/article/internet-porn-0",
       "Obscenity": "http://www.soc.ucsb.edu/sexinfo/article/obscenity",
       "Snuff Films": "http://www.soc.ucsb.edu/sexinfo/article/snuff-films"
-    }
-  },
-  "Other Non-Consensual Sexual Behaviors": {
-    "image": "other_non_consensual.png",
-    "children": {
-      "Exhibitionism": "http://www.soc.ucsb.edu/sexinfo/article/exhibitionism",
-      "Frotteurism": "http://www.soc.ucsb.edu/sexinfo/article/frotteurism",
-      "Necrophilia": "http://www.soc.ucsb.edu/sexinfo/article/necrophilia",
-      "Scatolophilia": "http://www.soc.ucsb.edu/sexinfo/article/scatolophilia",
-      "Stalking": "http://www.soc.ucsb.edu/sexinfo/article/stalking",
-      "Voyeurism": "http://www.soc.ucsb.edu/sexinfo/article/voyeurism",
-      "Zoophilia/Bestiality": "http://www.soc.ucsb.edu/sexinfo/article/zoophiliabestiality"
     }
   },
   "Laws": {
