@@ -2488,7 +2488,7 @@ img#logo-image {
   .social-buttons a {
     float: left;
     height: 32px;
-    margin-right: 30px;
+    margin-right: 10px;
     white-space: nowrap;
     width: 32px; }
     .social-buttons a:hover {
