@@ -160,24 +160,11 @@
     top: 0; left: 0;
   }
 
-.carousel-frame {
-  color: white;
-  float: left;
-  height: 250px;
-  overflow: hidden;
-  position: relative;
-  width: 400px;
-
-  .carousel-caption {
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-    padding: 5px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 390px;
-  }
+.carousel-caption {
+  opacity: 0.7;
+  padding-bottom: 10px;
 }
+
 
 #carousel-nav {
   font-size: 0.9em;
