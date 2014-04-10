@@ -7,8 +7,6 @@
 <div id="main" class="clearfix <?php echo $mainClass ?>">
   <div class="container clearfix">
     <div class="main">
-      <?php if ($breadcrumb): print $breadcrumb; endif; ?>
-
       <?php
         # View and Edit buttons
         if ($tabs): print '<div id="tabs-wrapper" class="clear-block">' . render($tabs) .'</div>'; endif;
