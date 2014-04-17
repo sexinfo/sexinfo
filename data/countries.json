@@ -168,7 +168,7 @@
 	{alts="OM عمان", value="Oman"},
 	{alts="PK پاکستان", weight="2", value="Pakistan"},
 	{alts="PW", weight="0.5", value="Palau"},
-	{altskjj="PS فلسطين", value="Palestinian Territory, Occupied"},
+	{alts="PS فلسطين", value="Palestinian Territory, Occupied"},
 	{alts="PA", value="Panama"},
 	{alts="PG", value="Papua New Guinea"},
 	{alts="PY", value="Paraguay"},
