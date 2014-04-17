@@ -1,7 +1,10 @@
 $( document ).ready(function() {
-
-  $('select').selectToAutocomplete();
-	$countries = $('#edit-submitted-location');
+  $.get( "data/countries.html", function( data ) {
+    $( "#edit-submitted-location" ).replaceWith( data );
+    $('#edit-submitted-location').selectToAutocomplete();
+    $('.tt-hint').remove();
+  });
+  $countries = $('#edit-submitted-location');
 	$countries.prop("autocomplete", "off");
 	$countries.addClass("typeahead");
 
