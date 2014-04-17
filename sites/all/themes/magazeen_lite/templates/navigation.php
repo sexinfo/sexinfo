@@ -44,7 +44,7 @@ function on_quiz_page()      { return page() == 'node/561'; }
 
         <li class="menu-549 <?php echo on_faq_page() ? 'active' : '' ?>"><a href="/sexinfo/frequently-asked-questions">FAQs</a></li>
         <li class="menu-400 <?php echo on_ask_page() ? 'active' : '' ?>"><a href="/sexinfo/ask-sexperts">Ask the Sexperts</a></li>
-        <li class="menu-543 <?php echo on_resources_page() ? 'active' : '' ?>"><a href="/sexinfo/article/important-phone-numbersresources">Resources</a></li>
+        <li class="menu-543 <?php echo on_resources_page() ? 'active' : '' ?>"><a href="/sexinfo/article/important-phone-numbersresources-pregnancy">Resources</a></li>
         <?php
           $result     = db_query("select * from {node} where status = 1 and promote = 1 order by rand() limit 1");
           $randomNode = $result->fetch()

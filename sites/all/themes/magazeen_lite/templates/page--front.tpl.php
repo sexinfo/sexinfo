@@ -4,8 +4,6 @@
 
 
 <div class="container">
-  <?php if ($breadcrumb): print $breadcrumb; endif; ?>
-
   <?php
     # "has been successfully updated", etc
     if ($show_messages && $messages): print $messages; endif;
