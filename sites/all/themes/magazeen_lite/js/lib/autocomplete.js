@@ -1,19 +1,8 @@
 $( document ).ready(function() {
-  $.get( "data/countries.html", function( data ) {
-    $( "#edit-submitted-location" ).replaceWith( data );
-    $('#edit-submitted-location').selectToAutocomplete();
-    $('.tt-hint').remove();
+  // If javascript is enabled, replace the standard webform select stuff with our cool country selection!
+  $.get('data/countries.html', function( data ) {
+    $('#edit-submitted-location').replaceWith( data ); // Replace the data!
+    $('#edit-submitted-location').selectToAutocomplete(); // Enables our autocomplete mode
+    $('.tt-hint').remove(); // Removes the hint that blocks our select item from being seein
   });
-  $countries = $('#edit-submitted-location');
-	$countries.prop("autocomplete", "off");
-	$countries.addClass("typeahead");
-
-	$countries.typeahead({
-	  name: 'countries',
-	  prefetch: '/data/countries.json',
-	  limit: 10
-	});
-
 });
-
-
