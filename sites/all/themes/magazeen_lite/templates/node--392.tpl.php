@@ -79,8 +79,7 @@ HTML;
     <h2>Sex Across the Lifecycle</h2>
 
     <div class="grid-left">
-      <?php echo renderTopicQuarter('An Overview of Sexuality') ?>
-      <?php echo renderTopicQuarter('Puberty') ?>
+      <?php echo renderTopicHalf('Adolescent Sexuality') ?>
     </div>
 
     <div class="grid-right">
