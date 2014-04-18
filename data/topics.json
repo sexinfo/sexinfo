@@ -4,10 +4,8 @@
     "children": {
       "An Overview of Sexuality": "http://www.soc.ucsb.edu/sexinfo/article/overview-sexuality",
       "Childhood Sexuality": "http://www.soc.ucsb.edu/sexinfo/article/childhood-sexuality",
-      "Male Puberty": "http://www.soc.ucsb.edu/sexinfo/article/male-puberty",
       "Female Puberty": "http://www.soc.ucsb.edu/sexinfo/article/female-puberty",
-      "Pubic Hair": "http://www.soc.ucsb.edu/sexinfo/article/pubic-hair",
-      "The Vulva During Puberty": "http://www.soc.ucsb.edu/sexinfo/article/vulva-during-puberty",
+      "Male Puberty": "http://www.soc.ucsb.edu/sexinfo/article/male-puberty",
       "Nocturnal Orgasms and Emissions": "http://www.soc.ucsb.edu/sexinfo/article/nocturnal-orgasms-and-emissions"
     }
   },
@@ -21,7 +19,6 @@
     "image": "talking_about_sex.jpg",
     "children": {
       "Sex Education within Schools": "http://www.soc.ucsb.edu/sexinfo/article/sex-education-within-schools",
-      "Primary School Sex Education": "http://www.soc.ucsb.edu/sexinfo/article/primary-school-sex-education",
       "Talking To Your Child About Sex": "http://www.soc.ucsb.edu/sexinfo/article/basics-sexuality-talking-about-sex-talking-your-child-about-sex-0",
       "Talking To Your Parent About Sex": "http://www.soc.ucsb.edu/sexinfo/article/talking-your-parent-about-sex",
       "Interview With a Sex Therapist": "http://www.soc.ucsb.edu/sexinfo/article/interview-sex-therapist"
@@ -35,31 +32,27 @@
     "children": {
       "Overview of the Male Reproductive System": "http://www.soc.ucsb.edu/sexinfo/article/overview-male-reproductive-system",
       "The Penis": "http://www.soc.ucsb.edu/sexinfo/article/penis-0",
-
       "The Testes": "http://www.soc.ucsb.edu/sexinfo/article/testes",
-          "Semen": "http://www.soc.ucsb.edu/sexinfo/article/semen",
-          "Spermatogenesis": "http://www.soc.ucsb.edu/sexinfo/article/spermatogenesis",
-
       "The Prostate Gland": "http://www.soc.ucsb.edu/sexinfo/article/prostate-gland"
     }
   },
   "Female Reproductive System": {
     "image": "female_reproductive_system.jpg",
     "children": {
-      "Egg Facts": "http://www.soc.ucsb.edu/sexinfo/article/egg-facts",
-      "Menstrual Products": "http://www.soc.ucsb.edu/sexinfo/article/menstrual-products",
       "Overview of the Female Reproductive System": "http://www.soc.ucsb.edu/sexinfo/article/overview-female-reproductive-system",
+      "Egg Facts": "http://www.soc.ucsb.edu/sexinfo/article/egg-facts",
       "The Breasts": "http://www.soc.ucsb.edu/sexinfo/article/breasts",
       "The Clitoris": "http://www.soc.ucsb.edu/sexinfo/article/clitoris",
-      "The G Spot": "http://www.soc.ucsb.edu/sexinfo/article/g-spot",
+      "The G-Spot": "http://www.soc.ucsb.edu/sexinfo/article/g-spot",
       "The Hymen": "http://www.soc.ucsb.edu/sexinfo/article/hymen",
-      "The Menstrual Cycle": "http://www.soc.ucsb.edu/sexinfo/article/menstrual-cycle"
+      "The Menstrual Cycle": "http://www.soc.ucsb.edu/sexinfo/article/menstrual-cycle",
+      "Menstrual Products": "http://www.soc.ucsb.edu/sexinfo/article/menstrual-products"
     }
   },
   "Intersex Reproductive System": {
     "image": "TODO.jpg",
     "children": {
-      "Intersex": "http://www.soc.ucsb.edu/sexinfo/article/intersex"
+      "Overview of the Intersex Reproductive System": "http://www.soc.ucsb.edu/sexinfo/article/intersex"
     }
   },
   "Bodily Sexual Response": {
@@ -67,7 +60,7 @@
     "children": {
       "The Sexual Response Cycle": "http://www.soc.ucsb.edu/sexinfo/article/sexual-response-cycle",
       "Epididymal Hypertension (Blue Balls)": "???",
-      "Pelvic Congestion": "http://www.soc.ucsb.edu/sexinfo/article/pelvic-congestion"
+      "Pelvic Congestion (Blue Vulva)": "http://www.soc.ucsb.edu/sexinfo/article/pelvic-congestion"
     }
   },
   "Sex Determination and Differentiation": {
@@ -107,19 +100,20 @@
   "Sex With Others": {
     "image": "sex_with_others.jpg",
     "children": {
+      "Manual Stimulation": "http://www.soc.ucsb.edu/sexinfo/article/manual-stimulation",
       "Dry Sex": "http://www.soc.ucsb.edu/sexinfo/article/dry-sex",
       "Group Sex": "http://www.soc.ucsb.edu/sexinfo/article/group-sex",
-      "Manual Stimulation": "http://www.soc.ucsb.edu/sexinfo/article/manual-stimulation",
-      "Queefing Demystified": "http://www.soc.ucsb.edu/sexinfo/article/queefing-demystified",
-      "Sex On Your Period": "http://www.soc.ucsb.edu/sexinfo/article/sex-your-period",
+      "Swinging": "http://www.soc.ucsb.edu/sexinfo/article/swinging",
       "Sexual Positions for Overweight Individuals and Pregnant Couples": "http://www.soc.ucsb.edu/sexinfo/article/sexual-positions-overweight-individuals-pregnant-couples",
-      "Swinging": "http://www.soc.ucsb.edu/sexinfo/article/swinging"
+      "Sex On Your Period": "http://www.soc.ucsb.edu/sexinfo/article/sex-your-period",
+      "Queefing Demystified": "http://www.soc.ucsb.edu/sexinfo/article/queefing-demystified"
     }
   },
   "Autoeroticism": {
     "image": "TODO.jpg",
     "children": {
-      "Fantasy and Erogenous Zones": "http://www.soc.ucsb.edu/sexinfo/article/fantasy-erogenous-zones",
+      "Fantasy": "http://www.soc.ucsb.edu/sexinfo/article/fantasy",
+      "Erogenous Zones": "http://www.soc.ucsb.edu/sexinfo/article/erogenous-zones",
       "A Guide to Sex Toys": "http://www.soc.ucsb.edu/sexinfo/article/guide-sex-toys"
     }
   },
@@ -133,14 +127,14 @@
   "Atypical Sexual Behaviors": {
     "image": "TODO.jpg",
     "children": {
-      "Autoerotic Asphyxiophilia": "http://www.soc.ucsb.edu/sexinfo/article/autoerotic-asphyxiophilia",
+      "Autoerotic Asphyxiation": "http://www.soc.ucsb.edu/sexinfo/article/autoerotic-asphyxiophilia",
       "Coprophilia": "http://www.soc.ucsb.edu/sexinfo/article/coprophilia",
       "Exhibitionism": "http://www.soc.ucsb.edu/sexinfo/article/exhibitionism",
-      "Fetishistic Transvestism": "http://www.soc.ucsb.edu/sexinfo/article/transvestism",
       "Fetishism": "http://www.soc.ucsb.edu/sexinfo/article/fetishism",
+      "Fetishistic Transvestism": "http://www.soc.ucsb.edu/sexinfo/article/transvestism",
       "Frotteurism": "http://www.soc.ucsb.edu/sexinfo/article/frotteurism",
       "Necrophilia": "http://www.soc.ucsb.edu/sexinfo/article/necrophilia",
-      "Scatolophilia": "http://www.soc.ucsb.edu/sexinfo/article/scatolophilia",
+      "Scatophilia": "http://www.soc.ucsb.edu/sexinfo/article/scatolophilia",
       "Stalking": "http://www.soc.ucsb.edu/sexinfo/article/stalking",
       "Urophilia": "http://www.soc.ucsb.edu/sexinfo/article/urophilia",
       "Voyeurism": "http://www.soc.ucsb.edu/sexinfo/article/voyeurism",
