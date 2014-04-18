@@ -57,15 +57,15 @@ HTML;
     <h4>Explore Our Topics!</h4>
   </div>
 
-  <li><a href="#basics_of_sexuality">Basics of Sexuality</a></li>
+  <li><a href="#basics_of_sexuality">Sex Across The Lifecycle</a></li>
   <li><a href="#the_body">The Body</a></li>
   <li><a href="#sexual_activity">Sexual Activity</a></li>
   <li><a href="#pregnancy">Pregnancy</a></li>
-  <li><a href="#contraception">Contraception</a></li>
+  <li><a href="#contraception">Birth Control</a></li>
   <li><a href="#abortion">Abortion</a></li>
-  <li><a href="#sexually_transmitted_infections">Sexually Transmitted Infections</a></li>
+  <li><a href="#sexually_transmitted_infections">Sexually Transmitted Infections (STIs)</a></li>
   <li><a href="#health">Health</a></li>
-  <li><a href="#love_and_relationships">Love &amp; Relationships</a></li>
+  <li><a href="#love_and_relationships">Love and Relationships</a></li>
   <li><a href="#sexual_orientations">Sexual Orientations</a></li>
   <li><a href="#sexual_difficulties">Sexual Difficulties</a></li>
   <li><a href="#sex_and_the_law">Sex and the Law</a></li>
@@ -76,7 +76,7 @@ HTML;
 <div class="topics-container">
 
   <div class="parent-topic" id="basics_of_sexuality">
-    <h2>Basics of Sexuality</h2>
+    <h2>Sex Across the Lifecycle</h2>
 
     <div class="grid-left">
       <?php echo renderTopicQuarter('An Overview of Sexuality') ?>
@@ -173,7 +173,7 @@ HTML;
 
 
   <div class="parent-topic" id="contraception">
-    <h2>Contraception</h2>
+    <h2>Birth Control</h2>
 
     <section>
       <div class="grid-left">
@@ -215,7 +215,7 @@ HTML;
 
 
   <div class="parent-topic" id="sexually_transmitted_infections">
-    <h2>Sexually Transmitted Infections</h2>
+    <h2>Sexually Transmitted Infections (STIs)</h2>
 
     <section>
       <div class="grid-left">
@@ -288,7 +288,7 @@ HTML;
 
 
   <div class="parent-topic" id="love_and_relationships">
-    <h2>Love &amp; Relationships</h2>
+    <h2>Love and Relationships</h2>
 
     <div class="grid-left">
       <?php echo renderTopicHalf('Love') ?>
