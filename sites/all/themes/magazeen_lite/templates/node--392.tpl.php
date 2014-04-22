@@ -32,7 +32,7 @@
 
 return <<<HTML
 <div class="topic-{$size}">
-  <div class="text-on-image" style="background: url('$image') no-repeat">
+  <div class="text-on-image" style="background-image: url('$image')">
     <div class="text-on-image-tint">
     <div class="text-on-image-text">{$topicName}</div>
       <ul class="text-on-image-articles">{$children}</ul>
