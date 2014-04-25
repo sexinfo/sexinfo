@@ -1,4 +1,9 @@
-// TODO: docs
+// Determine if some input entered into the question box
+// contains pregnancy keywords that we want to intercept
+//
+// input - String textarea input entered by the user
+//
+// Returns Boolean
 function containsPregnancyKeywords(input) {
   var keywords = ['pregnant', 'pregnancy'];
 
@@ -11,7 +16,10 @@ function containsPregnancyKeywords(input) {
 }
 
 
-// TODO: docs
+// Once a pregnancy keyword has been detected, show a big button
+// linking to the pregnancy page
+//
+// Returns Boolean
 function displayPregnancyTrap() {
   var linkText = 'Click here if you think you might be pregnant!',
       linkOptions = { 'class': 'pink-block-btn', 'href': "#" };
@@ -27,11 +35,11 @@ function displayPregnancyTrap() {
 }
 
 
-// TODO: docs
-//
 // Query the search API and dispatch success/error handlers
 // The query is first spell corrected, then filtered for popular words
 // to pass to the search API
+//
+// Returns nothing
 function fetchSuggestions() {
     var input = $("#edit-submitted-message").val().split(' ');
 
@@ -94,6 +102,7 @@ function showSuggestions(html) {
 
 
 
+// DOM bindings
 $(function() {
   // Wait a bit after keyup before hitting the API
   var timeout = -1;
