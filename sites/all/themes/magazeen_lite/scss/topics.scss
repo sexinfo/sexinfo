@@ -210,6 +210,8 @@ $transition-time: 0.4s;
     color: lighten($light-gray, 20);
     text-decoration: underline;
   }
+
+  a:visited { color: #f48ab7; }
 }
 
 .text-on-image-tint {

@@ -2921,6 +2921,8 @@ tr.odd.cat-row td {
   .text-on-image-article a:hover {
     color: #ececec;
     text-decoration: underline; }
+  .text-on-image-article a:visited {
+    color: #f48ab7; }
 
 .text-on-image-tint {
   background-color: rgba(0, 0, 0, 0);
