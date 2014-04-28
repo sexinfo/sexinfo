@@ -210,6 +210,8 @@ $transition-time: 0.4s;
     color: lighten($light-gray, 20);
     text-decoration: underline;
   }
+
+  a:visited { color: #f48ab7; }
 }
 
 .text-on-image-tint {
@@ -232,7 +234,7 @@ $transition-time: 0.4s;
   margin: 0;
   padding: 0;
 
-  @media(min-width: 1100px) {
+  @media(min-width: 1200px) {
     position: fixed;
     right: 32px;
     top: 234px;
