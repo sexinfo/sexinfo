@@ -50,6 +50,33 @@ HTML;
     return renderTopicSection('quarter', $topicName);
   }
 
+  printf("<ul>\n");
+  $topics = db_query('SELECT * FROM taxonomy_term_data A, taxonomy_term_hierarchy B WHERE A.tid=B.tid AND A.vid=3 AND B.parent=0 ORDER BY weight ASC');
+  foreach($topics as $topic) {
+    printf("<li>");
+    printf("<h4>%s</h4>", $topic->name);
+
+    $sections = db_query('SELECT * FROM taxonomy_term_hierarchy A, taxonomy_term_data B WHERE A.tid = B.tid AND parent=' . $topic->tid);
+    foreach($sections as $section) {
+      printf("<li>");
+      printf("<h5>%s</h5>", $section->name);
+
+
+      printf("<ul>");
+
+      $articles = db_query('SELECT DISTINCT nid FROM `taxonomy_index` WHERE tid=' . $section->tid);
+      foreach($articles as $nid) {
+        $article = db_query('SELECT * FROM node WHERE nid='.$nid->nid)->fetch();
+        printf("<a href=\"node/%d\"><li>%s</li></a>", $article->nid, $article->title);
+      }
+
+      printf("</ul>");
+
+      printf("</li>");
+    }
+    printf("</li>\n");
+  }
+  printf("</ul>\n");
 ?>
 
 <ul class="topics-nav">
