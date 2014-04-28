@@ -21,7 +21,7 @@
       "Sex Education within Schools": "http://www.soc.ucsb.edu/sexinfo/article/sex-education-within-schools",
       "Talking To Your Child About Sex": "http://www.soc.ucsb.edu/sexinfo/article/basics-sexuality-talking-about-sex-talking-your-child-about-sex-0",
       "Talking To Your Parent About Sex": "http://www.soc.ucsb.edu/sexinfo/article/talking-your-parent-about-sex",
-      "Interview With a Sex Therapist": "http://www.soc.ucsb.edu/sexinfo/article/interview-sex-therapist"
+      "Interview With a Sex Reassignment Therapist": "http://www.soc.ucsb.edu/sexinfo/article/interview-sex-therapist"
     }
   },
 
@@ -40,7 +40,7 @@
     "image": "female_reproductive_system.jpg",
     "children": {
       "Overview of the Female Reproductive System": "http://www.soc.ucsb.edu/sexinfo/article/overview-female-reproductive-system",
-      "Egg Facts": "http://www.soc.ucsb.edu/sexinfo/article/egg-facts",
+      "The Human Egg": "http://www.soc.ucsb.edu/sexinfo/article/egg-facts",
       "The Breasts": "http://www.soc.ucsb.edu/sexinfo/article/breasts",
       "The Clitoris": "http://www.soc.ucsb.edu/sexinfo/article/clitoris",
       "The G-Spot": "http://www.soc.ucsb.edu/sexinfo/article/g-spot",
@@ -175,7 +175,7 @@
       "Can We Get Pregnant If...? (For Him)": "http://www.soc.ucsb.edu/sexinfo/article/can-we-get-pregnant-if-him",
       "Can We Get Pregnant If...? (For Her)": "http://www.soc.ucsb.edu/sexinfo/article/can-we-get-pregnant-if-her",
       "Pregnancy Tests": "http://www.soc.ucsb.edu/sexinfo/article/pregnancy-tests",
-      "Pregnancy: Important Phone Numbers/Resources": "http://www.soc.ucsb.edu/sexinfo/article/important-phone-numbersresources-pregnancy",
+      "Important Phone Numbers/Resources": "http://www.soc.ucsb.edu/sexinfo/article/important-phone-numbersresources-pregnancy",
       "Signs and Symptoms of Pregnancy": "http://www.soc.ucsb.edu/sexinfo/article/signs-and-symptoms-pregnancy",
       "Steps to Becoming Pregnant": "http://www.soc.ucsb.edu/sexinfo/article/steps-becoming-pregnant"
     }
@@ -195,7 +195,8 @@
   "Adolescent Pregnancy": {
     "image": "adolescent_pregnancy.jpg",
     "children": {
-      "Teen Pregnancy Options": "http://www.soc.ucsb.edu/sexinfo/article/teen-pregnancy-options"
+      "Teen Pregnancy Options": "http://www.soc.ucsb.edu/sexinfo/article/teen-pregnancy-options",
+      "Tips for Educators on Avoiding Teen Pregnancy":"http://www.soc.ucsb.edu/sexinfo/article/tips-educators-avoiding-teen-pregnancy"
     }
   },
   "Risks While Pregnant": {
@@ -240,16 +241,16 @@
   "Hormonal Methods": {
     "image": "hormonal_methods.jpg",
     "children": {
-      "Birth Control Implant": "http://www.soc.ucsb.edu/sexinfo/article/implant",
-      "Birth Control Patch": "http://www.soc.ucsb.edu/sexinfo/article/patch",
+      "The Birth Control Implant": "http://www.soc.ucsb.edu/sexinfo/article/implant",
+      "The Contraceptive Patch": "http://www.soc.ucsb.edu/sexinfo/article/patch",
       "Birth Control Pill Overview": "http://www.soc.ucsb.edu/sexinfo/article/birth-control-pill-overview",
       "Birth Control Pills and Antibiotics": "http://www.soc.ucsb.edu/sexinfo/article/birth-control-pills-and-antibiotics",
-      "Birth Control Shot": "http://www.soc.ucsb.edu/sexinfo/article/shot",
+      "The Contraceptive Shot": "http://www.soc.ucsb.edu/sexinfo/article/shot",
       "Combination Pills": "http://www.soc.ucsb.edu/sexinfo/article/combination-pills",
       "Estrogen and Progestin Overview": "http://www.soc.ucsb.edu/sexinfo/article/estrogen-and-progestin-overview",
       "Lybrel": "http://www.soc.ucsb.edu/sexinfo/article/lybrel",
       "Male Birth Control: Coming Soon?": "http://www.soc.ucsb.edu/sexinfo/article/male-birth-control-coming-soon",
-      "Progestin-Only Pills?": "http://www.soc.ucsb.edu/sexinfo/article/progestin-only-pills",
+      "Progestin-Only Pills": "http://www.soc.ucsb.edu/sexinfo/article/progestin-only-pills",
       "Seasonique": "http://www.soc.ucsb.edu/sexinfo/article/seasonique",
       "Vaginal Ring": "http://www.soc.ucsb.edu/sexinfo/article/vaginal-ring"
     }
@@ -267,12 +268,11 @@
   "Other Methods": {
     "image": "other_methods.jpg",
     "children": {
-      "Copper IUD": "http://www.soc.ucsb.edu/sexinfo/article/intrauterine-device-iud",
       "Emergency Contraceptive Pills (ECPs)": "http://www.soc.ucsb.edu/sexinfo/article/emergency-contraceptive-pills-ecps-0",
       "Intrauterine Device (IUD)": "http://www.soc.ucsb.edu/sexinfo/article/intrauterine-device-iud",
       "Spermicides": "http://www.soc.ucsb.edu/sexinfo/article/spermicides",
-      "Tubal Ligation": "http://www.soc.ucsb.edu/sexinfo/article/female-sterilization",
-      "Vasectomy": "http://www.soc.ucsb.edu/sexinfo/article/male-sterilization"
+      "Female Sterilization": "http://www.soc.ucsb.edu/sexinfo/article/female-sterilization",
+      "Male Sterilization": "http://www.soc.ucsb.edu/sexinfo/article/male-sterilization"
     }
   },
 
@@ -292,14 +292,14 @@
     "image": "types_of_abortion.jpg",
     "children": {
       "Late-Term Abortions": "http://www.soc.ucsb.edu/sexinfo/article/late-term-abortions",
-      "Medically Induced Abortions": "http://www.soc.ucsb.edu/sexinfo/article/late-term-abortions",
+      "Medically Induced Abortions": "http://www.soc.ucsb.edu/sexinfo/article/medically-induced-abortions",
       "Surgical Abortions": "http://www.soc.ucsb.edu/sexinfo/article/surgical-abortions"
     }
   },
   "Alternative Options": {
     "image": "alternative_options.jpg",
     "children": {
-      "Option: Adoption": "http://www.soc.ucsb.edu/sexinfo/article/Adoption",
+      "Adoption": "http://www.soc.ucsb.edu/sexinfo/article/Adoption",
       "Safe Surrender": "http://www.soc.ucsb.edu/sexinfo/article/safe-surrender"
     }
   },
@@ -365,6 +365,7 @@
     "image": "non_stis.png",
     "children": {
       "Folliculitis": "http://www.soc.ucsb.edu/sexinfo/article/folliculitis",
+      "Fordyce Spots": "http://www.soc.ucsb.edu/sexinfo/article/fordyce-spots",
       "Pearly Penile Papules": "http://www.soc.ucsb.edu/sexinfo/article/pearly-penile-papules",
       "Toxic Shock Syndrome": "http://www.soc.ucsb.edu/sexinfo/article/toxic-shock-syndrome",
       "Urinary Tract Infections (UTIs)": "http://www.soc.ucsb.edu/sexinfo/article/urinary-tract-infections-utis"
@@ -426,7 +427,7 @@
       "Penile Fracture": "http://www.soc.ucsb.edu/sexinfo/article/penile-fracture",
       "Polycystic Ovaries": "http://www.soc.ucsb.edu/sexinfo/article/polycystic-ovaries",
       "Sex and Autism": "http://www.soc.ucsb.edu/sexinfo/article/sex-and-autism",
-      "sex and Type 1 Diabetes": "http://www.soc.ucsb.edu/sexinfo/article/sex-and-type-1-diabetes",
+      "Sex and Type 1 Diabetes": "http://www.soc.ucsb.edu/sexinfo/article/sex-and-type-1-diabetes",
       "Testicular Torsion": "http://www.soc.ucsb.edu/sexinfo/article/testicular-torsion"
     }
   },
@@ -496,7 +497,7 @@
   "Sexual Identities": {
     "image": "sexual_identities.jpg",
     "children": {
-      "Androgyny": "http://www.soc.ucsb.edu/sexinfo/article/androgyny",
+      "Genderqueer": "http://www.soc.ucsb.edu/sexinfo/article/androgyny",
       "Asexuality": "http://www.soc.ucsb.edu/sexinfo/article/asexuality",
       "Kinsey Scale": "http://www.soc.ucsb.edu/sexinfo/article/kinsey-scale"
     }
@@ -508,7 +509,6 @@
       "Famous Queer Identified Figures": "http://www.soc.ucsb.edu/sexinfo/article/famous-queer-identified-figures",
       "Homophobia": "http://www.soc.ucsb.edu/sexinfo/article/homophobia",
       "Homosexuality and Religion": "http://www.soc.ucsb.edu/sexinfo/article/homosexuality-and-religion",
-      "Interview with a Sex Reassignment Therapist": "http://www.soc.ucsb.edu/sexinfo/article/interview-sex-reassignment-therapist",
       "Situational Homosexuality": "http://www.soc.ucsb.edu/sexinfo/article/situational-homosexuality",
       "Support Groups and Organizations": "http://www.soc.ucsb.edu/sexinfo/article/support-groups-and-organizations",
       "The Tearoom Trade": "http://www.soc.ucsb.edu/sexinfo/article/tearoom-trade",
@@ -586,7 +586,7 @@
       "Overview of Domestic Violence": "http://www.soc.ucsb.edu/sexinfo/article/overview-domestic-violence",
       "The Cycle of Violence": "http://www.soc.ucsb.edu/sexinfo/article/cycle-violence",
       "What To Do If You Are Being Abused": "http://www.soc.ucsb.edu/sexinfo/article/what-do-if-you-are-being-abused",
-      "Why She* Stays": "http://www.soc.ucsb.edu/sexinfo/article/why-she-stays"
+      "Why She Stays": "http://www.soc.ucsb.edu/sexinfo/article/why-she-stays"
     }
   },
   "Sexual Assault": {
@@ -645,6 +645,7 @@
       "Magdalene Laundries in Ireland": "http://www.soc.ucsb.edu/sexinfo/article/magdalene-laundries-ireland",
       "Risks of HIV/AIDS and Gender Inequality in Sub-Saharan Africa":"http://www.soc.ucsb.edu/sexinfo/article/risks-hivaids-and-gender-inequality-sub-saharan-africa",
       "Sex in Inis Beag, Ireland":"http://www.soc.ucsb.edu/sexinfo/article/sex-inis-beag-ireland",
+      "Sexual Abuse in Irish Industrial Schools":"http://www.soc.ucsb.edu/sexinfo/article/sexual-abuse-irish-industrial-schools",
       "Some Culturally-Based Differences in Sexual Activity":"http://www.soc.ucsb.edu/sexinfo/article/some-culturally-based-differences-sexual-activity",
       "When Girls Will Be Boys: The 'Sworn Virgins' of Albania":"http://www.soc.ucsb.edu/sexinfo/article/when-girls-will-be-boys-sworn-virgins-albania"
     }
