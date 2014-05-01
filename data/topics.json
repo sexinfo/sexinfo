@@ -1,6 +1,6 @@
 {
   "Adolescent Sexuality": {
-    "image": "overview_of_sexuality.jpg",
+    "image": "adolescent_sexuality.jpg",
     "children": {
       "An Overview of Sexuality": "http://www.soc.ucsb.edu/sexinfo/article/overview-sexuality",
       "Childhood Sexuality": "http://www.soc.ucsb.edu/sexinfo/article/childhood-sexuality",
@@ -297,7 +297,7 @@
     }
   },
   "Alternative Options": {
-    "image": "alternative_options.jpg",
+    "image": "alternative_options.png",
     "children": {
       "Adoption": "http://www.soc.ucsb.edu/sexinfo/article/Adoption",
       "Safe Surrender": "http://www.soc.ucsb.edu/sexinfo/article/safe-surrender"
@@ -432,7 +432,7 @@
     }
   },
   "Cancer": {
-    "image": "cancer.jpg",
+    "image": "cancer.png",
     "children": {
       "Breast Cancer": "http://www.soc.ucsb.edu/sexinfo/article/breast-cancer",
       "Breast Cancer Awareness": "http://www.soc.ucsb.edu/sexinfo/article/breast-cancer-awareness",
@@ -444,7 +444,7 @@
     }
   },
   "Medical Procedures": {
-    "image": "medical_procedures.jpg",
+    "image": "medical_procedures.png",
     "children": {
       "Breast Augmentation": "http://www.soc.ucsb.edu/sexinfo/article/health-medical-procedures-elective-breast-augmentation-0",
       "Hysterectomy": "http://www.soc.ucsb.edu/sexinfo/article/hysterectomy",
@@ -638,7 +638,7 @@
     }
   },
   "Sex Around the World": {
-    "image": "sex_around_the_world.jpg",
+    "image": "sex_around_the_world.png",
     "children": {
       "Cultural Significance of an Intact Hymen": "http://www.soc.ucsb.edu/sexinfo/article/cultural-significance-tact-hymen",
       "Female Genital Mutilation (FGM)": "http://www.soc.ucsb.edu/sexinfo/article/female-genital-mutilation-fgm",
