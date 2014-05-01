@@ -2895,6 +2895,10 @@ tr.odd.cat-row td {
     position: absolute;
     bottom: 0px;
     width: 100%; }
+    @media (max-width: 767px) {
+      .text-on-image .text-on-image-text {
+        opacity: 0;
+        bottom: 170px; } }
   .text-on-image .text-on-image-articles {
     list-style: none;
     margin: 0px;
@@ -2903,6 +2907,10 @@ tr.odd.cat-row td {
     position: absolute;
     transition: opacity 0.4s ease-in, top 0.4s;
     width: 100%; }
+    @media (max-width: 767px) {
+      .text-on-image .text-on-image-articles {
+        opacity: 1 !important;
+        top: 0px !important; } }
   .text-on-image:hover .text-on-image-articles {
     opacity: 1;
     top: 0px; }
@@ -2931,6 +2939,9 @@ tr.odd.cat-row td {
   width: 100%; }
   .text-on-image-tint:hover {
     background-color: rgba(0, 0, 0, 0.75); }
+  @media (max-width: 767px) {
+    .text-on-image-tint {
+      background-color: rgba(0, 0, 0, 0.75); } }
 
 .topics-nav {
   background-color: white;
