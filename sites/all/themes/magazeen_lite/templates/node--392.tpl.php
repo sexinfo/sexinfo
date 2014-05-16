@@ -89,20 +89,53 @@ HTML;
   function renderTopic($topic) {
     $name = $topic->name;
     $target = urlencode($name);
-    $result = <<<HTML
+    $sections = renderSections($topic);
+    return <<<HTML
 <div class="parent-topic" id="$target">
   <h2>$name</h2>
-
-  <div class="grid-left">
-    <?php echo renderTopicHalf('Adolescent Sexuality') ?>
-  </div>
-
-  <div class="grid-right">
-    <?php echo renderTopicQuarter('Aging and the Sexual Response') ?>
-    <?php echo renderTopicQuarter('Talking About Sex') ?>
-  </div>
+  $sections
 </div><!-- .parent-topic -->
 HTML;
+  }
+
+  function renderSections($topic) {
+    $sections = db_query('SELECT * FROM taxonomy_term_hierarchy A, taxonomy_term_data B WHERE A.tid = B.tid AND parent=' . $topic->tid);
+    $sections_html = '';
+
+    foreach ($sections as $section) {
+      $sections_html .= renderSection($section);
+    }
+
+    return $sections_html;
+  }
+
+  function renderSection($section) {
+    $num_articles = 0;
+    $children_html = '';
+
+    // Generate children html which is links to articles
+    $articles = db_query('SELECT DISTINCT * FROM taxonomy_index A, node B WHERE A.nid = B.nid AND A.tid=' . $section->tid);
+    foreach($articles as $nid) {
+      $num_articles += 1;
+      $article = db_query('SELECT * FROM node WHERE nid='.$nid->nid)->fetch();
+      $children_html = $children_html . sprintf("<li class='text-on-image-article'><a href=\"node/%d\">%s</a></li>", $article->nid, $article->title);
+    }
+
+    $section_name = $section->name;
+    $size = $num_articles > 6 ? 'half' : 'quarter';
+    $image = 'sites/all/themes/magazeen_lite/images/topics/kinky_sex_paraphilia.jpg';
+    return <<<HTML
+<div class="topic-{$size}">
+  <div class="text-on-image" style="background-image: url('$image')">
+    <div class="text-on-image-tint">
+    <div class="text-on-image-text">{$section_name}</div>
+      <ul class="text-on-image-articles">{$children_html}</ul>
+    </div>
+  </div>
+</div>
+HTML;
+
+
   }
 
   echo renderNav();
