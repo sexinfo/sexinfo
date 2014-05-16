@@ -68,24 +68,6 @@ $spacer: 20px;
   }
 }
 
-.grid-left,
-.grid-right {
-  @include border-box;
-  float: left;
-  width: 417px;
-
-  @media(max-width: 1200px) {
-    float: none;
-    margin: 0 !important;
-    width: 100%;
-
-    .topic-quarter { margin-bottom: $spacer; }
-  }
-}
-
-.grid-right { margin-left: $spacer; }
-
-
 .parent-topic {
   @include border-box;
   @include clearfix;
@@ -122,14 +104,31 @@ $quarter-height: 170px;
 
 .topic-half, .topic-quarter {
   @include clearfix;
+  @include border-box;
+  float: left;
+  width: 417px;
   border: 1px solid #ccc;
+  margin: 10px 5px;
+
+  @media(max-width: 1200px) {
+    float: none;
+    margin: 0 !important;
+    width: 100%;
+
+    .topic-quarter { margin-bottom: $spacer; }
+  }
 
   @include mobile { margin-bottom: $spacer; }
 }
 
+.grid-right { margin-left: $spacer; }
+
+
+
 .topic-half {
   .text-on-image {
     height: $half-height;
+    margin-top: 1px;
 
     &:hover .text-on-image-text {
       opacity: 0;
