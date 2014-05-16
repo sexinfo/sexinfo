@@ -121,14 +121,9 @@ $quarter-height: 170px;
   @include mobile { margin-bottom: $spacer; }
 }
 
-.grid-right { margin-left: $spacer; }
-
-
-
 .topic-half {
   .text-on-image {
     height: $half-height;
-    margin-top: 1px;
 
     &:hover .text-on-image-text {
       opacity: 0;
@@ -140,7 +135,9 @@ $quarter-height: 170px;
 }
 
 .topic-quarter {
-  &:first-child { margin-bottom: $spacer; }
+  // This little hack below here allows for the height of two small
+  // images to be the same size as one large image.
+  border-bottom: 0px;
 
   .text-on-image {
     height: $quarter-height;

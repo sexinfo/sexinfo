@@ -2853,27 +2853,23 @@ tr.odd.cat-row td {
     .topic-half, .topic-quarter {
       margin-bottom: 20px; } }
 
-.grid-right {
-  margin-left: 20px; }
-
 .topic-half .text-on-image {
-  height: 360px;
-  margin-top: 1px; }
+  height: 360px; }
   .topic-half .text-on-image:hover .text-on-image-text {
     opacity: 0;
     bottom: 360px; }
   .topic-half .text-on-image .text-on-image-articles {
     top: 360px; }
 
-.topic-quarter:first-child {
-  margin-bottom: 20px; }
-.topic-quarter .text-on-image {
-  height: 170px; }
-  .topic-quarter .text-on-image:hover .text-on-image-text {
-    opacity: 0;
-    bottom: 170px; }
-  .topic-quarter .text-on-image .text-on-image-articles {
-    top: 170px; }
+.topic-quarter {
+  border-bottom: 0px; }
+  .topic-quarter .text-on-image {
+    height: 170px; }
+    .topic-quarter .text-on-image:hover .text-on-image-text {
+      opacity: 0;
+      bottom: 170px; }
+    .topic-quarter .text-on-image .text-on-image-articles {
+      top: 170px; }
 
 .text-on-image {
   background-size: cover;
