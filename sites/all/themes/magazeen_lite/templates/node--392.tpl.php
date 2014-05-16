@@ -114,7 +114,10 @@ HTML;
     $children_html = '';
 
     // Generate children html which is links to articles
-    $articles = db_query('SELECT DISTINCT * FROM taxonomy_index A, node B WHERE A.nid = B.nid AND A.tid=' . $section->tid);
+    // The status=1 part makes sure we only select published articles
+    // This is because there are a lot of cases were we have old, 
+    // and terrible articles in circulation that we don't want normal users to see.
+    $articles = db_query('SELECT DISTINCT * FROM taxonomy_index A, node B WHERE A.nid = B.nid AND B.status=1 AND A.tid=' . $section->tid);
     foreach($articles as $nid) {
       $num_articles += 1;
       $article = db_query('SELECT * FROM node WHERE nid='.$nid->nid)->fetch();
