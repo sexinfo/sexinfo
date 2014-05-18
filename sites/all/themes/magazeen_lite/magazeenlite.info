@@ -34,3 +34,4 @@ scripts[] = js/dropdown.js
 scripts[] = js/lib/autocomplete.js
 scripts[] = js/lib/jquery.select-to-autocomplete.min.js
 scripts[] = js/lib/jquery-ui-autocomplete.js
+scripts[] = js/lib/masonry.pkgd.min.js

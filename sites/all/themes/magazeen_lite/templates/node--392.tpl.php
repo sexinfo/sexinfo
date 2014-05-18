@@ -71,9 +71,9 @@ HTML;
       return $result . "</ul>";
   }
 
-  function renderTopics() {
+  function renderTopcs() {
       // Query DB for top level topics
-      $topics = db_query('SELECT * FROM taxonomy_term_data A, taxonomy_term_hierarchy B WHERE A.tid=B.tid AND A.vid=3 AND B.parent=0 ORDER BY weight ASC');
+      $topicsresult = db_query('SELECT * FROM taxonomy_term_data A, taxonomy_term_hierarchy B WHERE A.tid=B.tid AND A.vid=3 AND B.parent=0 ORDER BY weight ASC');
 
       $result = "<div class=\"topics-container\">";
 
@@ -86,12 +86,23 @@ HTML;
       return $result . "</div>";
   }
 
+  function generateDataStructure() {
+      $topicsresult = db_query('SELECT * FROM taxonomy_term_data A, taxonomy_term_hierarchy B WHERE A.tid=B.tid AND A.vid=3 AND B.parent=0 ORDER BY weight ASC');
+
+      $topics = [];
+
+      foreach ($topicsresult as $topicresult) {
+          $topic = [];
+          $topic['name'] = $topicresult->name
+      }
+  }
+
   function renderTopic($topic) {
     $name = $topic->name;
     $target = urlencode($name);
     $sections = renderSections($topic);
     return <<<HTML
-<div class="parent-topic" id="$target">
+<div class="parent-topic" id="$target" class="js-masonry" data-masonry-options='{ "columnWidth": 200, "itemSelector": ".topic-quarter" }'>
   <h2>$name</h2>
   $sections
 </div><!-- .parent-topic -->
@@ -100,13 +111,24 @@ HTML;
 
   function renderSections($topic) {
     $sections = db_query('SELECT * FROM taxonomy_term_hierarchy A, taxonomy_term_data B WHERE A.tid = B.tid AND parent=' . $topic->tid);
-    $sections_html = '';
+    $left_html = '<div class="grid-left">';
+    $left_size = 0;
+    $right_html = '<div class="grid-right">';
+    $right_size = 0;
 
     foreach ($sections as $section) {
-      $sections_html .= renderSection($section);
+      list($section_html, $size) = renderSection($section);
+      $size = $size == 'half' ? 2 : 1;
+      if ($left_size <= $right_size) {
+        $left_html .= $section_html;
+        $left_size += $size;
+      } else {
+        $right_html .= $section_html;
+        $right_size += $size;
+      }
     }
 
-    return $sections_html;
+    return $left_html . "</div>" . $right_html . "</div>" ;
   }
 
   function renderSection($section) {
@@ -127,7 +149,7 @@ HTML;
     $section_name = $section->name;
     $size = $num_articles > 6 ? 'half' : 'quarter';
     $image = 'sites/all/themes/magazeen_lite/images/topics/kinky_sex_paraphilia.jpg';
-    return <<<HTML
+    $section_html = <<<HTML
 <div class="topic-{$size}">
   <div class="text-on-image" style="background-image: url('$image')">
     <div class="text-on-image-tint">
@@ -137,8 +159,7 @@ HTML;
   </div>
 </div>
 HTML;
-
-
+    return array($section_html, $size);
   }
 
   echo renderNav();
