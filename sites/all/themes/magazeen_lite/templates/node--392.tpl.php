@@ -50,57 +50,91 @@ HTML;
     return renderTopicSection('quarter', $topicName);
   }
 
-  function renderNav() {
-      // Query DB for top level topics
-      $topics = db_query('SELECT * FROM taxonomy_term_data A, taxonomy_term_hierarchy B WHERE A.tid=B.tid AND A.vid=3 AND B.parent=0 ORDER BY weight ASC');
+  function generateTopics() {
+    $topicsresult = db_query('SELECT * FROM taxonomy_term_data A, taxonomy_term_hierarchy B WHERE A.tid=B.tid AND A.vid=3 AND B.parent=0 ORDER BY weight ASC');
 
-      // Generate html from db result
-      $result = <<<HTML
-<ul class="topics-nav">
-  <div class="header-container">
-    <h4>Explore Our Topics!</h4>
-  </div>
+    $topics = [];
+
+    foreach ($topicsresult as $topicresult) {
+      $topic = [];
+      $topic['name'] = $topicresult->name;
+      $topic['tid'] = $topicresult->tid;
+      $topic['sections'] = generateSections($topic);
+      $topics[] = $topic;
+    }
+
+    return $topics;
+  }
+
+  function generateSections($topic) {
+    $sectionsresult = db_query('SELECT * FROM taxonomy_term_hierarchy A, taxonomy_term_data B WHERE A.tid = B.tid AND parent=' . $topic['tid']);
+
+    $sections = [];
+    foreach ($sectionsresult as $sectionresult) {
+      $section = [];
+      $section['name'] = $sectionresult->name;
+      $section['image'] = 'sites/all/themes/magazeen_lite/images/topics/kinky_sex_paraphilia.jpg';
+      $section['tid'] = $sectionresult->tid;
+      $section['articles'] = generateArticles($section);
+      $sections[] = $section;
+    }
+
+    return $sections;
+  }
+
+  function generateArticles($section) {
+    // Generate children html which is links to articles
+    // The status=1 part makes sure we only select published articles
+    // This is because there are a lot of cases were we have old, 
+    // and terrible articles in circulation that we don't want normal users to see.
+    $articlesresult = db_query('SELECT DISTINCT * FROM taxonomy_index A, node B WHERE A.nid = B.nid AND B.status=1 AND A.tid=' . $section['tid']);
+    $articles = [];
+    foreach($articlesresult as $articleresult) {
+      $article = [];
+      $article['nid'] = $articleresult->nid;
+      $article['name'] = $articleresult->title;
+      $articles[] = $article;
+    }
+
+    return $articles;
+  }
+
+  function renderNav($topics) {
+    // Generate html from db result
+    $result = <<<HTML
+    <ul class="topics-nav">
+      <div class="header-container">
+        <h4>Explore Our Topics!</h4>
+      </div>
 HTML;
 
-      // For each topic, make a link in the list
-      foreach($topics as $topic) {
-        $result = $result . sprintf("<li><a href='#%s'>%s</a></li>", urlencode($topic->name), $topic->name);
-      }
+    // For each topic, make a link in the list
+    foreach($topics as $topic) {
+      $name = $topic['name'];
+      $result = $result . sprintf("<li><a href='#%s'>%s</a></li>", urlencode($name), $name);
+    }
 
-      // Return generated HTML
-      return $result . "</ul>";
+    // Return generated HTML
+    return $result . "</ul>";
   }
 
-  function renderTopcs() {
-      // Query DB for top level topics
-      $topicsresult = db_query('SELECT * FROM taxonomy_term_data A, taxonomy_term_hierarchy B WHERE A.tid=B.tid AND A.vid=3 AND B.parent=0 ORDER BY weight ASC');
+  function renderTopics($topics) {
+    $result = "<div class=\"topics-container\">";
 
-      $result = "<div class=\"topics-container\">";
+    // For each topic, make a link in the list
+    foreach($topics as $topic) {
+      $result = $result . renderTopic($topic);
+    }
 
-      // For each topic, make a link in the list
-      foreach($topics as $topic) {
-        $result = $result . renderTopic($topic);
-      }
-
-      // Return generated HTML
-      return $result . "</div>";
+    // Return generated HTML
+    return $result . "</div>";
   }
 
-  function generateDataStructure() {
-      $topicsresult = db_query('SELECT * FROM taxonomy_term_data A, taxonomy_term_hierarchy B WHERE A.tid=B.tid AND A.vid=3 AND B.parent=0 ORDER BY weight ASC');
-
-      $topics = [];
-
-      foreach ($topicsresult as $topicresult) {
-          $topic = [];
-          $topic['name'] = $topicresult->name
-      }
-  }
 
   function renderTopic($topic) {
-    $name = $topic->name;
+    $name = $topic['name'];
     $target = urlencode($name);
-    $sections = renderSections($topic);
+    $sections = renderSections($topic['sections']);
     return <<<HTML
 <div class="parent-topic" id="$target" class="js-masonry" data-masonry-options='{ "columnWidth": 200, "itemSelector": ".topic-quarter" }'>
   <h2>$name</h2>
@@ -109,16 +143,15 @@ HTML;
 HTML;
   }
 
-  function renderSections($topic) {
-    $sections = db_query('SELECT * FROM taxonomy_term_hierarchy A, taxonomy_term_data B WHERE A.tid = B.tid AND parent=' . $topic->tid);
+  function renderSections($sections) {
     $left_html = '<div class="grid-left">';
     $left_size = 0;
     $right_html = '<div class="grid-right">';
     $right_size = 0;
 
     foreach ($sections as $section) {
-      list($section_html, $size) = renderSection($section);
-      $size = $size == 'half' ? 2 : 1;
+      $section_html = renderSection($section);
+      $size = sizeof($section['articles']) > 6 ? 2 : 1;
       if ($left_size <= $right_size) {
         $left_html .= $section_html;
         $left_size += $size;
@@ -132,22 +165,15 @@ HTML;
   }
 
   function renderSection($section) {
-    $num_articles = 0;
     $children_html = '';
+    $articles = $section['articles'];
 
-    // Generate children html which is links to articles
-    // The status=1 part makes sure we only select published articles
-    // This is because there are a lot of cases were we have old, 
-    // and terrible articles in circulation that we don't want normal users to see.
-    $articles = db_query('SELECT DISTINCT * FROM taxonomy_index A, node B WHERE A.nid = B.nid AND B.status=1 AND A.tid=' . $section->tid);
-    foreach($articles as $nid) {
-      $num_articles += 1;
-      $article = db_query('SELECT * FROM node WHERE nid='.$nid->nid)->fetch();
-      $children_html = $children_html . sprintf("<li class='text-on-image-article'><a href=\"node/%d\">%s</a></li>", $article->nid, $article->title);
+    foreach($articles as $article) {
+      $children_html = $children_html . sprintf("<li class='text-on-image-article'><a href=\"node/%d\">%s</a></li>", $article['nid'], $article['name']);
     }
 
-    $section_name = $section->name;
-    $size = $num_articles > 6 ? 'half' : 'quarter';
+    $section_name = $section['name'];
+    $size = sizeof($articles) > 6 ? 'half' : 'quarter';
     $image = 'sites/all/themes/magazeen_lite/images/topics/kinky_sex_paraphilia.jpg';
     $section_html = <<<HTML
 <div class="topic-{$size}">
@@ -159,11 +185,12 @@ HTML;
   </div>
 </div>
 HTML;
-    return array($section_html, $size);
+    return $section_html;
   }
 
-  echo renderNav();
-  echo renderTopics();
+  $topics = generateTopics();
+  echo renderNav($topics);
+  echo renderTopics($topics);
   ?>
 
 
