@@ -2,14 +2,6 @@
 <?php include_once 'utils/topics.php' ?>
 
 <?php
-  // Decode /data/topics.json as associative array
-  function getTopics() {
-    $fileData = file_get_contents("data/topics.json", true);
-    return json_decode($fileData, true);
-  }
-
-  // TODO: remove this
-  $GLOBALS['topics'] = getTopics();
   
   function renderNav($topics) {
     // Generate html from db result
@@ -30,23 +22,22 @@ HTML;
     return $result . "</ul>";
   }
 
-  function renderTopics($topics) {
+  function renderTopics($topics, $images) {
     $result = "<div class=\"topics-container\">";
 
     // For each topic, make a link in the list
     foreach($topics as $topic) {
-      $result = $result . renderTopic($topic);
+      $result = $result . renderTopic($topic, $images);
     }
 
     // Return generated HTML
     return $result . "</div>";
   }
 
-
-  function renderTopic($topic) {
+  function renderTopic($topic, $images) {
     $name = $topic['name'];
     $target = strip($name);
-    $sections = renderSections($topic['sections']);
+    $sections = renderSections($topic['sections'], $images);
     return <<<HTML
 <div class="parent-topic" id="$target" class="js-masonry" data-masonry-options='{ "columnWidth": 200, "itemSelector": ".topic-quarter" }'>
   <h2>$name</h2>
@@ -55,22 +46,22 @@ HTML;
 HTML;
   }
 
-  function renderSections($sections) {
+  function renderSections($sections, $images) {
     $left_html = '<div class="grid-left">';
     $right_html = '<div class="grid-right">';
 
     list($leftsections, $rightsections) = optimizeSectionLayout($sections);
     foreach ($leftsections as $section) {
-      $left_html .= renderSection($section);
+      $left_html .= renderSection($section, $images);
     }
     foreach ($rightsections as $section) {
-      $right_html .= renderSection($section);
+      $right_html .= renderSection($section, $images);
     }
 
     return $left_html . "</div>" . $right_html . "</div>" ;
   }
 
-  function renderSection($section) {
+  function renderSection($section, $images) {
     $children_html = '';
     $articles = $section['articles'];
 
@@ -80,7 +71,7 @@ HTML;
 
     $section_name = $section['name'];
     $size = $section['rendersize'] == 1 ? 'quarter' : 'half';
-    $image = 'sites/all/themes/magazeen_lite/images/topics/kinky_sex_paraphilia.jpg';
+    $image = path_to_theme() . '/images/topics/' . $images[sprintf("%d", $section['tid'])]['image'];
     $section_html = <<<HTML
 <div class="topic-{$size}">
   <div class="text-on-image" style="background-image: url('$image')">
@@ -95,7 +86,8 @@ HTML;
   }
 
   $topics = generateTopics();
+  $images = getImagesForTopics();
   echo renderNav($topics);
-  echo renderTopics($topics);
+  echo renderTopics($topics, $images);
   ?>
 </div><!-- .topics-container -->

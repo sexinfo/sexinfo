@@ -5,6 +5,12 @@
     return preg_replace("/[^a-zA-Z0-9\-_]+/", "", $input);
   }
 
+  // Decode /data/topics.json as associative array
+  function getImagesForTopics() {
+    $fileData = file_get_contents("data/topics.json", true);
+    return json_decode($fileData, true);
+  }
+
   // Does the database queries to return a datastructure of what the topics page would look like
   function generateTopics() {
     $topicsresult = db_query('SELECT * FROM taxonomy_term_data A, taxonomy_term_hierarchy B WHERE A.tid=B.tid AND A.vid=3 AND B.parent=0 ORDER BY weight ASC');
