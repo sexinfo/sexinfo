@@ -76,6 +76,7 @@ HTML;
       $section['image'] = 'sites/all/themes/magazeen_lite/images/topics/kinky_sex_paraphilia.jpg';
       $section['tid'] = $sectionresult->tid;
       $section['articles'] = generateArticles($section);
+      $section['rendersize'] = sizeof($section['articles']) > 6 ? 2 : 1;
       $sections[] = $section;
     }
 
@@ -97,6 +98,55 @@ HTML;
     }
 
     return $articles;
+  }
+
+  function optimizeSectionLayout($sections) {
+    $leftsections = [];
+    $rightsections = [];
+
+    $leftsize = 0;
+    $rightsize = 0;
+
+    // Count the total size of the sections by quarters
+    $totalsize = 0;
+    $lastlargeindex = -1;
+    $lastsmallindex = -1;
+    for ($i = 0; $i < sizeof($sections); $i++) {
+      $section = $sections[$i];
+      $totalsize += $section['rendersize'];
+      if ($section['rendersize'] == 1) $lastsmallindex = $i;
+      else $lastlargeindex = $i;
+    }
+
+    // If the last element isn't small, make it small
+    if ($lastlargeindex != -1 && $lastsmallindex != -1 && $lastlargeindex > $lastsmallindex) {
+      $temp = $sections[$lastsmallindex];
+      $sections[$lastsmallindex] = $sections[$lastlargeindex];
+      $sections[$lastlargeindex] = $temp;
+      $swap = $lastlargeindex;
+      $lastlargeindex = $lastsmallindex;
+      $lastsmallindex = $swap;
+    }
+
+    // Modify based on the way sections work
+    $howmanytomakebigger = $totalsize % 2;
+    foreach ($sections as $section) {
+      if ($section['rendersize'] == 1 && $howmanytomakebigger > 0) {
+        $howmanytomakebigger -= 1;
+        $section['rendersize'] = 2;
+      }
+
+      $size = $section['rendersize'];
+      if ($leftsize <= $rightsize) {
+        $leftsections[] = $section;
+        $leftsize += $size;
+      } else {
+        $rightsections[] = $section;
+        $rightsize += $size;
+      }
+    }
+
+    return array($leftsections, $rightsections);
   }
 
   function renderNav($topics) {
@@ -145,20 +195,14 @@ HTML;
 
   function renderSections($sections) {
     $left_html = '<div class="grid-left">';
-    $left_size = 0;
     $right_html = '<div class="grid-right">';
-    $right_size = 0;
 
-    foreach ($sections as $section) {
-      $section_html = renderSection($section);
-      $size = sizeof($section['articles']) > 6 ? 2 : 1;
-      if ($left_size <= $right_size) {
-        $left_html .= $section_html;
-        $left_size += $size;
-      } else {
-        $right_html .= $section_html;
-        $right_size += $size;
-      }
+    list($leftsections, $rightsections) = optimizeSectionLayout($sections);
+    foreach ($leftsections as $section) {
+      $left_html .= renderSection($section);
+    }
+    foreach ($rightsections as $section) {
+      $right_html .= renderSection($section);
     }
 
     return $left_html . "</div>" . $right_html . "</div>" ;
@@ -173,7 +217,7 @@ HTML;
     }
 
     $section_name = $section['name'];
-    $size = sizeof($articles) > 6 ? 'half' : 'quarter';
+    $size = $section['rendersize'] == 1 ? 'quarter' : 'half';
     $image = 'sites/all/themes/magazeen_lite/images/topics/kinky_sex_paraphilia.jpg';
     $section_html = <<<HTML
 <div class="topic-{$size}">
@@ -192,15 +236,4 @@ HTML;
   echo renderNav($topics);
   echo renderTopics($topics);
   ?>
-
-
-  <div class="parent-topic" id="basics_of_sexuality">
-    <h2>Sex Across the Lifecycle</h2>
-
-      <?php echo renderTopicHalf('Adolescent Sexuality') ?>
-
-      <?php echo renderTopicQuarter('Aging and the Sexual Response') ?>
-      <?php echo renderTopicQuarter('Talking About Sex') ?>
-  </div><!-- .parent-topic -->
-
 </div><!-- .topics-container -->
