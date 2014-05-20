@@ -1,6 +1,6 @@
 {
   "Adolescent Sexuality": {
-    "image": "overview_of_sexuality.jpg",
+    "image": "adolescent_sexuality.jpg",
     "children": {
       "An Overview of Sexuality": "http://www.soc.ucsb.edu/sexinfo/article/overview-sexuality",
       "Childhood Sexuality": "http://www.soc.ucsb.edu/sexinfo/article/childhood-sexuality",
@@ -105,7 +105,8 @@
       "Swinging": "http://www.soc.ucsb.edu/sexinfo/article/swinging",
       "Sexual Positions for Overweight Individuals and Pregnant Couples": "http://www.soc.ucsb.edu/sexinfo/article/sexual-positions-overweight-individuals-pregnant-couples",
       "Sex On Your Period": "http://www.soc.ucsb.edu/sexinfo/article/sex-your-period",
-      "Queefing Demystified": "http://www.soc.ucsb.edu/sexinfo/article/queefing-demystified"
+      "Queefing Demystified": "http://www.soc.ucsb.edu/sexinfo/article/queefing-demystified",
+      "Phone Sex": "http://www.soc.ucsb.edu/sexinfo/article/phone-sex"
     }
   },
   "Autoeroticism": {
@@ -189,7 +190,8 @@
       "Pregnancy by Trimester": "http://www.soc.ucsb.edu/sexinfo/article/pregnancy-trimester",
       "Prenatal Vitamins": "http://www.soc.ucsb.edu/sexinfo/article/prenatal-vitamins",
       "Tips for a Healthy Pregnancy": "http://www.soc.ucsb.edu/sexinfo/article/tips-healthy-pregnancy",
-      "The Odon Childbirth Device": "http://www.soc.ucsb.edu/sexinfo/article/odon-childbirth-device"
+      "The Odon Childbirth Device": "http://www.soc.ucsb.edu/sexinfo/article/odon-childbirth-device",
+      "Being Pregnant with Twins": "http://www.soc.ucsb.edu/sexinfo/article/being-pregnant-twins"
     }
   },
   "Adolescent Pregnancy": {
@@ -259,9 +261,7 @@
     "image": "natural_methods.jpeg",
     "children": {
       "Abstinence": "http://www.soc.ucsb.edu/sexinfo/article/abstinence",
-      "Basal Body Temperature Method (BBT)": "http://www.soc.ucsb.edu/sexinfo/article/basal-body-temperature-method-bbt",
-      "Calendar Method": "http://www.soc.ucsb.edu/sexinfo/article/calendar-method",
-      "Cervical Mucus Method": "http://www.soc.ucsb.edu/sexinfo/article/cervical-mucus-method",
+      "Fertility Awareness": "http://www.soc.ucsb.edu/sexinfo/article/fertility-awareness",
       "Withdrawal": "http://www.soc.ucsb.edu/sexinfo/article/withdrawal"
     }
   },
@@ -297,7 +297,7 @@
     }
   },
   "Alternative Options": {
-    "image": "alternative_options.jpg",
+    "image": "alternative_options.png",
     "children": {
       "Adoption": "http://www.soc.ucsb.edu/sexinfo/article/Adoption",
       "Safe Surrender": "http://www.soc.ucsb.edu/sexinfo/article/safe-surrender"
@@ -392,7 +392,6 @@
   "Appearance/Body Image": {
     "image": "appearance_body_image.jpg",
     "children": {
-      "A Guide to Washing Your Hands": "http://www.soc.ucsb.edu/sexinfo/article/guide-washing-your-hands",
       "Body Dysmorphic Disorder (BDD)": "http://www.soc.ucsb.edu/sexinfo/article/body-dysmorphic-disorder-bdd",
       "Body Dysmorphic Disorder (BDD) and its Effects on Gay Males": "http://www.soc.ucsb.edu/sexinfo/article/body-dysmorphic-disorder-bdd-and-its-effects-gay-males",
       "Body Piercing": "http://www.soc.ucsb.edu/sexinfo/article/body-piercing",
@@ -432,7 +431,7 @@
     }
   },
   "Cancer": {
-    "image": "cancer.jpg",
+    "image": "cancer.png",
     "children": {
       "Breast Cancer": "http://www.soc.ucsb.edu/sexinfo/article/breast-cancer",
       "Breast Cancer Awareness": "http://www.soc.ucsb.edu/sexinfo/article/breast-cancer-awareness",
@@ -444,7 +443,7 @@
     }
   },
   "Medical Procedures": {
-    "image": "medical_procedures.jpg",
+    "image": "medical_procedures.png",
     "children": {
       "Breast Augmentation": "http://www.soc.ucsb.edu/sexinfo/article/health-medical-procedures-elective-breast-augmentation-0",
       "Hysterectomy": "http://www.soc.ucsb.edu/sexinfo/article/hysterectomy",
@@ -638,7 +637,7 @@
     }
   },
   "Sex Around the World": {
-    "image": "sex_around_the_world.jpg",
+    "image": "sex_around_the_world.png",
     "children": {
       "Cultural Significance of an Intact Hymen": "http://www.soc.ucsb.edu/sexinfo/article/cultural-significance-tact-hymen",
       "Female Genital Mutilation (FGM)": "http://www.soc.ucsb.edu/sexinfo/article/female-genital-mutilation-fgm",
