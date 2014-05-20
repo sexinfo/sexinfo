@@ -11,46 +11,9 @@
   // TODO: remove this
   $GLOBALS['topics'] = getTopics();
 
-  // Render a half-width topic box for a specified topic name
-  //
-  //  $size - The size of the section, 'half' or 'quarter'
-  //  $topicName - Name of the topic JSON section, e.g. 'The Sexual Response Cycle'
-  //
-  // The heredoc can't be indented!
-  // See http://php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc
-  function renderTopicSection($size, $topicName) {
-    $topics = $GLOBALS['topics'];
-    $topic  = $topics[$topicName];
-    $image  = path_to_theme() . '/images/topics/' .  $topic['image'];
-
-    // Pre-construct children list items to substitute into heredoc string
-    // Ex: <li class="text-on-image-article"><a href="http://...">Sex Around The World</a></li>
-    $children = "";
-    foreach($topic['children'] as $name => $url) {
-      $link = content_tag("a", $name, array("href" => $url));
-      $children .= content_tag('li', $link, array('class' => 'text-on-image-article'));
-    }
-
-return <<<HTML
-<div class="topic-{$size}">
-  <div class="text-on-image" style="background-image: url('$image')">
-    <div class="text-on-image-tint">
-    <div class="text-on-image-text">{$topicName}</div>
-      <ul class="text-on-image-articles">{$children}</ul>
-    </div>
-  </div>
-</div>
-HTML;
+  function strip($input) {
+    return preg_replace("/[^a-zA-Z0-9\.\-_]+/", "", $input);
   }
-
-  function renderTopicHalf($topicName) {
-    return renderTopicSection('half', $topicName);
-  }
-
-  function renderTopicQuarter($topicName) {
-    return renderTopicSection('quarter', $topicName);
-  }
-
   
   function renderNav($topics) {
     // Generate html from db result
@@ -64,7 +27,7 @@ HTML;
     // For each topic, make a link in the list
     foreach($topics as $topic) {
       $name = $topic['name'];
-      $result = $result . sprintf("<li><a href='#%s'>%s</a></li>", urlencode($name), $name);
+      $result = $result . sprintf("<li><a href='#%s'>%s</a></li>", strip($name),  htmlspecialchars($name));
     }
 
     // Return generated HTML
@@ -86,7 +49,7 @@ HTML;
 
   function renderTopic($topic) {
     $name = $topic['name'];
-    $target = urlencode($name);
+    $target = strip($name);
     $sections = renderSections($topic['sections']);
     return <<<HTML
 <div class="parent-topic" id="$target" class="js-masonry" data-masonry-options='{ "columnWidth": 200, "itemSelector": ".topic-quarter" }'>
