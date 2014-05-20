@@ -10,10 +10,6 @@
 
   // TODO: remove this
   $GLOBALS['topics'] = getTopics();
-
-  function strip($input) {
-    return preg_replace("/[^a-zA-Z0-9\.\-_]+/", "", $input);
-  }
   
   function renderNav($topics) {
     // Generate html from db result

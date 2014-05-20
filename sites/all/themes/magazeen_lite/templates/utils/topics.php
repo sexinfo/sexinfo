@@ -1,4 +1,11 @@
 <?php
+
+  // Generates a valid ID or NAME value out of the given input string
+  function strip($input) {
+    return preg_replace("/[^a-zA-Z0-9\-_]+/", "", $input);
+  }
+
+  // Does the database queries to return a datastructure of what the topics page would look like
   function generateTopics() {
     $topicsresult = db_query('SELECT * FROM taxonomy_term_data A, taxonomy_term_hierarchy B WHERE A.tid=B.tid AND A.vid=3 AND B.parent=0 ORDER BY weight ASC');
 
