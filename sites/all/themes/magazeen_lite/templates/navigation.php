@@ -1,4 +1,7 @@
 <?php
+include 'utils/topics.php';
+$topics = generateTopics();
+
 // TODO: may the coding gods forgive me. Will come back to this later
 function page() { return $_GET['q']; }
 function on_home_page()      { return page() == 'node/18'; }
@@ -19,23 +22,21 @@ function on_quiz_page()      { return page() == 'node/561'; }
           <a href="/sexinfo/category">Topics</a>
           <div id="topics-menu">
             <ul>
+              <?php $index = 0; $size = sizeof($topics); ?>
               <div class="dropdown-half">
-                <li><a href="/sexinfo/category#basics_of_sexuality" >Basics of Sexuality</a></li>
-                <li><a href="/sexinfo/category#the_body" >The Body</a></li>
-                <li><a href="/sexinfo/category#sexual_activity" >Sexual Activity</a></li>
-                <li><a href="/sexinfo/category#pregnancy" >Pregnancy</a></li>
-                <li><a href="/sexinfo/category#contraception" >Contraception</a></li>
-                <li><a href="/sexinfo/category#abortion" >Abortion</a></li>
-                <li><a href="/sexinfo/category#sexually_transmitted_infections" >Sexually Transmitted Infections</a></li>
+                <?php
+                for (; $index < (($size + 1) / 2); $index++) {
+                  $name = $topics[$index]['name'];
+                  printf("<li><a href=\"/sexinfo/category#%s\">%s</a></li>", strip($name), htmlspecialchars($name));
+                } ?>
               </div>
 
               <div class="dropdown-half">
-                <li><a href="/sexinfo/category#health" >Health</a></li>
-                <li><a href="/sexinfo/category#love_and_relationships" >Love &amp; Relationships</a></li>
-                <li><a href="/sexinfo/category#sexual_orientations" >Sexual Orientations</a></li>
-                <li><a href="/sexinfo/category#sexual_difficulties" >Sexual Difficulties</a></li>
-                <li><a href="/sexinfo/category#sex_and_the_law" >Sex and the Law</a></li>
-                <li><a href="/sexinfo/category#beliefs_and_sexuality" >Beliefs and Sexuality</a></li>
+                <?php
+                for (; $index < $size; $index++) {
+                  $name = $topics[$index]['name'];
+                  printf("<li><a href=\"/sexinfo/category#%s\">%s</a></li>", strip($name), htmlspecialchars($name));
+                } ?>
               </div>
 
             </ul>
