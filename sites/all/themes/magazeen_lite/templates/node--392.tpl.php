@@ -39,7 +39,7 @@ HTML;
     $target = strip($name);
     $sections = renderSections($topic['sections'], $images);
     return <<<HTML
-<div class="parent-topic" id="$target" class="js-masonry" data-masonry-options='{ "columnWidth": 200, "itemSelector": ".topic-quarter" }'>
+<div class="parent-topic" id="$target">
   <h2>$name</h2>
   $sections
 </div><!-- .parent-topic -->
