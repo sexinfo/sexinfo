@@ -50,7 +50,7 @@
     // The status=1 part makes sure we only select published articles
     // This is because there are a lot of cases were we have old, 
     // and terrible articles in circulation that we don't want normal users to see.
-    $articlesresult = db_query('SELECT DISTINCT * FROM taxonomy_index A, node B WHERE A.nid = B.nid AND B.status=1 AND A.tid=' . $section['tid']);
+    $articlesresult = db_query('SELECT * FROM (SELECT DISTINCT nid FROM taxonomy_index WHERE tid=' . $section['tid'] . ') as A INNER JOIN node B on A.nid = B.nid AND B.status=1');
     $articles = [];
     foreach($articlesresult as $articleresult) {
       $article = [];
