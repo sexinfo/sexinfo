@@ -15,10 +15,10 @@
   function generateTopics() {
     $topicsresult = db_query('SELECT * FROM taxonomy_term_data A, taxonomy_term_hierarchy B WHERE A.tid=B.tid AND A.vid=3 AND B.parent=0 ORDER BY weight ASC');
 
-    $topics = [];
+    $topics = array();
 
     foreach ($topicsresult as $topicresult) {
-      $topic = [];
+      $topic = array();
       $topic['name'] = $topicresult->name;
       $topic['tid'] = $topicresult->tid;
       $topic['sections'] = generateSections($topic);
@@ -31,9 +31,9 @@
   function generateSections($topic) {
     $sectionsresult = db_query('SELECT * FROM taxonomy_term_hierarchy A, taxonomy_term_data B WHERE A.tid = B.tid AND parent=' . $topic['tid']);
 
-    $sections = [];
+    $sections = array();
     foreach ($sectionsresult as $sectionresult) {
-      $section = [];
+      $section = array();
       $section['name'] = $sectionresult->name;
       $section['image'] = 'sites/all/themes/magazeen_lite/images/topics/kinky_sex_paraphilia.jpg';
       $section['tid'] = $sectionresult->tid;
@@ -51,9 +51,9 @@
     // This is because there are a lot of cases were we have old, 
     // and terrible articles in circulation that we don't want normal users to see.
     $articlesresult = db_query('SELECT * FROM (SELECT DISTINCT nid FROM taxonomy_index WHERE tid=' . $section['tid'] . ') as A INNER JOIN node B on A.nid = B.nid AND B.status=1');
-    $articles = [];
+    $articles = array();
     foreach($articlesresult as $articleresult) {
-      $article = [];
+      $article = array();
       $article['nid'] = $articleresult->nid;
       $article['name'] = $articleresult->title;
       $articles[] = $article;
@@ -63,8 +63,8 @@
   }
 
   function optimizeSectionLayout($sections) {
-    $leftsections = [];
-    $rightsections = [];
+    $leftsections = array();
+    $rightsections = array();
 
     $leftsize = 0;
     $rightsize = 0;
