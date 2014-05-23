@@ -135,3 +135,25 @@ ul.pager {
   margin: 0;
   padding: 5px;
 }
+
+
+/* img blackouts
+/* --------------- */
+.img-reveal {
+  display: none;
+}
+
+.img-reveal-container:before {
+  border: 1px dotted #969696;
+  border-radius: 2px;
+  color: #404040;
+  content: '> Click to reveal image';
+  display: inline-block;
+  float: left;
+  font-weight: bold;
+  padding: 10px 15px;
+}
+
+.img-reveal-container.img-reveal-container-revealed:before {
+  content: '<';
+}
