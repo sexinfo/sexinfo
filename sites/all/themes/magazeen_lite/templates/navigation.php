@@ -27,7 +27,7 @@ function on_quiz_page()      { return page() == 'node/561'; }
                 <?php
                 for (; $index < (($size + 1) / 2); $index++) {
                   $name = $topics[$index]['name'];
-                  printf("<li><a href=\"/sexinfo/category#%s\">%s</a></li>", strip($name), htmlspecialchars($name));
+                  printf("<li><a href='/sexinfo/category#%s'>%s</a></li>", strip($name), htmlspecialchars($name));
                 } ?>
               </div>
 
@@ -35,7 +35,7 @@ function on_quiz_page()      { return page() == 'node/561'; }
                 <?php
                 for (; $index < $size; $index++) {
                   $name = $topics[$index]['name'];
-                  printf("<li><a href=\"/sexinfo/category#%s\">%s</a></li>", strip($name), htmlspecialchars($name));
+                  printf("<li><a href='/sexinfo/category#%s'>%s</a></li>", strip($name), htmlspecialchars($name));
                 } ?>
               </div>
 
