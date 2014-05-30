@@ -23,7 +23,7 @@ HTML;
   }
 
   function renderTopics($topics, $images) {
-    $result = "<div class=\"topics-container\">";
+    $result = "<div class='topics-container'>";
 
     // For each topic, make a link in the list
     foreach($topics as $topic) {
@@ -66,7 +66,7 @@ HTML;
     $articles = $section['articles'];
 
     foreach($articles as $article) {
-      $children_html = $children_html . sprintf("<li class='text-on-image-article'><a href=\"node/%d\">%s</a></li>", $article['nid'], $article['name']);
+      $children_html .= sprintf("<li class='text-on-image-article'><a href='node/%d'>%s</a></li>", $article['nid'], $article['name']);
     }
 
     $section_name = $section['name'];
