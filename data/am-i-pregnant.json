@@ -1,0 +1,22 @@
+[
+  {
+    "type" : "question",
+    "question" : "Think you might be pregnant?",
+    "answers" : {
+      "Yes" : 1,
+      "No" : 2
+    }
+  },
+  {
+    "type" : "response",
+    "message" : "YAY!"
+  },
+  {
+    "type" : "question",
+    "question" : "Then why are you here?!?!",
+    "answers" : {
+      "Why not?" : 1,
+      "I don't know...." : 1
+    }
+  }
+]
