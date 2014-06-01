@@ -74,7 +74,7 @@ HTML;
     $image = path_to_theme() . '/images/topics/' . $images[sprintf("%d", $section['tid'])]['image'];
     $section_html = <<<HTML
 <div class="topic-{$size}">
-  <div class="text-on-image" style="background-image: url('$image')">
+  <div class="text-on-image" style="background-image: url('/sexinfo/$image')">
     <div class="text-on-image-tint">
     <div class="text-on-image-text">{$section_name}</div>
       <ul class="text-on-image-articles">{$children_html}</ul>
