@@ -68,24 +68,6 @@ $spacer: 20px;
   }
 }
 
-.grid-left,
-.grid-right {
-  @include border-box;
-  float: left;
-  width: 417px;
-
-  @media(max-width: 1200px) {
-    float: none;
-    margin: 0 !important;
-    width: 100%;
-
-    .topic-quarter { margin-bottom: $spacer; }
-  }
-}
-
-.grid-right { margin-left: $spacer; }
-
-
 .parent-topic {
   @include border-box;
   @include clearfix;
@@ -120,9 +102,31 @@ $spacer: 20px;
 $half-height: 360px;
 $quarter-height: 170px;
 
+.grid-left, .grid-right {
+  width: 50%;
+  float: left;
+
+  @media(max-width: 1200px) {
+    width: 100%;
+    float: none;
+  }
+}
+
 .topic-half, .topic-quarter {
   @include clearfix;
+  @include border-box;
+  float: left;
+  width: 417px;
   border: 1px solid #ccc;
+  margin: 10px 5px;
+
+  @media(max-width: 1200px) {
+    float: none;
+    margin: 0 !important;
+    width: 100%;
+
+    .topic-quarter { margin-bottom: $spacer; }
+  }
 
   @include mobile { margin-bottom: $spacer; }
 }
@@ -141,7 +145,9 @@ $quarter-height: 170px;
 }
 
 .topic-quarter {
-  &:first-child { margin-bottom: $spacer; }
+  // This little hack below here allows for the height of two small
+  // images to be the same size as one large image.
+  border-bottom: 0px;
 
   .text-on-image {
     height: $quarter-height;
@@ -169,11 +175,15 @@ $transition-time: 0.4s;
     @include border-box;
     color: white;
     padding: 15px;
-    //transition: opacity 1s, bottom 1s;
     transition: opacity $transition-time, bottom $transition-time;
     position: absolute;
     bottom: 0px;
     width: 100%;
+
+    @include mobile {
+      opacity: 0;
+      bottom: $quarter-height;
+    }
   }
 
   .text-on-image-articles {
@@ -184,6 +194,11 @@ $transition-time: 0.4s;
     position: absolute;
     transition: opacity $transition-time ease-in, top $transition-time;
     width: 100%;
+
+    @include mobile {
+      opacity: 1 !important;
+      top: 0px !important;
+    }
   }
 
   &:hover .text-on-image-articles {
@@ -191,6 +206,7 @@ $transition-time: 0.4s;
     top: 0px;
   }
 }
+
 
 .text-on-image-article {
   font-size: 0.75em;
@@ -210,6 +226,8 @@ $transition-time: 0.4s;
     color: lighten($light-gray, 20);
     text-decoration: underline;
   }
+
+  a:visited { color: #f48ab7; }
 }
 
 .text-on-image-tint {
@@ -218,9 +236,9 @@ $transition-time: 0.4s;
   height: 100%;
   width: 100%;
 
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.75);
-  }
+  // Tint on hover, and by default on mobile
+  &:hover { background-color: rgba(0, 0, 0, 0.75); }
+  @include mobile { background-color: rgba(0, 0, 0, 0.75); }
 }
 
 

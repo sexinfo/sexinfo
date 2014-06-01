@@ -70,7 +70,7 @@
 <div id="footer">
   <div class="container clearfix">
   
-   <h4>About SexInfoOnline</h4>
+   <h4>About SexInfo Online</h4>
     <p><?print '<a href="'. check_url($front_page) .'">';?>SexInfo Online</a> is a website devoted to comprehensive sex education based on the best research we have to date. The site is maintained by university students from the University of California, Santa Barbara who have studied advanced topics in human sexuality.</p>
     <p>Our primary goal is to ensure that people around the world have access to useful and accurate information about all aspects of human sexuality. If you find our site useful, don't forget that your friends, family, and coworkers may find it useful too!</p>
 
