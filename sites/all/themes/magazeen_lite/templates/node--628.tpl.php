@@ -22,22 +22,23 @@
     }
 
     function showElement(thingy) {
-      if (thingy.type === 'question') {
-        $('#question').show();
-        $('#answer').hide();
-        $('#question_title').html(thingy.question);
-        console.log(thingy.question);
-        var options = $('#options');
-        options.empty();
-        for (var key in thingy.answers) {
-          var option = "<input type='radio' name='question-id' value=" + thingy.answers[key] + ">" + key + "</br>";
-          options.append(option);
-        };
-      } else {
-        $('#question').hide();
-        $('#answer').show();
-        $('#answer').html(thingy.message);
-      }
+      $("#question").hide("slow");
+      $("#answer").hide("slow", function() {
+        if (thingy.type === 'question') {
+          $('#question').slideDown('slow');
+          $('#question_title').html(thingy.question);
+          console.log(thingy.question);
+          var options = $('#options');
+          options.empty();
+          for (var key in thingy.answers) {
+            var option = "<input type='radio' name='question-id' value=" + thingy.answers[key] + ">" + key + "</br>";
+            options.append(option);
+          };
+        } else {
+          $('#answer').slideDown('slow');
+          $('#answer-content').html(thingy.message);
+        }
+      });
     }
 
     function submitAnswer() {
@@ -55,7 +56,7 @@
     }
   </script>
   <div id='content'>
-    <div id='question' style='display: <?php print($is_question ? 'visible' : 'none'); ?>;'>
+    <div id='question' class='parent-topic' style='display: <?php print($is_question ? 'visible' : 'none'); ?>;'>
       <form onsubmit='return submitAnswer()'>
         <?php printf("<h3 id='question_title'>%s</h3>", $question) ?>
         <div id='options'>
@@ -67,8 +68,8 @@
       </form>
     </div>
 
-    <div id='answer' style='display: <?php print($is_question ? 'none' : 'visible'); ?>;'>
-      <?php print($response); ?>
+    <div id='answer' class='parent-topic' style='display: <?php print($is_question ? 'none' : 'visible'); ?>;'>
+      <div id='answer-content'><?php print($response); ?></div>
     </div>
   </div>
 
