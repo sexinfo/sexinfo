@@ -1,0 +1,31 @@
+{
+
+  "start" : "ejaculate",
+
+  "did he ejaculate" : {
+    "Yes" : {
+      "type" : "question",
+      "id" : "where did he ejaculate"
+    },
+    "No" : {
+      "type" : "response",
+      "id" : "not pregnant"
+    }
+  },
+
+  "where did he ejaculate" : {
+    "Inside the vagina" : {
+      "type" : "response",
+      "id" : "very pregnant"
+    },
+    "On or very close to the vulva" : {
+      "type" : "response",
+      "id" : "kind of pregnant"
+    },
+    "Other" : {
+      "type" : "response",
+      "id" : "we cant say"
+    }
+  }
+  
+}

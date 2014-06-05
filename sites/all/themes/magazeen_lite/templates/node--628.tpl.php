@@ -1,21 +1,15 @@
 <?php include_once 'utils/am-i-pregnant.php' ?>
 
 <?php
-  $data = getData();
+  $questions = getQuestions();
+  $responses = getResponses();
 
-  $question_id = $_GET['question-id'];
-  if ($question_id == NULL) $question_id = 0;
-
-  $element = $data[$question_id];
-  $is_question = $element['type'] == 'question';
-
-  $question = $is_question ? $element['question'] : "";
-  $options = $is_question ? $element['answers'] : array();
-  $response = $is_question ? "" : $element['message'];
 ?>
 
   <script type='text/javascript'>
-    var data = jQuery.parseJSON(<?php echo json_encode(json_encode($data)) ?>);
+    var questions = jQuery.parseJSON(<?php echo json_encode(json_encode($questions)) ?>);
+    var responses = jQuery.parseJSON(<?php echo json_encode(json_encode($responses)) ?>);
+    console.log(questions);
 
     function nextElement(id) {
       return data[id];
@@ -56,20 +50,20 @@
     }
   </script>
   <div id='content'>
-    <div id='question' class='parent-topic' style='display: <?php print($is_question ? 'visible' : 'none'); ?>;'>
+
+    <!-- This is the field that shows the question to the user -->
+    <div id='question' class='parent-topic'>
       <form onsubmit='return submitAnswer()'>
-        <?php printf("<h3 id='question_title'>%s</h3>", $question) ?>
+        <h3 id='question_title'></h3>
         <div id='options'>
-        <?php foreach (array_keys($options) as $key) {
-          printf("<input type='radio' name='question-id' value='%s'>%s</br>", $options[$key], $key);
-        } ?>
+          <!-- Answers go here -->
         </div>
-        <input type="submit" value="Submit">
       </form>
     </div>
 
-    <div id='answer' class='parent-topic' style='display: <?php print($is_question ? 'none' : 'visible'); ?>;'>
-      <div id='answer-content'><?php print($response); ?></div>
+    <!-- This is the field that shows the response to the user -->
+    <div id='answer' class='parent-topic'>
+      <div id='answer-content'></div>
     </div>
   </div>
 
