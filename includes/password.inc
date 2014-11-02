@@ -43,7 +43,7 @@ function _password_itoa64() {
 }
 
 /**
- * Encode bytes into printable base 64 using the *nix standard from crypt().
+ * Encodes bytes into printable base 64 using the *nix standard from crypt().
  *
  * @param $input
  *   The string containing bytes to encode.
@@ -285,4 +285,3 @@ function user_needs_new_hash($account) {
   // Check whether the iteration count used differs from the standard number.
   return (_password_get_count_log2($account->pass) !== $count_log2);
 }
-
