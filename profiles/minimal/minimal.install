@@ -1,15 +1,9 @@
 <?php
-/**
- * @file
- * Install, update and uninstall functions for the minimal installation profile.
- */
 
 /**
  * Implements hook_install().
  *
- * Performs actions to set up the site for this profile.
- *
- * @see system_install()
+ * Perform actions to set up the site for this profile.
  */
 function minimal_install() {
   // Enable some standard blocks.

@@ -2,12 +2,12 @@
 
 /**
  * @file
- * Directed acyclic graph manipulation.
+ * Directed acyclic graph functions.
  */
 
 
 /**
- * Performs a depth-first search and sort on a directed acyclic graph.
+ * Perform a depth first sort on a directed acyclic graph.
  *
  * @param $graph
  *   A three dimensional associated array, with the first keys being the names
@@ -52,7 +52,7 @@ function drupal_depth_first_search(&$graph) {
     // The components of the graph.
     'components' => array(),
   );
-  // Perform the actual search.
+  // Perform the actual sort.
   foreach ($graph as $start => $data) {
     _drupal_depth_first_search($graph, $state, $start);
   }
@@ -72,7 +72,7 @@ function drupal_depth_first_search(&$graph) {
 }
 
 /**
- * Performs a depth-first search on a graph.
+ * Helper function to perform a depth first sort.
  *
  * @param $graph
  *   A three dimensional associated graph array.
@@ -143,3 +143,4 @@ function _drupal_depth_first_search(&$graph, &$state, $start, &$component = NULL
   // topological order if the graph is acyclic.
   $state['last_visit_order'][] = $start;
 }
+

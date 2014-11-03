@@ -6,19 +6,13 @@
  */
 
 /**
- * Form constructor for the file transfer authorization form.
- *
- * Allows the user to choose a FileTransfer type and supply credentials.
- *
- * @see authorize_filetransfer_form_validate()
- * @see authorize_filetransfer_form_submit()
- * @ingroup forms
+ * Build the form for choosing a FileTransfer type and supplying credentials.
  */
 function authorize_filetransfer_form($form, &$form_state) {
   global $base_url, $is_https;
   $form = array();
 
-  // If possible, we want to post this form securely via HTTPS.
+  // If possible, we want to post this form securely via https.
   $form['#https'] = TRUE;
 
   // CSS we depend on lives in modules/system/maintenance.css, which is loaded
@@ -133,11 +127,10 @@ function authorize_filetransfer_form($form, &$form_state) {
 }
 
 /**
- * Generates the Form API array for a given connection backend's settings.
+ * Generate the Form API array for the settings for a given connection backend.
  *
  * @param $backend
  *   The name of the backend (e.g. 'ftp', 'ssh', etc).
- *
  * @return
  *   Form API array of connection settings for the given backend.
  *
@@ -158,7 +151,7 @@ function _authorize_filetransfer_connection_settings($backend) {
 }
 
 /**
- * Sets the default settings on a file transfer connection form recursively.
+ * Recursively fill in the default settings on a file transfer connection form.
  *
  * The default settings for the file transfer connection forms are saved in
  * the database. The settings are stored as a nested array in the case of a
@@ -172,6 +165,8 @@ function _authorize_filetransfer_connection_settings($backend) {
  *   The key for our current form element, if any.
  * @param array $defaults
  *   The default settings for the file transfer backend we're operating on.
+ * @return
+ *   Nothing, this function just sets $element['#default_value'] if needed.
  */
 function _authorize_filetransfer_connection_settings_set_defaults(&$element, $key, array $defaults) {
   // If we're operating on a form element which isn't a fieldset, and we have
@@ -191,10 +186,9 @@ function _authorize_filetransfer_connection_settings_set_defaults(&$element, $ke
 }
 
 /**
- * Form validation handler for authorize_filetransfer_form().
+ * Validate callback for the filetransfer authorization form.
  *
  * @see authorize_filetransfer_form()
- * @see authorize_filetransfer_submit()
  */
 function authorize_filetransfer_form_validate($form, &$form_state) {
   // Only validate the form if we have collected all of the user input and are
@@ -224,10 +218,9 @@ function authorize_filetransfer_form_validate($form, &$form_state) {
 }
 
 /**
- * Form submission handler for authorize_filetransfer_form().
+ * Submit callback when a file transfer is being authorized.
  *
  * @see authorize_filetransfer_form()
- * @see authorize_filetransfer_validate()
  */
 function authorize_filetransfer_form_submit($form, &$form_state) {
   global $base_url;
@@ -287,7 +280,7 @@ function authorize_filetransfer_form_submit($form, &$form_state) {
 }
 
 /**
- * Runs the operation specified in $_SESSION['authorize_operation'].
+ * Run the operation specified in $_SESSION['authorize_operation']
  *
  * @param $filetransfer
  *   The FileTransfer object to use for running the operation.
@@ -305,13 +298,12 @@ function authorize_run_operation($filetransfer) {
 }
 
 /**
- * Gets a FileTransfer class for a specific transfer method and settings.
+ * Get a FileTransfer class for a specific transfer method and settings.
  *
  * @param $backend
  *   The FileTransfer backend to get the class for.
  * @param $settings
  *   Array of settings for the FileTransfer.
- *
  * @return
  *   An instantiated FileTransfer object for the requested method and settings,
  *   or FALSE if there was an error finding or instantiating it.

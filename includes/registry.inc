@@ -10,7 +10,7 @@
  * @{
  * The code registry engine.
  *
- * Drupal maintains an internal registry of all interfaces or classes in the
+ * Drupal maintains an internal registry of all functions or classes in the
  * system, allowing it to lazy-load code files as needed (reducing the amount
  * of code that must be parsed on each request).
  */
@@ -120,10 +120,7 @@ function registry_get_parsed_files() {
 }
 
 /**
- * Parse all changed files and save their interface and class listings.
- *
- * Parse all files that have changed since the registry was last built, and save
- * their interface and class listings.
+ * Parse all files that have changed since the registry was last built, and save their function and class listings.
  *
  * @param $files
  *  The list of files to check and parse.
@@ -134,6 +131,10 @@ function _registry_parse_files($files) {
     if (file_exists($filename)) {
       $hash = hash_file('sha256', $filename);
       if (empty($file['hash']) || $file['hash'] != $hash) {
+        // Delete registry entries for this file, so we can insert the new resources.
+        db_delete('registry')
+          ->condition('filename', $filename)
+          ->execute();
         $file['hash'] = $hash;
         $parsed_files[$filename] = $file;
       }
@@ -152,12 +153,12 @@ function _registry_parse_files($files) {
 }
 
 /**
- * Parse a file and save its interface and class listings.
+ * Parse a file and save its function and class listings.
  *
  * @param $filename
- *   Name of the file we are going to parse.
+ *  Name of the file we are going to parse.
  * @param $contents
- *   Contents of the file we are going to parse as a string.
+ *  Contents of the file we are going to parse as a string.
  * @param $module
  *   (optional) Name of the module this file belongs to.
  * @param $weight
@@ -165,28 +166,21 @@ function _registry_parse_files($files) {
  */
 function _registry_parse_file($filename, $contents, $module = '', $weight = 0) {
   if (preg_match_all('/^\s*(?:abstract|final)?\s*(class|interface)\s+([a-zA-Z0-9_]+)/m', $contents, $matches)) {
+    $query = db_insert('registry')->fields(array('name', 'type', 'filename', 'module', 'weight'));
     foreach ($matches[2] as $key => $name) {
-      db_merge('registry')
-        ->key(array(
-          'name' => $name,
-          'type' => $matches[1][$key],
-        ))
-        ->fields(array(
-          'filename' => $filename,
-          'module' => $module,
-          'weight' => $weight,
-        ))
-        ->execute();
+      $query->values(array(
+        'name' => $name,
+        'type' => $matches[1][$key],
+        'filename' => $filename,
+        'module' => $module,
+        'weight' => $weight,
+      ));
     }
-    // Delete any resources for this file where the name is not in the list
-    // we just merged in.
-    db_delete('registry')
-      ->condition('filename', $filename)
-      ->condition('name', $matches[2], 'NOT IN')
-      ->execute();
+    $query->execute();
   }
 }
 
 /**
  * @} End of "defgroup registry".
  */
+

@@ -17,15 +17,17 @@ function profile_browse() {
   if ($name && $field->fid) {
     // Only allow browsing of fields that have a page title set.
     if (empty($field->page)) {
-      return MENU_NOT_FOUND;
+      drupal_not_found();
+      return;
     }
     // Do not allow browsing of private and hidden fields by non-admins.
     if (!user_access('administer users') && ($field->visibility == PROFILE_PRIVATE || $field->visibility == PROFILE_HIDDEN)) {
-      return MENU_ACCESS_DENIED;
+      drupal_access_denied();
+      return;
     }
 
     // Compile a list of fields to show.
-    $fields = db_query('SELECT name, title, type, weight, page, visibility FROM {profile_field} WHERE fid <> :fid AND visibility = :visibility ORDER BY weight', array(
+    $fields = db_query('SELECT name, title, type, weight, page FROM {profile_field} WHERE fid <> :fid AND visibility = :visibility ORDER BY weight', array(
       ':fid' => $field->fid,
       ':visibility' => PROFILE_PUBLIC_LISTINGS,
     ))->fetchAll();
@@ -52,7 +54,8 @@ function profile_browse() {
         $query->condition('v.value', '%' . db_like($value) . '%', 'LIKE');
         break;
       default:
-        return MENU_NOT_FOUND;
+        drupal_not_found();
+        return;
     }
 
     $uids = $query
@@ -82,7 +85,7 @@ function profile_browse() {
     return $output;
   }
   elseif ($name && !$field->fid) {
-    return MENU_NOT_FOUND;
+    drupal_not_found();
   }
   else {
     // Compile a list of fields to show.

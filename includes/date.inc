@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Initializes the list of date formats and their locales.
+ * Initialize the list of date formats and their locales.
  */
 
 /**

@@ -475,12 +475,6 @@ table th {
   border-color: #bebfb9;
   padding: 3px 10px;
 }
-/**
- * Force browsers to calculate the width of a 'select all' TH element.
- */
-table th.select-all {
-  width: 1px;
-}
 table th.active {
   background: #bdbeb9;
 }
@@ -841,7 +835,6 @@ body.in-maintenance .form-submit {
 }
 body.in-maintenance #logo {
   margin-bottom: 1.5em;
-  max-width: 180px;
 }
 ol.task-list {
   margin-left: 0; /* LTR */
@@ -858,6 +851,7 @@ ol.task-list li.active {
   color: #000;
 }
 ol.task-list li.done {
+  color: #393;
   background: transparent url(images/task-check.png) no-repeat 0 50%;
   color: green;
 }

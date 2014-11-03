@@ -9,9 +9,7 @@
  * Invokes XML-RPC methods on this server.
  *
  * @param array $callbacks
- *   Either an associative array of external XML-RPC method names as keys with
- *   the callbacks they map to as values, or a more complex structure
- *   describing XML-RPC callbacks as returned from hook_xmlrpc().
+ *   Array of external XML-RPC method names with the callbacks they map to.
  */
 function xmlrpc_server($callbacks) {
   $xmlrpc_server = new stdClass();
@@ -384,3 +382,4 @@ function xmlrpc_server_method_help($method) {
   $xmlrpc_server = xmlrpc_server_get();
   return $xmlrpc_server->help[$method];
 }
+

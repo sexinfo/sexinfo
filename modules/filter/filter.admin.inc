@@ -2,14 +2,13 @@
 
 /**
  * @file
- * Administrative page callbacks for the Filter module.
+ * Admin page callbacks for the filter module.
  */
 
 /**
- * Page callback: Form constructor for a form to list and reorder text formats.
+ * Menu callback; Displays a list of all text formats and allows them to be rearranged.
  *
  * @ingroup forms
- * @see filter_menu()
  * @see filter_admin_overview_submit()
  */
 function filter_admin_overview($form) {
@@ -46,9 +45,6 @@ function filter_admin_overview($form) {
   return $form;
 }
 
-/**
- * Form submission handler for filter_admin_overview().
- */
 function filter_admin_overview_submit($form, &$form_state) {
   foreach ($form_state['values']['formats'] as $id => $data) {
     if (is_array($data) && isset($data['weight'])) {
@@ -99,26 +95,7 @@ function theme_filter_admin_overview($variables) {
 }
 
 /**
- * Page callback: Displays the text format add/edit form.
- *
- * @param object|null $format
- *   (optional) An object representing a format, with the following properties:
- *   - format: A machine-readable name representing the ID of the text format
- *     to save. If this corresponds to an existing text format, that format
- *     will be updated; otherwise, a new format will be created.
- *   - name: The title of the text format.
- *   - cache: (optional) An integer indicating whether the text format is
- *     cacheable (1) or not (0). Defaults to 1.
- *   - status: (optional) An integer indicating whether the text format is
- *     enabled (1) or not (0). Defaults to 1.
- *   - weight: (optional) The weight of the text format, which controls its
- *     placement in text format lists. If omitted, the weight is set to 0.
- *     Defaults to NULL.
- *
- * @return
- *   A form array.
- *
- * @see filter_menu()
+ * Menu callback; Display a text format form.
  */
 function filter_admin_format_page($format = NULL) {
   if (!isset($format->name)) {
@@ -132,24 +109,11 @@ function filter_admin_format_page($format = NULL) {
 }
 
 /**
- * Form constructor for the text format add/edit form.
+ * Generate a text format form.
  *
- * @param $format
- *   A format object having the properties:
- *   - format: A machine-readable name representing the ID of the text format to
- *     save. If this corresponds to an existing text format, that format will be
- *     updated; otherwise, a new format will be created.
- *   - name: The title of the text format.
- *   - cache: An integer indicating whether the text format is cacheable (1) or
- *     not (0). Defaults to 1.
- *   - status: (optional) An integer indicating whether the text format is
- *     enabled (1) or not (0). Defaults to 1.
- *   - weight: (optional) The weight of the text format, which controls its
- *     placement in text format lists. If omitted, the weight is set to 0.
- *
+ * @ingroup forms
  * @see filter_admin_format_form_validate()
  * @see filter_admin_format_form_submit()
- * @ingroup forms
  */
 function filter_admin_format_form($form, &$form_state, $format) {
   $is_fallback = ($format->format == filter_fallback_format());
@@ -323,9 +287,7 @@ function theme_filter_admin_format_filter_order($variables) {
 }
 
 /**
- * Form validation handler for filter_admin_format_form().
- *
- * @see filter_admin_format_form_submit()
+ * Validate text format form submissions.
  */
 function filter_admin_format_form_validate($form, &$form_state) {
   $format_format = trim($form_state['values']['format']);
@@ -342,9 +304,7 @@ function filter_admin_format_form_validate($form, &$form_state) {
 }
 
 /**
- * Form submission handler for filter_admin_format_form().
- *
- * @see filter_admin_format_form_validate()
+ * Process text format form submissions.
  */
 function filter_admin_format_form_submit($form, &$form_state) {
   // Remove unnecessary values.
@@ -376,14 +336,10 @@ function filter_admin_format_form_submit($form, &$form_state) {
 }
 
 /**
- * Form constructor for the text format deletion confirmation form.
+ * Menu callback; confirm deletion of a format.
  *
- * @param $format
- *   An object representing a text format.
- *
- * @see filter_menu()
- * @see filter_admin_disable_submit()
  * @ingroup forms
+ * @see filter_admin_disable_submit()
  */
 function filter_admin_disable($form, &$form_state, $format) {
   $form['#format'] = $format;
@@ -397,7 +353,7 @@ function filter_admin_disable($form, &$form_state, $format) {
 }
 
 /**
- * Form submission handler for filter_admin_disable().
+ * Process filter disable form submission.
  */
 function filter_admin_disable_submit($form, &$form_state) {
   $format = $form['#format'];
@@ -406,3 +362,4 @@ function filter_admin_disable_submit($form, &$form_state) {
 
   $form_state['redirect'] = 'admin/config/content/formats';
 }
+

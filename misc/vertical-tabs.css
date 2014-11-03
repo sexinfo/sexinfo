@@ -19,11 +19,8 @@ div.vertical-tabs {
   padding: 0 1em;
   border: 0;
 }
-fieldset.vertical-tabs-pane legend {
+.vertical-tabs legend {
   display: none;
-}
-fieldset.vertical-tabs-pane fieldset legend {
-  display: block;
 }
 
 /* Layout of each tab */

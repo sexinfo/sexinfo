@@ -15,8 +15,6 @@
  * - $vote: The choice number of the current user's vote.
  *
  * @see template_preprocess_poll_results()
- *
- * @ingroup themeable
  */
 ?>
 <div class="poll">

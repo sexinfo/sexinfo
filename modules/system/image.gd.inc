@@ -6,7 +6,7 @@
  */
 
 /**
- * @addtogroup image
+ * @ingroup image
  * @{
  */
 
@@ -56,8 +56,13 @@ function image_gd_settings_validate($form, &$form_state) {
  *   A boolean indicating if the GD toolkit is available on this machine.
  */
 function image_gd_check_settings() {
-  // GD2 support is available.
-  return function_exists('imagegd2');
+  if ($check = get_extension_funcs('gd')) {
+    if (in_array('imagegd2', $check)) {
+      // GD2 support is available.
+      return TRUE;
+    }
+  }
+  return FALSE;
 }
 
 /**
@@ -341,7 +346,7 @@ function image_gd_create_tmp(stdClass $image, $width, $height) {
  */
 function image_gd_get_info(stdClass $image) {
   $details = FALSE;
-  $data = @getimagesize($image->source);
+  $data = getimagesize($image->source);
 
   if (isset($data) && is_array($data)) {
     $extensions = array('1' => 'gif', '2' => 'jpg', '3' => 'png');
@@ -358,5 +363,5 @@ function image_gd_get_info(stdClass $image) {
 }
 
 /**
- * @} End of "addtogroup image".
+ * @} End of "ingroup image".
  */

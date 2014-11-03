@@ -42,11 +42,6 @@ function color_requirements($phase) {
 }
 
 /**
- * @addtogroup updates-7.x-extra
- * @{
- */
-
-/**
  * Warn site administrator if unsafe CSS color codes are found in the database.
  */
 function color_update_7001() {
@@ -60,7 +55,3 @@ function color_update_7001() {
     }
   }
 }
-
-/**
- * @} End of "addtogroup updates-7.x-extra".
- */

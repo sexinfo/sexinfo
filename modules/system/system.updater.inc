@@ -73,12 +73,8 @@ class ModuleUpdater extends Updater implements DrupalUpdaterInterface {
     return array();
   }
 
-  /**
-   * Returns a list of post install actions.
-   */
   public function postInstallTasks() {
     return array(
-      l(t('Install another module'), 'admin/modules/install'),
       l(t('Enable newly added modules'), 'admin/modules'),
       l(t('Administration pages'), 'admin'),
     );

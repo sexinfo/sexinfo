@@ -6,11 +6,7 @@
  */
 
 /**
- * Form constructor for the update settings form.
- *
- * @see update_settings_validate()
- * @see update_settings_submit()
- * @ingroup forms
+ * Form builder for the update settings tab.
  */
 function update_settings($form) {
   $form['update_check_frequency'] = array(
@@ -61,11 +57,9 @@ function update_settings($form) {
 }
 
 /**
- * Form validation handler for update_settings().
+ * Validation callback for the settings form.
  *
- * Validates the e-mail addresses and ensures the field is formatted correctly.
- *
- * @see update_settings_submit()
+ * Validates the email addresses and ensures the field is formatted correctly.
  */
 function update_settings_validate($form, &$form_state) {
   if (!empty($form_state['values']['update_notify_emails'])) {
@@ -95,15 +89,13 @@ function update_settings_validate($form, &$form_state) {
 }
 
 /**
- * Form submission handler for update_settings().
+ * Submit handler for the settings tab.
  *
- * Also invalidates the cache of available updates if the "Check for updates of
- * disabled modules and themes" setting is being changed. The available updates
- * report needs to refetch available update data after this setting changes or
- * it would show misleading things (e.g., listing the disabled projects on the
- * site with the "No available releases found" warning).
- *
- * @see update_settings_validate()
+ * Also invalidates the cache of available updates if the "Check for updates
+ * of disabled modules and themes" setting is being changed. The available
+ * updates report need to refetch available update data after this setting
+ * changes or it would show misleading things (e.g. listing the disabled
+ * projects on the site with the "No available releases found" warning).
  */
 function update_settings_submit($form, $form_state) {
   $op = $form_state['values']['op'];

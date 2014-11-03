@@ -2,22 +2,7 @@
 
 /**
  * @file
- * Administrative page callbacks for the Forum module.
- */
-
-/**
- * Page callback: Returns a form for creating a new forum or container.
- *
- * @param $type
- *   What is being added. Possible values are 'forum' and 'container'.
- * @param $edit
- *   (optional) Associative array containing a forum term to be edited.
- *   Defaults to an empty array.
- *
- * @return
- *   A form for creating a new forum or container.
- *
- * @see forum_menu()
+ * Administrative page callbacks for the forum module.
  */
 function forum_form_main($type, $edit = array()) {
   $edit = (array) $edit;
@@ -35,14 +20,11 @@ function forum_form_main($type, $edit = array()) {
 }
 
 /**
- * Form constructor for adding and editing a forum.
+ * Returns a form for adding a forum to the forum vocabulary
  *
- * @param $edit
- *   (optional) Associative array containing a forum term to be added or edited.
- *   Defaults to an empty array.
- *
- * @see forum_form_submit()
+ * @param $edit Associative array containing a forum term to be added or edited.
  * @ingroup forms
+ * @see forum_form_submit()
  */
 function forum_form_forum($form, &$form_state, $edit = array()) {
   $edit += array(
@@ -85,7 +67,7 @@ function forum_form_forum($form, &$form_state, $edit = array()) {
 }
 
 /**
- * Form submission handler for forum_form_forum() and forum_form_container().
+ * Process forum form and container form submissions.
  */
 function forum_form_submit($form, &$form_state) {
   if ($form['form_id']['#value'] == 'forum_form_container') {
@@ -122,8 +104,8 @@ function forum_form_submit($form, &$form_state) {
 /**
  * Returns HTML for a forum form.
  *
- * By default this does not alter the appearance of a form at all, but is
- * provided as a convenience for themers.
+ * By default this does not alter the appearance of a form at all,
+ * but is provided as a convenience for themers.
  *
  * @param $variables
  *   An associative array containing:
@@ -136,14 +118,11 @@ function theme_forum_form($variables) {
 }
 
 /**
- * Form constructor for adding and editing forum containers.
+ * Returns a form for adding a container to the forum vocabulary
  *
- * @param $edit
- *   (optional) Associative array containing a container term to be added or edited.
- *   Defaults to an empty array.
- *
- * @see forum_form_submit()
+ * @param $edit Associative array containing a container term to be added or edited.
  * @ingroup forms
+ * @see forum_form_submit()
  */
 function forum_form_container($form, &$form_state, $edit = array()) {
   $edit += array(
@@ -197,13 +176,9 @@ function forum_form_container($form, &$form_state, $edit = array()) {
 }
 
 /**
- * Form constructor for confirming deletion of a forum taxonomy term.
+ * Returns a confirmation page for deleting a forum taxonomy term.
  *
- * @param $tid
- *   ID of the term to be deleted.
- *
- * @see forum_confirm_delete_submit()
- * @ingroup forms
+ * @param $tid ID of the term to be deleted
  */
 function forum_confirm_delete($form, &$form_state, $tid) {
   $term = taxonomy_term_load($tid);
@@ -215,7 +190,7 @@ function forum_confirm_delete($form, &$form_state, $tid) {
 }
 
 /**
- * Form submission handler for forum_confirm_delete().
+ * Implement forms api _submit call. Deletes a forum after confirmation.
  */
 function forum_confirm_delete_submit($form, &$form_state) {
   taxonomy_term_delete($form_state['values']['tid']);
@@ -227,11 +202,9 @@ function forum_confirm_delete_submit($form, &$form_state) {
 }
 
 /**
- * Form constructor for the forum settings page.
+ * Form builder for the forum settings page.
  *
- * @see forum_menu()
  * @see system_settings_form()
- * @ingroup forms
  */
 function forum_admin_settings($form) {
   $number = drupal_map_assoc(array(5, 10, 15, 20, 25, 30, 35, 40, 50, 60, 80, 100, 150, 200, 250, 300, 350, 400, 500));
@@ -259,13 +232,7 @@ function forum_admin_settings($form) {
 }
 
 /**
- * Form constructor for the forum overview form.
- *
- * Returns a form for controlling the hierarchy of existing forums and
- * containers.
- *
- * @see forum_menu()
- * @ingroup forms
+ * Returns an overview list of existing forums and containers
  */
 function forum_overview($form, &$form_state) {
   module_load_include('inc', 'taxonomy', 'taxonomy.admin');
@@ -300,17 +267,11 @@ function forum_overview($form, &$form_state) {
 }
 
 /**
- * Returns a select box for available parent terms.
+ * Returns a select box for available parent terms
  *
- * @param $tid
- *   ID of the term that is being added or edited.
- * @param $title
- *   Title for the select box.
- * @param $child_type
- *   Whether the child is a forum or a container.
- *
- * @return
- *   A select form element.
+ * @param $tid ID of the term which is being added or edited
+ * @param $title Title to display the select box with
+ * @param $child_type Whether the child is forum or container
  */
 function _forum_parent_select($tid, $title, $child_type) {
 

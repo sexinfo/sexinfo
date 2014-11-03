@@ -27,7 +27,6 @@
   color: #000;
   cursor: default;
   white-space: pre;
-  zoom: 1; /* IE7 */
 }
 /* Animated throbber */
 html.js input.form-autocomplete {
@@ -94,22 +93,21 @@ body.drag {
   cursor: move;
   float: left; /* LTR */
   height: 1.7em;
-  margin-left: -1em; /* LTR */
-  overflow: hidden;
+  margin: -0.4em 0 -0.4em -0.5em; /* LTR */
+  padding: 0.42em 1.5em 0.42em 0.5em; /* LTR */
   text-decoration: none;
 }
 a.tabledrag-handle:hover {
   text-decoration: none;
 }
 a.tabledrag-handle .handle {
-  background: url(../../misc/draggable.png) no-repeat 6px 9px;
+  background: url(../../misc/draggable.png) no-repeat 0 0;
   height: 13px;
-  margin: -0.4em 0.5em; /* LTR */
-  padding: 0.42em 0.5em; /* LTR */
+  margin-top: 4px;
   width: 13px;
 }
 a.tabledrag-handle-hover .handle {
-  background-position: 6px -11px;
+  background-position: 0 -20px;
 }
 div.indentation {
   float: left; /* LTR */
@@ -159,9 +157,12 @@ table.sticky-header {
 .progress .percentage {
   float: right; /* LTR */
 }
+.progress-disabled {
+  float: left; /* LTR */
+}
 /* Throbber */
 .ajax-progress {
-  display: inline-block;
+  float: left; /* LTR */
 }
 .ajax-progress .throbber {
   background: transparent url(../../misc/throbber.gif) no-repeat 0px -18px;
@@ -169,9 +170,6 @@ table.sticky-header {
   height: 15px;
   margin: 2px;
   width: 15px;
-}
-.ajax-progress .message {
-  padding-left: 20px;
 }
 tr .ajax-progress .throbber {
   margin: 0 2px;
@@ -231,8 +229,6 @@ html.js .js-hide {
   position: absolute !important;
   clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
-  overflow: hidden;
-  height: 1px;
 }
 
 /**
@@ -243,8 +239,6 @@ html.js .js-hide {
 .element-invisible.element-focusable:focus {
   position: static !important;
   clip: auto;
-  overflow: visible;
-  height: auto;
 }
 
 /**

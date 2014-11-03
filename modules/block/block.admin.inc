@@ -57,7 +57,7 @@ function block_admin_display_prepare_blocks($theme) {
 }
 
 /**
- * Form constructor for the main block administration form.
+ * Form builder for the main blocks administration form.
  *
  * @param $blocks
  *   An array of blocks, as returned by block_admin_display_prepare_blocks().
@@ -165,7 +165,7 @@ function block_admin_display_form($form, &$form_state, $blocks, $theme, $block_r
 }
 
 /**
- * Form submission handler for block_admin_display_form().
+ * Form submission handler for the main blocks administration form.
  *
  * @see block_admin_display_form()
  */
@@ -197,9 +197,10 @@ function block_admin_display_form_submit($form, &$form_state) {
 }
 
 /**
- * Sorts active blocks by region, then by weight; sorts inactive blocks by name.
+ * Helper function for sorting blocks on admin/structure/block.
  *
- * Callback for usort() in block_admin_display_prepare_blocks().
+ * Active blocks are sorted by region, then by weight.
+ * Disabled blocks are sorted by name.
  */
 function _block_compare($a, $b) {
   global $theme_key;
@@ -239,7 +240,7 @@ function _block_compare($a, $b) {
 }
 
 /**
- * Form constructor for the block configuration form.
+ * Form builder for the block configuration form.
  *
  * Also used by block_add_block_form() for adding a new custom block.
  *
@@ -440,7 +441,7 @@ function block_admin_configure($form, &$form_state, $module, $delta) {
 }
 
 /**
- * Form validation handler for block_admin_configure().
+ * Form validation handler for the block configuration form.
  *
  * @see block_admin_configure()
  * @see block_admin_configure_submit()
@@ -458,7 +459,7 @@ function block_admin_configure_validate($form, &$form_state) {
 }
 
 /**
- * Form submission handler for block_admin_configure().
+ * Form submission handler for the block configuration form.
  *
  * @see block_admin_configure()
  * @see block_admin_configure_validate()
@@ -518,7 +519,7 @@ function block_admin_configure_submit($form, &$form_state) {
 }
 
 /**
- * Form constructor for the add block form.
+ * Form builder for the add block form.
  *
  * @see block_add_block_form_validate()
  * @see block_add_block_form_submit()
@@ -529,7 +530,7 @@ function block_add_block_form($form, &$form_state) {
 }
 
 /**
- * Form validation handler for block_add_block_form().
+ * Form validation handler for the add block form.
  *
  * @see block_add_block_form()
  * @see block_add_block_form_submit()
@@ -543,7 +544,7 @@ function block_add_block_form_validate($form, &$form_state) {
 }
 
 /**
- * Form submission handler for block_add_block_form().
+ * Form submission handler for the add block form.
  *
  * Saves the new custom block.
  *
@@ -608,7 +609,7 @@ function block_add_block_form_submit($form, &$form_state) {
 }
 
 /**
- * Form constructor for the custom block deletion form.
+ * Form builder for the custom block deletion form.
  *
  * @param $module
  *   The name of the module that implements the block to be deleted. This should
@@ -628,7 +629,7 @@ function block_custom_block_delete($form, &$form_state, $module, $delta) {
 }
 
 /**
- * Form submission handler for block_custom_block_delete().
+ * Form submission handler for the custom block deletion form.
  *
  * @see block_custom_block_delete()
  */

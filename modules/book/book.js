@@ -1,15 +1,10 @@
-/**
- * @file
- * Javascript behaviors for the Book module.
- */
 
 (function ($) {
 
 Drupal.behaviors.bookFieldsetSummaries = {
   attach: function (context) {
-    $('fieldset.book-outline-form', context).drupalSetSummary(function (context) {
-      var $select = $('.form-item-book-bid select');
-      var val = $select.val();
+    $('fieldset.book-form', context).drupalSetSummary(function (context) {
+      var val = $('.form-item-book-bid select').val();
 
       if (val === '0') {
         return Drupal.t('Not in book');
@@ -18,7 +13,7 @@ Drupal.behaviors.bookFieldsetSummaries = {
         return Drupal.t('New book');
       }
       else {
-        return Drupal.checkPlain($select.find(':selected').text());
+        return Drupal.checkPlain($('.form-item-book-bid select :selected').text());
       }
     });
   }

@@ -55,8 +55,6 @@
  * @see template_preprocess_comment()
  * @see template_process()
  * @see theme_comment()
- *
- * @ingroup themeable
  */
 ?>
 <div class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>

@@ -1,7 +1,3 @@
-/**
- * @file
- * Styling for the Forum module.
- */
 
 #forum .description {
   font-size: 0.9em;
@@ -29,7 +25,7 @@
 }
 
 #forum div.indent {
-  margin-left: 20px; /* LTR */
+  margin-left: 20px;
 }
 #forum .icon div {
   background-image: url(../../misc/forum-icons.png);

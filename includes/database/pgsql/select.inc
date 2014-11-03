@@ -6,7 +6,7 @@
  */
 
 /**
- * @addtogroup database
+ * @ingroup database
  * @{
  */
 
@@ -103,6 +103,6 @@ class SelectQuery_pgsql extends SelectQuery {
 }
 
 /**
- * @} End of "addtogroup database".
+ * @} End of "ingroup database".
  */
 

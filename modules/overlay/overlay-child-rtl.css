@@ -1,9 +1,4 @@
 
-/**
- * @file
- * RTL styling for Overlay child pages.
- */
-
 html {
   direction: rtl;
 }
@@ -36,5 +31,5 @@ html {
   right: auto;
 }
 #overlay-tabs li {
-  margin: 0 -3px 0 0;
+  margin: 0 -3px 0 O;
 }

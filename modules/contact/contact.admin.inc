@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Admin page callbacks for the Contact module.
+ * Admin page callbacks for the contact module.
  */
 
 /**
@@ -53,22 +53,7 @@ function contact_category_list() {
 }
 
 /**
- * Form constructor for the category edit form.
- *
- * @param $category
- *   An array describing the category to be edited. May be empty for new
- *   categories. Recognized array keys are:
- *   - category: The name of the category.
- *   - recipients: A comma-separated list of recipients.
- *   - reply: (optional) The body of the auto-reply message.
- *   - weight: The weight of the category.
- *   - selected: Boolean indicating whether the category should be selected by
- *     default.
- *   - cid: The category ID for which the form is to be displayed.
- *
- * @see contact_category_edit_form_validate()
- * @see contact_category_edit_form_submit()
- * @ingroup forms
+ * Category edit page.
  */
 function contact_category_edit_form($form, &$form_state, array $category = array()) {
   // If this is a new category, add the default values.
@@ -132,9 +117,7 @@ function contact_category_edit_form($form, &$form_state, array $category = array
 }
 
 /**
- * Form validation handler for contact_category_edit_form().
- *
- * @see contact_category_edit_form_submit()
+ * Validate the contact category edit page form submission.
  */
 function contact_category_edit_form_validate($form, &$form_state) {
   // Validate and each e-mail recipient.
@@ -161,9 +144,7 @@ function contact_category_edit_form_validate($form, &$form_state) {
 }
 
 /**
- * Form submission handler for contact_category_edit_form().
- *
- * @see contact_category_edit_form_validate()
+ * Process the contact category edit page form submission.
  */
 function contact_category_edit_form_submit($form, &$form_state) {
   if ($form_state['values']['selected']) {
@@ -186,13 +167,8 @@ function contact_category_edit_form_submit($form, &$form_state) {
 }
 
 /**
- * Form constructor for the contact category deletion form.
+ * Form builder for deleting a contact category.
  *
- * @param $contact
- *   Array describing the contact category to be deleted. See the documentation
- *   of contact_category_edit_form() for the recognized keys.
- *
- * @see contact_menu()
  * @see contact_category_delete_form_submit()
  */
 function contact_category_delete_form($form, &$form_state, array $contact) {
@@ -212,7 +188,9 @@ function contact_category_delete_form($form, &$form_state, array $contact) {
 }
 
 /**
- * Form submission handler for contact_category_delete_form().
+ * Submit handler for the confirm delete category form.
+ *
+ * @see contact_category_delete_form()
  */
 function contact_category_delete_form_submit($form, &$form_state) {
   $contact = $form['contact']['#value'];

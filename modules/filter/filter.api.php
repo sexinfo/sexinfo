@@ -57,20 +57,20 @@
  *   - description: Additional administrative information about the filter's
  *     behavior, if needed for clarification.
  *   - settings callback: The name of a function that returns configuration form
- *     elements for the filter. See callback_filter_settings() for details.
+ *     elements for the filter. See hook_filter_FILTER_settings() for details.
  *   - default settings: An associative array containing default settings for
  *     the filter, to be applied when the filter has not been configured yet.
  *   - prepare callback: The name of a function that escapes the content before
- *     the actual filtering happens. See callback_filter_prepare() for
+ *     the actual filtering happens. See hook_filter_FILTER_prepare() for
  *     details.
  *   - process callback: (required) The name the function that performs the
- *     actual filtering. See callback_filter_process() for details.
+ *     actual filtering. See hook_filter_FILTER_process() for details.
  *   - cache (default TRUE): Specifies whether the filtered text can be cached.
  *     Note that setting this to FALSE makes the entire text format not
  *     cacheable, which may have an impact on the site's overall performance.
  *     See filter_format_allowcache() for details.
  *   - tips callback: The name of a function that returns end-user-facing filter
- *     usage guidelines for the filter. See callback_filter_tips() for
+ *     usage guidelines for the filter. See hook_filter_FILTER_tips() for
  *     details.
  *   - weight: A default weight for the filter in new text formats.
  *
@@ -122,9 +122,11 @@ function hook_filter_info_alter(&$info) {
  */
 
 /**
- * Provide a settings form for filter settings.
+ * Settings callback for hook_filter_info().
  *
- * Callback for hook_filter_info().
+ * Note: This is not really a hook. The function name is manually specified via
+ * 'settings callback' in hook_filter_info(), with this recommended callback
+ * name pattern. It is called from filter_admin_format_form().
  *
  * This callback function is used to provide a settings form for filter
  * settings, for filters that need settings on a per-text-format basis. This
@@ -156,10 +158,8 @@ function hook_filter_info_alter(&$info) {
  * @return
  *   An array of form elements defining settings for the filter. Array keys
  *   should match the array keys in $filter->settings and $defaults.
- *
- * @ingroup callbacks
  */
-function callback_filter_settings($form, &$form_state, $filter, $format, $defaults, $filters) {
+function hook_filter_FILTER_settings($form, &$form_state, $filter, $format, $defaults, $filters) {
   $filter->settings += $defaults;
 
   $elements = array();
@@ -172,9 +172,11 @@ function callback_filter_settings($form, &$form_state, $filter, $format, $defaul
 }
 
 /**
- * Provide prepared text with special characters escaped.
+ * Prepare callback for hook_filter_info().
  *
- * Callback for hook_filter_info().
+ * Note: This is not really a hook. The function name is manually specified via
+ * 'prepare callback' in hook_filter_info(), with this recommended callback
+ * name pattern. It is called from check_markup().
  *
  * See hook_filter_info() for a description of the filtering process. Filters
  * should not use the 'prepare callback' step for anything other than escaping,
@@ -197,19 +199,19 @@ function callback_filter_settings($form, &$form_state, $filter, $format, $defaul
  *
  * @return
  *   The prepared, escaped text.
- *
- * @ingroup callbacks
  */
-function callback_filter_prepare($text, $filter, $format, $langcode, $cache, $cache_id) {
+function hook_filter_FILTER_prepare($text, $filter, $format, $langcode, $cache, $cache_id) {
   // Escape <code> and </code> tags.
   $text = preg_replace('|<code>(.+?)</code>|se', "[codefilter_code]$1[/codefilter_code]", $text);
   return $text;
 }
 
 /**
- * Provide text filtered to conform to the supplied format.
+ * Process callback for hook_filter_info().
  *
- * Callback for hook_filter_info().
+ * Note: This is not really a hook. The function name is manually specified via
+ * 'process callback' in hook_filter_info(), with this recommended callback
+ * name pattern. It is called from check_markup().
  *
  * See hook_filter_info() for a description of the filtering process. This step
  * is where the filter actually transforms the text.
@@ -230,19 +232,19 @@ function callback_filter_prepare($text, $filter, $format, $langcode, $cache, $ca
  *
  * @return
  *   The filtered text.
- *
- * @ingroup callbacks
  */
-function callback_filter_process($text, $filter, $format, $langcode, $cache, $cache_id) {
+function hook_filter_FILTER_process($text, $filter, $format, $langcode, $cache, $cache_id) {
   $text = preg_replace('|\[codefilter_code\](.+?)\[/codefilter_code\]|se', "<pre>$1</pre>", $text);
 
   return $text;
 }
 
 /**
- * Return help text for a filter.
+ * Tips callback for hook_filter_info().
  *
- * Callback for hook_filter_info().
+ * Note: This is not really a hook. The function name is manually specified via
+ * 'tips callback' in hook_filter_info(), with this recommended callback
+ * name pattern. It is called from _filter_tips().
  *
  * A filter's tips should be informative and to the point. Short tips are
  * preferably one-liners.
@@ -258,10 +260,8 @@ function callback_filter_process($text, $filter, $format, $langcode, $cache, $ca
  *
  * @return
  *   Translated text to display as a tip.
- *
- * @ingroup callbacks
  */
-function callback_filter_tips($filter, $format, $long) {
+function hook_filter_FILTER_tips($filter, $format, $long) {
  if ($long) {
     return t('Lines and paragraphs are automatically recognized. The &lt;br /&gt; line break, &lt;p&gt; paragraph and &lt;/p&gt; close paragraph tags are inserted automatically. If paragraphs are not recognized simply add a couple blank lines.');
   }

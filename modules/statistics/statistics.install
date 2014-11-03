@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Install, update, and uninstall functions for the Statistics module.
+ * Install, update and uninstall functions for the statistics module.
  */
 
 /**
@@ -11,7 +11,6 @@
 function statistics_uninstall() {
   // Remove variables.
   variable_del('statistics_count_content_views');
-  variable_del('statistics_count_content_views_ajax');
   variable_del('statistics_enable_access_log');
   variable_del('statistics_flush_accesslog_timer');
   variable_del('statistics_day_timestamp');
@@ -155,5 +154,5 @@ function statistics_update_7000() {
 }
 
 /**
- * @} End of "addtogroup updates-6.x-to-7.x".
+ * @} End of "addtogroup updates-6.x-to-7.x"
  */

@@ -6,12 +6,17 @@
  */
 
 /**
- * Implements hook_requirements().
+ * Test and report Drupal installation requirements.
+ *
+ * @param $phase
+ *   The current system installation phase.
+ * @return
+ *   An array of system requirements.
  */
 function system_requirements($phase) {
   global $base_url;
   $requirements = array();
-  // Ensure translations don't break during installation.
+  // Ensure translations don't break at install time
   $t = get_t();
 
   // Report Drupal version
@@ -23,8 +28,8 @@ function system_requirements($phase) {
       'weight' => -10,
     );
 
-    // Display the currently active installation profile, if the site
-    // is not running the default installation profile.
+    // Display the currently active install profile, if the site
+    // is not running the default install profile.
     $profile = drupal_get_profile();
     if ($profile != 'standard') {
       $info = system_get_info('module', $profile);
@@ -203,7 +208,7 @@ function system_requirements($phase) {
     'value' => $memory_limit == -1 ? t('-1 (Unlimited)') : $memory_limit,
   );
 
-  if (!drupal_check_memory_limit(DRUPAL_MINIMUM_PHP_MEMORY_LIMIT, $memory_limit)) {
+  if ($memory_limit && $memory_limit != -1 && parse_size($memory_limit) < parse_size(DRUPAL_MINIMUM_PHP_MEMORY_LIMIT)) {
     $description = '';
     if ($phase == 'install') {
       $description = $t('Consider increasing your PHP memory limit to %memory_minimum_limit to help prevent errors in the installation process.', array('%memory_minimum_limit' => DRUPAL_MINIMUM_PHP_MEMORY_LIMIT));
@@ -251,39 +256,6 @@ function system_requirements($phase) {
       );
     }
     $requirements['settings.php']['title'] = $t('Configuration file');
-  }
-
-  // Test the contents of the .htaccess files.
-  if ($phase == 'runtime') {
-    // Try to write the .htaccess files first, to prevent false alarms in case
-    // (for example) the /tmp directory was wiped.
-    file_ensure_htaccess();
-    $htaccess_files['public://.htaccess'] = array(
-      'title' => $t('Public files directory'),
-      'directory' => variable_get('file_public_path', conf_path() . '/files'),
-    );
-    if ($private_files_directory = variable_get('file_private_path')) {
-      $htaccess_files['private://.htaccess'] = array(
-        'title' => $t('Private files directory'),
-        'directory' => $private_files_directory,
-      );
-    }
-    $htaccess_files['temporary://.htaccess'] = array(
-      'title' => $t('Temporary files directory'),
-      'directory' => variable_get('file_temporary_path', file_directory_temp()),
-    );
-    foreach ($htaccess_files as $htaccess_file => $info) {
-      // Check for the string which was added to the recommended .htaccess file
-      // in the latest security update.
-      if (!file_exists($htaccess_file) || !($contents = @file_get_contents($htaccess_file)) || strpos($contents, 'Drupal_Security_Do_Not_Remove_See_SA_2013_003') === FALSE) {
-        $requirements[$htaccess_file] = array(
-          'title' => $info['title'],
-          'value' => $t('Not fully protected'),
-          'severity' => REQUIREMENT_ERROR,
-          'description' => $t('See <a href="@url">@url</a> for information about the recommended .htaccess file which should be added to the %directory directory to help protect against arbitrary code execution.', array('@url' => 'http://drupal.org/SA-CORE-2013-003', '%directory' => $info['directory'])),
-        );
-      }
-    }
   }
 
   // Report cron status.
@@ -336,7 +308,7 @@ function system_requirements($phase) {
     variable_get('file_private_path', FALSE),
   );
 
-  // Do not check for the temporary files directory during installation
+  // Do not check for the temporary files directory at install time
   // unless it has been set in settings.php. In this case the user has
   // no alternative but to fix the directory if it is not writable.
   if ($phase == 'install') {
@@ -440,7 +412,7 @@ function system_requirements($phase) {
     $profile = drupal_get_profile();
     $files = system_rebuild_module_data();
     foreach ($files as $module => $file) {
-      // Ignore disabled modules and installation profiles.
+      // Ignore disabled modules and install profiles.
       if (!$file->status || $module == $profile) {
         continue;
       }
@@ -493,7 +465,7 @@ function system_requirements($phase) {
       $requirements['update status'] = array(
         'value' => $t('Not enabled'),
         'severity' => REQUIREMENT_WARNING,
-        'description' => $t('Update notifications are not enabled. It is <strong>highly recommended</strong> that you enable the update manager module from the <a href="@module">module administration page</a> in order to stay up-to-date on new releases. For more information, <a href="@update">Update status handbook page</a>.', array('@update' => 'http://drupal.org/documentation/modules/update', '@module' => url('admin/modules'))),
+        'description' => $t('Update notifications are not enabled. It is <strong>highly recommended</strong> that you enable the update status module from the <a href="@module">module administration page</a> in order to stay up-to-date on new releases. For more information, <a href="@update">Update status handbook page</a>.', array('@update' => 'http://drupal.org/handbook/modules/update', '@module' => url('admin/modules'))),
       );
     }
     else {
@@ -544,7 +516,7 @@ function system_install() {
     ->execute();
 
   // Populate the cron key variable.
-  $cron_key = drupal_random_key();
+  $cron_key = drupal_hash_base64(drupal_random_bytes(55));
   variable_set('cron_key', $cron_key);
 }
 
@@ -772,7 +744,6 @@ function system_schema() {
         'type' => 'varchar',
         'length' => 100,
         'not null' => TRUE,
-        'binary' => TRUE,
       ),
       'type' => array(
         'description' => 'The date format type, e.g. medium.',
@@ -846,7 +817,6 @@ function system_schema() {
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
-        'binary' => TRUE,
       ),
       'filemime' => array(
         'description' => "The file's MIME type.",
@@ -858,7 +828,6 @@ function system_schema() {
       'filesize' => array(
         'description' => 'The size of the file in bytes.',
         'type' => 'int',
-        'size' => 'big',
         'unsigned' => TRUE,
         'not null' => TRUE,
         'default' => 0,
@@ -1718,12 +1687,6 @@ function system_update_dependencies() {
     'block' => 7002,
   );
 
-  // system_update_7061() queries the {node_revision} table, so it must run
-  // after node_update_7001(), which renames the {node_revisions} table.
-  $dependencies['system'][7061] = array(
-    'node' => 7001,
-  );
-
   // system_update_7067() migrates role permissions and therefore must run
   // after the {role} and {role_permission} tables are properly set up, which
   // happens in user_update_7007().
@@ -1746,18 +1709,17 @@ function system_update_dependencies() {
 function system_update_7000() {
   $result = db_query("SELECT rid, perm FROM {permission} ORDER BY rid");
   foreach ($result as $role) {
-    $renamed_permission = $role->perm;
-    $renamed_permission = preg_replace('/(?<=^|,\ )create\ blog\ entries(?=,|$)/', 'create blog content', $renamed_permission);
-    $renamed_permission = preg_replace('/(?<=^|,\ )edit\ own\ blog\ entries(?=,|$)/', 'edit own blog content', $renamed_permission);
-    $renamed_permission = preg_replace('/(?<=^|,\ )edit\ any\ blog\ entry(?=,|$)/', 'edit any blog content', $renamed_permission);
-    $renamed_permission = preg_replace('/(?<=^|,\ )delete\ own\ blog\ entries(?=,|$)/', 'delete own blog content', $renamed_permission);
-    $renamed_permission = preg_replace('/(?<=^|,\ )delete\ any\ blog\ entry(?=,|$)/', 'delete any blog content', $renamed_permission);
+    $renamed_permission = preg_replace('/(?<=^|,\ )create\ blog\ entries(?=,|$)/', 'create blog content', $role->perm);
+    $renamed_permission = preg_replace('/(?<=^|,\ )edit\ own\ blog\ entries(?=,|$)/', 'edit own blog content', $role->perm);
+    $renamed_permission = preg_replace('/(?<=^|,\ )edit\ any\ blog\ entry(?=,|$)/', 'edit any blog content', $role->perm);
+    $renamed_permission = preg_replace('/(?<=^|,\ )delete\ own\ blog\ entries(?=,|$)/', 'delete own blog content', $role->perm);
+    $renamed_permission = preg_replace('/(?<=^|,\ )delete\ any\ blog\ entry(?=,|$)/', 'delete any blog content', $role->perm);
 
-    $renamed_permission = preg_replace('/(?<=^|,\ )create\ forum\ topics(?=,|$)/', 'create forum content', $renamed_permission);
-    $renamed_permission = preg_replace('/(?<=^|,\ )delete\ any\ forum\ topic(?=,|$)/', 'delete any forum content', $renamed_permission);
-    $renamed_permission = preg_replace('/(?<=^|,\ )delete\ own\ forum\ topics(?=,|$)/', 'delete own forum content', $renamed_permission);
-    $renamed_permission = preg_replace('/(?<=^|,\ )edit\ any\ forum\ topic(?=,|$)/', 'edit any forum content', $renamed_permission);
-    $renamed_permission = preg_replace('/(?<=^|,\ )edit\ own\ forum\ topics(?=,|$)/', 'edit own forum content', $renamed_permission);
+    $renamed_permission = preg_replace('/(?<=^|,\ )create\ forum\ topics(?=,|$)/', 'create forum content', $role->perm);
+    $renamed_permission = preg_replace('/(?<=^|,\ )delete\ any\ forum\ topic(?=,|$)/', 'delete any forum content', $role->perm);
+    $renamed_permission = preg_replace('/(?<=^|,\ )delete\ own\ forum\ topics(?=,|$)/', 'delete own forum content', $role->perm);
+    $renamed_permission = preg_replace('/(?<=^|,\ )edit\ any\ forum\ topic(?=,|$)/', 'edit any forum content', $role->perm);
+    $renamed_permission = preg_replace('/(?<=^|,\ )edit\ own\ forum\ topics(?=,|$)/', 'edit own forum content', $role->perm);
 
     if ($renamed_permission != $role->perm) {
       db_update('permission')
@@ -1772,7 +1734,7 @@ function system_update_7000() {
  * Generate a cron key and save it in the variables table.
  */
 function system_update_7001() {
-  variable_set('cron_key', drupal_random_key());
+  variable_set('cron_key', drupal_hash_base64(drupal_random_bytes(55)));
 }
 
 /**
@@ -1919,7 +1881,7 @@ function system_update_7007() {
   $result = db_query("SELECT rid, perm FROM {permission} ORDER BY rid ASC");
   $query = db_insert('role_permission')->fields(array('rid', 'permission'));
   foreach ($result as $role) {
-    foreach (array_unique(explode(', ', $role->perm)) as $perm) {
+    foreach (explode(', ', $role->perm) as $perm) {
       $query->values(array(
         'rid' => $role->rid,
         'permission' => $perm,
@@ -2012,7 +1974,7 @@ function system_update_7013() {
     $timezone = 'UTC';
   }
   variable_set('date_default_timezone', $timezone);
-  drupal_set_message(format_string('The default time zone has been set to %timezone. Check the <a href="@config-url">date and time configuration page</a> to configure it correctly.', array('%timezone' => $timezone, '@config-url' => url('admin/config/regional/settings'))), 'warning');
+  drupal_set_message('The default time zone has been set to <em>' . check_plain($timezone) . '</em>. Check the ' . l('date and time configuration page', 'admin/config/regional/settings') . ' to configure it correctly.', 'warning');
   // Remove temporary override.
   variable_del('date_temporary_timezone');
 }
@@ -2211,7 +2173,6 @@ function system_update_7034() {
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
-        'binary' => TRUE,
       ),
       'uri' => array(
         'description' => 'URI of file.',
@@ -2219,7 +2180,6 @@ function system_update_7034() {
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
-        'binary' => TRUE,
       ),
       'filemime' => array(
         'description' => "The file's MIME type.",
@@ -2282,6 +2242,10 @@ function system_update_7036() {
     ));
   }
   $insert->execute();
+
+  // Remove obsolete variable 'site_offline_message'. See
+  // update_fix_d7_requirements().
+  variable_del('site_offline_message');
 }
 
 /**
@@ -2765,37 +2729,15 @@ function system_update_7061(&$sandbox) {
   }
 
   if (!isset($sandbox['progress'])) {
-    // Delete stale rows from {upload} where the fid is not in the {files} table.
-    db_delete('upload')
-      ->notExists(
-        db_select('files', 'f')
-        ->fields('f', array('fid'))
-        ->where('f.fid = {upload}.fid')
-      )
-      ->execute();
-
-    // Delete stale rows from {upload} where the vid is not in the
-    // {node_revision} table. The table has already been renamed in
-    // node_update_7001().
-    db_delete('upload')
-      ->notExists(
-        db_select('node_revision', 'nr')
-        ->fields('nr', array('vid'))
-        ->where('nr.vid = {upload}.vid')
-      )
-      ->execute();
-
     // Retrieve a list of node revisions that have uploaded files attached.
     // DISTINCT queries are expensive, especially when paged, so we store the
     // data in its own table for the duration of the update.
-    if (!db_table_exists('system_update_7061')) {
-      $table = array(
-        'description' => t('Stores temporary data for system_update_7061.'),
-        'fields' => array('vid' => array('type' => 'int')),
-        'primary key' => array('vid'),
-      );
-      db_create_table('system_update_7061', $table);
-    }
+    $table = array(
+      'description' => t('Stores temporary data for system_update_7061.'),
+      'fields' => array('vid' => array('type' => 'int')),
+      'primary key' => array('vid'),
+    );
+    db_create_table('system_update_7061', $table);
     $query = db_select('upload', 'u');
     $query->distinct();
     $query->addField('u','vid');
@@ -2851,9 +2793,9 @@ function system_update_7061(&$sandbox) {
     $scheme = file_default_scheme() . '://';
     foreach ($node_revisions as $vid => $revision) {
       foreach ($revision['file'][LANGUAGE_NONE] as $delta => $file) {
-        // We will convert filepaths to URI using the default scheme
+        // We will convert filepaths to uri using the default scheme
         // and stripping off the existing file directory path.
-        $file['uri'] = $scheme . preg_replace('!^' . preg_quote($basename) . '!', '', $file['filepath']);
+        $file['uri'] = $scheme . str_replace($basename, '', $file['filepath']);
         $file['uri'] = file_stream_wrapper_uri_normalize($file['uri']);
         unset($file['filepath']);
         // Insert into the file_managed table.
@@ -3011,17 +2953,6 @@ function system_update_7069() {
 }
 
 /**
- * @} End of "defgroup updates-6.x-to-7.x".
- * The next series of updates should start at 8000.
- */
-
-/**
- * @defgroup updates-7.x-extra Extra updates for 7.x
- * @{
- * Update functions between 7.x versions.
- */
-
-/**
  * Remove the obsolete 'drupal_badge_color' and 'drupal_badge_size' variables.
  */
 function system_update_7070() {
@@ -3043,114 +2974,16 @@ function system_update_7071() {
 }
 
 /**
- * Remove the obsolete 'site_offline_message' variable.
- *
- * @see update_fix_d7_requirements()
+ * @} End of "defgroup updates-6.x-to-7.x"
+ * The next series of updates should start at 8000.
  */
-function system_update_7072() {
-  variable_del('site_offline_message');
-}
 
 /**
- * Add binary to {file_managed}, in case system_update_7034() was run without
- * it.
+ * @defgroup updates-7.x-extra Extra system updates for 7.x
+ * @{
  */
-function system_update_7073() {
-  db_change_field('file_managed', 'filename', 'filename', array(
-    'description' => 'Name of the file with no path components. This may differ from the basename of the URI if the file is renamed to avoid overwriting an existing file.',
-    'type' => 'varchar',
-    'length' => 255,
-    'not null' => TRUE,
-    'default' => '',
-    'binary' => TRUE,
-  ));
-  db_drop_unique_key('file_managed', 'uri');
-  db_change_field('file_managed', 'uri', 'uri', array(
-    'description' => 'The URI to access the file (either local or remote).',
-    'type' => 'varchar',
-    'length' => 255,
-    'not null' => TRUE,
-    'default' => '',
-    'binary' => TRUE,
-  ));
-  db_add_unique_key('file_managed', 'uri', array('uri'));
-}
 
 /**
- * This update has been removed and will not run.
- */
-function system_update_7074() {
-  // This update function previously converted menu_links query strings to
-  // arrays. It has been removed for now due to incompatibility with
-  // PostgreSQL.
-}
-
-/**
- * Convert menu_links query strings into arrays.
- */
-function system_update_7076() {
-  $query = db_select('menu_links', 'ml', array('fetch' => PDO::FETCH_ASSOC))
-    ->fields('ml', array('mlid', 'options'));
-  foreach ($query->execute() as $menu_link) {
-    if (strpos($menu_link['options'], 'query') !== FALSE) {
-      $menu_link['options'] = unserialize($menu_link['options']);
-      if (isset($menu_link['options']['query']) && is_string($menu_link['options']['query'])) {
-        $menu_link['options']['query'] = drupal_get_query_array($menu_link['options']['query']);
-        db_update('menu_links')
-          ->fields(array(
-            'options' => serialize($menu_link['options']),
-          ))
-          ->condition('mlid', $menu_link['mlid'], '=')
-          ->execute();
-      }
-    }
-  }
-}
-
-/**
- * Revert {file_managed}.filename changed to a binary column.
- */
-function system_update_7077() {
-  db_change_field('file_managed', 'filename', 'filename', array(
-    'description' => 'Name of the file with no path components. This may differ from the basename of the URI if the file is renamed to avoid overwriting an existing file.',
-    'type' => 'varchar',
-    'length' => 255,
-    'not null' => TRUE,
-    'default' => '',
-  ));
-}
-
-
-/**
- * Add binary to {date_formats}.format.
- */
-function system_update_7078() {
-  db_drop_unique_key('date_formats', 'formats');
-  db_change_field('date_formats', 'format', 'format', array(
-    'description' => 'The date format string.',
-    'type' => 'varchar',
-    'length' => 100,
-    'not null' => TRUE,
-    'binary' => TRUE,
-  ), array('unique keys' => array('formats' => array('format', 'type'))));
-}
-
-/**
- * Convert the 'filesize' column in {file_managed} to a bigint.
- */
-function system_update_7079() {
-  $spec = array(
-    'description' => 'The size of the file in bytes.',
-    'type' => 'int',
-    'size' => 'big',
-    'unsigned' => TRUE,
-    'not null' => TRUE,
-    'default' => 0,
-  );
-  db_change_field('file_managed', 'filesize', 'filesize', $spec);
-}
-
-/**
- * @} End of "defgroup updates-7.x-extra".
+ * @} End of "defgroup updates-7.x-extra"
  * The next series of updates should start at 8000.
  */

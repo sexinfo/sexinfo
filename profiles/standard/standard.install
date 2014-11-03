@@ -1,15 +1,9 @@
 <?php
-/**
- * @file
- * Install, update and uninstall functions for the standard installation profile.
- */
 
 /**
  * Implements hook_install().
  *
  * Perform actions to set up the site for this profile.
- *
- * @see system_install()
  */
 function standard_install() {
   // Add text formats.
@@ -71,7 +65,7 @@ function standard_install() {
   // Enable some standard blocks.
   $default_theme = variable_get('theme_default', 'bartik');
   $admin_theme = 'seven';
-  $blocks = array(
+  $values = array(
     array(
       'module' => 'system',
       'delta' => 'main',
@@ -194,8 +188,8 @@ function standard_install() {
     ),
   );
   $query = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'cache'));
-  foreach ($blocks as $block) {
-    $query->values($block);
+  foreach ($values as $record) {
+    $query->values($record);
   }
   $query->execute();
 
@@ -275,10 +269,13 @@ function standard_install() {
 
   // Create a default vocabulary named "Tags", enabled for the 'article' content type.
   $description = st('Use tags to group articles on similar topics into categories.');
+  $help = st('Enter a comma-separated list of words to describe your content.');
   $vocabulary = (object) array(
     'name' => st('Tags'),
     'description' => $description,
     'machine_name' => 'tags',
+    'help' => $help,
+
   );
   taxonomy_vocabulary_save($vocabulary);
 
@@ -298,13 +295,12 @@ function standard_install() {
   );
   field_create_field($field);
 
-  $help = st('Enter a comma-separated list of words to describe your content.');
   $instance = array(
     'field_name' => 'field_' . $vocabulary->machine_name,
     'entity_type' => 'node',
     'label' => 'Tags',
     'bundle' => 'article',
-    'description' => $help,
+    'description' => $vocabulary->help,
     'widget' => array(
       'type' => 'taxonomy_autocomplete',
       'weight' => -4,

@@ -2,19 +2,15 @@
 
 /**
  * @file
- * Callbacks and related functions invoked by authorize.php to update projects.
- *
- * We use the Batch API to actually update each individual project on the site.
- * All of the code in this file is run at a low bootstrap level (modules are not
- * loaded), so these functions cannot assume access to the rest of the code of
- * the Update Manager module.
+ * Callbacks and related functions invoked by authorize.php to update projects
+ * on the Drupal site. We use the Batch API to actually update each individual
+ * project on the site. All of the code in this file is run at a low bootstrap
+ * level (modules are not loaded), so these functions cannot assume access to
+ * the rest of the update module code.
  */
 
 /**
- * Updates existing projects when invoked by authorize.php.
- *
- * Callback for system_authorized_init() in
- * update_manager_update_ready_form_submit().
+ * Callback invoked by authorize.php to update existing projects.
  *
  * @param $filetransfer
  *   The FileTransfer object created by authorize.php for use during this
@@ -22,9 +18,9 @@
  * @param $projects
  *   A nested array of projects to install into the live webroot, keyed by
  *   project name. Each subarray contains the following keys:
- *   - project: The canonical project short name.
- *   - updater_name: The name of the Updater class to use for this project.
- *   - local_url: The locally installed location of new code to update with.
+ *   - 'project': The canonical project short name.
+ *   - 'updater_name': The name of the Updater class to use for this project.
+ *   - 'local_url': The locally installed location of new code to update with.
  */
 function update_authorize_run_update($filetransfer, $projects) {
   $operations = array();
@@ -54,16 +50,13 @@ function update_authorize_run_update($filetransfer, $projects) {
 }
 
 /**
- * Installs a new project when invoked by authorize.php.
- *
- * Callback for system_authorized_init() in
- * update_manager_install_form_submit().
+ * Callback invoked by authorize.php to install a new project.
  *
  * @param FileTransfer $filetransfer
  *   The FileTransfer object created by authorize.php for use during this
  *   operation.
  * @param string $project
- *   The canonical project short name (e.g., {system}.name).
+ *   The canonical project short name (e.g. {system}.name).
  * @param string $updater_name
  *   The name of the Updater class to use for installing this project.
  * @param string $local_url
@@ -97,7 +90,7 @@ function update_authorize_run_install($filetransfer, $project, $updater_name, $l
 }
 
 /**
- * Batch callback: Copies project to its proper place when authorized to do so.
+ * Copy a project to its proper place when authorized with elevated privileges.
  *
  * @param string $project
  *   The canonical short name of the project being installed.
@@ -109,7 +102,7 @@ function update_authorize_run_install($filetransfer, $project, $updater_name, $l
  * @param FileTransfer $filetransfer
  *   The FileTransfer object to use for performing this operation.
  * @param array $context
- *   Reference to an array used for Batch API storage.
+ *   Reference to an array used for BatchAPI storage.
  */
 function update_authorize_batch_copy_project($project, $updater_name, $local_url, $filetransfer, &$context) {
 
@@ -125,13 +118,15 @@ function update_authorize_batch_copy_project($project, $updater_name, $local_url
     $context['results']['tasks'] = array();
   }
 
-  // The batch API uses a session, and since all the arguments are serialized
-  // and unserialized between requests, although the FileTransfer object itself
-  // will be reconstructed, the connection pointer itself will be lost. However,
-  // the FileTransfer object will still have the connection variable, even
-  // though the connection itself is now gone. So, although it's ugly, we have
-  // to unset the connection variable at this point so that the FileTransfer
-  // object will re-initiate the actual connection.
+  /**
+   * The batch API uses a session, and since all the arguments are serialized
+   * and unserialized between requests, although the FileTransfer object
+   * itself will be reconstructed, the connection pointer itself will be lost.
+   * However, the FileTransfer object will still have the connection variable,
+   * even though the connection itself is now gone. So, although it's ugly, we
+   * have to unset the connection variable at this point so that the
+   * FileTransfer object will re-initiate the actual connection.
+   */
   unset($filetransfer->connection);
 
   if (!empty($context['results']['log'][$project]['#abort'])) {
@@ -168,16 +163,11 @@ function update_authorize_batch_copy_project($project, $updater_name, $local_url
 }
 
 /**
- * Batch callback: Performs actions when the authorized update batch is done.
+ * Batch callback for when the authorized update batch is finished.
  *
  * This processes the results and stashes them into SESSION such that
  * authorize.php will render a report. Also responsible for putting the site
  * back online and clearing the update status cache after a successful update.
- *
- * @param $success
- *   TRUE if the batch operation was successful; FALSE if there were errors.
- * @param $results
- *   An associative array of results from the batch operation.
  */
 function update_authorize_update_batch_finished($success, $results) {
   foreach ($results['log'] as $project => $messages) {
@@ -235,16 +225,11 @@ function update_authorize_update_batch_finished($success, $results) {
 }
 
 /**
- * Batch callback: Performs actions when the authorized install batch is done.
+ * Batch callback for when the authorized install batch is finished.
  *
  * This processes the results and stashes them into SESSION such that
  * authorize.php will render a report. Also responsible for putting the site
  * back online after a successful install if necessary.
- *
- * @param $success
- *   TRUE if the batch operation was a success; FALSE if there were errors.
- * @param $results
- *   An associative array of results from the batch operation.
  */
 function update_authorize_install_batch_finished($success, $results) {
   foreach ($results['log'] as $project => $messages) {
@@ -294,30 +279,26 @@ function update_authorize_install_batch_finished($success, $results) {
 }
 
 /**
- * Creates a structure of log messages.
+ * Helper function to create a structure of log messages.
  *
  * @param array $project_results
- *   An associative array of results from the batch operation.
  * @param string $message
- *   A string containing a log message.
  * @param bool $success
- *   (optional) TRUE if the operation the message is about was a success, FALSE
- *   if there were errors. Defaults to TRUE.
  */
 function _update_batch_create_message(&$project_results, $message, $success = TRUE) {
   $project_results[] = array('message' => $message, 'success' => $success);
 }
 
 /**
- * Clears cached available update status data.
+ * Private helper function to clear cached available update status data.
  *
- * Since this function is run at such a low bootstrap level, the Update Manager
- * module is not loaded. So, we can't just call _update_cache_clear(). However,
- * the database is bootstrapped, so we can do a query ourselves to clear out
- * what we want to clear.
+ * Since this function is run at such a low bootstrap level, update.module is
+ * not loaded. So, we can't just call _update_cache_clear(). However, the
+ * database is bootstrapped, so we can do a query ourselves to clear out what
+ * we want to clear.
  *
- * Note that we do not want to just truncate the table, since that would remove
- * items related to currently pending fetch attempts.
+ * Note that we do not want to just truncate the table, since that would
+ * remove items related to currently pending fetch attempts.
  *
  * @see update_authorize_update_batch_finished()
  * @see _update_cache_clear()

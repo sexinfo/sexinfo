@@ -23,12 +23,8 @@
  *   Some comments are replies to other comments. In those cases, $pid is the parent
  *   comment's cid.
  *
- * @return array
- *   An associative array containing:
- *   - An array for rendering the node or parent comment.
- *     - comment_node: If the comment is a reply to the node.
- *     - comment_parent: If the comment is a reply to another comment.
- *   - comment_form: The comment form as a renderable array.
+ * @return
+ *   The rendered parent node or comment plus the new comment form.
  */
 function comment_reply($node, $pid = NULL) {
   // Set the breadcrumb trail.

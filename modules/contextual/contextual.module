@@ -13,7 +13,7 @@ function contextual_help($path, $arg) {
     case 'admin/help#contextual':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('The Contextual links module displays links related to regions of pages on your site to users with <em>access contextual links</em> permission. For more information, see the online handbook entry for <a href="@contextual">Contextual links module</a>.', array('@contextual' => 'http://drupal.org/documentation/modules/contextual')) . '</p>';
+      $output .= '<p>' . t('The Contextual links module displays links related to regions of pages on your site to users with <em>access contextual links</em> permission. For more information, see the online handbook entry for <a href="@contextual">Contextual links module</a>.', array('@contextual' => 'http://drupal.org/handbook/modules/contextual')) . '</p>';
       $output .= '<h3>' . t('Uses') . '</h3>';
       $output .= '<dl>';
       $output .= '<dt>' . t('Displaying contextual links') . '</dt>';
@@ -77,17 +77,21 @@ function contextual_element_info() {
 }
 
 /**
- * Implements hook_preprocess().
+ * Template variable preprocessor for contextual links.
  *
  * @see contextual_pre_render_links()
  */
 function contextual_preprocess(&$variables, $hook) {
+  static $hooks;
+
   // Nothing to do here if the user is not permitted to access contextual links.
   if (!user_access('access contextual links')) {
     return;
   }
 
-  $hooks = theme_get_registry(FALSE);
+  if (!isset($hooks)) {
+    $hooks = theme_get_registry();
+  }
 
   // Determine the primary theme function argument.
   if (!empty($hooks[$hook]['variables'])) {
@@ -132,7 +136,6 @@ function contextual_preprocess(&$variables, $hook) {
  *   A renderable array representing contextual links.
  *
  * @see menu_contextual_links()
- * @see contextual_element_info()
  */
 function contextual_pre_render_links($element) {
   // Retrieve contextual menu links.

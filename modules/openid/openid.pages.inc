@@ -56,7 +56,6 @@ function openid_user_identities($account) {
     '#theme' => 'table',
     '#header' => $header,
     '#rows' => $rows,
-    '#empty' => t('No OpenID identities available for this account.'),
   );
   $build['openid_user_add'] = drupal_get_form('openid_user_add');
   return $build;

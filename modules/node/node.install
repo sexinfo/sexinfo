@@ -18,14 +18,12 @@ function node_schema() {
         'unsigned' => TRUE,
         'not null' => TRUE,
       ),
-      // Defaults to NULL in order to avoid a brief period of potential
-      // deadlocks on the index.
       'vid' => array(
         'description' => 'The current {node_revision}.vid version identifier.',
         'type' => 'int',
         'unsigned' => TRUE,
-        'not null' => FALSE,
-        'default' => NULL,
+        'not null' => TRUE,
+        'default' => 0,
       ),
       'type' => array(
         'description' => 'The {node_type}.type of this node.',
@@ -114,7 +112,6 @@ function node_schema() {
       'uid'                 => array('uid'),
       'tnid'                => array('tnid'),
       'translate'           => array('translate'),
-      'language'            => array('language'),
     ),
     'unique keys' => array(
       'vid' => array('vid'),
@@ -475,7 +472,7 @@ function node_update_dependencies() {
  *
  * This function is valid for a database schema version 7000.
  *
- * @ingroup update_api
+ * @ingroup update-api-6.x-to-7.x
  */
 function _update_7000_node_get_types() {
   $node_types = db_query('SELECT * FROM {node_type}')->fetchAllAssoc('type', PDO::FETCH_OBJ);
@@ -848,15 +845,6 @@ function node_update_7010() {
 }
 
 /**
- * @} End of "addtogroup updates-6.x-to-7.x".
- */
-
-/**
- * @addtogroup updates-7.x-extra
- * @{
- */
-
-/**
  * Update the database from Drupal 6 to match the schema.
  */
 function node_update_7011() {
@@ -900,7 +888,7 @@ function node_update_7012() {
       ->execute();
 
     // Switch field languages to LANGUAGE_NONE, since initially they were
-    // assigned the node language.
+    // assigned $node->language.
     foreach (array('field_data_body', 'field_revision_body') as $table) {
       db_update($table)
         ->fields(array('language' => LANGUAGE_NONE))
@@ -912,27 +900,5 @@ function node_update_7012() {
 }
 
 /**
- * Change {node}.vid default value from 0 to NULL to avoid deadlock issues on MySQL.
- */
-function node_update_7013() {
-  db_drop_unique_key('node', 'vid');
-  db_change_field('node', 'vid', 'vid', array(
-    'description' => 'The current {node_revision}.vid version identifier.',
-    'type' => 'int',
-    'unsigned' => TRUE,
-    'not null' => FALSE,
-    'default' => NULL,
-  ));
-  db_add_unique_key('node', 'vid', array('vid'));
-}
-
-/**
- * Add an index on {node}.language.
- */
-function node_update_7014() {
-  db_add_index('node', 'language', array('language'));
-}
-
-/**
- * @} End of "addtogroup updates-7.x-extra".
+ * @} End of "addtogroup updates-6.x-to-7.x"
  */

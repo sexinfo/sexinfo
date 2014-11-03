@@ -6,7 +6,7 @@
  */
 
 /**
- * @addtogroup database
+ * @ingroup database
  * @{
  */
 
@@ -41,8 +41,7 @@ class InsertQuery_sqlite extends InsertQuery {
     // If we're selecting from a SelectQuery, finish building the query and
     // pass it back, as any remaining options are irrelevant.
     if (!empty($this->fromQuery)) {
-      $insert_fields_string = $this->insertFields ? ' (' . implode(', ', $this->insertFields) . ') ' : ' ';
-      return $comments . 'INSERT INTO {' . $this->table . '}' . $insert_fields_string . $this->fromQuery;
+      return $comments . 'INSERT INTO {' . $this->table . '} (' . implode(', ', $this->insertFields) . ') ' . $this->fromQuery;
     }
 
     return $comments . 'INSERT INTO {' . $this->table . '} (' . implode(', ', $this->insertFields) . ') VALUES (' . implode(', ', $placeholders) . ')';
@@ -58,18 +57,39 @@ class InsertQuery_sqlite extends InsertQuery {
  * we don't select those rows.
  *
  * A query like this one:
- *   UPDATE test SET col1 = 'newcol1', col2 = 'newcol2' WHERE tid = 1
+ *   UPDATE test SET name = 'newname' WHERE tid = 1
  * will become:
- *   UPDATE test SET col1 = 'newcol1', col2 = 'newcol2' WHERE tid = 1 AND (col1 <> 'newcol1' OR col2 <> 'newcol2')
+ *   UPDATE test SET name = 'newname' WHERE tid = 1 AND name <> 'newname'
  */
 class UpdateQuery_sqlite extends UpdateQuery {
+  /**
+   * Helper function that removes the fields that are already in a condition.
+   *
+   * @param $fields
+   *   The fields.
+   * @param QueryConditionInterface $condition
+   *   A database condition.
+   */
+  protected function removeFieldsInCondition(&$fields, QueryConditionInterface $condition) {
+    foreach ($condition->conditions() as $child_condition) {
+      if ($child_condition['field'] instanceof QueryConditionInterface) {
+        $this->removeFieldsInCondition($fields, $child_condition['field']);
+      }
+      else {
+        unset($fields[$child_condition['field']]);
+      }
+    }
+  }
+
   public function execute() {
     if (!empty($this->queryOptions['sqlite_return_matched_rows'])) {
       return parent::execute();
     }
 
-    // Get the fields used in the update query.
+    // Get the fields used in the update query, and remove those that are already
+    // in the condition.
     $fields = $this->expressionFields + $this->fields;
+    $this->removeFieldsInCondition($fields, $this->condition);
 
     // Add the inverse of the fields to the condition.
     $condition = new DatabaseCondition('OR');
@@ -136,5 +156,5 @@ class TruncateQuery_sqlite extends TruncateQuery {
 }
 
 /**
- * @} End of "addtogroup database".
+ * @} End of "ingroup database".
  */

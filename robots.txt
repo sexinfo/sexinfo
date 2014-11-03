@@ -11,10 +11,10 @@
 # Ignored: http://example.com/site/robots.txt
 #
 # For more information about the robots.txt standard, see:
-# http://www.robotstxt.org/robotstxt.html
+# http://www.robotstxt.org/wc/robots.html
 #
 # For syntax checking, see:
-# http://www.frobee.com/robots-txt-check
+# http://www.sxw.org.uk/computing/robots/check.html
 
 User-agent: *
 Crawl-delay: 10

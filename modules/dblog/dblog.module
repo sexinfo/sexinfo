@@ -4,9 +4,9 @@
  * @file
  * System monitoring and logging for administrators.
  *
- * The Database Logging module monitors your site and keeps a list of recorded
- * events containing usage and performance data, errors, warnings, and similar
- * operational information.
+ * The dblog module monitors your site and keeps a list of
+ * recorded events containing usage and performance data, errors,
+ * warnings, and similar operational information.
  *
  * @see watchdog()
  */
@@ -19,7 +19,7 @@ function dblog_help($path, $arg) {
     case 'admin/help#dblog':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('The Database logging module logs system events in the Drupal database. For more information, see the online handbook entry for the <a href="@dblog">Database logging module</a>.', array('@dblog' => 'http://drupal.org/documentation/modules/dblog')) . '</p>';
+      $output .= '<p>' . t('The Database logging module logs system events in the Drupal database. For more information, see the online handbook entry for the <a href="@dblog">Database logging module</a>.', array('@dblog' => 'http://drupal.org/handbook/modules/dblog')) . '</p>';
       $output .= '<h3>' . t('Uses') . '</h3>';
       $output .= '<dl>';
       $output .= '<dt>' . t('Monitoring your site') . '</dt>';
@@ -96,7 +96,7 @@ function dblog_init() {
 /**
  * Implements hook_cron().
  *
- * Controls the size of the log table, paring it to 'dblog_row_limit' messages.
+ * Remove expired log messages and flood control events.
  */
 function dblog_cron() {
   // Cleanup the watchdog table.
@@ -121,12 +121,6 @@ function dblog_cron() {
   }
 }
 
-/**
- * Gathers a list of uniquely defined database log message types.
- *
- * @return array
- *   List of uniquely defined database log message types.
- */
 function _dblog_get_message_types() {
   $types = array();
 
@@ -141,12 +135,15 @@ function _dblog_get_message_types() {
 /**
  * Implements hook_watchdog().
  *
- * Note: Some values may be truncated to meet database column size restrictions.
+ * Note some values may be truncated for database column size restrictions.
  */
 function dblog_watchdog(array $log_entry) {
+  // The user object may not exist in all conditions, so 0 is substituted if needed.
+  $user_uid = isset($log_entry['user']->uid) ? $log_entry['user']->uid : 0;
+
   Database::getConnection('default', 'default')->insert('watchdog')
     ->fields(array(
-      'uid' => $log_entry['uid'],
+      'uid' => $user_uid,
       'type' => substr($log_entry['type'], 0, 64),
       'message' => $log_entry['message'],
       'variables' => serialize($log_entry['variables']),
@@ -161,7 +158,7 @@ function dblog_watchdog(array $log_entry) {
 }
 
 /**
- * Implements hook_form_FORM_ID_alter() for system_logging_settings().
+ * Implements hook_form_FORM_ID_alter().
  */
 function dblog_form_system_logging_settings_alter(&$form, $form_state) {
   $form['dblog_row_limit'] = array(

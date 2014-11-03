@@ -99,14 +99,7 @@ function _menu_overview_tree_form($tree) {
       $mlid = 'mlid:' . $item['mlid'];
       $form[$mlid]['#item'] = $item;
       $form[$mlid]['#attributes'] = $item['hidden'] ? array('class' => array('menu-disabled')) : array('class' => array('menu-enabled'));
-      $form[$mlid]['title']['#markup'] = l($item['title'], $item['href'], $item['localized_options']);
-      if ($item['hidden']) {
-        $form[$mlid]['title']['#markup'] .= ' (' . t('disabled') . ')';
-      }
-      elseif ($item['link_path'] == 'user' && $item['module'] == 'system') {
-        $form[$mlid]['title']['#markup'] .= ' (' . t('logged in users only') . ')';
-      }
-
+      $form[$mlid]['title']['#markup'] = l($item['title'], $item['href'], $item['localized_options']) . ($item['hidden'] ? ' (' . t('disabled') . ')' : '');
       $form[$mlid]['hidden'] = array(
         '#type' => 'checkbox',
         '#title' => t('Enable @title menu link', array('@title' => $item['title'])),
@@ -267,16 +260,6 @@ function menu_edit_item($form, &$form_state, $type, $item, $menu) {
     // This is an add form, initialize the menu link.
     $item = array('link_title' => '', 'mlid' => 0, 'plid' => 0, 'menu_name' => $menu['menu_name'], 'weight' => 0, 'link_path' => '', 'options' => array(), 'module' => 'menu', 'expanded' => 0, 'hidden' => 0, 'has_children' => 0);
   }
-  else {
-    // Get the human-readable menu title from the given menu name.
-    $titles = menu_get_menus();
-    $current_title = $titles[$item['menu_name']];
-
-    // Get the current breadcrumb and add a link to that menu's overview page.
-    $breadcrumb = menu_get_active_breadcrumb();
-    $breadcrumb[] = l($current_title, 'admin/structure/menu/manage/' . $item['menu_name']);
-    drupal_set_breadcrumb($breadcrumb);
-  }
   $form['actions'] = array('#type' => 'actions');
   $form['link_title'] = array(
     '#type' => 'textfield',
@@ -395,7 +378,7 @@ function menu_edit_item_validate($form, &$form_state) {
     else {
       unset($item['options']['fragment']);
     }
-    if (isset($parsed_link['path']) && $item['link_path'] != $parsed_link['path']) {
+    if ($item['link_path'] != $parsed_link['path']) {
       $item['link_path'] = $parsed_link['path'];
     }
   }
@@ -470,6 +453,7 @@ function menu_edit_menu($form, &$form_state, $type, $menu = array()) {
     '#machine_name' => array(
       'exists' => 'menu_edit_menu_name_exists',
       'source' => array('title'),
+      'label' => t('URL path'),
       'replace_pattern' => '[^a-z0-9-]+',
       'replace' => '-',
     ),
@@ -512,7 +496,8 @@ function menu_delete_menu_page($menu) {
   // System-defined menus may not be deleted.
   $system_menus = menu_list_system_menus();
   if (isset($system_menus[$menu['menu_name']])) {
-    return MENU_ACCESS_DENIED;
+    drupal_access_denied();
+    return;
   }
   return drupal_get_form('menu_delete_menu_confirm', $menu);
 }
@@ -621,7 +606,8 @@ function menu_item_delete_page($item) {
   // Links defined via hook_menu may not be deleted. Updated items are an
   // exception, as they can be broken.
   if ($item['module'] == 'system' && !$item['updated']) {
-    return MENU_ACCESS_DENIED;
+    drupal_access_denied();
+    return;
   }
   return drupal_get_form('menu_item_delete_form', $item);
 }
@@ -693,7 +679,7 @@ function menu_configure() {
     '#empty_option' => t('No Secondary links'),
     '#options' => $menu_options,
     '#tree' => FALSE,
-    '#description' => t('Select the source for the Secondary links. An advanced option allows you to use the same source for both Main links (currently %main) and Secondary links: if your source menu has two levels of hierarchy, the top level menu links will appear in the Main links, and the children of the active link will appear in the Secondary links.', array('%main' => $main ? $menu_options[$main] : t('none'))),
+    '#description' => t('Select the source for the Secondary links. An advanced option allows you to use the same source for both Main links (currently %main) and Secondary links: if your source menu has two levels of hierarchy, the top level menu links will appear in the Main links, and the children of the active link will appear in the Secondary links.', array('%main' => $main ? $menu_options[$main] : 'none')),
   );
 
   return system_settings_form($form);

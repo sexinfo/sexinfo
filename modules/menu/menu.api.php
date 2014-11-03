@@ -11,7 +11,7 @@
  */
 
 /**
- * Respond to a custom menu creation.
+ * Informs modules that a custom menu was created.
  *
  * This hook is used to notify modules that a custom menu has been created.
  * Contributed modules may use the information to perform actions based on the
@@ -34,7 +34,7 @@ function hook_menu_insert($menu) {
 }
 
 /**
- * Respond to a custom menu update.
+ * Informs modules that a custom menu was updated.
  *
  * This hook is used to notify modules that a custom menu has been updated.
  * Contributed modules may use the information to perform actions based on the
@@ -59,14 +59,14 @@ function hook_menu_update($menu) {
 }
 
 /**
- * Respond to a custom menu deletion.
+ * Informs modules that a custom menu was deleted.
  *
  * This hook is used to notify modules that a custom menu along with all links
  * contained in it (if any) has been deleted. Contributed modules may use the
  * information to perform actions based on the information entered into the menu
  * system.
  *
- * @param $menu
+ * @param $link
  *   An array representing a custom menu:
  *   - menu_name: The unique name of the custom menu.
  *   - title: The human readable menu title.

@@ -16,8 +16,6 @@
  *
  * @see template_preprocess()
  * @see template_preprocess_aggregator_item()
- *
- * @ingroup themeable
  */
 ?>
 <div class="feed-item">

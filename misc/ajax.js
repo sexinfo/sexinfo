@@ -318,7 +318,7 @@ Drupal.ajax.prototype.beforeSerialize = function (element, options) {
 Drupal.ajax.prototype.beforeSubmit = function (form_values, element, options) {
   // This function is left empty to make it simple to override for modules
   // that wish to add functionality here.
-};
+}
 
 /**
  * Prepare the Ajax request before it is sent.
@@ -348,7 +348,7 @@ Drupal.ajax.prototype.beforeSend = function (xmlhttprequest, options) {
     // this is only needed for IFRAME submissions.
     var v = $.fieldValue(this.element);
     if (v !== null) {
-      options.extraData[this.element.name] = Drupal.checkPlain(v);
+      options.extraData[this.element.name] = v;
     }
   }
 
@@ -396,7 +396,7 @@ Drupal.ajax.prototype.success = function (response, status) {
   Drupal.freezeHeight();
 
   for (var i in response) {
-    if (response.hasOwnProperty(i) && response[i]['command'] && this.commands[response[i]['command']]) {
+    if (response[i]['command'] && this.commands[response[i]['command']]) {
       this.commands[response[i]['command']](this, response[i], status);
     }
   }
@@ -616,13 +616,6 @@ Drupal.ajax.prototype.commands = {
       .removeClass('odd even')
       .filter(':even').addClass('odd').end()
       .filter(':odd').addClass('even');
-  },
-
-  /**
-   * Command to update a form's build ID.
-   */
-  updateBuildId: function(ajax, response, status) {
-    $('input[name="form_build_id"][value="' + response['old'] + '"]').val(response['new']);
   }
 };
 

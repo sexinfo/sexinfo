@@ -1,7 +1,8 @@
 <?php
+
 /**
  * @file
- * Allows administrators to attach custom fields to fieldable types.
+ * Allows administrators to associate custom fields to fieldable types.
  */
 
 /**
@@ -12,7 +13,7 @@ function field_ui_help($path, $arg) {
     case 'admin/help#field_ui':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('The Field UI module provides an administrative user interface (UI) for attaching and managing fields. Fields can be defined at the content-type level for content items and comments, at the vocabulary level for taxonomy terms, and at the site level for user accounts. Other modules may also enable fields to be defined for their data. Field types (text, image, number, etc.) are defined by modules, and collected and managed by the <a href="@field">Field module</a>. For more information, see the online handbook entry for <a href="@field_ui" target="_blank">Field UI module</a>.', array('@field' => url('admin/help/field'), '@field_ui' => 'http://drupal.org/documentation/modules/field-ui')) . '</p>';
+      $output .= '<p>' . t('The Field UI module provides an administrative user interface (UI) for attaching and managing fields. Fields can be defined at the content-type level for content items and comments, at the vocabulary level for taxonomy terms, and at the site level for user accounts. Other modules may also enable fields to be defined for their data. Field types (text, image, number, etc.) are defined by modules, and collected and managed by the <a href="@field">Field module</a>. For more information, see the online handbook entry for <a href="@field_ui" target="_blank">Field UI module</a>.', array('@field' => url('admin/help/field'), '@field_ui' => 'http://drupal.org/handbook/modules/field-ui')) . '</p>';
       $output .= '<h3>' . t('Uses') . '</h3>';
       $output .= '<dl>';
       $output .= '<dt>' . t('Planning fields') . '</dt>';
@@ -212,11 +213,6 @@ function field_ui_menu() {
  *   The position of $bundle_name in $map.
  * @param $map
  *   The translated menu router path argument map.
- *
- * @return
- *   The field instance array.
- *
- * @ingroup field
  */
 function field_ui_menu_load($field_name, $entity_type, $bundle_name, $bundle_pos, $map) {
   // Extract the actual bundle name from the translated argument map.
@@ -265,8 +261,7 @@ function _field_ui_view_mode_menu_access($entity_type, $bundle, $view_mode, $acc
   // part of _menu_check_access().
   if ($visibility) {
     // Grab the variable 'access arguments' part.
-    $all_args = func_get_args();
-    $args = array_slice($all_args, 4);
+    $args = array_slice(func_get_args(), 4);
     $callback = empty($access_callback) ? 0 : trim($access_callback);
     if (is_numeric($callback)) {
       return (bool) $callback;
@@ -318,7 +313,7 @@ function field_ui_field_attach_create_bundle($entity_type, $bundle) {
 }
 
 /**
- * Determines the administration path for a bundle.
+ * Helper function to create the right administration path for a bundle.
  */
 function _field_ui_bundle_admin_path($entity_type, $bundle_name) {
   $bundles = field_info_bundles($entity_type);
@@ -329,33 +324,26 @@ function _field_ui_bundle_admin_path($entity_type, $bundle_name) {
 }
 
 /**
- * Identifies inactive fields within a bundle.
+ * Helper function to identify inactive fields within a bundle.
  */
 function field_ui_inactive_instances($entity_type, $bundle_name = NULL) {
-  $params = array('entity_type' => $entity_type);
-
-  if (empty($bundle_name)) {
-    $active = field_info_instances($entity_type);
-    $inactive = array();
+  if (!empty($bundle_name)) {
+    $inactive = array($bundle_name => array());
+    $params = array('bundle' => $bundle_name);
   }
   else {
-    // Restrict to the specified bundle. For consistency with the case where
-    // $bundle_name is NULL, the $active and  $inactive arrays are keyed by
-    // bundle name first.
-    $params['bundle'] = $bundle_name;
-    $active = array($bundle_name => field_info_instances($entity_type, $bundle_name));
-    $inactive = array($bundle_name => array());
+    $inactive = array();
+    $params = array();
   }
+  $params['entity_type'] = $entity_type;
 
-  // Iterate on existing definitions, and spot those that do not appear in the
-  // $active list collected earlier.
+  $active_instances = field_info_instances($entity_type);
   $all_instances = field_read_instances($params, array('include_inactive' => TRUE));
   foreach ($all_instances as $instance) {
-    if (!isset($active[$instance['bundle']][$instance['field_name']])) {
+    if (!isset($active_instances[$instance['bundle']][$instance['field_name']])) {
       $inactive[$instance['bundle']][$instance['field_name']] = $instance;
     }
   }
-
   if (!empty($bundle_name)) {
     return $inactive[$bundle_name];
   }
@@ -363,12 +351,7 @@ function field_ui_inactive_instances($entity_type, $bundle_name = NULL) {
 }
 
 /**
- * Implements hook_form_FORM_ID_alter().
- *
- * Adds a button 'Save and add fields' to the 'Create content type' form.
- *
- * @see node_type_form()
- * @see field_ui_form_node_type_form_submit()
+ * Add a button Save and add fields to Create content type form.
  */
 function field_ui_form_node_type_form_alter(&$form, $form_state) {
   // We want to display the button only on add page.
@@ -383,9 +366,7 @@ function field_ui_form_node_type_form_alter(&$form, $form_state) {
 }
 
 /**
- * Form submission handler for the 'Save and add fields' button.
- *
- * @see field_ui_form_node_type_form_alter()
+ * Redirect to manage fields form.
  */
 function field_ui_form_node_type_form_submit($form, &$form_state) {
   if ($form_state['triggering_element']['#parents'][0] === 'save_continue') {

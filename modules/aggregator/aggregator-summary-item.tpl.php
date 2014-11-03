@@ -13,8 +13,6 @@
  *
  * @see template_preprocess()
  * @see template_preprocess_aggregator_summary_item()
- *
- * @ingroup themeable
  */
 ?>
 <a href="<?php print $feed_url; ?>"><?php print $feed_title; ?></a>

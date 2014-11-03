@@ -14,8 +14,6 @@
  *
  * @see template_preprocess()
  * @see template_preprocess_aggregator_summary_items()
- *
- * @ingroup themeable
  */
 ?>
 <h3><?php print $title; ?></h3>

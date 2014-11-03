@@ -6,12 +6,12 @@
  */
 
 /**
- * Defines the root directory of the Drupal installation.
+ * Root directory of Drupal installation.
  */
 define('DRUPAL_ROOT', getcwd());
 
 /**
- * Global flag to indicate the site is in installation mode.
+ * Global flag to indicate that site is in installation mode.
  */
 define('MAINTENANCE_MODE', 'install');
 

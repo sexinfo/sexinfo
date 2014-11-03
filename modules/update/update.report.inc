@@ -6,9 +6,7 @@
  */
 
 /**
- * Page callback: Generates a page about the update status of projects.
- *
- * @see update_menu()
+ * Menu callback. Generate a page about the update status of projects.
  */
 function update_status() {
   if ($available = update_get_available(TRUE)) {
@@ -259,7 +257,6 @@ function theme_update_report($variables) {
  *   - status: The integer code for a project's current update status.
  *
  * @see update_calculate_project_data()
- * @ingroup themeable
  */
 function theme_update_status_label($variables) {
   switch ($variables['status']) {

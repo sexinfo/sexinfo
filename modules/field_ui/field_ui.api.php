@@ -6,7 +6,7 @@
  */
 
 /**
- * @addtogroup field_types
+ * @ingroup field_ui_field_type
  * @{
  */
 
@@ -132,10 +132,7 @@ function hook_field_widget_settings_form($field, $instance) {
 
 
 /**
- * Specify the form elements for a formatter's settings.
- *
- * This hook is only invoked if hook_field_formatter_settings_summary()
- * returns a non-empty value.
+ * Returns form elements for a formatter's settings.
  *
  * @param $field
  *   The field structure being configured.
@@ -173,7 +170,7 @@ function hook_field_formatter_settings_form($field, $instance, $view_mode, $form
 }
 
 /**
- * Return a short summary for the current formatter settings of an instance.
+ * Returns a short summary for the current formatter settings of an instance.
  *
  * If an empty result is returned, the formatter is assumed to have no
  * configurable settings, and no UI will be provided to display a settings
@@ -203,5 +200,5 @@ function hook_field_formatter_settings_summary($field, $instance, $view_mode) {
 }
 
 /**
- * @} End of "addtogroup field_types".
+ * @} End of "ingroup field_ui_field_type"
  */

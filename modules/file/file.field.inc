@@ -186,7 +186,7 @@ function file_field_load($entity_type, $entities, $field, $instances, $langcode,
         $items[$id][$delta] = NULL;
       }
       else {
-        $items[$id][$delta] = array_merge((array) $files[$item['fid']], $item);
+        $items[$id][$delta] = array_merge($item, (array) $files[$item['fid']]);
       }
     }
   }
@@ -215,16 +215,8 @@ function file_field_presave($entity_type, $entity, $field, $instance, $langcode,
   // Make sure that each file which will be saved with this object has a
   // permanent status, so that it will not be removed when temporary files are
   // cleaned up.
-  foreach ($items as $delta => $item) {
-    if (empty($item['fid'])) {
-      unset($items[$delta]);
-      continue;
-    }
+  foreach ($items as $item) {
     $file = file_load($item['fid']);
-    if (empty($file)) {
-      unset($items[$delta]);
-      continue;
-    }
     if (!$file->status) {
       $file->status = FILE_STATUS_PERMANENT;
       file_save($file);
@@ -269,16 +261,11 @@ function file_field_update($entity_type, $entity, $field, $instance, $langcode, 
     $current_fids[] = $item['fid'];
   }
 
-  // Compare the original field values with the ones that are being saved. Use
-  // $entity->original to check this when possible, but if it isn't available,
-  // create a bare-bones entity and load its previous values instead.
-  if (isset($entity->original)) {
-    $original = $entity->original;
-  }
-  else {
-    $original = entity_create_stub_entity($entity_type, array($id, $vid, $bundle));
-    field_attach_load($entity_type, array($id => $original), FIELD_LOAD_CURRENT, array('field_id' => $field['id']));
-  }
+  // Create a bare-bones entity so that we can load its previous values.
+  $original = entity_create_stub_entity($entity_type, array($id, $vid, $bundle));
+  field_attach_load($entity_type, array($id => $original), FIELD_LOAD_CURRENT, array('field_id' => $field['id']));
+
+  // Compare the original field values with the ones that are being saved.
   $original_fids = array();
   if (!empty($original->{$field['field_name']}[$langcode])) {
     foreach ($original->{$field['field_name']}[$langcode] as $original_item) {
@@ -325,7 +312,7 @@ function file_field_delete_revision($entity_type, $entity, $field, $instance, $l
 }
 
 /**
- * Decrements the usage count for a file and attempts to delete it.
+ * Decrements a file usage count and attempts to delete it.
  *
  * This function only has an effect if the file being deleted is used only by
  * File module.
@@ -371,13 +358,12 @@ function file_field_is_empty($item, $field) {
 }
 
 /**
- * Determines whether a file should be displayed when outputting field content.
+ * Determine whether a file should be displayed when outputting field content.
  *
  * @param $item
  *   A field item array.
  * @param $field
  *   A field array.
- *
  * @return
  *   Boolean TRUE if the file will be displayed, FALSE if the file is hidden.
  */
@@ -477,7 +463,6 @@ function file_field_widget_form(&$form, &$form_state, $field, $instance, $langco
     '#upload_validators' => file_field_widget_upload_validators($field, $instance),
     '#value_callback' => 'file_field_widget_value',
     '#process' => array_merge($element_info['#process'], array('file_field_widget_process')),
-    '#progress_indicator' => $instance['widget']['settings']['progress_indicator'],
     // Allows this field to return an array instead of a single value.
     '#extended' => TRUE,
   );
@@ -530,11 +515,10 @@ function file_field_widget_form(&$form, &$form_state, $field, $instance, $langco
 }
 
 /**
- * Retrieves the upload validators for a file field.
+ * Get the upload validators for a file field.
  *
  * @param $field
  *   A field array.
- *
  * @return
  *   An array suitable for passing to file_save_upload() or the file field
  *   element's '#upload_validators' property.
@@ -560,7 +544,7 @@ function file_field_widget_upload_validators($field, $instance) {
 }
 
 /**
- * Determines the URI for a file field instance.
+ * Determine the URI for a file field instance.
  *
  * @param $field
  *   A field array.
@@ -568,7 +552,6 @@ function file_field_widget_upload_validators($field, $instance) {
  *   A field instance array.
  * @param $data
  *   An array of token objects to pass to token_replace().
- *
  * @return
  *   A file directory URI with tokens replaced.
  *
@@ -643,9 +626,10 @@ function file_field_widget_process($element, &$form_state, $form) {
   // Add the description field if enabled.
   if (!empty($instance['settings']['description_field']) && $item['fid']) {
     $element['description'] = array(
-      '#type' => variable_get('file_description_type', 'textfield'),
+      '#type' => 'textfield',
       '#title' => t('Description'),
       '#value' => isset($item['description']) ? $item['description'] : '',
+      '#type' => variable_get('file_description_type', 'textfield'),
       '#maxlength' => variable_get('file_description_length', 128),
       '#description' => t('The description may be used as the label of the link to the file.'),
     );
@@ -719,13 +703,10 @@ function file_field_widget_process_multiple($element, &$form_state, $form) {
 }
 
 /**
- * Retrieves the file description from a field field element.
- *
- * This helper function is used by file_field_widget_process_multiple().
+ * Helper function for file_field_widget_process_multiple().
  *
  * @param $element
  *   The element being processed.
- *
  * @return
  *   A description of the file suitable for use in the administrative interface.
  */
@@ -743,7 +724,7 @@ function _file_field_get_description_from_element($element) {
 }
 
 /**
- * Form submission handler for upload/remove button of file_field_widget_form().
+ * Submit handler for upload and remove buttons of file_generic fields.
  *
  * This runs in addition to and after file_managed_file_submit().
  *
@@ -768,7 +749,7 @@ function file_field_widget_submit($form, &$form_state) {
   $langcode = $element['#language'];
   $parents = $element['#field_parents'];
 
-  $submitted_values = drupal_array_get_nested_value($form_state['values'], array_slice($button['#parents'], 0, -2));
+  $submitted_values = drupal_array_get_nested_value($form_state['values'], array_slice($button['#array_parents'], 0, -2));
   foreach ($submitted_values as $delta => $submitted_value) {
     if (!$submitted_value['fid']) {
       unset($submitted_values[$delta]);
@@ -779,7 +760,7 @@ function file_field_widget_submit($form, &$form_state) {
   $submitted_values = array_values($submitted_values);
 
   // Update form_state values.
-  drupal_array_set_nested_value($form_state['values'], array_slice($button['#parents'], 0, -2), $submitted_values);
+  drupal_array_set_nested_value($form_state['values'], array_slice($button['#array_parents'], 0, -2), $submitted_values);
 
   // Update items.
   $field_state = field_form_get_state($parents, $field_name, $langcode, $form_state);
@@ -988,13 +969,11 @@ function file_field_formatter_view($entity_type, $entity, $field, $instance, $la
       break;
 
     case 'file_table':
-      if (!empty($items)) {
-        // Display all values in a single element..
-        $element[0] = array(
-          '#theme' => 'file_formatter_table',
-          '#items' => $items,
-        );
-      }
+      // Display all values in a single element..
+      $element[0] = array(
+        '#theme' => 'file_formatter_table',
+        '#items' => $items,
+      );
       break;
   }
 

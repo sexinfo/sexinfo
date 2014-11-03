@@ -6,7 +6,7 @@
  */
 
 /**
- * Loads all the modules that have been enabled in the system table.
+ * Load all the modules that have been enabled in the system table.
  *
  * @param $bootstrap
  *   Whether to load only the reduced set of modules loaded in "bootstrap mode"
@@ -102,7 +102,7 @@ function module_list($refresh = FALSE, $bootstrap_refresh = FALSE, $sort = FALSE
 }
 
 /**
- * Builds a list of bootstrap modules and enabled modules and themes.
+ * Build a list of bootstrap modules and enabled modules and themes.
  *
  * @param $type
  *   The type of list to return:
@@ -178,34 +178,6 @@ function system_list($type) {
           $lists['filepaths'][] = array('type' => $record->type, 'name' => $record->name, 'filepath' => $record->filename);
         }
       }
-      foreach ($lists['theme'] as $key => $theme) {
-        if (!empty($theme->info['base theme'])) {
-          // Make a list of the theme's base themes.
-          require_once DRUPAL_ROOT . '/includes/theme.inc';
-          $lists['theme'][$key]->base_themes = drupal_find_base_themes($lists['theme'], $key);
-          // Don't proceed if there was a problem with the root base theme.
-          if (!current($lists['theme'][$key]->base_themes)) {
-            continue;
-          }
-          // Determine the root base theme.
-          $base_key = key($lists['theme'][$key]->base_themes);
-          // Add to the list of sub-themes for each of the theme's base themes.
-          foreach (array_keys($lists['theme'][$key]->base_themes) as $base_theme) {
-            $lists['theme'][$base_theme]->sub_themes[$key] = $lists['theme'][$key]->info['name'];
-          }
-          // Add the base theme's theme engine info.
-          $lists['theme'][$key]->info['engine'] = isset($lists['theme'][$base_key]->info['engine']) ? $lists['theme'][$base_key]->info['engine'] : 'theme';
-        }
-        else {
-          // A plain theme is its own engine.
-          $base_key = $key;
-          if (!isset($lists['theme'][$key]->info['engine'])) {
-            $lists['theme'][$key]->info['engine'] = 'theme';
-          }
-        }
-        // Set the theme engine prefix.
-        $lists['theme'][$key]->prefix = ($lists['theme'][$key]->info['engine'] == 'theme') ? $base_key : $lists['theme'][$key]->info['engine'];
-      }
       cache_set('system_list', $lists, 'cache_bootstrap');
     }
     // To avoid a separate database lookup for the filepath, prime the
@@ -219,7 +191,7 @@ function system_list($type) {
 }
 
 /**
- * Resets all system_list() caches.
+ * Reset all system_list() caches.
  */
 function system_list_reset() {
   drupal_static_reset('system_list');
@@ -230,7 +202,7 @@ function system_list_reset() {
 }
 
 /**
- * Determines which modules require and are required by each module.
+ * Find dependencies any level deep and fill in required by information too.
  *
  * @param $files
  *   The array of filesystem objects used to rebuild the cache.
@@ -263,7 +235,7 @@ function _module_build_dependencies($files) {
 }
 
 /**
- * Determines whether a given module exists.
+ * Determine whether a given module exists.
  *
  * @param $module
  *   The name of the module (without the .module extension).
@@ -277,7 +249,7 @@ function module_exists($module) {
 }
 
 /**
- * Loads a module's installation hooks.
+ * Load a module's installation hooks.
  *
  * @param $module
  *   The name of the module (without the .module extension).
@@ -293,7 +265,7 @@ function module_load_install($module) {
 }
 
 /**
- * Loads a module include file.
+ * Load a module include file.
  *
  * Examples:
  * @code
@@ -335,7 +307,8 @@ function module_load_include($type, $module, $name = NULL) {
 }
 
 /**
- * Loads an include file for each module enabled in the {system} table.
+ * Load an include file for each of the modules that have been enabled in
+ * the system table.
  */
 function module_load_all_includes($type, $name = NULL) {
   $modules = module_list();
@@ -452,8 +425,6 @@ function module_enable($module_list, $enable_dependencies = TRUE) {
       registry_update();
       // Refresh the schema to include it.
       drupal_get_schema(NULL, TRUE);
-      // Update the theme registry to include it.
-      drupal_theme_rebuild();
       // Clear entity cache.
       entity_info_cache_clear();
 
@@ -503,7 +474,7 @@ function module_enable($module_list, $enable_dependencies = TRUE) {
 }
 
 /**
- * Disables a given set of modules.
+ * Disable a given set of modules.
  *
  * @param $module_list
  *   An array of module names.
@@ -568,15 +539,12 @@ function module_disable($module_list, $disable_dependents = TRUE) {
     system_list_reset();
     module_list(TRUE);
     module_implements('', FALSE, TRUE);
-    entity_info_cache_clear();
     // Invoke hook_modules_disabled before disabling modules,
     // so we can still call module hooks to get information.
     module_invoke_all('modules_disabled', $invoke_modules);
     // Update the registry to remove the newly-disabled module.
     registry_update();
     _system_update_bootstrap_status();
-    // Update the theme registry to remove the newly-disabled module.
-    drupal_theme_rebuild();
   }
 
   // If there remains no more node_access module, rebuilding will be
@@ -610,42 +578,11 @@ function module_disable($module_list, $disable_dependents = TRUE) {
  * just models that you can modify. Only the hooks implemented within modules
  * are executed when running Drupal.
  *
- * @see themeable
- * @see callbacks
+ * See also @link themeable the themeable group page. @endlink
  */
 
- /**
-  * @defgroup callbacks Callbacks
-  * @{
-  * Callback function signatures.
-  *
-  * Drupal's API sometimes uses callback functions to allow you to define how
-  * some type of processing happens. A callback is a function with a defined
-  * signature, which you define in a module. Then you pass the function name as
-  * a parameter to a Drupal API function or return it as part of a hook
-  * implementation return value, and your function is called at an appropriate
-  * time. For instance, when setting up batch processing you might need to
-  * provide a callback function for each processing step and/or a callback for
-  * when processing is finished; you would do that by defining these functions
-  * and passing their names into the batch setup function.
-  *
-  * Callback function signatures, like hook definitions, are described by
-  * creating and documenting dummy functions in a *.api.php file; normally, the
-  * dummy callback function's name should start with "callback_", and you should
-  * document the parameters and return value and provide a sample function body.
-  * Then your API documentation can refer to this callback function in its
-  * documentation. A user of your API can usually name their callback function
-  * anything they want, although a standard name would be to replace "callback_"
-  * with the module name.
-  *
-  * @see hooks
-  * @see themeable
-  *
-  * @}
-  */
-
 /**
- * Determines whether a module implements a hook.
+ * Determine whether a module implements a hook.
  *
  * @param $module
  *   The name of the module (without the .module extension).
@@ -674,7 +611,7 @@ function module_hook($module, $hook) {
 }
 
 /**
- * Determines which modules are implementing a hook.
+ * Determine which modules are implementing a hook.
  *
  * @param $hook
  *   The name of the hook (e.g. "help" or "menu").
@@ -775,14 +712,7 @@ function module_implements($hook, $sort = FALSE, $reset = FALSE) {
 }
 
 /**
- * Retrieves a list of hooks that are declared through hook_hook_info().
- *
- * @return
- *   An associative array whose keys are hook names and whose values are an
- *   associative array containing a group name. The structure of the array
- *   is the same as the return value of hook_hook_info().
- *
- * @see hook_hook_info()
+ * Retrieve a list of what hooks are explicitly declared.
  */
 function module_hook_info() {
   // This function is indirectly invoked from bootstrap_invoke_all(), in which
@@ -834,17 +764,17 @@ function module_hook_info() {
  */
 function module_implements_write_cache() {
   $implementations = &drupal_static('module_implements');
-  if (isset($implementations['#write_cache'])) {
+  // Check whether we need to write the cache. We do not want to cache hooks
+  // which are only invoked on HTTP POST requests since these do not need to be
+  // optimized as tightly, and not doing so keeps the cache entry smaller.
+  if (isset($implementations['#write_cache']) && ($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'HEAD')) {
     unset($implementations['#write_cache']);
     cache_set('module_implements', $implementations, 'cache_bootstrap');
   }
 }
 
 /**
- * Invokes a hook in a particular module.
- *
- * All arguments are passed by value. Use drupal_alter() if you need to pass
- * arguments by reference.
+ * Invoke a hook in a particular module.
  *
  * @param $module
  *   The name of the module (without the .module extension).
@@ -855,8 +785,6 @@ function module_implements_write_cache() {
  *
  * @return
  *   The return value of the hook implementation.
- *
- * @see drupal_alter()
  */
 function module_invoke($module, $hook) {
   $args = func_get_args();
@@ -868,10 +796,7 @@ function module_invoke($module, $hook) {
 }
 
 /**
- * Invokes a hook in all enabled modules that implement it.
- *
- * All arguments are passed by value. Use drupal_alter() if you need to pass
- * arguments by reference.
+ * Invoke a hook in all enabled modules that implement it.
  *
  * @param $hook
  *   The name of the hook to invoke.
@@ -881,8 +806,6 @@ function module_invoke($module, $hook) {
  * @return
  *   An array of return values of the hook implementations. If modules return
  *   arrays from their implementations, those are merged into one array.
- *
- * @see drupal_alter()
  */
 function module_invoke_all($hook) {
   $args = func_get_args();
@@ -910,13 +833,13 @@ function module_invoke_all($hook) {
  */
 
 /**
- * Returns an array of modules required by core.
+ * Array of modules required by core.
  */
 function drupal_required_modules() {
   $files = drupal_system_listing('/^' . DRUPAL_PHP_FUNCTION_PATTERN . '\.info$/', 'modules', 'name', 0);
   $required = array();
 
-  // An installation profile is required and one must always be loaded.
+  // An install profile is required and one must always be loaded.
   $required[] = drupal_get_profile();
 
   foreach ($files as $name => $file) {
@@ -930,16 +853,15 @@ function drupal_required_modules() {
 }
 
 /**
- * Passes alterable variables to specific hook_TYPE_alter() implementations.
+ * Hands off alterable variables to type-specific *_alter implementations.
  *
  * This dispatch function hands off the passed-in variables to type-specific
  * hook_TYPE_alter() implementations in modules. It ensures a consistent
  * interface for all altering operations.
  *
- * A maximum of 2 alterable arguments is supported (a third is supported for
- * legacy reasons, but should not be used in new code). In case more arguments
- * need to be passed and alterable, modules provide additional variables
- * assigned by reference in the last $context argument:
+ * A maximum of 2 alterable arguments is supported. In case more arguments need
+ * to be passed and alterable, modules provide additional variables assigned by
+ * reference in the last $context argument:
  * @code
  *   $context = array(
  *     'alterable' => &$alterable,
@@ -978,14 +900,8 @@ function drupal_required_modules() {
  *   (optional) An additional variable that is passed by reference. If more
  *   context needs to be provided to implementations, then this should be an
  *   associative array as described above.
- * @param $context3
- *   (optional) An additional variable that is passed by reference. This
- *   parameter is deprecated and will not exist in Drupal 8; consequently, it
- *   should not be used for new Drupal 7 code either. It is here only for
- *   backwards compatibility with older code that passed additional arguments
- *   to drupal_alter().
  */
-function drupal_alter($type, &$data, &$context1 = NULL, &$context2 = NULL, &$context3 = NULL) {
+function drupal_alter($type, &$data, &$context1 = NULL, &$context2 = NULL) {
   // Use the advanced drupal_static() pattern, since this is called very often.
   static $drupal_static_fast;
   if (!isset($drupal_static_fast)) {
@@ -1036,24 +952,10 @@ function drupal_alter($type, &$data, &$context1 = NULL, &$context2 = NULL, &$con
       }
       // If any modules implement one of the extra hooks that do not implement
       // the primary hook, we need to add them to the $modules array in their
-      // appropriate order. module_implements() can only return ordered
-      // implementations of a single hook. To get the ordered implementations
-      // of multiple hooks, we mimic the module_implements() logic of first
-      // ordering by module_list(), and then calling
-      // drupal_alter('module_implements').
+      // appropriate order.
       if (array_diff($extra_modules, $modules)) {
-        // Merge the arrays and order by module_list().
+        // Order the modules by the order returned by module_list().
         $modules = array_intersect(module_list(), array_merge($modules, $extra_modules));
-        // Since module_implements() already took care of loading the necessary
-        // include files, we can safely pass FALSE for the array values.
-        $implementations = array_fill_keys($modules, FALSE);
-        // Let modules adjust the order solely based on the primary hook. This
-        // ensures the same module order regardless of whether this if block
-        // runs. Calling drupal_alter() recursively in this way does not result
-        // in an infinite loop, because this call is for a single $type, so we
-        // won't end up in this code block again.
-        drupal_alter('module_implements', $implementations, $hook);
-        $modules = array_keys($implementations);
       }
       foreach ($modules as $module) {
         // Since $modules is a merged array, for any given module, we do not
@@ -1098,6 +1000,7 @@ function drupal_alter($type, &$data, &$context1 = NULL, &$context2 = NULL, &$con
   }
 
   foreach ($functions[$cid] as $function) {
-    $function($data, $context1, $context2, $context3);
+    $function($data, $context1, $context2);
   }
 }
+

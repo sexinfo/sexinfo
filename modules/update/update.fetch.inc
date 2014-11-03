@@ -6,11 +6,7 @@
  */
 
 /**
- * Page callback: Checks for updates and displays the update status report.
- *
- * Manually checks the update status without the use of cron.
- *
- * @see update_menu()
+ * Callback to manually check the update status without cron.
  */
 function update_manual_status() {
   _update_refresh();
@@ -29,10 +25,7 @@ function update_manual_status() {
 }
 
 /**
- * Batch callback: Processes a step in batch for fetching available update data.
- *
- * @param $context
- *   Reference to an array used for Batch API storage.
+ * Process a step in the batch for fetching available update data.
  */
 function update_fetch_data_batch(&$context) {
   $queue = DrupalQueue::get('update_fetch_tasks');
@@ -77,12 +70,12 @@ function update_fetch_data_batch(&$context) {
 }
 
 /**
- * Batch callback: Performs actions when all fetch tasks have been completed.
+ * Batch API callback when all fetch tasks have been completed.
  *
  * @param $success
- *   TRUE if the batch operation was successful; FALSE if there were errors.
+ *   Boolean indicating the success of the batch.
  * @param $results
- *   An associative array of results from the batch operation, including the key
+ *   Associative array holding the results of the batch, including the key
  *   'updated' which holds the total number of projects we fetched available
  *   update data for.
  */
@@ -103,7 +96,7 @@ function update_fetch_data_finished($success, $results) {
 }
 
 /**
- * Attempts to drain the queue of tasks for release history data to fetch.
+ * Attempt to drain the queue of tasks for release history data to fetch.
  */
 function _update_fetch_data() {
   $queue = DrupalQueue::get('update_fetch_tasks');
@@ -115,14 +108,13 @@ function _update_fetch_data() {
 }
 
 /**
- * Processes a task to fetch available update data for a single project.
+ * Process a task to fetch available update data for a single project.
  *
- * Once the release history XML data is downloaded, it is parsed and saved into
- * the {cache_update} table in an entry just for that project.
+ * Once the release history XML data is downloaded, it is parsed and saved
+ * into the {cache_update} table in an entry just for that project.
  *
  * @param $project
  *   Associative array of information about the project to fetch data for.
- *
  * @return
  *   TRUE if we fetched parsable XML, otherwise FALSE.
  */
@@ -192,7 +184,7 @@ function _update_process_fetch_task($project) {
 }
 
 /**
- * Clears out all the cached available update data and initiates re-fetching.
+ * Clear out all the cached available update data and initiate re-fetching.
  */
 function _update_refresh() {
   module_load_include('inc', 'update', 'update.compare');
@@ -219,7 +211,7 @@ function _update_refresh() {
 }
 
 /**
- * Adds a task to the queue for fetching release history data for a project.
+ * Add a task to the queue for fetching release history data for a project.
  *
  * We only create a new fetch task if there's no task already in the queue for
  * this particular project (based on 'fetch_task::' entries in the
@@ -227,8 +219,8 @@ function _update_refresh() {
  *
  * @param $project
  *   Associative array of information about a project as created by
- *   update_get_projects(), including keys such as 'name' (short name), and the
- *   'info' array with data from a .info file for the project.
+ *   update_get_projects(), including keys such as 'name' (short name),
+ *   and the 'info' array with data from a .info file for the project.
  *
  * @see update_get_projects()
  * @see update_get_available()
@@ -245,22 +237,12 @@ function _update_create_fetch_task($project) {
   if (empty($fetch_tasks[$cid])) {
     $queue = DrupalQueue::get('update_fetch_tasks');
     $queue->createItem($project);
-    // Due to race conditions, it is possible that another process already
-    // inserted a row into the {cache_update} table and the following query will
-    // throw an exception.
-    // @todo: Remove the need for the manual check by relying on a queue that
-    // enforces unique items.
-    try {
-      db_insert('cache_update')
-        ->fields(array(
-          'cid' => $cid,
-          'created' => REQUEST_TIME,
-        ))
-        ->execute();
-    }
-    catch (Exception $e) {
-      // The exception can be ignored safely.
-    }
+    db_insert('cache_update')
+      ->fields(array(
+        'cid' => $cid,
+        'created' => REQUEST_TIME,
+      ))
+      ->execute();
     $fetch_tasks[$cid] = REQUEST_TIME;
   }
 }
@@ -268,17 +250,14 @@ function _update_create_fetch_task($project) {
 /**
  * Generates the URL to fetch information about project updates.
  *
- * This figures out the right URL to use, based on the project's .info file and
- * the global defaults. Appends optional query arguments when the site is
+ * This figures out the right URL to use, based on the project's .info file
+ * and the global defaults. Appends optional query arguments when the site is
  * configured to report usage stats.
  *
  * @param $project
  *   The array of project information from update_get_projects().
  * @param $site_key
- *   (optional) The anonymous site key hash. Defaults to an empty string.
- *
- * @return
- *   The URL for fetching information about updates to the specified project.
+ *   The anonymous site key hash (optional).
  *
  * @see update_fetch_data()
  * @see _update_process_fetch_task()
@@ -288,35 +267,26 @@ function _update_build_fetch_url($project, $site_key = '') {
   $name = $project['name'];
   $url = _update_get_fetch_url_base($project);
   $url .= '/' . $name . '/' . DRUPAL_CORE_COMPATIBILITY;
-
-  // Only append usage information if we have a site key and the project is
-  // enabled. We do not want to record usage statistics for disabled projects.
+  // Only append a site_key and the version information if we have a site_key
+  // in the first place, and if this is not a disabled module or theme. We do
+  // not want to record usage statistics for disabled code.
   if (!empty($site_key) && (strpos($project['project_type'], 'disabled') === FALSE)) {
-    // Append the site key.
-    $url .= (strpos($url, '?') !== FALSE) ? '&' : '?';
+    $url .= (strpos($url, '?') === TRUE) ? '&' : '?';
     $url .= 'site_key=';
     $url .= rawurlencode($site_key);
-
-    // Append the version.
     if (!empty($project['info']['version'])) {
       $url .= '&version=';
       $url .= rawurlencode($project['info']['version']);
     }
-
-    // Append the list of modules or themes enabled.
-    $list = array_keys($project['includes']);
-    $url .= '&list=';
-    $url .= rawurlencode(implode(',', $list));
   }
   return $url;
 }
 
 /**
- * Returns the base of the URL to fetch available update data for a project.
+ * Return the base of the URL to fetch available update data for a project.
  *
  * @param $project
  *   The array of project information from update_get_projects().
- *
  * @return
  *   The base of the URL used for fetching available update data. This does
  *   not include the path elements to specify a particular project, version,
@@ -329,10 +299,10 @@ function _update_get_fetch_url_base($project) {
 }
 
 /**
- * Performs any notifications that should be done once cron fetches new data.
+ * Perform any notifications that should be done once cron fetches new data.
  *
- * This method checks the status of the site using the new data and, depending
- * on the configuration of the site, notifies administrators via e-mail if there
+ * This method checks the status of the site using the new data and depending
+ * on the configuration of the site, notifies administrators via email if there
  * are new releases or missing security updates.
  *
  * @see update_requirements()
@@ -360,19 +330,14 @@ function _update_cron_notify() {
         else {
           $target_language = $default_language;
         }
-        $message = drupal_mail('update', 'status_notify', $target, $target_language, $params);
-        // Track when the last mail was successfully sent to avoid sending
-        // too many e-mails.
-        if ($message['result']) {
-          variable_set('update_last_email_notification', REQUEST_TIME);
-        }
+        drupal_mail('update', 'status_notify', $target, $target_language, $params);
       }
     }
   }
 }
 
 /**
- * Parses the XML of the Drupal release history info files.
+ * Parse the XML of the Drupal release history info files.
  *
  * @param $raw_xml
  *   A raw XML string of available release data for a given project.

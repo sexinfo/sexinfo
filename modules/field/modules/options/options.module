@@ -79,11 +79,8 @@ function options_field_widget_form(&$form, &$form_state, $field, $instance, $lan
   $has_value = isset($items[0][$value_key]);
   $properties = _options_properties($type, $multiple, $required, $has_value);
 
-  $entity_type = $element['#entity_type'];
-  $entity = $element['#entity'];
-
   // Prepare the list of options.
-  $options = _options_get_options($field, $instance, $properties, $entity_type, $entity);
+  $options = _options_get_options($field, $instance, $properties);
 
   // Put current field values in shape.
   $default_value = _options_storage_to_form($items, $options, $value_key, $properties);
@@ -105,18 +102,10 @@ function options_field_widget_form(&$form, &$form_state, $field, $instance, $lan
         reset($options);
         $default_value = array(key($options));
       }
-
-      // If this is a single-value field, take the first default value, or
-      // default to NULL so that the form element is properly recognized as
-      // not having a default value.
-      if (!$multiple) {
-        $default_value = $default_value ? reset($default_value) : NULL;
-      }
-
       $element += array(
         '#type' => $multiple ? 'checkboxes' : 'radios',
         // Radio buttons need a scalar value.
-        '#default_value' => $default_value,
+        '#default_value' => $multiple ? $default_value : reset($default_value),
         '#options' => $options,
       );
       break;
@@ -211,7 +200,7 @@ function _options_properties($type, $multiple, $required, $has_value) {
         if (!$required) {
           $properties['empty_option'] = 'option_none';
         }
-        elseif (!$has_value) {
+        else if (!$has_value) {
           $properties['empty_option'] = 'option_select';
         }
       }
@@ -240,9 +229,9 @@ function _options_properties($type, $multiple, $required, $has_value) {
 /**
  * Collects the options for a field.
  */
-function _options_get_options($field, $instance, $properties, $entity_type, $entity) {
+function _options_get_options($field, $instance, $properties) {
   // Get the list of options.
-  $options = (array) module_invoke($field['module'], 'options_list', $field, $instance, $entity_type, $entity);
+  $options = (array) module_invoke($field['module'], 'options_list', $field, $instance);
 
   // Sanitize the options.
   _options_prepare_options($options, $properties);

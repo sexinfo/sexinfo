@@ -1,8 +1,3 @@
-/**
- * @file
- * Attaches the behaviors for the Color module.
- */
-
 (function ($) {
 
 Drupal.behaviors.color = {
@@ -70,20 +65,20 @@ Drupal.behaviors.color = {
     });
 
     /**
-     * Renders the preview.
+     * Render the preview.
      */
     function preview() {
       Drupal.color.callback(context, settings, form, farb, height, width);
     }
 
     /**
-     * Shifts a given color, using a reference pair (ref in HSL).
+     * Shift a given color, using a reference pair (ref in HSL).
      *
      * This algorithm ensures relative ordering on the saturation and luminance
      * axes is preserved, and performs a simple hue shift.
      *
-     * It is also symmetrical. If: shift_color(c, a, b) == d, then
-     * shift_color(d, b, a) == c.
+     * It is also symmetrical. If: shift_color(c, a, b) == d,
+     *                        then shift_color(d, b, a) == c.
      */
     function shift_color(given, ref1, ref2) {
       // Convert to HSL.
@@ -164,7 +159,7 @@ Drupal.behaviors.color = {
     }
 
     /**
-     * Resets the color scheme selector.
+     * Reset the color scheme selector.
      */
     function resetScheme() {
       $('#edit-scheme', form).each(function () {
@@ -172,9 +167,7 @@ Drupal.behaviors.color = {
       });
     }
 
-    /**
-     * Focuses Farbtastic on a particular field.
-     */
+    // Focus the Farbtastic on a particular field.
     function focus() {
       var input = this;
       // Remove old bindings.

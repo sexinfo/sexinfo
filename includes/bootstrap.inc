@@ -8,7 +8,7 @@
 /**
  * The current system version.
  */
-define('VERSION', '7.32');
+define('VERSION', '7.9');
 
 /**
  * Core API compatibility.
@@ -24,21 +24,6 @@ define('DRUPAL_MINIMUM_PHP', '5.2.4');
  * Minimum recommended value of PHP memory_limit.
  */
 define('DRUPAL_MINIMUM_PHP_MEMORY_LIMIT', '32M');
-
-/**
- * Error reporting level: display no errors.
- */
-define('ERROR_REPORTING_HIDE', 0);
-
-/**
- * Error reporting level: display errors and warnings.
- */
-define('ERROR_REPORTING_DISPLAY_SOME', 1);
-
-/**
- * Error reporting level: display all messages.
- */
-define('ERROR_REPORTING_DISPLAY_ALL', 2);
 
 /**
  * Indicates that the item should never be removed unless explicitly selected.
@@ -58,9 +43,9 @@ define('CACHE_TEMPORARY', -1);
  * Logging severity levels as defined in RFC 3164.
  *
  * The WATCHDOG_* constant definitions correspond to the logging severity levels
- * defined in RFC 3164, section 4.1.1. PHP supplies predefined LOG_* constants
+ * defined in RFC 3164, section 4.1.1.  PHP supplies predefined LOG_* constants
  * for use in the syslog() function, but their values on Windows builds do not
- * correspond to RFC 3164. The associated PHP bug report was closed with the
+ * correspond to RFC 3164.  The associated PHP bug report was closed with the
  * comment, "And it's also not a bug, as Windows just have less log levels,"
  * and "So the behavior you're seeing is perfectly normal."
  *
@@ -83,32 +68,32 @@ define('WATCHDOG_EMERGENCY', 0);
 define('WATCHDOG_ALERT', 1);
 
 /**
- * Log message severity -- Critical conditions.
+ * Log message severity -- Critical: critical conditions.
  */
 define('WATCHDOG_CRITICAL', 2);
 
 /**
- * Log message severity -- Error conditions.
+ * Log message severity -- Error: error conditions.
  */
 define('WATCHDOG_ERROR', 3);
 
 /**
- * Log message severity -- Warning conditions.
+ * Log message severity -- Warning: warning conditions.
  */
 define('WATCHDOG_WARNING', 4);
 
 /**
- * Log message severity -- Normal but significant conditions.
+ * Log message severity -- Notice: normal but significant condition.
  */
 define('WATCHDOG_NOTICE', 5);
 
 /**
- * Log message severity -- Informational messages.
+ * Log message severity -- Informational: informational messages.
  */
 define('WATCHDOG_INFO', 6);
 
 /**
- * Log message severity -- Debug-level messages.
+ * Log message severity -- Debug: debug-level messages.
  */
 define('WATCHDOG_DEBUG', 7);
 
@@ -152,7 +137,8 @@ define('DRUPAL_BOOTSTRAP_PAGE_HEADER', 5);
 define('DRUPAL_BOOTSTRAP_LANGUAGE', 6);
 
 /**
- * Final bootstrap phase: Drupal is fully loaded; validate and fix input data.
+ * Final bootstrap phase: Drupal is fully loaded; validate and fix
+ * input data.
  */
 define('DRUPAL_BOOTSTRAP_FULL', 7);
 
@@ -167,9 +153,8 @@ define('DRUPAL_ANONYMOUS_RID', 1);
 define('DRUPAL_AUTHENTICATED_RID', 2);
 
 /**
- * The number of bytes in a kilobyte.
- *
- * For more information, visit http://en.wikipedia.org/wiki/Kilobyte.
+ * The number of bytes in a kilobyte. For more information, visit
+ * http://en.wikipedia.org/wiki/Kilobyte.
  */
 define('DRUPAL_KILOBYTE', 1024);
 
@@ -206,28 +191,20 @@ define('LANGUAGE_LTR', 0);
 define('LANGUAGE_RTL', 1);
 
 /**
- * Time of the current request in seconds elapsed since the Unix Epoch.
+ * For convenience, define a short form of the request time global.
  *
- * This differs from $_SERVER['REQUEST_TIME'], which is stored as a float
- * since PHP 5.4.0. Float timestamps confuse most PHP functions
- * (including date_create()).
- *
- * @see http://php.net/manual/reserved.variables.server.php
- * @see http://php.net/manual/function.time.php
+ * REQUEST_TIME is a float with microseconds since PHP 5.4.0, but float
+ * timestamps confuses most of the PHP functions (including date_create()).
  */
 define('REQUEST_TIME', (int) $_SERVER['REQUEST_TIME']);
 
 /**
- * Flag used to indicate that text is not sanitized, so run check_plain().
- *
- * @see drupal_set_title()
+ * Flag for drupal_set_title(); text is not sanitized, so run check_plain().
  */
 define('CHECK_PLAIN', 0);
 
 /**
- * Flag used to indicate that text has already been sanitized.
- *
- * @see drupal_set_title()
+ * Flag for drupal_set_title(); text has already been sanitized.
  */
 define('PASS_THROUGH', -1);
 
@@ -244,7 +221,7 @@ define('REGISTRY_WRITE_LOOKUP_CACHE', 2);
 /**
  * Regular expression to match PHP function names.
  *
- * @see http://php.net/manual/language.functions.php
+ * @see http://php.net/manual/en/language.functions.php
  */
 define('DRUPAL_PHP_FUNCTION_PATTERN', '[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*');
 
@@ -278,7 +255,7 @@ define('DRUPAL_PHP_FUNCTION_PATTERN', '[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*'
  * error, and $var will be populated with the contents of $object['foo'], but
  * that data will be passed by value, not reference. For more information on
  * the PHP limitation, see the note in the official PHP documentation at·
- * http://php.net/manual/arrayaccess.offsetget.php on
+ * http://php.net/manual/en/arrayaccess.offsetget.php on
  * ArrayAccess::offsetGet().
  *
  * By default, the class accounts for caches where calling functions might
@@ -298,7 +275,7 @@ define('DRUPAL_PHP_FUNCTION_PATTERN', '[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*'
  * means that assigning an offset via arrayAccess will only apply while the
  * object is in scope and will not be written back to the persistent cache.
  * This follows a similar pattern to static vs. persistent caching in
- * procedural code. Extending classes may wish to alter this behavior, for
+ * procedural code. Extending classes may wish to alter this behaviour, for
  * example by overriding offsetSet() and adding an automatic call to persist().
  *
  * @see SchemaCache
@@ -308,12 +285,12 @@ abstract class DrupalCacheArray implements ArrayAccess {
   /**
    * A cid to pass to cache_set() and cache_get().
    */
-  protected $cid;
+  private $cid;
 
   /**
    * A bin to pass to cache_set() and cache_get().
    */
-  protected $bin;
+  private $bin;
 
   /**
    * An array of keys to add to the cache at the end of the request.
@@ -326,7 +303,7 @@ abstract class DrupalCacheArray implements ArrayAccess {
   protected $storage = array();
 
   /**
-   * Constructs a DrupalCacheArray object.
+   * Constructor.
    *
    * @param $cid
    *   The cid for the array being cached.
@@ -342,16 +319,10 @@ abstract class DrupalCacheArray implements ArrayAccess {
     }
   }
 
-  /**
-   * Implements ArrayAccess::offsetExists().
-   */
   public function offsetExists($offset) {
     return $this->offsetGet($offset) !== NULL;
   }
 
-  /**
-   * Implements ArrayAccess::offsetGet().
-   */
   public function offsetGet($offset) {
     if (isset($this->storage[$offset]) || array_key_exists($offset, $this->storage)) {
       return $this->storage[$offset];
@@ -361,16 +332,10 @@ abstract class DrupalCacheArray implements ArrayAccess {
     }
   }
 
-  /**
-   * Implements ArrayAccess::offsetSet().
-   */
   public function offsetSet($offset, $value) {
     $this->storage[$offset] = $value;
   }
 
-  /**
-   * Implements ArrayAccess::offsetUnset().
-   */
   public function offsetUnset($offset) {
     unset($this->storage[$offset]);
   }
@@ -384,11 +349,11 @@ abstract class DrupalCacheArray implements ArrayAccess {
    * without necessarily writing back to the persistent cache at the end.
    *
    * @param $offset
-   *   The array offset that was requested.
+   *   The array offset that was request.
    * @param $persist
    *   Optional boolean to specify whether the offset should be persisted or
    *   not, defaults to TRUE. When called with $persist = FALSE the offset will
-   *   be unflagged so that it will not be written at the end of the request.
+   *   be unflagged so that it will not written at the end of the request.
    */
   protected function persist($offset, $persist = TRUE) {
     $this->keysToPersist[$offset] = $persist;
@@ -410,31 +375,32 @@ abstract class DrupalCacheArray implements ArrayAccess {
   abstract protected function resolveCacheMiss($offset);
 
   /**
-   * Writes a value to the persistent cache immediately.
+   * Immediately write a value to the persistent cache.
    *
+   * @param $cid
+   *   The cache ID.
+   * @param $bin
+   *   The cache bin.
    * @param $data
    *   The data to write to the persistent cache.
    * @param $lock
    *   Whether to acquire a lock before writing to cache.
    */
-  protected function set($data, $lock = TRUE) {
+  protected function set($cid, $data, $bin, $lock = TRUE) {
     // Lock cache writes to help avoid stampedes.
     // To implement locking for cache misses, override __construct().
-    $lock_name = $this->cid . ':' . $this->bin;
+    $lock_name = $cid . ':' . $bin;
     if (!$lock || lock_acquire($lock_name)) {
-      if ($cached = cache_get($this->cid, $this->bin)) {
+      if ($cached = cache_get($cid, $bin)) {
         $data = $cached->data + $data;
       }
-      cache_set($this->cid, $data, $this->bin);
+      cache_set($cid, $data, $bin);
       if ($lock) {
         lock_release($lock_name);
       }
     }
   }
 
-  /**
-   * Destructs the DrupalCacheArray object.
-   */
   public function __destruct() {
     $data = array();
     foreach ($this->keysToPersist as $offset => $persist) {
@@ -443,16 +409,14 @@ abstract class DrupalCacheArray implements ArrayAccess {
       }
     }
     if (!empty($data)) {
-      $this->set($data);
+      $this->set($this->cid, $data, $this->bin);
     }
   }
 }
 
 /**
- * Starts the timer with the specified name.
- *
- * If you start and stop the same timer multiple times, the measured intervals
- * will be accumulated.
+ * Start the timer with the specified name. If you start and stop the same
+ * timer multiple times, the measured intervals will be accumulated.
  *
  * @param $name
  *   The name of the timer.
@@ -465,7 +429,7 @@ function timer_start($name) {
 }
 
 /**
- * Reads the current timer value without stopping the timer.
+ * Read the current timer value without stopping the timer.
  *
  * @param $name
  *   The name of the timer.
@@ -489,7 +453,7 @@ function timer_read($name) {
 }
 
 /**
- * Stops the timer with the specified name.
+ * Stop the timer with the specified name.
  *
  * @param $name
  *   The name of the timer.
@@ -517,12 +481,56 @@ function timer_stop($name) {
 }
 
 /**
- * Returns the appropriate configuration directory.
+ * Finds the appropriate configuration directory.
  *
- * Returns the configuration path based on the site's hostname, port, and
- * pathname. Uses find_conf_path() to find the current configuration directory.
- * See default.settings.php for examples on how the URL is converted to a
- * directory.
+ * Finds a matching configuration directory by stripping the website's
+ * hostname from left to right and pathname from right to left. The first
+ * configuration file found will be used and the remaining ones will be ignored.
+ * If no configuration file is found, return a default value '$confdir/default'.
+ *
+ * With a site located at http://www.example.com:8080/mysite/test/, the file,
+ * settings.php, is searched for in the following directories:
+ *
+ * - $confdir/8080.www.example.com.mysite.test
+ * - $confdir/www.example.com.mysite.test
+ * - $confdir/example.com.mysite.test
+ * - $confdir/com.mysite.test
+ *
+ * - $confdir/8080.www.example.com.mysite
+ * - $confdir/www.example.com.mysite
+ * - $confdir/example.com.mysite
+ * - $confdir/com.mysite
+ *
+ * - $confdir/8080.www.example.com
+ * - $confdir/www.example.com
+ * - $confdir/example.com
+ * - $confdir/com
+ *
+ * - $confdir/default
+ *
+ * If a file named sites.php is present in the $confdir, it will be loaded
+ * prior to scanning for directories. It should define an associative array
+ * named $sites, which maps domains to directories. It should be in the form
+ * of:
+ * @code
+ * $sites = array(
+ *   'The url to alias' => 'A directory within the sites directory'
+ * );
+ * @endcode
+ * For example:
+ * @code
+ * $sites = array(
+ *   'devexample.com' => 'example.com',
+ *   'localhost.example' => 'example.com',
+ * );
+ * @endcode
+ * The above array will cause Drupal to look for a directory named
+ * "example.com" in the sites directory whenever a request comes from
+ * "example.com", "devexample.com", or "localhost/example". That is useful
+ * on development servers, where the domain name may not be the same as the
+ * domain of the live server. Since Drupal stores file paths into the database
+ * (files, system table, etc.) this will ensure the paths are correct while
+ * accessed on development servers.
  *
  * @param bool $require_settings
  *   Only configuration directories with an existing settings.php file
@@ -535,8 +543,6 @@ function timer_stop($name) {
  *
  * @return
  *   The path of the matching directory.
- *
- * @see default.settings.php
  */
 function conf_path($require_settings = TRUE, $reset = FALSE) {
   $conf = &drupal_static(__FUNCTION__, '');
@@ -572,7 +578,7 @@ function conf_path($require_settings = TRUE, $reset = FALSE) {
 }
 
 /**
- * Sets appropriate server variables needed for command line scripts to work.
+ * Set appropriate server variables needed for command line scripts to work.
  *
  * This function can be called by command line scripts before bootstrapping
  * Drupal, to ensure that the page loads with the desired server parameters.
@@ -634,7 +640,7 @@ function drupal_override_server_variables($variables = array()) {
 }
 
 /**
- * Initializes the PHP environment.
+ * Initialize PHP environment.
  */
 function drupal_environment_initialize() {
   if (!isset($_SERVER['HTTP_REFERER'])) {
@@ -683,8 +689,7 @@ function drupal_environment_initialize() {
   ini_set('session.use_only_cookies', '1');
   ini_set('session.use_trans_sid', '0');
   // Don't send HTTP headers using PHP's session handler.
-  // An empty string is used here to disable the cache limiter.
-  ini_set('session.cache_limiter', '');
+  ini_set('session.cache_limiter', 'none');
   // Use httponly session cookies.
   ini_set('session.cookie_httponly', '1');
 
@@ -694,29 +699,23 @@ function drupal_environment_initialize() {
 }
 
 /**
- * Validates that a hostname (for example $_SERVER['HTTP_HOST']) is safe.
+ * Validate that a hostname (for example $_SERVER['HTTP_HOST']) is safe.
  *
  * @return
  *  TRUE if only containing valid characters, or FALSE otherwise.
  */
 function drupal_valid_http_host($host) {
-  // Limit the length of the host name to 1000 bytes to prevent DoS attacks with
-  // long host names.
-  return strlen($host) <= 1000
-    // Limit the number of subdomains and port separators to prevent DoS attacks
-    // in conf_path().
-    && substr_count($host, '.') <= 100
-    && substr_count($host, ':') <= 100
-    && preg_match('/^\[?(?:[a-zA-Z0-9-:\]_]+\.?)+$/', $host);
+  return preg_match('/^\[?(?:[a-zA-Z0-9-:\]_]+\.?)+$/', $host);
 }
 
 /**
- * Sets the base URL, cookie domain, and session name from configuration.
+ * Loads the configuration and sets the base URL, cookie domain, and
+ * session name correctly.
  */
 function drupal_settings_initialize() {
   global $base_url, $base_path, $base_root;
 
-  // Export these settings.php variables to the global namespace.
+  // Export the following settings.php variables to the global namespace
   global $databases, $cookie_domain, $conf, $installed_profile, $update_free_access, $db_url, $db_prefix, $drupal_hash_salt, $is_https, $base_secure_url, $base_insecure_url;
   $conf = array();
 
@@ -728,6 +727,7 @@ function drupal_settings_initialize() {
   if (isset($base_url)) {
     // Parse fixed base URL from settings.php.
     $parts = parse_url($base_url);
+    $http_protocol = $parts['scheme'];
     if (!isset($parts['path'])) {
       $parts['path'] = '';
     }
@@ -736,7 +736,7 @@ function drupal_settings_initialize() {
     $base_root = substr($base_url, 0, strlen($base_url) - strlen($parts['path']));
   }
   else {
-    // Create base URL.
+    // Create base URL
     $http_protocol = $is_https ? 'https' : 'http';
     $base_root = $http_protocol . '://' . $_SERVER['HTTP_HOST'];
 
@@ -762,7 +762,7 @@ function drupal_settings_initialize() {
   }
   else {
     // Otherwise use $base_url as session name, without the protocol
-    // to use the same session identifiers across HTTP and HTTPS.
+    // to use the same session identifiers across http and https.
     list( , $session_name) = explode('://', $base_url, 2);
     // HTTP_HOST can be modified by a visitor, but we already sanitized it
     // in drupal_settings_initialize().
@@ -796,14 +796,13 @@ function drupal_settings_initialize() {
 }
 
 /**
- * Returns and optionally sets the filename for a system resource.
- *
- * The filename, whether provided, cached, or retrieved from the database, is
- * only returned if the file exists.
+ * Returns and optionally sets the filename for a system item (module,
+ * theme, etc.). The filename, whether provided, cached, or retrieved
+ * from the database, is only returned if the file exists.
  *
  * This function plays a key role in allowing Drupal's resources (modules
  * and themes) to be located in different places depending on a site's
- * configuration. For example, a module 'foo' may legally be located
+ * configuration. For example, a module 'foo' may legally be be located
  * in any of these three places:
  *
  * modules/foo/foo.module
@@ -814,7 +813,7 @@ function drupal_settings_initialize() {
  * the above, depending on where the module is located.
  *
  * @param $type
- *   The type of the item (theme, theme_engine, module, profile).
+ *   The type of the item (i.e. theme, theme_engine, module, profile).
  * @param $name
  *   The name of the item for which the filename is requested.
  * @param $filename
@@ -822,18 +821,13 @@ function drupal_settings_initialize() {
  *   than by consulting the database.
  *
  * @return
- *   The filename of the requested item or NULL if the item is not found.
+ *   The filename of the requested item.
  */
 function drupal_get_filename($type, $name, $filename = NULL) {
   // The location of files will not change during the request, so do not use
   // drupal_static().
   static $files = array(), $dirs = array();
 
-  // Profiles are a special case: they have a fixed location and naming.
-  if ($type == 'profile') {
-    $profile_filename = "profiles/$name/$name.profile";
-    $files[$type][$name] = file_exists($profile_filename) ? $profile_filename : FALSE;
-  }
   if (!isset($files[$type])) {
     $files[$type] = array();
   }
@@ -901,11 +895,11 @@ function drupal_get_filename($type, $name, $filename = NULL) {
 }
 
 /**
- * Loads the persistent variable table.
+ * Load the persistent variable table.
  *
  * The variable table is composed of values that have been saved in the table
- * with variable_set() as well as those explicitly specified in the
- * configuration file.
+ * with variable_set() as well as those explicitly specified in the configuration
+ * file.
  */
 function variable_initialize($conf = array()) {
   // NOTE: caching the variables improves performance by 20% when serving
@@ -950,7 +944,7 @@ function variable_initialize($conf = array()) {
  *   The default value to use if this variable has never been set.
  *
  * @return
- *   The value of the variable. Unserialization is taken care of as necessary.
+ *   The value of the variable.
  *
  * @see variable_del()
  * @see variable_set()
@@ -1012,7 +1006,7 @@ function variable_del($name) {
 }
 
 /**
- * Retrieves the current page from the cache.
+ * Retrieve the current page from the cache.
  *
  * Note: we do not serve cached pages to authenticated users, or to anonymous
  * users when $_SESSION is non-empty. $_SESSION may contain status messages
@@ -1044,7 +1038,7 @@ function drupal_page_get_cache($check_only = FALSE) {
 }
 
 /**
- * Determines the cacheability of the current page.
+ * Determine the cacheability of the current page.
  *
  * @param $allow_caching
  *   Set to FALSE if you want to prevent this page to get cached.
@@ -1063,7 +1057,7 @@ function drupal_page_is_cacheable($allow_caching = NULL) {
 }
 
 /**
- * Invokes a bootstrap hook in all bootstrap modules that implement it.
+ * Invoke a bootstrap hook in all bootstrap modules that implement it.
  *
  * @param $hook
  *   The name of the bootstrap hook to invoke.
@@ -1085,9 +1079,8 @@ function bootstrap_invoke_all($hook) {
 }
 
 /**
- * Includes a file with the provided type and name.
- *
- * This prevents including a theme, engine, module, etc., more than once.
+ * Includes a file with the provided type and name. This prevents
+ * including a theme, engine, module, etc., more than once.
  *
  * @param $type
  *   The type of item to load (i.e. theme, theme_engine, module).
@@ -1119,7 +1112,7 @@ function drupal_load($type, $name) {
 }
 
 /**
- * Sets an HTTP response header for the current page.
+ * Set an HTTP response header for the current page.
  *
  * Note: When sending a Content-Type header, always include a 'charset' type,
  * too. This is necessary to avoid security bugs (e.g. UTF-7 XSS).
@@ -1155,12 +1148,11 @@ function drupal_add_http_header($name, $value, $append = FALSE) {
 }
 
 /**
- * Gets the HTTP response headers for the current page.
+ * Get the HTTP response headers for the current page.
  *
  * @param $name
  *   An HTTP header name. If omitted, all headers are returned as name/value
  *   pairs. If an array value is FALSE, the header has been unset.
- *
  * @return
  *   A string containing the header value, or FALSE if the header has been set,
  *   or NULL if the header has not been set.
@@ -1177,8 +1169,6 @@ function drupal_get_http_header($name = NULL) {
 }
 
 /**
- * Sets the preferred name for the HTTP header.
- *
  * Header names are case-insensitive, but for maximum compatibility they should
  * follow "common form" (see RFC 2617, section 4.2).
  */
@@ -1192,16 +1182,14 @@ function _drupal_set_preferred_header_name($name = NULL) {
 }
 
 /**
- * Sends the HTTP response headers that were previously set, adding defaults.
+ * Send the HTTP response headers previously set using drupal_add_http_header().
+ * Add default headers, unless they have been replaced or unset using
+ * drupal_add_http_header().
  *
- * Headers are set in drupal_add_http_header(). Default headers are not set
- * if they have been replaced or unset using drupal_add_http_header().
- *
- * @param array $default_headers
- *   (optional) An array of headers as name/value pairs.
- * @param bool $only_default
- *   (optional) If TRUE and headers have already been sent, send only the
- *   specified headers.
+ * @param $default_headers
+ *   An array of headers as name/value pairs.
+ * @param $single
+ *   If TRUE and headers have already be sent, send only the specified header.
  */
 function drupal_send_headers($default_headers = array(), $only_default = FALSE) {
   $headers_sent = &drupal_static(__FUNCTION__, FALSE);
@@ -1224,14 +1212,14 @@ function drupal_send_headers($default_headers = array(), $only_default = FALSE) 
       header($_SERVER['SERVER_PROTOCOL'] . ' ' . $value);
     }
     // Skip headers that have been unset.
-    elseif ($value !== FALSE) {
+    elseif ($value) {
       header($header_names[$name_lower] . ': ' . $value);
     }
   }
 }
 
 /**
- * Sets HTTP headers in preparation for a page response.
+ * Set HTTP headers in preparation for a page response.
  *
  * Authenticated users are always given a 'no-cache' header, and will fetch a
  * fresh page on every request. This prevents authenticated users from seeing
@@ -1274,7 +1262,7 @@ function drupal_page_header() {
 }
 
 /**
- * Sets HTTP headers in preparation for a cached page response.
+ * Set HTTP headers in preparation for a cached page response.
  *
  * The headers allow as much as possible in proxies and browsers without any
  * particular knowledge about the pages. Modules can override these headers
@@ -1286,7 +1274,7 @@ function drupal_page_header() {
  */
 function drupal_serve_page_from_cache(stdClass $cache) {
   // Negotiate whether to use compression.
-  $page_compression = !empty($cache->data['page_compressed']);
+  $page_compression = variable_get('page_compression', TRUE) && extension_loaded('zlib');
   $return_compressed = $page_compression && isset($_SERVER['HTTP_ACCEPT_ENCODING']) && strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== FALSE;
 
   // Get headers set in hook_boot(). Keys are lower-case.
@@ -1377,7 +1365,7 @@ function drupal_serve_page_from_cache(stdClass $cache) {
 }
 
 /**
- * Defines the critical hooks that force modules to always be loaded.
+ * Define the critical hooks that force modules to always be loaded.
  */
 function bootstrap_hooks() {
   return array('boot', 'exit', 'watchdog', 'language_init');
@@ -1417,7 +1405,6 @@ function drupal_unpack($obj, $field = 'data') {
  * more information, including recommendations on how to break up or not
  * break up strings for translation.
  *
- * @section sec_translating_vars Translating Variables
  * You should never use t() to translate variables, such as calling
  * @code t($text); @endcode, unless the text that the variable holds has been
  * passed through t() elsewhere (e.g., $text is one of several translated
@@ -1431,13 +1418,11 @@ function drupal_unpack($obj, $field = 'data') {
  * $text = t("@name's blog", array('@name' => format_username($account)));
  * @endcode
  * Basically, you can put variables like @name into your string, and t() will
- * substitute their sanitized values at translation time. (See the
- * Localization API pages referenced above and the documentation of
- * format_string() for details about how to define variables in your string.)
- * Translators can then rearrange the string as necessary for the language
- * (e.g., in Spanish, it might be "blog de @name").
+ * substitute their sanitized values at translation time (see $args below or
+ * the Localization API pages referenced above for details). Translators can
+ * then rearrange the string as necessary for the language (e.g., in Spanish,
+ * it might be "blog de @name").
  *
- * @section sec_alt_funcs_install Use During Installation Phase
  * During the Drupal installation phase, some resources used by t() wil not be
  * available to code that needs localization. See st() and get_t() for
  * alternatives.
@@ -1445,9 +1430,8 @@ function drupal_unpack($obj, $field = 'data') {
  * @param $string
  *   A string containing the English string to translate.
  * @param $args
- *   An associative array of replacements to make after translation. Based
- *   on the first character of the key, the value is escaped and/or themed.
- *   See format_string() for details.
+ *   An associative array of replacements to make after translation.
+ *   See format_string().
  * @param $options
  *   An associative array of additional options, with the following elements:
  *   - 'langcode' (defaults to the current language): The language code to
@@ -1460,7 +1444,6 @@ function drupal_unpack($obj, $field = 'data') {
  *
  * @see st()
  * @see get_t()
- * @see format_string()
  * @ingroup sanitization
  */
 function t($string, array $args = array(), array $options = array()) {
@@ -1499,34 +1482,21 @@ function t($string, array $args = array(), array $options = array()) {
 }
 
 /**
- * Formats a string for HTML display by replacing variable placeholders.
- *
- * This function replaces variable placeholders in a string with the requested
- * values and escapes the values so they can be safely displayed as HTML. It
- * should be used on any unknown text that is intended to be printed to an HTML
- * page (especially text that may have come from untrusted users, since in that
- * case it prevents cross-site scripting and other security problems).
- *
- * In most cases, you should use t() rather than calling this function
- * directly, since it will translate the text (on non-English-only sites) in
- * addition to formatting it.
+ * Replace placeholders with sanitized values in a string.
  *
  * @param $string
  *   A string containing placeholders.
  * @param $args
  *   An associative array of replacements to make. Occurrences in $string of
- *   any key in $args are replaced with the corresponding value, after optional
- *   sanitization and formatting. The type of sanitization and formatting
- *   depends on the first character of the key:
- *   - @variable: Escaped to HTML using check_plain(). Use this as the default
- *     choice for anything displayed on a page on the site.
- *   - %variable: Escaped to HTML and formatted using drupal_placeholder(),
- *     which makes it display as <em>emphasized</em> text.
- *   - !variable: Inserted as is, with no sanitization or formatting. Only use
- *     this for text that has already been prepared for HTML display (for
- *     example, user-supplied text that has already been run through
- *     check_plain() previously, or is expected to contain some limited HTML
- *     tags and has already been run through filter_xss() previously).
+ *   any key in $args are replaced with the corresponding value, after
+ *   sanitization. The sanitization function depends on the first character of
+ *   the key:
+ *   - !variable: Inserted as is. Use this for text that has already been
+ *     sanitized.
+ *   - @variable: Escaped to HTML using check_plain(). Use this for anything
+ *     displayed on a page on the site.
+ *   - %variable: Escaped as a placeholder for user-submitted content using
+ *     drupal_placeholder(), which shows up as <em>emphasized</em> text.
  *
  * @see t()
  * @ingroup sanitization
@@ -1554,7 +1524,7 @@ function format_string($string, array $args = array()) {
 }
 
 /**
- * Encodes special characters in a plain-text string for display as HTML.
+ * Encode special characters in a plain-text string for display as HTML.
  *
  * Also validates strings as UTF-8 to prevent cross site scripting attacks on
  * Internet Explorer 6.
@@ -1593,7 +1563,6 @@ function check_plain($text) {
  *
  * @param $text
  *   The text to check.
- *
  * @return
  *   TRUE if the text is valid UTF-8, FALSE if not.
  */
@@ -1635,7 +1604,7 @@ function request_uri() {
 }
 
 /**
- * Logs an exception.
+ * Log an exception.
  *
  * This is a wrapper function for watchdog() which automatically decodes an
  * exception.
@@ -1676,7 +1645,7 @@ function watchdog_exception($type, Exception $exception, $message = NULL, $varia
 }
 
 /**
- * Logs a system message.
+ * Log a system message.
  *
  * @param $type
  *   The category to which this message belongs. Can be any string, but the
@@ -1692,16 +1661,8 @@ function watchdog_exception($type, Exception $exception, $message = NULL, $varia
  *   NULL if message is already translated or not possible to
  *   translate.
  * @param $severity
- *   The severity of the message; one of the following values as defined in
- *   @link http://www.faqs.org/rfcs/rfc3164.html RFC 3164: @endlink
- *   - WATCHDOG_EMERGENCY: Emergency, system is unusable.
- *   - WATCHDOG_ALERT: Alert, action must be taken immediately.
- *   - WATCHDOG_CRITICAL: Critical conditions.
- *   - WATCHDOG_ERROR: Error conditions.
- *   - WATCHDOG_WARNING: Warning conditions.
- *   - WATCHDOG_NOTICE: (default) Normal but significant conditions.
- *   - WATCHDOG_INFO: Informational messages.
- *   - WATCHDOG_DEBUG: Debug-level messages.
+ *   The severity of the message, as per RFC 3164. Possible values are
+ *   WATCHDOG_ERROR, WATCHDOG_WARNING, etc.
  * @param $link
  *   A link to associate with the message.
  *
@@ -1718,9 +1679,6 @@ function watchdog($type, $message, $variables = array(), $severity = WATCHDOG_NO
   if (!$in_error_state && function_exists('module_implements')) {
     $in_error_state = TRUE;
 
-    // The user object may not exist in all conditions, so 0 is substituted if needed.
-    $user_uid = isset($user->uid) ? $user->uid : 0;
-
     // Prepare the fields to be logged
     $log_entry = array(
       'type'        => $type,
@@ -1729,12 +1687,10 @@ function watchdog($type, $message, $variables = array(), $severity = WATCHDOG_NO
       'severity'    => $severity,
       'link'        => $link,
       'user'        => $user,
-      'uid'         => $user_uid,
       'request_uri' => $base_root . request_uri(),
       'referer'     => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '',
       'ip'          => ip_address(),
-      // Request time isn't accurate for long processes, use time() instead.
-      'timestamp'   => time(),
+      'timestamp'   => REQUEST_TIME,
     );
 
     // Call the logging hooks to log/process the message
@@ -1749,37 +1705,22 @@ function watchdog($type, $message, $variables = array(), $severity = WATCHDOG_NO
 }
 
 /**
- * Sets a message to display to the user.
+ * Set a message which reflects the status of the performed operation.
  *
- * Messages are stored in a session variable and displayed in page.tpl.php via
- * the $messages theme variable.
+ * If the function is called with no arguments, this function returns all set
+ * messages without clearing them.
  *
- * Example usage:
- * @code
- * drupal_set_message(t('An error occurred and processing did not complete.'), 'error');
- * @endcode
- *
- * @param string $message
- *   (optional) The translated message to be displayed to the user. For
- *   consistency with other messages, it should begin with a capital letter and
- *   end with a period.
- * @param string $type
- *   (optional) The message's type. Defaults to 'status'. These values are
- *   supported:
+ * @param $message
+ *   The message to be displayed to the user. For consistency with other
+ *   messages, it should begin with a capital letter and end with a period.
+ * @param $type
+ *   The type of the message. One of the following values are possible:
  *   - 'status'
  *   - 'warning'
  *   - 'error'
- * @param bool $repeat
- *   (optional) If this is FALSE and the message is already set, then the
- *   message won't be repeated. Defaults to TRUE.
- *
- * @return array|null
- *   A multidimensional array with keys corresponding to the set message types.
- *   The indexed array values of each contain the set messages for that type.
- *   Or, if there are no messages set, the function returns NULL.
- *
- * @see drupal_get_messages()
- * @see theme_status_messages()
+ * @param $repeat
+ *   If this is FALSE and the message is already set, then the message won't
+ *   be repeated.
  */
 function drupal_set_message($message = NULL, $type = 'status', $repeat = TRUE) {
   if ($message) {
@@ -1800,29 +1741,17 @@ function drupal_set_message($message = NULL, $type = 'status', $repeat = TRUE) {
 }
 
 /**
- * Returns all messages that have been set with drupal_set_message().
+ * Return all messages that have been set.
  *
- * @param string $type
- *   (optional) Limit the messages returned by type. Defaults to NULL, meaning
- *   all types. These values are supported:
- *   - NULL
- *   - 'status'
- *   - 'warning'
- *   - 'error'
- * @param bool $clear_queue
- *   (optional) If this is TRUE, the queue will be cleared of messages of the
- *   type specified in the $type parameter. Otherwise the queue will be left
- *   intact. Defaults to TRUE.
- *
- * @return array
- *   A multidimensional array with keys corresponding to the set message types.
- *   The indexed array values of each contain the set messages for that type.
- *   The messages returned are limited to the type specified in the $type
- *   parameter. If there are no messages of the specified type, an empty array
- *   is returned.
- *
- * @see drupal_set_message()
- * @see theme_status_messages()
+ * @param $type
+ *   (optional) Only return messages of this type.
+ * @param $clear_queue
+ *   (optional) Set to FALSE if you do not want to clear the messages queue
+ * @return
+ *   An associative array, the key is the message type, the value an array
+ *   of messages. If the $type parameter is passed, you get only that type,
+ *   or an empty array if there are no such messages. If $type is not passed,
+ *   all message types are returned, or an empty array if none exist.
  */
 function drupal_get_messages($type = NULL, $clear_queue = TRUE) {
   if ($messages = drupal_set_message()) {
@@ -1845,9 +1774,7 @@ function drupal_get_messages($type = NULL, $clear_queue = TRUE) {
 }
 
 /**
- * Gets the title of the current page.
- *
- * The title is displayed on the page and in the title bar.
+ * Get the title of the current page, for display on the page and in the title bar.
  *
  * @return
  *   The current page's title.
@@ -1864,9 +1791,7 @@ function drupal_get_title() {
 }
 
 /**
- * Sets the title of the current page.
- *
- * The title is displayed on the page and in the title bar.
+ * Set the title of the current page, for display on the page and in the title bar.
  *
  * @param $title
  *   Optional string value to assign to the page title; or if set to NULL
@@ -1891,7 +1816,7 @@ function drupal_set_title($title = NULL, $output = CHECK_PLAIN) {
 }
 
 /**
- * Checks to see if an IP address has been blocked.
+ * Check to see if an IP address has been blocked.
  *
  * Blocked IP addresses are stored in the database by default. However for
  * performance reasons we allow an override in settings.php. This allows us
@@ -1900,7 +1825,6 @@ function drupal_set_title($title = NULL, $output = CHECK_PLAIN) {
  *
  * @param $ip
  *   IP address to check.
- *
  * @return bool
  *   TRUE if access is denied, FALSE if access is allowed.
  */
@@ -1926,7 +1850,7 @@ function drupal_is_denied($ip) {
 }
 
 /**
- * Handles denied users.
+ * Handle denied users.
  *
  * @param $ip
  *   IP address to check. Prints a message and exits if access is denied.
@@ -1941,73 +1865,39 @@ function drupal_block_denied($ip) {
 }
 
 /**
- * Returns a URL-safe, base64 encoded string of highly randomized bytes (over the full 8-bit range).
- *
- * @param $byte_count
- *   The number of random bytes to fetch and base64 encode.
- *
- * @return string
- *   The base64 encoded result will have a length of up to 4 * $byte_count.
- */
-function drupal_random_key($byte_count = 32) {
-  return drupal_base64_encode(drupal_random_bytes($byte_count));
-}
-
-/**
- * Returns a URL-safe, base64 encoded version of the supplied string.
- *
- * @param $string
- *   The string to convert to base64.
- *
- * @return string
- */
-function drupal_base64_encode($string) {
-  $data = base64_encode($string);
-  // Modify the output so it's safe to use in URLs.
-  return strtr($data, array('+' => '-', '/' => '_', '=' => ''));
-}
-
-/**
  * Returns a string of highly randomized bytes (over the full 8-bit range).
  *
  * This function is better than simply calling mt_rand() or any other built-in
  * PHP function because it can return a long string of bytes (compared to < 4
- * bytes normally from mt_rand()) and uses the best available pseudo-random
- * source.
+ * bytes normally from mt_rand()) and uses the best available pseudo-random source.
  *
  * @param $count
  *   The number of characters (bytes) to return in the string.
  */
 function drupal_random_bytes($count)  {
   // $random_state does not use drupal_static as it stores random bytes.
-  static $random_state, $bytes, $has_openssl;
-
-  $missing_bytes = $count - strlen($bytes);
-
-  if ($missing_bytes > 0) {
-    // PHP versions prior 5.3.4 experienced openssl_random_pseudo_bytes()
-    // locking on Windows and rendered it unusable.
-    if (!isset($has_openssl)) {
-      $has_openssl = version_compare(PHP_VERSION, '5.3.4', '>=') && function_exists('openssl_random_pseudo_bytes');
+  static $random_state, $bytes;
+  // Initialize on the first call. The contents of $_SERVER includes a mix of
+  // user-specific and system information that varies a little with each page.
+  if (!isset($random_state)) {
+    $random_state = print_r($_SERVER, TRUE);
+    if (function_exists('getmypid')) {
+      // Further initialize with the somewhat random PHP process ID.
+      $random_state .= getmypid();
     }
-
-    // openssl_random_pseudo_bytes() will find entropy in a system-dependent
-    // way.
-    if ($has_openssl) {
-      $bytes .= openssl_random_pseudo_bytes($missing_bytes);
-    }
-
-    // Else, read directly from /dev/urandom, which is available on many *nix
-    // systems and is considered cryptographically secure.
-    elseif ($fh = @fopen('/dev/urandom', 'rb')) {
+    $bytes = '';
+  }
+  if (strlen($bytes) < $count) {
+    // /dev/urandom is available on many *nix systems and is considered the
+    // best commonly available pseudo-random source.
+    if ($fh = @fopen('/dev/urandom', 'rb')) {
       // PHP only performs buffered reads, so in reality it will always read
       // at least 4096 bytes. Thus, it costs nothing extra to read and store
       // that much so as to speed any additional invocations.
-      $bytes .= fread($fh, max(4096, $missing_bytes));
+      $bytes .= fread($fh, max(4096, $count));
       fclose($fh);
     }
-
-    // If we couldn't get enough entropy, this simple hash-based PRNG will
+    // If /dev/urandom is not available or returns no bytes, this loop will
     // generate a good set of pseudo-random bytes on any system.
     // Note that it may be important that our $random_state is passed
     // through hash() prior to being rolled into $output, that the two hash()
@@ -2015,23 +1905,9 @@ function drupal_random_bytes($count)  {
     // the microtime() - is prepended rather than appended. This is to avoid
     // directly leaking $random_state via the $output stream, which could
     // allow for trivial prediction of further "random" numbers.
-    if (strlen($bytes) < $count) {
-      // Initialize on the first call. The contents of $_SERVER includes a mix of
-      // user-specific and system information that varies a little with each page.
-      if (!isset($random_state)) {
-        $random_state = print_r($_SERVER, TRUE);
-        if (function_exists('getmypid')) {
-          // Further initialize with the somewhat random PHP process ID.
-          $random_state .= getmypid();
-        }
-        $bytes = '';
-      }
-
-      do {
-        $random_state = hash('sha256', microtime() . mt_rand() . $random_state);
-        $bytes .= hash('sha256', mt_rand() . $random_state, TRUE);
-      }
-      while (strlen($bytes) < $count);
+    while (strlen($bytes) < $count) {
+      $random_state = hash('sha256', microtime() . mt_rand() . $random_state);
+      $bytes .= hash('sha256', mt_rand() . $random_state, TRUE);
     }
   }
   $output = substr($bytes, 0, $count);
@@ -2040,29 +1916,25 @@ function drupal_random_bytes($count)  {
 }
 
 /**
- * Calculates a base-64 encoded, URL-safe sha-256 hmac.
+ * Calculate a base-64 encoded, URL-safe sha-256 hmac.
  *
- * @param string $data
+ * @param $data
  *   String to be validated with the hmac.
- * @param string $key
+ * @param $key
  *   A secret string key.
  *
- * @return string
+ * @return
  *   A base-64 encoded sha-256 hmac, with + replaced with -, / with _ and
  *   any = padding characters removed.
  */
 function drupal_hmac_base64($data, $key) {
-  // Casting $data and $key to strings here is necessary to avoid empty string
-  // results of the hash function if they are not scalar values. As this
-  // function is used in security-critical contexts like token validation it is
-  // important that it never returns an empty string.
-  $hmac = base64_encode(hash_hmac('sha256', (string) $data, (string) $key, TRUE));
+  $hmac = base64_encode(hash_hmac('sha256', $data, $key, TRUE));
   // Modify the hmac so it's safe to use in URLs.
   return strtr($hmac, array('+' => '-', '/' => '_', '=' => ''));
 }
 
 /**
- * Calculates a base-64 encoded, URL-safe sha-256 hash.
+ * Calculate a base-64 encoded, URL-safe sha-256 hash.
  *
  * @param $data
  *   String to be hashed.
@@ -2105,8 +1977,7 @@ function drupal_hash_base64($data) {
  * @see drupal_array_merge_deep_array()
  */
 function drupal_array_merge_deep() {
-  $args = func_get_args();
-  return drupal_array_merge_deep_array($args);
+  return drupal_array_merge_deep_array(func_get_args());
 }
 
 /**
@@ -2157,7 +2028,7 @@ function drupal_array_merge_deep_array($arrays) {
  * @return Object - the user object.
  */
 function drupal_anonymous_user() {
-  $user = variable_get('drupal_anonymous_user_object', new stdClass);
+  $user = new stdClass();
   $user->uid = 0;
   $user->hostname = ip_address();
   $user->roles = array();
@@ -2167,34 +2038,20 @@ function drupal_anonymous_user() {
 }
 
 /**
- * Ensures Drupal is bootstrapped to the specified phase.
- *
- * In order to bootstrap Drupal from another PHP script, you can use this code:
- * @code
- *   define('DRUPAL_ROOT', '/path/to/drupal');
- *   require_once DRUPAL_ROOT . '/includes/bootstrap.inc';
- *   drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
- * @endcode
+ * A string describing a phase of Drupal to load. Each phase adds to the
+ * previous one, so invoking a later phase automatically runs the earlier
+ * phases too. The most important usage is that if you want to access the
+ * Drupal database from a script without loading anything else, you can
+ * include bootstrap.inc, and call drupal_bootstrap(DRUPAL_BOOTSTRAP_DATABASE).
  *
  * @param $phase
- *   A constant telling which phase to bootstrap to. When you bootstrap to a
- *   particular phase, all earlier phases are run automatically. Possible
- *   values:
- *   - DRUPAL_BOOTSTRAP_CONFIGURATION: Initializes configuration.
- *   - DRUPAL_BOOTSTRAP_PAGE_CACHE: Tries to serve a cached page.
- *   - DRUPAL_BOOTSTRAP_DATABASE: Initializes the database layer.
- *   - DRUPAL_BOOTSTRAP_VARIABLES: Initializes the variable system.
- *   - DRUPAL_BOOTSTRAP_SESSION: Initializes session handling.
- *   - DRUPAL_BOOTSTRAP_PAGE_HEADER: Sets up the page header.
- *   - DRUPAL_BOOTSTRAP_LANGUAGE: Finds out the language of the page.
- *   - DRUPAL_BOOTSTRAP_FULL: Fully loads Drupal. Validates and fixes input
- *     data.
+ *   A constant. Allowed values are the DRUPAL_BOOTSTRAP_* constants.
  * @param $new_phase
  *   A boolean, set to FALSE if calling drupal_bootstrap from inside a
  *   function called from drupal_bootstrap (recursion).
- *
  * @return
  *   The most recently completed phase.
+ *
  */
 function drupal_bootstrap($phase = NULL, $new_phase = TRUE) {
   // Not drupal_static(), because does not depend on any run-time information.
@@ -2273,7 +2130,7 @@ function drupal_bootstrap($phase = NULL, $new_phase = TRUE) {
 }
 
 /**
- * Returns the time zone of the current user.
+ * Return the time zone of the current user.
  */
 function drupal_get_user_timezone() {
   global $user;
@@ -2288,20 +2145,7 @@ function drupal_get_user_timezone() {
 }
 
 /**
- * Gets a salt useful for hardening against SQL injection.
- *
- * @return
- *   A salt based on information in settings.php, not in the database.
- */
-function drupal_get_hash_salt() {
-  global $drupal_hash_salt, $databases;
-  // If the $drupal_hash_salt variable is empty, a hash of the serialized
-  // database credentials is used as a fallback salt.
-  return empty($drupal_hash_salt) ? hash('sha256', serialize($databases)) : $drupal_hash_salt;
-}
-
-/**
- * Provides custom PHP error handling.
+ * Custom PHP error handler.
  *
  * @param $error_level
  *   The level of the error raised.
@@ -2312,8 +2156,7 @@ function drupal_get_hash_salt() {
  * @param $line
  *   The line number the error was raised at.
  * @param $context
- *   An array that points to the active symbol table at the point the error
- *   occurred.
+ *   An array that points to the active symbol table at the point the error occurred.
  */
 function _drupal_error_handler($error_level, $message, $filename, $line, $context) {
   require_once DRUPAL_ROOT . '/includes/errors.inc';
@@ -2321,7 +2164,7 @@ function _drupal_error_handler($error_level, $message, $filename, $line, $contex
 }
 
 /**
- * Provides custom PHP exception handling.
+ * Custom PHP exception handler.
  *
  * Uncaught exceptions are those not enclosed in a try/catch block. They are
  * always fatal: the execution of the script will stop as soon as the exception
@@ -2349,7 +2192,7 @@ function _drupal_exception_handler($exception) {
 }
 
 /**
- * Sets up the script environment and loads settings.php.
+ * Bootstrap configuration: Setup script environment and load settings.php.
  */
 function _drupal_bootstrap_configuration() {
   // Set the Drupal custom error handler.
@@ -2364,7 +2207,7 @@ function _drupal_bootstrap_configuration() {
 }
 
 /**
- * Attempts to serve a page from the cache.
+ * Bootstrap page cache: Try to serve a page from cache.
  */
 function _drupal_bootstrap_page_cache() {
   global $user;
@@ -2420,7 +2263,7 @@ function _drupal_bootstrap_page_cache() {
 }
 
 /**
- * Initializes the database system and registers autoload functions.
+ * Bootstrap database: Initialize database system and register autoload functions.
  */
 function _drupal_bootstrap_database() {
   // Redirect the user to the installation script if Drupal has not been
@@ -2472,7 +2315,7 @@ function _drupal_bootstrap_database() {
 }
 
 /**
- * Loads system variables and all enabled bootstrap modules.
+ * Bootstrap variables: Load system variables and all enabled bootstrap modules.
  */
 function _drupal_bootstrap_variables() {
   global $conf;
@@ -2489,7 +2332,7 @@ function _drupal_bootstrap_variables() {
 }
 
 /**
- * Invokes hook_boot(), initializes locking system, and sends HTTP headers.
+ * Bootstrap page header: Invoke hook_boot(), initialize locking system, and send default HTTP headers.
  */
 function _drupal_bootstrap_page_header() {
   bootstrap_invoke_all('boot');
@@ -2512,7 +2355,8 @@ function drupal_get_bootstrap_phase() {
 }
 
 /**
- * Returns the test prefix if this is an internal request from SimpleTest.
+ * Checks the current User-Agent string to see if this is an internal request
+ * from SimpleTest. If so, returns the test prefix for this test.
  *
  * @return
  *   Either the simpletest prefix (the string "simpletest" followed by any
@@ -2520,6 +2364,7 @@ function drupal_get_bootstrap_phase() {
  *   HMAC and timestamp.
  */
 function drupal_valid_test_ua() {
+  global $drupal_hash_salt;
   // No reason to reset this.
   static $test_prefix;
 
@@ -2533,7 +2378,7 @@ function drupal_valid_test_ua() {
     // We use the salt from settings.php to make the HMAC key, since
     // the database is not yet initialized and we can't access any Drupal variables.
     // The file properties add more entropy not easily accessible to others.
-    $key = drupal_get_hash_salt() . filectime(__FILE__) . fileinode(__FILE__);
+    $key = $drupal_hash_salt . filectime(__FILE__) . fileinode(__FILE__);
     $time_diff = REQUEST_TIME - $time;
     // Since we are making a local request a 5 second time window is allowed,
     // and the HMAC must match.
@@ -2543,21 +2388,21 @@ function drupal_valid_test_ua() {
     }
   }
 
-  $test_prefix = FALSE;
-  return $test_prefix;
+  return FALSE;
 }
 
 /**
- * Generates a user agent string with a HMAC and timestamp for simpletest.
+ * Generate a user agent string with a HMAC and timestamp for simpletest.
  */
 function drupal_generate_test_ua($prefix) {
+  global $drupal_hash_salt;
   static $key;
 
   if (!isset($key)) {
     // We use the salt from settings.php to make the HMAC key, since
     // the database is not yet initialized and we can't access any Drupal variables.
     // The file properties add more entropy not easily accessible to others.
-    $key = drupal_get_hash_salt() . filectime(__FILE__) . fileinode(__FILE__);
+    $key = $drupal_hash_salt . filectime(__FILE__) . fileinode(__FILE__);
   }
   // Generate a moderately secure HMAC based on the database credentials.
   $salt = uniqid('', TRUE);
@@ -2598,7 +2443,7 @@ function drupal_fast_404() {
     $fast_paths = variable_get('404_fast_paths', FALSE);
     if ($fast_paths && preg_match($fast_paths, $_GET['q'])) {
       drupal_add_http_header('Status', '404 Not Found');
-      $fast_404_html = variable_get('404_fast_html', '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested URL "@path" was not found on this server.</p></body></html>');
+      $fast_404_html = variable_get('404_fast_html', '<html xmlns="http://www.w3.org/1999/xhtml"><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested URL "@path" was not found on this server.</p></body></html>');
       // Replace @path in the variable with the page path.
       print strtr($fast_404_html, array('@path' => check_plain(request_uri())));
       exit;
@@ -2607,7 +2452,7 @@ function drupal_fast_404() {
 }
 
 /**
- * Returns TRUE if a Drupal installation is currently being attempted.
+ * Return TRUE if a Drupal installation is currently being attempted.
  */
 function drupal_installation_attempted() {
   return defined('MAINTENANCE_MODE') && MAINTENANCE_MODE == 'install';
@@ -2650,9 +2495,10 @@ function get_t() {
 }
 
 /**
- * Initializes all the defined language types.
+ * Initialize all the defined language types.
  */
 function drupal_language_initialize() {
+  global $language;
   $types = language_types();
 
   // Ensure the language is correctly returned, even without multilanguage
@@ -2672,10 +2518,13 @@ function drupal_language_initialize() {
     // environments.
     bootstrap_invoke_all('language_init');
   }
+
+  // Send appropriate HTTP-Header for browsers and search engines.
+  header('Content-Language: ' . $language->language);
 }
 
 /**
- * Returns a list of the built-in language types.
+ * The built-in language types.
  *
  * @return
  *   An array of key-values pairs where the key is the language type and the
@@ -2690,10 +2539,7 @@ function drupal_language_types() {
 }
 
 /**
- * Returns TRUE if there is more than one language enabled.
- *
- * @return
- *   TRUE if more than one language is enabled.
+ * Return true if there is more than one language enabled.
  */
 function drupal_multilingual() {
   // The "language_count" variable stores the number of enabled languages to
@@ -2703,11 +2549,7 @@ function drupal_multilingual() {
 }
 
 /**
- * Returns an array of the available language types.
- *
- * @return
- *   An array of all language types where the keys of each are the language type
- *   name and its value is its configurability (TRUE/FALSE).
+ * Return an array of the available language types.
  */
 function language_types() {
   return array_keys(variable_get('language_types', drupal_language_types()));
@@ -2764,7 +2606,7 @@ function language_list($field = 'language') {
 }
 
 /**
- * Returns the default language used on the site
+ * Default language used on the site
  *
  * @param $property
  *   Optional property of the language object to return
@@ -2798,7 +2640,7 @@ function request_path() {
     return $path;
   }
 
-  if (isset($_GET['q']) && is_string($_GET['q'])) {
+  if (isset($_GET['q'])) {
     // This is a request with a ?q=foo/bar query string. $_GET['q'] is
     // overwritten in drupal_path_initialize(), but request_path() is called
     // very early in the bootstrap process, so the original value is saved in
@@ -2834,16 +2676,16 @@ function request_path() {
 }
 
 /**
- * Returns a component of the current Drupal path.
+ * Return a component of the current Drupal path.
  *
  * When viewing a page at the path "admin/structure/types", for example, arg(0)
  * returns "admin", arg(1) returns "structure", and arg(2) returns "types".
  *
- * Avoid use of this function where possible, as resulting code is hard to
- * read. In menu callback functions, attempt to use named arguments. See the
- * explanation in menu.inc for how to construct callbacks that take arguments.
- * When attempting to use this function to load an element from the current
- * path, e.g. loading the node on a node page, use menu_get_object() instead.
+ * Avoid use of this function where possible, as resulting code is hard to read.
+ * In menu callback functions, attempt to use named arguments. See the explanation
+ * in menu.inc for how to construct callbacks that take arguments. When attempting
+ * to use this function to load an element from the current path, e.g. loading the
+ * node on a node page, please use menu_get_object() instead.
  *
  * @param $index
  *   The index of the component, where each component is separated by a '/'
@@ -2883,8 +2725,6 @@ function arg($index = NULL, $path = NULL) {
 }
 
 /**
- * Returns the IP address of the client machine.
- *
  * If Drupal is behind a reverse proxy, we use the X-Forwarded-For header
  * instead of $_SERVER['REMOTE_ADDR'], which would be the IP address of
  * the proxy server, and not the client's. The actual header name can be
@@ -2929,12 +2769,12 @@ function ip_address() {
 }
 
 /**
- * @addtogroup schemaapi
+ * @ingroup schemaapi
  * @{
  */
 
 /**
- * Gets the schema definition of a table, or the whole database schema.
+ * Get the schema definition of a table, or the whole database schema.
  *
  * The returned schema will include any modifications made by any
  * module that implements hook_schema_alter().
@@ -2970,17 +2810,11 @@ function drupal_get_schema($table = NULL, $rebuild = FALSE) {
  */
 class SchemaCache extends DrupalCacheArray {
 
-  /**
-   * Constructs a SchemaCache object.
-   */
   public function __construct() {
     // Cache by request method.
     parent::__construct('schema:runtime:' . ($_SERVER['REQUEST_METHOD'] == 'GET'), 'cache');
   }
 
-  /**
-   * Overrides DrupalCacheArray::resolveCacheMiss().
-   */
   protected function resolveCacheMiss($offset) {
     $complete_schema = drupal_get_complete_schema();
     $value = isset($complete_schema[$offset]) ? $complete_schema[$offset] :  NULL;
@@ -2991,7 +2825,7 @@ class SchemaCache extends DrupalCacheArray {
 }
 
 /**
- * Gets the whole database schema.
+ * Get the whole database schema.
  *
  * The returned schema will include any modifications made by any
  * module that implements hook_schema_alter().
@@ -3051,24 +2885,23 @@ function drupal_get_complete_schema($rebuild = FALSE) {
 }
 
 /**
- * @} End of "addtogroup schemaapi".
+ * @} End of "ingroup schemaapi".
  */
 
 
 /**
- * @addtogroup registry
+ * @ingroup registry
  * @{
  */
 
 /**
- * Confirms that an interface is available.
+ * Confirm that an interface is available.
  *
  * This function is rarely called directly. Instead, it is registered as an
  * spl_autoload()  handler, and PHP calls it for us when necessary.
  *
  * @param $interface
  *   The name of the interface to check or load.
- *
  * @return
  *   TRUE if the interface is currently available, FALSE otherwise.
  */
@@ -3077,14 +2910,13 @@ function drupal_autoload_interface($interface) {
 }
 
 /**
- * Confirms that a class is available.
+ * Confirm that a class is available.
  *
  * This function is rarely called directly. Instead, it is registered as an
  * spl_autoload()  handler, and PHP calls it for us when necessary.
  *
  * @param $class
  *   The name of the class to check or load.
- *
  * @return
  *   TRUE if the class is currently available, FALSE otherwise.
  */
@@ -3093,7 +2925,7 @@ function drupal_autoload_class($class) {
 }
 
 /**
- * Checks for a resource in the registry.
+ * Helper to check for a resource in the registry.
  *
  * @param $type
  *   The type of resource we are looking up, or one of the constants
@@ -3102,7 +2934,6 @@ function drupal_autoload_class($class) {
  * @param $name
  *   The name of the resource, or NULL if either of the REGISTRY_* constants
  *   is passed in.
- *
  * @return
  *   TRUE if the resource was found, FALSE if not.
  *   NULL if either of the REGISTRY_* constants is passed in as $type.
@@ -3174,7 +3005,7 @@ function _registry_check_code($type, $name = NULL) {
 }
 
 /**
- * Rescans all enabled modules and rebuilds the registry.
+ * Rescan all enabled modules and rebuild the registry.
  *
  * Rescans all code in modules or includes directories, storing the location of
  * each interface or class in the database.
@@ -3185,44 +3016,25 @@ function registry_rebuild() {
 }
 
 /**
- * Updates the registry based on the latest files listed in the database.
+ * Update the registry based on the latest files listed in the database.
  *
  * This function should be used when system_rebuild_module_data() does not need
  * to be called, because it is already known that the list of files in the
  * {system} table matches those in the file system.
  *
- * @return
- *   TRUE if the registry was rebuilt, FALSE if another thread was rebuilding
- *   in parallel and the current thread just waited for completion.
- *
  * @see registry_rebuild()
  */
 function registry_update() {
-  // install_system_module() calls module_enable() which calls into this
-  // function during initial system installation, so the lock system is neither
-  // loaded nor does its storage exist yet.
-  $in_installer = drupal_installation_attempted();
-  if (!$in_installer && !lock_acquire(__FUNCTION__)) {
-    // Another request got the lock, wait for it to finish.
-    lock_wait(__FUNCTION__);
-    return FALSE;
-  }
-
   require_once DRUPAL_ROOT . '/includes/registry.inc';
   _registry_update();
-
-  if (!$in_installer) {
-    lock_release(__FUNCTION__);
-  }
-  return TRUE;
 }
 
 /**
- * @} End of "addtogroup registry".
+ * @} End of "ingroup registry".
  */
 
 /**
- * Provides central static variable storage.
+ * Central static variable storage.
  *
  * All functions requiring a static variable to persist or cache data within
  * a single page request are encouraged to use this function unless it is
@@ -3302,8 +3114,8 @@ function registry_update() {
  * However, the above line of code does not work, because PHP only allows static
  * variables to be initializied by literal values, and does not allow static
  * variables to be assigned to references.
- * - http://php.net/manual/language.variables.scope.php#language.variables.scope.static
- * - http://php.net/manual/language.variables.scope.php#language.variables.scope.references
+ * - http://php.net/manual/en/language.variables.scope.php#language.variables.scope.static
+ * - http://php.net/manual/en/language.variables.scope.php#language.variables.scope.references
  * The example below shows the syntax needed to work around both limitations.
  * For benchmarks and more information, see http://drupal.org/node/619666.
  *
@@ -3373,7 +3185,7 @@ function &drupal_static($name, $default_value = NULL, $reset = FALSE) {
 }
 
 /**
- * Resets one or all centrally stored static variable(s).
+ * Reset one or all centrally stored static variable(s).
  *
  * @param $name
  *   Name of the static variable to reset. Omit to reset all variables.
@@ -3383,7 +3195,7 @@ function drupal_static_reset($name = NULL) {
 }
 
 /**
- * Detects whether the current script is running in a command-line environment.
+ * Detect whether the current script is running in a command-line environment.
  */
 function drupal_is_cli() {
   return (!isset($_SERVER['SERVER_SOFTWARE']) && (php_sapi_name() == 'cli' || (is_numeric($_SERVER['argc']) && $_SERVER['argc'] > 0)));
@@ -3391,8 +3203,7 @@ function drupal_is_cli() {
 
 /**
  * Formats text for emphasized display in a placeholder inside a sentence.
- *
- * Used automatically by format_string().
+ * Used automatically by t().
  *
  * @param $text
  *   The text to format (plain-text).
@@ -3405,7 +3216,7 @@ function drupal_placeholder($text) {
 }
 
 /**
- * Registers a function for execution on shutdown.
+ * Register a function for execution on shutdown.
  *
  * Wrapper for register_shutdown_function() that catches thrown exceptions to
  * avoid "Exception thrown without a stack frame in Unknown".
@@ -3440,7 +3251,7 @@ function &drupal_register_shutdown_function($callback = NULL) {
 }
 
 /**
- * Executes registered shutdown functions.
+ * Internal function used to execute registered shutdown functions.
  */
 function _drupal_shutdown_function() {
   $callbacks = &drupal_register_shutdown_function();
@@ -3462,33 +3273,4 @@ function _drupal_shutdown_function() {
       print '<p>' . _drupal_render_exception_safe($exception) . '</p><hr />';
     }
   }
-}
-
-/**
- * Compares the memory required for an operation to the available memory.
- *
- * @param $required
- *   The memory required for the operation, expressed as a number of bytes with
- *   optional SI or IEC binary unit prefix (e.g. 2, 3K, 5MB, 10G, 6GiB, 8bytes,
- *   9mbytes).
- * @param $memory_limit
- *   (optional) The memory limit for the operation, expressed as a number of
- *   bytes with optional SI or IEC binary unit prefix (e.g. 2, 3K, 5MB, 10G,
- *   6GiB, 8bytes, 9mbytes). If no value is passed, the current PHP
- *   memory_limit will be used. Defaults to NULL.
- *
- * @return
- *   TRUE if there is sufficient memory to allow the operation, or FALSE
- *   otherwise.
- */
-function drupal_check_memory_limit($required, $memory_limit = NULL) {
-  if (!isset($memory_limit)) {
-    $memory_limit = ini_get('memory_limit');
-  }
-
-  // There is sufficient memory if:
-  // - No memory limit is set.
-  // - The memory limit is set to unlimited (-1).
-  // - The memory limit is greater than the memory required for the operation.
-  return ((!$memory_limit) || ($memory_limit == -1) || (parse_size($memory_limit) >= parse_size($required)));
 }

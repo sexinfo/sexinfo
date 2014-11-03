@@ -6,7 +6,7 @@
  */
 
 /**
- * @addtogroup database
+ * @ingroup database
  * @{
  */
 
@@ -37,7 +37,7 @@ class DatabaseConnection_sqlite extends DatabaseConnection {
   /**
    * All databases attached to the current database. This is used to allow
    * prefixes to be safely handled without locking the table
-   *
+   * 
    * @var array
    */
   protected $attachedDatabases = array();
@@ -46,10 +46,10 @@ class DatabaseConnection_sqlite extends DatabaseConnection {
    * Whether or not a table has been dropped this request: the destructor will
    * only try to get rid of unnecessary databases if there is potential of them
    * being empty.
-   *
+   * 
    * This variable is set to public because DatabaseSchema_sqlite needs to
    * access it. However, it should not be manually set.
-   *
+   * 
    * @var boolean
    */
   var $tableDropped = FALSE;
@@ -59,19 +59,16 @@ class DatabaseConnection_sqlite extends DatabaseConnection {
     $this->statementClass = NULL;
 
     // This driver defaults to transaction support, except if explicitly passed FALSE.
-    $this->transactionSupport = $this->transactionalDDLSupport = !isset($connection_options['transactions']) || $connection_options['transactions'] !== FALSE;
+    $this->transactionSupport = !isset($connection_options['transactions']) || $connection_options['transactions'] !== FALSE;
 
     $this->connectionOptions = $connection_options;
 
-    // Allow PDO options to be overridden.
-    $connection_options += array(
-      'pdo' => array(),
-    );
-    $connection_options['pdo'] += array(
+    parent::__construct('sqlite:' . $connection_options['database'], '', '', array(
+      // Force column names to lower case.
+      PDO::ATTR_CASE => PDO::CASE_LOWER,
       // Convert numeric values to strings when fetching.
       PDO::ATTR_STRINGIFY_FETCHES => TRUE,
-    );
-    parent::__construct('sqlite:' . $connection_options['database'], '', '', $connection_options['pdo']);
+    ));
 
     // Attach one database for each registered prefix.
     $prefixes = $this->prefixes;
@@ -106,11 +103,6 @@ class DatabaseConnection_sqlite extends DatabaseConnection {
     $this->sqliteCreateFunction('substring', array($this, 'sqlFunctionSubstring'), 3);
     $this->sqliteCreateFunction('substring_index', array($this, 'sqlFunctionSubstringIndex'), 3);
     $this->sqliteCreateFunction('rand', array($this, 'sqlFunctionRand'));
-
-    // Execute sqlite init_commands.
-    if (isset($connection_options['init_commands'])) {
-      $this->exec(implode('; ', $connection_options['init_commands']));
-    }
   }
 
   /**
@@ -250,7 +242,7 @@ class DatabaseConnection_sqlite extends DatabaseConnection {
     $prefixes[$tablename] = '';
     $this->setPrefix($prefixes);
 
-    $this->query('CREATE TEMPORARY TABLE ' . $tablename . ' AS ' . $query, $args, $options);
+    $this->query(preg_replace('/^SELECT/i', 'CREATE TEMPORARY TABLE ' . $tablename . ' AS SELECT', $query), $args, $options);
     return $tablename;
   }
 
@@ -515,5 +507,5 @@ class DatabaseStatement_sqlite extends DatabaseStatementPrefetch implements Iter
 }
 
 /**
- * @} End of "addtogroup database".
+ * @} End of "ingroup database".
  */

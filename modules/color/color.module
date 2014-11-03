@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Allows users to change the color scheme of themes.
- */
 
 /**
  * Implements hook_help().
@@ -11,7 +7,7 @@ function color_help($path, $arg) {
   switch ($path) {
     case 'admin/help#color':
       $output = '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('The Color module allows users with the <em>Administer site configuration</em> permission to quickly and easily change the color scheme of themes that have been built to be compatible with it. For more information, see the online handbook entry for <a href="@color">Color module</a>.', array('@color' => 'http://drupal.org/documentation/modules/color')) . '</p>';
+      $output .= '<p>' . t('The Color module allows users with the <em>Administer site configuration</em> permission to quickly and easily change the color scheme of themes that have been built to be compatible with it. For more information, see the online handbook entry for <a href="@color">Color module</a>.', array('@color' => 'http://drupal.org/handbook/modules/color')) . '</p>';
       $output .= '<h3>' . t('Uses') . '</h3>';
       $output .= '<dl>';
       $output .= '<dt>' . t('Changing colors') . '</dt>';
@@ -74,13 +70,7 @@ function _color_theme_select_form_alter(&$form, &$form_state) {
 }
 
 /**
- * Replaces style sheets with color-altered style sheets.
- *
- * A theme that supports the color module should call this function from its
- * THEME_process_html() function, so that the correct style sheets are
- * included when html.tpl.php is rendered.
- *
- * @see theme()
+ * Callback for the theme to alter the resources used.
  */
 function _color_html_alter(&$vars) {
   global $theme_key;
@@ -96,7 +86,7 @@ function _color_html_alter(&$vars) {
       foreach ($color_paths as $color_path) {
         // Color module currently requires unique file names to be used,
         // which allows us to compare different file paths.
-        if (drupal_basename($old_path) == drupal_basename($color_path)) {
+        if (basename($old_path) == basename($color_path)) {
           // Replace the path to the new css file.
           // This keeps the order of the stylesheets intact.
           $vars['css'][$old_path]['data'] = $color_path;
@@ -109,13 +99,7 @@ function _color_html_alter(&$vars) {
 }
 
 /**
- * Replaces the logo with a color-altered logo.
- *
- * A theme that supports the color module should call this function from its
- * THEME_process_page() function, so that the correct logo is included when
- * page.tpl.php is rendered.
- *
- * @see theme()
+ * Callback for the theme to alter the resources used.
  */
 function _color_page_alter(&$vars) {
   global $theme_key;
@@ -128,7 +112,7 @@ function _color_page_alter(&$vars) {
 }
 
 /**
- * Retrieves the Color module information for a particular theme.
+ * Retrieve the color.module info for a particular theme.
  */
 function color_get_info($theme) {
   static $theme_info = array();
@@ -147,7 +131,7 @@ function color_get_info($theme) {
 }
 
 /**
- * Retrieves the color palette for a particular theme.
+ * Helper function to retrieve the color palette for a particular theme.
  */
 function color_get_palette($theme, $default = FALSE) {
   // Fetch and expand default palette.
@@ -159,14 +143,7 @@ function color_get_palette($theme, $default = FALSE) {
 }
 
 /**
- * Form constructor for the color configuration form for a particular theme.
- *
- * @param $theme
- *   The machine name of the theme whose color settings are being configured.
- *
- * @see color_scheme_form_validate()
- * @see color_scheme_form_submit()
- * @ingroup forms
+ * Form callback. Returns the configuration form.
  */
 function color_scheme_form($complete_form, &$form_state, $theme) {
   $base = drupal_get_path('module', 'color');
@@ -240,7 +217,6 @@ function color_scheme_form($complete_form, &$form_state, $theme) {
       $form['palette'][$name] = array(
         '#type' => 'textfield',
         '#title' => check_plain($names[$name]),
-        '#value_callback' => 'color_palette_color_value',
         '#default_value' => $value,
         '#size' => 8,
       );
@@ -268,11 +244,11 @@ function theme_color_scheme_form($variables) {
   $info = $form['info']['#value'];
   $path = drupal_get_path('theme', $theme) . '/';
   drupal_add_css($path . $info['preview_css']);
-
+  
   $preview_js_path = isset($info['preview_js']) ? $path . $info['preview_js'] : drupal_get_path('module', 'color') . '/' . 'preview.js';
   // Add the JS at a weight below color.js.
   drupal_add_js($preview_js_path, array('weight' => -1));
-
+    
   $output  = '';
   $output .= '<div class="color-form clearfix">';
   // Color schemes
@@ -296,69 +272,19 @@ function theme_color_scheme_form($variables) {
 }
 
 /**
- * Determines the value for a palette color field.
- *
- * @param $element
- *   The form element whose value is being populated.
- * @param $input
- *   The incoming input to populate the form element. If this is FALSE,
- *   the element's default value should be returned.
- * @param $form_state
- *   A keyed array containing the current state of the form.
- *
- * @return
- *   The data that will appear in the $form_state['values'] collection for this
- *   element. Return nothing to use the default.
- */
-function color_palette_color_value($element, $input = FALSE, $form_state = array()) {
-  // If we suspect a possible cross-site request forgery attack, only accept
-  // hexadecimal CSS color strings from user input, to avoid problems when this
-  // value is used in the JavaScript preview.
-  if ($input !== FALSE) {
-    // Start with the provided value for this textfield, and validate that if
-    // necessary, falling back on the default value.
-    $value = form_type_textfield_value($element, $input, $form_state);
-    if (!$value || !isset($form_state['complete form']['#token']) || color_valid_hexadecimal_string($value) || drupal_valid_token($form_state['values']['form_token'], $form_state['complete form']['#token'])) {
-      return $value;
-    }
-    else {
-      return $element['#default_value'];
-    }
-  }
-}
-
-/**
- * Determines if a hexadecimal CSS color string is valid.
- *
- * @param $color
- *   The string to check.
- *
- * @return
- *   TRUE if the string is a valid hexadecimal CSS color string, or FALSE if it
- *   isn't.
- */
-function color_valid_hexadecimal_string($color) {
-  return preg_match('/^#([a-f0-9]{3}){1,2}$/iD', $color);
-}
-
-/**
- * Form validation handler for color_scheme_form().
- *
- * @see color_scheme_form_submit()
+ * Validation handler for color change form.
  */
 function color_scheme_form_validate($form, &$form_state) {
   // Only accept hexadecimal CSS color strings to avoid XSS upon use.
   foreach ($form_state['values']['palette'] as $key => $color) {
-    if (!color_valid_hexadecimal_string($color)) {
+    if (!preg_match('/^#([a-f0-9]{3}){1,2}$/iD', $color)) {
       form_set_error('palette][' . $key, t('%name must be a valid hexadecimal CSS color value.', array('%name' => $form['color']['palette'][$key]['#title'])));
     }
   }
 }
 
 /**
- * Form submission handler for color_scheme_form().
- *
- * @see color_scheme_form_validate()
+ * Submit handler for color change form.
  */
 function color_scheme_form_submit($form, &$form_state) {
   // Get theme coloring info.
@@ -393,10 +319,9 @@ function color_scheme_form_submit($form, &$form_state) {
     // memory_get_usage(), therefore we won't inadvertently reject a color
     // scheme change based on a faulty memory calculation.
     $usage = memory_get_usage(TRUE);
-    $memory_limit = ini_get('memory_limit');
-    $size = parse_size($memory_limit);
-    if (!drupal_check_memory_limit($usage + $required, $memory_limit)) {
-      drupal_set_message(t('There is not enough memory available to PHP to change this theme\'s color scheme. You need at least %size more. Check the <a href="@url">PHP documentation</a> for more information.', array('%size' => format_size($usage + $required - $size), '@url' => 'http://www.php.net/manual/ini.core.php#ini.sect.resource-limits')), 'error');
+    $limit = parse_size(ini_get('memory_limit'));
+    if ($usage + $required > $limit) {
+      drupal_set_message(t('There is not enough memory available to PHP to change this theme\'s color scheme. You need at least %size more. Check the <a href="@url">PHP documentation</a> for more information.', array('%size' => format_size($usage + $required - $limit), '@url' => 'http://www.php.net/manual/ini.core.php#ini.sect.resource-limits')), 'error');
       return;
     }
   }
@@ -437,7 +362,7 @@ function color_scheme_form_submit($form, &$form_state) {
 
   // Copy over neutral images.
   foreach ($info['copy'] as $file) {
-    $base = drupal_basename($file);
+    $base = basename($file);
     $source = $paths['source'] . $file;
     $filepath = file_unmanaged_copy($source, $paths['target'] . $base);
     $paths['map'][$file] = $base;
@@ -479,7 +404,7 @@ function color_scheme_form_submit($form, &$form_state) {
 
       // Rewrite stylesheet with new colors.
       $style = _color_rewrite_stylesheet($theme, $info, $paths, $palette, $style);
-      $base_file = drupal_basename($file);
+      $base_file = basename($file);
       $css[] = $paths['target'] . $base_file;
       _color_save_stylesheet($paths['target'] . $base_file, $style, $paths);
     }
@@ -491,7 +416,7 @@ function color_scheme_form_submit($form, &$form_state) {
 }
 
 /**
- * Rewrites the stylesheet to match the colors in the palette.
+ * Rewrite the stylesheet to match the colors in the palette.
  */
 function _color_rewrite_stylesheet($theme, &$info, &$paths, $palette, $style) {
   $themes = list_themes();
@@ -562,7 +487,7 @@ function _color_rewrite_stylesheet($theme, &$info, &$paths, $palette, $style) {
 }
 
 /**
- * Saves the rewritten stylesheet to disk.
+ * Save the rewritten stylesheet to disk.
  */
 function _color_save_stylesheet($file, $style, &$paths) {
   $filepath = file_unmanaged_save_data($style, $file, FILE_EXISTS_REPLACE);
@@ -573,7 +498,7 @@ function _color_save_stylesheet($file, $style, &$paths) {
 }
 
 /**
- * Renders images that match a given palette.
+ * Render images that match a given palette.
  */
 function _color_render_images($theme, &$info, &$paths, $palette) {
   // Prepare template image.
@@ -619,7 +544,7 @@ function _color_render_images($theme, &$info, &$paths, $palette) {
   // Cut out slices.
   foreach ($info['slices'] as $file => $coord) {
     list($x, $y, $width, $height) = $coord;
-    $base = drupal_basename($file);
+    $base = basename($file);
     $image = drupal_realpath($paths['target'] . $base);
 
     // Cut out slice.
@@ -650,16 +575,16 @@ function _color_render_images($theme, &$info, &$paths, $palette) {
 }
 
 /**
- * Shifts a given color, using a reference pair and a target blend color.
+ * Shift a given color, using a reference pair and a target blend color.
  *
  * Note: this function is significantly different from the JS version, as it
  * is written to match the blended images perfectly.
  *
- * Constraint: if (ref2 == target + (ref1 - target) * delta) for some fraction
- * delta then (return == target + (given - target) * delta).
+ * Constraint: if (ref2 == target + (ref1 - target) * delta) for some fraction delta
+ *              then (return == target + (given - target) * delta)
  *
  * Loose constraint: Preserve relative positions in saturation and luminance
- * space.
+ *                   space.
  */
 function _color_shift($given, $ref1, $ref2, $target) {
   // We assume that ref2 is a blend of ref1 and target and find
@@ -709,7 +634,7 @@ function _color_shift($given, $ref1, $ref2, $target) {
 }
 
 /**
- * Converts a hex triplet into a GD color.
+ * Convert a hex triplet into a GD color.
  */
 function _color_gd($img, $hex) {
   $c = array_merge(array($img), _color_unpack($hex));
@@ -717,7 +642,7 @@ function _color_gd($img, $hex) {
 }
 
 /**
- * Blends two hex colors and returns the GD color.
+ * Blend two hex colors and return the GD color.
  */
 function _color_blend($img, $hex1, $hex2, $alpha) {
   $in1 = _color_unpack($hex1);
@@ -731,7 +656,7 @@ function _color_blend($img, $hex1, $hex2, $alpha) {
 }
 
 /**
- * Converts a hex color into an RGB triplet.
+ * Convert a hex color into an RGB triplet.
  */
 function _color_unpack($hex, $normalize = FALSE) {
   if (strlen($hex) == 4) {
@@ -746,7 +671,7 @@ function _color_unpack($hex, $normalize = FALSE) {
 }
 
 /**
- * Converts an RGB triplet to a hex color.
+ * Convert an RGB triplet to a hex color.
  */
 function _color_pack($rgb, $normalize = FALSE) {
   $out = 0;
@@ -758,7 +683,7 @@ function _color_pack($rgb, $normalize = FALSE) {
 }
 
 /**
- * Converts an HSL triplet into RGB.
+ * Convert a HSL triplet into RGB.
  */
 function _color_hsl2rgb($hsl) {
   $h = $hsl[0];
@@ -787,7 +712,7 @@ function _color_hue2rgb($m1, $m2, $h) {
 }
 
 /**
- * Converts an RGB triplet to HSL.
+ * Convert an RGB triplet to HSL.
  */
 function _color_rgb2hsl($rgb) {
   $r = $rgb[0];

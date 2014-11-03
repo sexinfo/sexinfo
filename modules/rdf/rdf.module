@@ -13,7 +13,7 @@ function rdf_help($path, $arg) {
     case 'admin/help#rdf':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('The RDF module enriches your content with metadata to let other applications (e.g., search engines, aggregators, and so on) better understand its relationships and attributes. This semantically enriched, machine-readable output for Drupal sites uses the <a href="@rdfa">RDFa specification</a> which allows RDF data to be embedded in HTML markup. Other modules can define mappings of their data to RDF terms, and the RDF module makes this RDF data available to the theme. The core Drupal modules define RDF mappings for their data model, and the core Drupal themes output this RDF metadata information along with the human-readable visual information. For more information, see the online handbook entry for <a href="@rdf">RDF module</a>.', array('@rdfa' => 'http://www.w3.org/TR/xhtml-rdfa-primer/', '@rdf' => 'http://drupal.org/documentation/modules/rdf')) . '</p>';
+      $output .= '<p>' . t('The RDF module enriches your content with metadata to let other applications (e.g., search engines, aggregators, and so on) better understand its relationships and attributes. This semantically enriched, machine-readable output for Drupal sites uses the <a href="@rdfa">RDFa specification</a> which allows RDF data to be embedded in HTML markup. Other modules can define mappings of their data to RDF terms, and the RDF module makes this RDF data available to the theme. The core Drupal modules define RDF mappings for their data model, and the core Drupal themes output this RDF metadata information along with the human-readable visual information. For more information, see the online handbook entry for <a href="@rdf">RDF module</a>.', array('@rdfa' => 'http://www.w3.org/TR/xhtml-rdfa-primer/', '@rdf' => 'http://drupal.org/handbook/modules/rdf')) . '</p>';
       return $output;
   }
 }
@@ -484,7 +484,7 @@ function rdf_preprocess_node(&$variables) {
     $element = array(
       '#tag' => 'meta',
       '#attributes' => array(
-        'content' => $variables['node']->title,
+        'content' => $variables['title'],
         'about' => $variables['node_url'],
       ),
     );
@@ -646,12 +646,10 @@ function rdf_preprocess_username(&$variables) {
   if (!empty($rdf_mapping['rdftype'])) {
     $attributes['typeof'] = $rdf_mapping['rdftype'];
   }
-  // Annotate the username in RDFa. A property attribute is used with an empty
-  // datatype attribute to ensure the username is parsed as a plain literal
-  // in RDFa 1.0 and 1.1.
+  // Annotate the user name in RDFa. The property attribute is used here
+  // because the user name is a literal.
   if (!empty($rdf_mapping['name'])) {
     $attributes['property'] = $rdf_mapping['name']['predicates'];
-    $attributes['datatype'] = '';
   }
   // Add the homepage RDFa markup if present.
   if (!empty($variables['homepage']) && !empty($rdf_mapping['homepage'])) {
@@ -759,10 +757,7 @@ function rdf_field_attach_view_alter(&$output, $context) {
             $element[$delta]['#options']['attributes']['typeof'] = $term->rdf_mapping['rdftype'];
           }
           if (!empty($term->rdf_mapping['name']['predicates'])) {
-            // A property attribute is used with an empty datatype attribute so
-            // the term name is parsed as a plain literal in RDFa 1.0 and 1.1.
             $element[$delta]['#options']['attributes']['property'] = $term->rdf_mapping['name']['predicates'];
-            $element[$delta]['#options']['attributes']['datatype'] = '';
           }
         }
       }
@@ -774,9 +769,6 @@ function rdf_field_attach_view_alter(&$output, $context) {
  * Implements MODULE_preprocess_HOOK().
  */
 function rdf_preprocess_image(&$variables) {
-  // Adds the RDF type for image. We cannot use the usual entity-based mapping
-  // to get 'foaf:Image' because image does not have its own entity type or
-  // bundle.
   $variables['attributes']['typeof'] = array('foaf:Image');
 }
 
