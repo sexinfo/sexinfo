@@ -51,7 +51,7 @@ function on_quiz_page()      { return page() == 'node/561'; }
           $randomNode = $result->fetch()
         ?>
         <li class="menu-543"><a href="/sexinfo/?q=node/<?php echo $randomNode->nid;?>" title="<?php echo $randomNode->title?>">Random Article</a></li>
-        <li class="menu-739 last  <?php echo on_quiz_page() ? 'active' : '' ?>"><a href="/sexinfo/q?quizzes">Test Your Knowledge</a></li>
+        <li class="menu-739 last  <?php echo on_quiz_page() ? 'active' : '' ?>"><a href="/sexinfo/?q=quizzes">Test Your Knowledge</a></li>
       </ul><!-- #main-menu -->
     </div>
   </div><!-- #navigation -->
