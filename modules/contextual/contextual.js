@@ -1,9 +1,14 @@
+/**
+ * @file
+ * Attaches behaviors for the Contextual module.
+ */
+
 (function ($) {
 
 Drupal.contextualLinks = Drupal.contextualLinks || {};
 
 /**
- * Attach outline behavior for regions associated with contextual links.
+ * Attaches outline behavior for regions associated with contextual links.
  */
 Drupal.behaviors.contextualLinks = {
   attach: function (context) {
@@ -25,6 +30,10 @@ Drupal.behaviors.contextualLinks = {
       );
       // Hide the contextual links when user clicks a link or rolls out of the .contextual-links-region.
       $region.bind('mouseleave click', Drupal.contextualLinks.mouseleave);
+      $region.hover(
+        function() { $trigger.addClass('contextual-links-trigger-active'); },
+        function() { $trigger.removeClass('contextual-links-trigger-active'); }
+      );
       // Prepend the trigger.
       $wrapper.prepend($trigger);
     });

@@ -76,8 +76,13 @@ require_once dirname(__FILE__) . '/query.inc';
  *       the precision (total number of significant digits) and scale
  *       (decimal digits right of the decimal point). Both values are
  *       mandatory. Ignored for other field types.
+ *     - 'binary': A boolean indicating that MySQL should force 'char',
+ *       'varchar' or 'text' fields to use case-sensitive binary collation.
+ *       This has no effect on other database types for which case sensitivity
+ *       is already the default behavior.
  *     All parameters apart from 'type' are optional except that type
- *     'numeric' columns must specify 'precision' and 'scale'.
+ *     'numeric' columns must specify 'precision' and 'scale', and type
+ *     'varchar' must specify the 'length' parameter.
  *  - 'primary key': An array of one or more key column specifiers (see below)
  *    that form the primary key.
  *  - 'unique keys': An associative array of unique keys ('keyname' =>
@@ -411,7 +416,7 @@ abstract class DatabaseSchema implements QueryPlaceholderInterface {
    *   This is most useful for creating NOT NULL columns with no default
    *   value in existing tables.
    * @param $keys_new
-   *   Optional keys and indexes specification to be created on the
+   *   (optional) Keys and indexes specification to be created on the
    *   table along with adding the field. The format is the same as a
    *   table specification but without the 'fields' element. If you are
    *   adding a type 'serial' field, you MUST specify at least one key
@@ -625,7 +630,7 @@ abstract class DatabaseSchema implements QueryPlaceholderInterface {
    * @param $spec
    *   The field specification for the new field.
    * @param $keys_new
-   *   Optional keys and indexes specification to be created on the
+   *   (optional) Keys and indexes specification to be created on the
    *   table along with changing the field. The format is the same as a
    *   table specification but without the 'fields' element.
    *

@@ -50,8 +50,8 @@ Drupal.behaviors.verticalTabs = {
       if (!tab_focus) {
         // If the current URL has a fragment and one of the tabs contains an
         // element that matches the URL fragment, activate that tab.
-        if (window.location.hash && $(window.location.hash, this).length) {
-          tab_focus = $(window.location.hash, this).closest('.vertical-tabs-pane');
+        if (window.location.hash && $(this).find(window.location.hash).length) {
+          tab_focus = $(this).find(window.location.hash).closest('.vertical-tabs-pane');
         }
         else {
           tab_focus = $('> .vertical-tabs-pane:first', this);
@@ -88,16 +88,6 @@ Drupal.verticalTab = function (settings) {
       self.focus();
       // Set focus on the first input field of the visible fieldset/tab pane.
       $("fieldset.vertical-tabs-pane :input:visible:enabled:first").focus();
-      return false;
-    }
-  });
-
-  // Pressing the Enter key lets you leave the tab again.
-  this.fieldset.keydown(function(event) {
-    // Enter key should not trigger inside <textarea> to allow for multi-line entries.
-    if (event.keyCode == 13 && event.target.nodeName != "TEXTAREA") {
-      // Set focus on the selected tab button again.
-      $(".vertical-tab-button.selected a").focus();
       return false;
     }
   });
