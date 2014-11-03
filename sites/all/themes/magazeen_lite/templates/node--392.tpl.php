@@ -66,7 +66,7 @@ HTML;
     $articles = $section['articles'];
 
     foreach($articles as $article) {
-      $children_html .= sprintf("<li class='text-on-image-article'><a href='node/%d'>%s</a></li>", $article['nid'], $article['name']);
+      $children_html .= sprintf("<li class='text-on-image-article'><a href='?q=node/%d'>%s</a></li>", $article['nid'], $article['name']);
     }
 
     $section_name = $section['name'];

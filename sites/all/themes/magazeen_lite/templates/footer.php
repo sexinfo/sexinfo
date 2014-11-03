@@ -32,6 +32,6 @@
 <div id="snavigation">
   <div class="container clearfix">
   <p>UCSB SexInfo Copyright &copy; <?php echo date('Y') ?> University of California, Santa Barbara. All Rights Reserved.</p>
-  <a href="<?php print $base_path . "login" ?>" class="login">Writer Login &raquo;</a>
+  <a href="<?php print $base_path . "?q=login" ?>" class="login">Writer Login &raquo;</a>
   </div>
 </div> <!-- #snavigation -->
