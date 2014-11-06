@@ -112,7 +112,7 @@ function mymodule_schema() {
 <dd>Human readable title of the export key. Defaults to 'Name'. Because the schema is cached, do not translate this. It must instead be translated when used.</dd>
 
 <dt>primary key</dt>
-<dd>Objects should contain a primary key which is a database identifier primarily used to determine if an object has been written or not. This is required for the default CRUD save callback to work.</dd>
+<dd>A single field within the table that is to be used as the main identifier to discern whether or not the object has been written. As the schema definition's primary key value will be used by default, it is not usually necessary to define this.</dd>
 
 <dt>object</dt>
 <dd>The class the object should be created as, if 'object factory' is not set. If this is not set either, defaults as stdClass.</dd>
@@ -156,6 +156,9 @@ function mymodule_schema() {
 <dt>to hook code callback</dt>
 <dd>Function used to generate an export for the bulk export process. This is only necessary if the export is more complicated than simply listing the fields. Defaults to $module . '_' . $table . '_to_hook_code'.</dt>
 
+<dt>boolean</dt>
+<dd>Explicitly indicate if a table field contains a boolean or not. The Schema API does not model the
+difference between a tinyint and a boolean type. Boolean values are stored in tinyint fields. This may cause mismatch errors when exporting a non-boolean value from a tinyint field. Add this to a tinyint field if it contains boolean data and can be exported. Defaults to TRUE.
 
 <dt>create callback</dt>
 <dd>CRUD callback to use to create a new exportable item in memory. If not provided, the default function will be used. The single argument is a boolean used to determine if defaults should be set on the object. This object will not be written to the database by this callback.</dd>
