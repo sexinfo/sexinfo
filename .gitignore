@@ -1,54 +1,6 @@
-# Numerous always-ignore extensions
-*.diff
-*.err
-*.orig
-*.log
-*.rej
-*.swo
-*.swp
-*.vi
-*~
-*.sass-cache
-
-# OS or Editor folders
-.DS_Store
-.cache
-.project
-.settings
-.tmproj
-nbproject
-Thumbs.db
-
-# Dreamweaver added files
-_notes
-dwsync.xml
-
-# Komodo
-*.komodoproject
-.komodotools
-
-# Folders to ignore
-.hg
-.svn
-.CVS
-intermediate
-publish
-.idea
-.bundle
-db/*.sqlite3
-log/*.log
-tmp/
-.sass-cache/
-
 # Ignore configuration files that may contain sensitive information.
 sites/*/settings*.php
-sites/*/files/default.settings.php
-sites/default/files/field/*
-sites/default/files/styles/*
-sites/default/files/tmp*
-sites/default/files/u*
-sites/*/private
-credentials.json
 
-# Ignoring database backup files #
-*.sql.gz
+# Ignore paths that contain user-generated content.
+sites/*/files
+sites/*/private

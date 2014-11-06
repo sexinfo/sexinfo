@@ -16,7 +16,7 @@ function file_help($path, $arg) {
     case 'admin/help#file':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('The File module defines a <em>File</em> field type for the Field module, which lets you manage and validate uploaded files attached to content on your site (see the <a href="@field-help">Field module help page</a> for more information about fields). For more information, see the online handbook entry for <a href="@file">File module</a>.', array('@field-help' => url('admin/help/field'), '@file' => 'http://drupal.org/handbook/modules/file')) . '</p>';
+      $output .= '<p>' . t('The File module defines a <em>File</em> field type for the Field module, which lets you manage and validate uploaded files attached to content on your site (see the <a href="@field-help">Field module help page</a> for more information about fields). For more information, see the online handbook entry for <a href="@file">File module</a>.', array('@field-help' => url('admin/help/field'), '@file' => 'http://drupal.org/documentation/modules/file')) . '</p>';
       $output .= '<h3>' . t('Uses') . '</h3>';
       $output .= '<dl>';
       $output .= '<dt>' . t('Attaching files to content') . '</dt>';
@@ -45,7 +45,6 @@ function file_menu() {
   );
   $items['file/progress'] = array(
     'page callback' => 'file_ajax_progress',
-    'delivery callback' => 'ajax_deliver',
     'access arguments' => array('access content'),
     'theme callback' => 'ajax_base_page_theme',
     'type' => MENU_CALLBACK,
@@ -57,7 +56,7 @@ function file_menu() {
 /**
  * Implements hook_element_info().
  *
- * The managed file element may be used independently anywhere in Drupal.
+ * The managed file element may be used anywhere in Drupal.
  */
 function file_element_info() {
   $file_path = drupal_get_path('module', 'file');
@@ -73,6 +72,7 @@ function file_element_info() {
     '#progress_message' => NULL,
     '#upload_validators' => array(),
     '#upload_location' => NULL,
+    '#size' => 22,
     '#extended' => FALSE,
     '#attached' => array(
       'css' => array($file_path . '/file.css'),
@@ -165,24 +165,27 @@ function file_file_download($uri, $field_type = 'file') {
         // Try to load $entity and $field.
         $entity = entity_load($entity_type, array($id));
         $entity = reset($entity);
-        $field = NULL;
+        $field = field_info_field($field_name);
+
+        // Load the field item that references the file.
+        $field_item = NULL;
         if ($entity) {
-          // Load all fields for that entity.
+          // Load all field items for that entity.
           $field_items = field_get_items($entity_type, $entity, $field_name);
 
           // Find the field item with the matching URI.
-          foreach ($field_items as $field_item) {
-            if ($field_item['uri'] == $uri) {
-              $field = $field_item;
+          foreach ($field_items as $item) {
+            if ($item['uri'] == $uri) {
+              $field_item = $item;
               break;
             }
           }
         }
 
-        // Check that $entity and $field were loaded successfully and check if
-        // access to that field is not disallowed. If any of these checks fail,
-        // stop checking access for this reference.
-        if (empty($entity) || empty($field) || !field_access('view', $field, $entity_type, $entity)) {
+        // Check that $entity, $field and $field_item were loaded successfully
+        // and check if access to that field is not disallowed. If any of these
+        // checks fail, stop checking access for this reference.
+        if (empty($entity) || empty($field) || empty($field_item) || !field_access('view', $field, $entity_type, $entity)) {
           $denied = TRUE;
           break;
         }
@@ -191,10 +194,10 @@ function file_file_download($uri, $field_type = 'file') {
         // Default to FALSE and let entities overrule this ruling.
         $grants = array('system' => FALSE);
         foreach (module_implements('file_download_access') as $module) {
-          $grants = array_merge($grants, array($module => module_invoke($module, 'file_download_access', $field, $entity_type, $entity)));
+          $grants = array_merge($grants, array($module => module_invoke($module, 'file_download_access', $field_item, $entity_type, $entity)));
         }
         // Allow other modules to alter the returned grants/denies.
-        drupal_alter('file_download_access', $grants, $field, $entity_type, $entity);
+        drupal_alter('file_download_access', $grants, $field_item, $entity_type, $entity);
 
         if (in_array(TRUE, $grants)) {
           // If TRUE is returned, access is granted and no further checks are
@@ -243,7 +246,7 @@ function file_ajax_upload() {
     return array('#type' => 'ajax', '#commands' => $commands);
   }
 
-  list($form, $form_state) = ajax_get_form();
+  list($form, $form_state, $form_id, $form_build_id, $commands) = ajax_get_form();
 
   if (!$form) {
     // Invalid form_build_id.
@@ -281,7 +284,6 @@ function file_ajax_upload() {
   $js = drupal_add_js();
   $settings = call_user_func_array('array_merge_recursive', $js['settings']['data']);
 
-  $commands = array();
   $commands[] = ajax_command_replace(NULL, $output, $settings);
   return array('#type' => 'ajax', '#commands' => $commands);
 }
@@ -318,7 +320,7 @@ function file_ajax_progress($key) {
 }
 
 /**
- * Determine the preferred upload progress implementation.
+ * Determines the preferred upload progress implementation.
  *
  * @return
  *   A string indicating which upload progress system is available. Either "apc"
@@ -384,7 +386,9 @@ function file_managed_file_process($element, &$form_state, $form) {
     '#weight' => -5,
   );
 
-  $ajax_settings['progress']['type'] ? $ajax_settings['progress']['type'] == 'bar' : 'throbber';
+  // Force the progress indicator for the remove button to be either 'none' or
+  // 'throbber', even if the upload button is using something else.
+  $ajax_settings['progress']['type'] = ($element['#progress_indicator'] == 'none') ? 'none' : 'throbber';
   $ajax_settings['progress']['message'] = NULL;
   $ajax_settings['effect'] = 'none';
   $element['remove_button'] = array(
@@ -412,6 +416,9 @@ function file_managed_file_process($element, &$form_state, $form) {
         '#type' => 'hidden',
         '#value' => $upload_progress_key,
         '#attributes' => array('class' => array('file-progress')),
+        // Uploadprogress extension requires this field to be at the top of the
+        // form.
+        '#weight' => -20,
       );
     }
     elseif ($implementation == 'apc') {
@@ -419,6 +426,9 @@ function file_managed_file_process($element, &$form_state, $form) {
         '#type' => 'hidden',
         '#value' => $upload_progress_key,
         '#attributes' => array('class' => array('file-progress')),
+        // Uploadprogress extension requires this field to be at the top of the
+        // form.
+        '#weight' => -20,
       );
     }
 
@@ -432,7 +442,7 @@ function file_managed_file_process($element, &$form_state, $form) {
     '#type' => 'file',
     '#title' => t('Choose a file'),
     '#title_display' => 'invisible',
-    '#size' => 22,
+    '#size' => $element['#size'],
     '#theme_wrappers' => array(),
     '#weight' => -10,
   );
@@ -468,6 +478,7 @@ function file_managed_file_process($element, &$form_state, $form) {
  */
 function file_managed_file_value(&$element, $input = FALSE, $form_state = NULL) {
   $fid = 0;
+  $force_default = FALSE;
 
   // Find the current value of this field from the form state.
   $form_state_fid = $form_state['values'];
@@ -500,15 +511,25 @@ function file_managed_file_value(&$element, $input = FALSE, $form_state = NULL) 
           $callback($element, $input, $form_state);
         }
       }
-      // Load file if the FID has changed to confirm it exists.
-      if (isset($input['fid']) && $file = file_load($input['fid'])) {
-        $fid = $file->fid;
+      // If a FID was submitted, load the file (and check access if it's not a
+      // public file) to confirm it exists and that the current user has access
+      // to it.
+      if (isset($input['fid']) && ($file = file_load($input['fid']))) {
+        if (file_uri_scheme($file->uri) == 'public' || file_download_access($file->uri)) {
+          $fid = $file->fid;
+        }
+        // If the current user doesn't have access, don't let the file be
+        // changed.
+        else {
+          $force_default = TRUE;
+        }
       }
     }
   }
 
-  // If there is no input, set the default value.
-  else {
+  // If there is no input or if the default value was requested above, use the
+  // default value.
+  if ($input === FALSE || $force_default) {
     if ($element['#extended']) {
       $default_fid = isset($element['#default_value']['fid']) ? $element['#default_value']['fid'] : 0;
       $return = isset($element['#default_value']) ? $element['#default_value'] : array('fid' => 0);
@@ -563,7 +584,9 @@ function file_managed_file_validate(&$element, &$form_state) {
 }
 
 /**
- * Submit handler for upload and remove buttons of managed_file elements.
+ * Form submission handler for upload / remove buttons of managed_file elements.
+ *
+ * @see file_managed_file_process()
  */
 function file_managed_file_submit($form, &$form_state) {
   // Determine whether it was the upload or the remove button that was clicked,
@@ -604,10 +627,11 @@ function file_managed_file_submit($form, &$form_state) {
 }
 
 /**
- * Given a managed_file element, save any files that have been uploaded into it.
+ * Saves any files that have been uploaded into a managed_file element.
  *
  * @param $element
  *   The FAPI element whose values are being saved.
+ *
  * @return
  *   The file object representing the file that was saved, or FALSE if no file
  *   was saved.
@@ -754,13 +778,14 @@ function theme_file_icon($variables) {
 }
 
 /**
- * Given a file object, create a URL to a matching icon.
+ * Creates a URL to the icon for a file object.
  *
  * @param $file
  *   A file object.
  * @param $icon_directory
  *   (optional) A path to a directory of icons to be used for files. Defaults to
  *   the value of the "file_icon_directory" variable.
+ *
  * @return
  *   A URL string to the icon, or FALSE if an appropriate icon cannot be found.
  */
@@ -772,13 +797,14 @@ function file_icon_url($file, $icon_directory = NULL) {
 }
 
 /**
- * Given a file object, create a path to a matching icon.
+ * Creates a path to the icon for a file object.
  *
  * @param $file
  *   A file object.
  * @param $icon_directory
  *   (optional) A path to a directory of icons to be used for files. Defaults to
  *   the value of the "file_icon_directory" variable.
+ *
  * @return
  *   A string to the icon as a local path, or FALSE if an appropriate icon could
  *   not be found.
@@ -824,10 +850,11 @@ function file_icon_path($file, $icon_directory = NULL) {
 }
 
 /**
- * Determine the generic icon MIME package based on a file's MIME type.
+ * Determines the generic icon MIME package based on a file's MIME type.
  *
  * @param $file
  *   A file object.
+ *
  * @return
  *   The generic icon MIME package expected for this file.
  */
@@ -955,7 +982,7 @@ function file_icon_map($file) {
  */
 
 /**
- * Gets a list of references to a file.
+ * Retrieves a list of references to a file.
  *
  * @param $file
  *   A file object.
