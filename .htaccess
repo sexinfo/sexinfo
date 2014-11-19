@@ -96,7 +96,7 @@ DirectoryIndex index.php index.html index.htm
   # modify the following line:
   # RewriteBase /drupal
 
-  #  RewriteBase /sexinfo
+  RewriteBase /sexinfo
 
   #
   # If your site is running in a VirtualDocumentRoot at http://example.com/,
