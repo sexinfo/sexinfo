@@ -2,7 +2,7 @@
 
   // Decode /data/topics.json as associative array
   function getImagesForFAQs() {
-    $fileData = file_get_contents("data/topics.json", true);
+    $fileData = file_get_contents("data/FAQs.json", true);
     return json_decode($fileData, true);
   }
 
@@ -25,7 +25,7 @@
     foreach ($sectionsresult as $sectionresult) {
       $section = array();
       $section['name'] = $sectionresult->name;
-      $section['image'] = 'sites/all/themes/magazeen_lite/images/topics/kinky_sex_paraphilia.jpg';
+      $section['image'] = 'kinky_sex_paraphilia.jpg';
       $section['tid'] = $sectionresult->tid;
       $section['articles'] = generateSectionFAQ($section);
       $section['rendersize'] = sizeof($section['articles']) > 6 ? 2 : 1;

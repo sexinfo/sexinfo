@@ -86,7 +86,8 @@ HTML;
   }
 
   $topics = generateFAQs();
-  $images = getImagesForTopics();
+  $images = getImagesForFAQs();
+  echo $images;
   echo renderTopics($topics, $images);
   ?>
 </div><!-- .topics-container -->
