@@ -1,4 +1,4 @@
-﻿<div class="terms">
+﻿<div id="terms" class="terms">
         <p style="text-align: center;"><b>Terms and Conditions</b></p>
         <p>Before beginning this questionnaire, please acknowledge your understanding that SexInfo Online cannot diagnose any medical conditions, including pregnancy.</p>
         
@@ -7,7 +7,7 @@
         <p>If you feel the questionnaire did not provide answer choices that accurately reflected your experience or have any other suggestions, please feel free to leave us constructive feedback through the “Ask the Sexperts” submission page!</p>
 </div>
 
-<div class="form-element terms-of-service" id="termsofservice-form-element" style="text-align:center;">
+<div id="terms-check" class="form-element terms-of-service" id="termsofservice-form-element" style="text-align:center;">
     <label id="termsofservice-label">
         <input type="checkbox" value="yes" name="TermsOfService" id="TermsOfService">
         <span id="terms-of-service-label">

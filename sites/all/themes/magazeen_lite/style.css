@@ -3007,6 +3007,106 @@ tr.odd.cat-row td {
     .topics-nav a:hover {
       text-decoration: underline; }
 
+body {
+  padding-top: 50px;
+  padding-bottom: 20px; }
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+  padding-left: 15px;
+  padding-right: 15px; }
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+  max-width: 280px; }
+
+/* styles for validation helpers */
+.field-validation-error {
+  color: #b94a48; }
+
+.field-validation-valid {
+  display: none; }
+
+input.input-validation-error {
+  border: 1px solid #b94a48; }
+
+input[type="checkbox"].input-validation-error {
+  border: 0 none; }
+
+.validation-summary-errors {
+  color: #b94a48; }
+
+.validation-summary-valid {
+  display: none; }
+
+.pink-block-btn {
+  background: #f23183;
+  background: -webkit-linear-gradient(top, #ff5db1 0%, #ef017c 100%);
+  background: -moz-linear-gradient(top, #ff5db1 0%, #ef017c 100%);
+  background: -ms-linear-gradient(top, #ff5db1 0%, #ef017c 100%);
+  background: -o-linear-gradient(top, #ff5db1 0%, #ef017c 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff5db1), color-stop(100%, #ef017c));
+  background: linear-gradient(top bottom, #ff5db1 0%, #ef017c 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5db1', endColorstr='#ef017c',GradientType=0 );
+  border: 1px solid #e20e68;
+  margin: 5px auto 25px;
+  opacity: .9;
+  width: 75%;
+  text-decoration: none; }
+
+.front-module .pink-block-btn {
+  margin: 20px auto 0; }
+
+.button-bar, .pink-block-btn {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 1.3em;
+  font-weight: bold;
+  display: block;
+  color: white !important;
+  margin-bottom: 20px;
+  padding: 12px 10px;
+  border-bottom: 3px solid #c50c5b; }
+
+a:hover {
+  background-color: #e20e68;
+  cursor: pointer;
+  text-decoration: none; }
+
+.button-bar:hover, .pink-block-btn:hover, #edit-submit:hover, #node-22 input[type="submit"]:hover, #user-login input[type="submit"]:hover {
+  background-color: #e20e68;
+  cursor: pointer; }
+
+#start-quiz {
+  margin-top: 20px; }
+
+#answers ul li {
+  font-size: 20px;
+  list-style: none;
+  padding-top: 20px; }
+
+#answers ul li:hover {
+  color: #e20e68;
+  cursor: pointer; }
+
+.terms {
+  width: 600px;
+  height: 300px;
+  border: 1px solid #ccc;
+  background: #f2f2f2;
+  padding: 6px;
+  overflow: auto;
+  margin-top: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+#start-quiz :disabled {
+  color: gray; }
+
 .suggestions-container {
   border: 1px solid #ccc;
   background-color: white;
