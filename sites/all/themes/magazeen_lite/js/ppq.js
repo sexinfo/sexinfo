@@ -1,4 +1,4 @@
-﻿$quiz = $('.quiz-body')
+﻿$quiz_id = '.quiz-body'
 $question_id = '#question';
 $answers_id = '#answers ul';
 $response_id = '.response';
@@ -66,13 +66,13 @@ function nextQuestion(sender) {
         $(sender).siblings().each(function () {
             $(this).fadeOut('slow');
         });
-        $quiz.delay(1000).fadeOut('slow', function () {
+        $($quiz_id).delay(1000).fadeOut('slow', function () {
             $($question_id).html(question.message);
             $($answers_id).html("");
             for (var key in question.options) {
                 $($answers_id).append("<li class='question' hidden onclick='nextQuestion(this)' data-type=" + question.options[key].type + " data-next=" + question.options[key].next + " >" + key + "</li>")
             }
-            $quiz.fadeIn();
+            $($quiz_id).fadeIn();
             $($question_id).fadeIn('slow', function () {
                 $("#answers ul li").each(function (index) {
                     $(this).delay(400 * index).fadeIn(300);
@@ -83,7 +83,7 @@ function nextQuestion(sender) {
     }
     else {
         var response = responses[next];
-        $quiz.fadeOut('slow', function () {
+        $($quiz_id).fadeOut('slow', function () {
             console.log(response);
             $($response_id).html("<h2 style='text-align: center'>" + response.title + "</h2>" + "<p style='font-size: 20px;'>" + response.text + "</p>");
             $($response_id).fadeIn('slow');
