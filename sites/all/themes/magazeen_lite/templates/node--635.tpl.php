@@ -7,20 +7,10 @@
         <p>If you feel the questionnaire did not provide answer choices that accurately reflected your experience or have any other suggestions, please feel free to leave us constructive feedback through the “Ask the Sexperts” submission page!</p>
 </div>
 
-<div id="terms-check" class="form-element terms-of-service" id="termsofservice-form-element" style="text-align:center;">
-    <label id="termsofservice-label">
-        <input type="checkbox" value="yes" name="TermsOfService" id="TermsOfService">
-        <span id="terms-of-service-label">
-            <strong>I agree to SexInfo Online's Terms and Conditions. </strong>
-        </span>
-    </label>
-    <span role="alert" class="errormsg" id="errormsg_0_TermsOfService"></span>
-</div>
+<a id="start-quiz" class="pink-block-btn" style="width: 250px; text-align: center">I Agree</a>
 
-<a id="start-quiz" class="pink-block-btn" style="width: 250px; text-align: center">Take the quiz</a>
-
-<div class="quiz-body" hidden>
-    <h2 id="question"></h2>
+<div class="quiz-body terms" style="display:none;">
+    <p id="ppq-question"></p>
     <div id="answers">
         <ul>
 
@@ -28,6 +18,6 @@
     </div>
 </div>
 
-<div class="response" hidden>
+<div class="response terms" style="display:none;">
 
 </div>

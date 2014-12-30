@@ -1,0 +1,40 @@
+#start-quiz {
+margin-top : 20px;
+}
+
+#ppq-question {
+    font-size : 16px;
+}
+
+#answers ul li {
+    font-size : 20px;
+    list-style: none;
+    padding-top: 20px;
+}
+
+#answers ul li:hover {
+    color: #e20e68;
+    cursor: pointer;
+}
+
+.terms {
+width: 600px;
+height: 300px;
+border: 1px solid #ccc;
+background: #f2f2f2;
+padding: 6px;
+overflow: auto;
+margin-top: 10px;
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
+
+.response h2 {
+    font-size : 36px;
+}
+
+.response p {
+	font-size: 16px;
+	padding: 8px;
+}

@@ -1,5 +1,5 @@
-﻿$quiz_id = '.quiz-body'
-$question_id = '#question';
+$quiz_id = '.quiz-body'
+$question_id = '#ppq-question';
 $answers_id = '#answers ul';
 $response_id = '.response';
 var questions;
@@ -14,18 +14,9 @@ $(document).ready(function () {
 
     var startKey = questions['start'];
     var currentQuestion = questions[startKey];
-
-    $('#TermsOfService').click(function () {
-        if ($(this).is(':checked') == true) {
-            $('#start-quiz').attr('disabled', true);
-        } else
-        {
-            $('#start-quiz').attr('disabled', false);
-        }
-    });
     
     $('#start-quiz').click(function () {
-        $('#question').html(currentQuestion.message);
+        $($question_id).html(currentQuestion.message);
         $('#terms').fadeOut('slow');
         $('#terms-check').fadeOut('slow');
         $(this).fadeOut('slow', function () {
@@ -85,7 +76,7 @@ function nextQuestion(sender) {
         var response = responses[next];
         $($quiz_id).fadeOut('slow', function () {
             console.log(response);
-            $($response_id).html("<h2 style='text-align: center'>" + response.title + "</h2>" + "<p style='font-size: 20px;'>" + response.text + "</p>");
+            $($response_id).html("<h2 style='text-align: center; padding: 8px;'>" + response.title + "</h2>" + "<p style='font-size: 16px; padding: 8px;'>" + response.text + "</p>");
             $($response_id).fadeIn('slow');
         });
 
