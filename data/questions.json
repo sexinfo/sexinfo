@@ -251,7 +251,7 @@
             },
 			"I am unsure" : {
 				"type": "response",
-				"next": "medium-risk"
+				"next": "not-enough-information"
 			}
         }
     },
@@ -268,7 +268,7 @@
             },
 			"I am unsure" : {
 				"type": "response",
-				"next": "medium-risk"
+				"next": "not-enough-information"
 			}
         }
     },
