@@ -15,5 +15,5 @@
   <span class="wrd tagcloud1"><a href="http://www.soc.ucsb.edu/sexinfo/category/contraception/barrier-methods">protection</a></span>
   <span class="wrd tagcloud3"><a href="http://www.soc.ucsb.edu/sexinfo/article/overview-female-reproductive-system">vagina</a></span>
   <span class="wrd tagcloud1"><a href="http://www.soc.ucsb.edu/sexinfo/article/effective-communication">communication</a></span>
-  <span class="wrd tagcloud3"><a href="http://www.soc.ucsb.edu/sexinfo/article/overview">abortion</a></span>
+  <span class="wrd tagcloud3"><a href="http://www.soc.ucsb.edu/sexinfo/article/arguments-and-against-abortion">abortion</a></span>
 </div>
