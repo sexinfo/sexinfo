@@ -4,13 +4,11 @@ $answers_id = '#answers ul';
 $response_id = '.response';
 var questions;
 var responses;
-var total_response;
 
 $(document).ready(function () {
 
     questions = loadJSON("questions.json");
     responses = loadJSON("responses.json");
-    total_response = loadHTML("ppq-ubiquitous-response.html");
 
     console.log(questions);
     console.log(responses);
@@ -93,8 +91,9 @@ function nextQuestion(sender) {
         var response = responses[next];
         $($quiz_id).fadeOut('slow', function () {
             console.log(response);
-            $($response_id).html("<h2 style='text-align: center; padding: 8px;'>" + response.title + "</h2>" + "<p style='font-size: 16px; padding: 8px;'>" + response.text  + "</p>" + total_response);
+            $($response_id).html("<h2 style='text-align: center; padding: 8px;'>" + response.title + "</h2>" + "<p style='font-size: 16px; padding: 8px;'>" + response.text  + "</p>");
             $($response_id).fadeIn('slow');
+            $('#total_response').fadeIn('slow');
         });
 
 
