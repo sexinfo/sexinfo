@@ -19,10 +19,10 @@
 
 
 <div class="third front-module">
-  <h3>Explore our Topics</h3>
+  <h3>Do You Think You Could Be Pregnant?</h3>
   <p style="font-size: 1.4em; line-height: 1.3;">
-    We've completely redone our topics page to make it easier to find what you're looking for.
-    <a href="/sexinfo/category">Take a look &raquo;</a>
+    We've created a brand new pregnancy questionnaire that will help estimate your likelihood of pregnancy.
+    <a href="/sexinfo/ppq">Try it here &raquo;</a>
   </p>
 </div>
 
