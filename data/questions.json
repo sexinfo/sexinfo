@@ -1,0 +1,297 @@
+﻿{
+    "start": "ejaculate",
+    "ejaculate": {
+        "message": "Was there an ejaculation of semen? Please select 'no' only if you are certain that no ejaculation of semen occured (including pre-ejaculate or 'pre-cum'). Be advised that pre-ejaculation may occur without either partner's knowledge.",
+        "options": {
+            "Yes": {
+                "type": "question",
+                "next": "where-did-he-ejaculate"
+            },
+            "No": {
+                "type": "response",
+                "next": "no-risk"
+            },
+			"I am unsure": {
+                "type": "question",
+                "next": "contraception"
+            }
+        },
+		"tooltips": {
+			"ejaculate": "Fluid expelled from the penis is called semen. The component of semen that has the potential to impregnate a woman is called sperm (less than 1% of the semen is actually made up of sperm).",
+			"semen": "Fluid expelled from the penis; typically a whitish color."
+		}
+    },
+    "where-did-he-ejaculate": {
+        "message": "Where did the ejaculation occur?",
+        "options": {
+            "Inside the vagina": {
+                "type": "question",
+                "next": "contraception"
+            },
+            "On the vulva": {
+                "type": "question",
+                "next": "contraception"
+            },
+			"Very close to the vulva (e.g., inner thighs, pelvis, lower abdomen, anal region)": {
+                "type": "question",
+                "next": "contraception"
+            },
+            "Clothing near or on the vulva": {
+                "type": "question",
+                "next": "contraception"
+            },
+			"Other area on the female body (non-genital skin)": {
+                "type": "question",
+                "next": "non-genital-ejaculation"
+            }
+        }
+    },
+        "non-genital-ejaculation": {
+        "message": "On which non-genital area did the ejaculation occur",
+        "options": {
+            "On the face or inside the mouth": {
+                "type": "response",
+                "next": "low-risk"
+            },
+            "Arms": {
+                "type": "response",
+                "next": "low-risk"
+            },
+            "Legs or feet": {
+                "type": "response",
+                "next": "low-risk"
+            },
+            "Upper stomach or chest": {
+                "type": "response",
+                "next": "low-risk"
+            },
+            "Back": {
+                "type": "response",
+                "next": "low-risk"
+            },
+            "Hands": {
+                "type": "question",
+                "next": "ejaculation-transfer"
+            }
+        }
+},
+        "ejaculation-transfer": {
+        "message": "Is there any possibility that semen could have been transferred to the female's genital area?",
+        "options": {
+            "Yes": {
+                "type": "question",
+                "next": "contraception"
+            },
+            "No": {
+                "type": "response",
+                "next": "low-risk"
+            },
+            "I am unsure": {
+                "type": "question",
+                "next": "contraception"
+            }
+        }
+	},
+        "contraception": {
+        "message": "Did you and/or your partner use any form of contraception?",
+        "options": {
+            "Yes, we used contraceptives correctly with no issues": {
+                "type": "response",
+                "next": "low-risk"
+            },
+            "Yes, but there was a problem": {
+                "type": "question",
+                "next": "method-of-contraceptives"
+            },
+            "No": {
+                "type": "question",
+                "next": "menstrual-cycle"
+            }
+        }
+    },
+        "method-of-contraceptives": {
+        "message": "Which method of contraception was used? (If more than one method was used, please select the primary method.)",
+        "options": {
+            "Male or female condom": {
+                "type": "question",
+                "next": "condom-issues"
+            },
+            "Hormonal birth control ('the pill' only)": {
+                "type": "question",
+                "next": "hormonal-issues"
+            },
+            "Withdrawal or 'pull-out' method": {
+                "type": "question",
+                "next": "pull-out-game-too-weak"
+            },
+            "The method of contraception used is not listed here": {
+                "type": "question",
+                "next": "menstrual-cycle"
+            }
+        }
+    },
+        "condom-issues": {
+        "message": "Which issue(s) did you encounter with your condom use?",
+        "options": {
+            "We put the condom on sometime after engaging in sexual activity": {
+                "type": "question",
+                "next": "menstrual-cycle"
+            },
+            "The condom broke": {
+                "type": "question",
+                "next": "menstrual-cycle"
+            },
+            "The condom came off inside the vagina": {
+                "type": "question",
+                "next": "menstrual-cycle"
+            },
+            "The condom slipped off outside the vagina" : {
+                "type": "question",
+                "next": "ejaculation-transfer-condom"
+            },            
+            "More than of these issues occurred" : {
+                "type": "question",
+                "next": "menstrual-cycle"
+            }
+
+
+        }
+    },
+        "ejaculation-transfer-condom": {
+        "message": "Is there any possibility semen could have spilled outside of the condom into the vagina or onto the vulva?",
+        "options": {
+            "Yes": {
+                "type": "question",
+                "next": "menstrual-cycle"
+            },
+            "No": {
+                "type": "response",
+                "next": "low-risk"
+            },
+            "I am unsure": {
+                "type": "question",
+                "next": "menstrual-cycle"
+            }
+        }
+    },
+        "hormonal-issues": {
+        "message": "Which issue did you encounter with the use of hormonal birth control?",
+        "options": {
+            "One or more pills were missed": {
+                "type": "question",
+                "next": "birth-control-issues"
+            },
+            "Use was inconsistent": {
+                "type": "question",
+                "next": "birth-control-issues"
+            }
+        }
+    },
+        "birth-control-issues": {
+        "message": "Do you know during which week the birth control use was inconsistent?",
+        "options": {
+            "Yes": {
+                "type": "question",
+                "next": "birth-control-missed"
+            },
+            "No": {
+                "type": "question",
+                "next": "menstrual-cycle"
+            }
+        }
+    },
+        "birth-control-missed": {
+        "message": "During which week was the birth control use inconsistent?",
+        "options": {
+            "Week 1": {
+                "type": "response",
+                "next": "low-risk"
+            },
+            "Week 2": {
+                "type": "question",
+                "next": "menstrual-cycle"
+            },
+            "Week 3": {
+                "type": "question",
+                "next": "menstrual-cycle"
+            },
+            "Week 4": {
+                "type": "question",
+                "next": "menstrual-cycle"
+            }
+        }
+    },
+    "pull-out-game-too-weak": {
+        "message": "Was the withdrawal method used effectively? (In other words, was the penis fully withdrawn from the vagina before ejaculation?)",
+        "options": {
+            "Yes": {
+                "type": "question",
+                "next": "menstrual-cycle"
+            },
+			"Yes, but there is a chance that semen could have transferred to the vulva": {
+                "type": "question",
+                "next": "menstrual-cycle"
+            },
+			"No": {
+                "type": "question",
+                "next": "menstrual-cycle"
+            }
+        }
+    },
+        "menstrual-cycle": {
+        "message": "Is the female partner's menstrual cycle regular?",
+        "options": {
+            "Yes": {
+                "type": "question",
+                "next": "menstrual-cycle-regular"
+            },
+            "No": {
+                "type": "response",
+                "next": "high-risk"
+            },
+			"I am unsure" : {
+				"type": "response",
+				"next": "not-enough-information"
+			}
+        }
+    },
+	    "menstrual-cycle-regular": {
+        "message": "Does the female's menstrual cycle have a typical 28-30 day range?",
+        "options": {
+            "Yes": {
+                "type": "question",
+                "next": "menstrual-cycle-issues"
+            },
+            "No": {
+                "type": "response",
+                "next": "medium-risk"
+            },
+			"I am unsure" : {
+				"type": "response",
+				"next": "not-enough-information"
+			}
+        }
+    },
+        "menstrual-cycle-issues": {
+        "message": "At which point in the menstrual cycle did the sexual encounter occur?",
+        "options": {
+            "During the menstrual period": {
+                "type": "response",
+                "next": "low-risk"
+            },
+            "About 4 to 7 days after the start date of the last menstrual period": {
+                "type": "question",
+                "next": "low-risk"
+            },
+            "About 10 to 20 days after the start date of the last menstrual period": {
+                "type": "response",
+                "next": "high-risk"
+            },
+			"It occurred outside any of the specified ranges": {
+                "type": "response",
+                "next": "low-risk"
+            }
+
+        }
+    }
+}
