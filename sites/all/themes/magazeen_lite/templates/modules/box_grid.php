@@ -31,17 +31,13 @@
 <div class="third front-module">
   <h3>Could You Be Pregnant?</h3>
 
-    <div class="faq-image">
-      <a href="http://www.soc.ucsb.edu/sexinfo/question/faq-how-do-i-increase-sexual-arousal">
-      <div style="background: url('<?php print path_to_theme() . '/images/modules/' . '10250738.jpg'; ?>') ; background-size: cover;" class="faq-image-box"></div>
+  <div class="faq-image">
+    <a href="/sexinfo/ppq">
+    <div style="background: url('<?php print path_to_theme() . '/images/modules/' . '10250738.jpg'; ?>') ; background-size: cover;" class="faq-image-box"></div>
 
-      <div class="caption-slide"></a>
-        <p>We've created a brand new pregnancy questionnaire that will help estimate your likelihood of pregnancy.  <a href="/sexinfo/ppq">Try it here &raquo;</a>
-        </p>
-      </div>
+    <div class="caption-slide"></a>
+      <p>We've created a brand new pregnancy questionnaire that will help estimate your likelihood of pregnancy.  <a href="/sexinfo/ppq">Try it here &raquo;</a>
+      </p>
     </div>
-  <!-- <p style="font-size: 1.4em; line-height: 1.3;">
-    We've created a brand new pregnancy questionnaire that will help estimate your likelihood of pregnancy.
-    <a href="/sexinfo/ppq">Try it here &raquo;</a>
-  </p> -->
+  </div>
 </div>
