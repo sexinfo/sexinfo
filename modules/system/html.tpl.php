@@ -49,6 +49,7 @@
   <meta name="viewport" content="width=device-width">
   <title><?php print $head_title; ?></title>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+  <meta name="google-translate-customization" content="dc59097e98610fb7-1987d26a31e88833-gf9143e1b410c85e5-19"></meta>
   <?php print $styles; ?>
   <?php print $scripts; ?>
 

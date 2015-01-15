@@ -19,19 +19,26 @@
     //print '<h2 class="slogan">'/* $site_slogan.*/.'</h2>';
       ?>
     </div>
+            
+
+
     <div id="searchform-header">
       <?php print render($page['search_area']); ?>
     </div>
 
     <div class="social-buttons">
-
-
-	<a class="btn" href="https://www.facebook.com/SexInfoOnline"><i class="icon-2x icon-facebook-sign"></i></a>
-	<a class="btn" href="https://twitter.com/sexinfoonline"><i class="icon-2x icon-twitter-sign"></i></a>
-	<a class="btn" href="http://www.youtube.com/user/UCSBSexInfoOnline"><i class="icon-2x icon-facetime-video"></i></a>
-	<a class="btn" href="https://github.com/sexinfo/sexinfo"><i class="icon-2x icon-github-alt"></i></a>
-
+    	<a class="btn" href="https://www.facebook.com/SexInfoOnline"><i class="icon-2x icon-facebook-sign"></i></a>
+    	<a class="btn" href="https://twitter.com/sexinfoonline"><i class="icon-2x icon-twitter-sign"></i></a>
+    	<a class="btn" href="http://www.youtube.com/user/UCSBSexInfoOnline"><i class="icon-2x icon-facetime-video"></i></a>
+    	<a class="btn" href="https://github.com/sexinfo/sexinfo"><i class="icon-2x icon-github-alt"></i></a>
     </div> <!-- .social-buttons -->
+
+
+    <div id="google_translate_element"></div><script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: 'UA-1633792-1'}, 'google_translate_element');
+    }
+    </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
   </div> <!-- /header-container -->
 </div> <!-- /header -->
