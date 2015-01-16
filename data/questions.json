@@ -280,7 +280,7 @@
                 "next": "low-risk"
             },
             "About 4 to 7 days after the start date of the last menstrual period": {
-                "type": "question",
+                "type": "response",
                 "next": "low-risk"
             },
             "About 10 to 20 days after the start date of the last menstrual period": {
