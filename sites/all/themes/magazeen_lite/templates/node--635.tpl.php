@@ -1,4 +1,12 @@
-﻿<div id="terms" class="terms">
+﻿<script>
+    var startedPPQ = false;
+    window.onbeforeunload = function(e) {
+        if (startedPPQ)
+        return "You've already started the quiz and leaving the page means you will lose all your progress."
+    }
+</script>
+
+<div id="terms" class="terms">
         <p style="text-align: center;"><b>Terms and Conditions</b></p>
         <p>Before beginning this questionnaire, please acknowledge your understanding that SexInfo Online cannot diagnose any medical conditions, including pregnancy.</p>
         
@@ -7,7 +15,7 @@
         <p>If you feel this questionnaire did not provide answer choices that accurately reflected your experience or have any other suggestions, please feel free to leave us constructive feedback through the <a href='ask-sexperts'>“Ask the Sexperts” submission page</a>!</p>
 </div>
 
-<a id="start-quiz" class="pink-block-btn" style="width: 250px; text-align: center">I Agree</a>
+<a id="start-quiz" class="pink-block-btn" style="width: 250px; text-align: center" onclick="startedPPQ = true; return true;">I Agree</a>
 
 <div class="quiz-body terms" style="display:none;">
     <p id="ppq-question"></p>
