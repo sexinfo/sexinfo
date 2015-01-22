@@ -11,7 +11,7 @@
     <div class="terms">
             <h3>Are you experiencing a pregnancy scare?</h3>
             
-            <div style="background-image: url('sites/all/themes/magazeen_lite/images/ppq/201111-orig-infidelity-quiz-serious-couple-bedroom-600x250.jpg'); background-size: cover; width:75%; height:300px; margin-left: auto; margin-right: auto;" ></div>
+            <div style="background-image: url('sites/all/themes/magazeen_lite/images/201111-orig-infidelity-quiz-serious-couple-bedroom-600x250.jpg'); background-size: cover; width:75%; height:300px; margin-left: auto; margin-right: auto;" ></div>
 
             <p class="bigger_p">We’re here to help! Our new interactive tool can estimate your likelihood of pregnancy 
             with a few simple questions about your experience.</p>
