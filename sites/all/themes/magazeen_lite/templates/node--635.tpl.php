@@ -11,26 +11,28 @@
     <div class="terms">
             <h3>Are you experiencing a pregnancy scare?</h3>
             
-            <div style="background-image: url('http://www.soc.ucsb.edu/sexinfo/sites/all/themes/magazeen_lite/images/modules/stdtalking.jpg'); background-size: cover; width:75%; height:300px; margin-left: auto; margin-right: auto;" ></div>
+            <div style="background-image: url('sites/all/themes/magazeen_lite/images/ppq/201111-orig-infidelity-quiz-serious-couple-bedroom-600x250.jpg'); background-size: cover; width:75%; height:300px; margin-left: auto; margin-right: auto;" ></div>
 
-            <p>We're here to help you figure out your chances of being pregnant!  This quiz is formatted to be very self-guided.
-            We ask you questions about your circumstances </p>
-            <p>Following the inquiry, we will provide you with a <i>preliminary</i> response that estimates 
-            your probability of pregnancy. The questions may not address your precise situation, but they were 
-            designed to encompass the experiences typical of many SexInfo Online readers. Please do your best 
-            to choose the answers that most accurately reflect your experience.</p>
-            
+            <p class="bigger_p">We’re here to help! Our new interactive tool can estimate your likelihood of pregnancy 
+            with a few simple questions about your experience.</p>
     </div>
 
     <div id="terms" class="terms">
-            <h4>Terms and Conditions</h4>
-            <p>Before beginning this questionnaire, please acknowledge your understanding that SexInfo Online cannot diagnose any medical conditions, including pregnancy.</p>
-            
-            <p>If you feel this questionnaire did not provide answer choices that accurately reflected your experience or have any other suggestions, please feel free to leave us constructive feedback through the <a href='ask-sexperts'>“Ask the Sexperts”</a> submission page!</p>
+            <h4>Acknowledgement</h4>
+
+            <p>Before beginning this anonymous questionnaire, please acknowledge your 
+            understanding that <b>SexInfo Online cannot diagnose any medical conditions, including pregnancy</b>.</p>
+
+            <p>Based off of your answer choices, we will provide you with a 
+            preliminary response that estimates your likelihood of pregnancy. 
+            If you feel this questionnaire did not provide choices that 
+            accurately reflected your experience or have any other suggestions, 
+            please feel free to leave us constructive feedback through 
+            the <a href='ask-sexperts'>“Ask the Sexperts”</a> submission page!</p>
     </div>
 </div>
 
-<a id="start-quiz" class="pink-block-btn" style="width: 250px; text-align: center" onclick="startedPPQ = true; return true;">I Agree</a>
+<a id="start-quiz" class="pink-block-btn" style="width: 250px; text-align: center" onclick="startedPPQ = true; return true;">Let's Begin!</a>
 
 <div class="quiz-body terms" style="display:none;">
     <p id="ppq-question"></p>

@@ -239,7 +239,7 @@
         }
     },
         "menstrual-cycle": {
-        "message": "Is the female partner's menstrual cycle regular?",
+        "message": "Is the female partner's menstrual cycle regular? (Keep in mind, if you are using hormonal birth control, your cycle is likely regulated to be 28-30 days.)",
         "options": {
             "Yes": {
                 "type": "question",
@@ -251,7 +251,7 @@
             },
 			"I am unsure" : {
 				"type": "response",
-				"next": "not-enough-information"
+				"next": "medium-risk"
 			}
         }
     },
@@ -268,7 +268,7 @@
             },
 			"I am unsure" : {
 				"type": "response",
-				"next": "not-enough-information"
+				"next": "medium-risk"
 			}
         }
     },

@@ -41,6 +41,7 @@ margin-right: auto;
 }
 
 .terms h3 {
+    margin: 16px;
     color: gray;
     text-align: center;
 }
@@ -52,4 +53,10 @@ margin-right: auto;
 
 .terms p {
     margin: 16px;
+}
+
+.bigger_p {
+    font-size: 175%;
+    line-height: 125%;
+    text-align: center;
 }

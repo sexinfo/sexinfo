@@ -4112,6 +4112,7 @@ ul.icons {
   padding: 8px; }
 
 .terms h3 {
+  margin: 16px;
   color: gray;
   text-align: center; }
 
@@ -4121,3 +4122,8 @@ ul.icons {
 
 .terms p {
   margin: 16px; }
+
+.bigger_p {
+  font-size: 175%;
+  line-height: 125%;
+  text-align: center; }
