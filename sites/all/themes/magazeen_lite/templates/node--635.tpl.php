@@ -6,13 +6,34 @@
     }
 </script>
 
-<div id="terms" class="terms">
-        <p style="text-align: center;"><b>Terms and Conditions</b></p>
-        <p>Before beginning this questionnaire, please acknowledge your understanding that SexInfo Online cannot diagnose any medical conditions, including pregnancy.</p>
-        
-        <p>The following questionnaire will ask you to respond to detailed questions about your sexual experience concerning male ejaculation, the female's menstrual cycle, and contraceptive use. Following the inquiry, we will provide you with a <i>preliminary</i> response that estimates your probability of pregnancy. The questions may not address your precise situation, but they were designed to encompass the experiences typical of many SexInfo Online readers. Please do your best to choose the answers that most accurately reflect your experience.</p>
-        
-        <p>If you feel this questionnaire did not provide answer choices that accurately reflected your experience or have any other suggestions, please feel free to leave us constructive feedback through the <a href='ask-sexperts'>“Ask the Sexperts” submission page</a>!</p>
+<div id="introduction">
+
+    <div class="terms">
+            <h3>Are you experiencing a pregnancy scare?</h3>
+            
+            <div style="background-image: url('http://www.soc.ucsb.edu/sexinfo/sites/all/themes/magazeen_lite/images/modules/stdtalking.jpg'); background-size: cover; width:75%; height:300px; margin-left: auto; margin-right: auto;" ></div>
+
+            <p>We're here to help you figure out your chances of being pregnant!  This quiz is formatted in a guided 
+            question-and-answer style </p>
+            <p>Following the inquiry, we will provide you with a <i>preliminary</i> response that estimates 
+            your probability of pregnancy. The questions may not address your precise situation, but they were 
+            designed to encompass the experiences typical of many SexInfo Online readers. Please do your best 
+            to choose the answers that most accurately reflect your experience.</p>
+            
+    </div>
+
+    <div class="terms">
+            <h4>Note to Users About the Back Button</h4>
+            
+            <p>Using the back buttons on your browser will remove you from taking the questionnaire and your answer selections will not be saved.</p>
+    </div>
+
+    <div id="terms" class="terms">
+            <h4>Terms and Conditions</h4>
+            <p>Before beginning this questionnaire, please acknowledge your understanding that SexInfo Online cannot diagnose any medical conditions, including pregnancy.</p>
+            
+            <p>If you feel this questionnaire did not provide answer choices that accurately reflected your experience or have any other suggestions, please feel free to leave us constructive feedback through the <a href='ask-sexperts'>“Ask the Sexperts”</a> submission page!</p>
+    </div>
 </div>
 
 <a id="start-quiz" class="pink-block-btn" style="width: 250px; text-align: center" onclick="startedPPQ = true; return true;">I Agree</a>

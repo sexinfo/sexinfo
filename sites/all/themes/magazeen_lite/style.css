@@ -4110,3 +4110,14 @@ ul.icons {
 .response p {
   font-size: 16px;
   padding: 8px; }
+
+.terms h3 {
+  color: gray;
+  text-align: center; }
+
+.terms h4 {
+  color: gray;
+  text-align: center; }
+
+.terms p {
+  margin: 16px; }
