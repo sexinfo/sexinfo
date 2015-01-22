@@ -18,7 +18,7 @@ $(document).ready(function () {
     
     $('#start-quiz').click(function () {
         $($question_id).html(currentQuestion.message);
-        $('#terms').fadeOut('slow');
+        $('#introduction').fadeOut('slow');
         $('#terms-check').fadeOut('slow');
         $(this).fadeOut('slow', function () {
             for (var key in currentQuestion.options) {
