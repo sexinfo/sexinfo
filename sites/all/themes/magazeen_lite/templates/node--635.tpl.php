@@ -13,19 +13,13 @@
             
             <div style="background-image: url('http://www.soc.ucsb.edu/sexinfo/sites/all/themes/magazeen_lite/images/modules/stdtalking.jpg'); background-size: cover; width:75%; height:300px; margin-left: auto; margin-right: auto;" ></div>
 
-            <p>We're here to help you figure out your chances of being pregnant!  This quiz is formatted in a guided 
-            question-and-answer style </p>
+            <p>We're here to help you figure out your chances of being pregnant!  This quiz is formatted to be very self-guided.
+            We ask you questions about your circumstances </p>
             <p>Following the inquiry, we will provide you with a <i>preliminary</i> response that estimates 
             your probability of pregnancy. The questions may not address your precise situation, but they were 
             designed to encompass the experiences typical of many SexInfo Online readers. Please do your best 
             to choose the answers that most accurately reflect your experience.</p>
             
-    </div>
-
-    <div class="terms">
-            <h4>Note to Users About the Back Button</h4>
-            
-            <p>Using the back buttons on your browser will remove you from taking the questionnaire and your answer selections will not be saved.</p>
     </div>
 
     <div id="terms" class="terms">
