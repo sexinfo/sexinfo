@@ -8,7 +8,7 @@
 
 <div id="introduction">
 
-    <div class="terms">
+    <div class="ppq-terms">
             <h3>Are you experiencing a pregnancy scare?</h3>
             
             <div style="background-image: url('sites/all/themes/magazeen_lite/images/201111-orig-infidelity-quiz-serious-couple-bedroom-600x250.jpg'); background-size: cover; width:75%; height:300px; margin-left: auto; margin-right: auto;" ></div>
@@ -17,7 +17,7 @@
             with a few simple questions about your experience.</p>
     </div>
 
-    <div id="terms" class="terms">
+    <div id="terms" class="ppq-terms">
             <h4>Acknowledgement</h4>
 
             <p>Before beginning this anonymous questionnaire, please acknowledge your 
@@ -34,7 +34,7 @@
 
 <a id="start-quiz" class="pink-block-btn" style="width: 250px; text-align: center" onclick="startedPPQ = true; return true;">Let's Begin!</a>
 
-<div class="quiz-body terms" style="display:none;">
+<div class="quiz-body ppq-terms" style="display:none;">
     <p id="ppq-question"></p>
     <div id="answers">
         <ul>
@@ -43,10 +43,10 @@
     </div>
 </div>
 
-<div class="response terms" style="display:none;">
+<div class="response ppq-terms" style="display:none;">
 </div>
 
-<div id="total_response" class="terms" style="display: none;">
+<div id="total_response" class="ppq-terms" style="display: none;">
 <h2 style='text-align: center; padding: 8px;'>Additional Information:</h2>
 <h2 style='font-size: 24px; text-align: center; padding: 8px;'>Ectopic Pregnancy</h2>
 <p>If you suspect you or your partner is pregnant because she has experienced nausea, irregular menstruation, or other common symptoms of pregnancy, but a home pregnancy test returned negative results, she may have an ectopic pregnancy. An ectopic pregnancy occurs when an ovum is fertilized outside of the uterus, most commonly within one of the fallopian tubes. It can cause lower levels of pregnancy hormones to be present in the impregnated female’s blood or urine, making it difficult for home pregnancy tests to detect ectopic pregnancies. Symptoms of ectopic pregnancy typically begin to occur six to eight weeks after the female’s last menstrual period and may include the following:</p>
