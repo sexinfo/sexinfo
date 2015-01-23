@@ -99,7 +99,7 @@
                 "type": "response",
                 "next": "low-risk"
             },
-            "Yes, but there was a problem": {
+            "Yes, but there was an issue that may have reduced its effectiveness": {
                 "type": "question",
                 "next": "method-of-contraceptives"
             },
