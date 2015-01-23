@@ -2799,7 +2799,7 @@ tr.odd.cat-row td {
   margin-right: 5px; }
 
 @media (max-width: 767px) {
-  .main-392 .main {
+  .main {
     width: 100% !important; } }
 
 .topics-container {
