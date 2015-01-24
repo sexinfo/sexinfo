@@ -51,7 +51,7 @@
 // Topics page v2
 // ---------------------------------------
 // Huge hack to get the page full width for mobile
-.main-392 .main {
+.main {
   @include mobile { width: 100% !important; }
 }
 

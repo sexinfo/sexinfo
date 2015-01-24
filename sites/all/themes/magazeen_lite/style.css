@@ -2799,7 +2799,7 @@ tr.odd.cat-row td {
   margin-right: 5px; }
 
 @media (max-width: 767px) {
-  .main-392 .main {
+  .main {
     width: 100% !important; } }
 
 .topics-container {
@@ -4092,7 +4092,7 @@ ul.icons {
   color: #e20e68;
   cursor: pointer; }
 
-.terms {
+.ppq-terms {
   width: 100%;
   height: 100%;
   border: 1px solid #ccc;
@@ -4102,7 +4102,8 @@ ul.icons {
   margin-top: 10px;
   display: block;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  font-size: 16px; }
 
 .response h2 {
   font-size: 36px; }
@@ -4111,19 +4112,22 @@ ul.icons {
   font-size: 16px;
   padding: 8px; }
 
-.terms h3 {
+.ppq-terms h3 {
   margin: 16px;
   color: gray;
   text-align: center; }
 
-.terms h4 {
+.ppq-terms h4 {
   color: gray;
   text-align: center; }
 
-.terms p {
+.ppq-terms p {
   margin: 16px; }
 
-.bigger_p {
+.ppq-terms .bigger_p {
   font-size: 175%;
   line-height: 125%;
   text-align: center; }
+
+.ppq-terms b {
+  color: black; }
