@@ -4102,7 +4102,8 @@ ul.icons {
   margin-top: 10px;
   display: block;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  font-size: 16px; }
 
 .response h2 {
   font-size: 36px; }
@@ -4123,7 +4124,7 @@ ul.icons {
 .ppq-terms p {
   margin: 16px; }
 
-ppq-terms .bigger_p {
+.ppq-terms .bigger_p {
   font-size: 175%;
   line-height: 125%;
   text-align: center; }
