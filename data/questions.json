@@ -110,7 +110,7 @@
         }
     },
         "method-of-contraceptives": {
-        "message": "Which method of contraception was used? (If more than one method was used, please select the primary method.)",
+        "message": "Which method of contraception was used? (If more than one method was used, please select the primary, or most effective, method.)",
         "options": {
             "Male or female condom": {
                 "type": "question",
