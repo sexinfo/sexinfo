@@ -32,7 +32,7 @@
     </div>
 
     <div id="ppq-buttons-container" style="margin-left: auto; margin-right: auto; width: 80%;">
-        <a class="pink-block-btn" style="display: inline-block; width: 45%; text-align: center; background: black; color: #ef017c;">Read Our Pregnancy FAQ</a>
+        <a class="pink-block-btn" style="display: inline-block; width: 45%; text-align: center; background: black; color: #ef017c;" href="/sexinfo/question/faq-could-i-be-pregnant">Read Our Pregnancy FAQ</a>
         <a id="start-quiz" class="pink-block-btn" style="display: inline-block; width: 45%; text-align: center" onclick="startedPPQ = true; return true;">Let's Begin The Quiz!</a>
     </div>
 
