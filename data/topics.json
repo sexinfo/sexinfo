@@ -302,5 +302,9 @@
   "285" : {
     "name" : "Sex Around the World",
     "image": "sex_around_the_world.png"
+  },
+  "779" : {
+    "name" : "History of Sex",
+    "image" : "history_of_sex.jpg"
   }
 }
