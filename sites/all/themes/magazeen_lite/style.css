@@ -2802,6 +2802,10 @@ tr.odd.cat-row td {
   .main {
     width: 100% !important; } }
 
+@media (max-width: 767px) {
+  #node-22 {
+    width: 100% !important; } }
+
 .topics-container {
   *zoom: 1; }
   .topics-container:before, .topics-container:after {

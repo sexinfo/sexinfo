@@ -55,6 +55,11 @@
   @include mobile { width: 100% !important; }
 }
 
+// This is a huge hack to get ask the sexperts full width
+#node-22 {
+  @include mobile { width: 100% !important; }
+}
+
 $spacer: 20px;
 
 .topics-container {
