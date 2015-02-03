@@ -174,7 +174,11 @@ html[xmlns] .clearfix { display: block; }
 .fb-like span {
   @include mobile { width: 100% !important;}
 }
-
 .fb-like span iframe {
   @include mobile { width: 100% !important; }
+}
+
+/* links that are super long end up causing our website to be pushed to the left or right. break them up by word */
+a {
+  word-wrap: break-word;
 }
