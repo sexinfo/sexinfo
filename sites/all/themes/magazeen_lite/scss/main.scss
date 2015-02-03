@@ -107,6 +107,7 @@ ul.pager {
 .terms {
   /* Prevent spillover onto Read More link */
   width: 85%;
+  display: none;
 
   a {
     display: inline;

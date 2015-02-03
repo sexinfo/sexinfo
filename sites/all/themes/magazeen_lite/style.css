@@ -2189,7 +2189,8 @@ ul.pager {
 
 .terms {
   /* Prevent spillover onto Read More link */
-  width: 85%; }
+  width: 85%;
+  display: none; }
   .terms a {
     display: inline;
     list-style-type: none;
