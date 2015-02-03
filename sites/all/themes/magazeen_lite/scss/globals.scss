@@ -170,3 +170,11 @@ html[xmlns] .clearfix { display: block; }
   .description { display: none; }
 }
 
+/* Facebook Like Button for mobile.  It's technically 450px so we have to hack in 100% for mobile */
+.fb-like span {
+  @include mobile { width: 100% !important;}
+}
+
+.fb-like span iframe {
+  @include mobile { width: 100% !important; }
+}

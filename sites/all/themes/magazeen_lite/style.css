@@ -1580,6 +1580,15 @@ html[xmlns] .clearfix {
   #user-login .description {
     display: none; }
 
+/* Facebook Like Button for mobile.  It's technically 450px so we have to hack in 100% for mobile */
+@media (max-width: 767px) {
+  .fb-like span {
+    width: 100% !important; } }
+
+@media (max-width: 767px) {
+  .fb-like span iframe {
+    width: 100% !important; } }
+
 h1 {
   margin: 0;
   padding: 0;
