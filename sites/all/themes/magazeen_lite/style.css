@@ -1580,6 +1580,19 @@ html[xmlns] .clearfix {
   #user-login .description {
     display: none; }
 
+/* Facebook Like Button for mobile.  It's technically 450px so we have to hack in 100% for mobile */
+@media (max-width: 767px) {
+  .fb-like span {
+    width: 100% !important; } }
+
+@media (max-width: 767px) {
+  .fb-like span iframe {
+    width: 100% !important; } }
+
+/* links that are super long end up causing our website to be pushed to the left or right. break them up by word */
+a {
+  word-wrap: break-word; }
+
 h1 {
   margin: 0;
   padding: 0;
@@ -1664,6 +1677,7 @@ h4, #footer h2 {
 #footer h4, #footer h2 {
   margin: 10px 0 20px 0; }
 
+/* Link styling for global site: pink no underline*/
 a:link, a:active {
   color: #f23183;
   text-decoration: none; }
@@ -1673,6 +1687,16 @@ a:hover {
 
 a:visited {
   color: #f05898;
+  text-decoration: none; }
+
+/* In a document (article, question, etc) we want underline for colorblind people */
+.node a {
+  text-decoration: underline; }
+
+.content a {
+  text-decoration: underline; }
+
+.node-title a {
   text-decoration: none; }
 
 p {
@@ -2169,7 +2193,9 @@ ul.pager {
 
 .terms {
   /* Prevent spillover onto Read More link */
-  width: 85%; }
+  width: 85%;
+  /* Writers want terms to be hidden because they get messy if we do it right */
+  display: none; }
   .terms a {
     display: inline;
     list-style-type: none;
@@ -2800,6 +2826,10 @@ tr.odd.cat-row td {
 
 @media (max-width: 767px) {
   .main {
+    width: 100% !important; } }
+
+@media (max-width: 767px) {
+  #node-22 {
     width: 100% !important; } }
 
 .topics-container {
@@ -4094,7 +4124,9 @@ ul.icons {
   cursor: pointer; }
 
 .ppq-terms {
-  width: 100%;
+  /*  You don't want ot do 100% because we have  border and padding 
+      that pushes the div into some weird whitespace on the right */
+  width: 90%;
   height: 100%;
   border: 1px solid #ccc;
   background: #f2f2f2;

@@ -19,7 +19,9 @@ margin-top : 20px;
 }
 
 .ppq-terms {
-width: 100%;
+/*  You don't want ot do 100% because we have  border and padding 
+    that pushes the div into some weird whitespace on the right */
+width: 90%;
 height: 100%;
 border: 1px solid #ccc;
 background: #f2f2f2;
