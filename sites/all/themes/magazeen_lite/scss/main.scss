@@ -107,6 +107,8 @@ ul.pager {
 .terms {
   /* Prevent spillover onto Read More link */
   width: 85%;
+
+  /* Writers want terms to be hidden because they get messy if we do it right */
   display: none;
 
   a {

@@ -2194,6 +2194,7 @@ ul.pager {
 .terms {
   /* Prevent spillover onto Read More link */
   width: 85%;
+  /* Writers want terms to be hidden because they get messy if we do it right */
   display: none; }
   .terms a {
     display: inline;
@@ -4123,6 +4124,8 @@ ul.icons {
   cursor: pointer; }
 
 .ppq-terms {
+  /*  You don't want ot do 100% because we have  border and padding 
+      that pushes the div into some weird whitespace on the right */
   width: 90%;
   height: 100%;
   border: 1px solid #ccc;
