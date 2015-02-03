@@ -2500,7 +2500,7 @@ ul.slinks {
   position: relative;
   width: 400px; }
   .carousel-frame .carousel-caption {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.8);
     color: white;
     padding: 5px;
     position: absolute;
