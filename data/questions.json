@@ -13,7 +13,7 @@
             },
 			"I am unsure": {
                 "type": "question",
-                "next": "contraception"
+                "next": "menstrual-cycle"
             }
         },
 		"tooltips": {
@@ -26,19 +26,19 @@
         "options": {
             "Inside the vagina": {
                 "type": "question",
-                "next": "contraception"
+                "next": "menstrual-cycle"
             },
             "On the vulva": {
                 "type": "question",
-                "next": "contraception"
+                "next": "menstrual-cycle"
             },
 			"Very close to the vulva (e.g., inner thighs, pelvis, lower abdomen, anal region)": {
                 "type": "question",
-                "next": "contraception"
+                "next": "menstrual-cycle"
             },
             "Clothing near or on the vulva": {
                 "type": "question",
-                "next": "contraception"
+                "next": "menstrual-cycle"
             },
 			"Other area on the female body (non-genital skin)": {
                 "type": "question",
@@ -80,7 +80,7 @@
         "options": {
             "Yes": {
                 "type": "question",
-                "next": "contraception"
+                "next": "menstrual-cycle"
             },
             "No": {
                 "type": "response",
@@ -88,7 +88,7 @@
             },
             "I am unsure": {
                 "type": "question",
-                "next": "contraception"
+                "next": "menstrual-cycle"
             }
         }
 	},
@@ -104,8 +104,8 @@
                 "next": "method-of-contraceptives"
             },
             "No": {
-                "type": "question",
-                "next": "menstrual-cycle"
+                "type": "response",
+                "next": "high-risk"
             }
         }
     },
@@ -125,8 +125,8 @@
                 "next": "pull-out-game-too-weak"
             },
             "The method of contraception used is not listed here": {
-                "type": "question",
-                "next": "menstrual-cycle"
+                "type": "response",
+                "next": "not-enough-information"
             }
         }
     },
@@ -134,47 +134,51 @@
         "message": "Which issue(s) did you encounter with your condom use?",
         "options": {
             "We put the condom on sometime after engaging in sexual activity": {
-                "type": "question",
-                "next": "menstrual-cycle"
+                "type": "response",
+                "next": "medium-risk"
             },
             "The condom broke": {
-                "type": "question",
-                "next": "menstrual-cycle"
+                "type": "response",
+                "next": "high-risk"
             },
             "The condom came off inside the vagina": {
-                "type": "question",
-                "next": "menstrual-cycle"
+                "type": "response",
+                "next": "high-risk"
             },
             "The condom slipped off outside the vagina" : {
                 "type": "question",
                 "next": "ejaculation-transfer-condom"
             },            
             "More than of these issues occurred" : {
-                "type": "question",
-                "next": "menstrual-cycle"
+                "type": "response",
+                "next": "high-risk"
             }
 
 
         }
     },
-        "ejaculation-transfer-condom": {
+    "ejaculation-transfer-condom": {
         "message": "Is there any possibility semen could have spilled outside of the condom into the vagina or onto the vulva?",
         "options": {
-            "Yes": {
-                "type": "question",
-                "next": "menstrual-cycle"
+            "Yes, into the vagina": {
+                "type": "response",
+                "next": "high-risk"
+            },
+            "Yes, not into the vagina but onto the vulva": {
+                "type": "response",
+                "next": "medium-risk"
             },
             "No": {
                 "type": "response",
                 "next": "low-risk"
             },
             "I am unsure": {
-                "type": "question",
-                "next": "menstrual-cycle"
+                "type": "response",
+                "next": "medium-risk"
             }
         }
     },
-        "hormonal-issues": {
+    "hormonal-issues": {
         "message": "Which issue did you encounter with the use of hormonal birth control?",
         "options": {
             "One or more pills were missed": {
@@ -187,7 +191,7 @@
             }
         }
     },
-        "birth-control-issues": {
+    "birth-control-issues": {
         "message": "Do you know during which week the birth control use was inconsistent?",
         "options": {
             "Yes": {
@@ -195,12 +199,12 @@
                 "next": "birth-control-missed"
             },
             "No": {
-                "type": "question",
-                "next": "menstrual-cycle"
+                "type": "response",
+                "next": "medium-risk"
             }
         }
     },
-        "birth-control-missed": {
+    "birth-control-missed": {
         "message": "During which week was the birth control use inconsistent?",
         "options": {
             "Week 1": {
@@ -208,16 +212,16 @@
                 "next": "low-risk"
             },
             "Week 2": {
-                "type": "question",
-                "next": "menstrual-cycle"
+                "type": "response",
+                "next": "high-risk"
             },
             "Week 3": {
-                "type": "question",
-                "next": "menstrual-cycle"
+                "type": "response",
+                "next": "medium-risk"
             },
             "Week 4": {
-                "type": "question",
-                "next": "menstrual-cycle"
+                "type": "response",
+                "next": "low-risk"
             }
         }
     },
@@ -225,16 +229,16 @@
         "message": "Was the withdrawal method used effectively? (In other words, was the penis fully withdrawn from the vagina before ejaculation?)",
         "options": {
             "Yes": {
-                "type": "question",
-                "next": "menstrual-cycle"
+                "type": "response",
+                "next": "low-risk"
             },
 			"Yes, but there is a chance that semen could have transferred to the vulva": {
-                "type": "question",
-                "next": "menstrual-cycle"
+                "type": "response",
+                "next": "medium-risk"
             },
 			"No": {
-                "type": "question",
-                "next": "menstrual-cycle"
+                "type": "response",
+                "next": "high-risk"
             }
         }
     },
@@ -246,12 +250,12 @@
                 "next": "menstrual-cycle-regular"
             },
             "No": {
-                "type": "response",
-                "next": "high-risk"
+                "type": "question",
+                "next": "contraception"
             },
 			"I am unsure" : {
-				"type": "response",
-				"next": "medium-risk"
+				"type": "question",
+				"next": "contraception"
 			}
         }
     },
@@ -263,12 +267,12 @@
                 "next": "menstrual-cycle-issues"
             },
             "No": {
-                "type": "response",
-                "next": "medium-risk"
+                "type": "question",
+                "next": "contraception"
             },
 			"I am unsure" : {
-				"type": "response",
-				"next": "medium-risk"
+				"type": "question",
+				"next": "contraception"
 			}
         }
     },
@@ -284,8 +288,8 @@
                 "next": "low-risk"
             },
             "About 10 to 20 days after the start date of the last menstrual period": {
-                "type": "response",
-                "next": "high-risk"
+                "type": "question",
+                "next": "contraception"
             },
 			"It occurred outside any of the specified ranges": {
                 "type": "response",
