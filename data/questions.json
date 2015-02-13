@@ -149,7 +149,7 @@
                 "type": "question",
                 "next": "ejaculation-transfer-condom"
             },            
-            "More than of these issues occurred" : {
+            "More than one of these issues occurred" : {
                 "type": "response",
                 "next": "high-risk"
             }
