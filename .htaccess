@@ -11,7 +11,9 @@
 Options -Indexes
 
 # Follow symbolic links in this directory.
-Options +FollowSymLinks
+# Warning! This option should be commented out because it causes
+# Errors with sexinfo on the LSIT webshare.
+# Options +FollowSymLinks
 
 # Make Drupal handle any 404 errors.
 ErrorDocument 404 /index.php
