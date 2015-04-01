@@ -2122,7 +2122,7 @@ ul.pager {
 .node {
   margin: 0 0 25px 0; }
 
-.search-result {
+.node-box, .search-result {
   background: #fdfefe url(images/node-box-top.gif) repeat-x top center;
   border: 1px solid #dce7ed;
   border-bottom: 1px solid #cfdbe1;
