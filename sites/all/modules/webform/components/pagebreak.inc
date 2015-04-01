@@ -16,6 +16,8 @@ function _webform_defaults_pagebreak() {
     'weight' => 0,
     'extra' => array(
       'private' => FALSE,
+      'next_page_label' => '',
+      'prev_page_label' => '',
     ),
   );
 }
@@ -43,7 +45,20 @@ function _webform_edit_pagebreak($component) {
     '#value' => '0',
   );
 
-  $form['display'] = array('#type' => 'markup'); // Hide the display options.
+  $form['extra']['next_page_label'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Next page button label'),
+    '#description' => t('This is used for the <em>Next Page</em> button on the page before this page break. Default: <em>Next Page &gt;</em>'),
+    '#default_value' => $component['extra']['next_page_label'],
+    '#size' => 30,
+  );
+  $form['extra']['prev_page_label'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Previous page button label'),
+    '#description' => t('This is used for the <em>Previous Page</em> button on the page after this page break. Default: <em>&lt; Prev Page</em>'),
+    '#default_value' => $component['extra']['prev_page_label'],
+    '#size' => 30,
+  );
 
   return $form;
 }
@@ -80,5 +95,5 @@ function _webform_display_pagebreak($component, $value = NULL, $format = 'html')
 function theme_webform_display_pagebreak($variables) {
   $element = $variables['element'];
 
-  return $element['#format'] == 'html' ? '<h2 class="webform-page">' . check_plain($element['#title']) . '</h2>' : "--" . $element['#title'] . "--\n";
+  return $element['#format'] == 'html' ? '<h2 class="webform-page">' . check_plain($element['#title']) . '</h2>' : '==' . $element['#title'] . "==\n";
 }
