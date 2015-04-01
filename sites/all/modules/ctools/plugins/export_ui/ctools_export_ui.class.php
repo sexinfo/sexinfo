@@ -121,7 +121,7 @@ class ctools_export_ui {
 
     switch ($op) {
       case 'import':
-        return user_access('use PHP for settings');
+        return user_access('use ctools import');
       case 'revert':
         return ($item->export_type & EXPORT_IN_DATABASE) && ($item->export_type & EXPORT_IN_CODE);
       case 'delete':
@@ -152,7 +152,7 @@ class ctools_export_ui {
     if (isset($input['op']) && $input['op'] == t('Reset')) {
       unset($_SESSION['ctools_export_ui'][$this->plugin['name']]);
       if (!$js) {
-        return drupal_goto($_GET['q']);
+        drupal_goto($_GET['q']);
       }
       // clear everything but form id, form build id and form token:
       $keys = array_keys($input);
@@ -339,7 +339,6 @@ class ctools_export_ui {
   function list_form_submit(&$form, &$form_state) {
     // Filter and re-sort the pages.
     $plugin = $this->plugin;
-    $schema = ctools_export_get_schema($this->plugin['schema']);
 
     $prefix = ctools_export_ui_plugin_base_path($plugin);
 
@@ -350,44 +349,7 @@ class ctools_export_ui {
         continue;
       }
 
-      // Note: Creating this list seems a little clumsy, but can't think of
-      // better ways to do this.
-      $allowed_operations = drupal_map_assoc(array_keys($plugin['allowed operations']));
-      $not_allowed_operations = array('import');
-
-      if ($item->{$schema['export']['export type string']} == t('Normal')) {
-        $not_allowed_operations[] = 'revert';
-      }
-      elseif ($item->{$schema['export']['export type string']} == t('Overridden')) {
-        $not_allowed_operations[] = 'delete';
-      }
-      else {
-        $not_allowed_operations[] = 'revert';
-        $not_allowed_operations[] = 'delete';
-      }
-
-      $not_allowed_operations[] = empty($item->disabled) ? 'enable' : 'disable';
-
-      foreach ($not_allowed_operations as $op) {
-        // Remove the operations that are not allowed for the specific
-        // exportable.
-        unset($allowed_operations[$op]);
-      }
-
-      $operations = array();
-
-      foreach ($allowed_operations as $op) {
-        $operations[$op] = array(
-          'title' => $plugin['allowed operations'][$op]['title'],
-          'href' => ctools_export_ui_plugin_menu_path($plugin, $op, $name),
-        );
-        if (!empty($plugin['allowed operations'][$op]['ajax'])) {
-          $operations[$op]['attributes'] = array('class' => array('use-ajax'));
-        }
-        if (!empty($plugin['allowed operations'][$op]['token'])) {
-          $operations[$op]['query'] = array('token' => drupal_get_token($op));
-        }
-      }
+      $operations = $this->build_operations($item);
 
       $this->list_build_row($item, $form_state, $operations);
     }
@@ -498,6 +460,52 @@ class ctools_export_ui {
    */
   function list_css() {
     ctools_add_css('export-ui-list');
+  }
+
+  /**
+   * Builds the operation links for a specific exportable item.
+   */
+  function build_operations($item) {
+    $plugin = $this->plugin;
+    $schema = ctools_export_get_schema($plugin['schema']);
+    $operations = $plugin['allowed operations'];
+    $operations['import'] = FALSE;
+
+    if ($item->{$schema['export']['export type string']} == t('Normal')) {
+      $operations['revert'] = FALSE;
+    }
+    elseif ($item->{$schema['export']['export type string']} == t('Overridden')) {
+      $operations['delete'] = FALSE;
+    }
+    else {
+      $operations['revert'] = FALSE;
+      $operations['delete'] = FALSE;
+    }
+    if (empty($item->disabled)) {
+      $operations['enable'] = FALSE;
+    }
+    else {
+      $operations['disable'] = FALSE;
+    }
+
+    $allowed_operations = array();
+
+    foreach ($operations as $op => $info) {
+      if (!empty($info)) {
+        $allowed_operations[$op] = array(
+          'title' => $info['title'],
+          'href' => ctools_export_ui_plugin_menu_path($plugin, $op, $item->{$this->plugin['export']['key']}),
+        );
+        if (!empty($info['ajax'])) {
+          $allowed_operations[$op]['attributes'] = array('class' => array('use-ajax'));
+        }
+        if (!empty($info['token'])) {
+          $allowed_operations[$op]['query'] = array('token' => drupal_get_token($op));
+        }
+      }
+    }
+
+    return $allowed_operations;
   }
 
   /**
@@ -631,7 +639,7 @@ class ctools_export_ui {
   }
 
   function add_page($js, $input, $step = NULL) {
-    drupal_set_title($this->get_page_title('add'));
+    drupal_set_title($this->get_page_title('add'), PASS_THROUGH);
 
     // If a step not set, they are trying to create a new item. If a step
     // is set, they're in the process of creating an item.
@@ -657,7 +665,7 @@ class ctools_export_ui {
     );
 
     $output = $this->edit_execute_form($form_state);
-    if (!empty($form_state['executed'])) {
+    if (!empty($form_state['executed']) && empty($form_state['rebuild'])) {
       $this->redirect($form_state['op'], $form_state['item']);
     }
 
@@ -668,7 +676,7 @@ class ctools_export_ui {
    * Main entry point to edit an item.
    */
   function edit_page($js, $input, $item, $step = NULL) {
-    drupal_set_title($this->get_page_title('edit', $item));
+    drupal_set_title($this->get_page_title('edit', $item), PASS_THROUGH);
 
     // Check to see if there is a cached item to get if we're using the wizard.
     if (!empty($this->plugin['use wizard'])) {
@@ -693,7 +701,7 @@ class ctools_export_ui {
     );
 
     $output = $this->edit_execute_form($form_state);
-    if (!empty($form_state['executed'])) {
+    if (!empty($form_state['executed']) && empty($form_state['rebuild'])) {
       $this->redirect($form_state['op'], $form_state['item']);
     }
 
@@ -704,7 +712,7 @@ class ctools_export_ui {
    * Main entry point to clone an item.
    */
   function clone_page($js, $input, $original, $step = NULL) {
-    drupal_set_title($this->get_page_title('clone', $original));
+    drupal_set_title($this->get_page_title('clone', $original), PASS_THROUGH);
 
     // If a step not set, they are trying to create a new clone. If a step
     // is set, they're in the process of cloning an item.
@@ -741,7 +749,7 @@ class ctools_export_ui {
     );
 
     $output = $this->edit_execute_form($form_state);
-    if (!empty($form_state['executed'])) {
+    if (!empty($form_state['executed']) && empty($form_state['rebuild'])) {
       $this->redirect($form_state['op'], $form_state['item']);
     }
 
@@ -770,7 +778,7 @@ class ctools_export_ui {
    */
   function edit_execute_form_standard(&$form_state) {
     $output = drupal_build_form('ctools_export_ui_edit_item_form', $form_state);
-    if (!empty($form_state['executed'])) {
+    if (!empty($form_state['executed']) && empty($form_state['rebuild'])) {
       $this->edit_save_form($form_state);
     }
 
@@ -1187,21 +1195,30 @@ class ctools_export_ui {
 
     $output = drupal_build_form('ctools_export_ui_delete_confirm_form', $form_state);
     if (!empty($form_state['executed'])) {
-      ctools_export_crud_delete($this->plugin['schema'], $item);
-      $export_key = $this->plugin['export']['key'];
-      $message = str_replace('%title', check_plain($item->{$export_key}), $this->plugin['strings']['confirmation'][$form_state['op']]['success']);
-      drupal_set_message($message);
-      drupal_goto(ctools_export_ui_plugin_base_path($this->plugin));
+      $this->delete_form_submit($form_state);
+      $this->redirect($form_state['op'], $item);
     }
 
     return $output;
   }
 
   /**
+   * Deletes exportable items from the database.
+   */
+  function delete_form_submit(&$form_state) {
+    $item = $form_state['item'];
+
+    ctools_export_crud_delete($this->plugin['schema'], $item);
+    $export_key = $this->plugin['export']['key'];
+    $message = str_replace('%title', check_plain($item->{$export_key}), $this->plugin['strings']['confirmation'][$form_state['op']]['success']);
+    drupal_set_message($message);
+  }
+
+  /**
    * Page callback to display export information for an exportable item.
    */
   function export_page($js, $input, $item) {
-    drupal_set_title($this->get_page_title('export', $item));
+    drupal_set_title($this->get_page_title('export', $item), PASS_THROUGH);
     return drupal_get_form('ctools_export_form', ctools_export_crud_export($this->plugin['schema'], $item), t('Export'));
   }
 
@@ -1209,7 +1226,7 @@ class ctools_export_ui {
    * Page callback to import information for an exportable item.
    */
   function import_page($js, $input, $step = NULL) {
-    drupal_set_title($this->get_page_title('import'));
+    drupal_set_title($this->get_page_title('import'), PASS_THROUGH);
     // Import is basically a multi step wizard form, so let's go ahead and
     // use CTools' wizard.inc for it.
 
@@ -1322,7 +1339,7 @@ function _ctools_export_ui_add_form_files($form, &$form_state) {
  *
  * This simply loads the object defined in the plugin and hands it off.
  */
-function ctools_export_ui_list_form($form, $form_state) {
+function ctools_export_ui_list_form($form, &$form_state) {
   $form_state['object']->list_form($form, $form_state);
   return $form;
 }
@@ -1424,7 +1441,7 @@ function ctools_export_ui_delete_confirm_form($form, &$form_state) {
 
   $export_key = $plugin['export']['key'];
   $question = str_replace('%title', check_plain($item->{$export_key}), $plugin['strings']['confirmation'][$form_state['op']]['question']);
-  $path = empty($_REQUEST['cancel_path']) ? ctools_export_ui_plugin_base_path($plugin) : $_REQUEST['cancel_path'];
+  $path = (!empty($_REQUEST['cancel_path']) && !url_is_external($_REQUEST['cancel_path'])) ? $_REQUEST['cancel_path'] : ctools_export_ui_plugin_base_path($plugin);
 
   $form = confirm_form($form,
     $question,

@@ -376,11 +376,11 @@ function ctools_context_ajax_item_add($mechanism = NULL, $type = NULL, $cache_ke
     'path' => "ctools/context/ajax/add/$mechanism/$type/$cache_key/$name/%step",
     'show cancel' => TRUE,
     'default form' => 'ctools_edit_context_form_defaults',
-    'auto caching' => TRUE,
+    'auto cache' => TRUE,
     'cache mechanism' => $mechanism,
     'cache key' => $cache_key,
     // This is stating what the cache will be referred to in $form_state
-    'cache storage' => 'object',
+    'cache location' => 'object',
   );
 
   if ($type == 'requiredcontext') {
@@ -416,12 +416,20 @@ function ctools_context_ajax_item_add($mechanism = NULL, $type = NULL, $cache_ke
     ctools_cache_operation($mechanism, $cache_key, 'finalize', $object);
 
     // Very irritating way to update the form for our contexts.
-    $arg_form_state = array('values' => array());
+    $arg_form_state = form_state_defaults() + array(
+      'values' => array(),
+      'process_input' => FALSE,
+      'complete form' => array(),
+    );
+
+    $rel_form_state = $arg_form_state;
 
     $arg_form = array(
       '#post' => array(),
       '#programmed' => FALSE,
       '#tree' => FALSE,
+      '#parents' => array(),
+      '#array_parents' => array(),
     );
 
     // Build a chunk of the form to merge into the displayed form
@@ -446,6 +454,8 @@ function ctools_context_ajax_item_add($mechanism = NULL, $type = NULL, $cache_ke
       '#post' => array(),
       '#programmed' => FALSE,
       '#tree' => FALSE,
+      '#parents' => array(),
+      '#array_parents' => array(),
     );
 
     $rel_form['relationship'] = array(
@@ -460,7 +470,7 @@ function ctools_context_ajax_item_add($mechanism = NULL, $type = NULL, $cache_ke
     $output = array();
     if (!empty($available_relationships)) {
       ctools_context_add_item_table_buttons('relationship', $mechanism, $rel_form, $available_relationships);
-      $rel_form = form_builder('dummy_form_id', $rel_form, $arg_form_state);
+      $rel_form = form_builder('dummy_form_id', $rel_form, $rel_form_state);
       $output[] = ajax_command_replace('div#ctools-relationships-table div.buttons', drupal_render($rel_form));
     }
 
@@ -551,11 +561,11 @@ function ctools_context_ajax_item_edit($mechanism = NULL, $type = NULL, $cache_k
     'path' => "ctools/context/ajax/configure/$mechanism/$type/$cache_key/$position/%step",
     'show cancel' => TRUE,
     'default form' => 'ctools_edit_context_form_defaults',
-    'auto caching' => TRUE,
+    'auto cache' => TRUE,
     'cache mechanism' => $mechanism,
     'cache key' => $cache_key,
     // This is stating what the cache will be referred to in $form_state
-    'cache storage' => 'object',
+    'cache location' => 'object',
   );
 
   if ($type == 'requiredcontext') {
@@ -582,8 +592,16 @@ function ctools_context_ajax_item_edit($mechanism = NULL, $type = NULL, $cache_k
     $output = array();
     $output[] = ctools_modal_command_dismiss();
 
+    $arg_form_state = form_state_defaults() + array(
+      'values' => array(),
+      'process_input' => FALSE,
+      'complete form' => array(),
+    );
+
     $arg_form = array(
       '#post' => array(),
+      '#parents' => array(),
+      '#array_parents' => array(),
       '#programmed' => FALSE,
       '#tree' => FALSE,
     );
@@ -636,8 +654,8 @@ function ctools_context_get_defaults($plugin_definition, $object, $type) {
     'name' => $plugin_definition['name'],
   );
 
-  if (isset($plugin['defaults'])) {
-    $defaults = $plugin['defaults'];
+  if (isset($plugin_definition['defaults'])) {
+    $defaults = $plugin_definition['defaults'];
   }
   else if (isset($subtype['defaults'])) {
     $defaults = $subtype['defaults'];

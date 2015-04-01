@@ -1,17 +1,15 @@
 /**
  * @file
- *
- * Written by dmitrig01 (Dmitri Gaskin) for CTools; this provides dependent
- * visibility for form items in CTools' ajax forms.
+ * Provides dependent visibility for form items in CTools' ajax forms.
  *
  * To your $form item definition add:
- * - '#process' => array('CTools_process_dependency'),
- * - Add '#dependency' => array('id-of-form-item' => array(list, of, values, that,
-     make, this, item, show),
+ * - '#process' => array('ctools_process_dependency'),
+ * - '#dependency' => array('id-of-form-item' => array(list, of, values, that,
+ *   make, this, item, show),
  *
  * Special considerations:
- * - radios are harder. Because Drupal doesn't give radio groups individual ids,
- *   use 'radio:name-of-radio'
+ * - Radios are harder. Because Drupal doesn't give radio groups individual IDs,
+ *   use 'radio:name-of-radio'.
  *
  * - Checkboxes don't have their own id, so you need to add one in a div
  *   around the checkboxes via #prefix and #suffix. You actually need to add TWO
@@ -42,7 +40,7 @@
   Drupal.CTools.dependent.autoAttach = function() {
     // Clear active bindings and triggers.
     for (i in Drupal.CTools.dependent.activeTriggers) {
-      $(Drupal.CTools.dependent.activeTriggers[i]).unbind('change');
+      $(Drupal.CTools.dependent.activeTriggers[i]).unbind('change.ctools-dependent');
     }
     Drupal.CTools.dependent.activeTriggers = [];
     Drupal.CTools.dependent.activeBindings = {};
@@ -99,7 +97,7 @@
           else {
             switch ($(trigger).attr('type')) {
               case 'checkbox':
-                var val = $(trigger).attr('checked') || 0;
+                var val = $(trigger).attr('checked') ? true : false;
 
                 if (val) {
                   $(trigger).siblings('label').removeClass('hidden-options').addClass('expanded-options');
@@ -196,7 +194,7 @@
             }
           }
 
-          $(trigger_id).change(function() {
+          $(trigger_id).bind('change.ctools-dependent', function() {
             // Trigger the internal change function
             // the attr('id') is used because closures are more confusing
             changeTrigger(trigger_id, bind_id);
@@ -215,9 +213,9 @@
 
       // Really large sets of fields are too slow with the above method, so this
       // is a sort of hacked one that's faster but much less flexible.
-      $("select.ctools-master-dependent:not(.ctools-processed)")
-        .addClass('ctools-processed')
-        .change(function() {
+      $("select.ctools-master-dependent")
+        .once('ctools-dependent')
+        .bind('change.ctools-dependent', function() {
           var val = $(this).val();
           if (val == 'all') {
             $('.ctools-dependent-all').show(0);
@@ -227,7 +225,7 @@
             $('.ctools-dependent-' + val).show(0);
           }
         })
-        .trigger('change');
+        .trigger('change.ctools-dependent');
     }
   }
 })(jQuery);
