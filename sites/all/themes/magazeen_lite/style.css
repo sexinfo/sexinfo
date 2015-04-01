@@ -2122,19 +2122,16 @@ ul.pager {
 .node {
   margin: 0 0 25px 0; }
 
-.node-box {
+.search-result {
   background: #fdfefe url(images/node-box-top.gif) repeat-x top center;
   border: 1px solid #dce7ed;
   border-bottom: 1px solid #cfdbe1;
   border-top: 0;
   margin: 0;
-  padding: 0; }
+  padding: 16px; }
 
-.node-content img {
-  display: block;
-  margin: 0 auto 10px;
-  padding: 3px;
-  border: 1px solid #E8E8E8; }
+.search-info {
+  display: none; }
 
 .breadcrumb {
   font: 1.2em Verdana, Arial, Helvetica, sans-serif; }
