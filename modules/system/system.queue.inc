@@ -45,13 +45,13 @@
  * would be an in-memory queue backend which might lose items if it crashes.
  * However, such a backend would be able to deal with significantly more writes
  * than a reliable queue and for many tasks this is more important. See
- * aggregator_cron() for an example of how can this not be a problem. Another
- * example is doing Twitter statistics -- the small possibility of losing a few
- * items is insignificant next to power of the queue being able to keep up with
- * writes. As described in the processing section, regardless of the queue
- * being reliable or not, the processing code should be aware that an item
- * might be handed over for processing more than once (because the processing
- * code might time out before it finishes).
+ * aggregator_cron() for an example of how to effectively utilize a
+ * non-reliable queue. Another example is doing Twitter statistics -- the small
+ * possibility of losing a few items is insignificant next to power of the
+ * queue being able to keep up with writes. As described in the processing
+ * section, regardless of the queue being reliable or not, the processing code
+ * should be aware that an item might be handed over for processing more than
+ * once (because the processing code might time out before it finishes).
  */
 
 /**
@@ -97,13 +97,6 @@ class DrupalQueue {
 }
 
 interface DrupalQueueInterface {
-  /**
-   * Start working with a queue.
-   *
-   * @param $name
-   *   Arbitrary string. The name of the queue to work with.
-   */
-  public function __construct($name);
 
   /**
    * Add a queue item and store it directly to the queue.
@@ -315,6 +308,12 @@ class MemoryQueue implements DrupalQueueInterface {
    */
   protected $id_sequence;
 
+  /**
+   * Start working with a queue.
+   *
+   * @param $name
+   *   Arbitrary string. The name of the queue to work with.
+   */
   public function __construct($name) {
     $this->queue = array();
     $this->id_sequence = 0;
