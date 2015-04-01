@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Contains the table style plugin.
@@ -13,11 +14,13 @@ class views_plugin_style_jump_menu extends views_plugin_style {
   function option_definition() {
     $options = parent::option_definition();
 
-    $options['hide'] = array('default' => FALSE);
+    $options['hide'] = array('default' => FALSE, 'bool' => TRUE);
     $options['path'] = array('default' => '');
     $options['text'] = array('default' => 'Go', 'translatable' => TRUE);
+    $options['label'] = array('default' => '', 'translatable' => TRUE);
     $options['choose'] = array('default' => '- Choose -', 'translatable' => TRUE);
-    $options['default_value'] = array('default' => FALSE);
+    $options['inline'] = array('default' => TRUE, 'bool' => TRUE);
+    $options['default_value'] = array('default' => FALSE, 'bool' => TRUE);
 
     return $options;
   }
@@ -67,11 +70,24 @@ class views_plugin_style_jump_menu extends views_plugin_style {
       '#default_value' => $this->options['text'],
     );
 
+    $form['label'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Selector label'),
+      '#default_value' => $this->options['label'],
+      '#description' => t('The text that will appear as the the label of the selector element. If blank no label tag will be used.'),
+    );
+
     $form['choose'] = array(
       '#type' => 'textfield',
       '#title' => t('Choose text'),
       '#default_value' => $this->options['choose'],
       '#description' => t('The text that will appear as the selected option in the jump menu.'),
+    );
+
+    $form['inline'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Set this field to display inline'),
+      '#default_value' => !empty($this->options['inline']),
     );
 
     $form['default_value'] = array(
@@ -126,15 +142,26 @@ class views_plugin_style_jump_menu extends views_plugin_style {
     unset($this->view->row_index);
 
     $default_value = '';
-    if ($this->options['default_value'] && !empty($paths[url($_GET['q'])])) {
-      $default_value = $paths[url($_GET['q'])];
+    if ($this->options['default_value']) {
+      $lookup_options = array();
+      // We need to check if the path is absolute
+      // or else language is not taken in account.
+      if ($this->view->display[$this->view->current_display]->display_options['fields'][$this->options['path']]['absolute']) {
+        $lookup_options['absolute'] = TRUE;
+      }
+      $lookup_url = url($_GET['q'], $lookup_options);
+      if (!empty($paths[$lookup_url])) {
+        $default_value = $paths[$lookup_url];
+      }
     }
 
     ctools_include('jump-menu');
     $settings = array(
       'hide' => $this->options['hide'],
       'button' => $this->options['text'],
+      'title' => $this->options['label'],
       'choose' => $this->options['choose'],
+      'inline' => $this->options['inline'],
       'default_value' => $default_value,
     );
 

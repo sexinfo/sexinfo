@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @file
- * Views' relationship handlers.
+ * Definition of views_handler_relationship_node_term_data.
  */
-
 
 /**
  * Relationship handler to return the taxonomy terms of nodes.
@@ -58,8 +58,8 @@ class views_handler_relationship_node_term_data extends views_handler_relationsh
     $def['table'] = 'taxonomy_term_data';
 
     if (!array_filter($this->options['vocabularies'])) {
-      $term_node = $this->query->add_table('taxonomy_index', $this->relationship);
-      $def['left_table'] = 'taxonomy_index';
+      $taxonomy_index = $this->query->add_table('taxonomy_index', $this->relationship);
+      $def['left_table'] = $taxonomy_index;
       $def['left_field'] = 'tid';
       $def['field'] = 'tid';
       $def['type'] = empty($this->options['required']) ? 'LEFT' : 'INNER';
@@ -75,7 +75,9 @@ class views_handler_relationship_node_term_data extends views_handler_relationsh
       $query->addJoin($def['type'], 'taxonomy_vocabulary', 'tv', 'td.vid = tv.vid');
       $query->addJoin($def['type'], 'taxonomy_index', 'tn', 'tn.tid = td.tid');
       $query->condition('tv.machine_name', array_filter($this->options['vocabularies']));
-      $query->addTag('term_access');
+      if (empty($this->query->options['disable_sql_rewrite'])) {
+        $query->addTag('term_access');
+      }
       $query->fields('td');
       $query->fields('tn', array('nid'));
       $def['table formula'] = $query;

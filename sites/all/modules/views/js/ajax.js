@@ -1,6 +1,5 @@
 /**
- * @file ajax_admin.js
- *
+ * @file
  * Handles AJAX submission and response in Views UI.
  */
 (function ($) {
@@ -62,7 +61,9 @@
 
   Drupal.ajax.prototype.commands.viewsShowButtons = function (ajax, response, status) {
     $('div.views-edit-view div.form-actions').removeClass('js-hide');
-    $('div.views-edit-view div.view-changed.messages').removeClass('js-hide');
+    if (response.changed) {
+      $('div.views-edit-view div.view-changed.messages').removeClass('js-hide');
+    }
   };
 
   Drupal.ajax.prototype.commands.viewsTriggerPreview = function (ajax, response, status) {
