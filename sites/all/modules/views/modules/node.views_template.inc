@@ -1,8 +1,10 @@
 <?php
+
 /**
  * @file
  * Contains views templates on behalf of the node module.
  */
+
 function node_views_templates() {
   // Only the standard install profile has the image field provided so only show it for it.
   if (variable_get('install_profile', 'standard') != 'standard') {
@@ -22,6 +24,7 @@ function node_views_templates() {
   $handler = $view->new_display('default', 'Defaults', 'default');
   $handler->display->display_options['title'] = 'Image gallery';
   $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'access content';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';

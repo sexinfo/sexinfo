@@ -6,8 +6,8 @@
  *
  * @see http://bugs.jqueryui.com/ticket/4671
  * @see https://bugs.webkit.org/show_bug.cgi?id=19033
- * @see /views_ui.module
- * @see /js/jquery.ui.dialog.min.js
+ * @see views_ui.module
+ * @see js/jquery.ui.dialog.min.js
  *
  * This javascript patch overwrites the $.ui.dialog.overlay.events object to remove
  * the mousedown, mouseup and click events from the list of events that are bound
@@ -20,7 +20,7 @@
  */
 
 (function ($, undefined) {
-  if ($.ui && $.ui.dialog) {
+  if ($.ui && $.ui.dialog && $.ui.dialog.overlay) {
     $.ui.dialog.overlay.events = $.map('focus,keydown,keypress'.split(','),
                                  function(event) { return event + '.dialog-overlay'; }).join(' ');
   }

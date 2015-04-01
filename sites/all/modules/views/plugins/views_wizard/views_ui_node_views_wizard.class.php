@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * @file
+ * Definition of ViewsUiNodeViewsWizard.
+ */
+
+/**
+ * Tests creating node views with the wizard.
+ */
 class ViewsUiNodeViewsWizard extends ViewsUiBaseViewsWizard {
 
   protected function row_style_options($type) {
@@ -56,6 +64,7 @@ class ViewsUiNodeViewsWizard extends ViewsUiBaseViewsWizard {
 
     // Add permission-based access control.
     $display_options['access']['type'] = 'perm';
+    $display_options['access']['perm'] = 'access content';
 
     // Remove the default fields, since we are customizing them here.
     unset($display_options['fields']);

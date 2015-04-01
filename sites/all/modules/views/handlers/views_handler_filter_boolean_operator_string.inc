@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * @file
+ * Definition of views_handler_filter_boolean_operator_string.
+ */
+
 /**
  * Simple filter to handle matching of boolean values.
  *
@@ -24,6 +30,6 @@ class views_handler_filter_boolean_operator_string extends views_handler_filter_
     else {
       $where .= "<> ''";
     }
-    $this->query->add_where($this->options['group'], $where);
+    $this->query->add_where_expression($this->options['group'], $where);
   }
 }

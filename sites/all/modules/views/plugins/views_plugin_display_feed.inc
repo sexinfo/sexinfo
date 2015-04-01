@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Contains the feed display plugin.
@@ -36,7 +37,7 @@ class views_plugin_display_feed extends views_plugin_display_page {
   function execute() {
     $output = $this->view->render();
     if (empty($output)) {
-      return drupal_not_found();
+      return MENU_NOT_FOUND;
     }
     print $output;
   }
@@ -138,7 +139,6 @@ class views_plugin_display_feed extends views_plugin_display_page {
    * Provide the default form for setting options.
    */
   function options_form(&$form, &$form_state) {
-    parent::options_form($form, $form_state);
     // It is very important to call the parent function here.
     parent::options_form($form, $form_state);
 

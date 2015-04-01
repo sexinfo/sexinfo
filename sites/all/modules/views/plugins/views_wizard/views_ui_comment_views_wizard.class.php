@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * @file
+ * Definition of ViewsUiCommentViewsWizard.
+ */
+
+/**
+ * Tests creating comment views with the wizard.
+ */
 class ViewsUiCommentViewsWizard extends ViewsUiBaseViewsWizard {
 
   protected function row_style_options($type) {
@@ -67,6 +75,7 @@ class ViewsUiCommentViewsWizard extends ViewsUiBaseViewsWizard {
 
     // Add permission-based access control.
     $display_options['access']['type'] = 'perm';
+    $display_options['access']['perm'] = 'access comments';
 
     // Add a relationship to nodes.
     $display_options['relationships']['nid']['id'] = 'nid';
