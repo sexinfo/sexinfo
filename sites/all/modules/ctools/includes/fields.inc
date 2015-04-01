@@ -79,6 +79,19 @@ function ctools_fields_get_field_formatter_settings_form($field, $formatter_type
     $instance = ctools_fields_fake_field_instance($field['field_name'], $view_mode, $formatter_type, $conf['formatter_settings']);
     $settings_form = $function($field, $instance, $view_mode, $form, $form_state);
     if ($settings_form) {
+      // Allow other modules to alter the formatter settings form.
+      $context = array(
+        'module' => $formatter['module'],
+        'formatter' => $formatter,
+        'field' => $field,
+        'instance' => $instance,
+        'view_mode' => $view_mode,
+        'form' => $form,
+        'form_state' => $form_state,
+      );
+      drupal_alter('field_formatter_settings_form', $settings_form, $context);
+
+      $settings_form['#tree'] = TRUE;
       $form['ctools_field_list']['#value'][] = $field;
       $form += $settings_form;
     }
@@ -170,6 +183,8 @@ function ctools_field_label($field_name) {
  *
  * @param $field_name
  *   Either a field instance object or the name of the field.
+ *   If the 'field' key is populated it will be used as the field
+ *   settings.
  * @param $op
  *   Possible operations include:
  *   - form
@@ -222,6 +237,7 @@ function ctools_field_label($field_name) {
 function ctools_field_invoke_field($field_name, $op, $entity_type, $entity, &$a = NULL, &$b = NULL, $options = array()) {
   if (is_array($field_name)) {
     $instance = $field_name;
+    $field = empty($field_name['field']) ? field_info_field($instance['field_name']) : $field_name['field'];
     $field_name = $instance['field_name'];
   }
   else {
@@ -245,7 +261,6 @@ function ctools_field_invoke_field($field_name, $op, $entity_type, $entity, &$a 
 
   // Everything from here is unmodified code from _field_invoke() formerly
   // inside a foreach loop over the instances.
-  $field = field_info_field($field_name);
   $function = $options['default'] ? 'field_default_' . $op : $field['module'] . '_field_' . $op;
   if (function_exists($function)) {
     // Determine the list of languages to iterate on.
