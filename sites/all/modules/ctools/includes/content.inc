@@ -458,9 +458,12 @@ function ctools_content_admin_info($type, $subtype, $conf, $context = NULL) {
   if ($function = ctools_plugin_get_function($plugin, 'admin info')) {
     $output = $function($subtype, $conf, $context);
   }
+
   if (empty($output) || !is_object($output)) {
     $output = new stdClass();
-    $output->title = t('No info');
+    // replace the _ with " " for a better output
+    $subtype = check_plain(str_replace("_", " ", $subtype));
+    $output->title = $subtype;
     $output->content = t('No info available.');
   }
   return $output;
@@ -682,6 +685,11 @@ function ctools_content_get_available_types($contexts = NULL, $has_content = FAL
         if (!$allowed_types[$key]) {
           continue;
         }
+      }
+
+      // Check if the content type provides an access callback.
+      if (isset($subtype['create content access']) && function_exists($subtype['create content access']) && !$subtype['create content access']($plugin, $subtype)) {
+        continue;
       }
 
       // If we made it through all the tests, then we can use this content.

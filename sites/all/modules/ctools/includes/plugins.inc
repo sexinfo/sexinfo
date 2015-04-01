@@ -246,17 +246,10 @@ function ctools_get_plugins($module, $type, $id = NULL) {
     $cache = cache_get("plugins:$module:$type", $info[$module][$type]['cache table']);
 
     if (!empty($cache->data)) {
-      // Verify that the file exists as it may have been moved in a multisite environment
-      if (isset($cache->data['path'])) {
-        // Files to be registered may be in two locations. Check for both of them.
-        if ((is_array($cache->data['path']) && file_exists($cache->data['path']['file'])) ||
-           file_exists($cache->data['path'])) {
-          // Cache load succeeded so use the cached plugin list.
-          $plugins[$module][$type]   = $cache->data;
-          // Set $setup to true so we know things where loaded.
-          $setup[$module][$type]     = TRUE;
-        }
-      }
+      // Cache load succeeded so use the cached plugin list.
+      $plugins[$module][$type]   = $cache->data;
+      // Set $setup to true so we know things where loaded.
+      $setup[$module][$type]     = TRUE;
     }
     else {
       // Cache load failed so store that we need to build and write the cache.
@@ -350,8 +343,13 @@ function ctools_get_plugins($module, $type, $id = NULL) {
  *   name and each inner array keyed on plugin type name.
  */
 function ctools_plugin_get_plugin_type_info($flush = FALSE) {
-  $info_loaded = &drupal_static('ctools_plugin_type_info_loaded', FALSE);
-  $all_type_info = &drupal_static('ctools_plugin_type_info', array());
+  static $drupal_static_fast;
+  if (!isset($drupal_static_fast)) {
+    $drupal_static_fast['info_loaded'] = &drupal_static('ctools_plugin_type_info_loaded', FALSE);
+    $drupal_static_fast['all_type_info'] = &drupal_static('ctools_plugin_type_info', array());
+  }
+  $info_loaded = &$drupal_static_fast['info_loaded'];
+  $all_type_info = &$drupal_static_fast['all_type_info'];
 
   // Only trigger info loading once.
   if ($info_loaded && !$flush) {
@@ -447,7 +445,7 @@ function ctools_plugin_load_includes($info, $filename = NULL) {
       $all_files[$info['module']][$info['type']] = array();
       // Load all our plugins.
       $directories = ctools_plugin_get_directories($info);
-      $extension = empty($info['info file']) ? $info['extension'] : 'info';
+      $extension = (empty($info['info file']) || ($info['extension'] != 'inc')) ? $info['extension'] : 'info';
 
       foreach ($directories as $module => $path) {
         $all_files[$info['module']][$info['type']][$module] = file_scan_directory($path, '/\.' . $extension . '$/', array('key' => 'name'));
