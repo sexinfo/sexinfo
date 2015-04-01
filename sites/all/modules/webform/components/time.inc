@@ -18,13 +18,15 @@ function _webform_defaults_time() {
     'pid' => 0,
     'weight' => 0,
     'value' => '',
-    'mandatory' => 0,
+    'required' => 0,
     'extra' => array(
       'timezone' => 'user',
       'hourformat' => '12-hour',
+      'minuteincrements' => 1,
       'title_display' => 0,
       'description' => '',
       'private' => FALSE,
+      'analysis' => FALSE,
     ),
   );
 }
@@ -62,7 +64,7 @@ function _webform_edit_time($component) {
   $form['extra']['timezone'] = array(
     '#type' => 'radios',
     '#title' => t('Default value timezone'),
-    '#default_value' => empty($component['extra']['timezone']) ? 'user' : $component['extra']['timezone'],
+    '#default_value' => $component['extra']['timezone'],
     '#description' => t('If using relative dates for a default value (e.g. "now") base the current time on this timezone.'),
     '#options' => array('user' => t('User timezone'), 'site' => t('Website timezone')),
     '#weight' => 2,
@@ -70,12 +72,25 @@ function _webform_edit_time($component) {
   );
   $form['display']['hourformat'] = array(
     '#type' => 'radios',
-    '#title' => t('Time Format'),
-    '#default_value' => isset($component['extra']['hourformat']) ? $component['extra']['hourformat'] : '12-hour',
-    '#description' => t('Format the display of the time in 12 or 24 hours.'),
+    '#title' => t('Time format'),
+    '#default_value' => $component['extra']['hourformat'],
     '#options' => array('12-hour' => t('12-hour (am/pm)'), '24-hour' => t('24-hour')),
     '#weight' => 2,
     '#parents' => array('extra', 'hourformat'),
+  );
+  $form['display']['minuteincrements'] = array(
+    '#type' => 'select',
+    '#title' => t('Minute increments'),
+    '#default_value' => $component['extra']['minuteincrements'],
+    '#options' => array(
+      1 => t('1 minute'),
+      5 => t('5 minute'),
+      10 => t('10 minute'),
+      15 => t('15 minute'),
+      30 => t('30 minute'),
+    ),
+    '#weight' => 3,
+    '#parents' => array('extra', 'minuteincrements'),
   );
   return $form;
 }
@@ -88,14 +103,15 @@ function _webform_render_time($component, $value = NULL, $filter = TRUE) {
 
   $element = array(
     '#type' => 'webform_time',
-    '#title' => $filter ? _webform_filter_xss($component['name']) : $component['name'],
+    '#title' => $filter ? webform_filter_xss($component['name']) : $component['name'],
     '#title_display' => $component['extra']['title_display'] ? $component['extra']['title_display'] : 'before',
-    '#required' => $component['mandatory'],
+    '#required' => $component['required'],
     '#weight' => $component['weight'],
-    '#description' => $filter ? _webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
+    '#description' => $filter ? webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
     '#element_validate' => array('webform_validate_time'),
     '#hourformat' => $component['extra']['hourformat'],
-    '#default_value' => $filter ? _webform_filter_values($component['value'], $node, NULL, NULL, FALSE) : $component['value'],
+    '#minuteincrements' => $component['extra']['minuteincrements'],
+    '#default_value' => $filter ? webform_replace_tokens($component['value'], $node) : $component['value'],
     '#timezone' => $component['extra']['timezone'],
     '#process' => array('webform_expand_time'),
     '#theme' => 'webform_time',
@@ -147,19 +163,56 @@ function webform_expand_time($element) {
   // Generate the choices for drop-down selects.
   $hours[''] = t('hour');
   $minutes[''] = t('minute');
-  for ($i = $first_hour; $i <= $last_hour; $i++) $hours[$i] = $i;
-  for ($i = 0; $i <= 59; $i++) $minutes[$i] = $i < 10 ? "0$i" : $i;
+  for ($i = $first_hour; $i <= $last_hour; $i++) {
+    $hours[$i] = $i;
+  }
+  for ($i = 0; $i <= 59; $i += $element['#minuteincrements']) {
+    $minutes[$i] = $i < 10 ? "0$i" : $i;
+  }
   $ampms = array('am' => t('am'), 'pm' => t('pm'));
+
+  // Adjust the default for minutes if needed, rounding up to the closest value.
+  if (!isset($minutes[$default_values['minute']])) {
+    foreach ($minutes as $minute => $padded_minute) {
+      if ($minute > $default_values['minute']) {
+        $default_values['minute'] = $minute;
+        break;
+      }
+    }
+  }
+
+  // If the above loop didn't set a value, it's because rounding up would go to
+  // the next hour. This gets quite a bit more complicated, since we need to
+  // deal with looping around on hours, as well as flipping am/pm.
+  if (!isset($minutes[$default_values['minute']])) {
+    $default_values['minute'] = 0;
+    $default_values['hour']++;
+    // If the hour rolls over also, set hour to the first hour in the list.
+    if (!isset($hours[$default_values['hour']])) {
+      $default_values['hour'] = $element['#hourformat'] == '12-hour' ? 1 : 0;
+    }
+    // If the hour has been incremented to 12:00 in 12-hour format, flip am/pm.
+    // Note that technically midnight and noon are neither am or pm, but common
+    // convention (and US standard) is to represent 12:00am as midnight.
+    // See http://en.wikipedia.org/wiki/Midnight#Start_and_end_of_day.
+    if ($element['#hourformat'] == '12-hour' && $default_values['hour'] == 12) {
+      $default_values['ampm'] = $default_values['ampm'] == 'am' ? 'pm' : 'am';
+    }
+  }
 
   $element['hour'] = array(
     '#prefix' => '',
     '#type' => 'select',
+    '#title' => t('Hour'),
+    '#title_display' => 'invisible',
     '#default_value' => $default_values['hour'],
     '#options' => $hours,
   );
   $element['minute'] = array(
     '#prefix' => ':',
     '#type' => 'select',
+    '#title' => t('Minute'),
+    '#title_display' => 'invisible',
     '#default_value' => $default_values['minute'],
     '#options' => $minutes,
   );
@@ -185,10 +238,13 @@ function webform_expand_time($element) {
 function theme_webform_time($variables) {
   $element = $variables['element'];
 
+  $element['hour']['#attributes']['class'][] = 'hour';
+  $element['minute']['#attributes']['class'][] = 'minute';
+
   // Add error classes to all items within the element.
   if (form_get_error($element)) {
-    $element['hour']['#attributes']['class'] = array('error');
-    $element['minute']['#attributes']['class'] = array('error');
+    $element['hour']['#attributes']['class'][] = 'error';
+    $element['minute']['#attributes']['class'][] = 'error';
   }
 
   $output = '<div class="webform-container-inline">' . drupal_render($element['hour']) . drupal_render($element['minute']) . drupal_render($element['ampm']) . '</div>';
@@ -198,12 +254,11 @@ function theme_webform_time($variables) {
 
 function webform_validate_time($element, $form_state) {
   $form_key = $element['#webform_component']['form_key'];
-  $name = $element['#webform_component']['name'];
 
   // Check if the user filled the required fields.
   foreach ($element['#hourformat'] == '12-hour' ? array('hour', 'minute', 'ampm') : array('hour', 'minute') as $field_type) {
     if ($element[$field_type]['#value'] === '' && $element['#required']) {
-      form_error($element, t('%field field is required.', array('%field' => $name)));
+      form_error($element, t('!name field is required.', array('!name' => $element['#title'])));
       return;
     }
   }
@@ -211,7 +266,7 @@ function webform_validate_time($element, $form_state) {
   // Check for a valid time.
   if ($element['hour']['#value'] !== '' || $element['minute']['#value'] !== '') {
     if (!is_numeric($element['hour']['#value']) || !is_numeric($element['minute']['#value']) || (isset($element['ampm']) && $element['ampm']['#value'] === '')) {
-      form_error($element, t('Entered %name is not a valid time.', array('%name' => $name)));
+      form_error($element, t('Entered !name is not a valid time.', array('!name' => $element['#title'])));
       return;
     }
   }
@@ -241,6 +296,7 @@ function _webform_display_time($component, $value, $format = 'html') {
 
   return array(
     '#title' => $component['name'],
+    '#title_display' => $component['extra']['title_display'] ? $component['extra']['title_display'] : 'before',
     '#weight' => $component['weight'],
     '#theme' => 'webform_display_time',
     '#theme_wrappers' => $format == 'html' ? array('webform_element') : array('webform_element_text'),
@@ -297,7 +353,10 @@ function _webform_analysis_time($component, $sids = array()) {
   $nonblanks = count($times);
   $rows[0] = array(t('Left Blank'), ($submissions - $nonblanks));
   $rows[1] = array(t('User entered value'), $nonblanks);
-  return $rows;
+
+  return array(
+    'table_rows' => $rows,
+  );
 }
 
 /**
@@ -326,7 +385,7 @@ function _webform_csv_headers_time($component, $export_options) {
   $header = array();
   $header[0] = '';
   $header[1] = '';
-  $header[2] = $component['name'];
+  $header[2] = $export_options['header_keys'] ? $component['form_key'] : $component['name'];
   return $header;
 }
 
@@ -336,7 +395,8 @@ function _webform_csv_headers_time($component, $export_options) {
 function _webform_csv_data_time($component, $export_options, $value) {
   if ($value[0]) {
     $time = webform_date_array($value[0], 'time');
-    if ($component['extra']['hourformat'] == '24-hour') {
+    // An ISO 8601 time is the same as 24-hour time.
+    if (!empty($export_options['iso8601_time']) || $component['extra']['hourformat'] == '24-hour') {
       return sprintf('%02d', $time['hour']) . ':' . sprintf('%02d', $time['minute']);
     }
     else {
@@ -367,6 +427,7 @@ function webform_time_convert($array, $format) {
     }
     elseif ($format == '24-hour' && isset($array['ampm'])) {
       $array['hour'] = ($array['hour'] < 12 && $array['ampm'] == 'pm') ? $array['hour'] + 12 : (int) $array['hour'];
+      $array['hour'] = ($array['hour'] == 12 && $array['ampm'] == 'am') ? 0 : $array['hour'];
     }
   }
 
