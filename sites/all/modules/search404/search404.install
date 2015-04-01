@@ -9,7 +9,6 @@
  */
 function search404_install() {
   variable_set('site_404', 'search404');
-  variable_set('search404_page_title', 'Page not found');
 }
 
 function search404_uninstall() {

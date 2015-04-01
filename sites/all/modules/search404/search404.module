@@ -125,7 +125,7 @@ function search404_page() {
   $output = '';
   drupal_set_title(variable_get('search404_page_title', t('Page not found')));
   if (module_exists('search') && (user_access('search content') || user_access('search by page'))) {
-    $results = '';
+    $results = array();
 
     // Get and use the default search engine for the site.
     $default_search = search_get_default_module_info();
@@ -192,17 +192,19 @@ function search404_page() {
               drupal_set_message(t('The page you requested does not exist. For your convenience, a search was performed using the query %keys.', array('%keys' => check_plain($keys))), 'error');
             }
             if (isset($results['#results']) && count($results['#results']) >= 1) {
-              drupal_add_css(drupal_get_path('module', 'search') . '/search.css', 'module', 'all', FALSE);
+              drupal_add_css(drupal_get_path('module', 'search') . '/search.css');
             }
             else {
-              $results = search_help('search#noresults', drupal_help_arg());
+              $results['#markup'] = search_help('search#noresults', drupal_help_arg());
             }
           }
         }
         else {
           // Normal $results['#results'] doesn't exist, we will not redirect
           // and just hope the strange search module knows how to render its output.
-          drupal_set_message(t('The page you requested does not exist. For your convenience, a search was performed using the query %keys.', array('%keys' => check_plain($keys))), 'error');
+          if (!variable_get('search404_disable_error_message', FALSE)) {
+            drupal_set_message(t('The page you requested does not exist. For your convenience, a search was performed using the query %keys.', array('%keys' => check_plain($keys))), 'error');
+          }
         }
       }
     }
@@ -212,8 +214,22 @@ function search404_page() {
       module_load_include('inc', 'apachesolr_search', 'apachesolr_search.pages');
       $search_page = apachesolr_search_page_load('core_search');
       $form = drupal_get_form('apachesolr_search_custom_page_search_form', $search_page, $keys);
+
       // Set the action to point to the search page, otherwise form will submit to current 404 page
-      $form['#action'] = '/' . $form['#search_page']->search_path . $form['#action'];
+      // Newer versions of apache_solr is returning search_page as an array while earlier versions
+      // to return an object. (#1923954)
+      if (is_array($search_page)) {
+        $search_path = $search_page['search_path'];
+      }
+      else {
+        $search_page->search_path;
+      }
+      $form['#action'] = url($search_path);
+      // Remove the form value since it will include
+      // the destination directive and force a search submit button loop
+      // If not reset properly, the resulting search form will have a
+      // destination pointing back to the broken page that triggered the 404
+      $form['basic']['get']['#value'] = json_encode(array());
     }
     else {
       // Get the default search form
