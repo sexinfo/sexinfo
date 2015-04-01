@@ -214,9 +214,11 @@ function hook_user_categories() {
  * to have their data serialized on save.
  *
  * @param $edit
- *   The array of form values submitted by the user.
+ *   The array of form values submitted by the user. Assign values to this
+ *   array to save changes in the database.
  * @param $account
- *   The user object on which the operation is performed.
+ *   The user object on which the operation is performed. Values assigned in
+ *   this object will not be saved in the database.
  * @param $category
  *   The active category of user information being edited.
  *
@@ -224,9 +226,10 @@ function hook_user_categories() {
  * @see hook_user_update()
  */
 function hook_user_presave(&$edit, $account, $category) {
-  // Make sure that our form value 'mymodule_foo' is stored as 'mymodule_bar'.
+  // Make sure that our form value 'mymodule_foo' is stored as
+  // 'mymodule_bar' in the 'data' (serialized) column.
   if (isset($edit['mymodule_foo'])) {
-    $edit['data']['my_module_foo'] = $edit['my_module_foo'];
+    $edit['data']['mymodule_bar'] = $edit['mymodule_foo'];
   }
 }
 
@@ -298,6 +301,14 @@ function hook_user_login(&$edit, $account) {
 /**
  * The user just logged out.
  *
+ * Note that when this hook is invoked, the changes have not yet been written to
+ * the database, because a database transaction is still in progress. The
+ * transaction is not finalized until the save operation is entirely completed
+ * and user_save() goes out of scope. You should not rely on data in the
+ * database at this time as it is not updated yet. You should also note that any
+ * write/update database queries executed from this hook are also not committed
+ * immediately. Check user_save() and db_transaction() for more info.
+ *
  * @param $account
  *   The user object on which the operation was just performed.
  */
@@ -315,6 +326,14 @@ function hook_user_logout($account) {
  *
  * The module should format its custom additions for display and add them to the
  * $account->content array.
+ *
+ * Note that when this hook is invoked, the changes have not yet been written to
+ * the database, because a database transaction is still in progress. The
+ * transaction is not finalized until the save operation is entirely completed
+ * and user_save() goes out of scope. You should not rely on data in the
+ * database at this time as it is not updated yet. You should also note that any
+ * write/update database queries executed from this hook are also not committed
+ * immediately. Check user_save() and db_transaction() for more info.
  *
  * @param $account
  *   The user object on which the operation is being performed.
@@ -367,7 +386,7 @@ function hook_user_view_alter(&$build) {
 }
 
 /**
- * Inform other modules that a user role is about to be saved.
+ * Act on a user role being inserted or updated.
  *
  * Modules implementing this hook can act on the user role object before
  * it has been saved to the database.
@@ -386,7 +405,7 @@ function hook_user_role_presave($role) {
 }
 
 /**
- * Inform other modules that a user role has been added.
+ * Respond to creation of a new user role.
  *
  * Modules implementing this hook can act on the user role object when saved to
  * the database. It's recommended that you implement this hook if your module
@@ -407,7 +426,7 @@ function hook_user_role_insert($role) {
 }
 
 /**
- * Inform other modules that a user role has been updated.
+ * Respond to updates to a user role.
  *
  * Modules implementing this hook can act on the user role object when updated.
  * It's recommended that you implement this hook if your module adds additional
@@ -428,7 +447,7 @@ function hook_user_role_update($role) {
 }
 
 /**
- * Inform other modules that a user role has been deleted.
+ * Respond to user role deletion.
  *
  * This hook allows you act when a user role has been deleted.
  * If your module stores references to roles, it's recommended that you
