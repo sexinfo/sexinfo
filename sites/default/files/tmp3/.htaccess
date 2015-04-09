@@ -1,9 +1,9 @@
-# https://www.drupal.org/SA-CORE-2013-003
-# This is a security fix for a core drupal error
-
 # Turn off all options we don't need.
 Options None
 Options +FollowSymLinks
+
+# None of these temporary files should be used externally on this site
+Deny from all
 
 # Set the catch-all handler to prevent scripts from being executed.
 SetHandler Drupal_Security_Do_Not_Remove_See_SA_2006_006
