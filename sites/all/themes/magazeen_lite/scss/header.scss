@@ -67,7 +67,6 @@
   @include mobile {
     float: none;
     margin: 10px auto 0;
-    width: 75%;
   }
 }
 
@@ -122,6 +121,8 @@ img#logo-image {
   }
 
   @include mobile {
+    display: none;
+
     float: none;
     margin: 20px auto 10px;
     text-align: center;

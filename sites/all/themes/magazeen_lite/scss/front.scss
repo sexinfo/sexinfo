@@ -130,7 +130,7 @@
 // TODO: this is getting really awful, needs refactoring
 .carousel-container {
   margin: 20px auto 25px;
-  width: 985px;
+  width: 100%;
 
   @include mobile { width: auto; }
 }
@@ -144,20 +144,22 @@
   height: 250px;
   float: left;
   margin: 0;
-  margin-right: 10px;
+  margin-right: 1%;
   overflow: hidden;
   position: relative;
-  width: 400px;
+  width: 33%;
 
   @include mobile {
     margin: 0 auto 10px;
     float: none;
+    width: 100%
   }
 }
   #window-inner {
     /* An inner container that's scrolled by JS - sort of like a film reel */
     position: absolute;
     top: 0; left: 0;
+    width: 100%
   }
 
 .carousel-frame {
@@ -166,34 +168,38 @@
   height: 250px;
   overflow: hidden;
   position: relative;
-  width: 400px;
+  width: 100%;
 
-  .carousel-caption {
+  .carousel-backdrop {
     background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 5px;
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 390px;
+    width: 100%
+  }
+
+  .carousel-caption {
+    color: white;
+    padding: 4px;
+    text-align: justify;
   }
 }
 
 #carousel-nav {
   font-size: 0.9em;
   float: left;
-  width: 555px;
+  width: 66%;
 
   @include mobile {
     @include clearfix;
     float: none;
     margin: 0 auto;
-    width: 400px;
+    width: 100%;
   }
 }
   .carousel-nav-left,
   .carousel-nav-right {
-    width: 277px;
+    width: 50%;
 
     @include mobile {
       float: none;
