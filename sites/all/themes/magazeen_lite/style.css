@@ -1899,8 +1899,7 @@ p.copyright {
   @media (max-width: 767px) {
     #searchform-header {
       float: none;
-      margin: 10px auto 0;
-      width: 75%; } }
+      margin: 10px auto 0; } }
 
 input#edit-search-block-form--2 {
   background: #fdfefe url(images/searchform-back.gif) no-repeat left top;
@@ -1952,6 +1951,7 @@ img#logo-image {
       color: #B2B2B2; }
   @media (max-width: 767px) {
     .social-buttons {
+      display: none;
       float: none;
       margin: 20px auto 10px;
       text-align: center;
@@ -2454,7 +2454,7 @@ ul.slinks {
 
 .carousel-container {
   margin: 20px auto 25px;
-  width: 985px; }
+  width: 100%; }
   @media (max-width: 767px) {
     .carousel-container {
       width: auto; } }
@@ -2474,20 +2474,22 @@ ul.slinks {
   height: 250px;
   float: left;
   margin: 0;
-  margin-right: 10px;
+  margin-right: 1%;
   overflow: hidden;
   position: relative;
-  width: 400px; }
+  width: 33%; }
   @media (max-width: 767px) {
     #carousel-window {
       margin: 0 auto 10px;
-      float: none; } }
+      float: none;
+      width: 100%; } }
 
 #window-inner {
   /* An inner container that's scrolled by JS - sort of like a film reel */
   position: absolute;
   top: 0;
-  left: 0; }
+  left: 0;
+  width: 100%; }
 
 .carousel-frame {
   color: white;
@@ -2495,26 +2497,28 @@ ul.slinks {
   height: 250px;
   overflow: hidden;
   position: relative;
-  width: 400px; }
-  .carousel-frame .carousel-caption {
+  width: 100%; }
+  .carousel-frame .carousel-backdrop {
     background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 5px;
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 390px; }
+    width: 100%; }
+  .carousel-frame .carousel-caption {
+    color: white;
+    padding: 4px;
+    text-align: justify; }
 
 #carousel-nav {
   font-size: 0.9em;
   float: left;
-  width: 555px; }
+  width: 66%; }
   @media (max-width: 767px) {
     #carousel-nav {
       *zoom: 1;
       float: none;
       margin: 0 auto;
-      width: 400px; }
+      width: 100%; }
       #carousel-nav:before, #carousel-nav:after {
         display: table;
         content: ""; }
@@ -2523,7 +2527,7 @@ ul.slinks {
 
 .carousel-nav-left,
 .carousel-nav-right {
-  width: 277px; }
+  width: 50%; }
   @media (max-width: 767px) {
     .carousel-nav-left,
     .carousel-nav-right {
