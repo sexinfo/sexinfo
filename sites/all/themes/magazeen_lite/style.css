@@ -2159,7 +2159,8 @@ ul.pager {
   border-bottom: 1px solid #e8ebec;
   margin: 0;
   padding: 22px 22px 11px;
-  position: relative; }
+  position: relative;
+  word-break: break-word; }
 
 .page-content {
   padding: 15px 22px 0; }

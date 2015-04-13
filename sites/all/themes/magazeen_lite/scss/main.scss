@@ -70,6 +70,9 @@ ul.pager {
   margin: 0;
   padding: 22px 22px 11px;
   position: relative;
+  word-break: break-word; // This is required for responsive mobile 
+                          // if a link is too long or if there's a 
+                          // lot of spaces in an article.
 }
 
   .page-content { padding:15px 22px 0; }
