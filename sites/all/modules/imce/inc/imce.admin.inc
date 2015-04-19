@@ -16,7 +16,8 @@ function imce_admin() {
   $rows = array();
 
   foreach ($profiles as $pid => $profile) {
-    $rows[] = array($profile['name'],
+    $rows[] = array(
+      check_plain($profile['name']),
       l(t('Edit'), 'admin/config/media/imce/profile/edit/' . $pid),
       $pid == 1 ? '' : l(t('Delete'), 'admin/config/media/imce/profile/delete/' . $pid),
     );
@@ -34,6 +35,18 @@ function imce_admin() {
     '#attributes' => array('id' => 'imce-profiles-list'),
   );
   $output['form'] = drupal_get_form('imce_admin_form');
+
+  // Display security warnings
+  if (empty($_POST)) {
+    $roles = variable_get('imce_roles_profiles', array());
+    if (!empty($roles[DRUPAL_ANONYMOUS_RID]['public_pid']) || !empty($roles[DRUPAL_ANONYMOUS_RID]['private_pid'])) {
+      drupal_set_message(t('Anonymous user role has access to IMCE.') . ' ' . t('Make sure this is not a misconfiguration.'), 'warning');
+    }
+    if (imce_admin_check_wildcard_upload(DRUPAL_AUTHENTICATED_RID, $roles)) {
+      drupal_set_message(t('Authenticated user role is assigned a configuration profile with unrestricted file extensions.') . ' ' . t('Make sure this is not a misconfiguration.'), 'warning');
+    }
+  }
+
   return $output;
 }
 
@@ -116,7 +129,7 @@ function imce_admin_theme($variables) {
   $swrappers = file_get_stream_wrappers(STREAM_WRAPPERS_VISIBLE);
   foreach ($swrappers as $scheme => $info) {
     $header[] = l($info['name'], 'imce/' . $scheme);
-    $rows[0][] = $profile1['name'];
+    $rows[0][] = check_plain($profile1['name']);
     $keys[] = $scheme . '_pid';
   }
 
@@ -146,6 +159,17 @@ function imce_admin_theme($variables) {
 }
 
 /**
+ * Validate admin form.
+ */
+function imce_admin_form_validate($form, &$form_state) {
+  $roles = $form_state['values']['roles'];
+  // Check anonymous profile. Do not allow wildcard upload.
+  if ($key = imce_admin_check_wildcard_upload(DRUPAL_ANONYMOUS_RID, $roles)) {
+    form_error($form['roles'][DRUPAL_ANONYMOUS_RID][$key], t('Anonymous user role can not have a configuration profile with unrestricted file extensions.'));
+  }
+}
+
+/**
  * Submit admin form.
  */
 function imce_admin_submit($form, &$form_state) {
@@ -172,7 +196,7 @@ function imce_profile_operations($op = 'add', $pid = 0) {
     return drupal_get_form('imce_profile_delete_form', $pid);
   }
   //add-edit
-  if ($pid != 1 || $GLOBALS['user']->uid == 1) {
+  if ($op === 'add' || $op === 'edit') {
     return drupal_get_form('imce_profile_form', $pid);
   }
   drupal_access_denied();
@@ -249,7 +273,7 @@ function imce_profile_form($form, &$form_state, $pid = 0) {
   );
   $form['dimensions'] = array(
     '#type' => 'textfield',
-    '#title' => t('Maximum image resolution'),
+    '#title' => t('Maximum image dimensions'),
     '#default_value' => $profile['dimensions'],
     '#description' => t('The maximum allowed image size (e.g. 640x480). Set to 0 for no restriction. If an <a href="!image-toolkit-link">image toolkit</a> is installed, files exceeding this value will be scaled down to fit.', array('!image-toolkit-link' => url('admin/config/media/image-toolkit'))),
     '#field_suffix' => '<kbd>' . t('WIDTHxHEIGHT') . '</kbd>',
@@ -482,7 +506,7 @@ function imce_thumbnails_theme($variables) {
  */
 function imce_role_form($role, $weight = TRUE, $core = TRUE) {
   $form['name'] = array(
-    '#markup' => $role['name'],
+    '#markup' => check_plain($role['name']),
   );
   if ($weight) {
     $form['weight'] = $core ? array(
@@ -685,6 +709,31 @@ function imce_sorted_roles() {
  */
 function imce_rolesort($r1, $r2) {
   return $r1['weight']-$r2['weight'];
+}
+
+/**
+ * Checks if the given role can upload all extensions.
+ */
+function imce_admin_check_wildcard_upload($rid, $conf = NULL) {
+  if (!isset($conf)) {
+    $conf = variable_get('imce_roles_profiles', array());
+  }
+  if (!empty($conf[$rid])) {
+    foreach ($conf[$rid] as $key => $pid) {
+      if ($pid && substr($key, -4) == '_pid') {
+        if ($profile = imce_load_profile($pid)) {
+          if ($profile['extensions'] === '*' && !empty($profile['directories'])) {
+            foreach ($profile['directories'] as $dirconf) {
+              if (!empty($dirconf['upload'])) {
+                return $key;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  return FALSE;
 }
 
 //Include core profile functions.

@@ -11,6 +11,7 @@
 function imce($scheme = NULL) {
   module_invoke('admin_menu', 'suppress');//suppress admin_menu
   $jsop = isset($_GET['jsop']) ? $_GET['jsop'] : NULL;
+  drupal_add_http_header('Content-Type', 'text/html; charset=utf-8');
   print imce_page($GLOBALS['user'], $scheme, $jsop);
   exit();
 }
@@ -115,7 +116,7 @@ function imce_js($user, $scheme, $jsop = '') {
   //disable devel log.
   $GLOBALS['devel_shutdown'] = FALSE;
   //for upload we must return plain text header.
-  drupal_add_http_header('Content-Type', 'text/' . ($jsop == 'upload' ? 'html' : 'javascript') . '; charset=utf-8');
+  drupal_add_http_header('Content-Type', (!empty($_POST['html_response']) ? 'text/html' : 'application/json') . '; charset=utf-8');
   print drupal_json_encode($response);
   exit();
 }
@@ -143,6 +144,7 @@ function imce_upload_form($form, &$form_state, $ref) {
     '#submit' => $imce['perm']['upload'] ? array('imce_upload_submit') : NULL,
   );
   $form = array('fset_upload' => array('#type' => 'fieldset', '#title' => t('Upload file')) + $form);
+  $form['html_response'] = array('#type' => 'hidden', '#default_value' => '1');
   $form['#attributes']['enctype'] = 'multipart/form-data';
   $form['#action'] = $imce['url'];
   return $form;
@@ -258,7 +260,7 @@ function imce_fileop_form_validate($form, &$form_state) {
     return form_error($form['filenames'], t('Please select a file.'));
   }
 
-  //filenames come seperated by colon
+  //filenames come separated by colon
   $filenames = explode(':', $form_state['values']['filenames']);
   $cnt = count($filenames);
   //check the number of files.
@@ -359,7 +361,7 @@ function imce_resize_submit($form, &$form_state) {
   //check dimensions
   $width = (int) $form_state['values']['width'];
   $height = (int) $form_state['values']['height'];
-  list($maxw, $maxh) = explode('x', $imce['dimensions']);
+  list($maxw, $maxh) = $imce['dimensions'] ? explode('x', $imce['dimensions']) : array(0, 0);
   if ($width < 1 || $height < 1 || ($maxw && ($width > $maxw || $height > $maxh))) {
     drupal_set_message(t('Please specify dimensions within the allowed range that is from 1x1 to @dimensions.', array('@dimensions' => $imce['dimensions'] ? $imce['dimensions'] : t('unlimited'))), 'error');
     return;
@@ -423,10 +425,6 @@ function imce_delete_filepath($uri) {
     // Force delete file. Prevent running file_usage_list() second time.
     if (!file_delete($file, TRUE)) {
       return FALSE;
-    }
-    // Remove imce usage
-    if ($is_imce) {
-      file_usage_delete($file, 'imce');
     }
   }
   // Not in db. Probably loaded via ftp.
@@ -676,13 +674,25 @@ function imce_validate_quotas($file, &$imce, $add = 0) {
 }
 
 /**
- * Check if the file is an image and return info.
+ * Checks if the file is an image and returns info.
+ * There are two switchable versions that use image_get_info() and getimagesize()
  */
-function imce_image_info($file) {
-  if (is_file($file) && ($dot = strrpos($file, '.')) && in_array(strtolower(substr($file, $dot+1)), array('jpg', 'jpeg', 'gif', 'png')) && ($info = @getimagesize($file)) && in_array($info[2], array(IMAGETYPE_JPEG, IMAGETYPE_GIF, IMAGETYPE_PNG)) ) {
-    return array('width' => $info[0], 'height' => $info[1], 'type' => $info[2], 'mime' => $info['mime']);
+if (variable_get('imce_image_get_info', 0)) {
+  function imce_image_info($file) {
+    $mimes = array('image/jpeg' => IMAGETYPE_JPEG, 'image/gif'  => IMAGETYPE_GIF, 'image/png'  => IMAGETYPE_PNG);
+    if (is_file($file) && ($dot = strrpos($file, '.')) && in_array(strtolower(substr($file, $dot+1)), array('jpg', 'jpeg', 'gif', 'png')) && ($info = @image_get_info($file)) && isset($mimes[$info['mime_type']]) ) {
+      return array('width' => $info['width'], 'height' => $info['height'], 'type' => $mimes[$info['mime_type']], 'mime' => $info['mime_type']);
+    }
+    return FALSE;
   }
-  return FALSE;
+}
+else {
+  function imce_image_info($file) {
+    if (is_file($file) && ($dot = strrpos($file, '.')) && in_array(strtolower(substr($file, $dot+1)), array('jpg', 'jpeg', 'gif', 'png')) && ($info = @getimagesize($file)) && in_array($info[2], array(IMAGETYPE_JPEG, IMAGETYPE_GIF, IMAGETYPE_PNG)) ) {
+      return array('width' => $info[0], 'height' => $info[1], 'type' => $info[2], 'mime' => $info['mime']);
+    }
+    return FALSE;
+  }
 }
 
 /**
@@ -838,6 +848,7 @@ function imce_working_directory(&$imce) {
 
   //or the whole list.
   foreach ($imce['directories'] as $dirname => $info) {
+    $dirname = (string) $dirname;
     if (imce_check_directory($dirname, $imce)) {
       if ($sess) {
         $_SESSION['imce_directory'] = rawurlencode($dirname);

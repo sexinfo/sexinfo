@@ -15,6 +15,7 @@ function imce_menu() {
     'title' => 'File browser',
     'page callback' => 'imce',
     'access callback' => 'imce_access',
+    'access arguments' => array(FALSE, 1),
     'file' => 'inc/imce.page.inc',
     'type' => MENU_CALLBACK,
   );
@@ -118,7 +119,7 @@ function imce_textarea($element) {
   if (!isset($regexp)) {
     $regexp = FALSE;
     if (imce_access() && $regexp = str_replace(' ', '', variable_get('imce_settings_textarea', ''))) {
-      $regexp = '@^' . str_replace(',', '|', implode('.*', array_map('preg_quote', explode('*', $regexp)))) . '$@';
+      $regexp = '@^(' . str_replace(',', '|', implode('.*', array_map('preg_quote', explode('*', $regexp)))) . ')$@';
     }
   }
   if ($regexp && preg_match($regexp, $element['#id'])) {
@@ -132,58 +133,39 @@ function imce_textarea($element) {
  * Returns the configuration profile assigned to a user for a specific file scheme.
  */
 function imce_user_profile($user, $scheme = NULL) {
-  $profiles = variable_get('imce_profiles', array());
+  static $ups = array();
+
+  // Set scheme
+  if (empty($scheme)) {
+    $scheme = variable_get('file_default_scheme', 'public');
+  }
+
+  // Return from cache.
+  if (isset($ups[$scheme][$user->uid])) {
+    return $ups[$scheme][$user->uid];
+  }
+  $ups[$scheme][$user->uid] = FALSE;
+
+  // Check scheme
   $swrappers = file_get_stream_wrappers();
-  $default_scheme = variable_get('file_default_scheme', 'public');
+  if (!isset($swrappers[$scheme])) {
+    return FALSE;
+  }
 
-  //handle user#1 separately
+  $profiles = variable_get('imce_profiles', array());
+  $scinfo = array('scheme' => $scheme);
+
+  // Handle user#1 separately
   if ($user->uid == 1) {
-    $scheme = empty($scheme) ? $default_scheme : $scheme;
-    if (isset($profiles[1]) && isset($swrappers[$scheme])) {
-      return $profiles[1] + array('scheme' => $scheme);
-    }
-    return FALSE;
+    return $ups[$scheme][$user->uid] = isset($profiles[1]) ? $profiles[1] + $scinfo : FALSE;
   }
 
-  //handle regular users
+  // Handle regular users.
   $roles_profiles = variable_get('imce_roles_profiles', array());
-  //store assigned configuration
-  $conf = array();
-  foreach ($roles_profiles as $rid => $role) {
-    if (isset($user->roles[$rid])) {
-      $conf = $role;
-      break;
-    }
-  }
-
-  //no scheme-profile assignment
-  if (empty($conf)) {
-    return FALSE;
-  }
-
-  //return the profile for the specified scheme
-  if (!empty($scheme)) {
-    $key = $scheme . '_pid';
-    if (isset($conf[$key]) && isset($profiles[$conf[$key]]) && isset($swrappers[$scheme])) {
-      return $profiles[$conf[$key]] + array('scheme' => $scheme);
-    }
-    return FALSE;
-  }
-
-  //no scheme specified. check the default
-  $scheme = $default_scheme;
-  $key = $scheme . '_pid';
-  if (isset($conf[$key]) && isset($profiles[$conf[$key]]) && isset($swrappers[$scheme])) {
-    return $profiles[$conf[$key]] + array('scheme' => $scheme);
-  }
-
-  //check if any of the schemes has a profile assigned.
-  foreach ($conf as $key => $pid) {
-    if (substr($key, -4) == '_pid' && isset($profiles[$pid])) {
-      $scheme = substr($key, 0, -4);
-      if (isset($swrappers[$scheme])) {
-        return $profiles[$pid] + array('scheme' => $scheme);
-      }
+  $sckey = $scheme . '_pid';
+  foreach ($roles_profiles as $rid => $conf) {
+    if (isset($user->roles[$rid]) && isset($conf[$sckey]) && isset($profiles[$conf[$sckey]])) {
+      return $ups[$scheme][$user->uid] = $profiles[$conf[$sckey]] + $scinfo;
     }
   }
 
@@ -194,28 +176,11 @@ function imce_user_profile($user, $scheme = NULL) {
  * Checks if the user is assigned an imce profile.
  * A more detailed assignment check is performed before imce loads.
  */
-function imce_access($user = FALSE) {
+function imce_access($user = FALSE, $scheme = NULL) {
   if ($user === FALSE) {
     global $user;
   }
-
-  if ($user->uid == 1) {
-    return TRUE;
-  }
-
-  $roles_profiles = variable_get('imce_roles_profiles', array());
-  foreach ($roles_profiles as $rid => $role) {
-    if (isset($user->roles[$rid])) {
-      foreach ($role as $key => $pid) {
-        if (substr($key, -4) == '_pid' && $pid) {
-          return TRUE;
-        }
-      }
-      break;
-    }
-  }
-
-  return FALSE;
+  return imce_user_profile($user, $scheme) ? TRUE : FALSE;
 }
 
 /**
@@ -225,7 +190,6 @@ function imce_user_page_access($account, $user = FALSE) {
   if ($user === FALSE) {
     global $user;
   }
-
   return ($user->uid == 1 || $account->uid == $user->uid) && ($profile = imce_user_profile($account)) && $profile['usertab'];
 }
 
@@ -233,5 +197,5 @@ function imce_user_page_access($account, $user = FALSE) {
  * Check if the directory name is regular.
  */
 function imce_reg_dir($dirname) {
-  return $dirname == '.' || (is_string($dirname) && $dirname != '' && !preg_match('@(^\s)|(^/)|(^\./)|(\s$)|(/$)|(/\.$)|(\.\.)|(//)|(\\\\)|(/\./)@', $dirname));
+  return $dirname == '.' || is_int($dirname) || (is_string($dirname) && $dirname != '' && !preg_match('@(^\s)|(^/)|(^\./)|(\s$)|(/$)|(/\.$)|(\.\.)|(//)|(\\\\)|(/\./)@', $dirname));
 }

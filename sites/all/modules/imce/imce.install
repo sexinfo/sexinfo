@@ -11,13 +11,13 @@
 function imce_install() {
   module_load_include('inc', 'imce', 'inc/imce.core.profiles');
   imce_install_profiles();
-  drupal_set_message(st('!module has been installed.', array('!module' => l(st('IMCE'), 'admin/config/media/imce'))));
 }
 
 /**
  * Implements hook_uninstall().
  */
 function imce_uninstall() {
+  db_delete('file_usage')->condition('module', 'imce')->execute();
   variable_del('imce_profiles');
   variable_del('imce_roles_profiles');
   variable_del('imce_settings_textarea');
@@ -100,5 +100,25 @@ function imce_update_7001(&$sandbox) {
   if ($sandbox['#finished'] >= 1) {
     db_drop_table('imce_files');
     return t('Migrated IMCE files.');
+  }
+}
+
+/**
+ * Fixes misconfigurations where anonymous user is given User-1 profile
+ */
+function imce_update_7002() {
+  $roles = variable_get('imce_roles_profiles', array());
+  $rid = DRUPAL_ANONYMOUS_RID;
+  if (!empty($roles[$rid])) {
+    $update = FALSE;
+    foreach ($roles[$rid] as $key => $value) {
+      if ($value == 1 && substr($key, -4) == '_pid') {
+        $roles[$rid][$key] = '0';
+        $update = TRUE;
+      }
+    }
+    if ($update) {
+      variable_set('imce_roles_profiles', $roles);
+    }
   }
 }
