@@ -3,11 +3,16 @@
 $(function() {
     var $imgs = $('.img-reveal');
     $imgs.wrap("<div class='img-reveal-container'></div>");
-    $imgs.css('display', 'none');
+    $imgs.css('visibility', 'hidden');
 
     $(document).on('click', '.img-reveal-container', function() {
-      $(this).find('img').toggle();
-      $(this).toggleClass('img-reveal-container-revealed');
+      var $img = $(this).find('img');
+      if ($img.css('visibility') == 'hidden')
+        $img.css('visibility', 'visible')
+      else
+        $img.css('visibility', 'hidden')
     });
+
+    // $(".img-reveal").fadeTo(500, 0); $(".img-reveal").fadeTo(500, 1);
 });
 

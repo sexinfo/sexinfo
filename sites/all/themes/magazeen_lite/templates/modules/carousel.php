@@ -3,6 +3,7 @@
 =============================-->
 
 <div class="column-container">
+  <h2 style="text-align: center;">Featured Articles</h2>
   <div id="image-carousel">
 
     <div id="carousel-window">
