@@ -1,4 +1,6 @@
 <div id="htmltagcloud">
+  <h2>Popular Topics</h2>
+  <hr>
   <span class="wrd tagcloud1"><a href="http://www.soc.ucsb.edu/sexinfo/article/anal-sex">anal</a></span>
   <span class="wrd tagcloud5"><a href="http://www.soc.ucsb.edu/sexinfo/article/male-condom">condom</a></span>
   <span class="wrd tagcloud1"><a href="http://www.soc.ucsb.edu/sexinfo/article/semen">ejaculate</a></span>

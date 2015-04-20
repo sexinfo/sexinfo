@@ -14,17 +14,16 @@
     text-decoration: underline;
   }
 
-  .left, .right { width: 40%; }
-
-  .left { float: left; }
-  .right { float: right; }
-
   ul {
   	list-style-type: none;
   	margin: 0;
   	padding: 0;
 
-  	li { margin-bottom: 10px; }
+  	li { 
+      margin-bottom: 10px;
+      display: inline-block;
+      padding: 8px;
+    }
 
   	i { padding-right: 5px; }
   }

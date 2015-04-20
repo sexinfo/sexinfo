@@ -389,7 +389,6 @@
 
 @-ms-viewport {
   width: device-width; }
-
 .hidden {
   display: none;
   visibility: hidden; }
@@ -1557,7 +1556,7 @@ html[xmlns] .clearfix {
   /* Chrome,Safari4+ */
   background: linear-gradient(top bottom, #ff5db1 0%, #ef017c 100%);
   /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5db1', endColorstr='#ef017c',GradientType=0 );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5db1', endColorstr='#ef017c',GradientType=0 );
   /* IE6-9 */
   border: 1px solid #e20e68;
   margin: 5px auto 25px;
@@ -1866,12 +1865,12 @@ p.copyright {
 
 .new-banner {
   background-color: #F98BB9;
-  background-image: linear-gradient(bottom, #f875ab 35%, #f98bb9 70%);
-  background-image: -o-linear-gradient(bottom, #f875ab 35%, #f98bb9 70%);
-  background-image: -moz-linear-gradient(bottom, #f875ab 35%, #f98bb9 70%);
-  background-image: -webkit-linear-gradient(bottom, #f875ab 35%, #f98bb9 70%);
-  background-image: -ms-linear-gradient(bottom, #f875ab 35%, #f98bb9 70%);
-  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.35, #f875ab), color-stop(0.7, #f98bb9));
+  background-image: linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+  background-image: -o-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+  background-image: -moz-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+  background-image: -webkit-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+  background-image: -ms-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.35, #F875AB), color-stop(0.7, #F98BB9));
   color: #FFFFFF;
   font-size: 1.1em;
   font-weight: bold;
@@ -1902,7 +1901,7 @@ p.copyright {
       margin: 10px auto 0; } }
 
 input#edit-search-block-form--2 {
-  background: #fdfefe url(images/searchform-back.gif) no-repeat left top;
+  background: #FDFEFE url(images/searchform-back.gif) no-repeat left top;
   border: 0 none;
   color: #AEA592;
   float: left;
@@ -1962,7 +1961,7 @@ img#logo-image {
 /* Navigation
 /* -------------- */
 #navigation {
-  background: white url(images/navigation.gif) repeat-x bottom center;
+  background: #FFF url(images/navigation.gif) repeat-x bottom center;
   border-top: 2px solid #393b3b;
   border-bottom: 1px solid #FFF;
   font-size: 1.1em;
@@ -2065,11 +2064,11 @@ a.rss:link, a.rss:active, a.rss:visited, a.rss:hover {
 
 #navigation ul li.menu-537 #topics-menu {
   display: none;
-  -webkit-box-shadow: 0 0 30px black black;
-  -moz-box-shadow: 0 0 30px black black;
-  box-shadow: 0 0 30px black black;
+  -webkit-box-shadow: 0 0 30px #000 #000;
+  -moz-box-shadow: 0 0 30px #000 #000;
+  box-shadow: 0 0 30px #000 #000;
   background: white;
-  border: 2px solid lightgrey;
+  border: 2px solid lightgray;
   position: absolute;
   width: 510px;
   z-index: 500; }
@@ -2231,18 +2230,14 @@ ul.pager {
   #footer a:active {
     color: inherit;
     text-decoration: underline; }
-  #footer .left, #footer .right {
-    width: 40%; }
-  #footer .left {
-    float: left; }
-  #footer .right {
-    float: right; }
   #footer ul {
     list-style-type: none;
     margin: 0;
     padding: 0; }
     #footer ul li {
-      margin-bottom: 10px; }
+      margin-bottom: 10px;
+      display: inline-block;
+      padding: 8px; }
     #footer ul i {
       padding-right: 5px; }
   #footer p:last-child {
@@ -2293,7 +2288,7 @@ ul.slinks {
   width: 305px; }
 
 #sidebar .block h2 {
-  background: url("images/sidebar-top.gif") no-repeat scroll center top #f5fbfe;
+  background: url("images/sidebar-top.gif") no-repeat scroll center top #F5FBFE;
   color: #587682;
   font: bold 2.25em Arial,Helvetica,sans-serif;
   height: 55px;
@@ -2302,7 +2297,7 @@ ul.slinks {
   width: 285px; }
 
 #sidebar .block .content {
-  background: url("images/sidebar-bottom.gif") no-repeat scroll center bottom #f5fbfe;
+  background: url("images/sidebar-bottom.gif") no-repeat scroll center bottom #F5FBFE;
   display: block;
   height: auto;
   margin: 0 0 0 0;
@@ -2370,12 +2365,20 @@ ul.slinks {
     clear: both; }
   .front-container:last-child {
     margin-bottom: 55px; }
+  @media (max-width: 767px) {
+    .front-container {
+      border: 0; } }
 
 .cloud-container {
   padding: 30px;
   margin-left: auto;
   margin-right: auto;
-  max-width: 75%; }
+  max-width: 75%;
+  text-align: center; }
+  @media (max-width: 767px) {
+    .cloud-container {
+      max-width: 100%;
+      width: 100%; } }
 
 .front-module {
   -webkit-box-sizing: border-box;
@@ -2706,6 +2709,34 @@ a:active.more-button {
   background-color: #ebf6fa;
   border: 1px solid #EAF1F4; }
 
+#intro-container {
+  display: table;
+  border-collapse: separate;
+  border-spacing: 10px; }
+  @media (max-width: 767px) {
+    #intro-container {
+      border-spacing: 0; } }
+
+#intro-container, .front-container {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+.cloud-container, #front-description {
+  width: 40%;
+  padding: 2%;
+  display: inline-block;
+  display: table-cell;
+  margin-top: 20px;
+  text-align: center; }
+  @media (max-width: 767px) {
+    .cloud-container, #front-description {
+      width: 100%;
+      max-width: 100%;
+      display: block;
+      padding: 0; } }
+  .cloud-container h2, #front-description h2 {
+    color: purple; }
+
 /* ----------------------------------------------*/
 /* Ask the Sexperts webform
 /* ----------------------------------------------*/
@@ -2967,7 +2998,7 @@ tr.odd.cat-row td {
     color: #f48ab7; }
 
 .text-on-image-tint {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
   transition: background-color 0.4s;
   height: 100%;
   width: 100%; }
@@ -3085,7 +3116,6 @@ tr.odd.cat-row td {
   src: url("/sexinfo/sites/all/themes/magazeen_lite/font-awesome/fontawesome-webfont.eot?#iefix&v=3.0.1") format("embedded-opentype"), url("/sexinfo/sites/all/themes/magazeen_lite/font-awesome/fontawesome-webfont.woff?v=3.0.1") format("woff"), url("/sexinfo/sites/all/themes/magazeen_lite/font-awesome/fontawesome-webfont.ttf?v=3.0.1") format("truetype");
   font-weight: normal;
   font-style: normal; }
-
 /*  Font Awesome styles
     ------------------------------------------------------- */
 [class^="icon-"],
@@ -3183,10 +3213,10 @@ ul.icons {
     width: .75em; }
 
 .icon-muted {
-  color: #eeeeee; }
+  color: #eee; }
 
 .icon-border {
-  border: solid 1px #eeeeee;
+  border: solid 1px #eee;
   padding: .2em .25em .15em;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -3266,38 +3296,28 @@ ul.icons {
 @-moz-keyframes spin {
   0% {
     -moz-transform: rotate(0deg); }
-
   100% {
     -moz-transform: rotate(359deg); } }
-
 @-webkit-keyframes spin {
   0% {
     -webkit-transform: rotate(0deg); }
-
   100% {
     -webkit-transform: rotate(359deg); } }
-
 @-o-keyframes spin {
   0% {
     -o-transform: rotate(0deg); }
-
   100% {
     -o-transform: rotate(359deg); } }
-
 @-ms-keyframes spin {
   0% {
     -ms-transform: rotate(0deg); }
-
   100% {
     -ms-transform: rotate(359deg); } }
-
 @keyframes spin {
   0% {
     transform: rotate(0deg); }
-
   100% {
     transform: rotate(359deg); } }
-
 @-moz-document url-prefix() {
   .icon-spin {
     height: .9em; }
@@ -3310,7 +3330,6 @@ ul.icons {
 
   .btn .icon-spin.icon-large {
     height: .75em; } }
-
 /*  Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
     readers do not read off random characters that represent icons */
 .icon-glass:before {
@@ -4141,3 +4160,5 @@ ul.icons {
 
 .ppq-terms b {
   color: black; }
+
+/*# sourceMappingURL=style.css.map */

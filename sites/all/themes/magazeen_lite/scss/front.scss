@@ -46,12 +46,22 @@
   padding: 0;
 
   &:last-child { margin-bottom: 55px; }
+
+  @include mobile {
+    border: 0;
+  }
 }
 
 .cloud-container {
   padding: 30px;
   margin-left: auto; margin-right: auto;
   max-width: 75%;
+  text-align: center;
+
+  @include mobile {
+    max-width: 100%;
+    width: 100%;
+  }
 }
 
 
@@ -392,7 +402,43 @@ a:visited.more-button  {
   padding: 5px;
   text-align: left;
 }
-  #carousel-nav a.current {
-    background-color: #ebf6fa;
-    border: 1px solid #EAF1F4;
+
+#carousel-nav a.current {
+  background-color: #ebf6fa;
+  border: 1px solid #EAF1F4;
+}
+
+#intro-container {
+  display: table;
+  border-collapse: separate;
+  border-spacing: 10px;
+
+  @include mobile {
+    border-spacing: 0;
   }
+}
+
+#intro-container, .front-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.cloud-container, #front-description {
+  width: 40%;
+  padding: 2%;
+  display: inline-block;  
+  display: table-cell;
+  margin-top: 20px;
+  text-align: center;
+
+  @include mobile {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    padding: 0;
+  }
+
+  h2 {
+    color: purple;
+  }
+}
