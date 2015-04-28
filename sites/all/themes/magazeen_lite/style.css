@@ -2475,10 +2475,9 @@ ul.slinks {
   height: 250px;
   float: left;
   margin: 0;
-  margin-right: 1%;
   overflow: hidden;
   position: relative;
-  width: 33%; }
+  width: 40%; }
   @media (max-width: 767px) {
     #carousel-window {
       margin: 0 auto 10px;
@@ -2513,7 +2512,7 @@ ul.slinks {
 #carousel-nav {
   font-size: 0.9em;
   float: left;
-  width: 66%; }
+  width: 60%; }
   @media (max-width: 767px) {
     #carousel-nav {
       *zoom: 1;
