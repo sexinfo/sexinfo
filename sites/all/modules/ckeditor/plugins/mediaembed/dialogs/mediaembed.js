@@ -1,9 +1,16 @@
 /*
-Copyright (c) 2003-2012, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.html or http://ckeditor.com/license
 */
 
 CKEDITOR.dialog.add( 'mediaembedDialog', function( editor ) {
+  var numberRegex = /^\d+(?:\.\d+)?$/;
+  var cssifyLength = function( length )
+  {
+    if ( numberRegex.test( length ) )
+      return length + 'px';
+    return length;
+  }
   return {
     title : Drupal.t('Embed Media Dialog'),
     minWidth : 400,
