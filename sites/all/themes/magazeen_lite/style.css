@@ -3080,6 +3080,12 @@ tr.odd.cat-row td {
   margin-bottom: 20px;
   padding: 12px 10px; }
 
+.rtecenter > img {
+  display: inline-block; }
+
+.rtecenter {
+  text-align: center; }
+
 /*!
  *  Font Awesome 3.0.2
  *  the iconic font designed for use with Twitter Bootstrap

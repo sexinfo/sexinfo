@@ -8,14 +8,15 @@ $(function() {
         var $image = $(this);
         $image.wrap("<div class='main_container'></div>");
         var $container = $image.parent();
+        $container.css('display', 'inline-block')
         var $inner_container = $("<div class='inner_container'><p class='noselect' style='margin:1em;'>Click to Reveal Image</p></div>")
         $inner_container.css('opacity', '0');
         $inner_container.css('position', 'relative');
         $inner_container.css('top', '100px');
-        $inner_container.css('display', 'table');
         $inner_container.css('border', '2px solid black');
         $inner_container.css('border-radius', '10px');
         $inner_container.css('padding', '6px');
+        $inner_container.css('text-align', 'center');
 
         $image.before($inner_container);
         var control = false;
