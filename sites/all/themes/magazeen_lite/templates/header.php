@@ -29,7 +29,7 @@
 
 	<a class="btn" href="https://www.facebook.com/SexInfoOnline"><i class="icon-2x icon-facebook-sign"></i></a>
 	<a class="btn" href="https://twitter.com/sexinfoonline"><i class="icon-2x icon-twitter-sign"></i></a>
-	<a class="btn" href="http://iconosquare.com/tag/sexinfo#/grid"><i class="icon-2x fa-instagram"></i></i></a>
+	<a class="btn" href="https://instagram.com/ucsbsexperts/"><i class="icon-2x fa-instagram"></i></i></a>
 	<a class="btn" href="https://github.com/sexinfo/sexinfo"><i class="icon-2x icon-github-alt"></i></a>
 
     </div> <!-- .social-buttons -->
