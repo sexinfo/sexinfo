@@ -1,0 +1,10 @@
+// These tags are used by CKEditor to center
+// however, the images don't work so this will
+
+.rtecenter > img {
+    display: inline-block;
+}
+
+.rtecenter {
+    text-align: center;
+}

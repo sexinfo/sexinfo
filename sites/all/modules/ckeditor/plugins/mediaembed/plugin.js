@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2003-2012, CKSource - Frederico Knabben. All rights reserved.
+Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.html or http://ckeditor.com/license
 */
 
@@ -7,9 +7,16 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  * @file Plugin for inserting Drupal embeded media
  */
 ( function() {
+  var numberRegex = /^\d+(?:\.\d+)?$/;
+  var cssifyLength = function( length )
+  {
+    if ( numberRegex.test( length ) )
+      return length + 'px';
+    return length;
+  }
   CKEDITOR.plugins.add( 'mediaembed',
   {
-    requires : [ 'dialog', 'fakeobjects', 'htmlwriter' ],
+    requires : [ 'dialog', 'fakeobjects' ],
     init: function( editor )
     {
       var addCssObj = CKEDITOR;
@@ -29,7 +36,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
         '}'
         );
 
-      editor.addCommand( 'mediaembedDialog', new CKEDITOR.dialogCommand( 'mediaembedDialog' ) );
+      editor.addCommand( 'mediaembedDialog', new CKEDITOR.dialogCommand( 'mediaembedDialog', { allowedContent : 'div(media_embed);iframe[*](*)' } ) );
       editor.ui.addButton( 'MediaEmbed',
       {
         label: 'Embed Media',
@@ -80,7 +87,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
               if (element.attributes[ 'class' ] == 'media_embed') {
                 var fakeElement = editor.createFakeParserElement(element, 'cke_mediaembed', 'div', true);
                 var fakeStyle = fakeElement.attributes.style || '';
-                if (typeof(element.children[0].attributes) != 'undefined') {
+                if (element.children[0] && typeof(element.children[0].attributes) != 'undefined') {
                   var height = element.children[0].attributes.height,
                   width = element.children[0].attributes.width;
                 }
@@ -100,11 +107,4 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
       }
     }
   } );
-  var numberRegex = /^\d+(?:\.\d+)?$/;
-  function cssifyLength( length )
-  {
-    if ( numberRegex.test( length ) )
-      return length + 'px';
-    return length;
-  }
 } )();
