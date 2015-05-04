@@ -2,6 +2,7 @@ $quiz_id = '.quiz-body'
 $question_id = '#ppq-question';
 $answers_id = '#answers ul';
 $response_id = '.response';
+$tooltip_id = '.tooltip';
 var questions;
 var responses;
 
@@ -15,9 +16,13 @@ $(document).ready(function () {
 
     var startKey = questions['start'];
     var currentQuestion = questions[startKey];
+    var tooltipsArray = currentQuestion.tooltips;
+    console.log(tooltipsArray);
     
     $('#start-quiz').click(function () {
-        $($question_id).html(currentQuestion.message);
+        console.log();
+        var processedMessage = processQuestion(currentQuestion.message);
+        $($question_id).html(processedMessage);
         $('#ppq-introduction').fadeOut('slow');
         $('#terms-check').fadeOut('slow');
         $(this).fadeOut('slow', function () {
@@ -29,12 +34,18 @@ $(document).ready(function () {
                     $(this).delay(400 * index).fadeIn(300);
                 });
             });
-
         });
     });
-
 });
 
+function processQuestion(question) {
+    var words = ["ejaculate", "ejaculation", "semen"];
+    words.forEach(function (word) {
+        // 'g' is global flag
+        question = question.replace(new RegExp(word, 'g'), "WORD");
+    });
+    return question;
+}
 
 function loadJSON(filename) {
     var results = {};

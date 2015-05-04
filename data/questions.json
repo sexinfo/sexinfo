@@ -16,6 +16,14 @@
                 "next": "menstrual-cycle"
             }
         },
+        "links": [
+        {
+        	"href": "ejaculation"
+        },
+        {
+        	"href": "semen"
+        }
+        ],
 		"tooltips": {
 			"ejaculate": "Fluid expelled from the penis is called semen. The component of semen that has the potential to impregnate a woman is called sperm (less than 1% of the semen is actually made up of sperm).",
 			"semen": "Fluid expelled from the penis; typically a whitish color."
@@ -46,7 +54,7 @@
             }
         }
     },
-        "non-genital-ejaculation": {
+    "non-genital-ejaculation": {
         "message": "On which non-genital area did the ejaculation occur",
         "options": {
             "On the face or inside the mouth": {
@@ -75,7 +83,7 @@
             }
         }
 },
-        "ejaculation-transfer": {
+    "ejaculation-transfer": {
         "message": "Is there any possibility that semen could have been transferred to the female's genital area?",
         "options": {
             "Yes": {
@@ -92,7 +100,7 @@
             }
         }
 	},
-        "contraception": {
+    "contraception": {
         "message": "Did you and/or your partner use any form of contraception?",
         "options": {
             "Yes, we used contraceptives correctly with no issues": {
@@ -109,7 +117,7 @@
             }
         }
     },
-        "method-of-contraceptives": {
+    "method-of-contraceptives": {
         "message": "Which method of contraception was used? (If more than one method was used, please select the primary, or most effective, method.)",
         "options": {
             "Male or female condom": {
@@ -130,7 +138,7 @@
             }
         }
     },
-        "condom-issues": {
+    "condom-issues": {
         "message": "Which issue(s) did you encounter with your condom use?",
         "options": {
             "We put the condom on sometime after engaging in sexual activity": {
@@ -242,7 +250,7 @@
             }
         }
     },
-        "menstrual-cycle": {
+    "menstrual-cycle": {
         "message": "Is the female partner's menstrual cycle regular? (Keep in mind, if you are using hormonal birth control, your cycle is likely regulated to be 28-30 days.)",
         "options": {
             "Yes": {
@@ -259,7 +267,7 @@
 			}
         }
     },
-	    "menstrual-cycle-regular": {
+    "menstrual-cycle-regular": {
         "message": "Does the female's menstrual cycle have a typical 28-30 day range? (Keep in mind, if you are using hormonal birth control, your cycle is likely regulated to be 28-30 days.)",
         "options": {
             "Yes": {
@@ -276,7 +284,7 @@
 			}
         }
     },
-        "menstrual-cycle-issues": {
+    "menstrual-cycle-issues": {
         "message": "At which point in the menstrual cycle did the sexual encounter occur?",
         "options": {
             "During the menstrual period": {
