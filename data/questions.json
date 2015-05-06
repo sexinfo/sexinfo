@@ -93,7 +93,7 @@
         }
 	},
         "contraception": {
-        "message": "Did you and/or your partner use any form of contraception?",
+        "message": "Did you and/or your partner use any form of contraception? (and/or the withdrawal method)",
         "options": {
             "Yes, we used contraceptives correctly with no issues": {
                 "type": "response",
@@ -277,7 +277,7 @@
         }
     },
         "menstrual-cycle-issues": {
-        "message": "At which point in the menstrual cycle did the sexual encounter occur?",
+        "message": "<img src=\"https://upload.wikimedia.org/wikipedia/commons/8/85/SDM-circle2.gif\"></img><br />At which point in the menstrual cycle did the sexual encounter occur?",
         "options": {
             "During the menstrual period": {
                 "type": "response",
