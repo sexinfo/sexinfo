@@ -277,7 +277,7 @@
         }
     },
         "menstrual-cycle-issues": {
-        "message": "<img src=\"https://upload.wikimedia.org/wikipedia/commons/8/85/SDM-circle2.gif\"></img><br />At which point in the menstrual cycle did the sexual encounter occur?",
+        "message": "<img src=\"/sexinfo/data/menstrual_diagram.jpg\"></img><br />At which point in the menstrual cycle did the sexual encounter occur?",
         "options": {
             "During the menstrual period": {
                 "type": "response",
