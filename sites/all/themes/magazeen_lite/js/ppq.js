@@ -18,7 +18,8 @@ $(document).ready(function () {
     var currentQuestion = questions[startKey];
     var tooltipsArray = currentQuestion.tooltips;
     console.log(tooltipsArray);
-    
+
+
     $('#start-quiz').click(function () {
         console.log();
         var processedMessage = processQuestion(currentQuestion.message);
@@ -36,16 +37,54 @@ $(document).ready(function () {
             });
         });
     });
+
+    var term = document.getElementById("tooltip");
+    var termRect = term.getBoundingClientRect();
+
+    $('span.term').mouseover(function(event) {
+        console.log("Tooltip displayed!");
+        //console.log(termRect.top, termRect.left);
+        createTooltip(event);               
+    }).mouseout(function(){
+        hideToolTip(); 
+    });
 });
 
 function processQuestion(question) {
-    var words = ["ejaculate", "ejaculation", "semen"];
+    questions = loadJSON("questions.json");
+    var startKey = questions['start'];
+    var currentQuestion = questions[startKey];
+    var tooltipsArray = currentQuestion.tooltips;
+    var words = [];
+    var i = 0;
+    for (var key in tooltipsArray) {
+    	words[i] = key;
+    	i++;
+    }
+    console.log(words);
+
     words.forEach(function (word) {
         // 'g' is global flag
-        question = question.replace(new RegExp(word, 'g'), "WORD");
+        question = question.replace(new RegExp(word, 'g'), "<span id="+word+" class='tooltip'>"+word+"</span>");
     });
     return question;
 }
+
+function createTooltip(event){ 
+    var $tooltip = $('<div class = "tooltip">The quick brown fox jumps over the lazy dog.</div>');
+    $('.clickme').after($tooltip);
+    positionTooltip(event);        
+};
+
+function hideToolTip() {
+    $('div.tooltip').hide();
+}
+
+function positionTooltip(event){
+    var tPosX = termRect.left;
+    var tPosY = termRect.bottom + 5;
+    $('div.tooltip').css({'position': 'absolute', 'top': tPosY + 'px', 'left': tPosX + 'px'});
+};
 
 function loadJSON(filename) {
     var results = {};

@@ -72,3 +72,20 @@ font-size : 16px;
 .ppq-terms b {
     color:black;
 }
+
+span.tooltip {
+    transition: all 0.5s ease-in-out;
+    text-decoration: underline;
+    color: blue;
+}
+
+span.tooltip:hover {
+    background-color: yellow;
+}
+
+div.tooltip {
+    background-color: whitesmoke;
+    padding: 6px;
+    border-radius: 3px;
+    border: 2px solid black;
+}
