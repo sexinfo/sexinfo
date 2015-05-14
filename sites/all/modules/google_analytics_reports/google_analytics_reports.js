@@ -1,7 +1,7 @@
 /**
  * @file
  * Loads report blocks via ajax.  This is done because the API requests to Google
- * Analytics can add signifigant latency to page loads otherwise.
+ * Analytics can add significant latency to page loads otherwise.
  */
 (function ($) {
 
