@@ -4175,6 +4175,9 @@ div.tooltip {
   background-color: whitesmoke;
   padding: 6px;
   border-radius: 3px;
-  border: 2px solid black; }
+  border: 1px solid black;
+  -webkit-box-shadow: black 8px 8px 4px 1px;
+  -moz-box-shadow: black 8px 8px 4px 1px;
+  box-shadow: black 4px 4px 4px 1px; }
 
 /*# sourceMappingURL=style.css.map */

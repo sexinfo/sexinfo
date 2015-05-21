@@ -5,8 +5,15 @@ $response_id = '.response';
 $tooltip_id = '.tooltip';
 var questions;
 var responses;
+var tooltipsArray;
+var definition;
+
 var term;
+var termElement;
 var termRect;
+var tPosX;
+var tPosY;
+
 
 $(document).ready(function () {
 
@@ -18,7 +25,8 @@ $(document).ready(function () {
 
     var startKey = questions['start'];
     var currentQuestion = questions[startKey];
-    var tooltipsArray = currentQuestion.tooltips;
+    //var words = [];
+    tooltipsArray = currentQuestion.tooltips;
     console.log(tooltipsArray);
 
     $('#start-quiz').click(function () {
@@ -42,10 +50,13 @@ $(document).ready(function () {
 
         $('span.tooltip').mouseover(function(event) {
             console.log("Term selected!");
-            term = document.getElementById($(this).text());
-            console.log(term);
+            term = $(this).text();
+            termElement = document.getElementById(term);
+            termRect = termElement.getBoundingClientRect();
+            //console.log(termRect);
+            console.log(tooltipsArray[term]);
             //console.log(termRect.top, termRect.left);
-            createTooltip(term);
+            createTooltip(term, termRect);
         }).mouseout(function() {
             hideToolTip();
         });
@@ -56,9 +67,9 @@ function processQuestion(question) {
     questions = loadJSON("questions.json");
     var startKey = questions['start'];
     var currentQuestion = questions[startKey];
-    var tooltipsArray = currentQuestion.tooltips;
-    var words = [];
+    //tooltipsArray = currentQuestion.tooltips;
     var i = 0;
+    var words = [];
     for (var key in tooltipsArray) {
     	words[i] = key;
     	i++;
@@ -72,11 +83,13 @@ function processQuestion(question) {
     return question;
 }
 
-function createTooltip(termElement) {
+function createTooltip(term, termRect) {
     console.log("Tooltip creator invoked!"); 
-    var $tooltip = $('<div class = "tooltip">The quick brown fox jumps over the lazy dog.</div>');
+    definition = tooltipsArray[term];
+    //var definition = "The quick brown fox jumps over the lazy dog.";
+    var $tooltip = $('<div class = "tooltip">'+definition+'</div>');
     $('.tooltip').after($tooltip);
-    positionTooltip(termElement);
+    positionTooltip(termRect);
 };
 
 function hideToolTip() {
@@ -84,12 +97,11 @@ function hideToolTip() {
     $('div.tooltip').hide();
 }
 
-function positionTooltip(termElement) {
+function positionTooltip(termRect) {
     console.log("Positioning tooltip...");
-    termRect = termElement.getBoundingClientRect();
     console.log(termRect);
-    var tPosX = termRect.left;
-    var tPosY = termRect.bottom + 5;
+    tPosX = termRect.left;
+    tPosY = termRect.bottom + 5;
     $('div.tooltip').css({'position': 'absolute', 'top': tPosY + 'px', 'left': tPosX + 'px'});
 };
 
@@ -124,13 +136,21 @@ function loadHTML(filename) {
 function nextQuestion(sender) {
     var type = $(sender).data('type');
     var next = $(sender).data('next');
+    
     if (type == "question") {
         var question = questions[next];
+        tooltipsArray = question.tooltips;
+        //var words = [];
+
         $(sender).siblings().each(function () {
             $(this).fadeOut('slow');
         });
+        
         $($quiz_id).delay(1000).fadeOut('slow', function () {
-            $($question_id).html(question.message);
+            console.log("Processing message for new question.");
+            console.log(question.message);
+            var processedMessage = processQuestion(question.message);
+            $($question_id).html(processedMessage);
             $($answers_id).html("");
             for (var key in question.options) {
                 $($answers_id).append("<li class='question' hidden onclick='nextQuestion(this)' data-type=" + question.options[key].type + " data-next=" + question.options[key].next + " >" + key + "</li>")
@@ -140,6 +160,19 @@ function nextQuestion(sender) {
                 $("#answers ul li").each(function (index) {
                     $(this).delay(400 * index).fadeIn(300);
                 });
+            });
+           
+            $('span.tooltip').mouseover(function(event) {
+                console.log("Term selected!");
+                term = $(this).text();
+                termElement = document.getElementById(term);
+                termRect = termElement.getBoundingClientRect();
+                //console.log(termRect);
+                console.log(tooltipsArray[term]);
+                //console.log(termRect.top, termRect.left);
+                createTooltip(term, termRect);
+            }).mouseout(function() {
+                hideToolTip();
             });
         });
         

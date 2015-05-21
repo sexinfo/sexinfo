@@ -87,5 +87,8 @@ div.tooltip {
     background-color: whitesmoke;
     padding: 6px;
     border-radius: 3px;
-    border: 2px solid black;
+    border: 1px solid black;
+    -webkit-box-shadow: rgba(0, 0, 0, 1) 8px 8px 4px 1px;
+    -moz-box-shadow: rgba(0, 0, 0, 1) 8px 8px 4px 1px;
+    box-shadow: rgba(0, 0, 0, 1) 4px 4px 4px 1px;
 }

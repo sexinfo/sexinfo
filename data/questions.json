@@ -52,6 +52,9 @@
                 "type": "question",
                 "next": "non-genital-ejaculation"
             }
+        },
+        "tooltips": {
+            "ejaculation": "The act of ejaculating."
         }
     },
     "non-genital-ejaculation": {
