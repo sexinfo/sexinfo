@@ -5,6 +5,8 @@ $response_id = '.response';
 $tooltip_id = '.tooltip';
 var questions;
 var responses;
+var term;
+var termRect;
 
 $(document).ready(function () {
 
@@ -18,7 +20,6 @@ $(document).ready(function () {
     var currentQuestion = questions[startKey];
     var tooltipsArray = currentQuestion.tooltips;
     console.log(tooltipsArray);
-
 
     $('#start-quiz').click(function () {
         console.log();
@@ -36,17 +37,18 @@ $(document).ready(function () {
                 });
             });
         });
-    });
 
-    var term = document.getElementById("tooltip");
-    var termRect = term.getBoundingClientRect();
+        console.log("Question processing complete!");
 
-    $('span.term').mouseover(function(event) {
-        console.log("Tooltip displayed!");
-        //console.log(termRect.top, termRect.left);
-        createTooltip(event);               
-    }).mouseout(function(){
-        hideToolTip(); 
+        $('span.tooltip').mouseover(function(event) {
+            console.log("Term selected!");
+            term = document.getElementById($(this).text());
+            console.log(term);
+            //console.log(termRect.top, termRect.left);
+            createTooltip(term);
+        }).mouseout(function() {
+            hideToolTip();
+        });
     });
 });
 
@@ -70,17 +72,22 @@ function processQuestion(question) {
     return question;
 }
 
-function createTooltip(event){ 
+function createTooltip(termElement) {
+    console.log("Tooltip creator invoked!"); 
     var $tooltip = $('<div class = "tooltip">The quick brown fox jumps over the lazy dog.</div>');
-    $('.clickme').after($tooltip);
-    positionTooltip(event);        
+    $('.tooltip').after($tooltip);
+    positionTooltip(termElement);
 };
 
 function hideToolTip() {
+    console.log("Mouse exited.");
     $('div.tooltip').hide();
 }
 
-function positionTooltip(event){
+function positionTooltip(termElement) {
+    console.log("Positioning tooltip...");
+    termRect = termElement.getBoundingClientRect();
+    console.log(termRect);
     var tPosX = termRect.left;
     var tPosY = termRect.bottom + 5;
     $('div.tooltip').css({'position': 'absolute', 'top': tPosY + 'px', 'left': tPosX + 'px'});
