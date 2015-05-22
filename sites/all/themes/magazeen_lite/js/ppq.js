@@ -78,7 +78,7 @@ function processQuestion(question) {
 
     words.forEach(function (word) {
         // 'g' is global flag
-        question = question.replace(new RegExp(word, 'g'), "<span id="+word+" class='tooltip'>"+word+"</span>");
+        question = question.replace(new RegExp(word), "<span id="+word+" class='tooltip'>"+word+"</span>");
     });
     return question;
 }
