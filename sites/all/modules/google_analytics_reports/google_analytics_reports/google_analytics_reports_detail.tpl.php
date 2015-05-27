@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Theme implementation to display the Google Analytics Reports detail page.
+ * Theme implementation to display the Google Analytics detail page.
  */
 ?>
 
@@ -49,3 +49,5 @@
   </div>
 
 </div>
+
+

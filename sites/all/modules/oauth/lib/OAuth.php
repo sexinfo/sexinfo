@@ -840,7 +840,7 @@ class OAuthUtil {
         }
       }
       // The "Authorization" header may get turned into "Auth".
-      if (isset($out['Auth'])) {
+      if ($out['Auth']) {
         $out['Authorization'] = $out['Auth'];
       }
     }

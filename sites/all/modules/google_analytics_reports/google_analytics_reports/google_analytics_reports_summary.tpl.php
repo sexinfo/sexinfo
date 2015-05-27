@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * Theme implementation to display the Google Analytics Reports summary.
+ * Theme implementation to display the Google Analytics summary.
  */
 ?>
 
 <div class="google-analytics-summary google-analytics-reports">
   <div class="google-analytics-visits">
-    <h3><?php print t('Sessions Over the Past 30 Days'); ?></h3>
+    <h3><?php print t('Visits Over the Past 30 Days'); ?></h3>
     <?php print $visit_chart; ?>
   </div>
 
@@ -16,7 +16,7 @@
     <table>
       <tr class="odd">
         <td><?php print $entrances; ?></td>
-        <th><?php print t('Sessions'); ?></th>
+        <th><?php print t('Visits'); ?></th>
         <td><?php print $bounces; ?></td>
         <th><?php print t('Bounce Rate'); ?></th>
       </tr>
