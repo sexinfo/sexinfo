@@ -93,7 +93,7 @@
         }
 	},
         "contraception": {
-        "message": "Did you and/or your partner use any form of contraception (and/or the withdrawal method)?",
+        "message": "Did you and/or your partner use any form of contraception and/or the withdrawal method?",
         "options": {
             "Yes, we used contraceptives correctly with no issues": {
                 "type": "response",
