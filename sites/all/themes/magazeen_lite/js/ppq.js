@@ -6,7 +6,6 @@ $tooltip_id = '.tooltip';
 var questions;
 var responses;
 var tooltipsArray;
-var definition;
 
 var term;
 var termElement;
@@ -42,6 +41,7 @@ $(document).ready(function () {
             $('.quiz-body').fadeIn('slow', function () {
                 $("#answers ul li").each(function (index) {
                     $(this).delay(400 * index).fadeIn(300);
+                    console.log("Response - 1");
                 });
             });
         });
@@ -85,7 +85,7 @@ function processQuestion(question) {
 
 function createTooltip(term, termRect) {
     console.log("Tooltip creator invoked!"); 
-    definition = tooltipsArray[term];
+    var definition = tooltipsArray[term];
     //var definition = "The quick brown fox jumps over the lazy dog.";
     var $tooltip = $('<div class = "tooltip">'+definition+'</div>');
     $('.tooltip').after($tooltip);
@@ -138,12 +138,14 @@ function nextQuestion(sender) {
     var next = $(sender).data('next');
     
     if (type == "question") {
+        console.log("Populating tooltips array");
         var question = questions[next];
         tooltipsArray = question.tooltips;
         //var words = [];
 
         $(sender).siblings().each(function () {
             $(this).fadeOut('slow');
+            console.log("Response - 2");
         });
         
         $($quiz_id).delay(1000).fadeOut('slow', function () {
@@ -159,6 +161,7 @@ function nextQuestion(sender) {
             $($question_id).fadeIn('slow', function () {
                 $("#answers ul li").each(function (index) {
                     $(this).delay(400 * index).fadeIn(300);
+                    console.log("Response - 3");
                 });
             });
            

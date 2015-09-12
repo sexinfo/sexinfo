@@ -268,6 +268,9 @@
 				"type": "question",
 				"next": "contraception"
 			}
+        },
+        "tooltips": {
+                "female": "The opposite of male."
         }
     },
     "menstrual-cycle-regular": {
@@ -285,6 +288,10 @@
 				"type": "question",
 				"next": "contraception"
 			}
+        },
+        "tooltips": {
+
+            "menstrual cycle": "The process of ovulation and menstruation in women."
         }
     },
     "menstrual-cycle-issues": {
