@@ -1,0 +1,17 @@
+name = Google Analytics Reports
+package = Statistics
+description = Provides interface to access Google Analytics Core Reporting API statistics.
+core = 7.x
+dependencies[] = google_analytics_reports_api
+dependencies[] = charts
+dependencies[] = charts_google
+
+stylesheets[all][] = google_analytics_reports.css
+scripts[] = google_analytics_reports.js
+
+; Information added by Drupal.org packaging script on 2015-02-24
+version = "7.x-3.0-beta1+5-dev"
+core = "7.x"
+project = "google_analytics_reports"
+datestamp = "1424794791"
+

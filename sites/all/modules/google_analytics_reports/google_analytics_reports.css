@@ -1,9 +1,14 @@
-.google-analytics-referrals,
-.google-analytics-keywords {
+/**
+ * @file
+ * Google Analytics Reports styles.
+ */
+
+.google-analytics-reports-summary-top-sources,
+.google-analytics-reports-summary-top-keywords {
   width: 49.3%;
   float: left;
 }
-.google-analytics-referrals {
+.google-analytics-reports-summary-top-sources {
   margin-right: 1.4%;
 }
 
@@ -26,11 +31,9 @@
 /* Rubik doesn't style <ol>s */
 .limiter .page-content .google-analytics-reports .item-list ol li {
   float: none;
-  display: block;
   padding: 5px 10px 4px;
   border-bottom: 1px solid #f4f4f4;
-  list-style: decimal;
-  list-style-position: inside;
+  list-style: decimal inside;
   display: list-item;
 }
 

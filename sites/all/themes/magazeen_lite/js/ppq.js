@@ -13,7 +13,6 @@ var termRect;
 var tPosX;
 var tPosY;
 
-
 $(document).ready(function () {
 
     questions = loadJSON("questions.json");
@@ -29,7 +28,6 @@ $(document).ready(function () {
     console.log(tooltipsArray);
 
     $('#start-quiz').click(function () {
-        console.log();
         var processedMessage = processQuestion(currentQuestion.message);
         $($question_id).html(processedMessage);
         $('#ppq-introduction').fadeOut('slow');
@@ -84,7 +82,7 @@ function processQuestion(question) {
 }
 
 function createTooltip(term, termRect) {
-    console.log("Tooltip creator invoked!"); 
+    console.log("Tooltip creator invoked!");
     var definition = tooltipsArray[term];
     //var definition = "The quick brown fox jumps over the lazy dog.";
     var $tooltip = $('<div class = "tooltip">'+definition+'</div>');
@@ -136,7 +134,7 @@ function loadHTML(filename) {
 function nextQuestion(sender) {
     var type = $(sender).data('type');
     var next = $(sender).data('next');
-    
+
     if (type == "question") {
         console.log("Populating tooltips array");
         var question = questions[next];
@@ -147,7 +145,7 @@ function nextQuestion(sender) {
             $(this).fadeOut('slow');
             console.log("Response - 2");
         });
-        
+
         $($quiz_id).delay(1000).fadeOut('slow', function () {
             console.log("Processing message for new question.");
             console.log(question.message);
@@ -164,7 +162,7 @@ function nextQuestion(sender) {
                     console.log("Response - 3");
                 });
             });
-           
+
             $('span.tooltip').mouseover(function(event) {
                 console.log("Term selected!");
                 term = $(this).text();
@@ -178,7 +176,7 @@ function nextQuestion(sender) {
                 hideToolTip();
             });
         });
-        
+
     }
     else {
         var response = responses[next];
