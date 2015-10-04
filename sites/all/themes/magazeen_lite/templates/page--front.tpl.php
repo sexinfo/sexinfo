@@ -10,6 +10,10 @@
   ?>
 
   <?php print render($page['help']); ?>
+  
+  <div class="mission-container">
+	<?php include 'mission.php' ?>
+  </div>
 
   <div class="carousel-container">
     <?php include 'modules/carousel.php' ?>

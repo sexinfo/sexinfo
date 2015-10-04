@@ -3,11 +3,6 @@
 
     <div class="left">
        <h4>About SexInfo Online</h4>
-      <p>
-        <a href="<?php print check_url($front_page) ?>">SexInfo Online</a> is a website devoted to
-        comprehensive sex education based on the best research we have to date. Our primary goal is to
-        ensure that people around the world have access to useful and accurate information about all aspects of human sexuality.
-      </p>
 
       <p>
         The site is maintained by students from the University of California, Santa Barbara who have studied advanced topics in human sexuality.
