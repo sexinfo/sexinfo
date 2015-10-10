@@ -11,7 +11,7 @@
 
   <?php print render($page['help']); ?>
   
-  <div class="mission-container">
+  <div>
 	<?php include 'mission.php' ?>
   </div>
 
