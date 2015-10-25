@@ -26,9 +26,9 @@ function magazeenlite_preprocess_node(&$variables) {
 function magazeenlite_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'search_block_form') {
     $form['search_block_form']['#title'] = '';
-    $form['search_block_form']['#default_value'] = 'Search.';
-    $form['search_block_form']['#attributes']['onblur'] = "if (this.value == '') {this.value = 'Search.';}";
-    $form['search_block_form']['#attributes']['onfocus'] = "if (this.value == 'Search.') {this.value = '';}";
+    $form['search_block_form']['#default_value'] = 'Search...';
+    $form['search_block_form']['#attributes']['onblur'] = "if (this.value == '') {this.value = 'Search...';}";
+    $form['search_block_form']['#attributes']['onfocus'] = "if (this.value == 'Search...') {this.value = '';}";
     $form['actions']['submit']['#value'] = t('');
-  }    
+  }
 }
