@@ -90,14 +90,6 @@
   }
 }
 
-
-
-
-
-
-
-
-
 // FAQ module
 .faq-image {
   overflow: hidden;
@@ -391,7 +383,7 @@ a:visited.more-button  {
   padding: 5px;
   text-align: left;
 }
-  #carousel-nav a.current {
-    background-color: #ebf6fa;
-    border: 1px solid #EAF1F4;
-  }
+#carousel-nav a.current {
+background-color: #ebf6fa;
+border: 1px solid #EAF1F4;
+}

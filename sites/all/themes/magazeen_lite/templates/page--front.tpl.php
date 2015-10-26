@@ -2,7 +2,6 @@
 
 <?php include 'navigation.php' ?>
 
-
 <div class="container">
   <?php
     # "has been successfully updated", etc
@@ -10,7 +9,7 @@
   ?>
 
   <?php print render($page['help']); ?>
-  
+
   <div>
 	<?php include 'mission.php' ?>
   </div>
