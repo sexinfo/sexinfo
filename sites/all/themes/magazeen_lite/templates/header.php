@@ -17,8 +17,9 @@
           }
           print '</a></h1>';
         }
-    //print '<h2 class="slogan">'/* $site_slogan.*/.'</h2>';
+    //print '<h2 class="slogan">'. 'A website devoted sex, health, & relationships.' .'</h2>';
       ?>
+    <img src="sites/default/files/slogan.png" id="slogan-image"/>
     </div>
     <div id="searchform-header">
       <?php print render($page['search_area']); ?>

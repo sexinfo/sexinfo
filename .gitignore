@@ -48,7 +48,6 @@ sites/default/files/field/*
 sites/default/files/styles/*
 sites/default/files/tmp*
 sites/default/files/u*
-sites/*/files
 sites/*/private
 credentials.json
 
