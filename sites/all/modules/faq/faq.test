@@ -172,20 +172,20 @@ class FaqAccessTestClass extends FaqTestCase {
   function testFaqAccess() {
 
     // Verify that anonymous user has no access to the faq page
-    $this->faqVerifyNoAccess('faq-page');
+    $this->faqVerifyNoAccess('popular-questions');
 
     // Create and login user
     $normal_user = $this->drupalCreateUser();
     $this->drupalLogin($normal_user);
     // Verify that logged in user has no access to the faq page
-    $this->faqVerifyNoAccess('faq-page');
+    $this->faqVerifyNoAccess('popular-questions');
     $this->drupalLogout();
 
     $view_faq_user = $this->drupalCreateUser(array('view faq page'));
     $this->drupalLogin($view_faq_user);
 
     // Verify that the faq page is visible and available but empty
-    $this->drupalGet('faq-page');
+    $this->drupalGet('popular-questions');
     $this->assertText(t('Frequently Asked Questions'), t('FAQ page is available for view faq page permissions.'));
 
   }
@@ -232,7 +232,7 @@ class CreateFaqTestCase extends FaqTestCase {
 >>>>>>> Stashed changes
 
     // Verify that the faq page is visible and available but empty
-    $this->drupalGet('faq-page');
+    $this->drupalGet('popular-questions');
     $this->assertText(t('Frequently Asked Questions'), t('FAQ page is available for view faq page permissions.'));
 
     // Fill in the Create FAQ node 1 form and post it
@@ -273,12 +273,12 @@ class CreateFaqTestCase extends FaqTestCase {
 
 
     // Verify that logged in user has no access to the faq page
-    $this->faqVerifyNoAccess('faq-page');
+    $this->faqVerifyNoAccess('popular-questions');
 
     // Check that the FAQ page is available and that the correct term is listed as grouping for the new FAQ node
     $view_faq_user = $this->drupalCreateUser(array('view faq page'));
     $this->drupalLogin($view_faq_user);
-    $this->drupalGet('faq-page');
+    $this->drupalGet('popular-questions');
     $this->assertText(t('Frequently Asked Questions'), t('FAQ page is available for view faq page permissions.'));
     $this->assertText($this->faq1['title'], t('Created FAQ node 1 available on FAQ page.'));
     $this->assertText($this->faq1[$this->instance['field_name'] . '[' . $langcode .']'], t('Term for node 1 available on FAQ page.'));
@@ -306,7 +306,7 @@ class CreateFaqTestCase extends FaqTestCase {
     $this->drupalLogout();
 
     $this->drupalLogin($view_faq_user);
-    $this->drupalGet('faq-page');
+    $this->drupalGet('popular-questions');
     $this->assertText(t('Frequently Asked Questions'), t('FAQ page is available for view faq page permissions.'));
     $this->assertText($this->faq1['title'], t('Created FAQ node 1 available on FAQ page.'));
     $this->assertText($this->faq1[$this->instance['field_name'] . '[' . $langcode .']'], t('Term for node 1 not available on FAQ page.'));
@@ -339,7 +339,7 @@ class CRAUDFaqTestCase extends FaqTestCase {
   public function testFaqCreate() {
 
     // Verify that logged in user has no access to the faq page
-    $this->faqVerifyNoAccess('faq-page');
+    $this->faqVerifyNoAccess('popular-questions');
 
     // Log in user with create FAQ permissions
     $this->drupalLogin($this->faq_user);
@@ -369,7 +369,7 @@ class CRAUDFaqTestCase extends FaqTestCase {
     $this->drupalLogin($faq_view_user);
 
     // Verify visibility on faq page
-    $this->drupalGet('faq-page'); // Load faq page
+    $this->drupalGet('popular-questions'); // Load faq page
     $this->assertText($edit['title']); // Node should be listed here
     $this->drupalGet('node/' . $node->nid); // It should also be possible to open the node directly
 

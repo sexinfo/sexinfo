@@ -61,7 +61,7 @@ function faq_general_settings_form($form) {
     '#type' => 'textfield',
     '#title' => t('FAQ Path'),
     '#description' => t('This option sets the path to the faq page. DO NOT append with a \'/\''),
-    '#default_value' => variable_get('faq_path', 'faq-page'),
+    '#default_value' => variable_get('faq_path', 'popular-questions'),
   );
 
   return system_settings_form($form);

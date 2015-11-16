@@ -74,7 +74,7 @@ function faq_node_access($node, $op, $account = NULL) {
  */
 function faq_menu() {
   $items = array();
-  $faq_path = variable_get('faq_path', 'faq-page');
+  $faq_path = variable_get('faq_path', 'popular-questions');
 
   $items[$faq_path] = array(
     'title' => 'Frequently Asked Questions',
@@ -426,7 +426,7 @@ function faq_page($tid = 0, $faq_display = '', $category_display = '') {
 
   $output = $output_answers = '';
   drupal_add_css(drupal_get_path('module', 'faq') . '/faq.css');
-  if (arg(0) == 'faq-page') {
+  if (arg(0) == 'popular-questions') {
     drupal_set_title(t(variable_get('faq_title', 'Frequently Asked Questions')));
   }
   if (!module_exists("taxonomy")) {
@@ -441,7 +441,7 @@ function faq_page($tid = 0, $faq_display = '', $category_display = '') {
         drupal_goto($alias['alias']);
       }
     }
-    if (drupal_match_path($_GET['q'], 'faq-page/*')) {
+    if (drupal_match_path($_GET['q'], 'popular-questions/*')) {
       faq_set_breadcrumb($current_term);
     }
   }
@@ -546,7 +546,7 @@ function faq_page($tid = 0, $faq_display = '', $category_display = '') {
     if (!empty($tid)) {
       if ($term = taxonomy_term_load($tid)) {
         $title = t(variable_get('faq_title', 'Frequently Asked Questions'));
-        if (arg(0) == 'faq-page' && is_numeric(arg(1))) {
+        if (arg(0) == 'popular-questions' && is_numeric(arg(1))) {
           drupal_set_title($title . ($title ? ' - ' : '') . faq_tt("taxonomy:term:$term->tid:name", $term->name));
         }
         _display_faq_by_category($faq_display, $category_display, $term, 0, $output, $output_answers);
@@ -943,7 +943,7 @@ function faq_block_view($delta) {
           $block['subject'] = t('FAQ Categories');
           $items = array();
           foreach ($terms as $name => $tid) {
-            $items[] = l(faq_tt("taxonomy:term:$tid:name", $name), 'faq-page/' . $tid);
+            $items[] = l(faq_tt("taxonomy:term:$tid:name", $name), 'popular-questions/' . $tid);
           }
           $list_style = variable_get('faq_category_listing', 'ul');
           $block['content'] = theme('item_list',
@@ -1015,7 +1015,7 @@ function _get_indented_faq_terms($vid, $tid) {
         ->fetchField();
 
       if ($term_node_count > 0) {
-        $path = "faq-page/$term->tid";
+        $path = "popular-questions/$term->tid";
 
         if (!drupal_lookup_path('alias', arg(0) . '/' . $term->tid) && module_exists('pathauto')) {
           $alias = pathauto_create_alias('faq', 'insert', arg(0) . '/' . $term->tid, array('term' => $term));
@@ -1307,7 +1307,7 @@ function faq_view_answer(&$data, $node, $back_to_top, $teaser, $links) {
  *
  * @param string $path
  *   The path/url where the "back to top" link should bring the user too.  This
- *   could be the 'faq-page' page or one of the categorized faq pages, e.g 'faq-page/123'
+ *   could be the 'popular-questions' page or one of the categorized faq pages, e.g 'popular-questions/123'
  *   where 123 is the tid.
  *
  * @return array
@@ -1461,7 +1461,7 @@ function faq_view_child_category_headers($term) {
         $term_image = taxonomy_image_display($child_term->tid, array('class' => 'faq-tax-image'));
       }
 
-      $term_vars['link'] = l(faq_tt("taxonomy:term:$child_term->tid:name", $child_term->name), "faq-page/$child_term->tid");
+      $term_vars['link'] = l(faq_tt("taxonomy:term:$child_term->tid:name", $child_term->name), "popular-questions/$child_term->tid");
       $term_vars['description'] = check_markup(faq_tt("taxonomy:term:$child_term->tid:description", $child_term->description));
       $term_vars['count'] = $term_node_count;
       $term_vars['term_image'] = $term_image;
@@ -1482,7 +1482,7 @@ function faq_pathauto($op) {
       $settings['module'] = 'faq';
       $settings['groupheader'] = t('FAQ category page settings');
       $settings['patterndescr'] = t('Default path pattern (applies to all FAQ categories with blank patterns below)');
-      $settings['patterndefault'] = t('faq-page/[term:tid]');
+      $settings['patterndefault'] = t('popular-questions/[term:tid]');
       $settings['batch_update_callback'] = 'faq_pathauto_bulkupdate';
       $settings['token_type'] = 'term';
       return (object) $settings;
@@ -1496,7 +1496,7 @@ function faq_pathauto($op) {
  * Implements hook_path_alias_types().
  */
 function faq_path_alias_types() {
-  $objects['faq-page/'] = t('FAQ pages');
+  $objects['popular-questions/'] = t('FAQ pages');
   return $objects;
 }
 
@@ -1524,7 +1524,7 @@ function faq_pathauto_bulkupdate() {
 
   // Get tids that need aliasing.
   $query = db_select('taxonomy_term_data', 'td');
-  $query->leftJoin('url_alias', 'ua', "CONCAT('faq-page/', td.tid) = ua.source");
+  $query->leftJoin('url_alias', 'ua', "CONCAT('popular-questions/', td.tid) = ua.source");
   $query->addField('td', 'tid');
   $query->isNull('ua.source');
   $query->condition('td.tid', $context['sandbox']['current'], '>');
@@ -1549,7 +1549,7 @@ function faq_pathauto_bulkupdate() {
 
   $terms = taxonomy_term_load_multiple($tids);
   foreach ($terms as $term) {
-    pathauto_create_alias('faq', 'bulkupdate', 'faq-page/' . $term->tid, array('term' => $term));
+    pathauto_create_alias('faq', 'bulkupdate', 'popular-questions/' . $term->tid, array('term' => $term));
   }
   $context['sandbox']['count'] += count($tids);
   $context['sandbox']['current'] = max($tids);
@@ -1573,7 +1573,7 @@ function faq_taxonomy_term_insert($term) {
       if ((isset($vocab_omit[$vid]) && $vocab_omit[$vid] != 0) || ($term->vid != $vid)) {
         continue;
       }
-      $alias = pathauto_create_alias('faq', 'insert', 'faq-page/' . $term->tid, array('term' => $term));
+      $alias = pathauto_create_alias('faq', 'insert', 'popular-questions/' . $term->tid, array('term' => $term));
     }
   }
 }
@@ -1591,7 +1591,7 @@ function faq_taxonomy_term_update($term) {
       if ((isset($vocab_omit[$vid]) && $vocab_omit[$vid] != 0) || ($term->vid != $vid)) {
         continue;
       }
-      $alias = pathauto_create_alias('faq', 'update', 'faq-page/' . $term->tid, array('term' => $term));
+      $alias = pathauto_create_alias('faq', 'update', 'popular-questions/' . $term->tid, array('term' => $term));
     }
   }
 }
@@ -1602,7 +1602,7 @@ function faq_taxonomy_term_update($term) {
 function faq_taxonomy_term_delete($term) {
   if (module_exists('pathauto')) {
     module_load_include('inc', 'pathauto');
-    pathauto_path_delete_all("faq-page/{$term->tid}");
+    pathauto_path_delete_all("popular-questions/{$term->tid}");
   }
 }
 
@@ -1619,13 +1619,13 @@ function faq_set_breadcrumb($term = NULL) {
   $breadcrumb = array();
   if (variable_get('faq_custom_breadcrumbs', TRUE)) {
     if (module_exists("taxonomy") && $term) {
-      $breadcrumb[] = l(faq_tt("taxonomy:term:$term->tid:name", $term->name), 'faq-page/' . $term->tid);
+      $breadcrumb[] = l(faq_tt("taxonomy:term:$term->tid:name", $term->name), 'popular-questions/' . $term->tid);
       while ($parents = taxonomy_get_parents($term->tid)) {
         $term = array_shift($parents);
-        $breadcrumb[] = l(faq_tt("taxonomy:term:$term->tid:name", $term->name), 'faq-page/' . $term->tid);
+        $breadcrumb[] = l(faq_tt("taxonomy:term:$term->tid:name", $term->name), 'popular-questions/' . $term->tid);
       }
     }
-    $breadcrumb[] = l(t(variable_get('faq_title', 'Frequently Asked Questions')), 'faq-page');
+    $breadcrumb[] = l(t(variable_get('faq_title', 'Frequently Asked Questions')), 'popular-questions');
     $breadcrumb[] = l(t('Home'), NULL, array('attributes' => array('title' => variable_get('site_name', ''))));
     $breadcrumb = array_reverse($breadcrumb);
     return drupal_set_breadcrumb($breadcrumb);

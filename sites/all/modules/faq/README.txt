@@ -18,12 +18,12 @@ Documentation: http://drupal.org/node/129209
 
 The Frequently Asked Questions (faq) module allows users with the 'administer
 faq' permission to create question and answer pairs which they want displayed on
-the 'faq-page' page.  The 'faq-page' page is automatically generated from the
+the 'popular-questions' page.  The 'popular-questions' page is automatically generated from the
 FAQ nodes configured and the layout of this page can be modified on the settings
-page.  Users will need the 'view faq page' permission to view the 'faq-page'
+page.  Users will need the 'view faq page' permission to view the 'popular-questions'
 page.
 
-An alternative to the built-in 'faq-page' is to use one of the example Views
+An alternative to the built-in 'popular-questions' is to use one of the example Views
 layouts provided which you can easily customise to your needs using the Views
 UI.  Note, the configuration settings for the module do not apply to the Views
 layouts.
@@ -53,9 +53,9 @@ INSTALLATION
    layouts.
 
 >>>>>>> Stashed changes
-5. You can use the default faq page at "faq-page" or enable one of the page
+5. You can use the default faq page at "popular-questions" or enable one of the page
    layouts in the example Views.  For the Views pages you can change the url if
-   needed, but if you wish to change the url for the built-in page (faq-page)
+   needed, but if you wish to change the url for the built-in page (popular-questions)
    you need to create a url alias at admin/config/search/path.
 
 
