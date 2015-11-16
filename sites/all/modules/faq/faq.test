@@ -217,11 +217,19 @@ class CreateFaqTestCase extends FaqTestCase {
     // Show the detailed question
     $this->drupalGet('admin/config/content/faq/questions');
     // Set faq to allow long question text and labeled questions and answers
+<<<<<<< Updated upstream
     $this->drupalPost('admin/config/content/faq/questions', array('faq_question_long_form' => '1', 'faq_qa_mark' => '1'), t('Save configuration'));
     $this->drupalPost('admin/config/content/faq/questions', array('faq_question_length' => 'both'), t('Save configuration'));
 
     $this->afaq_user = $this->drupalCreateUser(array('create faq content', 'view faq page'));
     $this->drupalLogin($this->afaq_user);
+=======
+    $this->drupalPost('admin/config/content/faq/questions', array('faq_question_long_form' => '1', 'faq_qa_mark' => '1'), t('Save configuration'));
+    $this->drupalPost('admin/config/content/faq/questions', array('faq_question_length' => 'both'), t('Save configuration'));
+
+    $this->afaq_user = $this->drupalCreateUser(array('create faq content', 'view faq page'));
+    $this->drupalLogin($this->afaq_user);
+>>>>>>> Stashed changes
 
     // Verify that the faq page is visible and available but empty
     $this->drupalGet('faq-page');
@@ -242,7 +250,11 @@ class CreateFaqTestCase extends FaqTestCase {
 
     // Check that faq is found on the correct taxonomy term page too
     $this->drupalGet('taxonomy/term/' . $this->term->tid);
+<<<<<<< Updated upstream
     $this->assertText(t('@title', array('@title' => $this->faq1['title'])));
+=======
+    $this->assertText(t('@title', array('@title' => $this->faq1['title'])));
+>>>>>>> Stashed changes
 
     // Fill in the Create FAQ node 2 form and post it
     $this->faq2 = array();
@@ -276,7 +288,11 @@ class CreateFaqTestCase extends FaqTestCase {
     // Navigate to FAQ node created on FAQ page
     $this->clickLink(t($this->faq1['title']));
     $this->assertText(t($this->faq1["field_detailed_question[$langcode][0][value]"]), t('Detailed question visible')); // Dependant on the question setting
+<<<<<<< Updated upstream
     $this->assertText(t($this->faq1["body[$langcode][0][value]"]), t('Answer visible'));
+=======
+    $this->assertText(t($this->faq1["body[$langcode][0][value]"]), t('Answer visible'));
+>>>>>>> Stashed changes
 
     // Enable categorisation of FAQ nodes
     // Create and log in user with create and administer FAQ permissions
