@@ -19,7 +19,11 @@
         }
     //print '<h2 class="slogan">'. 'A website devoted sex, health, & relationships.' .'</h2>';
       ?>
+<<<<<<< HEAD
     <img src="sites/default/files/slogan.png" alt="A website devoted to sex, health, and relationships." id="slogan-image"
+=======
+    <img src="/sexinfo/sites/default/files/slogan.png" alt="A website devoted to sex, health, and relationships." id="slogan-image"
+>>>>>>> master
       style="margin: 0px 10px; min-width:30%;"
     />
     </div>

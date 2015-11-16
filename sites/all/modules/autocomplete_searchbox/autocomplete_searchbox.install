@@ -1,0 +1,16 @@
+<?php
+/**
+ * @file
+ * File to perform installation/uninstallation tasks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function autocomplete_searchbox_uninstall() {
+
+  // Delete all variables.
+  db_delete('variable')
+  ->condition('name', db_like('autocomplete_searchbox_') . '%', 'like')
+  ->execute();
+}
