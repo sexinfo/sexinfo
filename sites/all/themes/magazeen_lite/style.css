@@ -4200,5 +4200,7 @@ ul.icons {
   .faq a:link {
     text-decoration: none;
     color: #eeeeee; }
+  .faq .faq-question a:link {
+    color: #f05898; }
 
 /*# sourceMappingURL=style.css.map */
