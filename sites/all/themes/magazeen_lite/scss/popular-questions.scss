@@ -1,0 +1,33 @@
+$transition-time: 0.4s;
+
+.faq {
+    border-radius: 5px;
+
+    h3 {
+        text-align: center;
+    }
+
+    div.faq-category-group {
+        border-radius: 5px;
+        margin: 5px;
+
+        &:nth-of-type(odd) {
+            background-color: rgb(240, 88, 152);
+        }
+
+        &:nth-of-type(even) {
+            background-color: rgb(26, 25, 24);
+        }
+
+        .faq-qa-hide {
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            background-color: #eeeeee;
+        }
+    }
+
+    a:link {
+        text-decoration: none;
+        color: #eeeeee;
+    }
+}
