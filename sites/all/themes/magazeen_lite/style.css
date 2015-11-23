@@ -4200,6 +4200,8 @@ ul.icons {
   .faq a:link {
     text-decoration: none;
     color: #eeeeee; }
+  .faq div.field-items a:link {
+    color: #f05898; }
   .faq .faq-question a:link {
     color: #f05898; }
 
