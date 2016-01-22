@@ -15,15 +15,20 @@ function _webform_defaults_email() {
     'pid' => 0,
     'weight' => 0,
     'value' => '',
-    'mandatory' => 0,
+    'required' => 0,
     'extra' => array(
+      'multiple' => 0,
+      'format' => 'short',
       'width' => '',
       'unique' => 0,
       'disabled' => 0,
       'title_display' => 0,
       'description' => '',
+      'description_above' => FALSE,
+      'placeholder' => '',
       'attributes' => array(),
       'private' => FALSE,
+      'analysis' => FALSE,
     ),
   );
 }
@@ -52,22 +57,41 @@ function _webform_edit_email($component) {
     '#type' => 'textfield',
     '#title' => t('Default value'),
     '#default_value' => $component['value'],
-    '#description' => t('The default value of the field.') . theme('webform_token_help'),
+    '#description' => t('The default value of the field.') . ' ' . theme('webform_token_help'),
     '#size' => 60,
     '#maxlength' => 127,
     '#weight' => 0,
-    '#attributes' => ($component['value'] == '%useremail' && count(form_get_errors()) == 0) ? array('disabled' => TRUE) : array(),
+    '#attributes' => ($component['value'] == '[current-user:mail]' && count(form_get_errors()) == 0) ? array('disabled' => TRUE) : array(),
     '#id' => 'email-value',
   );
   $form['user_email'] = array(
     '#type' => 'checkbox',
     '#title' => t('User email as default'),
-    '#default_value' => $component['value'] == '%useremail' ? 1 : 0,
+    '#default_value' => $component['value'] == '[current-user:mail]' ? 1 : 0,
     '#description' => t('Set the default value of this field to the user email, if he/she is logged in.'),
-    '#attributes' => array('onclick' => 'getElementById("email-value").value = (this.checked ? "%useremail" : ""); getElementById("email-value").disabled = this.checked;'),
+    '#attributes' => array('onclick' => 'getElementById("email-value").value = (this.checked ? "[current-user:mail]" : ""); getElementById("email-value").disabled = this.checked;'),
     '#weight' => 0,
     '#element_validate' => array('_webform_edit_email_validate'),
   );
+  $form['extra']['multiple'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Multiple'),
+    '#default_value' => $component['extra']['multiple'],
+    '#description' => t('Allow multiple e-mail addresses, separated by commas.'),
+    '#weight' => 0,
+  );
+  if (webform_variable_get('webform_email_address_format') == 'long') {
+    $form['extra']['format'] = array(
+      '#type' => 'radios',
+      '#title' => t('Format'),
+      '#options' => array(
+        'long' => t('Allow long format: "Example Name" &lt;name@example.com&gt;'),
+        'short' => t('Short format only: name@example.com'),
+      ),
+      '#default_value' => $component['extra']['format'],
+      '#description' => t('Not all servers support the "long" format.'),
+    );
+  }
   $form['display']['width'] = array(
     '#type' => 'textfield',
     '#title' => t('Width'),
@@ -76,6 +100,13 @@ function _webform_edit_email($component) {
     '#size' => 5,
     '#maxlength' => 10,
     '#parents' => array('extra', 'width'),
+  );
+  $form['display']['placeholder'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Placeholder'),
+    '#default_value' => $component['extra']['placeholder'],
+    '#description' => t('The placeholder will be shown in the field until the user starts entering a value.') . ' ' . t('Often used for example values, such as "john@example.com".'),
+    '#parents' => array('extra', 'placeholder'),
   );
   $form['display']['disabled'] = array(
     '#type' => 'checkbox',
@@ -103,30 +134,34 @@ function _webform_edit_email($component) {
  */
 function _webform_edit_email_validate($element, &$form_state) {
   if ($form_state['values']['user_email']) {
-    $form_state['values']['value'] = '%useremail';
+    $form_state['values']['value'] = '[current-user:mail]';
   }
 }
 
 /**
  * Implements _webform_render_component().
  */
-function _webform_render_email($component, $value = NULL, $filter = TRUE) {
+function _webform_render_email($component, $value = NULL, $filter = TRUE, $submission = NULL) {
   global $user;
   $node = isset($component['nid']) ? node_load($component['nid']) : NULL;
 
   $element = array(
     '#type' => 'webform_email',
-    '#title' => $filter ? _webform_filter_xss($component['name']) : $component['name'],
+    '#title' => $filter ? webform_filter_xss($component['name']) : $component['name'],
     '#title_display' => $component['extra']['title_display'] ? $component['extra']['title_display'] : 'before',
-    '#default_value' => $filter ? _webform_filter_values($component['value'], $node) : $component['value'],
-    '#required' => $component['mandatory'],
+    '#default_value' => $filter ? webform_replace_tokens($component['value'], $node) : $component['value'],
+    '#required' => $component['required'],
     '#weight' => $component['weight'],
-    '#description' => $filter ? _webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
+    '#description' => $filter ? webform_filter_descriptions($component['extra']['description'], $node) : $component['extra']['description'],
     '#attributes' => $component['extra']['attributes'],
     '#element_validate'  => array('_webform_validate_email'),
     '#theme_wrappers' => array('webform_element'),
     '#translatable' => array('title', 'description'),
   );
+
+  if ($component['required']) {
+    $element['#attributes']['required'] = 'required';
+  }
 
   // Add an e-mail class for identifying the difference from normal textfields.
   $element['#attributes']['class'][] = 'email';
@@ -136,8 +171,33 @@ function _webform_render_email($component, $value = NULL, $filter = TRUE) {
     $element['#element_validate'][] = 'webform_validate_unique';
   }
 
-  if (isset($value)) {
+  if ($component['extra']['format'] == 'long') {
+    // html5 email elements enforce short-form email validation in addition to
+    // pattern validation. This means that long format email addresses must be
+    // rendered as text.
+    $element['#attributes']['type'] = 'text';
+    
+    // html5 patterns have implied delimters and start and end patterns.
+    // The are also case sensitive, not global, and not multi-line.
+    // See https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Constraint_validation
+    // See http://stackoverflow.com/questions/19605773/html5-email-validation
+    $address = '[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*';
+    $name = '("[^<>"]*?"|[^<>",]*?)';
+    $short_long = "($name *<$address>|$address)";
+    $element['#attributes']['pattern'] = $component['extra']['multiple']
+                                            ? "$short_long(, *$short_long)*"
+                                            : $short_long;
+  }
+  elseif ($component['extra']['multiple']) {
+    $element['#attributes']['multiple'] = 'multiple';
+  }
+
+  if (isset($value[0])) {
     $element['#default_value'] = $value[0];
+  }
+
+  if ($component['extra']['placeholder']) {
+    $element['#attributes']['placeholder'] = $component['extra']['placeholder'];
   }
 
   if ($component['extra']['disabled']) {
@@ -193,21 +253,22 @@ function theme_webform_email($variables) {
  */
 function _webform_validate_email($form_element, &$form_state) {
   $component = $form_element['#webform_component'];
-  $value = trim($form_element['#value']);
-  if ($value !== '' && !valid_email_address($value)) {
-    form_error($form_element, t('%value is not a valid email address.', array('%value' => $value)));
-  }
-  else {
-    form_set_value($form_element, $value, $form_state);
-  }
+  $format = webform_variable_get('webform_email_address_format') == 'long' ? $component['extra']['format'] : 'short';
+  webform_email_validate($form_element['#value'],
+                         implode('][', $form_element ['#parents']),
+                         TRUE,  // Required validation is done elsewhere.
+                         $component['extra']['multiple'],
+                         FALSE, // No tokens are allowed in user input.
+                         $format);
 }
 
 /**
  * Implements _webform_display_component().
  */
-function _webform_display_email($component, $value, $format = 'html') {
+function _webform_display_email($component, $value, $format = 'html', $submission = array()) {
   return array(
     '#title' => $component['name'],
+    '#title_display' => $component['extra']['title_display'] ? $component['extra']['title_display'] : 'before',
     '#weight' => $component['weight'],
     '#theme' => 'webform_display_email',
     '#theme_wrappers' => $format == 'html' ? array('webform_element') : array('webform_element_text'),
@@ -229,14 +290,18 @@ function theme_webform_display_email($variables) {
 /**
  * Implements _webform_analysis_component().
  */
-function _webform_analysis_email($component, $sids = array()) {
+function _webform_analysis_email($component, $sids = array(), $single = FALSE, $join = NULL) {
   $query = db_select('webform_submitted_data', 'wsd', array('fetch' => PDO::FETCH_ASSOC))
     ->fields('wsd', array('no', 'data'))
-    ->condition('nid', $component['nid'])
-    ->condition('cid', $component['cid']);
+    ->condition('wsd.nid', $component['nid'])
+    ->condition('wsd.cid', $component['cid']);
 
   if (count($sids)) {
-    $query->condition('sid', $sids, 'IN');
+    $query->condition('wsd.sid', $sids, 'IN');
+  }
+
+  if ($join) {
+    $query->innerJoin($join, 'ws2_', 'wsd.sid = ws2_.sid');
   }
 
   $nonblanks = 0;
@@ -254,8 +319,14 @@ function _webform_analysis_email($component, $sids = array()) {
 
   $rows[0] = array(t('Left Blank'), ($submissions - $nonblanks));
   $rows[1] = array(t('User entered value'), $nonblanks);
-  $rows[2] = array(t('Average submission length in words (ex blanks)'), ($nonblanks != 0 ? number_format($wordcount/$nonblanks, 2) : '0'));
-  return $rows;
+
+  $other[0] = array(t('Average submission length in words (ex blanks)'), ($nonblanks != 0 ? number_format($wordcount/$nonblanks, 2) : '0'));
+
+  return array(
+    'table_rows' => $rows,
+    'other_data' => $other,
+  );
+
 }
 
 /**
@@ -265,6 +336,13 @@ function _webform_table_email($component, $value) {
   return check_plain(empty($value[0]) ? '' : $value[0]);
 }
 
+/**
+ * Implements _webform_action_set_component().
+ */
+function _webform_action_set_email($component, &$element, &$form_state, $value) {
+  $element['#value'] = $value;
+  form_set_value($element, $value, $form_state);
+}
 
 /**
  * Implements _webform_csv_headers_component().
@@ -273,7 +351,7 @@ function _webform_csv_headers_email($component, $export_options) {
   $header = array();
   $header[0] = '';
   $header[1] = '';
-  $header[2] = $component['name'];
+  $header[2] = $export_options['header_keys'] ? $component['form_key'] : $component['name'];
   return $header;
 }
 

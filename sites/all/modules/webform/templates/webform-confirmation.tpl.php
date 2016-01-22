@@ -11,19 +11,24 @@
  *
  * Available variables:
  * - $node: The node object for this webform.
- * - $confirmation_message: The confirmation message input by the webform author.
+ * - $progressbar: The progress bar 100% filled (if configured). This may not
+ *   print out anything if a progress bar is not enabled for this node.
+ * - $confirmation_message: The confirmation message input by the webform
+ *   author.
  * - $sid: The unique submission ID of this submission.
+ * - $url: The URL of the form (or for in-block confirmations, the same page).
  */
 ?>
+<?php print $progressbar; ?>
 
 <div class="webform-confirmation">
   <?php if ($confirmation_message): ?>
     <?php print $confirmation_message ?>
   <?php else: ?>
-    <p><?php print t('Thank you for submitting your question to the Sex Info. Your question has been received and will be be answered within 1-2 weeks by a Sexpert. <br/> <br/>In the meantime you may want to check out our <a href='frequently-asked-questions'>Frequently Asked Questions</a>!'); ?></p>
+    <p><?php print t('Thank you, your submission has been received.'); ?></p>
   <?php endif; ?>
 </div>
 
 <div class="links">
-  <a href="<?php print url('node/'. $node->nid) ?>"><?php print t('Go back to the form') ?></a>
+  <a href="<?php print $url; ?>"><?php print t('Go back to the form') ?></a>
 </div>
