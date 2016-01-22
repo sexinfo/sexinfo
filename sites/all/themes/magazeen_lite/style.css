@@ -2760,6 +2760,9 @@ a:active.more-button {
       content: "- ";
       color: #666; }
 
+.webform-confirmation h3 {
+  padding: 10px 0px; }
+
 #node-508 .node-footer {
   display: none; }
 
