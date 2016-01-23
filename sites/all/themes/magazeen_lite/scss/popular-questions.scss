@@ -16,7 +16,7 @@ $transition-time: 0.4s;
         }
 
         &:nth-of-type(even) {
-            background-color: rgb(26, 25, 24);
+            background-color: rgb(25, 25, 25);
         }
 
         .faq-qa-hide {
@@ -24,6 +24,30 @@ $transition-time: 0.4s;
             border-bottom-right-radius: 4px;
             background-color: #eeeeee;
         }
+
+        // Sub-categories
+        div div.faq-category-group {
+            background-color: rgb(100, 100, 100);
+            margin: 10px;
+
+            div.faq-qa-hide {
+                background-color: #e8e8e8;
+            }
+        }
+
+        h4 {
+            text-align: center;
+            padding: 3px 0px;
+        }
+
+        div.faq-question {
+            padding-right: 10px;
+
+            span:before {
+                content: "• ";
+            }
+        }
+
     }
 
     a:link {
@@ -37,6 +61,10 @@ $transition-time: 0.4s;
 
     .faq-question a:link {
         color: #f05898;
+    }
+
+    .faq-answer {
+        padding: 0px 40px;
     }
 }
 
