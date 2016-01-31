@@ -68,7 +68,7 @@ function _autocomplete_search_entity($entity, $type, $input) {
     break;
 
     case 'term' :
-
+      $term = array();
       $terms = db_select('taxonomy_term_data', 'ttd')
       ->fields('ttd', array('name'))
       ->condition('ttd.name', '%' . db_like($input) . '%', 'like')
@@ -153,6 +153,8 @@ function theme_search_dropdown($variables) {
   $type = $variables['type'];
   $fcolor = $variables['fcolor'];
   $bcolor = $variables['bcolor'];
+  $separator = '';
+  $label = '';
 
   // Check whether to use a separator or not.
   if (variable_get('autocomplete_searchbox_use_separator', '0')) {

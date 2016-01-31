@@ -6,9 +6,9 @@ package = Search
 configure = admin/config/search/autocomplete-search-config
 dependencies[] = taxonomy
 
-; Information added by Drupal.org packaging script on 2014-08-20
-version = "7.x-1.1"
+; Information added by Drupal.org packaging script on 2016-01-05
+version = "7.x-1.2"
 core = "7.x"
 project = "autocomplete_searchbox"
-datestamp = "1408515529"
+datestamp = "1452013514"
 
