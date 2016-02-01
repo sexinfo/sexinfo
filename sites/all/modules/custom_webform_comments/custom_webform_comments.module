@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Allows statuses and omments to be stored for webform submissions
+ * Allows statuses and comments to be stored for webform submissions
 	*
  */
 /**
@@ -209,7 +209,7 @@ function custom_webform_comments_block_view($delta = '') {
 
 /**
  * Implements hook_menu_alter().
- * 
+ *
  */
 function custom_webform_comments_menu_alter(&$items) {
   // Unsets and rewrites webform results
@@ -230,7 +230,12 @@ function custom_webform_comments_menu_alter(&$items) {
  * Returns status options for webform submissions
 	*/
 function custom_webform_comments_statuses() {
-  return array('completed' => t('Completed Follow-up'), 'pending' => t('Pending'), 'notstarted' => t('Not Started'));
+  return array(
+      'unassigned'  => t('Not Assigned'),
+      'assigned'    => t('Assigned'),
+      'editing'     => t('Editing'),
+      'edited'      => t('Edited'),
+      'sent'        => t('Sent'));
 }
 
 /**
@@ -324,7 +329,7 @@ function custom_webform_comments_results_submissions($node, $user_filter, $pager
   $element['#total_count'] = $count;
   $element['#pager_count'] = $pager_count;
   $element['#attached']['library'][] = array('webform', 'admin');
-  
+
   //Add status to header
   $header[] = 'Status';
   $element['table']['#theme'] = 'table';
@@ -337,13 +342,13 @@ function custom_webform_comments_results_submissions($node, $user_filter, $pager
 
 /**
  * Retrieves most recent status of submission
-	* @param $nid 
+	* @param $nid
 	* @param $sid
 	*/
 function custom_webform_comments_getrowstatus($nid, $sid) {
-  $query = db_query_range("SELECT status from {custom_webform_submission_status} WHERE nid = :nid AND sid = :sid ORDER BY id DESC", 0, 1, array(':nid' => $nid, ':sid' => $sid));
+  $statusQuery = db_query_range("SELECT status from {custom_webform_submission_status} WHERE nid = :nid AND sid = :sid ORDER BY id DESC", 0, 1, array(':nid' => $nid, ':sid' => $sid));
   $status = custom_webform_comments_statuses();
-  $result = $query->fetchField();
+  $result = $statusQuery->fetchField();
   if ($result) {
     return $status[$result];
   }
