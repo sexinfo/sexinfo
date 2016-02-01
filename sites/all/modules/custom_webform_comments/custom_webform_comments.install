@@ -1,0 +1,112 @@
+<?php
+/**
+ * @file
+ * Installs tables for storing comments and statuses on webform submissions
+	*
+ */
+
+/**
+ * Implementation of hook_schema()
+	*/
+function custom_webform_comments_schema() {
+  $schema['custom_webform_comments'] = array(
+    'description' => 'Stores comments on webform submissions.',
+    'fields' => array(
+      'cid' => array(
+        'description' => 'THe unique ID for this comment',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'comment' => array(
+        'description' => 'The comment entered',
+        'type' => 'text',
+        'size' => 'big',
+        'not null' => TRUE,
+      ),
+      'subject' => array(
+        'description' => 'The subject of the comment',
+        'type' => 'text',
+        'size' => 'small',
+        'not null' => TRUE,
+      ),
+      'nid' => array(
+        'description' => 'The node being commented on',
+        'type' => 'int',
+        'not null' => FALSE,
+        'default' => 1,
+      ),
+      'sid' => array(
+        'description' => 'The submission ID of the webform',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 1,
+      ),
+      'commenter_user_id' => array(
+        'description' => 'The user ID of person commenting',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 1,
+      ),
+      'comment_parent' => array(
+        'description' => 'The comment this comment is related to (if applicable)',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'ts' => array(
+        'description' => 'The Unix timestamp when the comment was most recently saved.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+     'primary key' => array('cid'),
+  );
+  $schema['custom_webform_submission_status'] = array(
+    'description' => 'Stores status of webform submissions',
+    'fields' => array(
+      'id' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'status' => array(
+        'type' => 'varchar',
+        'length' => '40',
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'The status of the submission'
+      ),
+      'submit_time' => array(
+        'type' => 'varchar',
+        'length' => '40',
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'The time of the submission'
+      ),
+      'nid' => array(
+        'description' => 'The node ID',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 1
+      ),
+      'sid' => array(
+        'description' => 'The submission ID',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 1
+      ),
+      'user' => array(
+        'type' => 'blob',
+        'not null' => FALSE,
+        'size' => 'big',
+        'serialize' => TRUE,
+        'description' => 'The user who made the submission'
+      )
+    ),
+    'primary key' => array('id'),
+    'indexes' => array(
+      'nid' => array('nid', 'sid'),
+    ),
+  );
+  return $schema;
+}

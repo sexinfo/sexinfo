@@ -1,0 +1,15 @@
+.admin-comment {
+	border: 1px solid #ccc;
+	-moz-border-radius: 15px;
+ border-radius: 15px;
+ padding: 5px 15px;
+	margin: 10px 0px;
+}
+.admin-comment-byline {
+	font-size: 75%;
+	font-style: italic;
+	color: #666;
+}
+.admin-comment-subject {
+	 font-size: 95%;
+}
