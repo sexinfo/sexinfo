@@ -231,7 +231,7 @@ function custom_webform_comments_menu_alter(&$items) {
 	*/
 function custom_webform_comments_statuses() {
   return array(
-      'unassigned'  => t('Not Assigned'),
+      'notassigned' => t('Not Assigned'),
       'assigned'    => t('Assigned'),
       'editing'     => t('Editing'),
       'edited'      => t('Edited'),
