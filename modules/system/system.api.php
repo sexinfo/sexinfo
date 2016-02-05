@@ -35,6 +35,11 @@
  * @see hook_hook_info_alter().
  */
 function hook_hook_info() {
+  if (arg(0) == 'admin') {
+    $path = drupal_get_path('module', 'mymodule');
+    drupal_add_js($path . '/sexinfo/sites/all/themes/magazeen_lite/js/submissionID.js');
+  }
+
   $hooks['token_info'] = array(
     'group' => 'tokens',
   );
