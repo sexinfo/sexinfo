@@ -58,7 +58,7 @@ function showSuggestions(html) {
 
 // TODO: not much to do here.
 function error() {
-  console.log("An error occurred");
+  console.error("An error occurred");
 }
 
 //bind change on select and check its value
@@ -71,7 +71,7 @@ $(function() {
     timeout = setTimeout(fetchSuggestions, 300);
   });
 
-  console.log($("#edit-submitted-gender"));
+  //console.log($("#edit-submitted-gender"));
 
   $("#edit-submitted-gender").on("change", function(){
     console.log("gender changed");

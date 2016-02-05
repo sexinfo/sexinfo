@@ -10,12 +10,12 @@ $(document).ready(function () {
     questions = loadJSON("questions.json");
     responses = loadJSON("responses.json");
 
-    console.log(questions);
-    console.log(responses);
+    //console.log(questions);
+    //console.log(responses);
 
     var startKey = questions['start'];
     var currentQuestion = questions[startKey];
-    
+
     $('#start-quiz').click(function () {
         $($question_id).html(currentQuestion.message);
         $('#ppq-introduction').fadeOut('slow');
@@ -85,7 +85,7 @@ function nextQuestion(sender) {
                 });
             });
         });
-        
+
     }
     else {
         var response = responses[next];
