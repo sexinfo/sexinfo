@@ -353,6 +353,6 @@ function custom_webform_comments_getrowstatus($nid, $sid) {
     return $status[$result];
   }
   else {
-    return t('Not Started');
+    return t('Not Assigned');
   }
 }
