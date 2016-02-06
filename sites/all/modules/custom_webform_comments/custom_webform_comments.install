@@ -13,7 +13,7 @@ function custom_webform_comments_schema() {
     'description' => 'Stores comments on webform submissions.',
     'fields' => array(
       'cid' => array(
-        'description' => 'THe unique ID for this comment',
+        'description' => 'The unique ID for this comment',
         'type' => 'serial',
         'unsigned' => TRUE,
         'not null' => TRUE,
@@ -55,9 +55,10 @@ function custom_webform_comments_schema() {
       ),
       'ts' => array(
         'description' => 'The Unix timestamp when the comment was most recently saved.',
-        'type' => 'int',
+        'type' => 'varchar',
+        'length' => '40',
         'not null' => TRUE,
-        'default' => 0,
+        'default' => '',
       ),
     ),
      'primary key' => array('cid'),

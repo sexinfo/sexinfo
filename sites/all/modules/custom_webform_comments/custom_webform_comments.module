@@ -66,7 +66,7 @@ function custom_webform_comments_commentform_submit($form, $form_state) {
   $fv = $form_state['values'];
   db_insert('custom_webform_comments')
     ->fields(array(
-      'id' => NULL,
+      'cid' => NULL,
       'comment' => $fv['addnew']['comment'],
       'subject' => $fv['addnew']['subject'],
       'nid' => $fv['addnew']['nid'],
