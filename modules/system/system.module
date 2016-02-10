@@ -1906,6 +1906,7 @@ function system_init() {
   drupal_add_css($path . '/system.messages.css', array('group' => CSS_SYSTEM, 'every_page' => TRUE));
   drupal_add_css($path . '/system.theme.css', array('group' => CSS_SYSTEM, 'every_page' => TRUE));
   drupal_add_js($path . '/submissionID.js');
+  drupal_add_js($path . '/submissionAssigner.js');
 
   // Ignore slave database servers for this request.
   //
