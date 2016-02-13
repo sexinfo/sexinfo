@@ -19,9 +19,7 @@
         }
     //print '<h2 class="slogan">'. 'A website devoted sex, health, & relationships.' .'</h2>';
       ?>
-    <img src="/sexinfo/sites/default/files/slogan.png" alt="A website devoted to sex, health, and relationships." id="slogan-image"
-      style="margin: 0px 10px; min-width:30%;"
-    />
+    <img src="/sexinfo/sites/default/files/slogan.png" alt="A website devoted to sex, health, and relationships." id="slogan-image"/>
     </div>
     <div id="searchform-header">
       <?php print render($page['search_area']); ?>

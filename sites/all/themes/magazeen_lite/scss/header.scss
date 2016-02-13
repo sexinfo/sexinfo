@@ -101,7 +101,12 @@ input#edit-search-block-form--2 {
 #searchform-header .form-item { display:inline; }
 
 img#logo-image {
-  padding: 0 10px 0 0;
+  padding: 0 10px;
+}
+
+img#slogan-image {
+    padding: 0px 10px;
+    min-width:30%;
 }
 
 .social-buttons {

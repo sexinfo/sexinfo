@@ -46,6 +46,14 @@
   "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language; ?>" version="XHTML+RDFa 1.0" dir="<?php print $language->dir; ?>"<?php print $rdf_namespaces; ?>>
 
+<!-- Address bar colors -->
+<!-- Chrome, Firefox OS and Opera -->
+<meta name="theme-color" content="#f05898">
+<!-- Windows Phone -->
+<meta name="msapplication-navbutton-color" content="#f05898">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-status-bar-style" content="#f05898">
+
 <head profile="<?php print $grddl_profile; ?>">
   <meta name="viewport" content="width=device-width">
   <?php print $head; ?>
