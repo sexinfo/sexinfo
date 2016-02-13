@@ -14,8 +14,10 @@ $(document).ready(function() {
 
     // Only runs on the view page for a single submission.
     if(currentLocation.includes('/sexinfo/node/22/submission/') === true) {
-        var secondTabElement = $("#branding > ul > li:nth-child(2)")[0];
-        if(secondTabElement.innerText === "EDIT") {
+        postMessage();
+
+        var secondTabElement = $("#branding > ul > li:nth-child(2) > a")[0];
+        if(secondTabElement.innerHTML === "Edit") {
             console.log("Hello, Developer!");
             // Do nothing
         }
@@ -52,6 +54,11 @@ var canAssign = function(today) {
 }
 
 var postMessage = function() {
-    var message = "You can only assign submissions between Thursday at 5pm to "
-        + "Tuesday at 4pm.";
+    var message = "Note: Submissions can only be assigned between Thursdays at"
+        + " 5pm and Tuesdays at 4pm.";
+    var messageElement = document.createElement('div');
+    messageElement.innerHTML = '<small>' + message + '</small>';
+    var statusElement = $('#custom-webform-comments-statusform > div > '
+        + 'div.form-item.form-type-select.form-item-status')[0];
+    statusElement.appendChild(messageElement);
 }
