@@ -1,0 +1,71 @@
+/* ----------------------------------------------*/
+/* Ask the Sexperts webform
+/* ----------------------------------------------*/
+#node-816 {
+  width: 600px;
+
+  .node-box {
+    // Container resets
+    background: none;
+    background-image: none;
+    border: none;
+  }
+
+  .node-content { @extend %grey-form; }
+
+  input:not([type="submit"]),
+  textarea {
+    @extend %input-full;
+  }
+
+  textarea {
+    font: 1.2em Arial, Helvetica, sans-serif;
+    overflow: auto; // Remove scrollbar in IE
+    width: 100%;
+  }
+
+  // TODO: blue doesn't look great here
+  input[type="submit"] {
+    @extend %button-blue;
+  }
+
+  label { @extend %pink-label; }
+
+  .field-error {
+    border: 1px solid #d34332 !important;
+    color: #d34332 !important;
+  }
+}
+
+#node-816 .node-footer { display: none; }
+
+.grippie {
+  // Get rid of the textarea drag thing
+  // display: none;
+}
+
+#webform-component-gender-field {
+  display: none;
+}
+
+
+#suggestions {
+  margin-top: 10px;
+
+  h3 {}
+
+  a {
+    font-size: 1.2em;
+
+    &:before {
+      content: "- ";
+      color: #666;
+    }
+  }
+}
+
+.webform-confirmation {
+    h3 {
+        padding: 10px 0px;
+    }
+}
