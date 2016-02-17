@@ -24,7 +24,7 @@ $(document).ready(function() {
         else {
             console.log("Hello, Writer!");
             if(canAssign(new Date()) === false) {
-                console.log("Sorry, you can't assign today. :(");
+                console.log("Sorry, you can't assign right now. :(");
                 $('#edit-status > option:nth-child(2)').remove();
             }
             else {
