@@ -106,6 +106,13 @@ function custom_webform_comments_statusform() {
     '#default_value' => array('notstarted'),
     '#title' => t('Response Status')
   );
+  $form['username'] = array(
+    '#type' => 'textfield',
+    '#size' => 30,
+    '#title' => t('Specify a user:'),
+
+    '#prefix' => '<div style="height: 0px">&nbsp;</div>'
+  );
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Submit'),
@@ -150,6 +157,13 @@ function custom_webform_comments_status_callback($form, $form_state) {
 	*/
 function custom_webform_comments_status_dbupdater($data) {
   global $user;
+  $username;
+  if (1) {
+      $username = $data['username'];
+  }
+  else {
+      $username = serialize($user);
+  }
   //Insert values into database
   $insert = db_insert('custom_webform_submission_status')
     ->fields(array(
@@ -158,7 +172,7 @@ function custom_webform_comments_status_dbupdater($data) {
       'submit_time' => date("Y-m-d H:i:s"),
       'nid' => $data['nid'],
       'sid' => $data['sid'],
-      'user' => serialize($user)
+      'user' => serialize($username);
     ))->execute();
   return $insert;
 }
@@ -247,7 +261,11 @@ function custom_webform_comments_submission_statuses($data) {
   $status = custom_webform_comments_statuses();
   while ($row = $results->fetchAssoc()) {
     $user = unserialize($row['user']);
-    $rows[] = array($status[$row['status']], date("F j, Y, g:i a", strtotime($row['submit_time'])), l($user->name, 'user/' . $user->uid));
+    $rows[] = array(
+        $status[$row['status']],
+        date("F j, Y, g:i a", strtotime($row['submit_time'])),
+        l($user->name, 'user/' . $user->uid)
+    );
   }
   $header = array('Status', 'Date', 'User');
   $build['table'] = array(
