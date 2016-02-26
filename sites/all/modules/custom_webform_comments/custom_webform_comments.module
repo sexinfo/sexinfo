@@ -99,12 +99,19 @@ function custom_webform_comments_commentform_results() {
 	* creates for for updating submission status
 	*/
 function custom_webform_comments_statusform() {
+  global $user;
   $form = array();
   $form['status'] = array(
     '#type' => 'select',
     '#options' => custom_webform_comments_statuses(),
     '#default_value' => array('notstarted'),
     '#title' => t('Response Status')
+  );
+  $form['username'] = array(
+    '#type' => 'select',
+    '#options' => load_active_users(),
+    '#default_value' => array($user->name),
+    '#title' => t('Specify a user:')
   );
   $form['submit'] = array(
     '#type' => 'submit',
@@ -128,6 +135,23 @@ function custom_webform_comments_statusform() {
   return $form;
 }
 
+/*
+ * Queries database for all active users and returns an array of usernames.
+ */
+function load_active_users() {
+  $query = 'SELECT ur.uid
+    FROM {users} AS ur
+    WHERE status = 1';
+  $result = db_query($query, array());
+  $uids = $result->fetchCol();
+  $usernames = array();
+  foreach (user_load_multiple($uids) as $user) {
+      $usernames[$user->name] = t($user->name);
+  }
+  ksort($usernames); // Sorts array alphabetically by keys
+  return $usernames;
+}
+
 /**
  * Submit handler for Status update form (in the event ajax fails)
 	*/
@@ -149,8 +173,10 @@ function custom_webform_comments_status_callback($form, $form_state) {
  * Utility function for updating statuses
 	*/
 function custom_webform_comments_status_dbupdater($data) {
-  global $user;
-  //Insert values into database
+  //debug_to_console($data['username']);
+  // Get user object from username.
+  $userObject = user_load_by_name($data['username']);
+  // Insert values into database
   $insert = db_insert('custom_webform_submission_status')
     ->fields(array(
       'id' => NULL,
@@ -158,10 +184,21 @@ function custom_webform_comments_status_dbupdater($data) {
       'submit_time' => date("Y-m-d H:i:s"),
       'nid' => $data['nid'],
       'sid' => $data['sid'],
-      'user' => serialize($user)
+      'user' => serialize($userObject)
     ))->execute();
   return $insert;
 }
+
+function debug_to_console( $data ) {
+
+    if ( is_array( $data ) )
+        $output = "<script>console.log( 'Debug Objects: " . implode( ',', $data) . "' );</script>";
+    else
+        $output = "<script>console.log( 'Debug Objects: " . $data . "' );</script>";
+
+    echo $output;
+}
+
 /**
  * Implementation of hook_block_info()
 	*/
@@ -247,7 +284,11 @@ function custom_webform_comments_submission_statuses($data) {
   $status = custom_webform_comments_statuses();
   while ($row = $results->fetchAssoc()) {
     $user = unserialize($row['user']);
-    $rows[] = array($status[$row['status']], date("F j, Y, g:i a", strtotime($row['submit_time'])), l($user->name, 'user/' . $user->uid));
+    $rows[] = array(
+        $status[$row['status']],
+        date("F j, Y, g:i a", strtotime($row['submit_time'])),
+        l($user->name, 'user/' . $user->uid)
+    );
   }
   $header = array('Status', 'Date', 'User');
   $build['table'] = array(
