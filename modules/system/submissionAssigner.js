@@ -12,6 +12,8 @@ var USERNAME_SELECTOR = "#toolbar-user > li.account.first > a > strong";
 var TABLE_SELECTOR = "#update_results > table.sticky-enabled.tableheader-"
     +"processed.sticky-table > tbody";
 var ASSIGNED_STATUSES = ["Assigned", "Editing", "Edited", "Sent"];
+var USER_MENU_SELECTOR = "#custom-webform-comments-statusform > div > "
+    +"div.form-item.form-type-select.form-item-username";
 
 /*
  * Main method.
@@ -32,6 +34,8 @@ $(document).ready(function() {
         // If user is a writer.
         else {
             console.log("Hello, Writer!");
+            // Writers can only specify themselves
+            $(USER_MENU_SELECTOR).remove();
             var assigned = alreadyAssigned();
             // If assignment is closed or assigned
             if(!canAssign(new Date()) || assigned) {
