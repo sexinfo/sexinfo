@@ -111,9 +111,7 @@ function custom_webform_comments_statusform() {
     '#type' => 'select',
     '#options' => load_active_users(),
     '#default_value' => array($user->name),
-    '#title' => t('Specify a user:'),
-
-    '#prefix' => '<div style="height: 0px">&nbsp;</div>'
+    '#title' => t('Specify a user:')
   );
   $form['submit'] = array(
     '#type' => 'submit',
@@ -137,6 +135,9 @@ function custom_webform_comments_statusform() {
   return $form;
 }
 
+/*
+ * Queries database for all active users and returns an array of usernames.
+ */
 function load_active_users() {
   $query = 'SELECT ur.uid
     FROM {users} AS ur
@@ -145,8 +146,9 @@ function load_active_users() {
   $uids = $result->fetchCol();
   $usernames = array();
   foreach (user_load_multiple($uids) as $user) {
-      array_push($usernames, $user->name);
+      $usernames[$user->name] = t($user->name);
   }
+  ksort($usernames); // Sorts array alphabetically by keys
   return $usernames;
 }
 
@@ -171,15 +173,10 @@ function custom_webform_comments_status_callback($form, $form_state) {
  * Utility function for updating statuses
 	*/
 function custom_webform_comments_status_dbupdater($data) {
-  global $user;
-  $username;
-  if (1) {
-      $username = $data['username'];
-  }
-  else {
-      $username = serialize($user);
-  }
-  //Insert values into database
+  //debug_to_console($data['username']);
+  // Get user object from username.
+  $userObject = user_load_by_name($data['username']);
+  // Insert values into database
   $insert = db_insert('custom_webform_submission_status')
     ->fields(array(
       'id' => NULL,
@@ -187,10 +184,21 @@ function custom_webform_comments_status_dbupdater($data) {
       'submit_time' => date("Y-m-d H:i:s"),
       'nid' => $data['nid'],
       'sid' => $data['sid'],
-      'user' => serialize($username)
+      'user' => serialize($userObject)
     ))->execute();
   return $insert;
 }
+
+function debug_to_console( $data ) {
+
+    if ( is_array( $data ) )
+        $output = "<script>console.log( 'Debug Objects: " . implode( ',', $data) . "' );</script>";
+    else
+        $output = "<script>console.log( 'Debug Objects: " . $data . "' );</script>";
+
+    echo $output;
+}
+
 /**
  * Implementation of hook_block_info()
 	*/
