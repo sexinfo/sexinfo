@@ -99,6 +99,7 @@ function custom_webform_comments_commentform_results() {
 	* creates for for updating submission status
 	*/
 function custom_webform_comments_statusform() {
+  global $user;
   $form = array();
   $form['status'] = array(
     '#type' => 'select',
@@ -107,8 +108,9 @@ function custom_webform_comments_statusform() {
     '#title' => t('Response Status')
   );
   $form['username'] = array(
-    '#type' => 'textfield',
-    '#size' => 30,
+    '#type' => 'select',
+    '#options' => load_active_users(),
+    '#default_value' => array($user->name),
     '#title' => t('Specify a user:'),
 
     '#prefix' => '<div style="height: 0px">&nbsp;</div>'
@@ -133,6 +135,19 @@ function custom_webform_comments_statusform() {
     '#markup' => '<div id="update_results">' . drupal_render($build) . '</div>',
   );
   return $form;
+}
+
+function load_active_users() {
+  $query = 'SELECT ur.uid
+    FROM {users} AS ur
+    WHERE status = 1';
+  $result = db_query($query, array());
+  $uids = $result->fetchCol();
+  $usernames = array();
+  foreach (user_load_multiple($uids) as $user) {
+      array_push($usernames, $user->name);
+  }
+  return $usernames;
 }
 
 /**
@@ -172,7 +187,7 @@ function custom_webform_comments_status_dbupdater($data) {
       'submit_time' => date("Y-m-d H:i:s"),
       'nid' => $data['nid'],
       'sid' => $data['sid'],
-      'user' => serialize($username);
+      'user' => serialize($username)
     ))->execute();
   return $insert;
 }
