@@ -1,0 +1,245 @@
+<?php
+
+/**
+ * @file
+ * Module file for the instagram_block module.
+ */
+
+/**
+ * Implements hook_block_info().
+ *
+ * Defines the new instagram block.
+ */
+function instagram_block_block_info() {
+  $blocks['instagram_block'] = array(
+    'info' => t('Instagram Block - User Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  $blocks['instagram_block_tag'] = array(
+    'info' => t('Instagram Block - Tag Block'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_configure().
+ *
+ * Set values to be used when rendering the block later.
+ */
+function instagram_block_block_configure($delta = '') {
+  $form = array();
+  $description = '';
+
+  // Default values
+  $empty = array(
+    'user_id' => '',
+    'access_token' => '',
+  );
+
+  // Store data from variable in $form for now.
+  $form['#admin_data'] = variable_get('instagram_block_admin_settings', $empty);
+
+  $form['description'] = array(
+    '#title' => t('Description'),
+    '#type' => 'item',
+    '#markup' => '',
+    '#weight' => -50,
+  );
+
+  $form['count'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Number of images to display.'),
+  );
+
+  $form['width'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Image width in pixels.'),
+  );
+
+  $form['height'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Image height in pixels.'),
+  );
+
+  $image_options = array(
+    'thumbnail' => t('Thumbnail Preview'),
+    'low_resolution' => t('Low Resolution'),
+    'standard_resolution' => t('Standard Resolution'),
+  );
+
+  $form['img_resolution'] = array(
+    '#type' => 'select',
+    '#title' => t('Image resolution'),
+    '#description' => t('Choose the quality of the images you would like to display.'),
+    '#options' => $image_options,
+  );
+
+  switch ($delta) {
+    case 'instagram_block':
+      // Store data from variable in $form for now.
+      $form['#block_data'] = variable_get('instagram_block_user_block_settings', array());
+      $description = t('Configurations in this block utilise the !globalconfig.', array(
+        '!globalconfig' => l('global configuration', 'admin/config/services/instagram_block'),
+      ));
+
+      $form['count']['#default_value'] = isset($form['#block_data']['count']) ? $form['#block_data']['count'] : '';
+      $form['width']['#default_value'] = isset($form['#block_data']['width']) ? $form['#block_data']['width'] : '';
+      $form['height']['#default_value'] = isset($form['#block_data']['height']) ? $form['#block_data']['height'] : '';
+      $form['img_resolution']['#default_value'] = isset($form['#block_data']['img_resolution']) ? $form['#block_data']['img_resolution'] : '';
+
+      break;
+    case 'instagram_block_tag':
+      $form['#block_data'] = variable_get('instagram_block_tag_block_settings', array());
+      $description = t('This block won\'t fetch media from your personal instagram account. Configurations in this block utilise the !globalconfig.', array(
+        '!globalconfig' => l('global configuration', 'admin/config/services/instagram_block'),
+      ));
+
+      $form['count']['#default_value'] = isset($form['#block_data']['count']) ? $form['#block_data']['count'] : '';
+      $form['width']['#default_value'] = isset($form['#block_data']['width']) ? $form['#block_data']['width'] : '';
+      $form['height']['#default_value'] = isset($form['#block_data']['height']) ? $form['#block_data']['height'] : '';
+      $form['img_resolution']['#default_value'] = isset($form['#block_data']['img_resolution']) ? $form['#block_data']['img_resolution'] : '';
+
+      $form['tag'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Tag'),
+        '#description' => t('Fetch media with this tag'),
+        '#default_value' => isset($form['#block_data']['tag']) ? $form['#block_data']['tag'] : '',
+        '#weight' => -49,
+      );
+      break;
+  }
+
+  $form['description']['#markup'] = $description;
+
+  return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ *
+ * Save the information from the configuration form to a drupal variable.
+ */
+function instagram_block_block_save($delta = '', $edit = array()) {
+  switch ($delta) {
+    case 'instagram_block':
+      $variables = variable_get('instagram_block_user_block_settings', array());
+      $save_values = array_merge($variables, $edit);
+      variable_set('instagram_block_user_block_settings', $save_values);
+      break;
+    case 'instagram_block_tag':
+      $variables = variable_get('instagram_block_tag_block_settings', array());
+      $save_values = array_merge($variables, $edit);
+      variable_set('instagram_block_tag_block_settings', $save_values);
+      break;
+  }
+}
+
+/**
+ * Implements hook_block_view().
+ *
+ * Fetches the instagram photos and creates a render array.
+ */
+function instagram_block_block_view($delta = '') {
+  $block = array();
+
+  // Add instagram_block specific styles.
+  drupal_add_css(drupal_get_path('module', 'instagram_block') . '/css/instagram-block.css');
+
+  // Get configuration values.
+  $config = variable_get('instagram_block_admin_settings', array());
+  $content = array();
+  $block = array(
+    'subject' => 'Instagram block',
+  );
+
+  // Check that block configuration is available.
+  if (!isset($config['user_id']) || !isset($config['access_token'])) {
+    // Remind user to fill in configuration.
+    $content = instagram_block_get_configuration_reminder();
+  }
+  else {
+    // Build and send request to the Instagram API.
+    try {
+      switch ($delta) {
+        case 'instagram_block':
+          $values = variable_get('instagram_block_user_block_settings', array());
+          $request = new InstagramRequest($config, $values);
+          $request->requestUserMedia();
+          $block['subject'] = t('Instagram Block - User Block');
+          break;
+        case 'instagram_block_tag':
+          $values = variable_get('instagram_block_tag_block_settings', array());
+          $request = new InstagramRequest($config, $values);
+          $request->requestTagMedia();
+          $block['subject'] = t('Instagram Block - Tag Block');
+          break;
+      }
+    }
+    catch (Exception $e) {
+      watchdog_exception('instagram_block', $e);
+      // Return no content, the request failed.
+      return $block;
+    }
+
+    // Set resolution from block config.
+    $img_resolution = isset($values['img_resolution']) ? $values['img_resolution'] : 'thumbnail';
+
+    $response = $request->get_instagram_posts();
+    foreach ($response as $post) {
+      $url = $post->images->{$img_resolution}->url;
+      $components = parse_url($url);
+
+      $content['children'][] = array(
+        '#markup' => '',
+        '#theme' => 'instagram_block_image',
+        '#post' => $post,
+        '#href' => $post->link,
+        '#src' => str_replace($components['scheme'] . '://', '//', $url),
+        '#width' => $values['width'],
+        '#height' => $values['height'],
+      );
+    }
+  }
+  $block['content'] = $content;
+  return $block;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function instagram_block_menu() {
+  $items['admin/config/services/instagram_block'] = array(
+    'title' => 'Instagram Block',
+    'description' => 'Configuration page for Instagram Block.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('instagram_block_admin_settings'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'instagram_block.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function instagram_block_theme() {
+  return array(
+    'instagram_block_image' => array(
+      'variables' => array('height' => NULL,'width' => NULL, 'src' => NULL, 'href' => NULL, 'post' => NULL),
+      'template' => 'instagram-block-image',
+    ),
+  );
+}
+
+/**
+ * Builds render array to remind user to configure block settings.
+ */
+function instagram_block_get_configuration_reminder() {
+  return array(
+    '#markup' => t('Please don\'t forget to !configure this block.', array('!configure' => l(t('configure'),'admin/config/services/instagram_block')))
+  );
+}

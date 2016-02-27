@@ -37,3 +37,4 @@ scripts[] = js/lib/autocomplete.js
 scripts[] = js/lib/jquery.select-to-autocomplete.min.js
 scripts[] = js/lib/jquery-ui-autocomplete.js
 scripts[] = js/facebook-sdk.js
+scripts[] = js/raffle-landing-page.js

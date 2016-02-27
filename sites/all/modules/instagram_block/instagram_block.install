@@ -1,0 +1,87 @@
+<?php
+
+/**
+ * @file
+ * File to handle module operations performed when (un-)installing module.
+ */
+
+/*
+ * Implements hook_install().
+ *
+ * Creates config variables.
+ */
+function instagram_block_install() {
+  $user_block = array(
+    'count' => '4',
+    'width' => '100',
+    'height' => '100',
+    'img_resolution' => 'thumbnail',
+  );
+
+  $tag_block = array(
+    'tag' => 'drupal',
+    'count' => '4',
+    'width' => '100',
+    'height' => '100',
+    'img_resolution' => 'thumbnail',
+  );
+
+  variable_set('instagram_block_user_block_settings', $user_block);
+  variable_set('instagram_block_tag_block_settings', $tag_block);
+}
+
+/*
+ * Implements hook_uninstall().
+ *
+ * Deletes variables.
+ */
+function instagram_block_uninstall() {
+  variable_del('instagram_block_admin_settings');
+  variable_del('instagram_block_user_block_settings');
+  variable_del('instagram_block_tag_block_settings');
+}
+
+/**
+ * Move config storage from single to multiple variables.
+ */
+function instagram_block_update_7100() {
+  $empty = array(
+    'count' => '4',
+    'width' => '100',
+    'height' => '100',
+    'img_resolution' => 'thumbnail',
+    'user_id' => '',
+    'access_token' => '',
+  );
+
+  $admin = array(
+    'user_id' => '',
+    'access_token' => '',
+  );
+
+  $block = array(
+    'count' => '',
+    'width' => '',
+    'height' => '',
+    'img_resolution' => '',
+  );
+
+  $old = variable_get('instagram_block_data', $empty);
+
+  // Move config from old to new variables.
+  foreach (array_keys($empty) as $key) {
+    if (in_array($key, array_keys($admin))) {
+      $admin[$key] = isset($old[$key]) ? $old[$key] : $empty[$key];
+    }
+    else {
+      $block[$key] = isset($old[$key]) ? $old[$key] : $empty[$key];
+    }
+  }
+
+  // Save new variables.
+  variable_set('instagram_block_admin_settings', $admin);
+  variable_set('instagram_block_user_block_settings', $block);
+
+  // Delete old variable.
+  variable_del('instagram_block_data');
+}
