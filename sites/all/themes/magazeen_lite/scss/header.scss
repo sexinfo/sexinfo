@@ -61,11 +61,12 @@
   background: no-repeat scroll right top transparent;
   float: right;
   height: auto;
-  margin: 5px 0px 0 0;
+  margin: 5px 20px 0 0;
   width: 284px;
   display: inline;
 
   @include mobile {
+    display: block;
     float: none;
     margin: 10px auto 0;
   }
@@ -115,7 +116,7 @@ img#slogan-image {
 .social-buttons {
   @include clearfix;
   float: right;
-	margin: 10px 0px 5px 0;
+	margin: 10px 20px 5px 0;
 	width: 284px;
 
   a {
@@ -143,7 +144,7 @@ img#slogan-image {
 #random-article {
     @include clearfix;
     float: right;
-  	margin: 20px 14px 10px 5px;
+  	margin: 20px 34px 10px 5px;
     width: 270px;
     a {
         padding: 0px;

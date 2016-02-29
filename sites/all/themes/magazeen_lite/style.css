@@ -1896,11 +1896,12 @@ p.copyright {
   background: no-repeat scroll right top transparent;
   float: right;
   height: auto;
-  margin: 5px 0px 0 0;
+  margin: 5px 20px 0 0;
   width: 284px;
   display: inline; }
   @media (max-width: 767px) {
     #searchform-header {
+      display: block;
       float: none;
       margin: 10px auto 0; } }
 
@@ -1941,7 +1942,7 @@ img#slogan-image {
 .social-buttons {
   *zoom: 1;
   float: right;
-  margin: 10px 0px 5px 0;
+  margin: 10px 20px 5px 0;
   width: 284px; }
   .social-buttons:before, .social-buttons:after {
     display: table;
@@ -1969,7 +1970,7 @@ img#slogan-image {
 #random-article {
   *zoom: 1;
   float: right;
-  margin: 20px 14px 10px 5px;
+  margin: 20px 34px 10px 5px;
   width: 270px; }
   #random-article:before, #random-article:after {
     display: table;
