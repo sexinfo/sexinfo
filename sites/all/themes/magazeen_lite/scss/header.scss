@@ -167,7 +167,7 @@ img#slogan-image {
 /* Navigation
 /* -------------- */
 #navigation {
-  background: #FFF url(images/navigation.gif) repeat-x bottom center;
+  background: rgb(250,251,251) url(images/navigation.gif) repeat-x bottom center;
   border-top: 2px solid #393b3b;
   border-bottom: 1px solid #FFF;
   font-size: 1.1em;
@@ -210,8 +210,9 @@ img#slogan-image {
 #navigation ul li a:link,
 #navigation ul li a:active,
 #navigation ul li a:visited {
-  margin:0; padding:15px 15px 14px 15px;
-  font:bold 1.1em Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 12px 13px 12px 13px;
+  font:bold 1em Arial, Helvetica, sans-serif;
   color:#34393e;
   display:block; height:auto;
 
@@ -235,7 +236,6 @@ img#slogan-image {
 #navigation ul.links li.active > a:active,
 #navigation ul.links li.active > a:visited {
   /* margin:-3px 0 0 0;*/
-  padding:15px 15px 14px 15px;
   background:$dark-gray url(images/navigation-hover.gif) repeat-x bottom center;
   color:#f1f8ff; position:relative;
 	border-left: 1px solid #eee;
