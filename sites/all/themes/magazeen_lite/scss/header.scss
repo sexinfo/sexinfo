@@ -113,6 +113,11 @@ img#slogan-image {
     min-width:30%;
 }
 
+#slogan {
+    margin: 0px 0px 1em 30px;
+    color: #fefefe;
+}
+
 .social-buttons {
   @include clearfix;
   float: right;

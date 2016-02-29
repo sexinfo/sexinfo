@@ -1939,6 +1939,10 @@ img#slogan-image {
   padding: 0px 10px;
   min-width: 30%; }
 
+#slogan {
+  margin: 0px 0px 1em 30px;
+  color: #fefefe; }
+
 .social-buttons {
   *zoom: 1;
   float: right;
