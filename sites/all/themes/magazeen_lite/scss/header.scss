@@ -61,8 +61,9 @@
   background: no-repeat scroll right top transparent;
   float: right;
   height: auto;
-  margin: 35px 20px 0 0;
-  width:284px;
+  margin: 5px 0px 0 0;
+  width: 284px;
+  display: inline;
 
   @include mobile {
     float: none;
@@ -98,7 +99,9 @@ input#edit-search-block-form--2 {
   width: 72px;
 }
 
-#searchform-header .form-item { display:inline; }
+#searchform-header .form-item {
+    display: inline;
+}
 
 img#logo-image {
   padding: 0 10px;
@@ -112,7 +115,7 @@ img#slogan-image {
 .social-buttons {
   @include clearfix;
   float: right;
-	margin: 20px 10px 5px 0;
+	margin: 10px 0px 5px 0;
 	width: 284px;
 
   a {
@@ -136,6 +139,23 @@ img#slogan-image {
     a { float: none; }
   }
 }
+
+#random-article {
+    @include clearfix;
+    float: right;
+  	margin: 20px 14px 10px 5px;
+    width: 270px;
+    a {
+        padding: 0px;
+        margin: 0 50px 0 0;
+        font-size: 1em;
+    }
+
+    @include mobile {
+        display: none;
+    }
+}
+
 
 
 /* Navigation
