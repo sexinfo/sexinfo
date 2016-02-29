@@ -1885,7 +1885,7 @@ p.copyright {
   height: auto;
   margin: 0;
   padding: 0;
-  width: 400px; }
+  width: 50%; }
   @media (max-width: 767px) {
     #logo {
       float: none;
@@ -4206,7 +4206,7 @@ ul.icons {
   background-color: rgba(0, 0, 0, 0.6); }
 
 .mission-header {
-  font-size: 3.5vmin; }
+  font-size: 16pt; }
 
 .mission-body {
   font-size: 12pt;
