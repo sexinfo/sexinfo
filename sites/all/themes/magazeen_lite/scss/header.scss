@@ -61,7 +61,7 @@
   background: no-repeat scroll right top transparent;
   float: right;
   height: auto;
-  margin: 30px 20px 0 0;
+  margin: 35px 20px 0 0;
   width: 284px;
   display: inline;
 
@@ -114,14 +114,14 @@ img#slogan-image {
 }
 
 #slogan {
-    margin: 0px 0px 1em 30px;
+    margin: 0px 0px 10px 30px;
     color: #fefefe;
 }
 
 .social-buttons {
   @include clearfix;
   float: right;
-	margin: 10px 20px 0px 0;
+	margin: 12px 20px 0px 0;
 	width: 284px;
 
   a {
@@ -149,8 +149,8 @@ img#slogan-image {
 #random-article {
     @include clearfix;
     float: right;
-  	margin: 10px 34px 0px 0px;
-    width: 270px;
+  	margin: 10px 26px 0px 0px;
+    width: 278px;
     a {
         padding: 0px;
         margin: 0 50px 0 0;
@@ -168,19 +168,24 @@ img#slogan-image {
 /* -------------- */
 #navigation {
   background: rgb(250,251,251) url(images/navigation.gif) repeat-x bottom center;
-  border-top: 2px solid #393b3b;
-  border-bottom: 1px solid #FFF;
   font-size: 1.1em;
   margin: 0;
   padding: 0;
+  text-align: center;
+  height: 41px;
+  display: inherit;
+
+  @include mobile {
+      height: auto;
+  }
 }
 
 #navigation ul.links {
-  float: left;
   height: auto;
   list-style: none;
   margin: 0 auto;
   padding: 0;
+  display: inline-block;
 
   @include mobile {
     width: 100%;
