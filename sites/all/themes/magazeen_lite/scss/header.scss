@@ -172,12 +172,9 @@ img#slogan-image {
   margin: 0;
   padding: 0;
   text-align: center;
-  height: 41px;
+  height: auto;
   display: inherit;
-
-  @include mobile {
-      height: auto;
-  }
+  line-height: 10px;
 }
 
 #navigation ul.links {

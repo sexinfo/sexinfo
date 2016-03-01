@@ -1997,11 +1997,9 @@ img#slogan-image {
   margin: 0;
   padding: 0;
   text-align: center;
-  height: 41px;
-  display: inherit; }
-  @media (max-width: 767px) {
-    #navigation {
-      height: auto; } }
+  height: auto;
+  display: inherit;
+  line-height: 10px; }
 
 #navigation ul.links {
   height: auto;
