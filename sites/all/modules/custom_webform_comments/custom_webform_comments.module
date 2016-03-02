@@ -104,7 +104,7 @@ function custom_webform_comments_statusform() {
   $form['status'] = array(
     '#type' => 'select',
     '#options' => custom_webform_comments_statuses(),
-    '#default_value' => array('notstarted'),
+    '#default_value' => array('assigned'),
     '#title' => t('Response Status')
   );
   $form['username'] = array(
