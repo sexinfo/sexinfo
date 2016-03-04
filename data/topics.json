@@ -322,5 +322,10 @@
     "2679": {
         "name": "Teen Topics",
         "image": "teen-topics.jpg"
+    },
+
+    "2724": {
+        "name": "Eating Disorders",
+        "image": "eating-disorders.jpg"
     }
 }
