@@ -1,6 +1,12 @@
 $(document).ready(function() {
-    var instagrams = $("div.content:nth-child(3)");
-    $("#instagram-block").append(instagrams);
+    var currentLocation = location.pathname;
 
-    $("#block-instagram_block-instagram_block").remove();
+    // Only runs on the view page for a single submission.
+    if(currentLocation.includes('/sexinfo/raffle-landing-page') === true) {
+        console.log("On Raffle Landing Page");
+        var instagrams = $("#block-instagram_block-instagram_block")[0];
+        $("#instagram-block").append(instagrams);
+        console.log(instagrams);
+        //$("#block-instagram_block-instagram_block").remove();
+    }
 })
