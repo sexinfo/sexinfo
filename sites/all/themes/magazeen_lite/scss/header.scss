@@ -48,7 +48,7 @@
   height: auto;
   margin: 0;
   padding: 0;
-  width: 580px;
+  width: 50%;
 
   @include mobile {
     float: none;
@@ -62,9 +62,11 @@
   float: right;
   height: auto;
   margin: 35px 20px 0 0;
-  width:284px;
+  width: 284px;
+  display: inline;
 
   @include mobile {
+    display: block;
     float: none;
     margin: 10px auto 0;
   }
@@ -98,7 +100,9 @@ input#edit-search-block-form--2 {
   width: 72px;
 }
 
-#searchform-header .form-item { display:inline; }
+#searchform-header .form-item {
+    display: inline;
+}
 
 img#logo-image {
   padding: 0 10px;
@@ -109,10 +113,15 @@ img#slogan-image {
     min-width:30%;
 }
 
+#slogan {
+    margin: 0px 0px 10px 30px;
+    color: #fefefe;
+}
+
 .social-buttons {
   @include clearfix;
   float: right;
-	margin: 20px 10px 5px 0;
+	margin: 12px 20px 0px 0;
 	width: 284px;
 
   a {
@@ -137,24 +146,43 @@ img#slogan-image {
   }
 }
 
+#random-article {
+    @include clearfix;
+    float: right;
+  	margin: 10px 26px 0px 0px;
+    width: 278px;
+    a {
+        padding: 0px;
+        margin: 0 50px 0 0;
+        font-size: 1em;
+    }
+
+    @include mobile {
+        display: none;
+    }
+}
+
+
 
 /* Navigation
 /* -------------- */
 #navigation {
-  background: #FFF url(images/navigation.gif) repeat-x bottom center;
-  border-top: 2px solid #393b3b;
-  border-bottom: 1px solid #FFF;
+  background: rgb(250,251,251) url(images/navigation.gif) repeat-x bottom center;
   font-size: 1.1em;
   margin: 0;
   padding: 0;
+  text-align: center;
+  height: auto;
+  display: inherit;
+  line-height: 10px;
 }
 
 #navigation ul.links {
-  float: left;
   height: auto;
   list-style: none;
   margin: 0 auto;
   padding: 0;
+  display: inline-block;
 
   @include mobile {
     width: 100%;
@@ -184,8 +212,9 @@ img#slogan-image {
 #navigation ul li a:link,
 #navigation ul li a:active,
 #navigation ul li a:visited {
-  margin:0; padding:15px 15px 14px 15px;
-  font:bold 1.1em Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 12px 13px 12px 13px;
+  font:bold 1em Arial, Helvetica, sans-serif;
   color:#34393e;
   display:block; height:auto;
 
@@ -209,7 +238,6 @@ img#slogan-image {
 #navigation ul.links li.active > a:active,
 #navigation ul.links li.active > a:visited {
   /* margin:-3px 0 0 0;*/
-  padding:15px 15px 14px 15px;
   background:$dark-gray url(images/navigation-hover.gif) repeat-x bottom center;
   color:#f1f8ff; position:relative;
 	border-left: 1px solid #eee;

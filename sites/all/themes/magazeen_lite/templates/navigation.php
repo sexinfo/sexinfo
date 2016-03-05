@@ -48,12 +48,8 @@ function on_ppq_page()       { return page() == 'node/635'; }
         <li class="menu-549 <?php echo on_faq_page() ? 'active' : '' ?>"><a href="/sexinfo/popular-questions">Popular Questions</a></li>
         <li class="menu-635 <?php echo on_ppq_page() ? 'active' : '' ?>"><a href="/sexinfo/ppq">Could I Be Pregnant?</a></li>
         <li class="menu-543 <?php echo on_resources_page() ? 'active' : '' ?>"><a href="/sexinfo/article/important-phone-numbersresources-pregnancy">Resources</a></li>
-        <?php
-          $result     = db_query("select * from {node} where status = 1 and promote = 1 order by rand() limit 1");
-          $randomNode = $result->fetch()
-        ?>
-        <li class="menu-543"><a href="/sexinfo/node/<?php echo $randomNode->nid;?>" title="<?php echo $randomNode->title?>">Random Article</a></li>
-        <li class="menu-739 last  <?php echo on_quiz_page() ? 'active' : '' ?>"><a href="/sexinfo/quizzes">Test Your Knowledge</a></li>
+        <li class="menu"><a href="<?php #print $base_path?>category#ForEducators">For Educators</a></li>
+        <li class="menu"><a href="<?php #print $base_path?>category#TeenCorner">Teen Corner</a></li>
       </ul><!-- #main-menu -->
     </div>
   </div><!-- #navigation -->

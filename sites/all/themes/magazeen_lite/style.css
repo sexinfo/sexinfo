@@ -1885,7 +1885,7 @@ p.copyright {
   height: auto;
   margin: 0;
   padding: 0;
-  width: 580px; }
+  width: 50%; }
   @media (max-width: 767px) {
     #logo {
       float: none;
@@ -1897,9 +1897,11 @@ p.copyright {
   float: right;
   height: auto;
   margin: 35px 20px 0 0;
-  width: 284px; }
+  width: 284px;
+  display: inline; }
   @media (max-width: 767px) {
     #searchform-header {
+      display: block;
       float: none;
       margin: 10px auto 0; } }
 
@@ -1937,10 +1939,14 @@ img#slogan-image {
   padding: 0px 10px;
   min-width: 30%; }
 
+#slogan {
+  margin: 0px 0px 10px 30px;
+  color: #fefefe; }
+
 .social-buttons {
   *zoom: 1;
   float: right;
-  margin: 20px 10px 5px 0;
+  margin: 12px 20px 0px 0;
   width: 284px; }
   .social-buttons:before, .social-buttons:after {
     display: table;
@@ -1965,22 +1971,42 @@ img#slogan-image {
       .social-buttons a {
         float: none; } }
 
+#random-article {
+  *zoom: 1;
+  float: right;
+  margin: 10px 26px 0px 0px;
+  width: 278px; }
+  #random-article:before, #random-article:after {
+    display: table;
+    content: ""; }
+  #random-article:after {
+    clear: both; }
+  #random-article a {
+    padding: 0px;
+    margin: 0 50px 0 0;
+    font-size: 1em; }
+  @media (max-width: 767px) {
+    #random-article {
+      display: none; } }
+
 /* Navigation
 /* -------------- */
 #navigation {
-  background: #FFF url(images/navigation.gif) repeat-x bottom center;
-  border-top: 2px solid #393b3b;
-  border-bottom: 1px solid #FFF;
+  background: #fafbfb url(images/navigation.gif) repeat-x bottom center;
   font-size: 1.1em;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  text-align: center;
+  height: auto;
+  display: inherit;
+  line-height: 10px; }
 
 #navigation ul.links {
-  float: left;
   height: auto;
   list-style: none;
   margin: 0 auto;
-  padding: 0; }
+  padding: 0;
+  display: inline-block; }
   @media (max-width: 767px) {
     #navigation ul.links {
       width: 100%; } }
@@ -2003,8 +2029,8 @@ img#slogan-image {
 #navigation ul li a:active,
 #navigation ul li a:visited {
   margin: 0;
-  padding: 15px 15px 14px 15px;
-  font: bold 1.1em Arial, Helvetica, sans-serif;
+  padding: 12px 13px 12px 13px;
+  font: bold 1em Arial, Helvetica, sans-serif;
   color: #34393e;
   display: block;
   height: auto; }
@@ -2029,7 +2055,6 @@ img#slogan-image {
 #navigation ul.links li.active > a:active,
 #navigation ul.links li.active > a:visited {
   /* margin:-3px 0 0 0;*/
-  padding: 15px 15px 14px 15px;
   background: #171615 url(images/navigation-hover.gif) repeat-x bottom center;
   color: #f1f8ff;
   position: relative;
@@ -4183,7 +4208,7 @@ ul.icons {
   background-color: rgba(0, 0, 0, 0.6); }
 
 .mission-header {
-  font-size: 3.5vmin; }
+  font-size: 16pt; }
 
 .mission-body {
   font-size: 12pt;

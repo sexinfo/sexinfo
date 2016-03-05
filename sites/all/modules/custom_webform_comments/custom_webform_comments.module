@@ -104,7 +104,7 @@ function custom_webform_comments_statusform() {
   $form['status'] = array(
     '#type' => 'select',
     '#options' => custom_webform_comments_statuses(),
-    '#default_value' => array('notstarted'),
+    '#default_value' => array('assigned'),
     '#title' => t('Response Status')
   );
   $form['username'] = array(
@@ -389,9 +389,22 @@ function custom_webform_comments_results_submissions($node, $user_filter, $pager
 function custom_webform_comments_getrowstatus($nid, $sid) {
   $statusQuery = db_query_range("SELECT status from {custom_webform_submission_status} WHERE nid = :nid AND sid = :sid ORDER BY id DESC", 0, 1, array(':nid' => $nid, ':sid' => $sid));
   $status = custom_webform_comments_statuses();
-  $result = $statusQuery->fetchField();
-  if ($result) {
-    return $status[$result];
+  $statusResult = $statusQuery->fetchField();
+
+  if ($statusResult) {
+    // Get username from DB
+    $userQuery = db_query_range("SELECT user from {custom_webform_submission_status} WHERE nid = :nid AND sid = :sid ORDER BY id DESC", 0, 1, array(':nid' => $nid, ':sid' => $sid));
+    $user = unserialize($userQuery->fetchField());
+
+    if ($statusResult === 'assigned') {
+        return $status[$statusResult] . " to " . l($user->name, 'user/' . $user->uid);
+    }
+    else if ($statusResult === 'edited' || $statusResult === 'sent') {
+        return $status[$statusResult] . " by " . l($user->name, 'user/' . $user->uid);
+    }
+    else {
+        return $status[$statusResult];
+    }
   }
   else {
     return t('Not Assigned');
