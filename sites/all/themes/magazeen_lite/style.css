@@ -4288,8 +4288,18 @@ ul.icons {
 .webform-confirmation h3 {
   padding: 10px 0px; }
 
+@media (max-width: 767px) {
+  .node-content {
+    padding: 0px; } }
+
 .fb-page span {
   padding: 0px 28px 20px 0px; }
+@media (max-width: 767px) {
+  .fb-page span {
+    padding: 0px;
+    max-width: 100%; }
+    .fb-page span iframe {
+      max-width: 100%; } }
 
 #twitter-widget-0 {
   width: 350px !important;
