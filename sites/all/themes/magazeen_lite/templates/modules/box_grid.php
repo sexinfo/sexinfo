@@ -1,22 +1,21 @@
 <div class="third front-module">
-  <h3>Frequently Asked Questions</h3>
+  <h3>Enter Your Raffle Codes!</h3>
   <!--<p>Lorem ipsum dolor sit amet, lorem ipsum.</p>-->
 
-  <div class="module-content">
+  <!--<div class="module-content">-->
     <div class="faq-image">
-      <a href="http://www.soc.ucsb.edu/sexinfo/question/faq-how-do-i-increase-sexual-arousal">
-      <div style="background: url('<?php print path_to_theme() . '/images/modules/' . 'arousal.jpg'; ?>')" class="faq-image-box"></div>
+      <a href="http://www.soc.ucsb.edu/sexinfo/raffle-landing-page">
+      <div style="background: url('<?php print path_to_theme() . '/images/modules/' . 'raffle-ticket-final-front.jpg'; ?>') ; background-size: cover;" class="faq-image-box"></div>
 
       <div class="caption-slide">
-        <h3>How Do I Increase Sexual Arousal?</h3></a>
-        <p>There are many ways to increase your and your partner’s sexual arousal. Sexual arousal is... <a href="http://www.soc.ucsb.edu/sexinfo/question/faq-how-do-i-increase-sexual-arousal">Read More &gt;</a>
+        <h3>Did you visit us at one of our tabling events?</h3></a>
+        <p>Enter your raffle code <a href="http://www.soc.ucsb.edu/sexinfo/raffle-landing-page">Here</a>
         </p>
       </div>
     </div>
-  </div>
+  <!--</div>-->
 
 </div>
-
 
 <div class="third front-module">
   <h3>Test Your Knowledge</h3>
@@ -33,7 +32,7 @@
 
   <div class="faq-image">
     <a href="/sexinfo/ppq">
-    <div style="background: url('<?php print path_to_theme() . '/images/modules/' . '10250738.jpg'; ?>') ; background-size: cover;" class="faq-image-box"></div>
+    <div style="background: url('<?php print path_to_theme() . '/images/modules/' . 'ppq-front-page.jpg'; ?>') ; background-size: cover;" class="faq-image-box"></div>
 
     <div class="caption-slide"></a>
       <p>We've created a brand new pregnancy questionnaire that will help estimate your likelihood of pregnancy.  <a href="/sexinfo/ppq">Try it here &raquo;</a>
