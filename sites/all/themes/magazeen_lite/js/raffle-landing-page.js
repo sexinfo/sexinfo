@@ -8,5 +8,9 @@ $(document).ready(function() {
         $("#instagram-block").append(instagrams);
         console.log(instagrams);
         //$("#block-instagram_block-instagram_block").remove();
+        var twitterFeed = $('#twitter-widget-0')[0];
+        twitterFeed.style.width = "350px";
+
     }
+
 })
