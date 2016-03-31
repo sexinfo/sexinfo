@@ -1,0 +1,21 @@
+Submission Assigner States for Writers
+
+ASSIGNMENTS OPEN
+1) Fresh submission, unassigned
+	- All options available
+2) Assigned to someone else
+	- Remove "Assigned"
+	- Remove "Unassigned"
+3) Assigned to self
+	- All options available
+
+ASSIGNMENTS CLOSED
+1) Fresh submission, unassigned
+	- Remove "Assigned"
+	- Remove "Unassigned"
+2) Assigned to someone else
+	- Remove "Assigned"
+	- Remove "Unassigned"
+3) Assigned to self
+	- Remove "Assigned"
+	- Remove "Unassigned"
