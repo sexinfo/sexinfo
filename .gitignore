@@ -53,3 +53,5 @@ credentials.json
 
 # Ignoring database backup files #
 *.sql.gz
+
+.git-ftp-tmp
