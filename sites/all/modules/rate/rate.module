@@ -1293,7 +1293,9 @@ function rate_preprocess_rate_template_thumbs_up_down(&$variables) {
   }
   if ($mode != RATE_COMPACT && $mode != RATE_COMPACT_DISABLED) {
     if (isset($results['user_vote'])) {
-      $info[] = t('You voted \'@option\'. Thanks for your feedback!', array('@option' => $results['user_vote'] == 1 ? $links[0]['text'] : $links[1]['text']));
+      $info[] = t('You voted \'@option\'. Thanks for your feedback! <br>
+      Feel free to leave us feedback <a href="http://www.soc.ucsb.edu/sexinfo/ask-sexperts">here</a>!',
+      array('@option' => $results['user_vote'] == 1 ? $links[0]['text'] : $links[1]['text']));
     }
   }
   $variables['info'] = implode(' ', $info);
