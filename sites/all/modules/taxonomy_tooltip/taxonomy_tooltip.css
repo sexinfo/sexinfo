@@ -1,0 +1,8 @@
+.taxonomy-tooltip {
+  display: none;
+}
+
+.taxonomy-tooltip-element {
+  font-style: italic;
+  border-bottom: 1px dotted #000;
+}

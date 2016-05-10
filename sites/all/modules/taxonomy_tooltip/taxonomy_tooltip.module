@@ -1,0 +1,153 @@
+<?php
+/**
+ * @file
+ * Tha main file of the module.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function taxonomy_tooltip_menu() {
+  $items['admin/config/content/taxonomy-tooltip'] = array(
+    'title' => 'Taxonomy tooltip',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('taxonomy_tooltip_settings_form'),
+    'access arguments' => array('administer taxonomy tooltip'),
+    'file' => 'taxonomy_tooltip.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function taxonomy_tooltip_permission() {
+  return array(
+    'administer taxonomy tooltip' =>  array(
+      'title' => t('Administer taxonomy tooltip'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_init().
+ */
+function taxonomy_tooltip_init() {
+  libraries_load('jquery-tooltip');
+  drupal_add_js(drupal_get_path('module', 'taxonomy_tooltip') . '/taxonomy_tooltip.js');
+  drupal_add_css(drupal_get_path('module', 'taxonomy_tooltip') . '/taxonomy_tooltip.css');
+}
+
+/**
+ * Implements hook_libraries_info().
+ */
+function taxonomy_tooltip_libraries_info() {
+  $libraries['jquery-tooltip'] = array(
+    'name' => 'jQuery Tooltip',
+    'vendor url' => 'http://bassistance.de/jquery-plugins/jquery-plugin-tooltip/',
+    'download url' => 'http://bassistance.de/jquery-plugins/jquery-plugin-tooltip/',
+    'version arguments' => array(
+      'file' => 'jquery.tooltip.min.js',
+      'pattern' => '/jQuery Tooltip plugin ([0-9\.]+)/',
+      'lines' => 2,
+    ),
+    'files' => array(
+      'js' => array(
+        'jquery.tooltip.min.js',
+      ),
+      'css' => array(
+        'jquery.tooltip.css',
+      ),
+    ),
+    'variants' => array(
+      'minified' => array(
+        'files' => array(
+          'js' => array(
+            'jquery.tooltip.min.js',
+          ),
+          'css' => array(
+            'jquery.tooltip.css',
+          ),
+        ),
+      ),
+      'source' => array(
+        'files' => array(
+          'js' => array(
+            'jquery.tooltip.js',
+          ),
+          'css' => array(
+            'jquery.tooltip.css',
+          ),
+        ),
+      ),
+    ),
+  );
+
+  return $libraries;
+}
+
+/**
+ * Implements hook_filter_info().
+ */
+function taxonomy_tooltip_filter_info() {
+  $filters['taxonomy_tooltip'] = array(
+    'title' => t('Taxonomy tooltip'),
+    'process callback' => 'taxonomy_tooltip_filter_process',
+  );
+
+  return $filters;
+}
+
+/**
+ * Returns with the replaced content.
+ *
+ * Finds for the term names and changes with the description tooltip.
+ */
+function taxonomy_tooltip_filter_process($text, $filter, $format, $langcode, $cache, $cache_id) {
+  // Check that the variable is set.
+  if ($vocabs = variable_get('taxonomy_tooltip_vocabs', array())) {
+    // Performance tuning.
+    $pattern_map = &drupal_static(__FUNCTION__);
+
+    if (!$pattern_map) {
+      // Initialize the array.
+      $pattern_map['map'] = array();
+      $pattern_map['tooltips'] = '';
+
+      foreach ($vocabs as $vid => $enabled) {
+        if ($enabled) {
+          $vids[] = $vid;
+        }
+      }
+
+      // Get the terms.
+      $query = db_select('taxonomy_term_data', 't');
+      $result = $query
+        ->addTag('translatable')
+        ->addTag('term_access')
+        ->fields('t')
+        ->condition('t.vid', $vids, 'IN')
+        ->execute();
+
+      // Create map array. The first character must be a space and after the
+      // word must be space, ".", ",", "?" or "!" character.
+      foreach ($result as $id => $term) {
+        if (trim($term->description)) {
+          $pattern_map['map']['/( ' . drupal_strtolower($term->name) . '[ .,?!])/i'] = '<span class="taxonomy-tooltip-element" rel="taxonomy-tooltip-' . $id .'">$1</span>';
+          // Move the tooltips to a separate to keep valid HTML.
+          $pattern_map['tooltips'] .= '<div class="taxonomy-tooltip-' . $id .' taxonomy-tooltip">' . check_markup($term->description, $term->format) . '</div>';
+        }
+      }
+    }
+
+    // Replace the text with the modified "tooltipped" one.
+    foreach ($pattern_map['map'] as $pattern => $replace) {
+      $text = preg_replace($pattern, $replace, $text);
+    }
+    // Append tooltips to the end of the content.
+    $text .= $pattern_map['tooltips'];
+  }
+
+  return $text;
+}
