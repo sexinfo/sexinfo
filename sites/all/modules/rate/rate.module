@@ -1286,6 +1286,8 @@ function rate_preprocess_rate_template_thumbs_up_down(&$variables) {
 
   $variables['up_button'] = theme('rate_button', array('text' => $links[0]['text'], 'href' => $links[0]['href'], 'class' => $up_classes));
   $variables['down_button'] = theme('rate_button', array('text' => $links[1]['text'], 'href' => $links[1]['href'], 'class' => $down_classes));
+  $links[0]['text'] = 'yes';
+  $links[1]['text'] = 'no';
 
   $info = array();
   if ($mode == RATE_CLOSED) {
