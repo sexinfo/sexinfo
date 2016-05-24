@@ -1,24 +1,24 @@
 .taxonomy-tooltip {
   display: none;
-  transition: all 0.5s ease-in-out;
+  opacity: 0.9;
   background-color: whitesmoke;
   padding: 6px 8px 6px 8px;
   border-radius: 3px;
   border: 2px solid black;
   max-width: 400px;
+  min-width: 100px;
 }
 
 .taxonomy-tooltip p {
     margin: 0px;
+    color: #333333
 }
 
 .taxonomy-tooltip-element {
-  font-style: italic;
   border-bottom: 1px dotted #000;
-  transition: all 0.5s ease-in-out;
-  border-bottom: 1px dotted #000000;
+  transition: all 0.2s ease-in-out;
 }
 
 .taxonomy-tooltip-element:hover {
-  background-color: #cccccc;
+  background-color: #dddddd;
 }
