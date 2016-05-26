@@ -1,0 +1,41 @@
+<?php
+/**
+ * @file
+ * Install, requirement and update functions.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function taxonomy_tooltip_uninstall() {
+  variable_del('taxonomy_tooltip_vocabs');
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function taxonomy_tooltip_requirements($phase) {
+  $requirements = array();
+
+  if ($phase == 'runtime') {
+    $t = get_t();
+    $library = libraries_detect('jquery-tooltip');
+
+    if (empty($library['installed'])) {
+      $requirements['tooltip_plugin'] = array(
+        'title' => $t('Tooltip plugin'),
+        'severity' => REQUIREMENT_ERROR,
+        'description' => $t('You need to download the !tooltip and extract the entire contents of the archive into the %path directory on your server.', array('!tooltip' => l($t('Tooltip plugin'), $library['download url']), '%path' => 'sites/all/libraries')),
+      );
+    }
+    else {
+      $requirements['tooltip_plugin'] = array(
+        'title' => $t('Tooltip plugin'),
+        'severity' => REQUIREMENT_OK,
+        'value' => $library['version'],
+      );
+    }
+  }
+
+  return $requirements;
+}
