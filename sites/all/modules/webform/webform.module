@@ -2096,7 +2096,7 @@ function theme_webform_view_messages($variables) {
   $type = 'warning';
 
   if ($closed) {
-    $message = t('Submissions for this form are closed.');
+    $message = t('The Sexperts are gone for break. We will be back to answer your questions soon!');
   }
   elseif ($node->webform['confidential'] && user_is_logged_in()) {
     $message = t('This form is confidential. You must <a href="!url">Log out</a> to submit it.',
@@ -2265,7 +2265,7 @@ function webform_block_view($delta = '') {
         '#node' => $node,
         '#sid' => $_SESSION['webform_confirmation'][$nid]['sid'],
       );
-    } 
+    }
     elseif (strlen(trim(strip_tags($node->webform['confirmation'])))) {
       // Display confirmation link drupal status messages, but in the block.
       $message = webform_replace_tokens($node->webform['confirmation'],
