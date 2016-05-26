@@ -124,30 +124,33 @@ function taxonomy_tooltip_filter_process($text, $filter, $format, $langcode, $ca
       // Get the terms.
       $query = db_select('taxonomy_term_data', 't');
       $result = $query
-        ->addTag('translatable')
-        ->addTag('term_access')
-        ->fields('t')
-        ->condition('t.vid', $vids, 'IN')
-        ->execute();
+              ->addTag('translatable')
+              ->addTag('term_access')
+              ->fields('t')
+              ->condition('t.vid', $vids, 'IN')
+              ->execute();
 
       // Create map array. The first character must be a space and after the
       // word must be space, ".", ",", "?" or "!" character.
+
+      $tooltips = '';
       foreach ($result as $id => $term) {
-        if (trim($term->description)) {
-          $pattern_map['map']['/( ' . drupal_strtolower($term->name) . '[ .,?!])/i'] = '<span class="taxonomy-tooltip-element" rel="taxonomy-tooltip-' . $id .'">$1</span>';
-          // Move the tooltips to a separate to keep valid HTML.
-          $pattern_map['tooltips'] .= '<div class="taxonomy-tooltip-' . $id .' taxonomy-tooltip">' . check_markup($term->description, $term->format) . '</div>';
+        if (trim($term->description) !== '') {
+          $pattern_map['pattern'][] = '/( ' . drupal_strtolower($term->name) . '[ .,?!])/i';
+          $pattern_map['replace'][] = '<span class="taxonomy-tooltip-element" rel="taxonomy-tooltip-' . $id . '">$1</span>';
+
+          $tooltips .=  '<div class="taxonomy-tooltip-' . $id . ' taxonomy-tooltip">' . check_markup($term->description, $term->format) . '</div>';
         }
       }
-    }
 
-    // Replace the text with the modified "tooltipped" one.
-    foreach ($pattern_map['map'] as $pattern => $replace) {
-      $text = preg_replace($pattern, $replace, $text);
+      // Replace the text with the modified "tooltipped" one.
+      $text = preg_replace($pattern_map['pattern'], $pattern_map['replace'], $text);
+
+      // Append tooltips to the end of the content.
+      $text .= $tooltips;
     }
-    // Append tooltips to the end of the content.
-    $text .= $pattern_map['tooltips'];
   }
 
   return $text;
 }
+?>
