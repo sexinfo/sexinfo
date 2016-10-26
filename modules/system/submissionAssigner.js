@@ -90,6 +90,9 @@ var canAssign = function(today) {
     //console.log(today);
     // Check if day is between Thursday and Tuesday
     // Cannot Assign
+
+    /* 
+    //For assigning between Thursday and Tues
     if(today.getDay() <= OPEN_DAY && today.getDay() >= CLOSE_DAY) {
         if(today.getDay() === CLOSE_DAY && today.getHours() >= CLOSE_HOUR) {
             return false;
@@ -103,14 +106,19 @@ var canAssign = function(today) {
     else {
         return true;
     }
+    */
+
+    //Currently can assign whenever so always return true
+    return true;
 }
 
 /*
  * Injects disclaimer message below the dropdown menu.
  */
 var postMessage = function() {
-    var message = "Note: Submissions can only be assigned between Thursdays at"
-        + " 5pm and Tuesdays at 4pm.";
+    //var message = "Note: Submissions can only be assigned between Thursdays at"
+    //    + " 5pm and Tuesdays at 4pm.";
+    var message = "Note: Submissions can now be assigned anytime"
     var messageElement = document.createElement('div');
     messageElement.innerHTML = '<small>' + message + '</small>';
     var statusElement = $('#custom-webform-comments-statusform > div > '
