@@ -173,7 +173,8 @@ $transition-time: 0.4s;
   background-position: center;
   color: white;
   font-size: 2em;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
   position: relative;
   text-shadow: 0 2px 6px rgba(48,48,48,0.7);
 
