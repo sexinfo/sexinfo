@@ -1,46 +1,44 @@
-// Old topic table listings
-// ---------------------------------------
 .topic-header {
-  font-size: 2em;
-  margin-top: 15px;
+font-size: 2em;
+margin-top: 15px;
 }
 
 .taxonomy-parent {
-  background-color: #eee;
-  border: 1px solid #d0d0d0;
-  font-size: 1.1em;
-  padding: 0;
+background-color: #eee;
+border: 1px solid #d0d0d0;
+font-size: 1.1em;
+padding: 0;
 
-  ul {
-    background-color: white;
-    padding: 0;
+ul {
+background-color: white;
+padding: 0;
 
-    li { padding-left: 26px; }
-  }
+li { padding-left: 26px; }
+}
 }
 
 .taxonomy-nested {
-  border-bottom: 1px solid #DADADA;
-  margin: 0;
+border-bottom: 1px solid #DADADA;
+margin: 0;
 }
 
 .taxonomy-item {
-  background-color: white;
-  border-bottom: 1px solid #DADADA;
-  list-style: none;
-  padding: 5px 7px;
+background-color: white;
+border-bottom: 1px solid #DADADA;
+list-style: none;
+padding: 5px 7px;
 
-  &:last-child { border: none; }
-  a:hover { color: #000; }
+&:last-child { border: none; }
+a:hover { color: #000; }
 }
 
 .item-odd { background-color: #eee; }
 
 .taxonomy-nested .taxonomy-item:before {
-  // Nested sub-categories
-  content: "- ";
-  display: inline-block;
-  margin-right: 5px;
+// Nested sub-categories
+content: "- ";
+display: inline-block;
+margin-right: 5px;
 }
 
 
@@ -52,255 +50,252 @@
 // ---------------------------------------
 // Huge hack to get the page full width for mobile
 .main {
-  @include mobile { width: 100% !important; }
+@include mobile { width: 100% !important; }
 }
 
 // This is a huge hack to get "Ask the Sexperts" full width since it's a custom web form
 #node-22 {
-  @include mobile { width: 100% !important; }
+@include mobile { width: 100% !important; }
 }
 
 $spacer: 20px;
 
 .topics-container {
-  @include clearfix;
+@include clearfix;
 
-  h2 {
-    color: $gray-text;
-    font-size: 2.3em;
-    margin: 10px 0 20px;
-    text-align: center;
-  }
+h2 {
+color: $gray-text;
+font-size: 2.3em;
+margin: 10px 0 20px;
+text-align: center;
+}
 }
 
 .parent-topic {
-  @include border-box;
-  @include clearfix;
-  border: 1px solid #ccc;
-  background-color: white;
-  margin: 48px 0px;
-  padding: 10px;
+@include border-box;
+@include clearfix;
+border: 1px solid #ccc;
+background-color: white;
+margin: 48px 0px;
+padding: 10px;
 
-  &:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 10px;
-  }
+&:last-child {
+border-bottom: none;
+margin-bottom: 0;
+padding-bottom: 10px;
+}
 
-  img { width: 100%; }
+img { width: 100%; }
 
-  section {
-    @include clearfix;
-    margin-bottom: $spacer;
+section {
+@include clearfix;
+margin-bottom: $spacer;
 
-    @include mobile { margin-bottom: 0; }
-  }
+@include mobile { margin-bottom: 0; }
+}
 }
 
 .topic-link {
-  display: block;
-  position: relative;
+display: block;
+position: relative;
 
-  &:hover .text-on-image-text { text-decoration: underline; }
+&:hover .text-on-image-text { text-decoration: underline; }
 }
 
 $half-height: 360px;
 $quarter-height: 170px;
 
 .grid-left, .grid-right {
-  width: 50%;
-  float: left;
+width: 50%;
+float: left;
 
-  @media(max-width: 1200px) {
-    width: 100%;
-    float: none;
-  }
+@media(max-width: 1200px) {
+width: 100%;
+float: none;
+}
 }
 
 .topic-half, .topic-quarter {
-  @include clearfix;
-  @include border-box;
-  float: left;
-  width: 417px;
-  border: 1px solid #ccc;
-  margin: 10px 5px;
+@include clearfix;
+@include border-box;
+float: left;
+width: 417px;
+border: 1px solid #ccc;
+margin: 10px 5px;
 
-  @media(max-width: 1200px) {
-    float: none;
-    margin: 0 !important;
-    width: 100%;
+@media(max-width: 1200px) {
+float: none;
+margin: 0 !important;
+width: 100%;
 
-    .topic-quarter { margin-bottom: $spacer; }
-  }
+.topic-quarter { margin-bottom: $spacer; }
+}
 
-  @include mobile { margin-bottom: $spacer; }
+@include mobile { margin-bottom: $spacer; }
 }
 
 .topic-half {
-  .text-on-image {
-    height: $half-height;
+.text-on-image {
+height: $half-height;
 
-    &:hover .text-on-image-text {
-      opacity: 0;
-      bottom: $half-height;
-    }
+&:hover .text-on-image-text {
+opacity: 0;
+bottom: $half-height;
+}
 
-    .text-on-image-articles { top: $half-height; }
-  }
+.text-on-image-articles { top: $half-height; }
+}
 }
 
 .topic-quarter {
-  // This little hack below here allows for the height of two small
-  // images to be the same size as one large image.
-  border-bottom: 0px;
+// This little hack below here allows for the height of two small
+// images to be the same size as one large image.
+border-bottom: 0px;
 
-  .text-on-image {
-    height: $quarter-height;
+.text-on-image {
+height: $quarter-height;
 
-    &:hover .text-on-image-text {
-      opacity: 0;
-      bottom: $quarter-height;
-    }
+&:hover .text-on-image-text {
+opacity: 0;
+bottom: $quarter-height;
+}
 
-    .text-on-image-articles { top: $quarter-height; }
-  }
+.text-on-image-articles { top: $quarter-height; }
+}
 }
 
 $transition-time: 0.4s;
 
 .text-on-image {
-  background-size: cover;
-  background-position: center;
-  color: white;
-  font-size: 2em;
-  overflow: scroll;
-  position: relative;
-  text-shadow: 0 2px 6px rgba(48,48,48,0.7);
+background-size: cover;
+background-position: center;
+color: white;
+font-size: 2em;
+overflow: hidden;
+position: relative;
+text-shadow: 0 2px 6px rgba(48,48,48,0.7);
 
-  .text-on-image-text {
-    @include border-box;
-    color: white;
-    padding: 15px;
-    transition: opacity $transition-time, bottom $transition-time;
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
+.text-on-image-text {
+@include border-box;
+color: white;
+padding: 15px;
+transition: opacity $transition-time, bottom $transition-time;
+position: absolute;
+bottom: 0px;
+width: 100%;
 
-    @include mobile {
-      opacity: 0;
-      bottom: $quarter-height;
-    }
-  }
+@include mobile {
+opacity: 0;
+bottom: $quarter-height;
+}
+}
 
-  .text-on-image-articles {
-    list-style: none;
-    margin: 0px;
-    opacity: 0;
-    padding: 15px;
-    position: absolute;
-    transition: opacity $transition-time ease-in, top $transition-time;
-    width: 100%;
-    overflow: scroll;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.text-on-image-articles {
+list-style: none;
+margin: 0px;
+opacity: 0;
+padding: 15px;
+position: absolute;
+transition: opacity $transition-time ease-in, top $transition-time;
+width: 100%;
 
+@include mobile {
+opacity: 1 !important;
+top: 0px !important;
+}
+}
 
-    @include mobile {
-      opacity: 1 !important;
-      top: 0px !important;
-    }
-  }
-
-  &:hover .text-on-image-articles {
-    opacity: 1;
-    top: 0px;
-  }
+&:hover .text-on-image-articles {
+opacity: 1;
+top: 0px;
+}
 }
 
 
 .text-on-image-article {
-  font-size: 0.75em;
-  margin-bottom: 5px;
-  overflow: scroll;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+font-size: 0.75em;
+margin-bottom: 5px;
+overflow-x: hidden;
+overflow-y: scroll;
+text-overflow: ellipsis;
+white-space: nowrap;
 
-  &:before {
-    color: darken($light-gray, 10);
-    content: '-';
-    display: inline-block;
-    margin-right: 5px;
-  }
+&:before {
+color: darken($light-gray, 10);
+content: '-';
+display: inline-block;
+margin-right: 5px;
+}
 
-  a:hover {
-    color: lighten($light-gray, 20);
-    text-decoration: underline;
-  }
+a:hover {
+color: lighten($light-gray, 20);
+text-decoration: underline;
+}
 
-  a:visited { color: #f48ab7; }
+a:visited { color: #f48ab7; }
 }
 
 .text-on-image-tint {
-  background-color: rgba(0, 0, 0, 0);
-  transition: background-color $transition-time;
-  height: 100%;
-  width: 100%;
+background-color: rgba(0, 0, 0, 0);
+transition: background-color $transition-time;
+height: 100%;
+width: 100%;
 
-  // Tint on hover, and by default on mobile
-  &:hover { background-color: rgba(0, 0, 0, 0.75); }
-  @include mobile { background-color: rgba(0, 0, 0, 0.75); }
+// Tint on hover, and by default on mobile
+&:hover { background-color: rgba(0, 0, 0, 0.75); }
+@include mobile { background-color: rgba(0, 0, 0, 0.75); }
 }
 
 
 .topics-nav {
-  background-color: white;
-  border: 1px solid #ccc;
-  display: block;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-    visibility: hidden;
+background-color: white;
+border: 1px solid #ccc;
+display: block;
+list-style: none;
+margin: 0;
+padding: 0;
+visibility: hidden;
 
-  @media(min-width: 1200px) {
-    position: fixed;
-    right: 32px;
-    top: 234px;
-  }
+@media(min-width: 1200px) {
+position: fixed;
+right: 32px;
+top: 234px;
+}
 
-  .header-container {
-    border-bottom: 1px solid $border-color;
-    padding: 10px;
-  }
+.header-container {
+border-bottom: 1px solid $border-color;
+padding: 10px;
+}
 
-  h4 {
-    color: lighten($gray-text, 10);
-    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-    font-size: 1.9em;
-    font-weight: normal;
-    text-align: center;
-  }
+h4 {
+color: lighten($gray-text, 10);
+font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+font-size: 1.9em;
+font-weight: normal;
+text-align: center;
+}
 
 
-  li {
-    &:nth-of-type(even) { background-color: lighten($border-color, 5); }
+li {
+&:nth-of-type(even) { background-color: lighten($border-color, 5); }
 
-    &:last-child a { border-bottom: 0; }
+&:last-child a { border-bottom: 0; }
 
-    // Scrollspy
-    &.active {
-      background-color: $pink;
+// Scrollspy
+&.active {
+background-color: $pink;
 
-      a { color: white; }
-    }
-  }
+a { color: white; }
+}
+}
 
-  a {
-    border-bottom: 1px solid $border-color;
-    display: block;
-    color: $pink;
-    font-size: 1.2em;
-    padding: 6px 70px 6px 10px;
+a {
+border-bottom: 1px solid $border-color;
+display: block;
+color: $pink;
+font-size: 1.2em;
+padding: 6px 70px 6px 10px;
 
-    &:hover { text-decoration: underline; }
-  }
+&:hover { text-decoration: underline; }
+}
 }
