@@ -2794,8 +2794,7 @@ a:active.more-button {
 
 .form-item {
   display: inline-block;
-  padding: 5px;
-  background-color: black; }
+  padding: 5px; }
 
 #node-508 .node-footer {
   display: none; }
@@ -4137,10 +4136,6 @@ ul.icons {
 .ui-autocomplete .ui-menu-item a.ui-state-hover {
   background-color: #D5E5F4;
   color: #161A1C; }
-
-.webform-submission .form-item {
-  display: inline-block;
-  padding: 5px; }
 
 #start-quiz {
   margin-top: 20px; }
