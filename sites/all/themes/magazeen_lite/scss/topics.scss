@@ -1,3 +1,5 @@
+// Old topic table listings
+// ---------------------------------------
 .topic-header {
 font-size: 2em;
 margin-top: 15px;
@@ -167,11 +169,9 @@ bottom: $quarter-height;
 $transition-time: 0.4s;
 
 .text-on-image {
-<<<<<<< HEAD
 background-size: cover;
 background-position: center;
 color: white;
-font-size: 2em;
 overflow: hidden;
 position: relative;
 text-shadow: 0 2px 6px rgba(48,48,48,0.7);
@@ -189,55 +189,6 @@ width: 100%;
 opacity: 0;
 bottom: $quarter-height;
 }
-=======
-  background-size: cover;
-  background-position: center;
-  color: white;
-  font-size: 2em;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  position: relative;
-  text-shadow: 0 2px 6px rgba(48,48,48,0.7);
-
-  .text-on-image-text {
-    @include border-box;
-    color: white;
-    padding: 15px;
-    transition: opacity $transition-time, bottom $transition-time;
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
-
-    @include mobile {
-      opacity: 0;
-      bottom: $quarter-height;
-    }
-  }
-
-  .text-on-image-articles {
-    list-style: none;
-    margin: 0px;
-    opacity: 0;
-    padding: 15px;
-    position: absolute;
-    transition: opacity $transition-time ease-in, top $transition-time;
-    width: 100%;
-    overflow: scroll;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
-
-    @include mobile {
-      opacity: 1 !important;
-      top: 0px !important;
-    }
-  }
-
-  &:hover .text-on-image-articles {
-    opacity: 1;
-    top: 0px;
-  }
->>>>>>> b85e912e5d97bd03a641214b0d041b7c99de745a
 }
 
 .text-on-image-articles {
@@ -263,10 +214,10 @@ top: 0px;
 
 
 .text-on-image-article {
-font-size: 0.75em;
+font-size: 1.25 em;
 margin-bottom: 5px;
-overflow-x: hidden;
 overflow-y: scroll;
+overflow-x: hidden;
 text-overflow: ellipsis;
 white-space: nowrap;
 
@@ -275,6 +226,7 @@ color: darken($light-gray, 10);
 content: '-';
 display: inline-block;
 margin-right: 5px;
+overflow: scroll;
 }
 
 a:hover {
@@ -304,7 +256,8 @@ display: block;
 list-style: none;
 margin: 0;
 padding: 0;
-visibility: hidden;
+visibility:hidden;
+
 
 @media(min-width: 1200px) {
 position: fixed;

@@ -126,9 +126,9 @@ html[xmlns] .clearfix { display: block; }
 
 
 // TODO: this doesn't belong here
-.pink-block-btn {
-  @extend %buttonBar;
-  background: $pink;
+
+@extend %buttonBar;
+  background: ($pink)
   background: -webkit-linear-gradient(top,  #ff5db1 0%,#ef017c 100%); /* Chrome10+,Safari5.1+ */
   background:    -moz-linear-gradient(top,  #ff5db1 0%, #ef017c 100%); /* FF3.6+ */
   background:     -ms-linear-gradient(top,  #ff5db1 0%,#ef017c 100%); /* IE10+ */
@@ -137,7 +137,7 @@ html[xmlns] .clearfix { display: block; }
   background:         linear-gradient(top bottom,  #ff5db1 0%,#ef017c 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5db1', endColorstr='#ef017c',GradientType=0 ); /* IE6-9 */
 
-  border: 1px solid darken($pink, 10);
+  border: 0px solid darken($pink, 10);
   margin: 5px auto 25px;
   opacity: .9;
   width: 75%;
