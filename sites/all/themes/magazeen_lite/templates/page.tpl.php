@@ -1,7 +1,5 @@
 <?php include 'header.php' ?>
 
-<?php include 'navigation.php' ?>
-
 <?php $mainClass = (isset($node)) ? 'main-'.$node->nid : " "; ?>
 
 <div id="main" class="clearfix <?php echo $mainClass ?>">

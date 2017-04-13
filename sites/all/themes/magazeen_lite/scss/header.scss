@@ -44,11 +44,17 @@
 
 #logo {
   // background: url(images/header-shade.gif) no-repeat top right;
-  float: left;
-  height: auto;
   margin: 0;
   padding: 0;
-  width: 50%;
+  display: inline-block;
+
+  a{
+    display: inline-block;
+    img{
+      width: 100px;
+      margin-right: 5px;
+    }
+  }
 
   @include mobile {
     float: none;
@@ -59,11 +65,29 @@
 
 #searchform-header {
   background: no-repeat scroll right top transparent;
-  float: right;
   height: auto;
-  margin: 35px 20px 0 0;
+  margin: 0;
   width: 284px;
-  display: inline;
+  display: inline-block;
+
+  div{
+    display: inline-block;
+  }
+
+  .form-submit{
+    background: transparent url(images/search.gif) no-repeat  right top;
+    border: 0 none;
+    color: #ffffff;
+    cursor: pointer;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 122%;
+    font-weight: bold;
+    width: 72px;
+  }
+
+  .form-item {
+      display: inline;
+  }
 
   @include mobile {
     display: block;
@@ -86,26 +110,6 @@ input#edit-search-block-form--2 {
   &:focus {
     color: $gray-text;
   }
-}
-
-#searchform-header .form-submit{
-  background: transparent url(images/search.gif) no-repeat  right top;
-  border: 0 none;
-  color: #ffffff;
-  cursor: pointer;
-  font-family: Helvetica,Arial,sans-serif;
-  font-size: 122%;
-  font-weight: bold;
-  margin: 0 0 0 12px;
-  width: 72px;
-}
-
-#searchform-header .form-item {
-    display: inline;
-}
-
-img#logo-image {
-  padding: 0 10px;
 }
 
 img#slogan-image {
@@ -148,13 +152,12 @@ img#slogan-image {
 
 #random-article {
     @include clearfix;
-    float: right;
-  	margin: 10px 26px 0px 0px;
-    width: 278px;
+  	margin: 0;
+    width: 140px;
+    display: inline-block;
     a {
         padding: 0px;
-        margin: 0 50px 0 0;
-        font-size: 1em;
+        margin: 0;
     }
 
     @include mobile {
@@ -167,25 +170,38 @@ img#slogan-image {
 /* Navigation
 /* -------------- */
 #navigation {
-  background: rgb(250,251,251) url(images/navigation.gif) repeat-x bottom center;
   font-size: 1.1em;
   margin: 0;
-  padding: 0;
+  padding: 10px 0;
   text-align: center;
-  height: auto;
-  display: inherit;
+  display: inline-block;
   line-height: 10px;
+  ul.links {
+    height: auto;
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    display: inline-block;
+
+    @include mobile {
+      width: 100%;
+    }
+  }
 }
 
-#navigation ul.links {
-  height: auto;
-  list-style: none;
-  margin: 0 auto;
-  padding: 0;
-  display: inline-block;
+#navigation ul li a:link,
+#navigation ul li a:active,
+#navigation ul li a:visited {
+  margin: 0;
+  padding: 8px 13px;
+  font: 1em Arial, Helvetica, sans-serif;
+  color: rgb(195,195,195);
+  display:block; height:auto;
 
   @include mobile {
-    width: 100%;
+    border-top: 1px solid #eee;
+    padding: 5px;
+    text-align: center;
   }
 }
 
@@ -196,8 +212,10 @@ img#slogan-image {
   padding: 0;
 
   a:hover, a:active {
-    background-color: rgba(0,0,0,0.5);
     color: #F1F8FF;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    cursor: pointer;
   }
 
   @include mobile {
@@ -207,41 +225,13 @@ img#slogan-image {
   }
 }
 
-
-
-#navigation ul li a:link,
-#navigation ul li a:active,
-#navigation ul li a:visited {
-  margin: 0;
-  padding: 12px 13px 12px 13px;
-  font:bold 1em Arial, Helvetica, sans-serif;
-  color:#34393e;
-  display:block; height:auto;
-
-  @include mobile {
-    border-top: 1px solid #eee;
-    padding: 5px;
-    text-align: center;
-  }
-}
-
 #navigation ul li:first-child a { border-top: none; }
-
-#navigation ul li a:hover {
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-  text-decoration:underline;
-}
 
 #navigation ul.links li.active > a:link,
 #navigation ul.links li.active > a:active,
 #navigation ul.links li.active > a:visited {
   /* margin:-3px 0 0 0;*/
-  background:$dark-gray url(images/navigation-hover.gif) repeat-x bottom center;
   color:#f1f8ff; position:relative;
-	border-left: 1px solid #eee;
-	border-right: 1px solid #eee;
 
   @include mobile { padding: 5px; }
 }

@@ -1,7 +1,5 @@
 <?php include 'header.php' ?>
 
-<?php include 'navigation.php' ?>
-
 <div class="container">
   <?php
     # "has been successfully updated", etc
