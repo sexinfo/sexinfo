@@ -2975,7 +2975,6 @@ tr.odd.cat-row td {
   background-size: cover;
   background-position: center;
   color: white;
-  font-size: 2em;
   overflow: hidden;
   position: relative;
   text-shadow: 0 2px 6px rgba(48, 48, 48, 0.7); }
@@ -3010,16 +3009,18 @@ tr.odd.cat-row td {
     top: 0px; }
 
 .text-on-image-article {
-  font-size: 0.75em;
+  font-size: 1.25 em;
   margin-bottom: 5px;
-  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap; }
   .text-on-image-article:before {
     color: #a0a0a0;
     content: '-';
     display: inline-block;
-    margin-right: 5px; }
+    margin-right: 5px;
+    overflow: scroll; }
   .text-on-image-article a:hover {
     color: #ececec;
     text-decoration: underline; }
@@ -3043,7 +3044,8 @@ tr.odd.cat-row td {
   display: block;
   list-style: none;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  visibility: hidden; }
   @media (min-width: 1200px) {
     .topics-nav {
       position: fixed;
@@ -4137,10 +4139,6 @@ ul.icons {
 .ui-autocomplete .ui-menu-item a.ui-state-hover {
   background-color: #D5E5F4;
   color: #161A1C; }
-
-.webform-submission .form-item {
-  display: inline-block;
-  padding: 5px; }
 
 #start-quiz {
   margin-top: 20px; }
