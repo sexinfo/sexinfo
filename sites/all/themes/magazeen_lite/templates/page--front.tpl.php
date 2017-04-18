@@ -15,6 +15,11 @@
   <div class="carousel-container">
     <?php include 'modules/carousel.php' ?>
   </div>
+<!--
+  <div class="front-container cloud-container">
+ <?php include 'modules/tag_cloud.php' ?>
+ </div>
+ --!>
 
 
   <div class="front-container">
