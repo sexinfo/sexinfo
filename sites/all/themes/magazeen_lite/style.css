@@ -1427,7 +1427,7 @@
 /* 00 - GLOBAL ELEMENTS
 /* ----------------------------------------------*/
 body {
-  background: #e0edf3;
+  background: #fafafa;
   color: #5e6568;
   font: 0.8em Arial, Helvetica, sans-serif;
   height: auto;
@@ -1855,7 +1855,8 @@ p.copyright {
   width: auto;
   background: #1c1b1a;
   border-bottom: 1px solid #4a4d4c;
-  clear: both; }
+  clear: both;
+  text-align: left; }
 
 .banner {
   padding: 10px 0;
@@ -1883,12 +1884,12 @@ p.copyright {
 #logo {
   margin: 0;
   padding: 0;
-  display: inline-block; }
+  display: inline-block;
+  width: 10%; }
   #logo a {
     display: inline-block; }
     #logo a img {
-      width: 100px;
-      margin-right: 5px; }
+      width: 100%; }
   @media (max-width: 767px) {
     #logo {
       float: none;
@@ -1899,21 +1900,16 @@ p.copyright {
   background: no-repeat scroll right top transparent;
   height: auto;
   margin: 0;
-  width: 284px;
   display: inline-block; }
   #searchform-header div {
     display: inline-block; }
   #searchform-header .form-submit {
-    background: transparent url(images/search.gif) no-repeat right top;
     border: 0 none;
     color: #ffffff;
     cursor: pointer;
     font-family: Helvetica,Arial,sans-serif;
     font-size: 122%;
-    font-weight: bold;
-    width: 72px; }
-  #searchform-header .form-item {
-    display: inline; }
+    font-weight: bold; }
   @media (max-width: 767px) {
     #searchform-header {
       display: block;
@@ -1921,15 +1917,11 @@ p.copyright {
       margin: 10px auto 0; } }
 
 input#edit-search-block-form--2 {
-  background: #FDFEFE url(images/searchform-back.gif) no-repeat left top;
   border: 0 none;
   color: #AEA592;
-  float: left;
   font-size: 0.92em;
   height: auto;
-  margin: 0;
-  padding: 6px 10px 5px 25px;
-  width: 165px; }
+  margin: 0; }
   input#edit-search-block-form--2:focus {
     color: #30393d; }
 
@@ -1994,7 +1986,8 @@ img#slogan-image {
   padding: 10px 0;
   text-align: center;
   display: inline-block;
-  line-height: 10px; }
+  line-height: 10px;
+  width: 90%; }
   #navigation ul.links {
     height: auto;
     list-style: none;
@@ -2004,6 +1997,9 @@ img#slogan-image {
     @media (max-width: 767px) {
       #navigation ul.links {
         width: 100%; } }
+  #navigation #search {
+    display: inline-block;
+    float: right; }
 
 #navigation ul li a:link,
 #navigation ul li a:active,
@@ -2366,10 +2362,12 @@ ul.slinks {
   -moz-border-radius: 3px;
   border-radius: 3px;
   *zoom: 1;
+  /*
   background-color: #f6fbff;
   -webkit-box-shadow: inset 0px 0px 2px 1px #fff;
-  -moz-box-shadow: inset 0px 0px 2px 1px #fff;
-  box-shadow: inset 0px 0px 2px 1px #fff;
+     -moz-box-shadow: inset 0px 0px 2px 1px #fff;
+          box-shadow: inset 0px 0px 2px 1px #fff;
+  */
   margin-bottom: 20px;
   overflow: auto;
   padding: 10px; }
@@ -2391,7 +2389,7 @@ ul.slinks {
 
 .third {
   float: left;
-  width: 33.33%; }
+  width: 50%; }
   @media (max-width: 767px) {
     .third {
       float: none;
@@ -2962,7 +2960,7 @@ tr.odd.cat-row td {
   background-position: center;
   color: white;
   font-size: 2em;
-  overflow: hidden;
+  overflow: scroll;
   position: relative;
   text-shadow: 0 2px 6px rgba(48, 48, 48, 0.7); }
   .text-on-image .text-on-image-text {
@@ -2986,7 +2984,10 @@ tr.odd.cat-row td {
     padding: 15px;
     position: absolute;
     transition: opacity 0.4s ease-in, top 0.4s;
-    width: 100%; }
+    width: 100%;
+    overflow: scroll;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
     @media (max-width: 767px) {
       .text-on-image .text-on-image-articles {
         opacity: 1 !important;
@@ -2998,7 +2999,7 @@ tr.odd.cat-row td {
 .text-on-image-article {
   font-size: 0.75em;
   margin-bottom: 5px;
-  overflow: hidden;
+  overflow: scroll;
   text-overflow: ellipsis;
   white-space: nowrap; }
   .text-on-image-article:before {
@@ -3029,7 +3030,8 @@ tr.odd.cat-row td {
   display: block;
   list-style: none;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  visibility: hidden; }
   @media (min-width: 1200px) {
     .topics-nav {
       position: fixed;

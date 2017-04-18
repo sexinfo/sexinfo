@@ -29,6 +29,6 @@ function magazeenlite_form_alter(&$form, &$form_state, $form_id) {
     $form['search_block_form']['#default_value'] = 'Search...';
     $form['search_block_form']['#attributes']['onblur'] = "if (this.value == '') {this.value = 'Search...';}";
     $form['search_block_form']['#attributes']['onfocus'] = "if (this.value == 'Search...') {this.value = '';}";
-    $form['actions']['submit']['#value'] = t('');
+    $form['actions']['submit']['#value'] = t('Search');
   }
 }

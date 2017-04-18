@@ -1,8 +1,7 @@
-<div class="third front-module">
+<!--<div class="third front-module">
   <h3>Enter Your Raffle Codes!</h3>
-  <!--<p>Lorem ipsum dolor sit amet, lorem ipsum.</p>-->
 
-  <!--<div class="module-content">-->
+  <div class="module-content">
     <div class="faq-image">
       <a href="http://www.soc.ucsb.edu/sexinfo/raffle-landing-page">
       <div style="background: url('<?php print path_to_theme() . '/images/modules/' . 'raffle-ticket-final-front.jpg'; ?>') ; background-size: cover;" class="faq-image-box"></div>
@@ -13,9 +12,9 @@
         </p>
       </div>
     </div>
-  <!--</div>-->
+  </div>
 
-</div>
+</div>-->
 
 <div class="third front-module">
   <h3>Test Your Knowledge</h3>

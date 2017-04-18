@@ -6,10 +6,12 @@
   @include border-box;
   @include border-radius;
   @include clearfix;
+  /*
   background-color: #f6fbff;
   -webkit-box-shadow: inset 0px 0px 2px 1px #fff;
      -moz-box-shadow: inset 0px 0px 2px 1px #fff;
           box-shadow: inset 0px 0px 2px 1px #fff;
+  */
   margin-bottom: 20px;
   overflow: auto;
   padding: 10px;
@@ -27,7 +29,7 @@
 
 .third {
   float: left;
-  width: 33.33%;
+  width: 50%;
 
   @include mobile {
     float: none;
