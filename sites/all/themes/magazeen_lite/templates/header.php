@@ -16,32 +16,29 @@
         }
         $site_title = implode(' ', $site_fields);
         if ($logo || $site_title) {
-          print '<h1><a href="'. check_url($front_page) .'" title="'. $site_title .'">';
+          print '<a href="'. check_url($front_page) .'" title="'. $site_title .'">';
           if ($logo) {
-            print '<img src="'. check_url($logo) .'" alt="'. $site_title .'" id="logo-image" />';
+            print '<img src="'. check_url($logo) .'" alt="'. $site_title .'" />';
           }
-          print '</a></h1>';
+          print '</a>';
         }
     //print '<h2 class="slogan">'. 'A website devoted to sex, health, & relationships.' .'</h2>';
       ?>
       <!--img src="/sexinfo/sites/default/files/slogan.png" alt="A website devoted to sex, health, and relationships." id="slogan-image"/-->
-      <p id="slogan">A website devoted to sex, health, and relationships.</p>
     </div>
+
+    <?php include 'navigation.php' ?> 
 
     <div id="searchform-header">
       <?php print render($page['search_area']); ?>
     </div>
 
-    <div id="random-article">
-        <a class="pink-block-btn" href="/sexinfo/node/<?php echo $randomNode->nid;?>" title="<?php echo $randomNode->title?>">Random Article</a>
-    </div>
-
-    <div class="social-buttons">
+    <!--<div class="social-buttons">
     	<a class="btn" href="https://www.facebook.com/SexInfoOnline"><i class="icon-2x icon-facebook-sign"></i></a>
     	<a class="btn" href="https://twitter.com/sexinfoonline"><i class="icon-2x icon-twitter-sign"></i></a>
     	<a class="btn" href="https://instagram.com/ucsbsexperts/"><i class="icon-2x fa-instagram"></i></i></a>
     	<a class="btn" href="https://github.com/sexinfo/sexinfo"><i class="icon-2x icon-github-alt"></i></a>
-    </div> <!-- .social-buttons -->
+    </div>--> <!-- .social-buttons -->
 
   </div> <!-- /header-container -->
 </div> <!-- /header -->

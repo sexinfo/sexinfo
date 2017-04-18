@@ -16,7 +16,6 @@ function on_teen_corner()    { return page() == 'category#TeenCorner'; }
 ?>
 
 <div id="navigation">
-    <div class="container clearfix">
 
       <ul id="main-menu" class="links main-menu">
       <li class="menu-339 <?php echo on_home_page() ? 'active' : '' ?>"><a href="/sexinfo/home" title="">Home</a></li>
@@ -49,9 +48,12 @@ function on_teen_corner()    { return page() == 'category#TeenCorner'; }
         <li class="menu-400 <?php echo on_ask_page() ? 'active' : '' ?>"><a href="/sexinfo/ask-sexperts">Ask the Sexperts</a></li>
         <li class="menu-549 <?php echo on_faq_page() ? 'active' : '' ?>"><a href="/sexinfo/popular-questions">Popular Questions</a></li>
         <li class="menu-635 <?php echo on_ppq_page() ? 'active' : '' ?>"><a href="/sexinfo/ppq">Could I Be Pregnant?</a></li>
-        <li class="menu-543 <?php echo on_resources_page() ? 'active' : '' ?>"><a href="/sexinfo/article/important-phone-numbersresources-pregnancy">Resources</a></li>
+        <!--<li class="menu-543 <?php echo on_resources_page() ? 'active' : '' ?>"><a href="/sexinfo/article/important-phone-numbersresources-pregnancy">Resources</a></li>
         <li class="menu <?php echo on_for_educators() ? 'active' : '' ?>"><a href="/sexinfo/category#ForEducators">For Educators</a></li>
-        <li class="menu <?php echo on_teen_corner() ? 'active' : '' ?>"><a href="/sexinfo/category#TeenCorner">Teen Corner</a></li>
+        <li class="menu <?php echo on_teen_corner() ? 'active' : '' ?>"><a href="/sexinfo/category#TeenCorner">Teen Corner</a></li>-->
+        <li id="random-article">
+            <a class="pink-block-btn" href="/sexinfo/node/<?php echo $randomNode->nid;?>" title="<?php echo $randomNode->title?>">Random Article</a>
+        </li>
+
       </ul><!-- #main-menu -->
-    </div>
   </div><!-- #navigation -->
