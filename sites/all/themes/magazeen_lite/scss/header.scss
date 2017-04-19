@@ -1,258 +1,128 @@
 /* 03 - HEADER
 /* ----------------------------------------------*/
 
+$primary-color: #FC89AC;
+$text-color: white;
+$secondary-color: #fdbbcf;
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+[data-icon]:before {
+  font-family: 'Simple-Line-Icons';
+  content: attr(data-icon);
+  speak: none;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 #header {
-  margin: 0;
-  padding: 0;
-  width: auto;
-  background: lighten($dark-gray, 2); //url(images/header.gif) repeat-x top center;
-  border-bottom:1px solid #4a4d4c;
-  clear: both;
-  text-align: left;
+  background-color: $primary-color;
 }
 
-.banner {
-  padding: 10px 0;
-  text-align: center;
-
-  a {
-    color: inherit;
-    text-decoration: underline;
-
-    &:hover {
-      color: #444444;
-    }
-  }
+*:focus {
+    outline: none;
 }
 
-.new-banner {
-  background-color: #F98BB9;
-
-  background-image: linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
-  background-image: -o-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
-  background-image: -moz-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
-  background-image: -webkit-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
-  background-image: -ms-linear-gradient(bottom, #F875AB 35%, #F98BB9 70%);
-  background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.35, #F875AB),
-    color-stop(0.7, #F98BB9));
-
-  color: #FFFFFF;
-  font-size: 1.1em;
-  font-weight: bold;
-  padding: 6px 0;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
-}
-
-#logo {
-  // background: url(images/header-shade.gif) no-repeat top right;
-  margin: 0;
-  padding: 0;
-  display: inline-block;
-  width: 10%;
-
-  a{
-    display: inline-block;
-    img{
-      width: 100%;
-    }
-  }
-
-  @include mobile {
-    float: none;
-    text-align: center;
-    width: auto;
-  }
-}
-
-#searchform-header {
-  background: no-repeat scroll right top transparent;
-  height: auto;
-  margin: 0;
-  display: inline-block;
-
-  div{
-    display: inline-block;
-  }
-
-  .form-submit{
-    border: 0 none;
-    color: #ffffff;
-    cursor: pointer;
-    font-family: Helvetica,Arial,sans-serif;
-    font-size: 122%;
-    font-weight: bold;
-  }
-
-  .form-item {
-      //display: none;
-  }
-
-  @include mobile {
-    display: block;
-    float: none;
-    margin: 10px auto 0;
-  }
-}
-
-input#edit-search-block-form--2 {
-  border: 0 none;
-  color: #AEA592;
-  font-size: 0.92em;
-  height: auto;
-  margin: 0;
-
-  &:focus {
-    color: $gray-text;
-  }
-}
-
-img#slogan-image {
-    padding: 0px 10px;
-    min-width:30%;
-}
-
-#slogan {
-    margin: 0px 0px 10px 30px;
-    color: #fefefe;
-}
-
-.social-buttons {
-  @include clearfix;
+#header-right {
   float: right;
-	margin: 12px 20px 0px 0;
-	width: 284px;
+  width: 35%;
+  form {
+    ul {
+      text-align: right;
+      padding: 0.25em 0;
+      padding-right: 1em;
+      margin: 0;
+      li {
+        display: inline-block;
+        list-style-type: none;
+        text-align: center;
+        vertical-align: middle;
 
-  a {
-    float: left;
-    height: 32px;
-    margin-right: 30px;
-    white-space: nowrap;
-    width: 32px;
+        padding: 0.35em;
 
-    &:hover { color: #B2B2B2; }
-  }
+        margin: 0 0.35em;
 
-  @include mobile {
-    display: none;
+        
+        span {
+          color: $text-color;
+          font-size: 1.75em;
+          vertical-align: middle;
+        }
+      }
 
-    float: none;
-    margin: 20px auto 10px;
-    text-align: center;
-    width: auto;
+      li:hover:not(:first-child) {
+        background-color: $secondary-color;
+      }
 
-    a { float: none; }
+      li:first-child {
+        padding: 0.5em;
+        font-family: 'Open Sans', sans-serif;
+      }
+    }
   }
 }
 
-#random-article {
-    @include clearfix;
-  	margin: 0;
-    width: 140px;
+#search-box {
+  border: 1px solid $primary-color;
+  border-radius: 10px;
+  font-size: 1em;
+  height: 1em;
+  width: 90%;
+  padding: 0.5em !important;
+  color: gray;
+}
+
+
+
+#header-left {
+  float: left;
+  width: 65%;
+
+  div {
     display: inline-block;
-    a {
-        padding: 0px;
-        margin: 0;
-    }
-
-    @include mobile {
-        display: none;
-    }
+    font-size: 0;
+    letter-spacing: 0;
+    word-spacing: 0;
+  }
 }
-
-
 
 /* Navigation
-/* -------------- */
-#navigation {
-  font-size: 1.1em;
-  margin: 0;
-  padding: 10px 0;
-  text-align: center;
-  display: inline-block;
-  line-height: 10px;
-  width: 90%;
-  ul.links {
-    height: auto;
-    list-style: none;
-    margin: 0 auto;
-    padding: 0;
-    display: inline-block;
+/* ----------------------------------------------*/
 
-    @include mobile {
-      width: 100%;
+
+#navigation {
+  padding: 1em;
+  ul {
+    li {
+      font-size: 13px;
+      list-style-type: none;
+      display: inline-block;
+      vertical-align: middle;
+      padding: 1em;
+      font-family: 'Open Sans', sans-serif;
+
+
+      a {
+        color: $text-color;
+        font-weight: lighter;
+        text-transform: uppercase;
+      }
+    }  
+
+    li:hover:not(:first-child) {
+      background-color: $secondary-color;
     }
   }
-  #search{
-    display: inline-block;
-    float: right;
-  }
 }
 
-#navigation ul li a:link,
-#navigation ul li a:active,
-#navigation ul li a:visited {
-  margin: 0;
-  padding: 8px 13px;
-  font: 1em Arial, Helvetica, sans-serif;
-  color: rgb(195,195,195);
-  display:block; height:auto;
-
-  @include mobile {
-    border-top: 1px solid #eee;
-    padding: 5px;
-    text-align: center;
-  }
+#navlogo {
+  width: 11%;
+  padding: 0 2em !important;
 }
-
-#navigation ul li {
-  float: left;
-  margin: 0 0px;
-  overflow: visible;
-  padding: 0;
-
-  a:hover, a:active {
-    color: #F1F8FF;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  @include mobile {
-    float: none;
-    margin: 0;
-    width: 100%;
-  }
-}
-
-#navigation ul li:first-child a { border-top: none; }
-
-#navigation ul.links li.active > a:link,
-#navigation ul.links li.active > a:active,
-#navigation ul.links li.active > a:visited {
-  /* margin:-3px 0 0 0;*/
-  color:#f1f8ff; position:relative;
-
-  @include mobile { padding: 5px; }
-}
-
-a.rss:link, a.rss:active, a.rss:visited, a.rss:hover {
-  margin:13px 15px 0 0; padding:0;
-  width:16px; height:17px;
-  background:url(images/rss.png) no-repeat top center;
-  text-indent:-9999px; display:block; outline:0;
-}
-
-.rss {
-  margin:0 30px 0 0; padding:0;
-  width:16px; height:17px;
-  float:right;
-}
-
-
-
-
-
-
 
 /*Topics menu*/
 #navigation ul li.menu-537 div{
