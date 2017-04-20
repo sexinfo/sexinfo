@@ -21,6 +21,7 @@ $secondary-color: #fdbbcf;
 
 #header {
   background-color: $primary-color;
+  vertical-align: middle;
 }
 
 *:focus {
@@ -28,21 +29,23 @@ $secondary-color: #fdbbcf;
 }
 
 #header-right {
+  display: inline-block;
   float: right;
   width: 35%;
   form {
     ul {
       text-align: right;
-      padding: 0.25em 0;
+      padding: 0.5em 0;
       padding-right: 1em;
       margin: 0;
+
       li {
         display: inline-block;
         list-style-type: none;
         text-align: center;
         vertical-align: middle;
 
-        padding: 0.35em;
+        padding: 0.75em;
 
         margin: 0 0.35em;
 
@@ -71,7 +74,7 @@ $secondary-color: #fdbbcf;
   border-radius: 10px;
   font-size: 1em;
   height: 1em;
-  width: 90%;
+  width: 17em;
   padding: 0.5em !important;
   color: gray;
 }
@@ -79,6 +82,7 @@ $secondary-color: #fdbbcf;
 
 
 #header-left {
+  display: inline-block;
   float: left;
   width: 65%;
 

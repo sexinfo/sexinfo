@@ -4,8 +4,10 @@
 
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+$background-color: #f6f5f2;
+
 body {
-  background: white;
+  background: $background-color;
   color: #5e6568;
   font: 0.8em 'Roboto', sans-serif; // 0.75em
   height: auto;

@@ -17,6 +17,7 @@
         <li><a class="btn" href="https://www.facebook.com/SexInfoOnline"><span data-icon="&#xe00b;"></span></a></li>
         <li><a class="btn" href="https://twitter.com/sexinfoonline"><span data-icon="&#xe009;"></span></a></li>
         <li><a href="https://instagram.com/ucsbsexperts/"><span data-icon="&#58889;"></span></a></li>
+        <li><a href="https://www.youtube.com/user/UCSBSexInfoOnline"><span data-icon="&#57352;"></span></a></li>
       </ul>
 
       <input name="form_build_id" value="form-AmYRLMZDHrIiZu-Dl2zjnB27KK1EN2AC_XZ2YHVi_vE" type="hidden" />
