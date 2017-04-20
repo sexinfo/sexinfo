@@ -16,7 +16,7 @@
     clear: both; }
 
 #user-login label, #node-22 label, #node-816 label {
-  color: #f23183;
+  color: #FC89AC;
   font-size: 1.2em;
   margin-bottom: 5px; }
 
@@ -33,24 +33,24 @@
   #user-login input:focus:not([type="submit"]), #node-22 input:focus:not([type="submit"]),
   #node-22 textarea:focus, #node-816 input:focus:not([type="submit"]),
   #node-816 textarea:focus {
-    border: 1px solid #f23183;
+    border: 1px solid #FC89AC;
     outline: none; }
 
 .button-bar, .pink-block-btn, #edit-submit, #node-22 input[type="submit"], #node-816 input[type="submit"], #user-login input[type="submit"] {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  background-color: #f23183;
+  background-color: #FC89AC;
   border: none;
   color: white;
   font-size: 1.2em;
   padding: 10px 15px;
   text-align: center; }
   .button-bar:hover, .pink-block-btn:hover, #edit-submit:hover, #node-22 input[type="submit"]:hover, #node-816 input[type="submit"]:hover, #user-login input[type="submit"]:hover {
-    background-color: #e20e68;
+    background-color: #fb5789;
     cursor: pointer; }
   .button-bar:active, .pink-block-btn:active, #edit-submit:active, #node-22 input[type="submit"]:active, #node-816 input[type="submit"]:active, #user-login input[type="submit"]:active {
-    background-color: #d30d61; }
+    background-color: #fa487f; }
 
 .button-bar, .pink-block-btn {
   -webkit-border-radius: 3px;
@@ -62,7 +62,7 @@
   color: white !important;
   margin-bottom: 20px;
   padding: 12px 10px;
-  border-bottom: 3px solid #c50c5b; }
+  border-bottom: 3px solid #fa3974; }
 
 #edit-submit, #node-22 input[type="submit"], #node-816 input[type="submit"] {
   background-color: #3099DF;
@@ -1548,22 +1548,8 @@ html[xmlns] .clearfix {
   padding: 6px 15px; }
 
 .pink-block-btn {
-  background: #f23183;
-  background: -webkit-linear-gradient(top, #ff5db1 0%, #ef017c 100%);
-  /* Chrome10+,Safari5.1+ */
-  background: -moz-linear-gradient(top, #ff5db1 0%, #ef017c 100%);
-  /* FF3.6+ */
-  background: -ms-linear-gradient(top, #ff5db1 0%, #ef017c 100%);
-  /* IE10+ */
-  background: -o-linear-gradient(top, #ff5db1 0%, #ef017c 100%);
-  /* Opera 11.10+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ff5db1), color-stop(100%, #ef017c));
-  /* Chrome,Safari4+ */
-  background: linear-gradient(top bottom, #ff5db1 0%, #ef017c 100%);
-  /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5db1', endColorstr='#ef017c',GradientType=0 );
-  /* IE6-9 */
-  border: 1px solid #e20e68;
+  background-color: #FC89AC;
+  border: 1px solid #fb5789;
   margin: 5px auto 25px;
   opacity: .9;
   width: 75%; }
@@ -1683,14 +1669,14 @@ h4, #footer h2 {
 
 /* Link styling for global site: pink no underline*/
 a:link, a:active {
-  color: #f23183;
+  color: #FC89AC;
   text-decoration: none; }
 
 a:hover {
   color: #000; }
 
 a:visited {
-  color: #f05898;
+  color: #FC89AC;
   text-decoration: none; }
 
 /* In a document (article, question, etc) we want underline for colorblind people */
@@ -1719,7 +1705,7 @@ table {
   width: 99%; }
 
 thead th {
-  background: none repeat scroll 0 0 #f23183;
+  background: none repeat scroll 0 0 #FC89AC;
   border: 1px solid #e3e3e3;
   padding: 5px;
   text-align: left;
@@ -1769,7 +1755,7 @@ ol ol ol {
   text-decoration: none; }
 
 .node-info span a:hover {
-  color: #f23183; }
+  color: #FC89AC; }
 
 .node-readmore {
   float: right;
@@ -1837,7 +1823,7 @@ p.copyright {
 /* Search Results
 /* -------------- */
 .pink-header {
-  color: #f23183;
+  color: #FC89AC;
   font-size: 1.8em;
   font-weight: normal;
   text-align: center; }
@@ -1851,6 +1837,9 @@ p.copyright {
 
 /* 03 - HEADER
 /* ----------------------------------------------*/
+.theme-color {
+  color: #FC89AC; }
+
 [data-icon]:before {
   font-family: 'Simple-Line-Icons';
   content: attr(data-icon);
@@ -1972,7 +1961,7 @@ p.copyright {
     display: block;
     color: #30393d; }
     #navigation ul li.menu-537 #topics-menu li a:hover {
-      background-color: #f23183;
+      background-color: #FC89AC;
       color: white;
       text-decoration: none; }
 
@@ -2050,7 +2039,7 @@ ul.pager {
   padding: 15px 22px 0; }
 
 .comment-count {
-  background: #f23183;
+  background: #FC89AC;
   display: block;
   height: auto;
   margin: 0;
@@ -2499,7 +2488,7 @@ ul.pager {
   margin: 10px 0; }
 
 .column-container h4 {
-  color: #f23183;
+  color: #FC89AC;
   font: bold 1.4em Arial, Helvetica, sans-serif; }
 
 .date {
@@ -2558,7 +2547,7 @@ ul.pager {
   opacity: 1; }
 
 .carousel-caption h3 {
-  color: #f23183;
+  color: #FC89AC;
   font-size: 2em; }
 
 .carousel-caption p {
@@ -2904,13 +2893,13 @@ tr.odd.cat-row td {
   .topics-nav li:last-child a {
     border-bottom: 0; }
   .topics-nav li.active {
-    background-color: #f23183; }
+    background-color: #FC89AC; }
     .topics-nav li.active a {
       color: white; }
   .topics-nav a {
     border-bottom: 1px solid #e0e0e0;
     display: block;
-    color: #f23183;
+    color: #FC89AC;
     font-size: 1.2em;
     padding: 6px 70px 6px 10px; }
     .topics-nav a:hover {
@@ -2942,7 +2931,7 @@ tr.odd.cat-row td {
   .suggestions-container li {
     border-top: 1px solid #e0e0e0;
     padding: 8px;
-    color: #f23183; }
+    color: #FC89AC; }
     .suggestions-container li:nth-of-type(even) {
       background-color: #f2f2f2; }
 

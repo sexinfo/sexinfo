@@ -31,7 +31,7 @@
   li {
     border-top: 1px solid $border-color;
     padding: 8px;
-    color: $pink;
+    color: $primary-color;
     &:nth-of-type(even){background-color:lighten(#ccc,15)}
   }
 }
