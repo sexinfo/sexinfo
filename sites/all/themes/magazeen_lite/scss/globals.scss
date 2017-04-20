@@ -2,10 +2,14 @@
 /* 00 - GLOBAL ELEMENTS
 /* ----------------------------------------------*/
 
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+$background-color: #f6f5f2;
+
 body {
-  background: #e0edf3;
+  background: $background-color;
   color: #5e6568;
-  font: 0.8em Arial, Helvetica, sans-serif; // 0.75em
+  font: 0.8em 'Roboto', sans-serif; // 0.75em
   height: auto;
   line-height: 19px;
   margin: 0;
