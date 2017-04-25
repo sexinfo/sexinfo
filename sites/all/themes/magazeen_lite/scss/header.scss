@@ -8,6 +8,7 @@
   background: lighten($dark-gray, 2); //url(images/header.gif) repeat-x top center;
   border-bottom:1px solid #4a4d4c;
   clear: both;
+  text-align: left;
 }
 
 .banner {
@@ -47,12 +48,12 @@
   margin: 0;
   padding: 0;
   display: inline-block;
+  width: 10%;
 
   a{
     display: inline-block;
     img{
-      width: 100px;
-      margin-right: 5px;
+      width: 100%;
     }
   }
 
@@ -67,7 +68,6 @@
   background: no-repeat scroll right top transparent;
   height: auto;
   margin: 0;
-  width: 284px;
   display: inline-block;
 
   div{
@@ -75,18 +75,16 @@
   }
 
   .form-submit{
-    background: transparent url(images/search.gif) no-repeat  right top;
     border: 0 none;
     color: #ffffff;
     cursor: pointer;
     font-family: Helvetica,Arial,sans-serif;
     font-size: 122%;
     font-weight: bold;
-    width: 72px;
   }
 
   .form-item {
-      display: inline;
+      //display: none;
   }
 
   @include mobile {
@@ -97,15 +95,11 @@
 }
 
 input#edit-search-block-form--2 {
-  background: #FDFEFE url(images/searchform-back.gif) no-repeat  left top;
   border: 0 none;
   color: #AEA592;
-  float: left;
   font-size: 0.92em;
   height: auto;
   margin: 0;
-  padding: 6px 10px 5px 25px;
-  width: 165px;
 
   &:focus {
     color: $gray-text;
@@ -176,6 +170,7 @@ img#slogan-image {
   text-align: center;
   display: inline-block;
   line-height: 10px;
+  width: 90%;
   ul.links {
     height: auto;
     list-style: none;
@@ -186,6 +181,10 @@ img#slogan-image {
     @include mobile {
       width: 100%;
     }
+  }
+  #search{
+    display: inline-block;
+    float: right;
   }
 }
 
