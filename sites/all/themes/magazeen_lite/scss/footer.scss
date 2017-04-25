@@ -1,86 +1,71 @@
 #footer {
-  background: $dark-gray url(images/footer-stroke.gif) repeat-x top center;
-  border-top: 1px solid $dark-gray;
-  border-bottom: 1px solid #1e1d1d;
-  color: #B2B2B2;
-  height:auto;
-  margin: 0;
-  padding: 10px 0 15px;
-  width: auto;
+  background-color: $primary-color;
+  font-family: "Open Sans", sans-serif;
+  color: $text-color;
+  padding: 2em;
+  padding-bottom: 0;
+}
 
-  a:hover,
-  a:active {
-    color: inherit;
-    text-decoration: underline;
+#footer-left {
+  float: left;
+  width: 35%;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  margin-left: 15%;
+
+  img {
+    display: inline;
+    width: 15%;
   }
 
-  .left, .right { width: 40%; }
-
-  .left { float: left; }
-  .right { float: right; }
-
-  ul {
-  	list-style-type: none;
-  	margin: 0;
-  	padding: 0;
-
-  	li { margin-bottom: 10px; }
-
-  	i { padding-right: 5px; }
-  }
-
-  p:last-child { margin-bottom: 10px; }
-
-  @include mobile {
-    padding: 10px;
-
-    .left, .right {
-      float: none;
-      width: auto;
+  p {
+    display: inline;
+    a {
+      color: $text-color;
+      text-decoration: underline;
     }
   }
 }
 
+#footer-right {
+  float: right;
+  width: 25%;
 
-#footer-message {
-  color: #fff;
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  padding: 10px 0;
-}
+  margin-right: 15%;
+  ul {
+    text-align: right;
 
-.footer-divider {
-  background: url("images/footer-divider.gif") repeat-y scroll left top transparent;
-}
+    li {
+      display: inline-block;
+      list-style-type: none;
+      text-align: center;
+      vertical-align: middle;
 
+      padding: 1.5em;
+      a {
+        span {
+          font-size: 3em;
+          color: $text-color;
+        }
+      }
+    }
 
-
-#snavigation {
-  background-color: $dark-gray;
-  border-top: 1px solid #1E1D1D;
-  border-bottom: 1px solid #1E1D1D;
-  clear: both;
-  padding: 10px 0;
-
-  li a.active { color: $pink; }
-
-  p {
-    float: left;
-    margin-bottom: 0;
-  }
-
-  .login {
-    font-size: 1.1em;
-    float: right;
+    li:hover {
+        background-color: $secondary-color;
+    }
   }
 }
 
-ul.slinks {
-  margin: 0;
-  padding: 0;
-
-  li {
+#copyright {
+  margin-top: 4em;
+  padding: 1em;
+  text-align: center;
+  p, a {
     display: inline;
-    list-style-type: none;
-    padding: 0 0.5em;
+    color: $text-color;
+  }
+
+  a {
+    text-decoration: underline;
   }
 }
