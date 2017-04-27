@@ -16,7 +16,7 @@
     clear: both; }
 
 #user-login label, #node-22 label, #node-816 label {
-  color: #fc89ac;
+  color: #FC89AC;
   font-size: 1.2em;
   margin-bottom: 5px; }
 
@@ -33,14 +33,14 @@
   #user-login input:focus:not([type="submit"]), #node-22 input:focus:not([type="submit"]),
   #node-22 textarea:focus, #node-816 input:focus:not([type="submit"]),
   #node-816 textarea:focus {
-    border: 1px solid #fc89ac;
+    border: 1px solid #FC89AC;
     outline: none; }
 
 .button-bar, .pink-block-btn, #edit-submit, #node-22 input[type="submit"], #node-816 input[type="submit"], #user-login input[type="submit"] {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  background-color: #fc89ac;
+  background-color: #FC89AC;
   border: none;
   color: white;
   font-size: 1.2em;
@@ -394,7 +394,6 @@
 
 @-ms-viewport {
   width: device-width; }
-
 .hidden {
   display: none;
   visibility: hidden; }
@@ -1549,11 +1548,12 @@ html[xmlns] .clearfix {
   padding: 6px 15px; }
 
 .pink-block-btn {
-  background-color: #fc89ac;
+  background-color: #FC89AC;
   border: 1px solid #fb5789;
   margin: 5px auto 25px;
   opacity: .9;
-  width: 75%; }
+  width: 75%;
+  text-decoration: none; }
   .pink-block-btn:hover {
     opacity: 1; }
 
@@ -1670,22 +1670,15 @@ h4, #footer h2 {
 
 /* Link styling for global site: pink no underline*/
 a:link, a:active {
-  color: #fc89ac;
+  color: #FC89AC;
   text-decoration: none; }
 
 a:hover {
   color: #000; }
 
 a:visited {
-  color: #fc89ac;
+  color: #FC89AC;
   text-decoration: none; }
-
-/* In a document (article, question, etc) we want underline for colorblind people */
-.node a {
-  text-decoration: underline; }
-
-.content a {
-  text-decoration: underline; }
 
 .node-title a {
   text-decoration: none; }
@@ -1706,7 +1699,7 @@ table {
   width: 99%; }
 
 thead th {
-  background: none repeat scroll 0 0 #fc89ac;
+  background: none repeat scroll 0 0 #FC89AC;
   border: 1px solid #e3e3e3;
   padding: 5px;
   text-align: left;
@@ -1756,7 +1749,7 @@ ol ol ol {
   text-decoration: none; }
 
 .node-info span a:hover {
-  color: #fc89ac; }
+  color: #FC89AC; }
 
 .node-readmore {
   float: right;
@@ -1824,7 +1817,7 @@ p.copyright {
 /* Search Results
 /* -------------- */
 .pink-header {
-  color: #fc89ac;
+  color: #FC89AC;
   font-size: 1.8em;
   font-weight: normal;
   text-align: center; }
@@ -1839,7 +1832,7 @@ p.copyright {
 /* 03 - HEADER
 /* ----------------------------------------------*/
 .theme-color {
-  color: #fc89ac; }
+  color: #FC89AC; }
 
 [data-icon]:before {
   font-family: 'Simple-Line-Icons';
@@ -1853,7 +1846,7 @@ p.copyright {
   -moz-osx-font-smoothing: grayscale; }
 
 #header {
-  background-color: #fc89ac;
+  background-color: #FC89AC;
   vertical-align: middle; }
 
 *:focus {
@@ -1886,7 +1879,7 @@ p.copyright {
       font-family: 'Open Sans', sans-serif; }
 
 #search-box {
-  border: 1px solid #fc89ac;
+  border: 1px solid #FC89AC;
   border-radius: 10px;
   font-size: 1em;
   height: 1em;
@@ -1939,11 +1932,11 @@ p.copyright {
 
 #navigation ul li.menu-537 #topics-menu {
   display: none;
-  -webkit-box-shadow: 0 0 30px black black;
-  -moz-box-shadow: 0 0 30px black black;
-  box-shadow: 0 0 30px black black;
+  -webkit-box-shadow: 0 0 30px #000 #000;
+  -moz-box-shadow: 0 0 30px #000 #000;
+  box-shadow: 0 0 30px #000 #000;
   background: white;
-  border: 2px solid lightgrey;
+  border: 2px solid lightgray;
   position: absolute;
   width: 510px;
   z-index: 500; }
@@ -1962,7 +1955,7 @@ p.copyright {
     display: block;
     color: #30393d; }
     #navigation ul li.menu-537 #topics-menu li a:hover {
-      background-color: #fc89ac;
+      background-color: #FC89AC;
       color: white;
       text-decoration: none; }
 
@@ -2040,7 +2033,7 @@ ul.pager {
   padding: 15px 22px 0; }
 
 .comment-count {
-  background: #fc89ac;
+  background: #FC89AC;
   display: block;
   height: auto;
   margin: 0;
@@ -2118,7 +2111,7 @@ ul.pager {
     content: '<'; }
 
 #footer {
-  background-color: #fc89ac;
+  background-color: #FC89AC;
   font-family: "Open Sans", sans-serif;
   color: white;
   padding: 2em;
@@ -2175,7 +2168,7 @@ ul.pager {
   width: 305px; }
 
 #sidebar .block h2 {
-  background: url("images/sidebar-top.gif") no-repeat scroll center top #f5fbfe;
+  background: url("images/sidebar-top.gif") no-repeat scroll center top #F5FBFE;
   color: #587682;
   font: bold 2.25em Arial,Helvetica,sans-serif;
   height: 55px;
@@ -2184,7 +2177,7 @@ ul.pager {
   width: 285px; }
 
 #sidebar .block .content {
-  background: url("images/sidebar-bottom.gif") no-repeat scroll center bottom #f5fbfe;
+  background: url("images/sidebar-bottom.gif") no-repeat scroll center bottom #F5FBFE;
   display: block;
   height: auto;
   margin: 0 0 0 0;
@@ -2489,7 +2482,7 @@ ul.pager {
   margin: 10px 0; }
 
 .column-container h4 {
-  color: #fc89ac;
+  color: #FC89AC;
   font: bold 1.4em Arial, Helvetica, sans-serif; }
 
 .date {
@@ -2548,7 +2541,7 @@ ul.pager {
   opacity: 1; }
 
 .carousel-caption h3 {
-  color: #fc89ac;
+  color: #FC89AC;
   font-size: 2em; }
 
 .carousel-caption p {
@@ -2857,7 +2850,7 @@ tr.odd.cat-row td {
     color: #f48ab7; }
 
 .text-on-image-tint {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
   transition: background-color 0.4s;
   height: 100%;
   width: 100%; }
@@ -2894,13 +2887,13 @@ tr.odd.cat-row td {
   .topics-nav li:last-child a {
     border-bottom: 0; }
   .topics-nav li.active {
-    background-color: #fc89ac; }
+    background-color: #FC89AC; }
     .topics-nav li.active a {
       color: white; }
   .topics-nav a {
     border-bottom: 1px solid #e0e0e0;
     display: block;
-    color: #fc89ac;
+    color: #FC89AC;
     font-size: 1.2em;
     padding: 6px 70px 6px 10px; }
     .topics-nav a:hover {
@@ -2932,7 +2925,7 @@ tr.odd.cat-row td {
   .suggestions-container li {
     border-top: 1px solid #e0e0e0;
     padding: 8px;
-    color: #fc89ac; }
+    color: #FC89AC; }
     .suggestions-container li:nth-of-type(even) {
       background-color: #f2f2f2; }
 
@@ -2982,7 +2975,6 @@ tr.odd.cat-row td {
   src: url("/sexinfo/sites/all/themes/magazeen_lite/font-awesome/fontawesome-webfont.eot?#iefix&v=3.0.1") format("embedded-opentype"), url("/sexinfo/sites/all/themes/magazeen_lite/font-awesome/fontawesome-webfont.woff?v=3.0.1") format("woff"), url("/sexinfo/sites/all/themes/magazeen_lite/font-awesome/fontawesome-webfont.ttf?v=3.0.1") format("truetype");
   font-weight: normal;
   font-style: normal; }
-
 /*  Font Awesome styles
     ------------------------------------------------------- */
 [class^="icon-"],
@@ -3080,10 +3072,10 @@ ul.icons {
     width: .75em; }
 
 .icon-muted {
-  color: #eeeeee; }
+  color: #eee; }
 
 .icon-border {
-  border: solid 1px #eeeeee;
+  border: solid 1px #eee;
   padding: .2em .25em .15em;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -3163,38 +3155,28 @@ ul.icons {
 @-moz-keyframes spin {
   0% {
     -moz-transform: rotate(0deg); }
-
   100% {
     -moz-transform: rotate(359deg); } }
-
 @-webkit-keyframes spin {
   0% {
     -webkit-transform: rotate(0deg); }
-
   100% {
     -webkit-transform: rotate(359deg); } }
-
 @-o-keyframes spin {
   0% {
     -o-transform: rotate(0deg); }
-
   100% {
     -o-transform: rotate(359deg); } }
-
 @-ms-keyframes spin {
   0% {
     -ms-transform: rotate(0deg); }
-
   100% {
     -ms-transform: rotate(359deg); } }
-
 @keyframes spin {
   0% {
     transform: rotate(0deg); }
-
   100% {
     transform: rotate(359deg); } }
-
 @-moz-document url-prefix() {
   .icon-spin {
     height: .9em; }
@@ -3207,7 +3189,6 @@ ul.icons {
 
   .btn .icon-spin.icon-large {
     height: .75em; } }
-
 /*  Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
     readers do not read off random characters that represent icons */
 .icon-glass:before {
@@ -4160,3 +4141,5 @@ ul.icons {
 #twitter-widget-0 {
   width: 350px !important;
   padding: 0px 0px 20px 0px; }
+
+/*# sourceMappingURL=style.css.map */
