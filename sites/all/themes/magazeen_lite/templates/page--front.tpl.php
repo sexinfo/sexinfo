@@ -1,6 +1,6 @@
 <?php include 'header.php' ?>
 
-<div class="container">
+<div>
   <?php
     # "has been successfully updated", etc
     if ($show_messages && $messages): print $messages; endif;
