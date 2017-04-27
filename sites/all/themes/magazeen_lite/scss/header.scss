@@ -65,6 +65,11 @@ $secondary-color: #fdbbcf;
         padding: 0.5em;
         font-family: 'Open Sans', sans-serif;
       }
+
+      li:nth-child(2) {
+        margin-right: 1.5em;
+        margin-left: 0.15em;
+      }
     }
   }
 }
@@ -74,7 +79,7 @@ $secondary-color: #fdbbcf;
   border-radius: 10px;
   font-size: 1em;
   height: 1em;
-  width: 17em;
+  width: 8em;
   padding: 0.5em !important;
   color: gray;
 }
@@ -85,6 +90,8 @@ $secondary-color: #fdbbcf;
   display: inline-block;
   float: left;
   width: 65%;
+
+  margin-top: 0.2em;
 
   div {
     display: inline-block;
@@ -124,52 +131,11 @@ $secondary-color: #fdbbcf;
 }
 
 #navlogo {
-  width: 11%;
+  width: 100px;
   padding: 0 2em !important;
 }
 
-/*Topics menu*/
-#navigation ul li.menu-537 div{
-}
+/* Topic Hover
+/* ----------------------------------------------*/
 
-#navigation ul {
-  @include clearfix;
-  display: block;
-  padding: 0;
-}
 
-#navigation ul li.menu-537 {
-  #topics-menu {
-    display: none;
-    @include box-shadow(0, 0, 30px, #000);
-    background: white;
-    border: 2px solid lighten($light-gray, 10);
-    position: absolute;
-    width: 510px;
-    z-index: 500;
-  }
-
-  .dropdown-half {
-    @include border-box;
-    border-right: 1px solid $border-color;
-    float: left;
-    width: 50%;
-  }
-
-  #topics-menu li {
-    border-bottom: 1px solid $border-color;
-    display: block;
-    width: 100%;
-
-    a {
-      display: block;
-      color: $gray-text;
-
-      &:hover {
-        background-color: $pink;
-        color: white;
-        text-decoration: none;
-      }
-    }
-  }
-}

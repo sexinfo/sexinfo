@@ -14,7 +14,7 @@
         <li><a href="https://twitter.com/sexinfoonline"><span data-icon="&#xe009;"></span></a></li>
         <li><a href="https://instagram.com/ucsbsexperts/"><span data-icon="&#58889;"></span></a></li>
         <li><a href="https://www.youtube.com/user/UCSBSexInfoOnline"><span data-icon="&#57352;"></span></a></li>
-        <li><a href="https://www.youtube.com/user/UCSBSexInfoOnline"><span data-icon=" &#58892;"></span></a></li>
+        <li><a href="https://github.com/sexinfo/sexinfo"><span data-icon=" &#58892;"></span></a></li>
       </ul>
     </div>
 

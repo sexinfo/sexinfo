@@ -1894,20 +1894,24 @@ p.copyright {
     #header-right form ul li:first-child {
       padding: 0.5em;
       font-family: 'Open Sans', sans-serif; }
+    #header-right form ul li:nth-child(2) {
+      margin-right: 1.5em;
+      margin-left: 0.15em; }
 
 #search-box {
   border: 1px solid #FC89AC;
   border-radius: 10px;
   font-size: 1em;
   height: 1em;
-  width: 17em;
+  width: 8em;
   padding: 0.5em !important;
   color: gray; }
 
 #header-left {
   display: inline-block;
   float: left;
-  width: 65%; }
+  width: 65%;
+  margin-top: 0.2em; }
   #header-left div {
     display: inline-block;
     font-size: 0;
@@ -1933,49 +1937,11 @@ p.copyright {
     background-color: #fdbbcf; }
 
 #navlogo {
-  width: 11%;
+  width: 100px;
   padding: 0 2em !important; }
 
-/*Topics menu*/
-#navigation ul {
-  *zoom: 1;
-  display: block;
-  padding: 0; }
-  #navigation ul:before, #navigation ul:after {
-    display: table;
-    content: ""; }
-  #navigation ul:after {
-    clear: both; }
-
-#navigation ul li.menu-537 #topics-menu {
-  display: none;
-  -webkit-box-shadow: 0 0 30px #000 #000;
-  -moz-box-shadow: 0 0 30px #000 #000;
-  box-shadow: 0 0 30px #000 #000;
-  background: white;
-  border: 2px solid lightgray;
-  position: absolute;
-  width: 510px;
-  z-index: 500; }
-#navigation ul li.menu-537 .dropdown-half {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  border-right: 1px solid #e0e0e0;
-  float: left;
-  width: 50%; }
-#navigation ul li.menu-537 #topics-menu li {
-  border-bottom: 1px solid #e0e0e0;
-  display: block;
-  width: 100%; }
-  #navigation ul li.menu-537 #topics-menu li a {
-    display: block;
-    color: #30393d; }
-    #navigation ul li.menu-537 #topics-menu li a:hover {
-      background-color: #f23183;
-      color: white;
-      text-decoration: none; }
-
+/* Topic Hover
+/* ----------------------------------------------*/
 /* 05 - MAIN
 /* ----------------------------------------------*/
 #main .container {
@@ -2137,12 +2103,12 @@ ul.pager {
 #footer-left {
   float: left;
   width: 35%;
-  font-size: 1.5em;
+  font-size: 1.2em;
   line-height: 1.5em;
   margin-left: 15%; }
   #footer-left img {
     display: inline;
-    width: 15%; }
+    width: 12%; }
   #footer-left p {
     display: inline; }
     #footer-left p a {
@@ -2151,7 +2117,7 @@ ul.pager {
 
 #footer-right {
   float: right;
-  width: 25%;
+  width: 35%;
   margin-right: 15%; }
   #footer-right ul {
     text-align: right; }
