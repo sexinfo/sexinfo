@@ -1,11 +1,11 @@
 /* 03 - HEADER
 /* ----------------------------------------------*/
 
-$primary-color: #FC89AC;
-$text-color: white;
-$secondary-color: #fdbbcf;
-
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+.theme-color{
+  color: $primary-color;
+}
 
 [data-icon]:before {
   font-family: 'Simple-Line-Icons';
@@ -49,7 +49,7 @@ $secondary-color: #fdbbcf;
 
         margin: 0 0.35em;
 
-        
+
         span {
           color: $text-color;
           font-size: 1.75em;
@@ -115,7 +115,7 @@ $secondary-color: #fdbbcf;
         font-weight: lighter;
         text-transform: uppercase;
       }
-    }  
+    }
 
     li:hover:not(:first-child) {
       background-color: $secondary-color;
@@ -166,7 +166,7 @@ $secondary-color: #fdbbcf;
       color: $gray-text;
 
       &:hover {
-        background-color: $pink;
+        background-color: $primary-color;
         color: white;
         text-decoration: none;
       }
