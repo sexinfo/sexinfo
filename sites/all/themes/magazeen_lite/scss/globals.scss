@@ -74,7 +74,12 @@ div.error {
 
 div.status { color: #360; background: #cf8; border-color: #be7; }
 
-.container { margin: 0 auto; }
+.container { 
+  width: 60%;
+  padding-top: 1.5%;
+  margin-left: auto;
+  margin-right: auto;
+      }
 
 /* Columns
 /* -------------- */
