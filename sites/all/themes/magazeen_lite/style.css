@@ -1555,7 +1555,8 @@ html[xmlns] .clearfix {
   border: 1px solid #fb5789;
   margin: 5px auto 25px;
   opacity: .9;
-  width: 75%; }
+  width: 75%;
+  text-decoration: none; }
   .pink-block-btn:hover {
     opacity: 1; }
 
@@ -1681,13 +1682,6 @@ a:hover {
 a:visited {
   color: #FC89AC;
   text-decoration: none; }
-
-/* In a document (article, question, etc) we want underline for colorblind people */
-.node a {
-  text-decoration: underline; }
-
-.content a {
-  text-decoration: underline; }
 
 .node-title a {
   text-decoration: none; }

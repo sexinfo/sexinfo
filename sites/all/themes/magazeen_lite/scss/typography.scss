@@ -81,10 +81,6 @@ h4, #footer h2 {
 a:link, a:active { color:$primary-color; text-decoration:none; }
 a:hover { color:#000; }
 a:visited { color:$primary-color; text-decoration:none; }
-
-/* In a document (article, question, etc) we want underline for colorblind people */
-.node a { text-decoration: underline; }
-.content a { text-decoration: underline; }
 .node-title a { text-decoration: none; }
 
 p { margin:0 0 1em 0; }
