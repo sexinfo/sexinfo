@@ -1436,7 +1436,8 @@ body {
   line-height: 19px;
   margin: 0;
   padding: 0;
-  width: auto; }
+  width: auto;
+  overflow-x: hidden; }
 
 code {
   color: #0f8eb3;
@@ -1505,7 +1506,9 @@ div.status {
   width: 60%;
   padding-top: 1.5%;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  max-width: 100%;
+  overflow-x: hidden; }
 
 /* Columns
 /* -------------- */
@@ -1555,8 +1558,7 @@ html[xmlns] .clearfix {
   border: 1px solid #fb5789;
   margin: 5px auto 25px;
   opacity: .9;
-  width: 75%;
-  text-decoration: none; }
+  width: 75%; }
   .pink-block-btn:hover {
     opacity: 1; }
 
@@ -2122,10 +2124,10 @@ ul.pager {
 
 #footer-left {
   float: left;
-  width: 35%;
+  width: 45%;
   font-size: 1.5em;
   line-height: 1.5em;
-  margin-left: 15%; }
+  margin-left: 5%; }
   #footer-left img {
     display: inline;
     width: 15%; }
@@ -2137,8 +2139,8 @@ ul.pager {
 
 #footer-right {
   float: right;
-  width: 25%;
-  margin-right: 15%; }
+  width: 35%;
+  margin-right: 5%; }
   #footer-right ul {
     text-align: right; }
     #footer-right ul li {
@@ -4039,17 +4041,19 @@ ul.icons {
   background-image: url("/sexinfo/sites/all/themes/magazeen_lite/images/modules/bg.jpg");
   background-size: cover;
   text-align: center;
-  display: block; }
+  display: block;
+  overflow: hidden; }
 
 .mission-text {
-  position: relative;
   display: inline-block;
-  top: 55px;
+  margin-top: 3.5%;
+  margin-bottom: 3.5%;
+  padding-bottom: 10%;
   padding: 45px;
   text-align: center;
   width: 75%;
   background-color: rgba(0, 0, 0, 0.65);
-  border-radius: 15px; }
+  border-radius: 10px; }
 
 .mission-header {
   font-size: 36px;
