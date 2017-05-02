@@ -51,6 +51,7 @@
           ?>
 
           <!--Facebook like button-->
+          <!--POTENTIAL TO ADD FACEBOOK SHARE BUTTON -->
           <?php if(($node->type) != 'quiz') {?>
           <div class="fb-like" data-send="false" data-width="450" data-show-faces="false" data-font="arial" data-colorscheme="dark"></div>
           <?php } ?>
