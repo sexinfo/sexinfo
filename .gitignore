@@ -10,7 +10,7 @@
 *~
 *.sass-cache
 *.css.map
-
+*style.css
 # OS or Editor folders
 .DS_Store
 .cache
