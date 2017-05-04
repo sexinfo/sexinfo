@@ -76,7 +76,7 @@
 
 // Pink field labels with some margins
 %pink-label {
-  color: $pink;
+  color: $primary-color;
   font-size: 1.2em;
   margin-bottom: 5px;
 }
@@ -90,7 +90,7 @@
   width: 100%;
 
   &:focus {
-    border: 1px solid $pink;
+    border: 1px solid $primary-color;
     outline: none;
   }
 }
@@ -98,7 +98,7 @@
 // Pink submit buttons
 %button {
   @include border-radius;
-  background-color: $pink;
+  background-color: $primary-color;
   border: none;
   color: white;
   font-size: 1.2em;
@@ -106,11 +106,11 @@
   text-align: center;
 
   &:hover {
-    background-color: darken($pink, 10);
+    background-color: darken($primary-color, 10);
     cursor: pointer;
   }
 
-  &:active { background-color: darken($pink, 13); }
+  &:active { background-color: darken($primary-color, 13); }
 }
 
 %buttonBar {
@@ -121,7 +121,7 @@
   color: white !important;
   margin-bottom: 20px;
   padding: 12px 10px;
-  border-bottom: 3px solid darken($pink, 16);
+  border-bottom: 3px solid darken($primary-color, 16);
 }
 
 //Blue button

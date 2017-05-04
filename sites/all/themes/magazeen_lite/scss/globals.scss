@@ -4,7 +4,7 @@
 
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-$background-color: #f6f5f2;
+$background-color: rgba(237, 227, 215, 0.7);
 
 body {
   background: $background-color;
@@ -132,16 +132,8 @@ html[xmlns] .clearfix { display: block; }
 // TODO: this doesn't belong here
 .pink-block-btn {
   @extend %buttonBar;
-  background: $pink;
-  background: -webkit-linear-gradient(top,  #ff5db1 0%,#ef017c 100%); /* Chrome10+,Safari5.1+ */
-  background:    -moz-linear-gradient(top,  #ff5db1 0%, #ef017c 100%); /* FF3.6+ */
-  background:     -ms-linear-gradient(top,  #ff5db1 0%,#ef017c 100%); /* IE10+ */
-  background:      -o-linear-gradient(top,  #ff5db1 0%,#ef017c 100%); /* Opera 11.10+ */
-  background:        -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff5db1), color-stop(100%,#ef017c)); /* Chrome,Safari4+ */
-  background:         linear-gradient(top bottom,  #ff5db1 0%,#ef017c 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5db1', endColorstr='#ef017c',GradientType=0 ); /* IE6-9 */
-
-  border: 1px solid darken($pink, 10);
+  background-color: $primary-color;
+  border: 1px solid darken($primary-color, 10);
   margin: 5px auto 25px;
   opacity: .9;
   width: 75%;

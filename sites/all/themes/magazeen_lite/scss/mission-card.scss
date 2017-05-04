@@ -1,22 +1,30 @@
 .mission-container {
-    margin-top: 20px;
-    margin-bottom: 0px;
-    padding: 50px;
-    background-image: url('/sexinfo/sites/all/themes/magazeen_lite/images/modules/mission-bg-blur.jpg');
-    background-size: cover;
-    display: block;
+  width: 100%;
+  height: 350px;
+  background-image: url('/sexinfo/sites/all/themes/magazeen_lite/images/modules/bg.jpg');
+  background-size: cover;
+  text-align: center;
+  display: block;
 }
 
 .mission-text {
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.6);
+  position: relative;
+  display: inline-block;
+  top: 100px;
+  padding: 40px;
+  text-align: center;
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 .mission-header {
-    font-size: 16pt;
+  font-size: 36px;
+  margin-bottom: 16px;
 }
 
 .mission-body {
-    font-size: 12pt;
-    color: #eeeeee;
+  font-size: 16px;
+  display: inline-block;
+  width: 80%;
+  color: #eeeeee;
 }

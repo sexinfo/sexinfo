@@ -5,7 +5,7 @@
 			<font color="white">
 				Welcome to
 			</font>
-			<font color="#EC008C">
+			<font class="theme-color">
 				SexInfo Online
 			</font>
 		</center></h4></div>

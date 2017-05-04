@@ -4,7 +4,6 @@
 
       <p>
         is maintained by students from the University of California, Santa Barbara who have studied advanced topics in human sexuality.
-        You can read our mission statement <a href="<?php print $base_path . "docs/constitution.pdf" ?>">here</a> to learn more about us.
       </p>
     </div>
 

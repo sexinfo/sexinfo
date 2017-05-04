@@ -288,7 +288,7 @@ $transition-time: 0.4s;
 
     // Scrollspy
     &.active {
-      background-color: $pink;
+      background-color: $primary-color;
 
       a { color: white; }
     }
@@ -297,7 +297,7 @@ $transition-time: 0.4s;
   a {
     border-bottom: 1px solid $border-color;
     display: block;
-    color: $pink;
+    color: $primary-color;
     font-size: 1.2em;
     padding: 6px 70px 6px 10px;
 
