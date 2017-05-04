@@ -206,7 +206,7 @@ $transition-time: 0.4s;
     position: absolute;
     transition: opacity $transition-time ease-in, top $transition-time;
     width: 100%;
-    overflow: scroll;
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 
@@ -227,7 +227,7 @@ $transition-time: 0.4s;
 .text-on-image-article {
   font-size: 0.75em;
   margin-bottom: 5px;
-  overflow: scroll;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 
