@@ -2,31 +2,59 @@
 /* Ask the Sexperts webform
 /* ----------------------------------------------*/
 #node-22 {
-  width: 600px;
+
 
   .node-box {
     // Container resets
-    background: none;
-    background-image: none;
-    border: none;
+    position: relative;
+    z-index: 1;
+    font-size: 16px;
+    background: #FFFFFF;
+    max-width: 560px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   }
 
-  .node-content { @extend %grey-form; }
+  .node-content {  }
 
   input:not([type="submit"]),
   textarea {
-    @extend %input-full;
+    // @extend %input-full;
   }
 
   textarea {
-    font: 1.2em Arial, Helvetica, sans-serif;
-    overflow: auto; // Remove scrollbar in IE
-    width: 100%;
+    margin: 15px 0 0;
+    display: block;
+    font-size: 14px;
   }
 
+  input {
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
   // TODO: blue doesn't look great here
   input[type="submit"] {
-    @extend %button-blue;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 100%;
+    font-size: 20px;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    &:hover, &:active, &:focus {
+      background: #43A047;
+    }
   }
 
   label { @extend %pink-label; }
@@ -71,5 +99,25 @@
 }
 .form-item{
 	display: inline-block;
-	padding: 5px;
+  vertical-align: top;
+}
+
+.webform-component--gender {
+  width: 33%;
+}
+.webform-component--email {
+  width: 60%;
+  margin-right: 6%;
+}
+.webform-component--location {
+  width: 33%;
+}
+.webform-component--age {
+  width: 66%;
+}
+.webform-component--message {
+  display: block;
+  textarea {
+    color: black;
+  }
 }
