@@ -28,5 +28,9 @@
   </div>
 
 </div><!-- .container -->
+=======
+  <?php include 'article.php' ?>
+</div>
+
 
 <?php include 'footer.php' ?>

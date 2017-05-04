@@ -19,27 +19,11 @@ function on_teen_corner()    { return page() == 'category#TeenCorner'; }
           <li id="navlogo"><a href="/sexinfo"><img src="/sexinfo/sites/default/files/logoinvert.png"></a></li>
           <li class="menu-537 <?php echo on_topics_page() ? 'active' : '' ?>">
             <a href="/sexinfo/category">Topics  <span style="font-size: 8px;">▼</span></a>
-            <div id="topics-menu">
+            <div id="topics">
               <ul>
-                <?php $index = 0; $size = sizeof($topics); ?>
-                <div class="dropdown-half">
-                  <?php
-                  for (; $index < (($size + 1) / 2); $index++) {
-                    $name = $topics[$index]['name'];
-                    printf("<li><a href='/sexinfo/category#%s'>%s</a></li>", strip($name), htmlspecialchars($name));
-                  } ?>
-                </div>
-
-                <div class="dropdown-half">
-                  <?php
-                  for (; $index < $size; $index++) {
-                    $name = $topics[$index]['name'];
-                    printf("<li><a href='/sexinfo/category#%s'>%s</a></li>", strip($name), htmlspecialchars($name));
-                  } ?>
-                </div>
-
+                
               </ul>
-            </div><!-- .topics-menu -->
+            </div>
           </li>
 
           <li class="menu-400 <?php echo on_ask_page() ? 'active' : '' ?>"><a href="/sexinfo/ask-sexperts">Ask a Sexpert</a></li>

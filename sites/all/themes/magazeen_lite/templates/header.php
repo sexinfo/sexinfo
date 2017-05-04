@@ -14,8 +14,8 @@
       <ul>
         <li><input placeholder="Search..." id="search-box" type="text" name="search_block_form" maxlength="128" /></li>
         <li><span onclick="document.getElementById('search-block-form').submit()" data-icon="&#xe090;"></span></li>
-        <li><a class="btn" href="https://www.facebook.com/SexInfoOnline"><span data-icon="&#xe00b;"></span></a></li>
-        <li><a class="btn" href="https://twitter.com/sexinfoonline"><span data-icon="&#xe009;"></span></a></li>
+        <li><a href="https://www.facebook.com/SexInfoOnline"><span data-icon="&#xe00b;"></span></a></li>
+        <li><a href="https://twitter.com/sexinfoonline"><span data-icon="&#xe009;"></span></a></li>
         <li><a href="https://instagram.com/ucsbsexperts/"><span data-icon="&#58889;"></span></a></li>
         <li><a href="https://www.youtube.com/user/UCSBSexInfoOnline"><span data-icon="&#57352;"></span></a></li>
       </ul>

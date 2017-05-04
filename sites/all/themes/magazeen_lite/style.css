@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab");
 #user-login, #node-22 .node-content, #node-816 .node-content {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -1430,7 +1431,7 @@
 /* 00 - GLOBAL ELEMENTS
 /* ----------------------------------------------*/
 body {
-  background: #f6f5f2;
+  background: rgba(237, 227, 215, 0.7);
   color: #5e6568;
   font: 0.8em 'Roboto', sans-serif;
   height: auto;
@@ -1882,21 +1883,25 @@ p.copyright {
       background-color: #fdbbcf; }
     #header-right form ul li:first-child {
       padding: 0.5em;
-      font-family: 'Open Sans', sans-serif; }
+      font-family: 'Roboto', sans-serif; }
+    #header-right form ul li:nth-child(2) {
+      margin-right: 1.5em;
+      margin-left: 0.15em; }
 
 #search-box {
   border: 1px solid #fc89ac;
   border-radius: 10px;
   font-size: 1em;
   height: 1em;
-  width: 17em;
+  width: 8em;
   padding: 0.5em !important;
   color: gray; }
 
 #header-left {
   display: inline-block;
   float: left;
-  width: 65%; }
+  width: 65%;
+  margin-top: 0.2em; }
   #header-left div {
     display: inline-block;
     font-size: 0;
@@ -1912,7 +1917,7 @@ p.copyright {
     list-style-type: none;
     display: inline-block;
     vertical-align: middle;
-    padding: 1em;
+    padding: 0.9em;
     font-family: 'Open Sans', sans-serif; }
     #navigation ul li a {
       color: white;
@@ -1922,9 +1927,10 @@ p.copyright {
     background-color: #fdbbcf; }
 
 #navlogo {
-  width: 11%;
+  width: 100px;
   padding: 0 2em !important; }
 
+<<<<<<< HEAD
 /*Topics menu*/
 #navigation ul {
   *zoom: 1;
@@ -1965,6 +1971,10 @@ p.copyright {
       color: white;
       text-decoration: none; }
 
+=======
+/* Topic Hover
+/* ----------------------------------------------*/
+>>>>>>> 00f3c15070743e9f33135e5d66be3f841a06f79c
 /* 05 - MAIN
 /* ----------------------------------------------*/
 #main .container {
@@ -2131,7 +2141,7 @@ ul.pager {
   margin-left: 5%; }
   #footer-left img {
     display: inline;
-    width: 15%; }
+    width: 12%; }
   #footer-left p {
     display: inline; }
     #footer-left p a {
@@ -2192,6 +2202,108 @@ ul.pager {
 
 #sidebar .block {
   margin: 0 0 20px 0; }
+
+#articlespread {
+  width: 90%;
+  margin: 1em auto; }
+  #articlespread h5 {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    color: black;
+    margin: 0; }
+
+@media (max-width: 1280px) {
+  #articlespread {
+    width: 100%; }
+
+  #middlecol {
+    width: 430px !important; }
+
+  #rightcol {
+    width: 480px !important; } }
+#leftcol {
+  width: 350px;
+  float: left; }
+
+.recentlyPublished {
+  margin-bottom: 1em;
+  list-style-type: none;
+  padding: 20px 25px 20px;
+  background-color: white; }
+  .recentlyPublished img {
+    width: 100px;
+    float: left; }
+  .recentlyPublished p {
+    float: right;
+    color: #303030;
+    font-size: 1.25em;
+    width: 150px;
+    padding-left: 10px;
+    font-family: 'Roboto Slab', serif; }
+
+.recentlyPublished:hover p {
+  text-decoration: underline; }
+
+h4, h3 {
+  font-family: 'Roboto Slab', serif;
+  font-weight: normal; }
+
+#middlecol {
+  width: 40%;
+  padding-left: 4em;
+  display: inline-block;
+  text-align: center; }
+
+.panel {
+  display: inline-block;
+  vertical-align: top;
+  margin: 1em;
+  width: 300px;
+  text-align: right; }
+  .panel img {
+    display: block; }
+  .panel div {
+    background-color: white;
+    padding: 12px 15px 20px;
+    text-align: left; }
+    .panel div h4 {
+      color: #333333; }
+
+.panel:hover div h4 {
+  text-decoration: underline; }
+
+#rightcol {
+  width: 35%;
+  float: right; }
+  #rightcol ul {
+    text-align: center;
+    padding: 0; }
+    #rightcol ul li {
+      background-color: white;
+      padding: 0 15px 20px;
+      width: 600px;
+      display: inline-block;
+      list-style-type: none; }
+      #rightcol ul li div div {
+        width: 80%;
+        margin: 1em auto;
+        position: relative;
+        top: -40px;
+        background-color: white;
+        overflow: hidden; }
+        #rightcol ul li div div h3 {
+          color: #333333;
+          text-align: center; }
+      #rightcol ul li div p {
+        margin-top: -1em;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1.5em;
+        color: #777777; }
+
+.largepanel:hover div div h3 {
+  text-decoration: underline; }
 
 /* ----------------------------------------------*/
 /* Front page modules
@@ -4064,9 +4176,8 @@ ul.icons {
   padding-bottom: 10%;
   padding: 45px;
   text-align: center;
-  width: 75%;
-  background-color: rgba(0, 0, 0, 0.65);
-  border-radius: 10px; }
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.9); }
 
 .mission-header {
   font-size: 36px;
