@@ -1437,7 +1437,8 @@ body {
   line-height: 19px;
   margin: 0;
   padding: 0;
-  width: auto; }
+  width: auto;
+  overflow-x: hidden; }
 
 code {
   color: #0f8eb3;
@@ -1503,7 +1504,12 @@ div.status {
   border-color: #be7; }
 
 .container {
-  margin: 0 auto; }
+  width: 60%;
+  padding-top: 1.5%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  overflow-x: hidden; }
 
 /* Columns
 /* -------------- */
@@ -1679,13 +1685,6 @@ a:hover {
 a:visited {
   color: #FC89AC;
   text-decoration: none; }
-
-/* In a document (article, question, etc) we want underline for colorblind people */
-.node a {
-  text-decoration: underline; }
-
-.content a {
-  text-decoration: underline; }
 
 .node-title a {
   text-decoration: none; }
@@ -2092,10 +2091,10 @@ ul.pager {
 
 #footer-left {
   float: left;
-  width: 35%;
-  font-size: 1.2em;
+  width: 45%;
+  font-size: 1.5em;
   line-height: 1.5em;
-  margin-left: 15%; }
+  margin-left: 5%; }
   #footer-left img {
     display: inline;
     width: 12%; }
@@ -2108,7 +2107,7 @@ ul.pager {
 #footer-right {
   float: right;
   width: 35%;
-  margin-right: 15%; }
+  margin-right: 5%; }
   #footer-right ul {
     text-align: right; }
     #footer-right ul li {
@@ -2756,13 +2755,19 @@ tr.odd.cat-row td {
   display: inline-block;
   margin-right: 5px; }
 
-@media (max-width: 767px) {
-  .main {
-    width: 100% !important; } }
+.main {
+  position: relative;
+  width: 100%; }
+  @media (max-width: 767px) {
+    .main {
+      width: 100% !important; } }
 
-@media (max-width: 767px) {
-  #node-22 {
-    width: 100% !important; } }
+#node-22 {
+  position: relative;
+  width: 100%; }
+  @media (max-width: 767px) {
+    #node-22 {
+      width: 100% !important; } }
 
 .topics-container {
   *zoom: 1; }
@@ -4105,26 +4110,28 @@ ul.icons {
   background-image: url("/sexinfo/sites/all/themes/magazeen_lite/images/modules/bg.jpg");
   background-size: cover;
   text-align: center;
-  display: block; }
+  display: block;
+  overflow: hidden; }
 
 .mission-text {
-  position: relative;
   display: inline-block;
-  top: 100px;
-  padding: 40px;
+  margin-top: 3.5%;
+  margin-bottom: 3.5%;
+  padding-bottom: 10%;
+  padding: 45px;
   text-align: center;
   width: 80%;
   background-color: rgba(0, 0, 0, 0.9); }
 
 .mission-header {
   font-size: 36px;
-  margin-bottom: 16px; }
+  margin-bottom: 20px; }
 
 .mission-body {
   font-size: 16px;
   display: inline-block;
   width: 80%;
-  color: #eeeeee; }
+  color: #ffffff; }
 
 .faq {
   border-radius: 5px; }

@@ -17,7 +17,7 @@
       </ul>
     </div>
 
-   
+
 
     <div style="clear: both;"></div>
 
@@ -26,6 +26,3 @@
       <a href="<?php print $base_path . "login" ?>" class="login">Writer Login &raquo;</a>
     </div>
 </div>
-
-
-

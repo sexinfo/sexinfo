@@ -53,11 +53,17 @@
 // Huge hack to get the page full width for mobile
 .main {
   @include mobile { width: 100% !important; }
+  //margin: 0 auto;
+  position: relative;
+  width: 100%;
 }
 
 // This is a huge hack to get "Ask the Sexperts" full width since it's a custom web form
 #node-22 {
   @include mobile { width: 100% !important; }
+  //margin: 0 auto;
+  position: relative;
+  width: 100%;
 }
 
 $spacer: 20px;
