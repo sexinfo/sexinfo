@@ -9,7 +9,7 @@
 *.vi
 *~
 *.sass-cache
-*.css.map
+*.map
 *style.css
 # OS or Editor folders
 .DS_Store
