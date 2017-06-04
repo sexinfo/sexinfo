@@ -114,8 +114,9 @@ $half-height: 360px;
 $quarter-height: 170px;
 
 .grid-left, .grid-right {
-  width: 50%;
-  float: left;
+  width: 49.8%;
+  padding: 0 0.1%;
+  display: inline-block;
 
   @media(max-width: 1200px) {
     width: 100%;
@@ -126,10 +127,8 @@ $quarter-height: 170px;
 .topic-half, .topic-quarter {
   @include clearfix;
   @include border-box;
-  float: left;
-  width: 417px;
+  width: 100%;
   border: 1px solid #ccc;
-  margin: 10px 5px;
 
   @media(max-width: 1200px) {
     float: none;
@@ -179,14 +178,12 @@ $transition-time: 0.4s;
   background-position: center;
   color: white;
   font-size: 2em;
-  overflow: scroll;
   position: relative;
   text-shadow: 0 2px 6px rgba(48,48,48,0.7);
 
   .text-on-image-text {
     @include border-box;
     color: white;
-    padding: 15px;
     transition: opacity $transition-time, bottom $transition-time;
     position: absolute;
     bottom: 0px;
@@ -202,7 +199,7 @@ $transition-time: 0.4s;
     list-style: none;
     margin: 0px;
     opacity: 0;
-    padding: 15px;
+    padding: 0;
     position: absolute;
     transition: opacity $transition-time ease-in, top $transition-time;
     width: 100%;
@@ -226,7 +223,7 @@ $transition-time: 0.4s;
 
 .text-on-image-article {
   font-size: 0.75em;
-  margin-bottom: 5px;
+  margin: 10px 0 5px 15px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
