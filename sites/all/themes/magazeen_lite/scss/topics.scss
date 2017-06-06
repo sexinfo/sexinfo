@@ -117,6 +117,7 @@ $quarter-height: 170px;
   width: 49.8%;
   padding: 0 0.1%;
   display: inline-block;
+  vertical-align: top;
 
   @media(max-width: 1200px) {
     width: 100%;
@@ -186,7 +187,8 @@ $transition-time: 0.4s;
     color: white;
     transition: opacity $transition-time, bottom $transition-time;
     position: absolute;
-    bottom: 0px;
+    bottom: 15px;
+    left: 10px;
     width: 100%;
 
     @include mobile {
