@@ -18,7 +18,7 @@
 					<img src="sites/all/themes/magazeen_lite/images/modules/quiz-front-page.jpg"></img>
 					<div>
 						<div><h3>Test Your Knowledge</h3></div>
-						<p>Are you an expert on masturbation, LGBTQ facts, paraphilias, or pregnancy and abortion?</p>
+						<p>Are you an expert on masturbation, LGBTQ facts, paraphilias, or pregnancy and abortion? Quiz yourself here to see if you really are.</p>
 					</div>
 				</a>
 			</li>
