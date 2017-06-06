@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
 
 #articlespread {
-	width: 90%;
+	width: 95%;
 	margin: 1em auto;
 	
 
@@ -12,37 +12,35 @@
 		font-weight: bold;
 		color: black;
 		margin: 0;
-	}
-}
-
-@media (max-width: 1280px) {
-	#articlespread {
-		width: 100%;
+		margin: 1em;
 	}
 
-	#middlecol {
-		width: 430px !important;
-	}
-
-	#rightcol {
-		width: 480px !important;
+	>div {
+		display: inline-block;
+		vertical-align: top;
 	}
 }
 
 #leftcol {
-	width: 350px;
-	float: left;
+	width: 20%;
+
+	ul {
+		padding: 0;
+		margin: 0;
+	}
 }
 
 .recentlyPublished {
+	border: 1px solid lightgray;
+
 	margin-bottom: 1em;
 	list-style-type: none;
-	padding: 20px 25px 20px;
+	padding: 1em;
 	background-color: white;
 	
 
 	img {
-		width: 100px;
+		width: 40%;
 		float: left;
 	}
 
@@ -50,8 +48,8 @@
 		float: right;
 		color: rgb(48, 48, 48);
 		font-size: 1.25em;
-		width: 150px;
-		padding-left: 10px;
+		width: 50%;
+
 		font-family: 'Roboto Slab', serif;
 	}
 }
@@ -68,13 +66,13 @@ h4, h3 {
 }
 
 #middlecol {
-	width: 40%;
-	padding-left: 4em;
+	width: 43%;
 	display: inline-block;
 	text-align: center;
 }
 
 .panel {
+	border: 1px solid lightgray;
 	display: inline-block;
 	vertical-align:top;
 	margin: 1em;
@@ -86,7 +84,9 @@ h4, h3 {
 
 	img {
 		display: block;
+		width: 100%;
 	}
+
 
 	div {
 		background-color: white;
@@ -110,7 +110,6 @@ h4, h3 {
 
 #rightcol {
 	width: 35%;
-	float: right;
 
 	ul {
 		text-align: center;
@@ -118,8 +117,9 @@ h4, h3 {
 
 		li {
 			background-color: white;
-			padding: 0 15px 20px;
-			width: 600px;
+			padding: 0;
+			margin: 1em auto;
+			width: 100%;
 			
 			display: inline-block;
 			list-style-type: none;
@@ -144,10 +144,15 @@ h4, h3 {
 					font-family: 'Roboto', sans-serif;
 					font-size: 1.5em;
 					color: #777777;
+					padding: 0 0.25em;
 				}
 			}
 		}
 	}
+}
+
+.largepanel {
+	border: 1px solid lightgray;
 }
 
 .largepanel:hover {
@@ -158,4 +163,56 @@ h4, h3 {
 				}
 			}
 		}
+}
+
+@media all and (max-width: 1605px) {
+	#rightcol {
+		display: block;
+		width: 100%;
+
+		ul li {
+			width: 47%;
+
+			vertical-align: top;
+
+			div {
+				padding: 1em;
+				div {
+					top: -60px;
+				}
+
+				p {
+					margin-top: -2em;
+				}
+			}
+		}
+	}
+
+	#middlecol {
+		width: 75%;
+	}
+}
+
+@media all and (max-width: 1379px) {
+	#middlecol {
+		display: block;
+		width: 100%;
+	}
+
+	#leftcol {
+		width: 100%;
+
+		ul {
+			text-align: center;
+
+			li {
+				display: inline-block;
+				height: 75px;
+				width: 265px;
+				margin: 10px;
+			}
+
+		}
+		
+	}
 }

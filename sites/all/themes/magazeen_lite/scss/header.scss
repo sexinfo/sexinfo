@@ -143,7 +143,6 @@
 
     display: none !important;
     background-color: $primary-color;
-    min-width: 160px;
     z-index: 1;
     text-align: center;
 
@@ -162,16 +161,35 @@
 
 #firsthalf {
   float: left;
-  min-width: 160px;
 }
 
 #secondhalf {
   float: right;
-  min-width: 160px;
 }
 
 #menu:hover {
     #topics1 {
       display: block !important;
+    }
+}
+
+@media all and (max-width: 706px) {
+    #topics1 {
+      width: 290px;
+    }
+
+    #firsthalf {
+      width: 290px;
+    }
+
+    #secondhalf {
+      float: left;
+
+    }
+}
+
+@media all and (max-width: 462px) {
+    #topics1 {
+      left: 40px;
     }
 }
