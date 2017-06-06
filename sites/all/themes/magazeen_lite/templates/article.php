@@ -57,6 +57,16 @@
 					</div>
 				</a>
 			</li>
+
+			<li class="largepanel">
+				<a href="/sexinfo/quizzes">
+					<img src="sites/all/themes/magazeen_lite/images/modules/love-relationships.jpg" width="650px"></img>
+					<div>
+						<div><h3>Test Your Knowledge</h3></div>
+						<p>Do you think you know it all? Are you an expert on masturbation, LGBTQ facts, paraphilias, or pregnancy and abortion? Quiz yourself here to see if you really are.</p>
+					</div>
+				</a>
+			</li>
 		</ul>
 	</div>
 

@@ -105,9 +105,7 @@
 /* ----------------------------------------------*/
 
 
-#navigation {
-  padding: 1em;
-  ul {
+#navigation > ul {
     li {
       font-size: 13px;
       list-style-type: none;
@@ -116,7 +114,6 @@
       padding: 0.9em;
       font-family: 'Open Sans', sans-serif;
 
-
       a {
         color: $text-color;
         font-weight: lighter;
@@ -124,10 +121,9 @@
       }
     }
 
-    li:hover:not(:first-child) {
+    li:hover {
       background-color: $secondary-color;
     }
-  }
 }
 
 #navlogo {
@@ -135,5 +131,47 @@
   padding: 0 2em !important;
 }
 
+#navlogo:hover {
+    background-color: $primary-color !important;
+}
+
 /* Topic Hover
 /* ----------------------------------------------*/
+#topics1 {
+    position: absolute;
+    top: 30px;
+
+    display: none !important;
+    background-color: $primary-color;
+    min-width: 160px;
+    z-index: 1;
+    text-align: center;
+
+    ul {
+      padding: 0;
+
+      div {
+        a {
+          li {
+            display: block;
+          }
+        }
+      }
+    }
+}
+
+#firsthalf {
+  float: left;
+  min-width: 160px;
+}
+
+#secondhalf {
+  float: right;
+  min-width: 160px;
+}
+
+#menu:hover {
+    #topics1 {
+      display: block !important;
+    }
+}

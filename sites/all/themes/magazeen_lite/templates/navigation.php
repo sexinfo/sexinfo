@@ -17,16 +17,35 @@ function on_teen_corner()    { return page() == 'category#TeenCorner'; }
 <div id="navigation">
       <ul id="main-menu" class="links main-menu">
           <li id="navlogo"><a href="/sexinfo"><img src="/sexinfo/sites/default/files/logoinvert.png"></a></li>
-          <li class="menu-537 <?php echo on_topics_page() ? 'active' : '' ?>">
+          <li id="menu">
             <a href="/sexinfo/category">Topics  <span style="font-size: 8px;">▼</span></a>
-            <div id="topics">
+            <div id="topics1">
               <ul>
-                
+                <div id="firsthalf">
+                  <a href="/sexinfo/category#SexAcrosstheLifecycle"><li>Sex Across the Lifecycle
+                  </li></a>
+                  <a href="/sexinfo/category#TheBody"><li>The Body
+                  </li></a>
+                  <a href="/sexinfo/category#SexualActivity"><li>Sexual Activity</li></a>
+                  <a href="/sexinfo/category#Pregnancy"><li>Pregnancy</li></a>
+                  <a href="/sexinfo/category#BirthControl"><li>Birth Control</li></a>
+                  <a href="/sexinfo/category#Abortion"><li>Abortion</li></a>
+                  <a href="/sexinfo/category#SexuallyTransmittedInfections"><li>Sexually Transmitted Infections</li></a>
+                </div>
+                <div id="secondhalf">
+                  <a href="/sexinfo/category#LoveRelationships"><li>Love &amp; Relationships</li></a>
+                  <a href="/sexinfo/category#GenderIdentitySexualOrientation"><li>Gender, Identity, &amp; Sexual Orientation</li></a>
+                  <a href="/sexinfo/category#SexualDifficulties"><li>Sexual Difficulties</li></a>
+                  <a href="/sexinfo/category#SexandtheLaw"><li>Sex and the Law</li></a>
+                  <a href="/sexinfo/category#BeliefsandSexuality"><li>Beliefs and Sexuality</li></a>
+                  <a href="/sexinfo/category#ForEducators"><li>For Educators</li></a>
+                  <a href="/sexinfo/category#TeenCorner"><li>Teen Corner</li></a>
+                </div>
               </ul>
             </div>
           </li>
 
-          <li class="menu-400 <?php echo on_ask_page() ? 'active' : '' ?>"><a href="/sexinfo/ask-sexperts">Ask a Sexpert</a></li>
+          <li class="menu-400 <?php echo on_ask_page() ? 'active' : '' ?>"><a href="/sexinfo/ask-sexperts">Ask the Sexperts</a></li>
           <li class="menu-549 <?php echo on_faq_page() ? 'active' : '' ?>"><a href="/sexinfo/popular-questions">Popular Questions</a></li>
           <li class="menu-635 <?php echo on_ppq_page() ? 'active' : '' ?>"><a href="/sexinfo/ppq">Could I Be Pregnant?</a></li>
           <!--<li class="menu-543 <?php echo on_resources_page() ? 'active' : '' ?>"><a href="/sexinfo/article/important-phone-numbersresources-pregnancy">Resources</a></li>
