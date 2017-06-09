@@ -12,12 +12,13 @@
       
       
 
-      <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
+      <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
           if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-            fjs.parentNode.insertBefore(js, fjs);
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9";
+          fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
 
       <?php print render($title_suffix); ?>
@@ -53,8 +54,7 @@
           <!--Facebook like button-->
           <!--POTENTIAL TO ADD FACEBOOK SHARE BUTTON -->
           <?php if(($node->type) != 'quiz') {?>
-          <div class="fb-like" data-send="false" data-width="450" data-show-faces="false" data-font="arial" data-colorscheme="dark"></div>
-          <?php } ?>
+<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>          <?php } ?>
           <div class="terms">
          
 
