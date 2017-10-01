@@ -1,26 +1,10 @@
 $transition-time: 0.4s;
 
-/* 
-
-These are the settings to use to get the popular questions page to look good again.
-Make sure that these are the settings on the live site!
-
-http://imgur.com/a/WHlQe
-
-/*
-
 .faq {
     border-radius: 5px;
-    text-align: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border: 1px solid darken(gray, 10);
-    background-color: #FDFEFE;
-
 
     h3 {
         text-align: center;
-         background-color: #FDFEFE;
     }
 
     div.faq-category-group {
@@ -28,33 +12,32 @@ http://imgur.com/a/WHlQe
         margin: 5px;
 
         &:nth-of-type(odd) {
-            background-color: #FDFEFE;
+            background-color: #FC89AC;
         }
 
         &:nth-of-type(even) {
-            background-color: #FDFEFE;
+            background-color: #7c7b7c;
         }
 
         .faq-qa-hide {
             border-bottom-left-radius: 4px;
             border-bottom-right-radius: 4px;
-            background-color: #FDFEFE;
+            background-color: #ffffff;
         }
 
         // Sub-categories
         div div.faq-category-group {
-            background-color: #FDFEFE;
+            background-color: #ffbfbf;
             margin: 10px;
 
             div.faq-qa-hide {
-                background-color:#FDFEFE;
+                background-color: #ffffff;
             }
         }
 
         h4 {
             text-align: center;
             padding: 3px 0px;
-            color:black;
         }
 
         div.faq-question {

@@ -30,4 +30,6 @@
  */
 ?>
 
-
+<div class="container-inline" id="hidden-form-attributes">
+  <?php print $search_form; ?>
+</div>
