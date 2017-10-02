@@ -7,7 +7,7 @@
 					<img src="sites/all/themes/magazeen_lite/images/modules/ppq-front-page.jpg"></img>
 					<div>
 						<div><h3>Could you be pregnant?</h3></div>
-						
+
 						<p>We've created a brand new pregnancy questionnaire that will help estimate your likelihood of pregnancy.</p>
 					</div>
 				</a>
@@ -35,11 +35,11 @@
 			print "<div class='panel'>
 						<a href='". $val['url'] ."'>
 						<img src='sites/all/themes/magazeen_lite/images/modules/". $val['image'] ."''></img>
-					
+
 						<div>
 							<h4> ". $val['title']." </h4>
 						</div>
-					
+
 
 				</a>
 			</div>";
@@ -49,19 +49,19 @@
 	</div>
 
 	<div id="leftcol">
-		<h5>Recently Published</h5>
+		<h5>Recent Articles</h5>
 
 		<?php
-		
+		$query = db_query('SELECT a.title AS title, b.alias AS url FROM node a INNER JOIN url_alias b ON b.source=CONCAT(:prefix, a.nid) WHERE a.type=:article ORDER BY a.changed LIMIT 15', array('article' => "article", 'prefix' => "node/"));
+		$result = $query->fetchAll();
 
 		print "<ul>";
-		foreach($phpArray as $val) {
+		foreach ($result as $record) {
 			print "<li class='recentlyPublished'>
-						<a href='". $val['url'] ."'>
-						<img src='sites/all/themes/magazeen_lite/images/modules/". $val['image'] ."''></img>
+						<a href='/sexinfo/". $record->url ."'>
 
-						<p> ". $val['title']." </p>
-					
+						<p> ". $record->title ." </p>
+
 						<div style='clear: both'></div>
 				</a>
 			</li>";
@@ -72,9 +72,5 @@
 
 	</div>
 </div>
-
-
-
-
 
 <!-- "/sites/all/themes/magazeen_lite/images/modules/" -->
