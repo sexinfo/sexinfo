@@ -52,7 +52,7 @@
 		<h5>Recent Articles</h5>
 
 		<?php
-		$query = db_query('SELECT a.title AS title, b.alias AS url FROM node a INNER JOIN url_alias b ON b.source=CONCAT(:prefix, a.nid) WHERE a.type=:article ORDER BY a.changed LIMIT 15', array('article' => "article", 'prefix' => "node/"));
+		$query = db_query('SELECT a.title AS title, b.alias AS url FROM node a INNER JOIN url_alias b ON b.source=CONCAT(:prefix, a.nid) WHERE a.type=:article AND status=1 ORDER BY a.changed LIMIT 15', array('article' => "article", 'prefix' => "node/"));
 		$result = $query->fetchAll();
 
 		print "<ul>";
