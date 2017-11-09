@@ -84,11 +84,7 @@ a:hover { color:#000; }
 a:visited { color:$primary-color; text-decoration:none; }
 .node-title a { text-decoration: none; }
 
-p { margin:0 0 1em 0; font-size: 16px; 
-  strong {
-    font-size: 150%;
-  }
-}
+p { margin:0 0 1em 0; font-size: 16px; }
 
 /* List Styles  */
 ul, ol { margin-left: 0; padding-left: 2em; }
