@@ -8,7 +8,9 @@
 
 body {
   // background: $background-color;
-  color: #5e6568;
+  //background-color: colors BG for all pages
+  //background-color: #6e6e6e;
+  color: $secondary-color;
   font: 0.8em 'Roboto', sans-serif; // 0.75em
   height: auto;
   line-height: 19px;

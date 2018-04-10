@@ -12,7 +12,7 @@ $transition-time: 0.4s;
         margin: 5px;
 
         &:nth-of-type(odd) {
-            background-color: #FC89AC;
+            background-color: $primary-color;
         }
 
         &:nth-of-type(even) {
@@ -60,7 +60,7 @@ $transition-time: 0.4s;
     }
 
     .faq-question a:link {
-        color: #f05898;
+        color: $secondary-color;
     }
 
     .faq-answer {

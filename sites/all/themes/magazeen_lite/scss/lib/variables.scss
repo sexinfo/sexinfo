@@ -2,10 +2,16 @@ $gray-text:  #30393d;
 $light-gray: #b9b9b9;
 $dark-gray:  #171615;
 $blue-text:  #53798b;
-
-$primary-color: #FC89AC;
+/*
+3-5-18 Change
+primary color previous #FC89AC
+potential change: sky blue #7ec0ee
+secondary-color previously: #FDBBCF
+potential change: very dark gray #6e6e6e
+*/
+$primary-color: #76A1CF; /* light azure */
 $primary-color-temp: #FC89AC;
 $text-color: white;
-$secondary-color: #fdbbcf;
+$secondary-color: #6e6e6e; /* dark gray */
 
 $border-color: lighten(#ccc, 8);
