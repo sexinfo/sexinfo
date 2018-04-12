@@ -2,16 +2,14 @@ $gray-text:  #30393d;
 $light-gray: #b9b9b9;
 $dark-gray:  #171615;
 $blue-text:  #53798b;
-/*
-3-5-18 Change
-primary color previous #FC89AC
-potential change: sky blue #7ec0ee
-secondary-color previously: #FDBBCF
-potential change: very dark gray #6e6e6e
-*/
-$primary-color: #76A1CF; /* light azure */
+
+$pale-cyan: #93e9f8;
+$off-gray: #929292;
+$tan: #ffebcd;
+
+$primary-color: $pale-cyan;
 $primary-color-temp: #FC89AC;
-$text-color: white;
-$secondary-color: #6e6e6e; /* dark gray */
+$text-color: $off-gray;
+$secondary-color: $tan;
 
 $border-color: lighten(#ccc, 8);

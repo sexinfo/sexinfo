@@ -47,12 +47,12 @@
     font-size: 20px;
     border: 0;
     padding: 15px;
-    color: #FFFFFF;
+    color: $text-color;
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;
     &:hover, &:active, &:focus {
-      background: #43A047;
+      background: $secondary-color;
     }
   }
 

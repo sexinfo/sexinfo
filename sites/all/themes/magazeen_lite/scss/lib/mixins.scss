@@ -118,7 +118,7 @@
   @include border-radius;
   @include bold(1.3em);
   display: block;
-  color: white !important;
+  color: $text-color !important ;
   margin-bottom: 20px;
   padding: 12px 10px;
   // border-bottom: 3px solid darken($primary-color, 16);

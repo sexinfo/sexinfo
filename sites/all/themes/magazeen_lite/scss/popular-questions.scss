@@ -5,6 +5,7 @@ $transition-time: 0.4s;
 
     h3 {
         text-align: center;
+        color: $text-color;
     }
 
     div.faq-category-group {
@@ -16,7 +17,7 @@ $transition-time: 0.4s;
         }
 
         &:nth-of-type(even) {
-            background-color: #7c7b7c;
+            background-color: $secondary-color;
         }
 
         .faq-qa-hide {
@@ -52,7 +53,7 @@ $transition-time: 0.4s;
 
     a:link {
         text-decoration: none;
-        color: #ffffff;
+        color: $text-color;
     }
 
     div.field-items a:link {
@@ -60,7 +61,7 @@ $transition-time: 0.4s;
     }
 
     .faq-question a:link {
-        color: $secondary-color;
+        color: $text-color;
     }
 
     .faq-answer {
