@@ -37,8 +37,10 @@ h3 {
 }
 
   .node-content h3, #sidebar h3{
-    margin:10px 0; padding:0;
-    font:bold 1.50em Arial, Helvetica, sans-serif; color:$primary-color;
+    margin:10px 0; 
+    padding:0;
+    font:bold 1.50em Arial, Helvetica, sans-serif; 
+    color: #008080;
   }
 
   h3 a:link, h3 a:active, h3 a:visited {
@@ -79,8 +81,8 @@ h4, #footer h2 {
   }
 
 /* Link styling for global site: pink no underline*/
-a:link, a:active { color:$link-blue; text-decoration:none; }
-a:hover { color:#000; }
+a:link, a:active { color:$link-color; text-decoration:none; }
+a:hover { color: $tan; }
 a:visited { color:$primary-color; text-decoration:none; }
 .node-title a { text-decoration: none; }
 
