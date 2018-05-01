@@ -187,3 +187,11 @@ html[xmlns] .clearfix { display: block; }
 a {
   word-wrap: break-word;
 }
+
+/* super/sub scripts cause line-height to be disjoint. prevent super/sub scripts from influencing that */
+// sup {
+//   font-size: 70%;
+//   vertical-align: top;
+//   position: relative;
+//   top: -0.5em;
+// }
