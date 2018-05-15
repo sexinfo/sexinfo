@@ -31,13 +31,16 @@ ul.pager {
   margin:0 0 25px 0;
 }
 
+/* Node border surrounding articles
+/* --------------- */
+/* Follow comments to toggle borders */
 .node-box, .search-result {
-  background: #fdfefe url(images/node-box-top.gif) repeat-x top center;
-  border: 1px solid #dce7ed;
-  border-bottom: 1px solid #cfdbe1; border-top:0;
+  //background: #fdfefe url(images/node-box-top.gif) repeat-x top center; // uncomment for 
+  border: 0px solid #dce7ed; //  set to 1px for
+  border-bottom: 0px solid #cfdbe1; border-top:0; // set to 1 px for
   margin: 0;
   padding: 16px;
-}
+} 
 
 .search-info {
     display: none;
