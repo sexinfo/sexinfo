@@ -28,12 +28,13 @@ $transition-time: 0.4s;
 
         // Sub-categories
         div div.faq-category-group {
-            background-color: #ffbfbf;
+            background-color: $trenery-color;
             margin: 10px;
 
             div.faq-qa-hide {
                 background-color: #ffffff;
             }
+            
         }
 
         h4 {
