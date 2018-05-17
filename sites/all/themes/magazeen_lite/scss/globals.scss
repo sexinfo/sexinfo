@@ -3,6 +3,8 @@
 /* ----------------------------------------------*/
 
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
 
 // $background-color: rgba(237, 227, 215, 0.7);
 
@@ -11,7 +13,7 @@ body {
   //background-color: colors BG for all pages
   //background-color: #6e6e6e;
   color: $text-color;
-  font: 0.8em 'Roboto', sans-serif; // 0.75em
+  font: 0.8em 'Open Sans', sans-serif; // 0.75em
   height: auto;
   line-height: 19px;
   margin: 0;
