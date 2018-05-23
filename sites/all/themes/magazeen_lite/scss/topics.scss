@@ -238,11 +238,9 @@ $transition-time: 0.4s;
   }
 
   a:hover {
-    color: lighten($light-gray, 20);
+    color: $secondary-color;
     text-decoration: underline;
   }
-
-  a:visited { color: #f48ab7; }
 }
 
 .text-on-image-tint {

@@ -82,8 +82,8 @@ h4, #footer h2 {
 
 /* Link styling for global site: pink no underline*/
 a:link, a:active { color:$link-color; text-decoration:none; }
-a:hover { color: $tan; }
-a:visited { color:$primary-color; text-decoration:none; }
+a:hover { color: $secondary-color; }
+a:visited { color:$link-color; text-decoration:none; }
 .node-title a { text-decoration: none; }
 
 p { margin:0 0 1em 0; font-size: 16px; }
