@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 .theme-color{
-  color: $primary-color;
+  color: darken($primary-color, 45%);
 }
 
 [data-icon]:before {
