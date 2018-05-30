@@ -1,31 +1,45 @@
 .mission-container {
   width: 100%;
-  background-image: url('/sexinfo/sites/all/themes/magazeen_lite/images/modules/bg.jpg');
+  background-image: url('/sexinfo/sites/all/themes/magazeen_lite/images/modules/bg.png');
   background-size: cover;
   text-align: center;
   display: block;
   overflow: hidden;
 }
 
+.mission-subcontainer{
+  background-image: url('/sexinfo/sites/all/themes/magazeen_lite/images/modules/bg2.png');
+  width: 80%;
+  background-size: cover;
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 12%;
+
+}
+
 .mission-text {
   display: inline-block;
-  margin-top: 3.5%;
-  margin-bottom: 3.5%;
+  margin-top: 2.5%;
+  margin-bottom: 0%;
   padding-bottom: 10%;
-  padding: 45px;
+  padding: 10px;
   text-align: center;
   width: 80%;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .mission-header {
+  
   font-size: 36px;
-  margin-bottom: 20px;
 }
 
 .mission-body {
-  font-size: 16px;
   display: inline-block;
-  width: 80%;
-  color: #ffffff;
+  line-height: 30px;
+  font-size: 28px;
+  text-align: center;
+  color: #4d4c4d;
+
+  margin-bottom: 20px;
+
 }
