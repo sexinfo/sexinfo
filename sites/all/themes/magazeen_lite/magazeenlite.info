@@ -38,3 +38,5 @@ scripts[] = js/imgreveal.js
 scripts[] = js/ppq.js
 scripts[] = js/facebook-sdk.js
 scripts[] = js/raffle-landing-page.js
+scripts[] = js/qtip2/jquery.qtip.js
+scripts[] = js/qtip2/jquery.qtip.min.js
