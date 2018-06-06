@@ -46,7 +46,7 @@ function on_teen_corner()    { return page() == 'category#TeenCorner'; }
           </li>
 
           <li class="menu-400 <?php echo on_ask_page() ? 'active' : '' ?>"><a href="/sexinfo/ask-sexperts">Ask the Sexperts</a></li>
-          <li class="menu-549 <?php echo on_faq_page() ? 'active' : '' ?>"><a href="/sexinfo/popular-questions">Popular Questions</a></li>
+          <li class="menu-549 <?php echo on_faq_page() ? 'active' : '' ?>"><a href="/sexinfo/popular-questions">FAQ</a></li>
           <!--<li class="menu-635 <?php echo on_ppq_page() ? 'active' : '' ?>"><a href="/sexinfo/ppq">Could I Be Pregnant?</a></li>-->
           <!--<li class="menu-543 <?php echo on_resources_page() ? 'active' : '' ?>"><a href="/sexinfo/article/important-phone-numbersresources-pregnancy">Resources</a></li>
           <li class="menu <?php echo on_for_educators() ? 'active' : '' ?>"><a href="/sexinfo/category#ForEducators">For Educators</a></li>
